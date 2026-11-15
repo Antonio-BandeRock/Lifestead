@@ -62,6 +62,8 @@ import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { useFadingMessage } from '../hooks/useFadingMessage';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 
 function todayLocal(): string {
   const now = new Date();
@@ -115,15 +117,23 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
   const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
+  const [readFailed, setReadFailed] = useState(false);
+
   const load = useCallback(async () => {
-    const list = await listProjects(scope);
-    setProjects(list);
-    setSteps(await listProjectSteps(list.map((project) => project.id)));
-    if (scope === 'interests') {
-      setInterests(await listInterests());
-      const linked = list.filter((project) => project.linkKind === 'interest');
-      const pairs = await Promise.all(linked.map(async (project) => [project.id, await listSessionsForProject(project.id)] as const));
-      setProjectSessions(Object.fromEntries(pairs));
+    setReadFailed(false);
+    try {
+      const list = await listProjects(scope);
+      setProjects(list);
+      setSteps(await listProjectSteps(list.map((project) => project.id)));
+      if (scope === 'interests') {
+        setInterests(await listInterests());
+        const linked = list.filter((project) => project.linkKind === 'interest');
+        const pairs = await Promise.all(linked.map(async (project) => [project.id, await listSessionsForProject(project.id)] as const));
+        setProjectSessions(Object.fromEntries(pairs));
+      }
+    } catch (error) {
+      console.warn('[ProjectsSection] read failed', error);
+      setReadFailed(true);
     }
   }, [scope]);
 
@@ -183,16 +193,23 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
       // Only the Interests tab offers the choice, so only it changes the link.
       ...(scope === 'interests' ? { link: form.interestId ? { kind: 'interest', id: form.interestId } : null } : {}),
     };
-    if (form.id) {
-      await updateProject(form.id, input);
+    const editingId = form.id;
+    if (editingId) {
+      if (!(await saved('The project was not changed. Try again.', () => updateProject(editingId, input)))) return;
       setForm(null);
       await afterChange(`${name}: changed.`);
     } else {
-      const id = await addProject(input);
+      const id = await saveOrSay('The project was not started. Try again.', () => addProject(input));
+      if (id === undefined) return;
       setForm(null);
       setOpenId(id);
       await afterChange(`Started: ${name}. Add its first step below.`);
     }
+  }
+
+  /** Runs one write; false after saying what was not saved (lib/saveProblem.ts). */
+  async function saved(problem: string, work: () => Promise<unknown>): Promise<boolean> {
+    return (await saveOrSay(problem, async () => { await work(); return true; })) === true;
   }
 
   async function handleAddStep(project: Project) {
@@ -201,19 +218,20 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
       explainNotYet('Type the step first, as you would say it: "Order the tiles".');
       return;
     }
-    await addProjectStep(project.id, { text });
+    if (!(await saved('The step was not added. Try again.', () => addProjectStep(project.id, { text })))) return;
     setNewStep('');
     await afterChange(null);
   }
 
   async function handleStepDone(step: ProjectStep) {
     const done = !step.doneAt;
-    await setProjectStepDone(step.id, done);
+    if (!(await saved('That was not recorded. Try again.', () => setProjectStepDone(step.id, done)))) return;
     await afterChange(done ? `Done: ${step.text}.` : `${step.text}: open again.`);
   }
 
   async function handleMove(step: ProjectStep, direction: -1 | 1) {
-    const moved = await moveProjectStep(step.id, direction);
+    const moved = await saveOrSay('The step was not moved. Try again.', () => moveProjectStep(step.id, direction));
+    if (moved === undefined) return;
     if (!moved) {
       explainNotYet(direction === -1 ? 'This step is already first in the plan.' : 'This step is already last in the plan.');
       return;
@@ -223,7 +241,7 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
 
   async function handleParked(step: ProjectStep) {
     const parked = !step.parked;
-    await setProjectStepParked(step.id, parked);
+    if (!(await saved('That was not recorded. Try again.', () => setProjectStepParked(step.id, parked)))) return;
     await afterChange(parked ? `${step.text}: kept for later.` : `${step.text}: back in the plan, at the end.`);
   }
 
@@ -244,7 +262,7 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
       setStepError(DAY_HELP);
       return;
     }
-    await updateProjectStep(stepForm.id, { text, waitingOn: stepForm.waitingOn, dueOn: day.dueOn });
+    if (!(await saved('The step was not changed. Try again.', () => updateProjectStep(stepForm.id, { text, waitingOn: stepForm.waitingOn, dueOn: day.dueOn })))) return;
     setStepForm(null);
     await afterChange(`${text}: changed.`);
   }
@@ -259,7 +277,7 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
           destructive: true,
           onPress: async () => {
             setConfirm(null);
-            await deleteProjectStep(step.id);
+            if (!(await saved('The step was not removed. Try again.', () => deleteProjectStep(step.id)))) return;
             await afterChange(`${step.text}: removed.`);
           },
         },
@@ -271,13 +289,13 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
   async function handlePause() {
     if (!pausing) return;
     const project = projects.find((p) => p.id === pausing.id);
-    await setProjectStatus(pausing.id, 'paused', pausing.note);
+    if (!(await saved('The project was not paused. Try again.', () => setProjectStatus(pausing.id, 'paused', pausing.note)))) return;
     setPausing(null);
     await afterChange(project ? `${project.name}: paused. It is here whenever you pick it up.` : null);
   }
 
   async function handleGoAgain(project: Project) {
-    await setProjectStatus(project.id, 'active');
+    if (!(await saved('The project was not started again. Try again.', () => setProjectStatus(project.id, 'active')))) return;
     await afterChange(`${project.name}: going again.`);
   }
 
@@ -290,7 +308,7 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
           label: 'Finished',
           onPress: async () => {
             setConfirm(null);
-            await setProjectStatus(project.id, 'finished');
+            if (!(await saved('The project was not marked finished. Try again.', () => setProjectStatus(project.id, 'finished')))) return;
             await afterChange(`${project.name}: finished.`);
           },
         },
@@ -308,7 +326,7 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
           label: 'Stop',
           onPress: async () => {
             setConfirm(null);
-            await setProjectStatus(project.id, 'stopped');
+            if (!(await saved('The project was not stopped. Try again.', () => setProjectStatus(project.id, 'stopped')))) return;
             await afterChange(`${project.name}: stopped, kept as a record.`);
           },
         },
@@ -328,7 +346,7 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
           onPress: async () => {
             setConfirm(null);
             if (openId === project.id) setOpenId(null);
-            await deleteProject(project.id);
+            if (!(await saved('The project was not removed. Try again.', () => deleteProject(project.id)))) return;
             await afterChange(`${project.name}: removed.`);
           },
         },
@@ -347,7 +365,7 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
       explainNotYet('The project day is today or has gone by, so there are no days left to count. Give it a later day with Change.');
       return;
     }
-    await addCountdown({ name: project.name, about: 'A project day', startedOn: today, days });
+    if (!(await saved('The countdown was not added. Try again.', () => addCountdown({ name: project.name, about: 'A project day', startedOn: today, days })))) return;
     await afterChange(`Counting the days to ${project.name} in Days Until.`);
   }
 
@@ -630,6 +648,8 @@ export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
       </View>
     );
   }
+
+  if (readFailed) return <ReadProblem message="Your projects could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />;
 
   return (
     <View style={styles.section}>

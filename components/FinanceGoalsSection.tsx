@@ -30,6 +30,7 @@ import {
   addGoalContribution,
   addGoalCost,
   createGoal,
+  updateGoal,
   deleteGoal,
   deleteGoalCost,
   listGoalsWithProgress,
@@ -37,10 +38,12 @@ import {
   type GoalWithProgress,
 } from '../lib/financeGoalsDb';
 import { parsePriceInput } from '../lib/groceryList';
+import { saveOrSay } from '../lib/saveProblem';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { ThumbEndRow } from './ThumbEndRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
 
 // Goals, 2026-09-05, pass 3 of the Finances rebuild.
 //
@@ -70,7 +73,7 @@ function todayLocal(): string {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 
-type GoalForm = { name: string; reason: string; targetDate: string };
+type GoalForm = { id?: string; name: string; reason: string; targetDate: string };
 type CostForm = { goalId: string; kind: GoalCostKind; label: string; target: string; unit: string };
 type ContribForm = { costId: string; kind: GoalCostKind; unit: string; amount: string; occurredOn: string; note: string };
 
@@ -78,6 +81,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [goals, setGoals] = useState<GoalWithProgress[]>([]);
   const [loading, setLoading] = useState(false);
+  const [readFailed, setReadFailed] = useState(false);
   const [goalForm, setGoalForm] = useState<GoalForm | null>(null);
   const [costForm, setCostForm] = useState<CostForm | null>(null);
   const [contribForm, setContribForm] = useState<ContribForm | null>(null);
@@ -90,11 +94,15 @@ export function FinanceGoalsSection({ tabColor }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     listGoalsWithProgress()
       .then(setGoals)
-      .catch((error) => showInfoAlert('Could not load goals', error instanceof Error ? error.message : String(error)))
+      .catch((error) => {
+      console.warn('[FinanceGoalsSection] read failed', error);
+      setReadFailed(true);
+    })
       .finally(() => setLoading(false));
-  }, [showInfoAlert]);
+  }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -111,7 +119,14 @@ export function FinanceGoalsSection({ tabColor }: Props) {
       showInfoAlert('Almost there', 'Enter the date as YYYY-MM-DD, or leave it blank if there is no deadline.');
       return;
     }
-    await createGoal({ name: goalForm.name, reason: goalForm.reason, targetDate: date || null });
+    const input = { name: goalForm.name, reason: goalForm.reason, targetDate: date || null };
+    const editingId = goalForm.id;
+    const saved = await saveOrSay(editingId ? 'The goal was not changed. Try again.' : 'The goal was not saved. Try again.', async () => {
+      if (editingId) await updateGoal(editingId, input);
+      else await createGoal(input);
+      return true;
+    });
+    if (!saved) return;
     setGoalForm(null);
     load();
   }
@@ -131,13 +146,17 @@ export function FinanceGoalsSection({ tabColor }: Props) {
       showInfoAlert('Almost there', 'Say what this is counted in: hours, kg, jars, whatever fits.');
       return;
     }
-    await addGoalCost({
-      goalId: costForm.goalId,
-      kind: costForm.kind,
-      label: costForm.label,
-      target,
-      unit: costForm.unit,
+    const saved = await saveOrSay('The cost was not saved. Try again.', async () => {
+      await addGoalCost({
+        goalId: costForm.goalId,
+        kind: costForm.kind,
+        label: costForm.label,
+        target,
+        unit: costForm.unit,
+      });
+      return true;
     });
+    if (!saved) return;
     setCostForm(null);
     load();
   }
@@ -153,52 +172,25 @@ export function FinanceGoalsSection({ tabColor }: Props) {
       showInfoAlert('Almost there', 'Enter a valid date (YYYY-MM-DD).');
       return;
     }
-    await addGoalContribution({
-      costId: contribForm.costId,
-      occurredOn: contribForm.occurredOn,
-      amount,
-      note: contribForm.note,
+    const saved = await saveOrSay('What went in was not saved. Try again.', async () => {
+      await addGoalContribution({
+        costId: contribForm.costId,
+        occurredOn: contribForm.occurredOn,
+        amount,
+        note: contribForm.note,
+      });
+      return true;
     });
+    if (!saved) return;
     setContribForm(null);
     load();
   }
 
+  if (readFailed) return <ReadProblem message="Your goals could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
+
   if (loading) return <View style={band.boxMuted}><Text style={styles.bodyText}>Adding up your goals…</Text></View>;
 
-  return (
-    <View style={band.column}>
-      {infoAlertElement}
-      <AppActionSheet
-        visible={confirm !== null}
-        onClose={() => setConfirm(null)}
-        title={confirm?.title}
-        message={confirm?.message}
-        actions={confirm?.actions ?? []}
-      />
-
-      <View style={band.box}>
-        <Text style={styles.cardTitle}>Goals</Text>
-        {goals.length === 0 ? (
-          <Text style={styles.bodyText}>
-            A goal here is something you want, plus what it will actually take to get it. That cost can be money, but it
-            can just as easily be hours of work or things you provide yourself, and most goals are a mix. Restoring a
-            bed costs lumber and a weekend. A year of preserves costs jars, produce and time.
-          </Text>
-        ) : (
-          <Text style={styles.bodyText}>{describeGoalsSummary(summary)}</Text>
-        )}
-        {!goalForm ? (
-          <TouchableOpacity
-            ref={walkMark.ref('finance.goalAdd')}
-            style={styles.primaryButton}
-            onPress={() => setGoalForm({ name: '', reason: '', targetDate: '' })}
-          >
-            <Text style={styles.primaryButtonText}>+ Add a goal</Text>
-          </TouchableOpacity>
-        ) : null}
-      </View>
-
-      {goalForm ? (
+  const goalFormBlock = goalForm ? (
         <View style={band.box}>
           <Text style={styles.label}>What is it</Text>
           <AppTextInput
@@ -244,11 +236,46 @@ export function FinanceGoalsSection({ tabColor }: Props) {
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.primaryButton} onPress={saveGoal}>
-              <Text style={styles.primaryButtonText}>Add it</Text>
+              <Text style={styles.primaryButtonText}>{goalForm.id ? 'Save' : 'Add it'}</Text>
             </TouchableOpacity>
           </ThumbRow>
         </View>
-      ) : null}
+  ) : null;
+
+  return (
+    <View style={band.column}>
+      {infoAlertElement}
+      <AppActionSheet
+        visible={confirm !== null}
+        onClose={() => setConfirm(null)}
+        title={confirm?.title}
+        message={confirm?.message}
+        actions={confirm?.actions ?? []}
+      />
+
+      <View style={band.box}>
+        <Text style={styles.cardTitle}>Goals</Text>
+        {goals.length === 0 ? (
+          <Text style={styles.bodyText}>
+            A goal here is something you want, plus what it will actually take to get it. That cost can be money, but it
+            can just as easily be hours of work or things you provide yourself, and most goals are a mix. Restoring a
+            bed costs lumber and a weekend. A year of preserves costs jars, produce and time.
+          </Text>
+        ) : (
+          <Text style={styles.bodyText}>{describeGoalsSummary(summary)}</Text>
+        )}
+        {!goalForm ? (
+          <TouchableOpacity
+            ref={walkMark.ref('finance.goalAdd')}
+            style={styles.primaryButton}
+            onPress={() => setGoalForm({ name: '', reason: '', targetDate: '' })}
+          >
+            <Text style={styles.primaryButtonText}>+ Add a goal</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+
+      {goalForm && !goalForm.id ? goalFormBlock : null}
 
       {goals.map(({ progress }, goalIndex) => {
         const { goal } = progress;
@@ -262,6 +289,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
               title={statusWord ? `${goal.name} · ${statusWord}` : goal.name}
               icon="flag-outline"
             >
+            {goalForm?.id === goal.id ? goalFormBlock : null}
             {goal.reason ? <Text style={styles.reasonText}>{goal.reason}</Text> : null}
             <Text style={styles.bodyText}>{describeGoalProgress(progress)}</Text>
             {goal.targetDate ? (
@@ -332,7 +360,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
                               destructive: true,
                               onPress: async () => {
                                 setConfirm(null);
-                                await deleteGoalCost(entry.cost.id);
+                                await saveOrSay('The cost was not removed. Try again.', () => deleteGoalCost(entry.cost.id));
                                 load();
                               },
                             },
@@ -451,6 +479,14 @@ export function FinanceGoalsSection({ tabColor }: Props) {
             ) : null}
 
             <View style={styles.goalActions}>
+              {goalForm?.id !== goal.id ? (
+                <TouchableOpacity
+                  ref={goalIndex === 0 ? walkMark.ref('finance.goalChange') : undefined}
+                  onPress={() => setGoalForm({ id: goal.id, name: goal.name, reason: goal.reason ?? '', targetDate: goal.targetDate ?? '' })}
+                >
+                  <Text style={styles.actionText}>Change</Text>
+                </TouchableOpacity>
+              ) : null}
               {!costForm ? (
                 <TouchableOpacity
                   ref={goalIndex === 0 ? walkMark.ref('finance.costAdd') : undefined}
@@ -463,15 +499,15 @@ export function FinanceGoalsSection({ tabColor }: Props) {
               ) : null}
               {goal.status === 'active' ? (
                 <>
-                  <TouchableOpacity ref={goalIndex === 0 ? walkMark.ref('finance.goalReached') : undefined} onPress={async () => { await setGoalStatus(goal.id, 'reached'); load(); }}>
+                  <TouchableOpacity ref={goalIndex === 0 ? walkMark.ref('finance.goalReached') : undefined} onPress={async () => { await saveOrSay('The goal was not marked reached. Try again.', () => setGoalStatus(goal.id, 'reached')); load(); }}>
                     <Text style={styles.actionText}>Mark reached</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity ref={goalIndex === 0 ? walkMark.ref('finance.goalSetAside') : undefined} onPress={async () => { await setGoalStatus(goal.id, 'given_up'); load(); }}>
+                  <TouchableOpacity ref={goalIndex === 0 ? walkMark.ref('finance.goalSetAside') : undefined} onPress={async () => { await saveOrSay('The goal was not set aside. Try again.', () => setGoalStatus(goal.id, 'given_up')); load(); }}>
                     <Text style={styles.actionText}>Set aside</Text>
                   </TouchableOpacity>
                 </>
               ) : (
-                <TouchableOpacity onPress={async () => { await setGoalStatus(goal.id, 'active'); load(); }}>
+                <TouchableOpacity onPress={async () => { await saveOrSay('The goal was not picked back up. Try again.', () => setGoalStatus(goal.id, 'active')); load(); }}>
                   <Text style={styles.actionText}>Pick it back up</Text>
                 </TouchableOpacity>
               )}
@@ -488,7 +524,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
                         destructive: true,
                         onPress: async () => {
                           setConfirm(null);
-                          await deleteGoal(goal.id);
+                          await saveOrSay('The goal was not deleted. Try again.', () => deleteGoal(goal.id));
                           load();
                         },
                       },

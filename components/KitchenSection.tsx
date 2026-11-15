@@ -79,6 +79,8 @@ import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SEC
 import { foodDisplayName } from '../lib/ingredientShortName';
 import { daysLeftWords, foodKey, formatAmount } from '../lib/kitchenLow';
 import { addKitchenFoodToList, readKitchenFoods, setKitchenLowMark, type KitchenFoodReading } from '../lib/kitchenLowDb';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 
 type DispositionForm = {
   itemId: string;
@@ -153,12 +155,17 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
   const [markDraft, setMarkDraft] = useState('');
   const [lastPaid, setLastPaid] = useState<Record<string, RecordedPrice>>({});
 
+  const [readFailed, setReadFailed] = useState(false);
+
   const load = useCallback(async () => {
     setLoading(true);
+    setReadFailed(false);
     try {
       setItems(await listKitchenInventory(kind));
-    } catch {
+    } catch (error) {
+      console.warn('[KitchenSection] read failed', error);
       setItems([]);
+      setReadFailed(true);
     } finally {
       const foods = await readKitchenFoods().catch(() => [] as KitchenFoodReading[]);
       setReadings(new Map(foods.map((food) => [food.key, food])));
@@ -208,11 +215,14 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
     [readings, kind],
   );
 
-  async function run(action: () => Promise<void>) {
+  // Every change in the kitchen goes through here, so a change the database
+  // refuses says so in one place (lib/saveProblem.ts) and the form stays open.
+  async function run(action: () => Promise<void>): Promise<boolean> {
     setBusy(true);
     try {
-      await action();
+      const done = await saveOrSay('That change to your kitchen was not saved. Try again.', async () => { await action(); return true; });
       await load();
+      return done === true;
     } finally {
       setBusy(false);
     }
@@ -340,10 +350,10 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
       showInfoAlert('Not a number', 'Type how much is left when it should tell you, as a number, or empty it to clear it.');
       return;
     }
-    await run(async () => {
+    const saved = await run(async () => {
       await setKitchenLowMark({ category: item.category, foodName: item.foodName, belowAmount: amount, unit: item.unit });
     });
-    setMarkEditKey(null);
+    if (saved) setMarkEditKey(null);
   }
 
   async function handleDisposition(item: KitchenInventoryItem) {
@@ -609,6 +619,8 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
 
       {loading ? (
         <View style={band.boxMuted}><Text style={styles.bodyText}>Looking…</Text></View>
+      ) : readFailed ? (
+        <ReadProblem message="What is in your kitchen could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
       ) : items.length === 0 ? (
         <View style={band.box}>
           <Text style={styles.bodyText}>

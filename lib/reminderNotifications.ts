@@ -357,7 +357,7 @@ type SignalsReminderLens = 'generalNote' | 'flares';
 // opens the Days Until lens too, which has held every counter since
 // 1.0.42.14.
 type GardenReminderLens = 'upcomingTasks' | 'plotsAndPlantings' | 'daysUntil' | 'compost' | 'sowingCalendar';
-// A To Do List thing (C2) lands on its lens on Life, beside the dated ones.
+// A Checklist thing (C2) lands on its lens on Life, beside the dated ones.
 type LifeReminderLens = DatedReminderLens | 'didIDoIt';
 
 type ReminderPayload = {
@@ -399,7 +399,7 @@ type ReminderPayload = {
   /** A Yes pressed while locked: the id given to the flare it saved, so
    *  the answers after it, written at the same unlock, find it. */
   flareId?: string;
-  /** A To Do List thing: which of its times this is (lib/routines.ts
+  /** A Checklist thing: which of its times this is (lib/routines.ts
    *  dueKey), so Done checks off this time and no other. */
   dueAt?: string;
   /** A routine: its steps in order and the one on screen, so Done can show
@@ -501,6 +501,15 @@ function atReminderHour(dateStr: string): Date | null {
   if (!match) return null;
   const [, year, month, day] = match.map(Number);
   const parsed = new Date(year, month - 1, day, REMINDER_HOUR, 0, 0, 0);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+// The day at a given 'HH:MM', for a task given a time of day.
+function atClockTime(dateStr: string, time: string): Date | null {
+  const day = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+  const clock = /^(\d{2}):(\d{2})$/.exec(time);
+  if (!day || !clock) return atReminderHour(dateStr);
+  const parsed = new Date(Number(day[1]), Number(day[2]) - 1, Number(day[3]), Number(clock[1]), Number(clock[2]), 0, 0);
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
@@ -751,7 +760,7 @@ function buildDatedPlanned(
   day: { on: string; lead: number },
   now: Date,
 ): PlannedNotification | null {
-  const fireAt = atReminderHour(day.on);
+  const fireAt = day.lead === 0 && source.atTime ? atClockTime(day.on, source.atTime) : atReminderHour(day.on);
   if (!fireAt) return null;
   const prefix = DATED_KIND_PREFIX[source.kind];
   const pieces = [describeDatedDue(source.kind, day.lead), source.detail].filter(Boolean);
@@ -1020,7 +1029,7 @@ function buildPracticePlanned(interest: { id: string; name: string; leftOff: str
   };
 }
 
-// A To Do List thing (C2). The name they gave it is the title, one
+// A Checklist thing (C2). The name they gave it is the title, one
 // notification for each of its times, and the time is in the identifier so
 // the 8am and the 8pm one coexist. dueAt says which time it is, so Done
 // checks off that one and no other (2026-10-28).
@@ -1029,7 +1038,7 @@ function buildCheckPlanned(check: DoneCheck, fireAt: Date, now: Date): PlannedNo
   return {
     identifier: `${IDENTIFIER_PREFIX}check:${check.id}:${due}`,
     title: check.name,
-    body: `${answerLine('check')} To Do List as of ${describeFreshness(now, fireAt)}.`,
+    body: `${answerLine('check')} Checklist as of ${describeFreshness(now, fireAt)}.`,
     fireAt,
     payload: {
       kind: 'check',
@@ -2092,7 +2101,7 @@ async function runSync(): Promise<ReminderSyncResult> {
     }
   }
 
-  // The To Do List (C2, a schedule of its own since 2026-10-28). The time
+  // The Checklist (C2, a schedule of its own since 2026-10-28). The time
   // due now may already have gone by, in which case it only carries
   // follow-ups; the next one still ahead is a first-time reminder and the
   // rest of the week queues behind. A thing a routine walks past is not in

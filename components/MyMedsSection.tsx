@@ -66,6 +66,8 @@ import { explainNotYet } from '../lib/notYet';
 import { matchSupplementForm, readSpokenSupplementLabel } from '../lib/spokenSupplement';
 import { t, tl } from '../lib/i18n';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 
 // My Meds, the registry of everything a person takes: prescriptions, OTC
 // drugs and supplements, each with its dose, form, timing rules, interactions
@@ -219,7 +221,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   const [commonMedications, setCommonMedications] = useState<CommonMedication[]>([]);
   const [foodEntries, setFoodEntries] = useState<NutrientGapEntry[]>([]);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [readFailed, setReadFailed] = useState(false);
 
   const [addMode, setAddMode] = useState<MyMedsCategory | null>(null);
   const [supplementForm, setSupplementForm] = useState<MyMedsSupplementFormState>(blankMyMedsSupplementForm());
@@ -243,6 +245,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     ensureScheduleSeriesGenerated()
       .then(() =>
         Promise.all([
@@ -286,7 +289,8 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
         setIngredientsByTreatment(Object.fromEntries(entries));
       })
       .catch((error) => {
-        setErrorMessage(`Could not load My Meds: ${error instanceof Error ? error.message : String(error)}`);
+        console.warn('[MyMedsSection] read failed', error);
+        setReadFailed(true);
       })
       .finally(() => setLoading(false));
   }, [focusTreatmentId]);
@@ -588,12 +592,12 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       destructive: true,
     });
     if (!ok) return;
-    await deleteTreatment(treatment.id);
+    if (!(await saveOrSay('It was not removed. Try again.', async () => { await deleteTreatment(treatment.id); return true; }))) return;
     load();
   }
 
   async function handleToggleActive(treatment: TreatmentRecord) {
-    await setTreatmentActive(treatment.id, !treatment.active);
+    if (!(await saveOrSay(treatment.active ? 'It was not paused. Try again.' : 'It was not started again. Try again.', async () => { await setTreatmentActive(treatment.id, !treatment.active); return true; }))) return;
     load();
   }
 
@@ -839,8 +843,8 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       {confirmSheetElement}
       {loading ? (
         <View style={styles.bandBox}><Text style={styles.emptyText}>Loading…</Text></View>
-      ) : errorMessage ? (
-        <View style={styles.bandBox}><Text style={styles.errorText}>{errorMessage}</Text></View>
+      ) : readFailed ? (
+        <ReadProblem message="Your medicines and supplements could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
       ) : (
         <>
           {addMode === null ? (
@@ -1224,7 +1228,6 @@ function makeStyles(tabColor: string, calm: boolean = false) {
     bodyContent: { paddingTop: 5, gap: bandGap },
     doseUnitInput: { flex: 1 },
     emptyText: { ...typography.body, color: colors.textSecondary, ...textShadow },
-    errorText: { ...typography.body, color: colors.danger, ...textShadow },
     formActions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 12, marginTop: 16 },
     formCard: {
       ...homeBandStyle,

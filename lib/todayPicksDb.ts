@@ -57,8 +57,8 @@ export async function pickForToday(day: string, checkId: string): Promise<boolea
   return result.changes > 0;
 }
 
-/** Something new: made as a To Do List thing, every day at 9am with no
- *  reminder of its own, then picked. It stays on Life > To Do List
+/** Something new: made as a Checklist thing, every day at 9am with no
+ *  reminder of its own, then picked. It stays on Life > Checklist
  *  afterwards, where its times can be changed. */
 export async function pickNewForToday(day: string, name: string): Promise<boolean> {
   const id = await createDoneCheck(name, defaultCheckSchedule(new Date(), '09:00', false));

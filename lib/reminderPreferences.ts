@@ -169,7 +169,7 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   routine: 'Routines',
   exercise: 'Planned exercise',
   practice: 'Practice time for an interest',
-  check: 'To Do List',
+  check: 'Checklist',
   bill: 'Bills',
   upkeep: 'Upkeep & renewals',
   benefit: 'Work benefits',
@@ -215,7 +215,7 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
   practice:
     'An interest on Interests > Sessions given practice days and a time, at that time on those days, with where you left off. Done keeps a session for today; one already kept is not added twice.',
   check:
-    'Something on Life > To Do List with Remind me on, once at each of its times. Done checks that time off, even with the phone locked, and it comes back at the next time. A thing a routine walks past is reminded with the routine instead.',
+    'Something on Life > Checklist with Remind me on, once at each of its times. Done checks that time off, even with the phone locked, and it comes back at the next time. A thing a routine walks past is reminded with the routine instead.',
   bill:
     'A bill from Life > Finances, three days ahead and again on the day. Anything set to pay itself is left out.',
   upkeep:
@@ -232,7 +232,7 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
     'Something in Life > Kitchen with a use-by date you gave it, the day before and on the day. Marking it used or gone clears the reminder.',
   kitchenLow:
     'Something in Life > Kitchen that is used up, down to the amount you set for it, or about five days from running out at the rate it has been used, asking whether to add it to the grocery list. Not yet asks again in three days if it is still low. Nothing comes for a food already on the list.',
-  todo: 'A task on Life > Tasks or Work that you gave a day to, once on that day. Done on the reminder marks it done; one left open stays on the list and is not chased.',
+  todo: 'A task on Life > To Do List or Work that you gave a day to, once on that day. Done on the reminder marks it done; one left open stays on the list and is not chased.',
   project: 'A step in a project on Life > Projects that you gave a day to, and the day of a project itself, once on that day. Done on the reminder for a step ticks it; a paused project says nothing.',
   learnReady:
     'Once, on the morning a deck you have studied in Interests > Flashcards has cards back for their day, naming the decks. It never counts the cards and never comes back for a day let go by, and a deck you have not opened says nothing.',

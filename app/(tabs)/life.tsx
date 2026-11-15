@@ -215,10 +215,27 @@ const SECTIONS: { key: FinanceSection; label: string }[] = [
 
 const UPCOMING_WINDOW_DAYS = 30;
 
+// The Life tab as a whole: what is on it and how the menu is laid out.
 const LIFE_HELP_SECTIONS: HelpSection[] = [
   {
     heading: 'What this tab is for',
-    body: 'Everything about your life that is not food, not a symptom, and not a lab result. Finances is its first area; more will be added, and each one becomes a separate entry on the corner button.',
+    body: 'The running of your day and your home, kept somewhere other than your head: what to do and what got done, routines, the kitchen and the grocery list, upkeep, money, work, your conditions and medicines, and what to do in an emergency.',
+  },
+  {
+    heading: 'Finding your way',
+    body: 'The corner button lists every part of Life in groups: Doing and Checking Off, Home and Household, Health, Money and Work, and Reading. The ones you opened lately come first. Each part has its help under the question mark once it is open.',
+  },
+  {
+    heading: 'What stays on this phone',
+    body: 'Everything here is kept on this device and in your backup folder, never on a company server. Nothing is sent anywhere unless you share it.',
+  },
+];
+
+// Life > Finances (1.0.90.10): its own help, in place of the tab's.
+const FINANCES_HELP_SECTIONS: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'Where your money goes and where it comes from, in seven parts: Overview, Health (insurance, medical bills and health accounts), Bills & Income, Spending, Coming Up, Accounts and Goals.',
   },
   {
     heading: 'A plan and a record are different things',
@@ -226,7 +243,7 @@ const LIFE_HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Money this app already knows about',
-    body: 'Grocery trips you priced in the shop and hands-on therapy sessions you recorded a cost for are counted automatically. They are read from where they already live rather than copied here, so correcting a grocery price fixes it everywhere at once. Do not enter them again by hand.',
+    body: 'Grocery trips you priced in the shop, hands-on therapy sessions you recorded a cost for, and what your hobbies and interests spent and brought in on Interests are counted automatically. They are read from where they already live rather than copied here, so correcting a grocery price fixes it everywhere at once. Do not enter them again by hand.',
   },
   {
     heading: 'Weekly is not four times a month',
@@ -330,11 +347,11 @@ const LOOK_BACK_HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'On their own, then each routine',
-    body: 'Things you checked off by themselves come first: the things on your To Do List no routine walks past, and Tasks you marked done, each with the times you checked it off. Each routine comes after, with every walk you made that day and the steps you did on it listed under the walk. A step is never listed again among the things on their own.',
+    body: 'Things you checked off by themselves come first: the things on your Checklist no routine walks past, and things on your To Do List you marked done, each with the times you checked it off. Each routine comes after, with every walk you made that day and the steps you did on it listed under the walk. A step is never listed again among the things on their own.',
   },
   {
     heading: 'Going back a day',
-    body: 'Earlier and Later move a day at a time, and Today comes back to today. Nothing here changes a record: things are set up and checked off on the To Do List, Tasks and Routines.',
+    body: 'Earlier and Later move a day at a time, and Today comes back to today. Nothing here changes a record: things are set up and checked off on the Checklist, the To Do List and Routines.',
   },
   {
     heading: 'Walks from before each step was kept',
@@ -353,7 +370,7 @@ const DID_I_DO_IT_HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Reminders sit together in the notification area',
-    body: 'A thing with a reminder raises one at each of its times, all kept together under To Do List in the notification area. Done on the reminder checks that time off without unlocking the phone or opening the app.',
+    body: 'A thing with a reminder raises one at each of its times, all kept together under Checklist in the notification area. Done on the reminder checks that time off without unlocking the phone or opening the app.',
   },
   {
     heading: 'How this works with routines',
@@ -547,7 +564,7 @@ const TODO_HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'The phone tells you on the day',
-    body: 'A task with a day raises one reminder that morning, and Done on the reminder ticks it. One left open is not chased. The switch is in Profile > Reminders.',
+    body: 'A task with a day raises one reminder that morning, or at its time when you gave it one ("call the dentist tomorrow at 3pm"), and Done on the reminder ticks it. One left open is not chased. The switch is in Profile > Reminders.',
   },
 ];
 
@@ -574,7 +591,7 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
   { key: 'healthLiteracy', label: 'Health Literacy', icon: 'reader-outline', help: HEALTH_LITERACY_HELP_SECTIONS },
   { key: 'earthMatters', label: 'Earth Matters', icon: 'earth-outline', help: EARTH_MATTERS_HELP_SECTIONS },
   { key: 'searchReading', label: 'Search Reading', icon: 'search-outline', help: DIGEST_SEARCH_HELP },
-  { key: 'finances', label: 'Finances', icon: 'wallet-outline', help: LIFE_HELP_SECTIONS },
+  { key: 'finances', label: 'Finances', icon: 'wallet-outline', help: FINANCES_HELP_SECTIONS },
   { key: 'work', label: 'Work', icon: 'briefcase-outline', help: WORK_HELP_SECTIONS },
   { key: 'upkeep', label: 'Upkeep', icon: 'construct-outline', help: UPKEEP_HELP_SECTIONS },
   // medkit-outline rather than a warning triangle or a siren: this is a
@@ -603,7 +620,7 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
   // has already happened. They sit next to each other because a routine
   // step can write a check, which is the join the whole design rests on.
   { key: 'routines', label: 'Routines', icon: 'footsteps-outline', help: ROUTINES_HELP_SECTIONS },
-  { key: 'didIDoIt', label: 'To Do List', icon: 'checkmark-done-outline', help: DID_I_DO_IT_HELP_SECTIONS },
+  { key: 'didIDoIt', label: 'Checklist', icon: 'checkmark-done-outline', help: DID_I_DO_IT_HELP_SECTIONS },
   { key: 'lookBack', label: 'Did I Do It', icon: 'time-outline', help: LOOK_BACK_HELP_SECTIONS },
   // 2026-09-22, when a Days Until counter stopped having to be about the
   // garden. Every counter of either kind reads here, in the order they
@@ -612,7 +629,7 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
   { key: 'daysUntil', label: 'Days Until', icon: 'hourglass-outline', help: DAYS_UNTIL_HELP_SECTIONS },
   // 2026-09-30 (C10). Things to do with an optional day and repeat, work and
   // personal together. See components/TodoSection.tsx.
-  { key: 'todos', label: 'Tasks', icon: 'checkbox-outline', help: TODO_HELP_SECTIONS },
+  { key: 'todos', label: 'To Do List', icon: 'checkbox-outline', help: TODO_HELP_SECTIONS },
   // 2026-10-30. Anything with several steps, paused and picked up again,
   // ending finished or stopped. Every area's projects show here; the
   // Interests tab will show its own. See components/ProjectsSection.tsx.
@@ -624,7 +641,8 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
 // subject, with the lenses opened lately on top (lib/lensMenu.ts). Every
 // lens is in exactly one group; scripts/test_lens_menu.js checks that.
 const LIFE_LENS_GROUPS: readonly { group: string; keys: readonly LifeLens[] }[] = [
-  { group: 'Day to day', keys: ['groceryList', 'kitchen', 'todos', 'didIDoIt', 'lookBack', 'routines', 'upkeep', 'daysUntil', 'projects'] },
+  { group: 'Doing and Checking Off', keys: ['todos', 'didIDoIt', 'lookBack', 'routines', 'daysUntil', 'projects'] },
+  { group: 'Home and Household', keys: ['groceryList', 'kitchen', 'upkeep'] },
   { group: 'Health', keys: ['conditions', 'myMeds', 'emergency', 'movement', 'workouts'] },
   { group: 'Money and work', keys: ['finances', 'work'] },
   { group: 'Reading', keys: ['healthLiteracy', 'earthMatters', 'searchReading'] },
@@ -2181,7 +2199,7 @@ export default function LifeScreen() {
             ) : null}
             {lens === 'todos' ? (
               <View style={band.box}>
-                <Text style={styles.cardTitle}>Tasks</Text>
+                <Text style={styles.cardTitle}>To Do List</Text>
                 <TodoSection scope="everything" tabColor={TAB_COLOR} />
               </View>
             ) : null}

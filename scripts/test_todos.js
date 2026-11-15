@@ -117,8 +117,13 @@ check('day read', bill.dueOn === '2026-10-20' && !/october|20/i.test(bill.title)
 const ferns = T.readTodoWords('water the ferns every 3 days', NOW);
 check('repeat read', ferns.repeat !== null && ferns.dueOn !== null && !/every/i.test(ferns.title), ferns);
 const timed = T.readTodoWords('call the dentist tomorrow at 3pm', NOW);
-check('time named as left out', timed.dueOn === '2026-10-01' && timed.notes.some((line) => /not the time/.test(line)), timed);
-check('when empty is no day', JSON.stringify(T.readTodoWhen('', NOW)) === JSON.stringify({ dueOn: null, repeat: null }));
+check('time kept with the day', timed.dueOn === '2026-10-01' && timed.dueTime === '15:00', timed);
+check('no time when none was said', bill.dueTime === null, bill);
+const whenTimed = T.readTodoWhen('tomorrow at 3pm', NOW);
+check('when keeps a time', whenTimed && whenTimed.dueTime === '15:00', whenTimed);
+check('a time read back', T.describeTodoWhen(TODAY, null, TODAY, '15:00') === 'Today at 3:00 PM', T.describeTodoWhen(TODAY, null, TODAY, '15:00'));
+check('a time in the caption', /3:00 PM/.test(T.describeTodoCaption(todo({ dueOn: TODAY, dueTime: '15:00' }), TODAY)));
+check('when empty is no day', JSON.stringify(T.readTodoWhen('', NOW)) === JSON.stringify({ dueOn: null, dueTime: null, repeat: null }));
 check('when tomorrow', (T.readTodoWhen('tomorrow', NOW) || {}).dueOn === '2026-10-01', T.readTodoWhen('tomorrow', NOW));
 const monday = T.readTodoWhen('every Monday', NOW);
 check('when every Monday', monday && monday.repeat && monday.repeat.type === 'weekly', monday);

@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -42,10 +43,12 @@ import {
   type NetWorthPoint,
 } from '../lib/financeAccountsDb';
 import { parsePriceInput } from '../lib/groceryList';
+import { saveOrSay } from '../lib/saveProblem';
 import { ThumbRow } from './ThumbRow';
 import { t } from '../lib/i18n';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
 
 // Accounts, net worth and debt payoff, 2026-09-05, pass 2 of the Finances
 // rebuild. These are the parts every mainstream finance app has and the
@@ -82,12 +85,14 @@ function todayLocalIso(): string {
 export function FinanceMoneySection({ tabColor }: Props) {
   const walkMark = useWalkMark();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
   const [accounts, setAccounts] = useState<AccountRecord[]>([]);
   const [history, setHistory] = useState<NetWorthPoint[]>([]);
   const [balanceHistory, setBalanceHistory] = useState<Record<string, BalancePoint[]>>({});
   const [entries, setEntries] = useState<FinanceEntryRecord[]>([]);
   const [recurring, setRecurring] = useState<FinanceRecurringRecord[]>([]);
   const [loading, setLoading] = useState(false);
+  const [readFailed, setReadFailed] = useState(false);
   const [form, setForm] = useState<{
     id: string | null; name: string; kind: string; balance: string;
     apr: string; minimumPayment: string; contribution: string;
@@ -96,14 +101,18 @@ export function FinanceMoneySection({ tabColor }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     Promise.all([listAccounts(), listNetWorthHistory(), listAllBalanceHistory(), listEntries(), listRecurring()])
       .then(([rows, points, perAccount, entryRows, recurringRows]) => {
         setAccounts(rows); setHistory(points); setBalanceHistory(perAccount);
         setEntries(entryRows); setRecurring(recurringRows);
       })
-      .catch((error) => showInfoAlert('Could not load', error instanceof Error ? error.message : String(error)))
+      .catch((error) => {
+      console.warn('[FinanceMoneySection] read failed', error);
+      setReadFailed(true);
+    })
       .finally(() => setLoading(false));
-  }, [showInfoAlert]);
+  }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -184,7 +193,7 @@ export function FinanceMoneySection({ tabColor }: Props) {
     if (balance == null) { showInfoAlert('Almost there', 'Enter the balance as a number.'); return; }
     const negative = form.balance.trim().startsWith('-');
 
-    await upsertAccount({
+    const saved = await saveOrSay('The account was not saved. Try again.', async () => { await upsertAccount({
       id: form.id ?? undefined,
       name: form.name,
       kind: form.kind,
@@ -192,16 +201,26 @@ export function FinanceMoneySection({ tabColor }: Props) {
       apr: showsRate && form.apr.trim() ? Number(form.apr) : null,
       minimumPayment: showsMinimum && form.minimumPayment.trim() ? parsePriceInput(form.minimumPayment) : null,
       contribution: form.contribution.trim() ? (parsePriceInput(form.contribution.replace('-', '')) ?? 0) * (form.contribution.trim().startsWith('-') ? -1 : 1) : 0,
-    });
+    }); return true; });
+    if (!saved) return;
     setForm(null);
     load();
   }
+
+  if (readFailed) return <ReadProblem message="Your accounts could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
 
   if (loading) return <View style={band.boxMuted}><Text style={styles.bodyText}>Adding up your accounts…</Text></View>;
 
   return (
     <View style={band.column}>
       {infoAlertElement}
+      <AppActionSheet
+        visible={confirm !== null}
+        onClose={() => setConfirm(null)}
+        title={confirm?.title}
+        message={confirm?.message}
+        actions={confirm?.actions ?? []}
+      />
 
       <TabBand folds={folds} color={tabColor} id="life:finances:net-worth" title="Net worth" icon="wallet-outline">
         {accounts.length === 0 ? (
@@ -395,7 +414,24 @@ export function FinanceMoneySection({ tabColor }: Props) {
                   })}>
                     <Text style={styles.actionText}>Update balance</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.accountRemove') : undefined} onPress={async () => { await deleteAccount(account.id); load(); }}>
+                  <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.accountRemove') : undefined} onPress={() =>
+                    setConfirm({
+                      title: t('Remove {name}?', { name: account.name }),
+                      message: 'This removes the account and its balance from your net worth. Bills that named it stop warning about it running short.',
+                      actions: [
+                        {
+                          label: 'Remove',
+                          destructive: true,
+                          onPress: async () => {
+                            setConfirm(null);
+                            await saveOrSay('The account was not removed. Try again.', () => deleteAccount(account.id));
+                            load();
+                          },
+                        },
+                        { label: 'Keep it', onPress: () => setConfirm(null) },
+                      ],
+                    })
+                  }>
                     <Text style={styles.actionTextRemove}>Remove</Text>
                   </TouchableOpacity>
                 </View>

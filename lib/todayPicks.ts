@@ -62,4 +62,4 @@ export function canPickMore(count: number): boolean {
 
 /** The line at the top of the card before anything is picked. */
 export const TODAY_PICKS_EMPTY =
-  'Pick a few things you want to get to today. Each one is on your To Do List, so checking it off here or there counts.';
+  'Pick a few things you want to get to today. Each one is on your Checklist, so checking it off here or there counts.';

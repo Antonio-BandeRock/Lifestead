@@ -64,6 +64,7 @@ import { t, tl } from '../lib/i18n';
 import { listPartners, type Connection } from '../lib/connections';
 import { besideFreshness } from '../lib/peerBeside';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
 
 // The 19 conditions, on the Life tab. Direct instruction, 2026-09-19:
 // "move Conditions from Digest to Life, all condition icons be changed to
@@ -275,7 +276,10 @@ export function ConditionsSection({
   const conditionsClosed = useCategoryClosed('conditions');
   const familyClosed = useCategoryClosed('familyHealth');
 
+  const [readFailed, setReadFailed] = useState(false);
+
   const load = useCallback(async () => {
+    setReadFailed(false);
     try {
       const [own, curious, members, conditions, stages, diets] = await Promise.all([
         getUserConditions(),
@@ -293,9 +297,10 @@ export function ConditionsSection({
       setDietPreferences(diets as RecipeDietTag[]);
       setPartners((await listPartners().catch(() => [] as Connection[])).filter((partner) => partner.showTheirs && partner.theirConditionCodes.length > 0));
     } catch (error) {
-      showInfoAlert('Could not load Conditions', error instanceof Error ? error.message : String(error));
+      console.warn('[ConditionsSection] read failed', error);
+      setReadFailed(true);
     }
-  }, [showInfoAlert]);
+  }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -590,6 +595,8 @@ export function ConditionsSection({
       </View>
     );
   }
+
+  if (readFailed) return <ReadProblem message="Your conditions could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />;
 
   return (
     <View ref={sectionRef} style={styles.wrapper}>

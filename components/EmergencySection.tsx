@@ -62,6 +62,8 @@ import { t } from '../lib/i18n';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 
 // Emergency & Essentials: what someone else needs to know when you cannot tell
 // them. Life's fifth area, 2026-09-05.
@@ -202,6 +204,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
   const [contacts, setContacts] = useState<EmergencyContact[]>([]);
   const [fromApp, setFromApp] = useState<EmergencyFromApp | null>(null);
   const [loading, setLoading] = useState(false);
+  const [readFailed, setReadFailed] = useState(false);
   const [editing, setEditing] = useState<Partial<EmergencyProfile> | null>(null);
   const [contactForm, setContactForm] = useState<ContactForm | null>(null);
   // Which Medical ID line was copied last, so its button says Copied.
@@ -236,6 +239,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     Promise.all([getEmergencyProfile(), listEmergencyContacts(), gatherFromApp(), getLockScreenParts()])
       .then(([p, c, a, parts]) => {
         setProfile(p);
@@ -245,9 +249,12 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
         // Whatever was just saved reaches the lock screen too (A19).
         if (parts.length > 0) void refreshLockScreenNotice();
       })
-      .catch((error) => showInfoAlert('Could not load', error instanceof Error ? error.message : String(error)))
+      .catch((error) => {
+      console.warn('[EmergencySection] read failed', error);
+      setReadFailed(true);
+    })
       .finally(() => setLoading(false));
-  }, [showInfoAlert]);
+  }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -382,14 +389,16 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
       );
       return;
     }
-    await setLockScreenParts(parts);
+    const savedParts = await saveOrSay('The lock screen lines were not changed. Try again.', async () => { await setLockScreenParts(parts); return true; });
+    if (!savedParts) return;
     setLockParts(parts);
     setLockPicking(null);
   }
 
   async function saveProfile() {
     if (!editing) return;
-    await saveEmergencyProfile(editing);
+    const saved = await saveOrSay('The emergency card was not saved. Try again.', async () => { await saveEmergencyProfile(editing); return true; });
+    if (!saved) return;
     setEditing(null);
     load();
   }
@@ -447,7 +456,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
 
   async function writeContact(form: ContactForm) {
     const contactForm = form;
-    await upsertEmergencyContact({
+    const saved = await saveOrSay('The contact was not saved. Try again.', async () => { await upsertEmergencyContact({
       id: contactForm.id ?? undefined,
       name: contactForm.name,
       relationship: contactForm.relationship,
@@ -457,10 +466,13 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
       // A new person nobody picked was typed in; an edit keeps what it had.
       source: contactForm.source ?? (contactForm.id ? undefined : TYPED_SOURCE),
       contactKey: contactForm.contactKey ?? undefined,
-    });
+    }); return true; });
+    if (!saved) return;
     setContactForm(null);
     load();
   }
+
+  if (readFailed) return <ReadProblem message="Your emergency card could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
 
   if (loading || !profile || !fromApp) {
     return <View style={band.boxMuted}><Text style={styles.bodyText}>Loading…</Text></View>;
@@ -621,7 +633,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
                             destructive: true,
                             onPress: async () => {
                               setConfirm(null);
-                              await deleteEmergencyContact(contact.id);
+                              await saveOrSay('The contact was not removed. Try again.', () => deleteEmergencyContact(contact.id));
                               load();
                             },
                           },

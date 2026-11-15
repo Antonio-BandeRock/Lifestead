@@ -161,6 +161,47 @@ export async function createMedicalBill(input: {
   return id;
 }
 
+// Corrects a bill's numbers, provider, date or condition. Its status and
+// what was paid are left as they are: those change through Mark paid and
+// Dispute, not by retyping the bill.
+export async function updateMedicalBill(
+  id: string,
+  input: {
+    serviceDate: string;
+    provider: string;
+    description?: string;
+    billed?: number | null;
+    allowed?: number | null;
+    insurancePaid?: number | null;
+    youOwe?: number | null;
+    appliedToDeductible?: number | null;
+    appliedToOutOfPocket?: number | null;
+    conditionCode?: string | null;
+  },
+): Promise<void> {
+  const db = await getDatabase();
+  await db.runAsync(
+    `
+      UPDATE finance_medical_bills
+         SET service_date = ?, provider = ?, description = ?, billed = ?, allowed = ?, insurance_paid = ?,
+             you_owe = ?, applied_to_deductible = ?, applied_to_out_of_pocket = ?, condition_code = ?, updated_at = ?
+       WHERE id = ?
+    `,
+    input.serviceDate,
+    input.provider.trim(),
+    input.description?.trim() || null,
+    input.billed ?? null,
+    input.allowed ?? null,
+    input.insurancePaid ?? null,
+    input.youOwe ?? null,
+    input.appliedToDeductible ?? null,
+    input.appliedToOutOfPocket ?? null,
+    input.conditionCode ?? null,
+    new Date().toISOString(),
+    id,
+  );
+}
+
 export async function setMedicalBillStatus(id: string, status: BillStatus, paidAmount?: number | null): Promise<void> {
   const db = await getDatabase();
   await db.runAsync(

@@ -454,7 +454,7 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   // Capture leads, behind only the one-off folder nudge: it is the one
   // card whose whole value is being reachable before a thought is gone.
   'captureInbox',
-  // Routines and the To Do List, rows of their own since 2026-10-28 (see
+  // Routines and the Checklist, rows of their own since 2026-10-28 (see
   // lib/homeSections.ts), so a day's reminders are one tap from the top.
   'routines',
   'doneChecks',
@@ -609,7 +609,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   logHarvest: 'Log a Harvest',
   digestCards: 'Library Cards',
   routines: 'Routines',
-  doneChecks: 'To Do List',
+  doneChecks: 'Checklist',
   countdowns: 'Days Until',
   startWorkout: 'Start a Workout',
   groceryQuickAdd: 'Add to the Grocery List',
@@ -876,7 +876,7 @@ export type VisualPreferences = {
   // 2026-11-12: the flip card tab at the far edge (components/LanguageBasicsButton.tsx),
   // opening every flash card and all the reading. On unless switched off in Profile.
   studyButton: boolean;
-  // How far ahead Home's To Do List looks (toDoListView in lib/routines.ts).
+  // How far ahead Home's Checklist looks (toDoListView in lib/routines.ts).
   toDoLookAhead: ToDoLookAhead;
 };
 
@@ -951,8 +951,8 @@ export const HOME_SECTIONS_ALWAYS_SHOWN: ReadonlySet<HomeSectionKey> = new Set<H
 // Simple View, P1 (1.0.68.5). Chosen for someone who came to run their day:
 // the greeting, Sort It Out, and reminders waiting for an
 // answer. Your Guide stays too, since it is never hidden
-// (HOME_SECTIONS_ALWAYS_SHOWN). Routines and the To Do List joined in
-// 1.0.75.15, direct instruction: "Their To Do List and Routines need to be
+// (HOME_SECTIONS_ALWAYS_SHOWN). Routines and the Checklist joined in
+// 1.0.75.15, direct instruction: "Their Checklist and Routines need to be
 // visible in the Simple View."
 export const SIMPLE_VIEW_SECTIONS: ReadonlySet<HomeSectionKey> = new Set<HomeSectionKey>([
   'testerWelcome',

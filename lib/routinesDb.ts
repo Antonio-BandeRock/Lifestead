@@ -76,7 +76,7 @@ function readCreatedAt(value: string | null): string | null {
 }
 
 function toCheck(row: CheckRow): DoneCheck {
-  // A row from before the To Do List can still arrive by sync from a phone
+  // A row from before the Checklist can still arrive by sync from a phone
   // not yet updated, so its cadence is read the way the migration reads it.
   const legacyUnit = row.cadence === 'weekly' ? 'week' : row.cadence === 'monthly' ? 'month' : null;
   const repeat: CheckRepeat = legacyUnit || row.cadence === 'every' ? 'every' : 'days';

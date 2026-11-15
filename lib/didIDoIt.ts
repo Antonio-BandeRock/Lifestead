@@ -9,8 +9,8 @@
 // listed within the individual one time or daily tasks."
 //
 // So a day comes out in two parts that never share a line:
-//   1. On their own: things on the To Do List no routine walks past, and
-//      Tasks, each with the times it was checked off.
+//   1. On their own: things on the Checklist no routine walks past, and
+//      the To Do List, each with the times it was checked off.
 //   2. Each routine: its walks that day, with the steps done on each walk
 //      under it, plus any of its things checked off outside a walk.
 // Nothing that was not checked off appears, and nothing is counted against
@@ -78,7 +78,7 @@ export type LookBackRoutine = {
   routineId: string;
   name: string;
   walks: LookBackWalk[];
-  /** Its things checked off outside a walk (from the To Do List or a
+  /** Its things checked off outside a walk (from the Checklist or a
    *  reminder), or on a walk from before each step was kept. */
   outsideWalks: LookBackItem[];
 };

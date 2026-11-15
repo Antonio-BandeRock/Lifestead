@@ -5,7 +5,7 @@
 // once, whether it came back: three follow-ups at 15, 45 and 90 minutes.
 // Somebody who needs the morning pill repeated every ten minutes and never
 // wants the bins repeated at all had to pick one answer for both. Each
-// routine, each To Do List thing and each reminder somebody sets now
+// routine, each Checklist thing and each reminder somebody sets now
 // carries a choice of its own:
 //
 //   null  follow the Profile switch (the old behaviour, and the default)
@@ -93,7 +93,7 @@ export function describeKeepReminding(choice: KeepReminding, switchOn: boolean):
   return `It comes back every ${describeInterval(choice)} until you mark it, ${count} more times at most.`;
 }
 
-// The times a To Do List thing speaks at are worked out in lib/routines.ts
+// The times a Checklist thing speaks at are worked out in lib/routines.ts
 // (nextCheckReminderTimes), beside the schedule they come from.
 
 /**

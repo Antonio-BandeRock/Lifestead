@@ -1,5 +1,5 @@
-// Checks the routine and To Do List rules (lib/routines.ts): when each
-// thing on the To Do List comes round, which time a tap checks off, what each
+// Checks the routine and Checklist rules (lib/routines.ts): when each
+// thing on the Checklist comes round, which time a tap checks off, what each
 // line says,
 // which routine the clock puts first, and that reordering steps loses
 // nothing. Pure, so it runs here rather than needing a phone.
@@ -619,7 +619,7 @@ check('nothing to say, nothing to schedule', nextReminderTimes(makeRoutine({}), 
   check('starting this Friday', times[0].getTime(), new Date(2026, 8, 18, 9, 0, 0, 0).getTime());
   check('and again the Friday after', times[1].getTime(), new Date(2026, 8, 25, 9, 0, 0, 0).getTime());
 }
-// ------------------------------------------------------------ the To Do List on Home
+// ------------------------------------------------------------ the Checklist on Home
 {
   // Wednesday 9:30am. The 8am pill is waiting, the 10am and 11am things are
   // coming, the 3pm one is later, and one switched off never shows. Each was

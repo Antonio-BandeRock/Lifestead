@@ -157,11 +157,11 @@ export function buildTodayView(input: TodayInputs): ReadingView {
   if (dueRoutines.length > 0 || waitingChecks.length > 0) {
     bands.push({
       id: 'routines',
-      title: 'Routines and the To Do List',
+      title: 'Routines and the Checklist',
       icon: 'list-outline',
       count: dueRoutines.length + waitingChecks.length,
       lines: [
-        `${plural(dueRoutines.length, 'routine')} not run yet today, ${plural(waitingChecks.length, 'thing')} on the To Do List not checked off yet.`,
+        `${plural(dueRoutines.length, 'routine')} not run yet today, ${plural(waitingChecks.length, 'thing')} on the Checklist not checked off yet.`,
       ],
       items: [
         ...dueRoutines.map((routine) => ({

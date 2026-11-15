@@ -204,7 +204,7 @@ export const GIVE_BACK_AREAS: GiveBackArea[] = [
     label: 'Keeping Up',
     tabPath: '/trends',
     destination: trendsLens('keepingUp'),
-    line: 'Which routines and To Do List things got done on which days, laid out so a missed week is easy to pick back up. Nothing here scores you.',
+    line: 'Which routines and Checklist things got done on which days, laid out so a missed week is easy to pick back up. Nothing here scores you.',
     waitsOn: 'keepingUp',
   },
   {
@@ -555,7 +555,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'didIDoIt',
-            title: 'To Do List',
+            title: 'Checklist',
             icon: 'checkmark-done-outline',
             hook: 'Did I lock the door? Take the pill? Feed the cat? Look, and know.',
             whatItIs: 'The things you need to do regularly, each with its times and days. One tap checks a time off, so you can look later.',
@@ -581,7 +581,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'todo',
-            title: 'Tasks',
+            title: 'To Do List',
             icon: 'checkbox-outline',
             hook: 'Out of your head and onto a list that reminds you.',
             whatItIs: 'Things to do, with a day if they need one.',

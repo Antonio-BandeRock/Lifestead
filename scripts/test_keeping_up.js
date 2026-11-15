@@ -243,7 +243,7 @@ check(
 // ---------------------------------------------------------------------------
 const noChecks = summarizeChecks(inputs());
 check('nothing set up says where to set one up', noChecks.headline,
-  'Nothing on the To Do List yet. Add something on the Life tab and this fills in on its own.');
+  'Nothing on the Checklist yet. Add something on the Life tab and this fills in on its own.');
 check('nothing set up has no standings', noChecks.standings.length, 0);
 check('two clean weeks over a fortnight', noChecks.weeks.length, 2);
 checkTrue('every week of an empty range is null', noChecks.weeks.every((week) => week.value === null));

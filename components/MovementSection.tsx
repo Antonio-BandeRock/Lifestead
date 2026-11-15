@@ -44,6 +44,7 @@ import { detectMeasurementSystemFromLocale, kgToLb } from '../lib/measurement';
 import { t, tl } from '../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
 
 // Movement: what the phone's health store has, read as is. Life's eighth
 // area, 2026-09-14, the JS half of the Health Connect rebuild.
@@ -251,7 +252,10 @@ export function MovementSection({ tabColor }: Props) {
     );
   }, []);
 
+  const [readFailed, setReadFailed] = useState(false);
+
   const refresh = useCallback(async (runSync: boolean) => {
+    setReadFailed(false);
     const available = await getHealthAvailability();
     setAvailability(available);
     const state = await getHealthSyncState();
@@ -272,7 +276,10 @@ export function MovementSection({ tabColor }: Props) {
 
   useFocusEffect(
     useCallback(() => {
-      refresh(true).catch(() => undefined);
+      refresh(true).catch((error) => {
+        console.warn('[MovementSection] read failed', error);
+        setReadFailed(true);
+      });
     }, [refresh]),
   );
 
@@ -377,6 +384,20 @@ export function MovementSection({ tabColor }: Props) {
       <View style={band.column}>
         <PhoneOnlyNotice feature="healthConnect" color={tabColor} />
       </View>
+    );
+  }
+
+  if (readFailed) {
+    return (
+      <ReadProblem
+        message="Your movement records could not be read just now. Nothing you recorded is lost."
+        onTryAgain={() => {
+          refresh(false).catch((error) => {
+            console.warn('[MovementSection] read failed', error);
+            setReadFailed(true);
+          });
+        }}
+      />
     );
   }
 

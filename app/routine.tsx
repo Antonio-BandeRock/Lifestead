@@ -434,7 +434,7 @@ export default function RoutineWalkScreen() {
                     <Text style={styles.tickHint}>
                       {tickedAt
                         ? `Checked off at ${formatMarkClock(new Date(tickedAt))}. Tap to take that back.`
-                        : 'Tap it as you do it, and your To Do List can answer for you later.'}
+                        : 'Tap it as you do it, and your Checklist can answer for you later.'}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -534,7 +534,7 @@ export default function RoutineWalkScreen() {
                   </View>
                 ))}
                 <Text style={styles.footText}>
-                  Look later in Life, To Do List, and the answer will be there.
+                  Look later in Life, Checklist, and the answer will be there.
                 </Text>
               </View>
             ) : null}

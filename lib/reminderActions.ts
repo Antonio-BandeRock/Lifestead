@@ -527,9 +527,9 @@ export function answerLine(kind: string, markable = true): string | null {
       return "Ate it marks it eaten on Today's Meals.";
     case 'task':
       if (kind === 'garden') return 'Done marks it done in Upcoming Tasks.';
-      if (kind === 'check') return 'Done checks it off your To Do List.';
+      if (kind === 'check') return 'Done checks it off your Checklist.';
       if (kind === 'routine') return 'Done checks this step off and shows the next one here.';
-      if (kind === 'todo') return 'Done marks it done on Tasks.';
+      if (kind === 'todo') return 'Done marks it done on your To Do List.';
       if (kind === 'project') return 'Done ticks this step in Projects.';
       if (kind === 'practice') return 'Done keeps a session for today in Sessions.';
       return 'Done marks it done.';

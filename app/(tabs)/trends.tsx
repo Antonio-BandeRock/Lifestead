@@ -553,7 +553,7 @@ const TRENDS_LENSES: LensOption<TrendsLens>[] = [
       },
       {
         heading: 'Where each of these is recorded',
-        body: 'Things checked off and routines live on Life > To Do List and Life > Routines, captures in the Capture inbox, upkeep on Life > Upkeep, and the work check-in on Life > Work. This lens only reads them: everything is still added and changed where it lives.',
+        body: 'Things checked off and routines live on Life > Checklist and Life > Routines, captures in the Capture inbox, upkeep on Life > Upkeep, and the work check-in on Life > Work. This lens only reads them: everything is still added and changed where it lives.',
       },
     ],
   },
@@ -2500,7 +2500,7 @@ export default function TrendsScreen() {
               ) : !keepingUpSummary || !keepingUpSummary.hasAnything ? (
                 <View style={band.boxMuted}>
                   <Text style={styles.loadingText}>
-                    {'Nothing to read yet. Check something off on Life > To Do List, walk a routine, or capture a note, and this fills in on its own.'}
+                    {'Nothing to read yet. Check something off on Life > Checklist, walk a routine, or capture a note, and this fills in on its own.'}
                   </Text>
                   <YourStoryMissingLine itemKey="keepingUp" />
                 </View>

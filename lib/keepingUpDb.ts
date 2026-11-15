@@ -101,7 +101,7 @@ async function readUpkeepStanding(today: string): Promise<KeepingUpUpkeepStandin
 }
 
 /**
- * What a To Do List schedule (2026-10-28) is, in the words Keeping Up reads:
+ * What a Checklist schedule (2026-10-28) is, in the words Keeping Up reads:
  * every day is 'daily', every week or every month is 'weekly' or
  * 'monthly', and anything else (weekdays only, every 3 days) is read by
  * when it last happened, which claims the least. A row from before keeps

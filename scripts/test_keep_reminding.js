@@ -57,7 +57,7 @@ check('value round trip, 15', k.readKeepReminding(k.keepRemindingValue(15)), 15)
 check('every option reads back', k.KEEP_REMINDING_OPTIONS.map((o) => k.keepRemindingValue(k.readKeepReminding(o.value))), k.KEEP_REMINDING_OPTIONS.map((o) => o.value));
 check('lookback covers the longest follow-up', k.KEEP_REMINDING_LOOKBACK_MINUTES >= 120, true);
 
-// When a thing on the To Do List speaks is checked in scripts/test_routines.js
+// When a thing on the Checklist speaks is checked in scripts/test_routines.js
 // (nextCheckReminderTimes), since 2026-10-28 each thing carries its own
 // times and days and lib/routines.ts works them out.
 const friday = new Date(2026, 8, 25, 9, 0, 0);

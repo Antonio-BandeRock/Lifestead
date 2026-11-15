@@ -19,6 +19,7 @@
 
 import { readPlanSentence } from './planSentence';
 import { addDays, describeRepeat, occurrencesOf, type RepeatConfig } from './repeatRule';
+import { formatTime12 } from './timeOfDay';
 
 export type TodoArea = 'personal' | 'work';
 export const TODO_AREAS: TodoArea[] = ['personal', 'work'];
@@ -32,6 +33,9 @@ export type Todo = {
   /** 'YYYY-MM-DD', or null for a to-do with no day. For a repeating one,
    *  the occurrence it is waiting on now. */
   dueOn: string | null;
+  /** 'HH:MM' when a time of day was given, which is when its reminder
+   *  comes; null for the day only. Only ever set beside a day. */
+  dueTime: string | null;
   /** The first day of the pattern, which a monthly repeat needs for its day
    *  of the month. Null when there is no repeat. */
   anchorOn: string | null;
@@ -169,6 +173,7 @@ export function describeTodoCaption(todo: Todo, today: string): string {
     else if (diff === -1) parts.push('From yesterday');
     else if (diff < 0) parts.push(`From ${formatTodoDay(todo.dueOn, today)}`);
     else parts.push(formatTodoDay(todo.dueOn, today));
+    if (todo.dueTime) parts.push(formatTime12(todo.dueTime));
   }
   if (isRepeating(todo)) parts.push(describeRepeat(todo.repeat!, todo.anchorOn ?? todo.dueOn ?? undefined));
   return parts.join(' · ');
@@ -200,6 +205,7 @@ export function cleanTodoTitle(text: string): string {
 export type TodoReading = {
   title: string;
   dueOn: string | null;
+  dueTime: string | null;
   repeat: RepeatConfig | null;
   /** Plain sentences about what was read or left alone. */
   notes: string[];
@@ -214,26 +220,28 @@ function localDayOf(now: Date): string {
  * A to-do typed as a sentence ("pay the water bill on the 20th", "call mum
  * every Sunday") read for its title, day and repeat through the same reader
  * Capture uses (lib/planSentence.ts). Words with no day in them are the
- * title as typed, with no day. A to-do keeps a day and never a time, so a
- * time that was said is named as left out rather than dropped in silence.
+ * title as typed, with no day. A time said with it ("tomorrow at 3pm") is
+ * kept, and its reminder comes then; with none it comes in the morning.
+ * (Until 1.0.90.10 a to-do kept the day only and named a said time as
+ * left out.)
  */
 export function readTodoWords(text: string, now: Date): TodoReading {
   const typed = cleanTodoTitle(text);
   const reading = readPlanSentence(typed, now);
   if (!reading || !reading.start || !reading.action) {
     const notes = reading?.unsettled ?? [];
-    return { title: typed, dueOn: null, repeat: null, notes };
+    return { title: typed, dueOn: null, dueTime: null, repeat: null, notes };
   }
   const today = localDayOf(now);
   // A time already gone today still leaves today as the day.
   const dueOn = reading.start.date < today ? today : reading.start.date;
   const repeat = reading.repeat.type === 'none' ? null : reading.repeat;
   const notes = reading.pieces.map((piece) => `“${piece.words}” read as ${piece.reads}.`);
-  if (!reading.timeAssumed) notes.push('A task keeps the day and not the time. For a set time, put it on your To Do List.');
+  const dueTime = reading.timeAssumed ? null : reading.start.time;
   // Unsettled lines about where a thing is kept (My Meds, the garden) are
   // about reminders and appointments, not to-dos; the rest still apply.
   for (const line of reading.unsettled) if (!/My Meds|appointment/i.test(line)) notes.push(line);
-  return { title: cleanTodoTitle(reading.action), dueOn, repeat, notes };
+  return { title: cleanTodoTitle(reading.action), dueOn, dueTime, repeat, notes };
 }
 
 /**
@@ -241,21 +249,26 @@ export function readTodoWords(text: string, now: Date): TodoReading {
  * other Friday", "15 October") read for a day and a repeat. Empty means no
  * day. Null means words that could not be read, so nothing is changed.
  */
-export function readTodoWhen(when: string, now: Date): { dueOn: string | null; repeat: RepeatConfig | null } | null {
+export function readTodoWhen(
+  when: string,
+  now: Date,
+): { dueOn: string | null; dueTime: string | null; repeat: RepeatConfig | null } | null {
   const words = when.trim();
-  if (!words) return { dueOn: null, repeat: null };
+  if (!words) return { dueOn: null, dueTime: null, repeat: null };
   const reading = readPlanSentence(`do it ${words}`, now);
   if (!reading || !reading.start) return null;
   const today = localDayOf(now);
   return {
     dueOn: reading.start.date < today ? today : reading.start.date,
+    dueTime: reading.timeAssumed ? null : reading.start.time,
     repeat: reading.repeat.type === 'none' ? null : reading.repeat,
   };
 }
 
 /** The When of a reading in a few words, for the preview. */
-export function describeTodoWhen(dueOn: string | null, repeat: RepeatConfig | null, today: string): string {
+export function describeTodoWhen(dueOn: string | null, repeat: RepeatConfig | null, today: string, dueTime: string | null = null): string {
   if (!dueOn) return 'No day';
-  const day = dueOn === today ? 'Today' : formatTodoDay(dueOn, today);
+  const date = dueOn === today ? 'Today' : formatTodoDay(dueOn, today);
+  const day = dueTime ? `${date} at ${formatTime12(dueTime)}` : date;
   return repeat ? `${day}, then ${describeRepeat(repeat, dueOn).toLowerCase()}` : day;
 }

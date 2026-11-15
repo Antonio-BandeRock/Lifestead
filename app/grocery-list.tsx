@@ -22,6 +22,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { AppActionSheet } from '../components/AppActionSheet';
+import { ReadProblem } from '../components/ReadProblem';
 import { AppTextInput } from '../components/AppTextInput';
 import { NotesInput } from '../components/NotesInput';
 import { PopoverSelect } from '../components/PopoverSelect';
@@ -223,6 +224,7 @@ export default function GroceryListScreen() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [readFailed, setReadFailed] = useState(false);
 
   // Setup form
   const [daysAhead, setDaysAhead] = useState(DEFAULT_DAYS);
@@ -311,6 +313,7 @@ export default function GroceryListScreen() {
   const load = useCallback(async () => {
     setLoading(true);
     setErrorMessage('');
+    setReadFailed(false);
     try {
       // A list named in the route wins, so returning from a barcode scan
       // always lands back on the same list rather than on whichever one
@@ -368,7 +371,8 @@ export default function GroceryListScreen() {
         setMode('setup');
       }
     } catch (error) {
-      setErrorMessage(`Could not open your grocery list: ${error instanceof Error ? error.message : String(error)}`);
+      console.warn('[grocery-list] read failed', error);
+      setReadFailed(true);
     } finally {
       setLoading(false);
     }
@@ -1192,6 +1196,17 @@ export default function GroceryListScreen() {
       <View style={styles.screen}>
         <View style={styles.centerBody}>
           <ActivityIndicator color={colors.accent} />
+        </View>
+        {infoAlertElement}
+      </View>
+    );
+  }
+
+  if (readFailed) {
+    return (
+      <View style={styles.screen}>
+        <View style={styles.centerBody}>
+          <ReadProblem message="Your grocery list could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
         </View>
         {infoAlertElement}
       </View>

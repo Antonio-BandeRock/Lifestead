@@ -82,6 +82,9 @@ import {
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
+import { t } from '../lib/i18n';
 
 // Life > Workouts (H11, 1.0.55.1). Direct request, 2026-09-28: "there needs
 // to be a workout builder to add exercises and everything about the
@@ -134,6 +137,7 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
   const [custom, setCustom] = useState<CustomExercise[]>([]);
   const [tracked, setTracked] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [readFailed, setReadFailed] = useState(false);
   const [workoutForm, setWorkoutForm] = useState<WorkoutForm | null>(null);
   const [exerciseForm, setExerciseForm] = useState<ExerciseForm | null>(null);
   const [stepForm, setStepForm] = useState<StepForm | null>(null);
@@ -149,15 +153,19 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     Promise.all([listWorkouts(), listCustomExercises(), getUserConditions()])
       .then(([loadedWorkouts, loadedCustom, loadedConditions]) => {
         setWorkouts(loadedWorkouts);
         setCustom(loadedCustom);
         setTracked(loadedConditions);
       })
-      .catch((error) => showInfoAlert('Could not load', error instanceof Error ? error.message : String(error)))
+      .catch((error) => {
+      console.warn('[WorkoutsSection] read failed', error);
+      setReadFailed(true);
+    })
       .finally(() => setLoading(false));
-  }, [showInfoAlert]);
+  }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -179,8 +187,13 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
       showInfoAlert('Almost there', problem);
       return;
     }
-    if (workoutForm.id) await renameWorkout(workoutForm.id, workoutForm.name, workoutForm.note);
-    else await createWorkout(workoutForm.name, workoutForm.note);
+    const editingId = workoutForm.id;
+    const saved = await saveOrSay('The workout was not saved. Try again.', async () => {
+      if (editingId) await renameWorkout(editingId, workoutForm.name, workoutForm.note);
+      else await createWorkout(workoutForm.name, workoutForm.note);
+      return true;
+    });
+    if (!saved) return;
     setWorkoutForm(null);
     load();
   }
@@ -195,7 +208,7 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
           destructive: true,
           onPress: async () => {
             setConfirm(null);
-            await removeWorkout(workout.id);
+            await saveOrSay('The workout was not removed. Try again.', () => removeWorkout(workout.id));
             load();
           },
         },
@@ -204,9 +217,10 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
     });
   }
 
-  async function addToWorkout(workout: Workout, view: ExerciseView) {
-    await addWorkoutStep(workout.id, newStepFields(view));
+  async function addToWorkout(workout: Workout, view: ExerciseView): Promise<boolean> {
+    const added = await saveOrSay('The exercise was not added. Try again.', async () => { await addWorkoutStep(workout.id, newStepFields(view)); return true; });
     load();
+    return added === true;
   }
 
   function chooseWorkoutFor(view: ExerciseView) {
@@ -221,7 +235,7 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
           label: workout.name,
           onPress: async () => {
             setConfirm(null);
-            await addToWorkout(workout, view);
+            if (!(await addToWorkout(workout, view))) return;
             showInfoAlert('Added', `${view.name} is now the last exercise in ${workout.name}.`);
           },
         })),
@@ -232,7 +246,7 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
 
   // Dragged by the grip, the way Home's cards are arranged (1.0.55.15).
   async function saveStepOrder(workout: Workout, orderedIds: string[]) {
-    await reorderWorkoutSteps(workout.id, orderedIds);
+    await saveOrSay('The order was not saved. Try again.', () => reorderWorkoutSteps(workout.id, orderedIds));
     load();
   }
 
@@ -243,7 +257,8 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
       showInfoAlert('Almost there', problem);
       return;
     }
-    await updateWorkoutStep(stepForm.step, stepDraftToFields(stepForm.draft));
+    const saved = await saveOrSay('The sets and reps were not saved. Try again.', async () => { await updateWorkoutStep(stepForm.step, stepDraftToFields(stepForm.draft)); return true; });
+    if (!saved) return;
     setStepForm(null);
     load();
   }
@@ -255,7 +270,8 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
       showInfoAlert('Almost there', problem);
       return;
     }
-    const id = await saveCustomExercise(exerciseForm.id, exerciseForm.draft);
+    const id = await saveOrSay('The exercise was not saved. Try again.', () => saveCustomExercise(exerciseForm.id, exerciseForm.draft));
+    if (id === undefined) return;
     setExerciseForm(null);
     setOpenExercise(`custom:${id}`);
     load();
@@ -272,7 +288,8 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
           destructive: true,
           onPress: async () => {
             setConfirm(null);
-            await removeCustomExercise(view.id);
+            const removed = await saveOrSay('The exercise was not removed. Try again.', async () => { await removeCustomExercise(view.id); return true; });
+            if (!removed) return;
             setOpenExercise(null);
             load();
           },
@@ -523,6 +540,8 @@ maxLength={80}
     );
   }
 
+  if (readFailed) return <ReadProblem message="Your workouts could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
+
   if (loading) return <View style={band.boxMuted}><Text style={styles.bodyText}>Loading…</Text></View>;
 
   return (
@@ -636,7 +655,24 @@ maxLength={80}
                           <Text style={styles.actionText}>How to do it</Text>
                         </TouchableOpacity>
                       ) : null}
-                      <TouchableOpacity ref={first ? walkMark.ref('workouts.takeOut') : undefined} onPress={async () => { await removeWorkoutStep(step); load(); }}>
+                      <TouchableOpacity ref={first ? walkMark.ref('workouts.takeOut') : undefined} onPress={() =>
+                          setConfirm({
+                            title: t('Take {name} out of {workout}?', { name, workout: workout.name }),
+                            message: 'Only this workout changes. The exercise stays in the list for any other workout.',
+                            actions: [
+                              {
+                                label: 'Take it out',
+                                destructive: true,
+                                onPress: async () => {
+                                  setConfirm(null);
+                                  await saveOrSay('The exercise was not taken out. Try again.', () => removeWorkoutStep(step));
+                                  load();
+                                },
+                              },
+                              { label: 'Keep it', onPress: () => setConfirm(null) },
+                            ],
+                          })
+                        }>
                         <Text style={styles.actionTextRemove}>Take out</Text>
                       </TouchableOpacity>
                     </View>

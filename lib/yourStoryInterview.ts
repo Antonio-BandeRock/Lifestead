@@ -231,7 +231,7 @@ export const SETUP_OPEN_APP_LABEL = 'Open Lifestead';
 // table names lenses and this names what a person recognises.
 export const FREE_BEFORE_SETUP_HEADING = "What is free and what is paid";
 export const FREE_BEFORE_SETUP =
-  "Setting up costs nothing, and neither does using Lifestead to run your day.\n\nFree, always: reminders, Capture for quick notes, routines, the To Do List, tasks, Days Until, the grocery list, My Meds with every safety warning, and logging your meals, symptoms, exercise and garden.\n\nA paid plan adds: the reading about each condition, meal plans, the ready-made recipes, reports, Pattern Finder, most of Trends, and Finances.";
+  "Setting up costs nothing, and neither does using Lifestead to run your day.\n\nFree, always: reminders, Capture for quick notes, routines, the Checklist, tasks, Days Until, the grocery list, My Meds with every safety warning, and logging your meals, symptoms, exercise and garden.\n\nA paid plan adds: the reading about each condition, meal plans, the ready-made recipes, reports, Pattern Finder, most of Trends, and Finances.";
 
 // Shown under the way-of-eating question in setup (direct request,
 // 2026-11-13): how the meal plan picks, where the grocery list comes from,
@@ -397,10 +397,10 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     emergency: 'Emergency',
     conditions: 'Conditions',
     routines: 'Routines',
-    didIDoIt: 'To Do List',
+    didIDoIt: 'Checklist',
     lookBack: 'Did I Do It',
     daysUntil: 'Days Until',
-    todos: 'Tasks',
+    todos: 'To Do List',
     projects: 'Projects',
     upkeep: 'Upkeep',
     kitchen: 'Kitchen',
@@ -842,7 +842,7 @@ export const TOUR_TABS: TourTabDef[] = [
       },
       {
         doThis: 'Write down one routine you go through most days.',
-        why: 'Walked through a part at a time, it takes the remembering out of it, and your To Do List answers whether you did.',
+        why: 'Walked through a part at a time, it takes the remembering out of it, and your Checklist answers whether you did.',
         item: 'routine',
       },
     ],

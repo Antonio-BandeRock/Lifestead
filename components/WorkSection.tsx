@@ -47,6 +47,7 @@ import {
   recordBenefitUse,
   rollBenefitPeriod,
   saveWorkCheckin,
+  deleteWorkCheckin,
   upsertBenefit,
 } from '../lib/workDb';
 import { parsePriceInput } from '../lib/groceryList';
@@ -54,6 +55,8 @@ import { readOrClosed, useOnVaultChange } from '../lib/vaultReads';
 import { useWalkMark } from './WalkMark';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 
 // Work: what it gives you, and how it is actually going.
 //
@@ -125,6 +128,7 @@ export function WorkSection({ tabColor }: Props) {
   const [checkins, setCheckins] = useState<WorkCheckin[]>([]);
   const [thisWeek, setThisWeek] = useState<WorkCheckin | null>(null);
   const [loading, setLoading] = useState(false);
+  const [readFailed, setReadFailed] = useState(false);
   const [benefitForm, setBenefitForm] = useState<BenefitForm | null>(null);
   const [useForm, setUseForm] = useState<{ id: string; kind: BenefitKind; amount: string } | null>(null);
   const [checkinForm, setCheckinForm] = useState<CheckinForm | null>(null);
@@ -136,6 +140,7 @@ export function WorkSection({ tabColor }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     Promise.all([
       readOrClosed(() => listBenefits(), [] as Benefit[]),
       readOrClosed(() => listWorkCheckins(), [] as WorkCheckin[]),
@@ -146,9 +151,12 @@ export function WorkSection({ tabColor }: Props) {
         setCheckins(checkinRows);
         setThisWeek(current);
       })
-      .catch((error) => showInfoAlert('Could not load', error instanceof Error ? error.message : String(error)))
+      .catch((error) => {
+      console.warn('[WorkSection] read failed', error);
+      setReadFailed(true);
+    })
       .finally(() => setLoading(false));
-  }, [showInfoAlert]);
+  }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
   // Check-ins (work) and benefits (finances) are in the vault.
@@ -181,7 +189,7 @@ export function WorkSection({ tabColor }: Props) {
       return;
     }
 
-    await upsertBenefit({
+    const kept = await saveOrSay('It was not saved. Try again.', async () => { await upsertBenefit({
       id: form.id ?? undefined,
       name: form.name,
       kind: form.kind,
@@ -190,9 +198,15 @@ export function WorkSection({ tabColor }: Props) {
       resets: form.resets,
       resetOn: form.resetOn.trim() || null,
       notes: form.notes,
-    });
+    }); return true; });
+    if (!kept) return;
     setBenefitForm(null);
     load();
+  }
+
+  /** Runs one write; false after saying what was not saved (lib/saveProblem.ts). */
+  async function saved(problem: string, work: () => Promise<unknown>): Promise<boolean> {
+    return (await saveOrSay(problem, async () => { await work(); return true; })) === true;
   }
 
   async function saveUse() {
@@ -202,17 +216,19 @@ export function WorkSection({ tabColor }: Props) {
       showInfoAlert('Almost there', 'Enter an amount.');
       return;
     }
-    await recordBenefitUse(useForm.id, amount);
+    if (!(await saved('What you used was not saved. Try again.', () => recordBenefitUse(useForm.id, amount)))) return;
     setUseForm(null);
     load();
   }
 
   async function saveCheckin() {
     if (!checkinForm) return;
-    await saveWorkCheckin({ date: todayLocal(), ...checkinForm });
+    if (!(await saved('This week was not saved. Try again.', () => saveWorkCheckin({ date: todayLocal(), ...checkinForm })))) return;
     setCheckinForm(null);
     load();
   }
+
+  if (readFailed) return <ReadProblem message="Your work records could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
 
   if (loading) return <View style={band.boxMuted}><Text style={styles.bodyText}>Loading…</Text></View>;
 
@@ -504,7 +520,7 @@ export function WorkSection({ tabColor }: Props) {
                               label: 'Start again',
                               onPress: async () => {
                                 setConfirm(null);
-                                await rollBenefitPeriod(benefit.id, benefit.resetOn);
+                                if (!(await saved('It was not started again. Try again.', () => rollBenefitPeriod(benefit.id, benefit.resetOn)))) return;
                                 load();
                               },
                             },
@@ -528,7 +544,7 @@ export function WorkSection({ tabColor }: Props) {
                             destructive: true,
                             onPress: async () => {
                               setConfirm(null);
-                              await deleteBenefit(benefit.id);
+                              if (!(await saved('It was not removed. Try again.', () => deleteBenefit(benefit.id)))) return;
                               load();
                             },
                           },
@@ -618,6 +634,32 @@ export function WorkSection({ tabColor }: Props) {
                 <Text style={styles.primaryButtonText}>
                   {thisWeek ? 'Change this week' : 'Answer for this week'}
                 </Text>
+              </TouchableOpacity>
+            ) : null}
+            {!checkinForm && thisWeek ? (
+              <TouchableOpacity
+                ref={walkMark.ref('work.removeWeek')}
+                style={styles.secondaryButton}
+                onPress={() =>
+                  setConfirm({
+                    title: 'Remove this week?',
+                    message: 'Your answers for this week come off, and the week reads as not answered. Earlier weeks stay as they are.',
+                    actions: [
+                      {
+                        label: 'Remove',
+                        destructive: true,
+                        onPress: async () => {
+                          setConfirm(null);
+                          if (!(await saved('This week was not removed. Try again.', () => deleteWorkCheckin(todayLocal())))) return;
+                          load();
+                        },
+                      },
+                      { label: 'Keep it', onPress: () => setConfirm(null) },
+                    ],
+                  })
+                }
+              >
+                <Text style={styles.secondaryButtonText}>Remove this week</Text>
               </TouchableOpacity>
             ) : null}
           </View>

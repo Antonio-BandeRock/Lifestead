@@ -1051,7 +1051,7 @@ const HOME_LENS_DESTINATIONS: Partial<
     href: { pathname: '/life', params: { openLifeLens: 'routines' } } as Href,
   },
   doneChecks: {
-    label: 'To Do List',
+    label: 'Checklist',
     icon: 'checkmark-done',
     color: colors.tabLife,
     href: { pathname: '/life', params: { openLifeLens: 'didIDoIt' } } as Href,
@@ -4628,7 +4628,7 @@ export default function HomeScreen() {
     const laterLine = describeLaterOnList(view, now);
     return renderBand(
       'doneChecks',
-      'To Do List',
+      'Checklist',
       <View style={styles.bandBody}>
         {summaryLine ? <Text style={styles.bandCaption}>{summaryLine}</Text> : null}
         {checks.length > 0 ? (
@@ -5670,7 +5670,7 @@ const styles = StyleSheet.create({
   reminderTime: { ...typography.caption, ...textShadow, color: colors.textMuted, width: 62 },
   reminderBody: { flex: 1, gap: 2 },
   reminderTitle: { ...typography.body, ...textShadow, color: colors.textPrimary },
-  // A thing on the To Do List whose time passed without being checked off.
+  // A thing on the Checklist whose time passed without being checked off.
   reminderRowLate: { borderLeftWidth: 4, borderLeftColor: colors.danger },
   reminderDetailLate: { color: colors.danger },
   reminderDetail: { ...typography.caption, ...textShadow, color: colors.textMuted },

@@ -84,9 +84,9 @@ export const MY_ITEM_KINDS: Record<MyItemsTab, MyItemKind[]> = {
     { id: 'body', label: 'Body Measurements', table: 'body_measurements', where: "measurement_type NOT LIKE 'blood_pressure%' AND measurement_type <> 'weight'", lens: 'movement' },
     { id: 'workouts', label: 'Workouts', table: 'workouts', lens: 'workouts' },
     { id: 'routines', label: 'Routines', table: 'routines', lens: 'routines' },
-    { id: 'didIt', label: 'To Do List', table: 'done_checks', lens: 'didIDoIt' },
+    { id: 'didIt', label: 'Checklist', table: 'done_checks', lens: 'didIDoIt' },
     { id: 'countdowns', label: 'Days Until Counters', table: 'countdowns', lens: 'daysUntil' },
-    { id: 'todos', label: 'Tasks', table: 'todos', lens: 'todos' },
+    { id: 'todos', label: 'To Do List', table: 'todos', lens: 'todos' },
     { id: 'projects', label: 'Projects', table: 'projects', lens: 'projects' },
   ],
 };

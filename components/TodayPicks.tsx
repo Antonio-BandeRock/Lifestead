@@ -132,7 +132,7 @@ export function TodayPicks({ tabColor }: Props) {
               selected={null}
               onSelect={(checkId) => void run(() => pickForToday(day, checkId))}
               tabColor={tabColor}
-              placeholder="Pick from your To Do List"
+              placeholder="Pick from your Checklist"
               searchable={choices.length > 8}
             />
             </View>

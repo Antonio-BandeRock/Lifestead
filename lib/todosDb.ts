@@ -12,6 +12,7 @@ type TodoRow = {
   notes: string | null;
   area: string;
   dueOn: string | null;
+  dueTime: string | null;
   anchorOn: string | null;
   repeatJson: string | null;
   doneAt: string | null;
@@ -19,7 +20,7 @@ type TodoRow = {
   createdAt: string;
 };
 
-const COLUMNS = `id, title, notes, area, due_on AS dueOn, anchor_on AS anchorOn, repeat_json AS repeatJson,
+const COLUMNS = `id, title, notes, area, due_on AS dueOn, due_time AS dueTime, anchor_on AS anchorOn, repeat_json AS repeatJson,
   done_at AS doneAt, closed_as AS closedAs, created_at AS createdAt`;
 
 function parseRepeat(json: string | null): RepeatConfig | null {
@@ -39,6 +40,7 @@ function fromRow(row: TodoRow): Todo {
     notes: row.notes,
     area: row.area === 'work' ? 'work' : 'personal',
     dueOn: row.dueOn,
+    dueTime: row.dueOn && row.dueTime ? row.dueTime : null,
     anchorOn: row.anchorOn,
     repeat: parseRepeat(row.repeatJson),
     doneAt: row.doneAt,
@@ -79,8 +81,14 @@ export type TodoInput = {
   notes?: string | null;
   area: TodoArea;
   dueOn: string | null;
+  /** 'HH:MM', kept only beside a day. */
+  dueTime?: string | null;
   repeat: RepeatConfig | null;
 };
+
+function timeOf(input: TodoInput): string | null {
+  return input.dueOn && input.dueTime && /^\d{2}:\d{2}$/.test(input.dueTime) ? input.dueTime : null;
+}
 
 export async function addTodo(input: TodoInput): Promise<string> {
   const db = await getDatabase();
@@ -89,13 +97,14 @@ export async function addTodo(input: TodoInput): Promise<string> {
   const repeat = input.repeat && input.repeat.type !== 'none' && input.dueOn ? input.repeat : null;
   const notes = input.notes && input.notes.trim() ? input.notes.trim() : null;
   await db.runAsync(
-    `INSERT INTO todos (id, title, notes, area, due_on, anchor_on, repeat_json, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO todos (id, title, notes, area, due_on, due_time, anchor_on, repeat_json, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     id,
     input.title.trim(),
     notes,
     input.area,
     input.dueOn,
+    timeOf(input),
     repeat ? input.dueOn : null,
     repeat ? JSON.stringify(repeat) : null,
     now,
@@ -112,12 +121,13 @@ export async function updateTodo(id: string, input: TodoInput): Promise<void> {
   const repeat = input.repeat && input.repeat.type !== 'none' && input.dueOn ? input.repeat : null;
   const notes = input.notes && input.notes.trim() ? input.notes.trim() : null;
   await db.runAsync(
-    `UPDATE todos SET title = ?, notes = ?, area = ?, due_on = ?, anchor_on = ?, repeat_json = ?, updated_at = ?
+    `UPDATE todos SET title = ?, notes = ?, area = ?, due_on = ?, due_time = ?, anchor_on = ?, repeat_json = ?, updated_at = ?
       WHERE id = ?`,
     input.title.trim(),
     notes,
     input.area,
     input.dueOn,
+    timeOf(input),
     repeat ? input.dueOn : null,
     repeat ? JSON.stringify(repeat) : null,
     now,

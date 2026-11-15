@@ -311,7 +311,7 @@ export function summarizeChecks(inputs: KeepingUpInputs): ChecksBand {
 
   let headline: string;
   if (!hasChecks) {
-    headline = 'Nothing on the To Do List yet. Add something on the Life tab and this fills in on its own.';
+    headline = 'Nothing on the Checklist yet. Add something on the Life tab and this fills in on its own.';
   } else if (!hasMarks) {
     headline = `${inputs.checks.length} ${plural(inputs.checks.length, 'thing', 'things')} to check, and nothing marked in this range.`;
   } else {

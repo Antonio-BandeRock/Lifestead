@@ -185,6 +185,7 @@ export type ToolMark =
   | 'work.reset'
   | 'work.remove'
   | 'work.answerWeek'
+  | 'work.removeWeek'
   | 'starter.open'
   | 'starter.addTicked'
   | 'starter.makeRoutine'
@@ -213,6 +214,7 @@ export type ToolMark =
   | 'routines.remove'
   | 'routines.stepDown'
   | 'routines.stepEdit'
+  | 'routines.stepRemove'
   | 'routines.speak'
   | 'didIDoIt.yes'
   | 'lookBack.earlier'
@@ -249,10 +251,12 @@ export type ToolMark =
   | 'finance.medPaid'
   | 'finance.medDispute'
   | 'finance.medRemove'
+  | 'finance.medChange'
   | 'finance.accountAdd'
   | 'finance.accountUpdate'
   | 'finance.accountRemove'
   | 'finance.goalAdd'
+  | 'finance.goalChange'
   | 'finance.costAdd'
   | 'finance.contribute'
   | 'finance.goalReached'
@@ -1239,10 +1243,20 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Keep a task for work',
       steps: [
         { say: 'Tap Tasks.', mark: 'work.todos' },
-        { say: 'Type the task as you would say it, with a day if it has one, like "send the report on Friday".' },
+        { say: 'Type the task as you would say it, with a day and a time if it has them, like "send the report on Friday at 10am".' },
         { say: 'Tap Add to the List.', mark: 'todo.add' },
       ],
-      forYou: 'It shows here and in Life under Tasks beside everything else you mean to do, and reminds you on its day.',
+      forYou: 'It shows here and in Life under To Do List beside everything else you mean to do, and reminds you on its day, or at its time when you gave one.',
+    },
+    {
+      key: 'removeWeek',
+      title: 'Take back this week',
+      steps: [
+        { say: 'Tap How It Feels.', mark: 'work.feel' },
+        { say: 'Tap Remove this week.', mark: 'work.removeWeek', stay: true },
+        { say: 'Tap Remove to confirm, or Keep it to leave it.' },
+      ],
+      forYou: 'The week reads as not answered, so you can answer it fresh or leave it. Earlier weeks stay as they are.',
     },
     {
       key: 'changeWeek',
@@ -1514,6 +1528,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Give the steps minutes and the routine shows about how long it takes. Attach a check and the step carries a box to tap as you do it.',
     },
     {
+      key: 'removeStep',
+      title: 'Take a step out of a routine',
+      steps: [
+        { say: 'Open the band with the name of the routine.' },
+        { say: 'Tap Steps.', mark: 'routines.steps' },
+        { say: 'Tap Remove under the step.', mark: 'routines.stepRemove', stay: true },
+        { say: 'Tap Remove it to confirm, or Keep it to leave it.' },
+      ],
+      forYou: 'The walk skips it from now on. Walks already done keep it in their record.',
+    },
+    {
       key: 'orderSteps',
       title: 'Put the steps in a different order',
       steps: [
@@ -1549,7 +1574,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Look back at what you checked off on a day',
       steps: [
         { say: 'Today opens first. Tap Earlier to go back a day, as many times as you need.', mark: 'lookBack.earlier' },
-        { say: 'Open On their own for the things and Tasks you checked off by themselves, each with its times.', mark: 'lookBack.onTheirOwn' },
+        { say: 'Open On their own for what you checked off by itself on the Checklist and the To Do List, each with its times.', mark: 'lookBack.onTheirOwn' },
         { say: 'Open a routine to see each walk you made that day, with the steps you did listed under it.', mark: 'lookBack.routine' },
       ],
       forYou: 'Only what was checked off is listed, so anything missing from the day was not checked off. Nothing here changes a record.',
@@ -1558,7 +1583,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
   '/life#didIDoIt': [
     {
       key: 'add',
-      title: 'Put something on your To Do List',
+      title: 'Put something on your Checklist',
       steps: [
         { say: 'Tap + Add something to do.', mark: 'didIDoIt.add', stay: true },
         { say: 'Under What you need to do, type its name the way you would say it, like Morning pill.' },
@@ -1597,7 +1622,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Under A reminder in the notification area, pick Remind me.' },
         { say: 'Tap Save.', mark: 'didIDoIt.save' },
       ],
-      forYou: 'One reminder comes at each time, kept together under To Do List in the notification area. Done on it checks that time off, even with the phone locked.',
+      forYou: 'One reminder comes at each time, kept together under Checklist in the notification area. Done on it checks that time off, even with the phone locked.',
     },
     {
       key: 'order',
@@ -1610,7 +1635,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     {
       key: 'remove',
-      title: 'Remove something from your To Do List',
+      title: 'Remove something from your Checklist',
       steps: [
         { say: 'If your list sits in bands, open the band it is listed under.' },
         { say: 'Tap Remove.', mark: 'didIDoIt.remove' },
@@ -1801,12 +1826,24 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The bill reads disputed, so you can see at a glance which ones you are still sorting out. Tap Mark paid once it is settled.',
     },
     {
+      key: 'medChange',
+      title: 'Change a medical bill',
+      steps: [
+        { say: 'Tap Health.', mark: 'finance.health' },
+        { say: 'Open the band called Medical bills.' },
+        { say: 'Tap Change under the bill.', mark: 'finance.medChange', stay: true },
+        { say: 'Correct the date, provider, amounts or condition, then tap Save.' },
+      ],
+      forYou: 'Whether it is paid or disputed stays as it was, and its files stay with it.',
+    },
+    {
       key: 'medRemove',
       title: 'Remove a medical bill',
       steps: [
         { say: 'Tap Health.', mark: 'finance.health' },
         { say: 'Open the band called Medical bills.' },
-        { say: 'Tap Remove under the bill. It goes straight away.', mark: 'finance.medRemove' },
+        { say: 'Tap Remove under the bill.', mark: 'finance.medRemove', stay: true },
+        { say: 'Tap Remove to confirm, or Keep it to leave it.' },
       ],
       forYou: 'It stops counting toward your deductible and toward what each condition costs.',
     },
@@ -1828,7 +1865,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Tap Accounts.', mark: 'finance.money' },
         { say: 'Open the band called Accounts.' },
-        { say: 'Tap Remove under the account. It goes straight away.', mark: 'finance.accountRemove' },
+        { say: 'Tap Remove under the account.', mark: 'finance.accountRemove', stay: true },
+        { say: 'Tap Remove to confirm, or Keep it to leave it.' },
       ],
       forYou: 'It leaves your net worth, and bills that named it no longer warn about it running short.',
     },
@@ -1853,6 +1891,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Write how much and when, then tap Record it.' },
       ],
       forYou: 'The bar for that cost moves on. Spending you tag to a goal under Spending counts too, without entering it twice.',
+    },
+    {
+      key: 'changeGoal',
+      title: 'Change a goal',
+      steps: [
+        { say: 'Tap Goals.', mark: 'finance.goals' },
+        { say: 'Open the band with the name of the goal.' },
+        { say: 'Tap Change.', mark: 'finance.goalChange', stay: true },
+        { say: 'Change the name, why it matters or the date, then tap Save.' },
+      ],
+      forYou: 'Its costs and everything recorded against them stay as they were.',
     },
     {
       key: 'reached',
@@ -2334,7 +2383,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Take an exercise out of a workout',
       steps: [
         { say: 'Open the band with the name of the workout.' },
-        { say: 'Tap Take out under the exercise. It goes straight away.', mark: 'workouts.takeOut' },
+        { say: 'Tap Take out under the exercise.', mark: 'workouts.takeOut', stay: true },
+        { say: 'Tap Take it out to confirm, or Keep it to leave it.' },
       ],
       forYou: 'Only that workout changes. The exercise stays in the list for any other workout.',
     },
@@ -2597,7 +2647,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Switch Home to Simple View and back',
       steps: [
         { say: 'Tap the quick-access tab at the bottom edge of the screen on your thumb side.' },
-        { say: 'Tap Simple View. Home keeps to your greeting, Routines, the To Do List, Sort It Out, anything waiting for an answer and the Grocery List.' },
+        { say: 'Tap Simple View. Home keeps to your greeting, Routines, the Checklist, Sort It Out, anything waiting for an answer and the Grocery List.' },
         { say: 'To keep another card, such as your appointments, open Profile, then Simple View, and tap the card under Also keep these cards in Simple View.' },
         { say: 'To bring everything back, open the same menu and tap Normal View.' },
       ],
@@ -2921,7 +2971,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
         { say: 'Open the band with the name of Today I Want To.', mark: 'homeBand.todayPicks', stay: true },
-        { say: 'Tap Pick from your To Do List and choose one.', mark: 'home.pickFrom', stay: true },
+        { say: 'Tap Pick from your Checklist and choose one.', mark: 'home.pickFrom', stay: true },
         { say: 'Or type something new in the box and tap Add.', mark: 'home.pickNew' },
       ],
       forYou: 'Today holds only the few you picked, and each one can be ticked off from Home.',
@@ -2933,7 +2983,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Open the band with the name of Today I Want To, on the Life band.', mark: 'homeBand.todayPicks', stay: true },
         { say: 'Tap the circle beside it. Tap again to take the mark back.', mark: 'home.pickMark' },
       ],
-      forYou: 'The mark is kept with its time, the same as checking it off on your To Do List.',
+      forYou: 'The mark is kept with its time, the same as checking it off on your Checklist.',
     },
     {
       key: 'tutorialCards',
@@ -2959,16 +3009,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'doneCheck',
       title: 'Check whether you did something',
       steps: [
-        { say: 'Open the band with the name of To Do List, near the top of Home.', mark: 'homeBand.doneChecks', stay: true },
+        { say: 'Open the band with the name of Checklist, near the top of Home.', mark: 'homeBand.doneChecks', stay: true },
         { say: 'Read the line under each one for whether it is checked off. Tap one to open it on Life.', mark: 'home.check' },
       ],
       forYou: 'The answer to "did I already?" is on Home, so you do not have to guess.',
     },
     {
       key: 'doneCheckAhead',
-      title: 'Choose how far ahead the To Do List looks',
+      title: 'Choose how far ahead the Checklist looks',
       steps: [
-        { say: 'Open the band with the name of To Do List, near the top of Home.', mark: 'homeBand.doneChecks', stay: true },
+        { say: 'Open the band with the name of Checklist, near the top of Home.', mark: 'homeBand.doneChecks', stay: true },
         { say: 'Tap 1 hour, 2 hours, 4 hours or Rest of today. Anything late for being checked off stays at the top, marked in the warning colour, then what is due in that time, soonest first.', mark: 'home.checkLookAhead' },
       ],
       forYou: 'You see what is coming up next without the whole day at once, and the line at the end names what comes after.',

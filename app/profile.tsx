@@ -5482,7 +5482,7 @@ export default function ProfileScreen() {
         {!collapsedSections.has('simple-view') ? (
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
-              Home shows today&apos;s greeting, the one next thing, Routines, the To Do List, Sort It Out, anything
+              Home shows today&apos;s greeting, the one next thing, Routines, the Checklist, Sort It Out, anything
               waiting for an answer and the cards you keep below, and nothing else. Every tab is still in the menu, and the cards you had switched on come back when this goes off.
             </Text>
             <View style={styles.pillRow}>

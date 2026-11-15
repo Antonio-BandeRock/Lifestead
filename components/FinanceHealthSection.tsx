@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
 import { NotesInput } from './NotesInput';
 import { useInfoAlert } from './InfoAlert';
@@ -28,6 +29,7 @@ import {
 } from '../lib/financeHealth';
 import {
   createMedicalBill,
+  updateMedicalBill,
   deleteMedicalBill,
   getHealthMoneySnapshot,
   setMedicalBillStatus,
@@ -37,11 +39,13 @@ import {
 import { monthlyFactor, parseDueRule } from '../lib/financeSchedule';
 import { LEGACY_CADENCE_MONTHLY } from '../lib/financeCore';
 import { parsePriceInput } from '../lib/groceryList';
+import { saveOrSay } from '../lib/saveProblem';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
 
 // The health-money half of Finances, 2026-09-05. Pulled into its own
 // component rather than added to app/(tabs)/life.tsx because it is a
@@ -113,6 +117,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
   const [conditions, setConditions] = useState<{ code: string; name: string }[]>([]);
   const [openForm, setOpenForm] = useState<Form>(null);
   const [loading, setLoading] = useState(false);
+  const [readFailed, setReadFailed] = useState(false);
 
   // The year so far is the window everything here is measured over: a
   // deductible resets annually, an FSA expires annually, and "what has this
@@ -122,12 +127,15 @@ export function FinanceHealthSection({ tabColor }: Props) {
   const [planForm, setPlanForm] = useState({ name: '', yearStart: since, deductible: '', oopMax: '', metDeductible: '', metOop: '' });
   const [billForm, setBillForm] = useState({
     serviceDate: todayLocal(), provider: '', description: '', billed: '', allowed: '',
-    insurancePaid: '', youOwe: '', appliedDeductible: '', conditionCode: '',
+    insurancePaid: '', youOwe: '', appliedDeductible: '', conditionCode: '', editingId: '',
   });
+  const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
+
   const [accountForm, setAccountForm] = useState({ kind: 'fsa', planYear: String(new Date().getFullYear()), contributed: '', spent: '', deadline: '' });
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     Promise.all([getHealthMoneySnapshot(since), getTrackedConditionsWithNames()])
       .then(([snapshot, userConditions]) => {
         setPlan(snapshot.plan);
@@ -151,9 +159,12 @@ export function FinanceHealthSection({ tabColor }: Props) {
           ...fromRecurring,
         ]);
       })
-      .catch((error) => showInfoAlert('Could not load', error instanceof Error ? error.message : String(error)))
+      .catch((error) => {
+      console.warn('[FinanceHealthSection] read failed', error);
+      setReadFailed(true);
+    })
       .finally(() => setLoading(false));
-  }, [since, showInfoAlert]);
+  }, [since]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -177,7 +188,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
   async function savePlan() {
     if (!planForm.name.trim()) { showInfoAlert('Almost there', 'Give the plan a name you will recognize.'); return; }
     if (!/^\d{4}-\d{2}-\d{2}$/.test(planForm.yearStart)) { showInfoAlert('Almost there', 'Enter the date your plan year starts (YYYY-MM-DD).'); return; }
-    await upsertInsurancePlan({
+    const savedPlan = await saveOrSay('The plan was not saved. Try again.', async () => { await upsertInsurancePlan({
       id: plan?.id,
       name: planForm.name,
       yearStart: planForm.yearStart,
@@ -185,7 +196,8 @@ export function FinanceHealthSection({ tabColor }: Props) {
       outOfPocketMax: num(planForm.oopMax),
       deductibleMetAtStart: num(planForm.metDeductible) ?? 0,
       outOfPocketMetAtStart: num(planForm.metOop) ?? 0,
-    });
+    }); return true; });
+    if (!savedPlan) return;
     setOpenForm(null);
     load();
   }
@@ -194,7 +206,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
     if (!billForm.provider.trim()) { showInfoAlert('Almost there', 'Who was this bill from?'); return; }
     if (!/^\d{4}-\d{2}-\d{2}$/.test(billForm.serviceDate)) { showInfoAlert('Almost there', 'Enter the date of the service (YYYY-MM-DD).'); return; }
     const owed = num(billForm.youOwe);
-    await createMedicalBill({
+    const fields = {
       serviceDate: billForm.serviceDate,
       provider: billForm.provider,
       description: billForm.description,
@@ -209,8 +221,15 @@ export function FinanceHealthSection({ tabColor }: Props) {
       // direction that is safe to assume.
       appliedToOutOfPocket: num(billForm.appliedDeductible),
       conditionCode: billForm.conditionCode || null,
+    };
+    const editingId = billForm.editingId;
+    const savedBill = await saveOrSay(editingId ? 'The bill was not changed. Try again.' : 'The bill was not saved. Try again.', async () => {
+      if (editingId) await updateMedicalBill(editingId, fields);
+      else await createMedicalBill(fields);
+      return true;
     });
-    setBillForm({ ...billForm, provider: '', description: '', billed: '', allowed: '', insurancePaid: '', youOwe: '', appliedDeductible: '' });
+    if (!savedBill) return;
+    setBillForm({ ...billForm, provider: '', description: '', billed: '', allowed: '', insurancePaid: '', youOwe: '', appliedDeductible: '', conditionCode: '', editingId: '' });
     setOpenForm(null);
     load();
   }
@@ -218,13 +237,14 @@ export function FinanceHealthSection({ tabColor }: Props) {
   async function saveAccount() {
     const contributed = num(accountForm.contributed);
     if (contributed == null) { showInfoAlert('Almost there', 'Enter how much has gone into it this year.'); return; }
-    await upsertHealthAccount({
+    const savedAccount = await saveOrSay('The account was not saved. Try again.', async () => { await upsertHealthAccount({
       kind: accountForm.kind as 'hsa' | 'fsa',
       planYear: accountForm.planYear,
       contributed,
       spent: num(accountForm.spent) ?? 0,
       deadline: accountForm.kind === 'fsa' && /^\d{4}-\d{2}-\d{2}$/.test(accountForm.deadline) ? accountForm.deadline : null,
-    });
+    }); return true; });
+    if (!savedAccount) return;
     setOpenForm(null);
     load();
   }
@@ -245,6 +265,8 @@ export function FinanceHealthSection({ tabColor }: Props) {
     );
   }
 
+  if (readFailed) return <ReadProblem message="Your health costs could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
+
   if (loading) {
     return <View style={band.boxMuted}><Text style={styles.bodyText}>Adding up your health costs…</Text></View>;
   }
@@ -252,6 +274,13 @@ export function FinanceHealthSection({ tabColor }: Props) {
   return (
     <View style={band.column}>
       {infoAlertElement}
+      <AppActionSheet
+        visible={confirm !== null}
+        onClose={() => setConfirm(null)}
+        title={confirm?.title}
+        message={confirm?.message}
+        actions={confirm?.actions ?? []}
+      />
 
       {/* Where you stand with the plan */}
       <TabBand folds={folds} color={tabColor} id="life:finances:your-plan-this-year" title="Your plan this year" icon="medkit-outline">
@@ -432,16 +461,57 @@ export function FinanceHealthSection({ tabColor }: Props) {
                   <Text style={result.balances ? styles.listMeta : styles.warnText}>{result.message}</Text>
                   <View style={styles.listActions}>
                     {bill.status !== 'paid' ? (
-                      <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.medPaid') : undefined} onPress={async () => { await setMedicalBillStatus(bill.id, 'paid', bill.youOwe); load(); }}>
+                      <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.medPaid') : undefined} onPress={async () => { await saveOrSay('The bill was not marked paid. Try again.', () => setMedicalBillStatus(bill.id, 'paid', bill.youOwe)); load(); }}>
                         <Text style={styles.actionText}>Mark paid</Text>
                       </TouchableOpacity>
                     ) : null}
                     {bill.status !== 'disputed' ? (
-                      <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.medDispute') : undefined} onPress={async () => { await setMedicalBillStatus(bill.id, 'disputed', null); load(); }}>
+                      <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.medDispute') : undefined} onPress={async () => { await saveOrSay('The bill was not marked disputed. Try again.', () => setMedicalBillStatus(bill.id, 'disputed', null)); load(); }}>
                         <Text style={styles.actionText}>Dispute</Text>
                       </TouchableOpacity>
                     ) : null}
-                    <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.medRemove') : undefined} onPress={async () => { await deleteMedicalBill(bill.id); load(); }}>
+                    <TouchableOpacity
+                      ref={index === 0 ? walkMark.ref('finance.medChange') : undefined}
+                      onPress={() => {
+                        const money = (value: number | null) => (value != null ? String(value) : '');
+                        setBillForm({
+                          serviceDate: bill.serviceDate,
+                          provider: bill.provider,
+                          description: bill.description ?? '',
+                          billed: money(bill.billed),
+                          allowed: money(bill.allowed),
+                          insurancePaid: money(bill.insurancePaid),
+                          youOwe: money(bill.youOwe),
+                          appliedDeductible: money(bill.appliedToDeductible),
+                          conditionCode: bill.conditionCode ?? '',
+                          editingId: bill.id,
+                        });
+                        setOpenForm('bill');
+                      }}
+                    >
+                      <Text style={styles.actionText}>Change</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      ref={index === 0 ? walkMark.ref('finance.medRemove') : undefined}
+                      onPress={() =>
+                        setConfirm({
+                          title: t('Remove the bill from {provider}?', { provider: bill.provider }),
+                          message: 'This removes the bill and the files attached to it. What it counted toward your deductible comes off too.',
+                          actions: [
+                            {
+                              label: 'Remove',
+                              destructive: true,
+                              onPress: async () => {
+                                setConfirm(null);
+                                await saveOrSay('The bill was not removed. Try again.', () => deleteMedicalBill(bill.id));
+                                load();
+                              },
+                            },
+                            { label: 'Keep it', onPress: () => setConfirm(null) },
+                          ],
+                        })
+                      }
+                    >
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
                   </View>
@@ -457,7 +527,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
             );
           })
         )}
-        <TouchableOpacity ref={walkMark.ref('finance.medAdd')} style={styles.primaryButton} onPress={() => setOpenForm('bill')}>
+        <TouchableOpacity ref={walkMark.ref('finance.medAdd')} style={styles.primaryButton} onPress={() => { setBillForm({ serviceDate: todayLocal(), provider: '', description: '', billed: '', allowed: '', insurancePaid: '', youOwe: '', appliedDeductible: '', conditionCode: '', editingId: '' }); setOpenForm('bill'); }}>
           <Text style={styles.primaryButtonText}>+ Add a bill</Text>
         </TouchableOpacity>
       </TabBand>
@@ -521,7 +591,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.primaryButton} onPress={saveBill}>
-              <Text style={styles.primaryButtonText}>Add bill</Text>
+              <Text style={styles.primaryButtonText}>{billForm.editingId ? 'Save' : 'Add bill'}</Text>
             </TouchableOpacity>
           </ThumbRow>
         </View>

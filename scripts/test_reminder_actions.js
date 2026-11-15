@@ -160,7 +160,7 @@ check('Taken on a bill does nothing', planReminderAction('bill', 'taken') === nu
 check('Turned it on a dose does nothing', planReminderAction('dose', 'turned') === null);
 check('a plain tap does nothing', planReminderAction('dose', 'expo.modules.notifications.actions.DEFAULT') === null);
 check('dose writes logged', planReminderAction('dose', 'taken').status === 'logged');
-check('a thing on the To Do List writes its mark (C2)', planReminderAction('check', 'done').write === 'checkMarked');
+check('a thing on the Checklist writes its mark (C2)', planReminderAction('check', 'done').write === 'checkMarked');
 check('a routine with no steps left to mark gets the plain set', categoryKeyFor('routine', false) === 'plain');
 check('Done on a routine checks off its step', planReminderAction('routine', 'done').write === 'routineStep');
 check('garden writes completed', planReminderAction('garden', 'done').status === 'completed');

@@ -12,7 +12,7 @@
 // place in, and losing your place is the hard part the routine exists to
 // take away. Finish a step and the next one arrives. Nothing else moves.
 //
-// A CHECK is a thing on the To Do List (Did I Do It until 2026-10-28):
+// A CHECK is a thing on the Checklist (Did I Do It until 2026-10-28):
 // something done regularly, on a schedule of its own, whose every time is
 // checked off on its own. Its value is that the answer can be looked at, so
 // "did I take my pill" costs a glance rather than a walk back upstairs or a
@@ -243,7 +243,7 @@ export type Routine = {
 
 // ------------------------------------------------------------------ checks
 //
-// The To Do List (2026-10-28, until then Did I Do It). Direct instruction:
+// The Checklist (2026-10-28, until then Did I Do It). Direct instruction:
 // "it needs to have a true schedule built around it, including days of the
 // week and it continually repeats and is available to be checked off the
 // next time the time is for it to be done again." So a check is a thing
@@ -919,7 +919,7 @@ export function nextReminderTimes(routine: Routine, now: Date, withinDays: numbe
   return times;
 }
 
-// ------------------------------------------- the To Do List on Home
+// ------------------------------------------- the Checklist on Home
 //
 // 2026-10-28, direct request: "make sure they are always displayed in the
 // order of when they need to be done, and only are displayed when their time
@@ -932,7 +932,7 @@ export function nextReminderTimes(routine: Routine, now: Date, withinDays: numbe
 // missed pill does not stop mattering because its hour went by. After it
 // comes whatever is due within the look-ahead, soonest first. Anything due
 // later than that is left off and counted, with the next of them named, so
-// nobody wonders whether the rest went missing. Life > To Do List still
+// nobody wonders whether the rest went missing. Life > Checklist still
 // shows everything, since that is where things are set up and changed.
 
 export type ToDoLookAhead = '1h' | '2h' | '4h' | 'today';

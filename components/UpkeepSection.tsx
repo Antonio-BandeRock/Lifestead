@@ -61,6 +61,8 @@ import { describePlainDate, readPlainDateField, readPlainDates, type Lean } from
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 
 // Upkeep: things that need doing again, and things that run out.
 //
@@ -183,6 +185,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [items, setItems] = useState<UpkeepItem[]>([]);
   const [loading, setLoading] = useState(false);
+  const [readFailed, setReadFailed] = useState(false);
   const [form, setForm] = useState<ItemForm | null>(null);
   const [renewForm, setRenewForm] = useState<{ id: string; name: string; date: string } | null>(null);
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
@@ -249,6 +252,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     Promise.all([
       listUpkeepItems(),
       listUpkeepPlaces(),
@@ -266,9 +270,12 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
             .map((entry) => ({ key: entry.publicKeyBase64, name: entry.name })),
         );
       })
-      .catch((error) => showInfoAlert('Could not load', error instanceof Error ? error.message : String(error)))
+      .catch((error) => {
+      console.warn('[UpkeepSection] read failed', error);
+      setReadFailed(true);
+    })
       .finally(() => setLoading(false));
-  }, [showInfoAlert]);
+  }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -311,14 +318,19 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
     return assigneeOptions.find((entry) => entry.value === code)?.label ?? null;
   }
 
+  /** Runs one write; false after saying what was not saved (lib/saveProblem.ts). */
+  async function saved(problem: string, work: () => Promise<unknown>): Promise<boolean> {
+    return (await saveOrSay(problem, async () => { await work(); return true; })) === true;
+  }
+
   async function take(item: UpkeepItem) {
     if (!context.myPersonId) return;
-    await assignUpkeepItem(item.id, `person:${context.myPersonId}`, context.myName);
+    if (!(await saved('It was not given to you. Try again.', () => assignUpkeepItem(item.id, `person:${context.myPersonId}`, context.myName)))) return;
     load();
   }
 
   async function giveBack(item: UpkeepItem) {
-    await assignUpkeepItem(item.id, null, null);
+    if (!(await saved('It was not handed back. Try again.', () => assignUpkeepItem(item.id, null, null)))) return;
     load();
   }
 
@@ -329,13 +341,15 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
       showInfoAlert('Almost there', 'Give the place a name, like "Spare room" or "Boat".');
       return;
     }
-    if (placeEdit.id) {
-      await renameUpkeepPlace(placeEdit.id, name);
+    const placeId = placeEdit.id;
+    if (placeId) {
+      if (!(await saved('The place was not renamed. Try again.', () => renameUpkeepPlace(placeId, name)))) return;
       setPlaces(await listUpkeepPlaces());
       setPlaceEdit(null);
       return;
     }
-    const code = await createUpkeepPlace(name);
+    const code = await saveOrSay('The place was not added. Try again.', () => createUpkeepPlace(name));
+    if (code === undefined) return;
     setPlaces(await listUpkeepPlaces());
     setForm({ ...form, place: code });
     setPlaceEdit(null);
@@ -353,7 +367,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
             destructive: true,
             onPress: async () => {
               setConfirm(null);
-              await removeUpkeepPlace(id, null);
+              if (!(await saved('The place was not removed. Try again.', () => removeUpkeepPlace(id, null)))) return;
               if (form?.place === id) setForm({ ...form, place: '' });
               load();
             },
@@ -372,7 +386,8 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
       showInfoAlert('Almost there', 'Pick where the things in it go first.');
       return;
     }
-    const moved = await removeUpkeepPlace(placeRemoval.id, placeRemoval.moveTo);
+    const moved = await saveOrSay('The place was not removed. Try again.', () => removeUpkeepPlace(placeRemoval.id, placeRemoval.moveTo));
+    if (moved === undefined) return;
     if (moved && form?.place === placeRemoval.id) setForm({ ...form, place: placeRemoval.moveTo });
     setPlaceRemoval(null);
     load();
@@ -398,7 +413,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
     }
 
     const interval = readIntervalCode(form.interval);
-    await upsertUpkeepItem({
+    const kept = await saveOrSay('It was not saved. Try again.', async () => { await upsertUpkeepItem({
       id: form.id ?? undefined,
       name: form.name,
       category: form.category,
@@ -415,7 +430,8 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
       assignedName: nameForAssignee(form.assignedTo),
       // Somebody on a linked phone only ever sees a chore that is shared.
       household: form.household || form.assignedTo.startsWith('key:'),
-    });
+    }); return true; });
+    if (!kept) return;
     setForm(null);
     load();
   }
@@ -432,7 +448,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
           label: 'Done today',
           onPress: async () => {
             setConfirm(null);
-            await markUpkeepDone(item.id, todayLocal());
+            if (!(await saved('It was not marked done. Try again.', () => markUpkeepDone(item.id, todayLocal())))) return;
             load();
           },
         },
@@ -440,6 +456,8 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
       ],
     });
   }
+
+  if (readFailed) return <ReadProblem message="Your upkeep jobs could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
 
   if (loading) return <View style={band.boxMuted}><Text style={styles.bodyText}>Loading…</Text></View>;
 
@@ -853,7 +871,8 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
                               showInfoAlert('Almost there', 'Enter the new date as YYYY-MM-DD.');
                               return;
                             }
-                            await renewUpkeepItem(item.id, renewForm.date.trim());
+                            const newDate = renewForm.date.trim();
+                            if (!(await saved('The new date was not saved. Try again.', () => renewUpkeepItem(item.id, newDate)))) return;
                             setRenewForm(null);
                             load();
                           }}
@@ -896,7 +915,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
                               destructive: true,
                               onPress: async () => {
                                 setConfirm(null);
-                                await deleteUpkeepItem(item.id);
+                                if (!(await saved('It was not removed. Try again.', () => deleteUpkeepItem(item.id)))) return;
                                 load();
                               },
                             },

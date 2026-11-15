@@ -19,7 +19,7 @@ import { t } from '../lib/i18n';
 // off (direct instruction, 2026-11-15; the rules are in lib/didIDoIt.ts).
 // Things checked off on their own come first, then each routine with the
 // steps done on each walk under it. Nothing here writes: things are set up
-// and checked off on the To Do List, Tasks and Routines.
+// and checked off on the Checklist, the To Do List and Routines.
 
 function clock(iso: string): string {
   return formatMarkClock(new Date(iso));
@@ -116,7 +116,7 @@ export function DidIDoItLookBack({ tabColor }: { tabColor: string }) {
           <Text style={styles.body}>Nothing was checked off on this day.</Text>
           <View style={styles.linkRow}>
             <TouchableOpacity onPress={() => router.push({ pathname: '/life', params: { openLifeLens: 'didIDoIt' } })}>
-              <Text style={styles.link}>Open the To Do List</Text>
+              <Text style={styles.link}>Open the Checklist</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => router.push({ pathname: '/life', params: { openLifeLens: 'routines' } })}>
               <Text style={styles.link}>Open Routines</Text>

@@ -54,8 +54,10 @@ import { useWalkMark } from './WalkMark';
 import { RecordPhotos } from './RecordPhotos';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 
-// The To Do List: the things you need to do regularly, and whether you did.
+// The Checklist: the things you need to do regularly, and whether you did.
 //
 // Life's tenth area, 2026-09-17, from the daily-living program (CLAUDE.md
 // item 28), first called Did I Do It. The audience is somebody standing on
@@ -70,9 +72,9 @@ import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY
 // day, on days of the week or every N days, weeks or months, and each time
 // is checked off on its own. "No set pattern" is gone ("These things are
 // things they need to do regularly"), and so is the once-a-period answer it
-// replaced. The lens is called the To Do List on screen; its key stays
+// replaced. The lens is called the Checklist on screen; its key stays
 // 'didIDoIt' so saved places and how-tos keep working, and the one-off list
-// that was called To-Do is Tasks.
+// that was called To-Do is the To Do List.
 //
 // HOW THIS RELATES TO ROUTINES, 2026-09-17: "Did I Do it should be related
 // to Routines, not treated separately." And the split agreed 2026-10-28: a
@@ -175,10 +177,11 @@ export function DidIDoItSection({ tabColor }: Props) {
   // The outline on a button a Your Story walk line names (components/WalkMark.ts).
   const walkMark = useWalkMark();
   const router = useRouter();
-  const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [, infoAlertElement] = useInfoAlert();
   const [checks, setChecks] = useState<DoneCheck[]>([]);
   const [routines, setRoutines] = useState<Routine[]>([]);
   const [loading, setLoading] = useState(true);
+  const [readFailed, setReadFailed] = useState(false);
   const [form, setForm] = useState<CheckForm | null>(null);
   const [confirm, setConfirm] = useState<{
     title: string;
@@ -192,14 +195,18 @@ export function DidIDoItSection({ tabColor }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     Promise.all([getDoneChecks(true), getRoutines(true)])
       .then(([loadedChecks, loadedRoutines]) => {
         setChecks(loadedChecks);
         setRoutines(loadedRoutines);
       })
-      .catch((error) => showInfoAlert('Could not load', error instanceof Error ? error.message : String(error)))
+      .catch((error) => {
+      console.warn('[DidIDoItSection] read failed', error);
+      setReadFailed(true);
+    })
       .finally(() => setLoading(false));
-  }, [showInfoAlert]);
+  }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -234,7 +241,8 @@ export function DidIDoItSection({ tabColor }: Props) {
       return;
     }
     const { id, name, ...schedule } = form;
-    const saved = id ? ((await updateDoneCheck(id, name, schedule)) ? id : null) : await createDoneCheck(name, schedule);
+    const saved = await saveOrSay('The check was not saved. Try again.', async () => (id ? ((await updateDoneCheck(id, name, schedule)) ? id : null) : await createDoneCheck(name, schedule)));
+    if (saved === undefined) return;
     if (saved) void syncReminderNotifications();
     setForm(null);
     load();
@@ -251,7 +259,7 @@ export function DidIDoItSection({ tabColor }: Props) {
           destructive: true,
           onPress: async () => {
             setConfirm(null);
-            await deleteDoneCheck(check.id);
+            await saveOrSay('The check was not removed. Try again.', () => deleteDoneCheck(check.id));
             load();
             void syncReminderNotifications();
           },
@@ -272,7 +280,7 @@ export function DidIDoItSection({ tabColor }: Props) {
     const numberOptions = Array.from({ length: unit.most }, (unused, i) => ({ label: String(i + 1), value: String(i + 1) }));
     return (
       <View style={band.box}>
-        <Text style={styles.cardTitle}>{current.id ? 'Change this one' : 'Something on your To Do List'}</Text>
+        <Text style={styles.cardTitle}>{current.id ? 'Change this one' : 'Something on your Checklist'}</Text>
 
         <Text style={styles.label}>What you need to do</Text>
         <AppTextInput
@@ -410,7 +418,7 @@ export function DidIDoItSection({ tabColor }: Props) {
             </View>
             <Text style={styles.helperText}>
               {current.reminderOn
-                ? 'One reminder at each time, kept together with the rest of your To Do List. Done on it checks that time off, even with the phone locked, and it comes back at the next time.'
+                ? 'One reminder at each time, kept together with the rest of your Checklist. Done on it checks that time off, even with the phone locked, and it comes back at the next time.'
                 : 'It stays on this list to check off, and the phone never asks.'}
             </Text>
             {current.reminderOn ? (
@@ -437,6 +445,8 @@ export function DidIDoItSection({ tabColor }: Props) {
     );
   }
 
+  if (readFailed) return <ReadProblem message="Your checklist could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
+
   if (loading) return <View style={band.boxMuted}><Text style={styles.bodyText}>Loading…</Text></View>;
 
   return (
@@ -451,7 +461,7 @@ export function DidIDoItSection({ tabColor }: Props) {
       />
 
       <View style={band.box}>
-        <Text style={styles.cardTitle}>To Do List</Text>
+        <Text style={styles.cardTitle}>Checklist</Text>
         <Text style={styles.bodyText}>
           A great way to make sure you know whether you did or did not do something. Give each thing its times
           and days, check it off each time you do it, and it comes back at its next time. The reminders sit
@@ -511,7 +521,7 @@ export function DidIDoItSection({ tabColor }: Props) {
                   <TouchableOpacity
                     ref={first ? walkMark.ref('didIDoIt.yes') : undefined}
                     style={styles.primaryButton}
-                    onPress={async () => { await markDoneCheck(check.id, 'tap'); load(); void syncReminderNotifications(); }}
+                    onPress={async () => { await saveOrSay('It was not marked done. Try again.', () => markDoneCheck(check.id, 'tap')); load(); void syncReminderNotifications(); }}
                   >
                     <Text style={styles.primaryButtonText}>
                       {done && standing?.nextDue

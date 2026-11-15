@@ -37,11 +37,14 @@ import {
 import { addTodo, answerTodo, deleteTodo, listTodos, reopenTodo, updateTodo } from '../lib/todosDb';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { describeRepeat } from '../lib/repeatRule';
+import { formatTime12 } from '../lib/timeOfDay';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
 import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 
 
 function todayLocal(): string {
@@ -69,9 +72,10 @@ type Editing = {
 /** The When field's starting words for a to-do being changed. */
 function whenWordsOf(todo: Todo, today: string): string {
   if (!todo.dueOn) return '';
+  const at = todo.dueTime ? ` at ${formatTime12(todo.dueTime).toLowerCase().replace(' ', '')}` : '';
   const day = todo.dueOn === today ? 'today' : todo.dueOn;
-  if (!todo.repeat) return day;
-  return `${describeRepeat(todo.repeat, todo.anchorOn ?? todo.dueOn).toLowerCase()} from ${todo.dueOn}`;
+  if (!todo.repeat) return `${day}${at}`;
+  return `${describeRepeat(todo.repeat, todo.anchorOn ?? todo.dueOn).toLowerCase()} from ${todo.dueOn}${at}`;
 }
 
 export function TodoSection({ tabColor, scope }: Props) {
@@ -85,8 +89,16 @@ export function TodoSection({ tabColor, scope }: Props) {
   const [showClosed, setShowClosed] = useState(false);
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
+  const [readFailed, setReadFailed] = useState(false);
+
   const load = useCallback(async () => {
-    setTodos(await listTodos(scope));
+    setReadFailed(false);
+    try {
+      setTodos(await listTodos(scope));
+    } catch (error) {
+      console.warn('[TodoSection] could not read', error);
+      setReadFailed(true);
+    }
   }, [scope]);
 
   useFocusEffect(
@@ -113,21 +125,24 @@ export function TodoSection({ tabColor, scope }: Props) {
   async function handleAdd() {
     if (!reading || !reading.title) return;
     const dueOn = ignoreDay ? null : reading.dueOn;
+    const dueTime = ignoreDay ? null : reading.dueTime;
     const repeat = ignoreDay ? null : reading.repeat;
-    await addTodo({ title: reading.title, area: scope === 'work' ? 'work' : area, dueOn, repeat });
+    const added = await saveOrSay('The task was not added. Try again.', async () => { await addTodo({ title: reading.title, area: scope === 'work' ? 'work' : area, dueOn, dueTime, repeat }); return true; });
+    if (!added) return;
     setWords('');
     setIgnoreDay(false);
-    await afterChange(`Added: ${reading.title}, ${describeTodoWhen(dueOn, repeat, today).toLowerCase()}.`);
+    await afterChange(`Added: ${reading.title}, ${describeTodoWhen(dueOn, repeat, today, dueTime).toLowerCase()}.`);
   }
 
   async function handleAnswer(todo: Todo, kind: TodoDoingKind) {
-    const result = await answerTodo(todo.id, kind, today);
+    const result = await saveOrSay('That was not recorded. Try again.', () => answerTodo(todo.id, kind, today));
     if (!result) return;
     await afterChange(describeTodoAnswered(todo.title, result.plan, kind, today));
   }
 
   async function handleReopen(todo: Todo) {
-    await reopenTodo(todo.id);
+    const reopened = await saveOrSay('The task was not opened again. Try again.', async () => { await reopenTodo(todo.id); return true; });
+    if (!reopened) return;
     await afterChange(`${todo.title}: open again.`);
   }
 
@@ -142,7 +157,8 @@ export function TodoSection({ tabColor, scope }: Props) {
           onPress: async () => {
             setConfirm(null);
             if (editing?.id === todo.id) setEditing(null);
-            await deleteTodo(todo.id);
+            const removed = await saveOrSay('The task was not removed. Try again.', async () => { await deleteTodo(todo.id); return true; });
+            if (!removed) return;
             await afterChange(`${todo.title}: removed.`);
           },
         },
@@ -165,12 +181,13 @@ export function TodoSection({ tabColor, scope }: Props) {
     }
     const when = readTodoWhen(editing.when, new Date());
     if (!when) {
-      setEditError('The day could not be read. Try "tomorrow", "15 October" or "every Monday", or leave it empty for no day.');
+      setEditError('The day could not be read. Try "tomorrow", "tomorrow at 3pm", "15 October" or "every Monday", or leave it empty for no day.');
       return;
     }
-    await updateTodo(editing.id, { title, notes: editing.notes, area: editing.area, dueOn: when.dueOn, repeat: when.repeat });
+    const changed = await saveOrSay('The task was not changed. Try again.', async () => { await updateTodo(editing.id, { title, notes: editing.notes, area: editing.area, dueOn: when.dueOn, dueTime: when.dueTime, repeat: when.repeat }); return true; });
+    if (!changed) return;
     setEditing(null);
-    await afterChange(`${title}: changed, ${describeTodoWhen(when.dueOn, when.repeat, today).toLowerCase()}.`);
+    await afterChange(`${title}: changed, ${describeTodoWhen(when.dueOn, when.repeat, today, when.dueTime).toLowerCase()}.`);
   }
 
   function renderAreaPills(selected: TodoArea, onSelect: (value: TodoArea) => void) {
@@ -207,9 +224,9 @@ export function TodoSection({ tabColor, scope }: Props) {
           style={styles.textInput}
           value={editing.when}
           onChangeText={(value) => setEditing({ ...editing, when: value })}
-          placeholder="When: tomorrow, 15 October, every Monday, or empty"
+          placeholder="When: tomorrow at 3pm, 15 October, every Monday, or empty"
         />
-        <Text style={styles.captionText}>{when ? describeTodoWhen(when.dueOn, when.repeat, today) : 'Not read yet'}</Text>
+        <Text style={styles.captionText}>{when ? describeTodoWhen(when.dueOn, when.repeat, today, when.dueTime) : 'Not read yet'}</Text>
         <AppTextInput
           style={styles.textInput}
           value={editing.notes}
@@ -277,6 +294,8 @@ export function TodoSection({ tabColor, scope }: Props) {
     );
   }
 
+  if (readFailed) return <ReadProblem message="Your to do list could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />;
+
   return (
     <View style={styles.section}>
       <AppTextInput
@@ -294,7 +313,7 @@ export function TodoSection({ tabColor, scope }: Props) {
         <View style={styles.previewBlock}>
           <Text style={styles.bodyText}>{reading.title}</Text>
           <Text style={styles.captionText}>
-            {ignoreDay ? 'No day' : describeTodoWhen(reading.dueOn, reading.repeat, today)}
+            {ignoreDay ? 'No day' : describeTodoWhen(reading.dueOn, reading.repeat, today, reading.dueTime)}
           </Text>
           {!ignoreDay ? reading.notes.map((line) => (
             <Text key={line} style={styles.captionText}>{line}</Text>

@@ -120,6 +120,10 @@ export type DatedReminderSource = {
    *  upkeep that expires, since renewing it needs the new date (C1,
    *  lib/reminderActions.ts). Absent means it can. */
   markable?: boolean;
+  /** 'HH:MM' when the thing was given a time of day: the reminder on the
+   *  day itself comes then rather than in the morning. Only a task on the
+   *  To Do List carries one. */
+  atTime?: string | null;
 };
 
 /**
@@ -323,6 +327,7 @@ export async function listDatedReminderSources(today: string): Promise<DatedRemi
       title: todo.title,
       detail: todo.notes ? todo.notes.split('\n')[0].slice(0, 120) : null,
       dueOn: todo.dueOn,
+      atTime: todo.dueTime,
       tab: 'life',
       lens: 'todos',
     });

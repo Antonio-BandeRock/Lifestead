@@ -10,7 +10,7 @@
 //  1. A thing no routine walks past, and a Task marked done, are listed on
 //     their own with every time they were checked off that day.
 //  2. A thing a routine walks past is never listed on its own, whether it
-//     was ticked on a walk or from the To Do List.
+//     was ticked on a walk or from the Checklist.
 //  3. A walk lists the steps done on it in walk order; a skipped step is not
 //     listed.
 //  4. A mark made on a walk that already lists that step is not said twice.

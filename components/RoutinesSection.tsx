@@ -65,6 +65,9 @@ import { useWalkMark } from './WalkMark';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
+import { t } from '../lib/i18n';
 
 // Routines: an order you do not want to hold in your head.
 //
@@ -173,6 +176,7 @@ export function RoutinesSection({ tabColor }: Props) {
   const [checks, setChecks] = useState<DoneCheck[]>([]);
   const [occasions, setOccasions] = useState<CustomOccasion[]>([]);
   const [loading, setLoading] = useState(true);
+  const [readFailed, setReadFailed] = useState(false);
   const [form, setForm] = useState<RoutineForm | null>(null);
   const [occasionForm, setOccasionForm] = useState<OccasionForm | null>(null);
   const [stepForm, setStepForm] = useState<StepForm | null>(null);
@@ -190,15 +194,19 @@ export function RoutinesSection({ tabColor }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     Promise.all([getRoutines(true), getDoneChecks(true), getRoutineOccasions()])
       .then(([loadedRoutines, loadedChecks, loadedOccasions]) => {
         setRoutines(loadedRoutines);
         setChecks(loadedChecks);
         setOccasions(loadedOccasions);
       })
-      .catch((error) => showInfoAlert('Could not load', error instanceof Error ? error.message : String(error)))
+      .catch((error) => {
+      console.warn('[RoutinesSection] read failed', error);
+      setReadFailed(true);
+    })
       .finally(() => setLoading(false));
-  }, [showInfoAlert]);
+  }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -236,17 +244,21 @@ export function RoutinesSection({ tabColor }: Props) {
       showInfoAlert('Almost there', 'Give it a name you will recognise, like "Morning" or "Leaving the house".');
       return;
     }
-    let id = form.id;
-    if (id) await updateRoutine(id, form.name, form.occasion);
-    else id = await createRoutine(form.name, form.occasion);
-    // The reminder is written whether or not there is one, so that clearing
-    // it clears the row as well as the form, and reconciled straight after,
-    // so the notification is on the phone before this screen has redrawn.
-    if (id) {
-      await setRoutineReminder(id, form.reminderTime, form.reminderDays, form.reminderTime !== null, form.keepReminding);
-      await setRoutineSpeakSteps(id, form.speakSteps);
-      void syncReminderNotifications();
-    }
+    const saved = await saveOrSay('The routine was not saved. Try again.', async () => {
+      let id = form.id;
+      if (id) await updateRoutine(id, form.name, form.occasion);
+      else id = await createRoutine(form.name, form.occasion);
+      // The reminder is written whether or not there is one, so that clearing
+      // it clears the row as well as the form, and reconciled straight after,
+      // so the notification is on the phone before this screen has redrawn.
+      if (id) {
+        await setRoutineReminder(id, form.reminderTime, form.reminderDays, form.reminderTime !== null, form.keepReminding);
+        await setRoutineSpeakSteps(id, form.speakSteps);
+        void syncReminderNotifications();
+      }
+      return true;
+    });
+    if (!saved) return;
     setForm(null);
     setOccasionForm(null);
     load();
@@ -261,13 +273,16 @@ export function RoutinesSection({ tabColor }: Props) {
       showInfoAlert('Almost there', 'Give it a name you would use out loud, like "Work" or "The school run".');
       return;
     }
-    if (occasionForm.id) {
-      await updateRoutineOccasion(occasionForm.id, occasionForm.name, occasionForm.hourFrom, occasionForm.hourTo);
-      setForm({ ...form, occasion: occasionForm.id });
-    } else {
-      const id = await createRoutineOccasion(occasionForm.name, occasionForm.hourFrom, occasionForm.hourTo);
-      if (id) setForm({ ...form, occasion: id });
-    }
+    const editingId = occasionForm.id;
+    const id = await saveOrSay('It was not saved. Try again.', async () => {
+      if (editingId) {
+        await updateRoutineOccasion(editingId, occasionForm.name, occasionForm.hourFrom, occasionForm.hourTo);
+        return editingId;
+      }
+      return (await createRoutineOccasion(occasionForm.name, occasionForm.hourFrom, occasionForm.hourTo)) ?? '';
+    });
+    if (id === undefined) return;
+    if (id) setForm({ ...form, occasion: id });
     setOccasionForm(null);
     setOccasions(await getRoutineOccasions());
   }
@@ -282,7 +297,8 @@ export function RoutinesSection({ tabColor }: Props) {
           destructive: true,
           onPress: async () => {
             setConfirm(null);
-            await deleteRoutineOccasion(entry.id);
+            const removed = await saveOrSay('It was not removed. Try again.', async () => { await deleteRoutineOccasion(entry.id); return true; });
+            if (!removed) return;
             setOccasionForm(null);
             if (form) setForm({ ...form, occasion: 'other' });
             setOccasions(await getRoutineOccasions());
@@ -303,17 +319,21 @@ export function RoutinesSection({ tabColor }: Props) {
     const checkId = stepForm.checkId === NO_CHECK ? null : stepForm.checkId;
     const typed = stepForm.minutes.trim();
     const minutes = typed.length > 0 ? Number(typed) : null;
-    if (stepForm.id) await updateRoutineStep(stepForm.id, stepForm.text, stepForm.detail, checkId, minutes);
-    else await addRoutineStep(stepForm.routineId, stepForm.text, stepForm.detail, checkId, minutes);
+    const saved = await saveOrSay('The step was not saved. Try again.', async () => {
+      if (stepForm.id) await updateRoutineStep(stepForm.id, stepForm.text, stepForm.detail, checkId, minutes);
+      else await addRoutineStep(stepForm.routineId, stepForm.text, stepForm.detail, checkId, minutes);
+      return true;
+    });
+    if (!saved) return;
     setStepForm(null);
     setCheckForm(null);
     load();
   }
 
-  /** A thing for the To Do List made from inside the step that does it, and
+  /** A thing for the Checklist made from inside the step that does it, and
    *  attached to that step straight away. It takes the routine's time and
    *  days, since the routine is what reminds it (2026-10-28), and can be
-   *  given a schedule of its own on the To Do List. */
+   *  given a schedule of its own on the Checklist. */
   async function saveCheck() {
     if (!checkForm || !stepForm) return;
     if (!checkForm.name.trim()) {
@@ -325,7 +345,8 @@ export function RoutinesSection({ tabColor }: Props) {
       ...defaultCheckSchedule(new Date(), cleanReminderTime(routine?.reminderTime ?? null) ?? '09:00', false),
       days: routine?.reminderDays ?? [],
     };
-    const id = await createDoneCheck(checkForm.name, schedule);
+    const id = await saveOrSay('The check was not saved. Try again.', () => createDoneCheck(checkForm.name, schedule));
+    if (id === undefined) return;
     setChecks(await getDoneChecks(true));
     if (id) setStepForm({ ...stepForm, checkId: id });
     setCheckForm(null);
@@ -334,7 +355,7 @@ export function RoutinesSection({ tabColor }: Props) {
   async function shiftStep(routine: Routine, index: number, direction: -1 | 1) {
     const reordered = moveRoutineStep(routine.steps, index, index + direction);
     if (reordered === routine.steps) return;
-    await saveStepOrder(reordered);
+    await saveOrSay('The order was not saved. Try again.', () => saveStepOrder(reordered));
     load();
   }
 
@@ -348,7 +369,7 @@ export function RoutinesSection({ tabColor }: Props) {
           destructive: true,
           onPress: async () => {
             setConfirm(null);
-            await deleteRoutine(routine.id);
+            await saveOrSay('The routine was not removed. Try again.', () => deleteRoutine(routine.id));
             load();
           },
         },
@@ -356,6 +377,8 @@ export function RoutinesSection({ tabColor }: Props) {
       ],
     });
   }
+
+  if (readFailed) return <ReadProblem message="Your routines could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
 
   if (loading) return <View style={band.boxMuted}><Text style={styles.bodyText}>Loading…</Text></View>;
 
@@ -713,7 +736,27 @@ export function RoutinesSection({ tabColor }: Props) {
                               <Text style={styles.actionText}>Down</Text>
                             </TouchableOpacity>
                           ) : null}
-                          <TouchableOpacity onPress={async () => { await deleteRoutineStep(step.id); load(); }}>
+                          <TouchableOpacity
+                            ref={index === 0 ? walkMark.ref('routines.stepRemove') : undefined}
+                            onPress={() =>
+                              setConfirm({
+                                title: t('Remove the step {step}?', { step: step.text }),
+                                message: 'The step comes out of this routine. Walks already done keep it in their record.',
+                                actions: [
+                                  {
+                                    label: 'Remove it',
+                                    destructive: true,
+                                    onPress: async () => {
+                                      setConfirm(null);
+                                      await saveOrSay('The step was not removed. Try again.', () => deleteRoutineStep(step.id));
+                                      load();
+                                    },
+                                  },
+                                  { label: 'Keep it', onPress: () => setConfirm(null) },
+                                ],
+                              })
+                            }
+                          >
                             <Text style={styles.actionTextRemove}>Remove</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
@@ -791,14 +834,14 @@ export function RoutinesSection({ tabColor }: Props) {
                       tabColor={tabColor}
                     />
                     <Text style={styles.helperText}>
-                      Attach something from your To Do List and this step carries a box to tap while you are
+                      Attach something from your Checklist and this step carries a box to tap while you are
                       standing there doing it. Tapping it checks it off there, so nothing has to be remembered
                       twice, and the routine&apos;s reminder covers it.
                     </Text>
 
                     {checkForm ? (
                       <View style={styles.inlineForm}>
-                        <Text style={styles.label}>Something new for your To Do List</Text>
+                        <Text style={styles.label}>Something new for your Checklist</Text>
                         <AppTextInput
                           onVoiceResult={(name) => setCheckForm({ ...checkForm, name })}
                           style={styles.input}
@@ -809,7 +852,7 @@ export function RoutinesSection({ tabColor }: Props) {
                           maxLength={MAX_CHECK_NAME}
                         />
                         <Text style={styles.helperText}>
-                          It goes on your To Do List at this routine&apos;s time and days. Change its times there.
+                          It goes on your Checklist at this routine&apos;s time and days. Change its times there.
                         </Text>
                         <ThumbRow primary="first" style={styles.formActions}>
                           <TouchableOpacity style={styles.primaryButton} onPress={saveCheck}>

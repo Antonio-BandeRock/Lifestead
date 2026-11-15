@@ -841,7 +841,7 @@ export const GUIDES: GuideDef[] = [
     entries: [
       fromItem(
         'didIDoIt',
-        'Add something you need to do and tend to wonder whether you did, like locking the door, in Life under To Do List.',
+        'Add something you need to do and tend to wonder whether you did, like locking the door, in Life under Checklist.',
         'One tap when you do it, and later the answer is there, with the time.',
         {
           when: 'start',
@@ -864,7 +864,7 @@ export const GUIDES: GuideDef[] = [
         key: 'doneMark',
         record: 'doneMark',
         when: 'daily',
-        doThis: 'Check it off each time you do it, in Life under To Do List.',
+        doThis: 'Check it off each time you do it, in Life under Checklist.',
         forYou: 'The time is kept, so the question has an answer.',
         takes: 'One tap',
         taps: ['Tap the thing you just did.'],
@@ -1226,7 +1226,7 @@ export const GUIDES: GuideDef[] = [
       ),
       fromItem(
         'didIDoIt',
-        'Add something you need to do and tend to wonder whether you did, in Life under To Do List.',
+        'Add something you need to do and tend to wonder whether you did, in Life under Checklist.',
         'One tap when you do it, and the answer is there later.',
         {
           when: 'daily',
@@ -1246,7 +1246,7 @@ export const GUIDES: GuideDef[] = [
       ),
       fromItem(
         'todo',
-        'Put the things you mean to do on one list, in Life under Tasks.',
+        'Put the things you mean to do on one list, in Life under To Do List.',
         'One list, each thing with its day if it has one and a reminder that morning. One left open stays until you do it or let it go.',
         {
           when: 'whenItHappens',
@@ -1304,7 +1304,7 @@ export const GUIDES: GuideDef[] = [
       fromItem(
         'todo',
         'Keep the work tasks in one place, in Life under Work, on the Tasks pill.',
-        'Each with its day if it has one, beside your personal ones on Life under Tasks.',
+        'Each with its day if it has one, beside your personal ones on Life under To Do List.',
         {
           when: 'whenItHappens',
           takes: 'A few seconds each',
@@ -1466,10 +1466,10 @@ export const LENS_NAMES: Record<string, Record<string, string>> = {
     movement: 'Movement',
     workouts: 'Workouts',
     routines: 'Routines',
-    didIDoIt: 'To Do List',
+    didIDoIt: 'Checklist',
     lookBack: 'Did I Do It',
     daysUntil: 'Days Until',
-    todos: 'Tasks',
+    todos: 'To Do List',
     projects: 'Projects',
   },
   '/schedule': {

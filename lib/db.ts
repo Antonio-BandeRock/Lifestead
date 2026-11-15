@@ -11355,6 +11355,15 @@ async function runDatabaseInitialization() {
         await db.execAsync('ALTER TABLE emergency_contacts ADD COLUMN contact_key TEXT;');
       }
     }
+    // A time of day on a task on the To Do List (1.0.90.10): 'HH:MM' when
+    // one was said with its day, which is when its reminder comes. NULL on
+    // every earlier row, which keeps the morning reminder it always had.
+    {
+      const columns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(todos)');
+      if (!columns.some((existing) => existing.name === 'due_time')) {
+        await db.execAsync('ALTER TABLE todos ADD COLUMN due_time TEXT;');
+      }
+    }
     // The person's symptom names, loaded once so every label lookup finds
     // them (D3). lib/customCheckinTagsDb.ts reloads after each change.
     setCustomCheckinTags(await readCustomCheckinTags(db));
