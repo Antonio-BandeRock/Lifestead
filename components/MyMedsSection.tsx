@@ -13,6 +13,7 @@ import { PartnerBesideBand } from './PartnerBesideBand';
 import { RecallsBand } from './RecallsBand';
 import { PopoverSelect } from './PopoverSelect';
 import { WhyExplainer } from './WhyExplainer';
+import { RuleLabelQuote } from './RuleLabelQuote';
 import { RuleSeverityTag } from './RuleSeverityTag';
 import { MedDetailsPanel } from './MedDetailsPanel';
 import { colors } from '../constants/colors';
@@ -1131,6 +1132,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                   <Text style={styles.interactionMessage}>{warning.message}</Text>
                   <Text style={styles.interactionCitation}>{warning.citation}</Text>
                   <WhyExplainer title={warning.title} mechanism={warning.mechanism} onPress={showInfoAlert} />
+                  <RuleLabelQuote ruleId={warning.ruleId} />
                 </View>
               ))}
             </View>
@@ -1154,6 +1156,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                   <Text style={styles.interactionMessage}>{rule.guidance}</Text>
                   <Text style={styles.interactionCitation}>{rule.citation}</Text>
                   <WhyExplainer title={rule.title} mechanism={rule.mechanism} onPress={showInfoAlert} />
+                  <RuleLabelQuote ruleId={rule.ruleId} />
                 </View>
               ))}
             </View>

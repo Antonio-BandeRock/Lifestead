@@ -83,6 +83,7 @@ function result(over) {
     boxed_warning: ['NOT FOR OBESITY OR WEIGHT LOSS'],
     drug_interactions: ['7 DRUG INTERACTIONS Calcium carbonate may reduce absorption.'],
     indications_and_usage: ['Hypothyroidism'],
+    description: ['SYNTHROID tablets contain synthetic levothyroxine.'],
     openfda: {
       generic_name: ['LEVOTHYROXINE SODIUM'],
       brand_name: ['SYNTHROID'],
@@ -100,13 +101,15 @@ check('date', doc.effective, '2025-01-15');
 check('product type in words', doc.productType, 'Prescription');
 check('sections in label order, text word for word', doc.sections.map((s) => [s.key, s.text]), [
   ['boxed_warning', 'NOT FOR OBESITY OR WEIGHT LOSS'],
+  ['indications_and_usage', 'Hypothyroidism'],
   ['drug_interactions', '7 DRUG INTERACTIONS Calcium carbonate may reduce absorption.'],
 ]);
+check('a section the screen does not show is left out', doc.sections.some((s) => s.key === 'description'), false);
 check('not a combination', doc.isCombination, false);
 check('combination marked', M.toLabelDocument(result({ openfda: { generic_name: ['LISINOPRIL AND HYDROCHLOROTHIAZIDE'] } })).isCombination, true);
 check('a label with no names is dropped', M.toLabelDocument(result({ openfda: {} })), null);
 check('a label with no document id is dropped', M.toLabelDocument(result({ set_id: undefined })), null);
-check('OTC Drug Facts sections read', M.toLabelDocument(result({ boxed_warning: undefined, drug_interactions: undefined, do_not_use: ['Do not use if...'], openfda: { generic_name: ['OMEPRAZOLE'], product_type: ['HUMAN OTC DRUG'] } })).sections.map((s) => s.heading), ['Do not use']);
+check('OTC Drug Facts sections read', M.toLabelDocument(result({ boxed_warning: undefined, drug_interactions: undefined, indications_and_usage: undefined, do_not_use: ['Do not use if...'], openfda: { generic_name: ['OMEPRAZOLE'], product_type: ['HUMAN OTC DRUG'] } })).sections.map((s) => s.heading), ['Do not use']);
 
 // ---- Exact matching; nothing is ever chosen.
 const other = result({ set_id: 'set-b', effective_time: '20260101', openfda: { generic_name: ['LEVOTHYROXINE SODIUM'], manufacturer_name: ['Mylan'], package_ndc: ['0378-1800-01'], product_ndc: ['0378-1800'] } });
@@ -166,6 +169,25 @@ const FORBIDDEN = /\b(safe|no interactions?|stop taking|you should|nothing to wo
 for (const s of ALL) check(`no verdict or style words: ${s.slice(0, 40)}`, FORBIDDEN.test(s), false);
 check('the source note names a pharmacist', /pharmacist can check all of your medicines/.test(M.LABEL_SOURCE_NOTE), true);
 check('the source note says the app does not check', /does not check it against your other medicines/.test(M.LABEL_SOURCE_NOTE), true);
+
+// A section cut into its sentences (A11c): word for word, nothing reworded,
+// joined or dropped except the spaces between them.
+const PROSE =
+  'Take on an empty stomach, 30 to 60 minutes before breakfast. Administer at least 4 hours before or after drugs that bind it (e.g. calcium carbonate). ' +
+  'Dose is 0.5 mg daily. Ask Dr. Smith or the U.S. office first!\n• Use with care in elderly patients.';
+const cut = M.labelSentences(PROSE);
+check('a section is cut at sentence ends', cut, [
+  'Take on an empty stomach, 30 to 60 minutes before breakfast.',
+  'Administer at least 4 hours before or after drugs that bind it (e.g. calcium carbonate).',
+  'Dose is 0.5 mg daily.',
+  'Ask Dr. Smith or the U.S. office first!',
+  '• Use with care in elderly patients.',
+]);
+check('every character but spacing is kept', cut.join('').replace(/\s/g, ''), PROSE.replace(/\s/g, ''));
+check('a lowercase start is not a new sentence', M.labelSentences('See section 7. see also above.'), ['See section 7. see also above.']);
+check('empty text has no sentences', M.labelSentences('\n\n'), []);
+check('a quoted sentence is marked where it is', M.markSentence('A. B c. D.', 'B c.'), { before: 'A. ', sentence: 'B c.', after: ' D.' });
+check('a sentence no longer there is not marked', M.markSentence('A. B c.', 'B d.'), null);
 
 console.log(`${total - failures} of ${total} passed`);
 if (failures > 0) process.exit(1);

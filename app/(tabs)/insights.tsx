@@ -54,6 +54,7 @@ import {
   type LabResultRecord,
   type LabTest,
   type PersonalRule,
+  type PersonalRuleLabel,
   type PrepStateGroup,
   type RankedFood,
   type SafeFood,
@@ -156,6 +157,9 @@ import { PopoverSelect } from '../../components/PopoverSelect';
 import { ProgressRing } from '../../components/ProgressRing';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { WhyExplainer } from '../../components/WhyExplainer';
+import { RuleLabelQuote } from '../../components/RuleLabelQuote';
+import { takeLabelRuleDraft } from '../../lib/labelRuleDraft';
+import { readableDate } from '../../lib/medicineLabel';
 import { RuleSeverityTag } from '../../components/RuleSeverityTag';
 import { colors } from '../../constants/colors';
 import {
@@ -4316,12 +4320,39 @@ function MyMedsView({
   // The rule being changed, or null for a new one.
   const [editingRuleId, setEditingRuleId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  // The FDA label sentence a new rule was started from (A11c), kept word for
+  // word beside whatever the person writes. Null for a rule started blank.
+  const [formLabel, setFormLabel] = useState<PersonalRuleLabel | null>(null);
 
   const treatmentOptions = useMemo(
     () => treatments.map((treatment) => ({ label: treatment.name, value: treatment.id })),
     [treatments],
   );
   const treatmentById = useMemo(() => new Map(treatments.map((treatment) => [treatment.id, treatment])), [treatments]);
+
+  // A rule started from a sentence on a label screen: the sentence filled in
+  // word for word, the label named and the med it was opened from chosen.
+  // Taken once, on focus, so the module state is never read during render.
+  useFocusEffect(
+    useCallback(() => {
+      const draft = takeLabelRuleDraft();
+      if (!draft) return;
+      setEditingRuleId(null);
+      setFormDescription(draft.sentence);
+      setFormSource('self');
+      setFormFoodKeyword('');
+      setFormLinkType(draft.treatmentId ? 'treatment' : 'none');
+      setFormTreatmentId(draft.treatmentId);
+      setFormLabel({
+        setId: draft.setId,
+        version: draft.version,
+        date: draft.date,
+        name: draft.labelName,
+        sentence: draft.sentence,
+      });
+      setFormOpen(true);
+    }, []),
+  );
 
   function resetRuleForm() {
     setFormDescription('');
@@ -4330,9 +4361,11 @@ function MyMedsView({
     setFormFoodKeyword('');
     setFormTreatmentId(null);
     setEditingRuleId(null);
+    setFormLabel(null);
   }
 
   function startChangeRule(rule: PersonalRule) {
+    setFormLabel(rule.label);
     setEditingRuleId(rule.id);
     setFormDescription(rule.description);
     setFormSource(rule.source);
@@ -4371,7 +4404,7 @@ function MyMedsView({
     setSaving(true);
     try {
       if (editingRuleId) await updatePersonalRule(editingRuleId, input);
-      else await createPersonalRule(input);
+      else await createPersonalRule({ ...input, label: formLabel });
     } catch (error) {
       setSaving(false);
       sayNotSaved(editingRuleId ? 'The change to this rule was not saved. Try again.' : 'The rule was not saved. Try again.', error);
@@ -4446,10 +4479,144 @@ function MyMedsView({
     );
   }
 
+  // A rule started from a label sentence opens at the top, where the
+  // person lands; every other rule form opens below the rule list.
+  const formAtTop = formOpen && formLabel !== null && editingRuleId === null;
+  const ruleForm = (
+    <View style={[styles.formCard, styles.rankSpaced, { borderColor: tabColor }]}>
+      <Text style={[styles.sectionLabel, { color: tabColor }]}>
+        {editingRuleId ? 'Change this rule: what did you notice, or what were you told?' : 'What did you notice, or what were you told?'}
+      </Text>
+      <View ref={walkMark.ref('meds.ruleText')} collapsable={false}>
+      <NotesInput
+        micColor={tabColor}
+        style={[styles.labInput, { minHeight: 72, textAlignVertical: 'top' }]}
+        value={formDescription}
+        onChangeText={setFormDescription}
+        placeholder="e.g. Dairy seems to bring on joint pain about half a day later"
+        placeholderTextColor={colors.textMuted}
+        multiline
+      />
+      </View>
+      {formLabel ? (
+        <View style={[styles.rankSpaced, { gap: 4 }]}>
+          {formDescription.trim() !== formLabel.sentence ? (
+            <Text style={styles.myMedsMessage} selectable>
+              {`“${formLabel.sentence}”`}
+            </Text>
+          ) : null}
+          <Text style={styles.myMedsCitation} selectable>
+            {formLabel.date
+              ? t('From the {label} label, version {version}, dated {date}. Set id {setId}.', {
+                  label: formLabel.name,
+                  version: formLabel.version,
+                  date: readableDate(formLabel.date),
+                  setId: formLabel.setId,
+                })
+              : t('From the {label} label, version {version}. Set id {setId}.', {
+                  label: formLabel.name,
+                  version: formLabel.version,
+                  setId: formLabel.setId,
+                })}
+          </Text>
+          <Text style={styles.myMedsCitation}>
+            Add when it applies to you, then save it as your rule. The label&apos;s sentence stays with the rule word for word, whatever you write above, and the app adds or rewords nothing.
+          </Text>
+        </View>
+      ) : null}
+
+      <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Where did this come from?</Text>
+      <View style={styles.pillWrap}>
+        {(['self', 'doctor'] as const).map((option) => (
+          <TouchableOpacity
+            ref={walkMark.ref('meds.source')}
+            key={option}
+            style={[styles.stagePill, formSource === option && styles.stagePillActive]}
+            onPress={() => setFormSource(option)}
+          >
+            <Text style={[styles.stagePillText, formSource === option && styles.stagePillTextActive]}>
+              {option === 'doctor' ? 'My doctor told me' : 'Something I noticed'}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Tie this to something specific? (optional)</Text>
+      <View style={styles.pillWrap}>
+        {(['none', 'food', 'treatment'] as const).map((option) => (
+          <TouchableOpacity
+            ref={walkMark.ref('meds.tie')}
+            key={option}
+            style={[styles.stagePill, formLinkType === option && styles.stagePillActive]}
+            onPress={() => setFormLinkType(option)}
+          >
+            <Text style={[styles.stagePillText, formLinkType === option && styles.stagePillTextActive]}>
+              {option === 'none' ? 'Nothing specific' : option === 'food' ? 'A food' : 'A medication'}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {formLinkType === 'food' ? (
+        <>
+          <Text style={[styles.sectionLabel, { color: tabColor }]}>What food or ingredient?</Text>
+          <AppTextInput
+            onVoiceResult={setFormFoodKeyword}
+            micColor={tabColor}
+            style={styles.labInput}
+            value={formFoodKeyword}
+            onChangeText={setFormFoodKeyword}
+            placeholder="e.g. dairy"
+            placeholderTextColor={colors.textMuted}
+          />
+          <Text style={[styles.myMedsCitation, styles.rankSpaced]}>Shown whenever something you&apos;ve logged today contains this word.</Text>
+        </>
+      ) : null}
+
+      {formLinkType === 'treatment' ? (
+        <>
+          <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Which one?</Text>
+          <PopoverSelect
+            options={treatmentOptions}
+            selected={formTreatmentId}
+            onSelect={setFormTreatmentId}
+            tabColor={tabColor}
+            searchable
+            placeholder="Pick a medication or supplement..."
+            minWidth={220}
+          />
+          <Text style={[styles.myMedsCitation, styles.rankSpaced]}>Shown only while this is marked active.</Text>
+        </>
+      ) : null}
+
+      <ThumbRow primary="last" style={styles.buttonRow}>
+        <TouchableOpacity
+          style={[styles.secondaryButton, { flex: 1 }]}
+          onPress={() => {
+            setFormOpen(false);
+            resetRuleForm();
+          }}
+        >
+          <Text style={styles.secondaryButtonText}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          ref={walkMark.ref('meds.saveRule')}
+          style={[styles.primaryButton, { flex: 1, opacity: saving ? 0.6 : 1 }]}
+          onPress={handleSaveRule}
+          disabled={saving}
+        >
+          <Text style={styles.primaryButtonText}>{saving ? 'Saving…' : editingRuleId ? 'Save Change' : 'Save Rule'}</Text>
+        </TouchableOpacity>
+      </ThumbRow>
+    </View>
+  );
+
   return (
     <>
       {infoAlertElement}
       {confirmElement}
+
+      {formAtTop ? ruleForm : null}
 
       {warnings.length > 0 ? (
         <View style={styles.rankSpaced}>
@@ -4461,6 +4628,7 @@ function MyMedsView({
               <Text style={styles.myMedsMessage}>{warning.message}</Text>
               <Text style={styles.myMedsCitation}>{warning.citation}</Text>
               <WhyExplainer title={warning.title} mechanism={warning.mechanism} onPress={showInfoAlert} />
+              <RuleLabelQuote ruleId={warning.ruleId} />
             </View>
           ))}
         </View>
@@ -4508,6 +4676,7 @@ function MyMedsView({
               <Text style={styles.myMedsMessage}>{rule.guidance}</Text>
               <Text style={styles.myMedsCitation}>{rule.citation}</Text>
               <WhyExplainer title={rule.title} mechanism={rule.mechanism} onPress={showInfoAlert} />
+              <RuleLabelQuote ruleId={rule.ruleId} />
             </View>
           ))}
         </View>
@@ -4540,6 +4709,21 @@ function MyMedsView({
                   : rule.linkType === 'treatment'
                     ? `tied to ${rule.linkLabel ?? 'a removed treatment'}`
                     : null;
+              const labelSummary = rule.label ? t('from the {label} label', { label: rule.label.name }) : null;
+              const labelDetail = rule.label
+                ? rule.label.date
+                  ? t('The {label} label, version {version}, dated {date}, says: “{sentence}”', {
+                      label: rule.label.name,
+                      version: rule.label.version,
+                      date: readableDate(rule.label.date),
+                      sentence: rule.label.sentence,
+                    })
+                  : t('The {label} label, version {version}, says: “{sentence}”', {
+                      label: rule.label.name,
+                      version: rule.label.version,
+                      sentence: rule.label.sentence,
+                    })
+                : null;
               return (
                 <View key={rule.id} style={[styles.rankRow, { opacity: rule.active ? 1 : 0.55 }]}>
                   <TouchableOpacity
@@ -4547,7 +4731,7 @@ function MyMedsView({
                     onPress={() =>
                       showInfoAlert(
                         rule.source === 'doctor' ? 'Your doctor told you this' : 'You noted this',
-                        linkSummary ? `${rule.description}\n\n${linkSummary}` : rule.description,
+                        [rule.description, linkSummary, labelDetail].filter(Boolean).join('\n\n'),
                       )
                     }
                   >
@@ -4558,6 +4742,7 @@ function MyMedsView({
                       {rule.active ? '' : 'Paused · '}
                       {rule.source === 'doctor' ? 'Your doctor told you this' : 'You noted this'}
                       {linkSummary ? ` · ${linkSummary}` : ''}
+                      {labelSummary ? ` · ${labelSummary}` : ''}
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity ref={walkMark.ref('meds.changeRule')} style={styles.rankActionButton} onPress={() => startChangeRule(rule)}>
@@ -4576,106 +4761,7 @@ function MyMedsView({
         )}
 
         {formOpen ? (
-          <View style={[styles.formCard, styles.rankSpaced, { borderColor: tabColor }]}>
-            <Text style={[styles.sectionLabel, { color: tabColor }]}>
-              {editingRuleId ? 'Change this rule: what did you notice, or what were you told?' : 'What did you notice, or what were you told?'}
-            </Text>
-            <View ref={walkMark.ref('meds.ruleText')} collapsable={false}>
-            <NotesInput
-              micColor={tabColor}
-              style={[styles.labInput, { minHeight: 72, textAlignVertical: 'top' }]}
-              value={formDescription}
-              onChangeText={setFormDescription}
-              placeholder="e.g. Dairy seems to bring on joint pain about half a day later"
-              placeholderTextColor={colors.textMuted}
-              multiline
-            />
-            </View>
-
-            <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Where did this come from?</Text>
-            <View style={styles.pillWrap}>
-              {(['self', 'doctor'] as const).map((option) => (
-                <TouchableOpacity
-                  ref={walkMark.ref('meds.source')}
-                  key={option}
-                  style={[styles.stagePill, formSource === option && styles.stagePillActive]}
-                  onPress={() => setFormSource(option)}
-                >
-                  <Text style={[styles.stagePillText, formSource === option && styles.stagePillTextActive]}>
-                    {option === 'doctor' ? 'My doctor told me' : 'Something I noticed'}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-
-            <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Tie this to something specific? (optional)</Text>
-            <View style={styles.pillWrap}>
-              {(['none', 'food', 'treatment'] as const).map((option) => (
-                <TouchableOpacity
-                  ref={walkMark.ref('meds.tie')}
-                  key={option}
-                  style={[styles.stagePill, formLinkType === option && styles.stagePillActive]}
-                  onPress={() => setFormLinkType(option)}
-                >
-                  <Text style={[styles.stagePillText, formLinkType === option && styles.stagePillTextActive]}>
-                    {option === 'none' ? 'Nothing specific' : option === 'food' ? 'A food' : 'A medication'}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-
-            {formLinkType === 'food' ? (
-              <>
-                <Text style={[styles.sectionLabel, { color: tabColor }]}>What food or ingredient?</Text>
-                <AppTextInput
-                  onVoiceResult={setFormFoodKeyword}
-                  micColor={tabColor}
-                  style={styles.labInput}
-                  value={formFoodKeyword}
-                  onChangeText={setFormFoodKeyword}
-                  placeholder="e.g. dairy"
-                  placeholderTextColor={colors.textMuted}
-                />
-                <Text style={[styles.myMedsCitation, styles.rankSpaced]}>Shown whenever something you&apos;ve logged today contains this word.</Text>
-              </>
-            ) : null}
-
-            {formLinkType === 'treatment' ? (
-              <>
-                <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Which one?</Text>
-                <PopoverSelect
-                  options={treatmentOptions}
-                  selected={formTreatmentId}
-                  onSelect={setFormTreatmentId}
-                  tabColor={tabColor}
-                  searchable
-                  placeholder="Pick a medication or supplement..."
-                  minWidth={220}
-                />
-                <Text style={[styles.myMedsCitation, styles.rankSpaced]}>Shown only while this is marked active.</Text>
-              </>
-            ) : null}
-
-            <ThumbRow primary="last" style={styles.buttonRow}>
-              <TouchableOpacity
-                style={[styles.secondaryButton, { flex: 1 }]}
-                onPress={() => {
-                  setFormOpen(false);
-                  resetRuleForm();
-                }}
-              >
-                <Text style={styles.secondaryButtonText}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                ref={walkMark.ref('meds.saveRule')}
-                style={[styles.primaryButton, { flex: 1, opacity: saving ? 0.6 : 1 }]}
-                onPress={handleSaveRule}
-                disabled={saving}
-              >
-                <Text style={styles.primaryButtonText}>{saving ? 'Saving…' : editingRuleId ? 'Save Change' : 'Save Rule'}</Text>
-              </TouchableOpacity>
-            </ThumbRow>
-          </View>
+          formAtTop ? null : ruleForm
         ) : (
           <TouchableOpacity
             ref={walkMark.ref('meds.addRule')}

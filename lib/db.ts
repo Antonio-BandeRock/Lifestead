@@ -11364,6 +11364,19 @@ async function runDatabaseInitialization() {
         await db.execAsync('ALTER TABLE todos ADD COLUMN due_time TEXT;');
       }
     }
+    // The FDA label a personal rule was started from (A11c, 1.0.91): the
+    // sentence the person picked, word for word, kept apart from the rule's
+    // description so their own wording can change while the label's stays
+    // as it was, with the label's set id, version, date and name. NULL on
+    // every rule not started from a label.
+    {
+      const columns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(personal_rules)');
+      for (const name of ['label_set_id', 'label_version', 'label_date', 'label_name', 'label_sentence']) {
+        if (!columns.some((existing) => existing.name === name)) {
+          await db.execAsync(`ALTER TABLE personal_rules ADD COLUMN ${name} TEXT;`);
+        }
+      }
+    }
     // The person's symptom names, loaded once so every label lookup finds
     // them (D3). lib/customCheckinTagsDb.ts reloads after each change.
     setCustomCheckinTags(await readCustomCheckinTags(db));
@@ -22137,11 +22150,45 @@ export type PersonalRule = {
   linkLabel: string | null;
   active: boolean;
   createdAt: string;
+  /** Set when the rule was started from a sentence on an FDA label (A11c). */
+  label: PersonalRuleLabel | null;
 };
+
+/** The FDA label sentence a personal rule was started from, word for word. */
+export type PersonalRuleLabel = {
+  setId: string;
+  version: string;
+  date: string | null;
+  name: string;
+  sentence: string;
+};
+
+type PersonalRuleRow = Omit<PersonalRule, 'active' | 'label'> & {
+  active: number;
+  labelSetId: string | null;
+  labelVersion: string | null;
+  labelDate: string | null;
+  labelName: string | null;
+  labelSentence: string | null;
+};
+
+function toPersonalRule(row: PersonalRuleRow): PersonalRule {
+  const { labelSetId, labelVersion, labelDate, labelName, labelSentence, ...rest } = row;
+  return {
+    ...rest,
+    active: row.active === 1,
+    label:
+      labelSetId && labelSentence
+        ? { setId: labelSetId, version: labelVersion ?? '', date: labelDate, name: labelName ?? '', sentence: labelSentence }
+        : null,
+  };
+}
 
 const PERSONAL_RULE_COLUMNS = `
   id, description, source, link_type AS linkType, link_value AS linkValue,
-  link_label AS linkLabel, active, created_at AS createdAt
+  link_label AS linkLabel, active, created_at AS createdAt,
+  label_set_id AS labelSetId, label_version AS labelVersion, label_date AS labelDate,
+  label_name AS labelName, label_sentence AS labelSentence
 `;
 
 // Unfiltered by default -- the "manage your rules" list needs to show a
@@ -22149,7 +22196,7 @@ const PERSONAL_RULE_COLUMNS = `
 // want what's currently checkable (lib/interactionRules.ts) pass true.
 export async function listPersonalRules(activeOnly = false): Promise<PersonalRule[]> {
   const db = await getDatabase();
-  const rows = await readOrClosed(() => db.getAllAsync<Omit<PersonalRule, 'active'> & { active: number }>(
+  const rows = await readOrClosed(() => db.getAllAsync<PersonalRuleRow>(
     `
       SELECT ${PERSONAL_RULE_COLUMNS}
       FROM personal_rules
@@ -22157,7 +22204,7 @@ export async function listPersonalRules(activeOnly = false): Promise<PersonalRul
       ORDER BY created_at DESC
     `,
   ), []);
-  return rows.map((row) => ({ ...row, active: row.active === 1 }));
+  return rows.map(toPersonalRule);
 }
 
 // The active rules for the warnings in lib/interactionRules.ts, read past a
@@ -22166,10 +22213,10 @@ export async function listPersonalRules(activeOnly = false): Promise<PersonalRul
 // Insights and in reports, goes through listPersonalRules and stays closed.
 export async function listPersonalRulesForWarnings(): Promise<PersonalRule[]> {
   const db = await getDatabase();
-  const rows = await db.getAllAsync<Omit<PersonalRule, 'active'> & { active: number }>(
+  const rows = await db.getAllAsync<PersonalRuleRow>(
     `/* vault:tool */ SELECT ${PERSONAL_RULE_COLUMNS} FROM personal_rules WHERE active = 1 ORDER BY created_at DESC`,
   );
-  return rows.map((row) => ({ ...row, active: row.active === 1 }));
+  return rows.map(toPersonalRule);
 }
 
 export async function createPersonalRule(input: {
@@ -22178,13 +22225,15 @@ export async function createPersonalRule(input: {
   linkType: 'none' | 'food' | 'treatment';
   linkValue?: string | null;
   linkLabel?: string | null;
+  label?: PersonalRuleLabel | null;
 }): Promise<string> {
   const db = await getDatabase();
   const id = `personal_rule_${Date.now()}`;
   await db.runAsync(
     `
-      INSERT INTO personal_rules (id, description, source, link_type, link_value, link_label, active)
-      VALUES (?, ?, ?, ?, ?, ?, 1)
+      INSERT INTO personal_rules (id, description, source, link_type, link_value, link_label, active,
+        label_set_id, label_version, label_date, label_name, label_sentence)
+      VALUES (?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?)
     `,
     id,
     input.description.trim(),
@@ -22192,6 +22241,11 @@ export async function createPersonalRule(input: {
     input.linkType,
     input.linkValue?.trim() || null,
     input.linkLabel?.trim() || null,
+    input.label?.setId ?? null,
+    input.label?.version ?? null,
+    input.label?.date ?? null,
+    input.label?.name ?? null,
+    input.label?.sentence ?? null,
   );
   return id;
 }

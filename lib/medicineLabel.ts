@@ -207,6 +207,7 @@ export const LABEL_SECTIONS: readonly [string, string][] = [
   ['boxed_warning', 'Boxed warning'],
   ['active_ingredient', 'Active ingredient'],
   ['purpose', 'Purpose'],
+  ['indications_and_usage', 'Indications and usage'],
   ['contraindications', 'Contraindications'],
   ['warnings_and_cautions', 'Warnings and precautions'],
   ['warnings', 'Warnings'],
@@ -217,12 +218,15 @@ export const LABEL_SECTIONS: readonly [string, string][] = [
   ['stop_use', 'Stop use and ask a doctor if'],
   ['pregnancy_or_breast_feeding', 'If pregnant or breast-feeding'],
   ['precautions', 'Precautions'],
+  ['geriatric_use', 'Geriatric use'],
   ['drug_interactions', 'Drug interactions'],
   ['dosage_and_administration', 'Dosage and administration'],
   ['directions', 'Directions'],
   ['information_for_patients', 'Information for patients'],
+  ['clinical_pharmacology', 'Clinical pharmacology'],
   ['spl_medguide', 'Medication guide'],
   ['spl_patient_package_insert', 'Patient information'],
+  ['spl_unclassified_section', 'Other text on the label'],
 ];
 
 function first(list: unknown): string | null {
@@ -323,9 +327,58 @@ export function matchLabels(ask: LookupAsk, results: unknown[], total: number): 
 }
 
 // ---------------------------------------------------------------------------
+// A section's sentences (A11c). A rule is started from one sentence the
+// person picks, so a section's text is cut into its sentences exactly as
+// printed: nothing is reworded, joined or dropped except the spaces between
+// them. A cut falls after . ! or ? (and any closing quote or bracket) when
+// a capital, a digit, a bullet or an opening bracket follows, never after
+// an abbreviation or a single initial.
+
+const NOT_A_SENTENCE_END = new Set(['e.g', 'i.e', 'approx', 'dr', 'mr', 'mrs', 'ms', 'no', 'vs', 'fig', 'inc', 'st', 'u.s', 'min', 'max']);
+
+export function labelSentences(text: string): string[] {
+  const sentences: string[] = [];
+  for (const paragraph of text.split(/\n+/)) {
+    let start = 0;
+    let i = 0;
+    while (i < paragraph.length) {
+      const ch = paragraph[i];
+      if (ch === '.' || ch === '!' || ch === '?') {
+        let end = i + 1;
+        while (end < paragraph.length && /["'”’)\]]/.test(paragraph[end])) end += 1;
+        let next = end;
+        while (next < paragraph.length && /\s/.test(paragraph[next])) next += 1;
+        const spaced = next > end;
+        const follows = paragraph[next];
+        const word = (paragraph.slice(start, i).match(/([A-Za-z.]+)$/)?.[1] ?? '').toLowerCase();
+        const abbreviation = ch === '.' && (NOT_A_SENTENCE_END.has(word) || /^[a-z]$/.test(word));
+        if (spaced && follows && /[A-Z0-9•(\[“"]/.test(follows) && !abbreviation) {
+          const sentence = paragraph.slice(start, end).trim();
+          if (sentence) sentences.push(sentence);
+          start = next;
+          i = next;
+          continue;
+        }
+      }
+      i += 1;
+    }
+    const rest = paragraph.slice(start).trim();
+    if (rest) sentences.push(rest);
+  }
+  return sentences;
+}
+
+/** The section text split around a quoted sentence, or null when the text no longer holds it word for word. */
+export function markSentence(text: string, sentence: string): { before: string; sentence: string; after: string } | null {
+  const at = sentence ? text.indexOf(sentence) : -1;
+  if (at < 0) return null;
+  return { before: text.slice(0, at), sentence, after: text.slice(at + sentence.length) };
+}
+
+// ---------------------------------------------------------------------------
 // Sentences
 
-function readableDate(iso: string | null): string {
+export function readableDate(iso: string | null): string {
   if (!iso) return 'an unknown date';
   const [y, m, d] = iso.slice(0, 10).split('-').map(Number);
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

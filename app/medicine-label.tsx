@@ -15,9 +15,19 @@
 // Opened from a med on Life > My Meds (treatmentId, treatmentName), the
 // label can be kept with that med and read offline; the kept copy changes
 // only when the person replaces it after Check for a Newer Version.
+//
+// Opened from a rule card's Open This Label (setId, ruleId; A11b), the
+// person has already picked the label, so that one set id is asked for and
+// shown at once, with the sentence the rule quotes marked in its section,
+// or a plain note when the current version no longer holds it word for word.
+//
+// Make a Rule from a Sentence (A11c) lists each open section's sentences;
+// the one tapped opens Insights > My Meds with the rule builder holding it
+// word for word, the label named and the med chosen. The person writes when
+// it applies and decides whether to save it; the app rewords nothing.
 import { Ionicons } from '@expo/vector-icons';
 import { CameraView, useCameraPermissions, type BarcodeScanningResult } from 'expo-camera';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
@@ -35,6 +45,9 @@ import {
   labelCaption,
   labelIdentity,
   labelName,
+  labelSentences,
+  markSentence,
+  readableDate,
   notADrugCodeMessage,
   notFoundMessage,
   pickPrompt,
@@ -46,9 +59,12 @@ import {
   type LabelDocument,
   type LookupAsk,
 } from '../lib/medicineLabel';
-import { getSavedLabel, removeSavedLabel, saveLabel, type SavedLabel } from '../lib/medicineLabelDb';
+import { findMedKeepingLabel, getSavedLabel, removeSavedLabel, saveLabel, type SavedLabel } from '../lib/medicineLabelDb';
 import { lookUpLabel } from '../lib/medicineLabelLookup';
 import { explainNotYet } from '../lib/notYet';
+import { t } from '../lib/i18n';
+import { leaveLabelRuleDraft } from '../lib/labelRuleDraft';
+import { labelSentenceForRule } from '../lib/ruleLabelSentences';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 const TAB = colors.tabLife;
@@ -68,9 +84,15 @@ type Found = { ask: LookupAsk; labels: LabelDocument[]; total: number; sent: str
 
 export default function MedicineLabelScreen() {
   const scrollPadding = useFloatingButtonScrollPadding();
-  const params = useLocalSearchParams<{ treatmentId?: string; treatmentName?: string }>();
+  const router = useRouter();
+  const params = useLocalSearchParams<{ treatmentId?: string; treatmentName?: string; setId?: string; ruleId?: string }>();
   const treatmentId = typeof params.treatmentId === 'string' && params.treatmentId ? params.treatmentId : null;
   const treatmentName = typeof params.treatmentName === 'string' ? params.treatmentName : '';
+  const askedSetId = typeof params.setId === 'string' && params.setId ? params.setId : null;
+  const quote = typeof params.ruleId === 'string' && params.ruleId ? labelSentenceForRule(params.ruleId) : null;
+  // The med a label opened from a rule card is kept with, if any.
+  const [keptBy, setKeptBy] = useState<{ treatmentId: string; name: string } | null>(null);
+  const [picking, setPicking] = useState(false);
 
   const [mode, setMode] = useState<'find' | 'scan'>('find');
   const [codeText, setCodeText] = useState('');
@@ -108,6 +130,63 @@ export default function MedicineLabelScreen() {
       cancelled = true;
     };
   }, [treatmentId]);
+
+  // Opened from a rule card: the person picked this exact label, so it is
+  // asked for by its set id and shown at once, the quoted section open.
+  const quotedSection = quote?.sectionKey ?? null;
+  useEffect(() => {
+    if (!askedSetId) return;
+    let cancelled = false;
+    setBusy(true);
+    lookUpLabel({ kind: 'setId', setId: askedSetId })
+      .then((outcome) => {
+        if (cancelled) return;
+        if (outcome.kind === 'unreachable') setMessage(unreachableMessage(outcome.status));
+        else if (outcome.kind === 'not_found') setMessage(notFoundMessage({ kind: 'setId', setId: askedSetId }));
+        else {
+          setOpen(new Set(quotedSection ? ['boxed_warning', quotedSection] : ['boxed_warning']));
+          setShown({
+            document: outcome.labels[0],
+            sent: outcome.sent,
+            retrievedAt: outcome.retrievedAt,
+            howFound: 'code',
+            isSavedCopy: false,
+          });
+        }
+      })
+      .catch((error) => {
+        if (!cancelled) setMessage(unreachableMessage(null));
+        console.error('[MedicineLabel] Failed to look up the label by set id', error);
+      })
+      .finally(() => {
+        if (!cancelled) setBusy(false);
+      });
+    findMedKeepingLabel(askedSetId)
+      .then((med) => {
+        if (!cancelled) setKeptBy(med);
+      })
+      .catch((error) => console.error('[MedicineLabel] Failed to read which med keeps this label', error));
+    return () => {
+      cancelled = true;
+    };
+  }, [askedSetId, quotedSection]);
+
+  // A sentence picked for a rule: the builder on Insights > My Meds opens
+  // with it word for word, the label named and the med chosen.
+  function startRuleFrom(sentence: string, doc: LabelDocument) {
+    const med = treatmentId ? { treatmentId, name: treatmentName } : keptBy;
+    leaveLabelRuleDraft({
+      sentence,
+      setId: doc.setId,
+      version: doc.version,
+      date: doc.effective,
+      labelName: labelName(doc),
+      treatmentId: med?.treatmentId ?? null,
+      treatmentName: med?.name ?? null,
+    });
+    setPicking(false);
+    router.navigate({ pathname: '/insights', params: { openInsightsLens: 'myMeds' } });
+  }
 
   useEffect(() => {
     if (mode === 'scan' && permission && !permission.granted && permission.canAskAgain) requestPermission();
@@ -308,6 +387,11 @@ export default function MedicineLabelScreen() {
 
   if (shown) {
     const doc = shown.document;
+    // The sentence a rule card quotes, marked when this label still holds it.
+    const ruleQuote = quote && quote.setId === doc.setId ? quote : null;
+    const quotedText = ruleQuote ? doc.sections.find((section) => section.key === ruleQuote.sectionKey)?.text : undefined;
+    const mark = ruleQuote && quotedText ? markSentence(quotedText, ruleQuote.sentence) : null;
+    const quotedHeading = ruleQuote ? (doc.sections.find((section) => section.key === ruleQuote.sectionKey)?.heading ?? ruleQuote.sectionKey) : '';
     return (
       <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.card}>
@@ -323,6 +407,45 @@ export default function MedicineLabelScreen() {
             <Text style={styles.secondaryButtonText}>Open This Label on DailyMed</Text>
           </TouchableOpacity>
         </View>
+
+        {ruleQuote ? (
+          <View style={styles.card}>
+            <Text style={styles.body}>
+              {mark
+                ? t('The sentence the rule quotes is marked below, under "{section}".', { section: quotedHeading })
+                : ruleQuote.version !== doc.version
+                  ? t('The rule quotes version {quoted}, dated {date}. This is version {current}, which no longer holds that sentence word for word, so nothing is marked.', {
+                      quoted: ruleQuote.version,
+                      date: readableDate(ruleQuote.effective),
+                      current: doc.version,
+                    })
+                  : t('This label does not hold the sentence the rule quotes word for word, so nothing is marked.')}
+            </Text>
+            {mark ? null : (
+              <Text style={styles.labelText} selectable>
+                {`“${ruleQuote.sentence}”`}
+              </Text>
+            )}
+          </View>
+        ) : null}
+
+        {doc.sections.length > 0 ? (
+          picking ? (
+            <View style={styles.card}>
+              <Text style={styles.body}>
+                Tap the sentence to start your rule with. It goes into a new rule on Insights, My Meds, word for word, with this label named. You add when it applies to you and decide whether to save it. Open a section to see its sentences.
+              </Text>
+              <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => setPicking(false)}>
+                <Text style={styles.secondaryButtonText}>Stop Picking a Sentence</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity style={[styles.inset, styles.secondaryButton]} activeOpacity={0.85} onPress={() => setPicking(true)}>
+              <Ionicons name="create-outline" size={18} color={colors.textPrimary} />
+              <Text style={styles.secondaryButtonText}>Make a Rule from a Sentence</Text>
+            </TouchableOpacity>
+          )
+        ) : null}
 
         {savedNote ? (
           <View style={styles.card}>
@@ -351,7 +474,27 @@ export default function MedicineLabelScreen() {
                   <Text style={[styles.sectionHeading, boxed ? styles.boxedHeading : null]}>{section.heading}</Text>
                   <Ionicons name={isOpen ? 'chevron-up' : 'chevron-down'} size={18} color={colors.textMuted} />
                 </TouchableOpacity>
-                {isOpen ? (
+                {isOpen && picking ? (
+                  labelSentences(section.text).map((sentence, index) => (
+                    <TouchableOpacity
+                      key={`${section.key}_${index}`}
+                      style={styles.sentenceRow}
+                      activeOpacity={0.8}
+                      onPress={() => startRuleFrom(sentence, doc)}
+                      accessibilityRole="button"
+                      accessibilityHint="Starts a rule with this sentence"
+                    >
+                      <Text style={styles.labelText}>{sentence}</Text>
+                      <Ionicons name="add-circle-outline" size={20} color={colors.primary} />
+                    </TouchableOpacity>
+                  ))
+                ) : isOpen && mark && ruleQuote?.sectionKey === section.key ? (
+                  <Text style={styles.labelText} selectable>
+                    {mark.before}
+                    <Text style={styles.markedText}>{mark.sentence}</Text>
+                    {mark.after}
+                  </Text>
+                ) : isOpen ? (
                   <Text style={styles.labelText} selectable>
                     {section.text}
                   </Text>
@@ -506,7 +649,17 @@ const styles = StyleSheet.create({
   foldRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
   sectionHeading: { ...typography.label, color: colors.textPrimary, flex: 1, ...textShadow },
   boxedHeading: { color: colors.danger },
-  labelText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  labelText: { ...typography.body, color: colors.textPrimary, flexShrink: 1, ...textShadow },
+  markedText: { fontWeight: '700', textDecorationLine: 'underline', textDecorationColor: colors.primary },
+  sentenceRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    gap: 10,
+    paddingVertical: 8,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+  },
   pickRow: {
     flexDirection: 'row',
     alignItems: 'center',

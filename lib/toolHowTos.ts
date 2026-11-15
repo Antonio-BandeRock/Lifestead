@@ -655,6 +655,7 @@ export type ToolMark =
   | 'meds.pause'
   | 'meds.changeRule'
   | 'meds.ruleText'
+  | 'meds.labelQuote'
   | 'meds.saveRule'
   | 'meds.source'
   | 'meds.tie'
@@ -1031,6 +1032,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Scan the barcode on the box, type the code from the pharmacy label, or type the name of the medicine.' },
       ],
       forYou: 'You can read the printed label of a medicine without the box in your hand.',
+    },
+    {
+      key: 'ruleFromLabel',
+      title: 'Start a rule from a sentence on the label',
+      steps: [
+        { say: 'Tap Look up a label and open the label.', mark: 'myMeds.label' },
+        { say: 'Tap Make a Rule from a Sentence, open a section, and tap the sentence to start with.' },
+        { say: 'Insights, My Meds opens with the sentence in a new rule, word for word, and this med chosen. Add when it applies to you, then tap Save Rule.' },
+      ],
+      forYou: 'The rule is yours: you decide when it applies and whether to keep it. The label, its version and date stay with it, and the app rewords nothing.',
     },
     {
       key: 'details',
@@ -6060,6 +6071,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Read Worth knowing for reference that does not apply to today.' },
       ],
       forYou: 'Timing between your medicines, supplements and what you logged today. The prescription itself stays your prescriber’s.',
+    },
+    {
+      key: 'labelQuote',
+      title: 'Read what the FDA label says about a rule',
+      steps: [
+        { say: 'Under a rule in Things to check, tap What the FDA Label Says.', mark: 'meds.labelQuote' },
+        { say: 'Read the sentence, word for word, with the label, its version and date under it.' },
+        { say: 'Tap Open This Label to read the whole label with that sentence marked.' },
+      ],
+      forYou: 'The rule rests on its citation; the label is one maker’s wording on the same subject. A rule whose label says nothing on the subject shows no sentence.',
     },
     {
       key: 'add',

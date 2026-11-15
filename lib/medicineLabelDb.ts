@@ -76,6 +76,23 @@ export async function saveLabel(label: SavedLabel): Promise<void> {
   );
 }
 
+/**
+ * The med a label with this set id is kept with, for a label opened from a
+ * rule card rather than from a med: a rule started from one of its
+ * sentences is then tied to that med. Null when no med keeps it.
+ */
+export async function findMedKeepingLabel(setId: string): Promise<{ treatmentId: string; name: string } | null> {
+  const db = await getDatabase();
+  const row = await db.getFirstAsync<{ id: string; name: string }>(
+    `SELECT t.id AS id, t.name AS name
+       FROM medicine_labels m JOIN treatments t ON t.id = m.treatment_id
+      WHERE m.set_id = ?
+      ORDER BY t.name COLLATE NOCASE`,
+    setId,
+  );
+  return row ? { treatmentId: row.id, name: row.name } : null;
+}
+
 export async function removeSavedLabel(treatmentId: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM medicine_labels WHERE treatment_id = ?', treatmentId);

@@ -142,12 +142,12 @@
 ### A11b. The label sentence behind each drug rule
 - **Ships by:** Over the air (JS) · **Size:** S-M · **Tabs:** Life,Insights
 - **Answers:** Drugs.com · **Theme:** Medication logistics
-- **How:** Each of the 44 curated interaction rules that names a prescription drug carries the exact sentence from that drug's FDA label it rests on, with the label's set id and version, shown on the rule card and opening the label screen from A11. Follow-up to A11, not started.
+- **How:** Each of the 35 curated interaction rules that names a prescription drug carries the exact sentence from that drug's FDA label on the rule's subject, with the label's set id, version and date, shown folded under the rule's Why? on every card that renders a curated rule (Life and Insights My Meds, Schedules Meds and Today's Meals) with a button that opens the label screen from A11 with the sentence marked. Shipped 1.0.90.14: 31 rules carry a sentence; the 4 whose labels say nothing on the subject are listed with why and show nothing (lib/ruleLabelSentences.ts, components/RuleLabelQuote.tsx, scripts/test_rule_label_sentences.js). The sentence is shown as what the label says, never as the rule's source; the rule rests on its citation. The count was 44 when written; 35 rules name a prescription.
 
 ### A11c. Make my own rule from a label sentence
 - **Ships by:** Over the air (JS) · **Size:** S-M · **Tabs:** Life,Schedules
 - **Answers:** (your question) · **Theme:** Medication logistics
-- **How:** On a label opened through A11, the person picks a sentence and the app opens the personal rule builder with that sentence filled in word for word, the label named with its set id, version and date, and the linked med chosen. The person decides the timing and whether to keep it; the rule is labelled as theirs, never as the app's. Nothing is suggested or reworded by the app. Added 2026-09-26 after the liability discussion.
+- **How:** On a label opened through A11, the person picks a sentence and the app opens the personal rule builder with that sentence filled in word for word, the label named with its set id, version and date, and the linked med chosen. The person decides the timing and whether to keep it; the rule is labelled as theirs, never as the app's. Nothing is suggested or reworded by the app. Added 2026-09-26 after the liability discussion. Shipped 1.0.90.14: Make a Rule from a Sentence on the label screen lists each open section's sentences (labelSentences in lib/medicineLabel.ts); a tap leaves a draft (lib/labelRuleDraft.ts) and Insights, My Meds opens the rule form at the top with the sentence, the label's set id, version and date, and the med the label is kept with. The label is kept in separate columns on personal_rules (additive), apart from the person's words, and shows on the rule.
 
 ### A12. Doses taken, said in words
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Trends,Reports

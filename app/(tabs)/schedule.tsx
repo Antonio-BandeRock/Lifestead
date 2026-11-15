@@ -278,6 +278,7 @@ import { RecordPhotos } from '../../components/RecordPhotos';
 import { AttachedFiles } from '../../components/AttachedFiles';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { WhyExplainer } from '../../components/WhyExplainer';
+import { RuleLabelQuote } from '../../components/RuleLabelQuote';
 import { RuleSeverityTag } from '../../components/RuleSeverityTag';
 import { colors } from '../../constants/colors';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
@@ -4926,6 +4927,7 @@ function TodaysMealsLens() {
                   <Text style={styles.interactionMessage}>{note.detail}</Text>
                   {note.citation ? <Text style={styles.interactionCitation}>{note.citation}</Text> : null}
                   <WhyExplainer title={note.headline} mechanism={note.mechanism} onPress={showInfoAlert} />
+                  <RuleLabelQuote ruleId={note.ruleId} />
                 </View>
               ))
             )}
@@ -6183,6 +6185,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
                     <Text style={styles.interactionMessage}>{warning.message}</Text>
                     <Text style={styles.interactionCitation}>{warning.citation}</Text>
                     <WhyExplainer title={warning.title} mechanism={warning.mechanism} onPress={showInfoAlert} />
+                    <RuleLabelQuote ruleId={warning.ruleId} />
                   </View>
                 ))}
               </View>
@@ -6205,6 +6208,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
                     <Text style={styles.interactionMessage}>{rule.guidance}</Text>
                     <Text style={styles.interactionCitation}>{rule.citation}</Text>
                     <WhyExplainer title={rule.title} mechanism={rule.mechanism} onPress={showInfoAlert} />
+                    <RuleLabelQuote ruleId={rule.ruleId} />
                   </View>
                 ))}
               </View>
@@ -6912,6 +6916,7 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
                   <Text style={styles.interactionMessage}>{warning.message}</Text>
                   <Text style={styles.interactionCitation}>{warning.citation}</Text>
                   <WhyExplainer title={warning.title} mechanism={warning.mechanism} onPress={showInfoAlert} />
+                  <RuleLabelQuote ruleId={warning.ruleId} />
                 </View>
               ))}
             </View>
