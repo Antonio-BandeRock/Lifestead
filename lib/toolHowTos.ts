@@ -6176,7 +6176,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
   }),
   '/reports#r-doctor': reportHowTos({
     name: 'the report for your doctor',
-    holds: 'Built for an appointment: what changed since the last visit, symptoms, doses as scheduled and as marked, meds with the interaction notes that touch them, body readings and recent labs. Food detail is left to the Nutritionist report.',
+    holds: 'Built for an appointment: what changed since the last visit, symptoms, doses as scheduled and as marked, meds with the interaction notes that touch them, body readings, bowel movements, nights, the cycle, therapy sessions, your trackers, recent labs and every lab result in the range. Food detail is left to the Nutritionist report.',
     rangeNote: 'Once an appointment has happened, Since last visit appears among the range pills.',
   }),
   '/reports#r-nutrition': reportHowTos({
@@ -6185,7 +6185,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
   }),
   '/reports#r-trainer': reportHowTos({
     name: 'the report for a trainer',
-    holds: 'Steps and sleep, weight and blood pressure, heart readings, hydration, nights up and how work weeks went. Conditions, medicines and symptoms are left out on purpose.',
+    holds: 'Steps and sleep, weight and blood pressure, heart readings, hydration, nights up, workouts and pacing. Conditions, medicines and symptoms are left out on purpose.',
   }),
   '/reports#r-month': reportHowTos({
     name: 'a look back',
@@ -6214,6 +6214,62 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
   '/reports#r-variety': reportHowTos({
     name: 'the eating variety report',
     holds: 'Different foods and plants week by week, the meals and foods that came back most, food groups not logged at all, and where meals came from. A meal that comes back often is counted, not judged.',
+  }),
+  '/reports#r-meds': reportHowTos({
+    name: 'the medication list',
+    holds: 'A list to hand over at a pharmacy, a new clinic or a hospital: your conditions, every active medicine and supplement with its dose, drug and food allergies, the interaction notes for these meds, and the emergency card. It is what is true on the day it is made.',
+  }),
+  '/reports#r-labs': reportHowTos({
+    name: 'the lab history',
+    holds: 'The newest result for each test, then every result in the range grouped by test with the oldest first, each beside the range your lab printed.',
+  }),
+  '/reports#r-bp': reportHowTos({
+    name: 'the blood pressure log',
+    holds: 'How blood pressure ran over the range, then every reading with the time it was taken and the pulse, the way a clinician often asks to see a home log.',
+  }),
+  '/reports#r-gut': reportHowTos({
+    name: 'the gut and digestion report',
+    holds: 'Bowel movements in brief and one by one, after-meal reactions, every microbiome test entered, ferments, and eating variety in brief.',
+  }),
+  '/reports#r-cycle': reportHowTos({
+    name: 'the cycle report',
+    holds: 'Cycle days and lengths as Trends reads them, with symptoms and flares over the same range.',
+  }),
+  '/reports#r-therapy': reportHowTos({
+    name: 'the report for a physio or chiropractor',
+    holds: 'Symptoms and flares, every hands-on session with its practitioner and focus, how the days after a session went beside your other days, and pacing.',
+  }),
+  '/reports#r-trackers': reportHowTos({
+    name: 'the trackers report',
+    holds: 'Each tracker you made, how often it was logged in the range, and every entry with its value.',
+  }),
+  '/reports#r-finances': reportHowTos({
+    name: 'the household money report',
+    holds: 'Where household money stands now, then every entry in and out over the range with its category and the totals each way. Repeating bills are not guessed into it.',
+  }),
+  '/reports#r-upkeep': reportHowTos({
+    name: 'the home upkeep report',
+    holds: 'Every active upkeep item with when it was last done, when it is next due and what it costs, then what was marked done in the range.',
+  }),
+  '/reports#r-meals': reportHowTos({
+    name: 'the meals and shopping report',
+    holds: 'Meals scheduled for the coming week, planned meals against what was eaten over the range, and the open grocery list by aisle.',
+  }),
+  '/reports#r-kitchen': reportHowTos({
+    name: 'the kitchen report',
+    holds: 'The kitchen in brief, then every food on hand with how much is left, where it is kept and when it came in.',
+  }),
+  '/reports#r-keeping': reportHowTos({
+    name: 'the keeping up report',
+    holds: 'Did I Do It checks, routines started and finished, and things captured and sorted over the range. Nothing in it scores anybody.',
+  }),
+  '/reports#r-interests': reportHowTos({
+    name: 'the interests and projects report',
+    holds: 'Every interest with its stages, time given to interests in the range, every project with its steps done, and how many Learn cards were answered.',
+  }),
+  '/reports#r-work': reportHowTos({
+    name: 'the work report',
+    holds: 'The work check-ins over the range and every project kept under work with its steps done.',
   }),
 };
 

@@ -414,7 +414,8 @@ run('i-garden empty', I.buildGardenView, { today, plantings: [], onHand: [], wee
 
 // Reports
 const CORE = ['glance', 'conditions', 'nutrients', 'flags', 'diary', 'symptoms', 'noticed', 'meds', 'movement', 'body', 'heart', 'rules', 'labs'];
-check(R.REPORT_KINDS.length === 9, 'nine reports');
+check(R.REPORT_KINDS.length === 23, 'twenty-three reports');
+check(R.REPORT_KINDS.every((def) => R.REPORT_GROUPS.includes(def.group)), 'every report sits in one of the menu groups');
 check(R.REPORT_KINDS[0].key === 'overview', 'the Overview comes first');
 // The diary (K9) is the Nutritionist's alone: a row a day would bury the
 // Overview's summary.

@@ -26,7 +26,7 @@ import { useAutoOpenLensHubSignal } from '../../hooks/useAutoOpenLensHubSignal';
 import { buildReport, renderReportText, type ReportDocument } from '../../lib/reportGenerator';
 import { againRange, type ReportHistoryEntry, type ReportSentHow } from '../../lib/reportHistory';
 import { listReportHistory, recordReportSent } from '../../lib/reportHistoryDb';
-import { cleanLeftOut, REPORT_KINDS, type ReportKind, type ReportSectionId } from '../../lib/reportKinds';
+import { cleanLeftOut, REPORT_GROUPS, REPORT_KINDS, type ReportKind, type ReportSectionId } from '../../lib/reportKinds';
 import { getReportLeftOut, setReportLeftOut } from '../../lib/reportSectionsDb';
 import { exportReportAsPdf, printReport } from '../../lib/reportPdf';
 import { confirmItsYou } from '../../lib/freshAuth';
@@ -38,21 +38,21 @@ import { LensFeedersRow } from '../../components/LensFeedersRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import { VAULT_CATEGORIES } from '../../lib/vault';
 import { useOnVaultChange } from '../../lib/vaultReads';
-import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
+import { BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
 
 const TAB_COLOR = colors.tabReports;
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
 
-// Eight reports since 1.0.52.7: the Overview plus the seven marked Build on
-// the inputs-to-outputs map, each a different reader's view over the same
-// records. What each one holds is defined in lib/reportKinds.ts; this
+// The Overview plus one report per reader and per subject the app keeps
+// records for (22 since 1.0.90.4), each a different view over the same
+// records, grouped in the menu the way Trends groups its lenses. What each one holds is defined in lib/reportKinds.ts; this
 // screen only picks one and shows it.
 type ReportsLens = ReportKind;
 
 const REPORTS_HELP_SECTIONS: HelpSection[] = [
   {
     heading: 'What this page does',
-    body: 'Pulls what was logged over a date range into one plain, readable report. The Overview holds everything; the other reports are each put together for one reader (a doctor, a nutritionist, a trainer, a caregiver) or one subject (a look back over the range, medical costs, the garden), and leave out what that reader does not need.',
+    body: 'Pulls what was logged over a date range into one plain, readable report. The Overview holds everything; the other reports are each put together for one reader (a doctor, a nutritionist, a trainer, a therapist, a caregiver) or one subject (a medication list, lab history, blood pressure, the gut, the cycle, trackers, money, upkeep, meals and shopping, the kitchen, the garden, keeping up, interests, work, a look back over the range), and leave out what that reader does not need.',
   },
   {
     heading: 'Privacy',
@@ -76,12 +76,28 @@ const REPORTS_HELP_SECTIONS: HelpSection[] = [
   },
 ];
 
-const REPORTS_LENSES: LensOption<ReportsLens>[] = REPORT_KINDS.map((def) => ({
-  key: def.key,
-  label: def.label,
-  icon: def.icon as LensOption<ReportsLens>['icon'],
-  help: [{ heading: 'What this report holds', body: def.help }, ...REPORTS_HELP_SECTIONS.slice(1)],
-}));
+const REPORTS_LENSES: LensOption<ReportsLens>[] = REPORT_GROUPS.flatMap((group) =>
+  REPORT_KINDS.filter((def) => def.group === group).map((def) => ({
+    key: def.key,
+    label: def.label,
+    icon: def.icon as LensOption<ReportsLens>['icon'],
+    group,
+    help: [{ heading: 'What this report holds', body: def.help }, ...REPORTS_HELP_SECTIONS.slice(1)],
+  })),
+);
+
+// Home and Your Guide name a range the way the pills do. 'visit' falls back
+// to a month further down when there is no visit yet.
+const OPENABLE_RANGES = ['7', '30', '90', '6m', '1y', 'visit', 'custom'] as const;
+type OpenableRange = (typeof OPENABLE_RANGES)[number];
+function openableRange(value: string | undefined): OpenableRange | null {
+  return OPENABLE_RANGES.find((range) => range === value) ?? null;
+}
+
+// A report built from a whole range of records reads like a look back at
+// meals and plants; the line naming a missing week of meals belongs only on
+// those, never on a medication list or a money report.
+const MEALS_WEEK_REPORTS = new Set<ReportsLens>(['overview', 'r-nutrition', 'r-month', 'r-variety']);
 
 const DAY_RANGE_OPTIONS = [
   { value: 7, label: '7d' },
@@ -205,10 +221,13 @@ export default function ReportsScreen() {
     useCallback(() => {
       const requestedLens = REPORT_KINDS.find((def) => def.key === openReportsLens);
       if (requestedLens) setLens(requestedLens.key);
-      if (openReportDays === '7' || openReportDays === '30' || openReportDays === '90') {
-        setRange(Number(openReportDays) as 7 | 30 | 90);
+      const requestedRange = openableRange(openReportDays);
+      if (requestedRange === '7' || requestedRange === '30' || requestedRange === '90') {
+        setRange(Number(requestedRange) as 7 | 30 | 90);
+      } else if (requestedRange) {
+        setRange(requestedRange);
       }
-      if (requestedLens || openReportDays === '7' || openReportDays === '30' || openReportDays === '90') {
+      if (requestedLens || requestedRange) {
         setRevealed(true);
         return;
       }
@@ -347,6 +366,9 @@ export default function ReportsScreen() {
 
   async function handleShareText() {
     if (!reportText) return;
+    // The text holds the same health records as the PDF and the printed
+    // page, so it asks the same question before it leaves the phone.
+    if (!(await confirmItsYou('Before the report is shared'))) return;
     try {
       const outcome = await Share.share({ message: reportText });
       // Your Story's "Make a report" item holds once a report has left the
@@ -492,7 +514,7 @@ export default function ReportsScreen() {
             {/* While meals are logged on fewer than seven days, most sections
                 below will say there is nothing in range; this names why and
                 where it fits, and disappears once the week is there. */}
-            {!loading && !loadError ? <YourStoryMissingLine itemKey="trends" standaloneColor={TAB_COLOR} /> : null}
+            {!loading && !loadError && MEALS_WEEK_REPORTS.has(lens) ? <YourStoryMissingLine itemKey="trends" standaloneColor={TAB_COLOR} /> : null}
 
             {leftOutFor === lens ? (
               <View style={band.box}>
@@ -503,7 +525,12 @@ export default function ReportsScreen() {
             {loading ? (
               <View style={band.boxMuted}><Text style={styles.loadingText}>Putting your report together…</Text></View>
             ) : loadError ? (
-              <View style={band.boxMuted}><Text style={styles.loadingText}>The report could not be built. {loadError}</Text></View>
+              <View style={band.boxMuted}>
+                <Text style={styles.loadingText}>This report could not be put together just now. Nothing you recorded is lost, and trying again usually works.</Text>
+                <TouchableOpacity style={styles.retryButton} onPress={() => load(days, lens, leftOutKey ? leftOutKey.split('|') : [])}>
+                  <Text style={BUTTON_SECONDARY_TEXT}>Try again</Text>
+                </TouchableOpacity>
+              </View>
             ) : (
               <View style={band.box}>
                 <Text style={styles.reportText}>{reportText}</Text>
@@ -554,6 +581,7 @@ export default function ReportsScreen() {
       <LensHub
         pageTitle="Reports"
         options={REPORTS_LENSES}
+        recentKey="Reports"
         selected={revealed ? lens : undefined}
         columns={3}
         autoOpenSignal={autoOpenLensHub}
@@ -573,6 +601,7 @@ const styles = StyleSheet.create({
   // (components/TabBand.tsx), spaced by the one standing band gap.
   content: { paddingBottom: 32, gap: HOME_BAND_ACCENT_WIDTH },
   loadingText: { ...typography.body, color: colors.textSecondary, ...textShadow },
+  retryButton: { ...BUTTON_SECONDARY_COMPACT, alignSelf: 'flex-start', marginTop: 10 },
 
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   customLabel: { ...typography.bodyEmphasis, color: colors.textPrimary, marginBottom: 8, ...textShadow },

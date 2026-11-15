@@ -417,7 +417,7 @@
     <h1>What is inside Lifestead, and how it is put together</h1>
     <p class="dek">Lifestead is an everything-about-a-person's-life app, tagline "Everything in your life has a place." It started with, and runs deepest on, food and autoimmune health: 19 tracked conditions, each a target for the same depth, alone or combined. It is also for somebody who needs an outside place to hold the details of daily living so they stop taking up room in their head, through Life, Schedules, reminders and capture. Garden, budget, family, interests, learning and the body are all in scope.</p>
     <p class="dek">Its job in food and health is finding the personal patterns between what someone eats and how their body responds, and doing that work for the person. Records stay on the person's devices, and no company server holds them.</p>
-    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-15 (1.0.90.3).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
+    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-15 (1.0.90.4).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
     <div class="stats">
       <div class="stat"><span class="n">16,140</span><span class="l">whole foods shown from the reference database</span></div>
       <div class="stat"><span class="n">10</span><span class="l">data sources (9 national tables plus a Derived set)</span></div>
@@ -440,7 +440,7 @@
       </div>
       <div class="plaincard">
         <h4>LensHub</h4>
-        <p>Most tabs (Life, Food, Garden, Interests, Schedules, Signals, Insights, Trends, Reports) have their own internal "lenses": sub-views reached through a second, page-local popup menu rather than a wall of sub-tabs. Picking a tab from TabHub opens the tab itself, and the box in the lower corner names the button to tap for its lenses. The longest lens menus, on Life and Trends, are grouped under plain headings (on Life: Day to day, Health, Money and work, Reading; on Trends: Food and drink, Body and health, Moving, Home, garden and money, Looking across everything), and on Trends the lenses with nothing recorded yet fold into one line with their count. Life, Insights and Trends show the lenses opened lately in a row at the top.</p>
+        <p>Most tabs (Life, Food, Garden, Interests, Schedules, Signals, Insights, Trends, Reports) have their own internal "lenses": sub-views reached through a second, page-local popup menu rather than a wall of sub-tabs. Picking a tab from TabHub opens the tab itself, and the box in the lower corner names the button to tap for its lenses. The longest lens menus, on Life and Trends, are grouped under plain headings (on Life: Day to day, Health, Money and work, Reading; on Trends: Food and drink, Body and health, Moving, Home, garden and money, Looking across everything; on Reports: For someone else, Health records, Food and home, Money, Life and time), and on Trends the lenses with nothing recorded yet fold into one line with their count. Life, Insights, Trends and Reports show the lenses opened lately in a row at the top.</p>
       </div>
       <div class="plaincard">
         <h4>The edge tabs</h4>
@@ -861,26 +861,58 @@
 
   <section id="reports">
     <h2><span class="dot" style="background:var(--reports)"></span>Reports</h2>
-    <p class="section-dek">Eight reports, each a different reader's view over the same records, over the last 7, 30 or 90 days. Each reads on screen and saves or shares as a laid-out PDF, made on the device.</p>
+    <p class="section-dek">Twenty-three reports, each a different reader's view or one subject over the same records, grouped in the lens menu under For someone else, Health records, Food and home, Money, and Life and time. The range is the last 7, 30 or 90 days, six months, a year, since the last visit, or a start date you pick. Each reads on screen and saves or shares as a laid-out PDF, made on the device.</p>
     <div class="tabcard" style="border-left-color: var(--reports)">
-      <div class="tabcard-head"><h3>The nine reports</h3><span class="status-pill status-built">Built</span></div>
-      <ul>
-        <li><strong>Overview</strong>: everything logged over the range, in one report</li>
-        <li><strong>For Your Doctor</strong>: symptoms, blood pressure, doses, medicines, labs and what changed since the last visit</li>
-        <li><strong>For a Nutritionist</strong>: nutrients, hydration, planned and eaten meals, and reactions after meals</li>
-        <li><strong>For a Trainer</strong>: movement, sleep, weight, blood pressure and hydration, with health details left out</li>
-        <li><strong>For a Caregiver</strong>: what is on today, doses, appointments, and the conditions and medicines behind them</li>
-        <li><strong>Looking Back</strong>: how the range went across every part of life recorded, including what it cost</li>
-        <li><strong>Medical Costs</strong>: medical bills, where the insurance plan stands, and what the conditions cost</li>
-        <li><strong>Garden Record</strong>: harvests, how long each grow took, compost and what was shared</li>
-      </ul>
-      <p style="margin-top:10px;">What each report holds is defined in one place (<code>lib/reportKinds.ts</code>), and a report never gathers a section it leaves out, so the Trainer report does not wait on a nutrient pass it will not show.</p>
-    </div>
-  <div class="tabcard" style="border-left-color: var(--reports)">
-      <div class="tabcard-head"><h3>Also here</h3><span class="status-pill status-built">Built</span></div>
+      <div class="tabcard-head"><h3>For someone else</h3><span class="status-pill status-built">Built</span></div>
       <ul class="lenslist">
-        <li><strong>Eating Variety</strong>: A report on how varied the eating has been over the chosen days.</li>
+        <li><strong>Overview</strong>: everything logged over the range, in one report</li>
+        <li><strong>For Your Doctor</strong>: what changed since the last visit, symptoms, doses, medicines with their interaction notes, body readings, bowel movements, nights, the cycle, therapy sessions, the trackers you made, recent labs and every lab result in the range</li>
+        <li><strong>For a Nutritionist</strong>: nutrients, hydration, planned and eaten meals, and reactions after meals</li>
+        <li><strong>For a Trainer</strong>: movement, sleep, weight, blood pressure, heart readings, hydration, workouts and pacing, with health details left out</li>
+        <li><strong>For a Caregiver</strong>: what is on today, doses, appointments, and the conditions and medicines behind them</li>
+        <li><strong>For a Therapist</strong>: for a physio, chiropractor or massage therapist: symptoms, every hands-on session, how the days after a session went, and pacing</li>
       </ul>
+    </div>
+    <div class="tabcard" style="border-left-color: var(--reports)">
+      <div class="tabcard-head"><h3>Health records</h3><span class="status-pill status-built">Built</span></div>
+      <ul class="lenslist">
+        <li><strong>Medication List</strong>: every medicine and supplement taken now, allergies, interaction notes and the emergency card, to hand over at a pharmacy, clinic or hospital</li>
+        <li><strong>Lab History</strong>: the newest result for each test, then every result in the range grouped by test, beside the range the lab printed</li>
+        <li><strong>Blood Pressure Log</strong>: how blood pressure ran, then every reading with its time and pulse</li>
+        <li><strong>Gut and Digestion</strong>: bowel movements, after-meal reactions, microbiome tests, ferments and eating variety</li>
+        <li><strong>Cycle</strong>: the cycle beside the symptoms and flares logged</li>
+        <li><strong>My Trackers</strong>: every tracker you made, how often it was logged, and every entry</li>
+      </ul>
+    </div>
+    <div class="tabcard" style="border-left-color: var(--reports)">
+      <div class="tabcard-head"><h3>Food and home</h3><span class="status-pill status-built">Built</span></div>
+      <ul class="lenslist">
+        <li><strong>Garden Record</strong>: harvests, how long each grow took, compost and what was shared</li>
+        <li><strong>Eating Variety</strong>: different foods and plants week by week, the meals that came back most, and food groups not logged</li>
+        <li><strong>Meals and Shopping</strong>: the meals ahead, planned against eaten, and the open grocery list by aisle</li>
+        <li><strong>Kitchen on Hand</strong>: everything in the kitchen now, with how much is left and where it is kept</li>
+        <li><strong>Home Upkeep</strong>: everything kept up, when each is next due, and what was done in the range</li>
+      </ul>
+    </div>
+    <div class="tabcard" style="border-left-color: var(--reports)">
+      <div class="tabcard-head"><h3>Money</h3><span class="status-pill status-built">Built</span></div>
+      <ul class="lenslist">
+        <li><strong>Medical Costs</strong>: medical bills, where the insurance plan stands, and what the conditions cost</li>
+        <li><strong>Household Money</strong>: where money stands now, and every entry in and out over the range; repeating bills are never guessed into it</li>
+      </ul>
+    </div>
+    <div class="tabcard" style="border-left-color: var(--reports)">
+      <div class="tabcard-head"><h3>Life and time</h3><span class="status-pill status-built">Built</span></div>
+      <ul class="lenslist">
+        <li><strong>Looking Back</strong>: how the range went across every part of life recorded, including what it cost</li>
+        <li><strong>Keeping Up</strong>: checks, routines and things captured, counted and never scored; a week with nothing marked shows as a gap</li>
+        <li><strong>Interests and Projects</strong>: interests, time given to them, projects and Learn cards answered</li>
+        <li><strong>Work</strong>: how the work weeks went and the work projects kept</li>
+      </ul>
+    </div>
+    <div class="tabcard" style="border-left-color: var(--reports)">
+      <div class="tabcard-head"><h3>How every report behaves</h3><span class="status-pill status-built">Built</span></div>
+      <p>What each report holds is defined in one place (<code>lib/reportKinds.ts</code>), and a report never gathers a section it leaves out, so the Trainer report does not wait on a nutrient pass it will not show. A record kept in a closed vault is named as being in the vault rather than left out quietly, and a section that cannot be read says so rather than looking empty. Allergies and the emergency card are read whatever the vault says. Sharing the report as text asks the same question as the PDF before it leaves the device. If a report cannot be put together, it says that nothing recorded is lost and offers Try again.</p>
     </div>
   </section>
 

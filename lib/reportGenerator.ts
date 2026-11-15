@@ -62,6 +62,49 @@ import { orderedSteps, steppedResultLines, steppedStage } from './steppedReintro
 import { experimentsSection, flareMarksSection, noticedSection, NOTICED_WINDOW_HOURS, type ExperimentForReport } from './reportNoticed';
 import { readOrClosed } from './vaultReads';
 import { isCategoryClosed } from './vaultState';
+import type { VaultCategory } from './vault';
+import {
+  allergiesSection,
+  bloodPressureLogSection,
+  bowelSections,
+  emergencyCardSection,
+  groceryListSection,
+  interestTimeSection,
+  interestsSection,
+  keepingUpSections,
+  kitchenItemsSection,
+  labHistorySection,
+  learnSection,
+  mealsAheadSection,
+  medListSection,
+  microbiomeSection,
+  moneyEntriesSection,
+  projectsSection,
+  therapyResponseSection,
+  therapySessionsSection,
+  trackerSections,
+  upkeepDoneSection,
+  upkeepStandingSection,
+} from './reportMore';
+import { listBloodPressureReadings } from './trendsMoreDb';
+import { listBowelEntriesBetween } from './bowelDb';
+import { getTherapyResponseInputs, listFoodAllergies, listTherapySessions, listTodaysMealsWithRecipes } from './db';
+import { summarizeTherapyResponse, describeTherapyResponse } from './therapyResponse';
+import { therapyTypeLabel } from './therapyTypes';
+import { listCustomTrackers, listTrackerEntriesSince } from './customTrackersDb';
+import { listMicrobiomeTests } from './microbiomeDb';
+import { gatherFromApp, getEmergencyProfile, listEmergencyContacts } from './emergencyDb';
+import { buildEmergencyCard } from './emergency';
+import { listEntries } from './financeDb';
+import { listUpkeepItems, listUpkeepPlaces } from './upkeepDb';
+import { placeLabel, upkeepStanding } from './upkeep';
+import { getKeepingUpSummary } from './keepingUpDb';
+import { getActiveGroceryList, getGroceryListItems } from './groceryDb';
+import { listKitchenInventory } from './kitchenDb';
+import { listInterests } from './interestsDb';
+import { listProjectSteps, listProjects } from './projectsDb';
+import { listLearnReviews } from './learnDb';
+import { isRecalled } from './learnSchedule';
 
 // Same real, small nutrient set app/(tabs)/index.tsx (Home) and
 // app/(tabs)/trends.tsx both already use, duplicated here rather than
@@ -285,10 +328,14 @@ export async function buildReport(
   // Symptom/flare log -- real, chronological, everything actually logged
   // in the window, not just a count the way the 6-DFF section above is.
   if (want.has('symptoms')) {
+    // 1.0.90.4: 200 of each cut a long range short without saying so. The
+    // limit is now far past any range, and the note says if it was reached.
+    const SYMPTOM_LIMIT = 5000;
     const [flares, reactions] = await Promise.all([
-      listCheckins({ checkinType: 'flare', limit: 200 }),
-      listCheckins({ checkinType: 'post_meal', limit: 200 }),
+      listCheckins({ checkinType: 'flare', limit: SYMPTOM_LIMIT }),
+      listCheckins({ checkinType: 'post_meal', limit: SYMPTOM_LIMIT }),
     ]);
+    const symptomsCut = flares.length >= SYMPTOM_LIMIT || reactions.length >= SYMPTOM_LIMIT;
     const symptomEntries = [...flares, ...reactions]
       .filter((entry) => entry.loggedAt.slice(0, 10) >= rangeStart)
       .sort((a, b) => a.loggedAt.localeCompare(b.loggedAt));
@@ -314,7 +361,9 @@ export async function buildReport(
           },
         },
       ],
-      note: 'Every flare and after-meal reaction logged in the range, in order. Severity is as the person rated it at the time.',
+      note: symptomsCut
+        ? `The newest ${SYMPTOM_LIMIT} flares and ${SYMPTOM_LIMIT} after-meal reactions, so the start of this range may be missing. Severity is as the person rated it at the time.`
+        : 'Every flare and after-meal reaction logged in the range, in order. Severity is as the person rated it at the time.',
       columns: ['When', 'Kind', 'Severity', 'Food', 'Tags', 'Notes'],
       rows: symptomEntries.map((entry) => [
         entry.loggedAt.slice(0, 16).replace('T', ' '),
@@ -700,6 +749,22 @@ function varietyBrief(start: string, end: string): Promise<ReportSection[]> {
     .catch(() => [eatingVarietyBrief(null)]);
 }
 
+/** One section a vault category holds: said to be in the vault while it
+ *  is closed, and said to be unreadable rather than missing if a read fails. */
+async function guarded(category: VaultCategory | null, heading: string, read: () => Promise<ReportSection[]>): Promise<ReportSection[]> {
+  if (category && isCategoryClosed(category)) return [{ kind: 'list', heading, rows: [], empty: IN_THE_VAULT }];
+  try {
+    return await read();
+  } catch (error) {
+    console.warn(`[reports] ${heading} could not be read`, error);
+    return [{ kind: 'list', heading, rows: [], empty: 'Could not be read for this report.' }];
+  }
+}
+
+function daysFrom(start: string, count: number): string[] {
+  return Array.from({ length: count }, (_, i) => addDays(start, i));
+}
+
 // Each extra section a report can carry, started only when called, so a
 // report's extras list says which run and in what order, and a section
 // the person left out is never read at all (K10).
@@ -744,7 +809,153 @@ function extraSectionLoaders(days: number): Record<ExtraSectionId, () => Promise
     },
     'on-hand': () => insights('i-garden', 'On hand now'),
     'planting-photos': () => plantingPhotoSection(start, end).then((section) => [section]),
+    'lab-history': () =>
+      guarded('labs', 'Lab results in this range', async () => {
+        const [results, tests] = await Promise.all([listLabResults(undefined, 5000), getLabTests()]);
+        const names = new Map(tests.map((test) => [test.code, test.displayName]));
+        return [
+          labHistorySection(
+            results.map((result) => ({
+              testName: names.get(result.testCode) ?? result.testCode,
+              value: result.value,
+              unit: result.unit,
+              low: result.labRangeLow,
+              high: result.labRangeHigh,
+              testedAt: result.testedAt,
+              labName: result.labName,
+            })),
+            start,
+            end,
+          ),
+        ];
+      }),
+    'bp-log': () => guarded('body', 'Every reading', async () => [bloodPressureLogSection(await listBloodPressureReadings(), start, end)]),
+    bowel: () => guarded('symptoms', 'Bowel movements in brief', async () => bowelSections(await listBowelEntriesBetween(start, end), start, end)),
+    microbiome: () =>
+      guarded('labs', 'Microbiome tests', async () => {
+        const { tests, results } = await listMicrobiomeTests();
+        return [microbiomeSection(tests, results)];
+      }),
+    cycle: () => trends('cycle', 'Cycle', days),
+    'body-signals': () => trends('bodySignals', 'Body signals', days),
+    therapy: () =>
+      guarded('therapy', 'Hands-on therapy sessions', async () => {
+        const sessions = await listTherapySessions({ sinceDate: start, limit: 5000 });
+        return [
+          therapySessionsSection(
+            sessions.map((session) => ({
+              performedAt: session.performedAt,
+              therapyLabel: therapyTypeLabel(session.therapyType),
+              practitioner: session.practitioner,
+              bodyFocus: session.bodyFocus,
+              durationMinutes: session.durationMinutes,
+              notes: session.notes,
+            })),
+            start,
+            end,
+          ),
+        ];
+      }),
+    'therapy-response': () =>
+      guarded('therapy', 'How the days after a session went', async () => {
+        const inputs = await getTherapyResponseInputs(days);
+        const result = summarizeTherapyResponse(inputs.sessions, inputs.checkins);
+        const lines = result.summaries.map((summary) => describeTherapyResponse(summary, therapyTypeLabel(summary.therapyType)));
+        return [therapyResponseSection(lines, result.totalSessions, result.totalCheckins)];
+      }),
+    trackers: () =>
+      guarded(null, 'Trackers in brief', async () => {
+        const [trackers, entries] = await Promise.all([listCustomTrackers(), listTrackerEntriesSince(start)]);
+        return trackerSections(trackers, entries, start, end);
+      }),
+    workouts: () => trends('workouts', 'Workouts', days),
+    pacing: () => trends('pacing', 'Pacing', days),
+    'med-list': () =>
+      guarded('medications', 'Medicines and supplements taken now', async () => {
+        const meds = await listAllActiveTreatments();
+        return [
+          medListSection(
+            meds.map((med) => ({
+              name: med.name,
+              genericName: med.genericName,
+              dose: med.doseAmount != null ? `${med.doseAmount}${med.doseUnit ? ` ${med.doseUnit}` : ''}` : '',
+              frequency: med.frequency,
+              treatmentType: med.treatmentType,
+              notes: med.notes,
+            })),
+          ),
+        ];
+      }),
+    // Allergies are safety, so they are read whatever the vault says: the
+    // drug allergies live on the emergency card, which is never vaulted,
+    // and a closed vault only leaves the food list out.
+    allergies: () =>
+      guarded(null, 'Allergies', async () => {
+        const [profile, foods] = await Promise.all([getEmergencyProfile(), readOrClosed(() => listFoodAllergies(), [] as string[])]);
+        return [allergiesSection(profile.drugAllergies, foods)];
+      }),
+    emergency: () =>
+      guarded(null, 'Emergency card', async () => {
+        const [profile, fromApp, contacts] = await Promise.all([getEmergencyProfile(), gatherFromApp(), listEmergencyContacts()]);
+        return [emergencyCardSection(buildEmergencyCard({ profile, fromApp, contacts, today: end }))];
+      }),
+    'money-now': () => guarded('finances', 'Where money stands', () => insights('i-money', 'Where money stands')),
+    'money-entries': () => guarded('finances', 'Money in and out', async () => [moneyEntriesSection(await listEntries({ limit: 20000 }), start, end)]),
+    'upkeep-standing': () =>
+      guarded(null, 'Everything kept up, and when it is next due', async () => {
+        const [items, places] = await Promise.all([listUpkeepItems(), listUpkeepPlaces()]);
+        return [upkeepStandingSection(items.map((item) => upkeepStanding(item, end)), (item) => placeLabel(item.place, places, item.placeName))];
+      }),
+    'upkeep-done': () =>
+      getKeepingUpSummary(start, end)
+        .then((summary) => [upkeepDoneSection(summary)])
+        .catch(() => [upkeepDoneSection(null)]),
+    'meals-ahead': () =>
+      guarded(null, 'Meals scheduled ahead', async () => {
+        const week = await Promise.all(daysFrom(end, 7).map((day) => listTodaysMealsWithRecipes(day)));
+        return [
+          mealsAheadSection(
+            week.flat().map((meal) => ({ scheduledFor: meal.scheduledFor, title: meal.title, mealType: meal.mealType, dishes: meal.components.map((part) => part.name) })),
+            7,
+          ),
+        ];
+      }),
+    grocery: () =>
+      guarded(null, 'Grocery list', async () => {
+        const list = await getActiveGroceryList();
+        const items = list ? await getGroceryListItems(list.id) : [];
+        return [groceryListSection(list?.name ?? null, items)];
+      }),
+    'kitchen-now': () => insights('i-kitchen', 'The kitchen in brief'),
+    'kitchen-items': () => guarded(null, 'Everything on hand', async () => [kitchenItemsSection(await listKitchenInventory('food'))]),
+    'keeping-checks': () => keepingPart(start, end, 0),
+    'keeping-routines': () => keepingPart(start, end, 1),
+    'keeping-captures': () => keepingPart(start, end, 2),
+    interests: () => guarded(null, 'Interests', async () => [interestsSection(await listInterests())]),
+    'interest-time': () =>
+      getKeepingUpSummary(start, end)
+        .then((summary) => [interestTimeSection(summary)])
+        .catch(() => [interestTimeSection(null)]),
+    projects: () => guarded(null, 'Projects', () => projectsPart(null)),
+    learn: () =>
+      guarded(null, 'Learn', async () => {
+        const reviews = await listLearnReviews();
+        return [learnSection(reviews.map((review) => ({ cardId: review.cardId, day: review.day, recalled: isRecalled(review.grade) })), start, end)];
+      }),
+    'work-projects': () => guarded(null, 'Work projects', () => projectsPart('work')),
   };
+}
+
+async function keepingPart(start: string, end: string, index: number): Promise<ReportSection[]> {
+  const summary = await getKeepingUpSummary(start, end).catch(() => null);
+  const parts = keepingUpSections(summary);
+  return summary ? [parts[index]] : parts;
+}
+
+async function projectsPart(area: 'work' | null): Promise<ReportSection[]> {
+  const projects = await listProjects(area ?? 'everything');
+  const steps = projects.length > 0 ? await listProjectSteps(projects.map((project) => project.id)) : [];
+  return [projectsSection(projects, steps, area)];
 }
 
 async function kindSections(kind: ReportKind, days: number, leftOut: readonly string[]): Promise<ReportSection[]> {

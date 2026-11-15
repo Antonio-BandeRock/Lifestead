@@ -1,4 +1,4 @@
-// The seven reports marked Build on the inputs-to-outputs map (1.0.52.7),
+// The reports (seven marked Build on the inputs-to-outputs map in 1.0.52.7, fourteen more in 1.0.90.4),
 // each a different reader's view over the same records the Overview reads.
 // This file holds what each report is and how a finished reading turns
 // into report sections, with no I/O, so scripts/test_output_lenses.js can
@@ -27,7 +27,21 @@ export type ReportKind =
   | 'r-care'
   | 'r-medical-costs'
   | 'r-garden'
-  | 'r-variety';
+  | 'r-variety'
+  | 'r-meds'
+  | 'r-labs'
+  | 'r-bp'
+  | 'r-gut'
+  | 'r-cycle'
+  | 'r-therapy'
+  | 'r-trackers'
+  | 'r-finances'
+  | 'r-upkeep'
+  | 'r-meals'
+  | 'r-kitchen'
+  | 'r-keeping'
+  | 'r-interests'
+  | 'r-work';
 
 /** The sections the Overview has always carried, each one a named block so
  *  a narrower report can ask for the ones its reader needs and skip the
@@ -59,12 +73,48 @@ export type ExtraSectionId =
   | 'variety-full'
   | 'garden-yield'
   | 'on-hand'
-  | 'planting-photos';
+  | 'planting-photos'
+  | 'lab-history'
+  | 'bp-log'
+  | 'bowel'
+  | 'microbiome'
+  | 'cycle'
+  | 'body-signals'
+  | 'therapy'
+  | 'therapy-response'
+  | 'trackers'
+  | 'workouts'
+  | 'pacing'
+  | 'med-list'
+  | 'allergies'
+  | 'emergency'
+  | 'money-now'
+  | 'money-entries'
+  | 'upkeep-standing'
+  | 'upkeep-done'
+  | 'meals-ahead'
+  | 'grocery'
+  | 'kitchen-now'
+  | 'kitchen-items'
+  | 'keeping-checks'
+  | 'keeping-routines'
+  | 'keeping-captures'
+  | 'interests'
+  | 'interest-time'
+  | 'projects'
+  | 'learn'
+  | 'work-projects';
 
 export type ReportSectionId = CoreSectionId | ExtraSectionId;
 
+/** The menu groups, 1.0.90.4: twenty-three reports in one flat grid were
+ *  too many to scan, the same reason Trends grouped its menu. */
+export const REPORT_GROUPS = ['For someone else', 'Health records', 'Food and home', 'Money', 'Life and time'] as const;
+export type ReportGroup = (typeof REPORT_GROUPS)[number];
+
 export type ReportKindDef = {
   key: ReportKind;
+  group: ReportGroup;
   label: string;
   icon: string;
   title: string;
@@ -79,6 +129,7 @@ const SELF_REPORTED = 'It is not a diagnosis. Every figure here is self-reported
 export const REPORT_KINDS: ReportKindDef[] = [
   {
     key: 'overview',
+    group: 'For someone else',
     label: 'Overview',
     icon: 'document-text-outline',
     title: 'Lifestead: Health Summary',
@@ -89,6 +140,7 @@ export const REPORT_KINDS: ReportKindDef[] = [
   },
   {
     key: 'r-doctor',
+    group: 'For someone else',
     label: 'For Your Doctor',
     icon: 'medkit-outline',
     title: 'Lifestead: For the Doctor',
@@ -96,12 +148,13 @@ export const REPORT_KINDS: ReportKindDef[] = [
       'What changed since the last visit, and the records a clinician usually asks for, as the person entered them.',
       SELF_REPORTED,
     ],
-    help: 'Built for an appointment, opening with an at a glance page: what was recorded since the last appointment with anybody, the next visit and what changed since the last one with the same provider, symptoms and flares, what Pattern Finder noticed and any food experiments, blood pressure, doses as scheduled and as marked with how many days each was due and marked, active meds and supplements with the interaction notes that touch them and how each works, weight, resting heart rate and heart rate variability against your usual range, personal rules and the most recent labs. Food detail is left to the Nutritionist report.',
+    help: 'Built for an appointment, opening with an at a glance page: what was recorded since the last appointment with anybody, the next visit and what changed since the last one with the same provider, symptoms and flares, what Pattern Finder noticed and any food experiments, blood pressure, doses as scheduled and as marked with how many days each was due and marked, active meds and supplements with the interaction notes that touch them and how each works, weight, resting heart rate and heart rate variability against your usual range, bowel movements, nights up, the cycle, body signals, hands-on therapy sessions and how the days after them went, the trackers you made, personal rules, the most recent labs and every lab result in the range. Food detail is left to the Nutritionist report.',
     core: ['glance', 'conditions', 'symptoms', 'noticed', 'meds', 'body', 'heart', 'rules', 'labs'],
-    extras: ['since-visit', 'appointments', 'blood-pressure', 'doses', 'interactions', 'symptom-photos'],
+    extras: ['since-visit', 'appointments', 'blood-pressure', 'doses', 'interactions', 'symptom-photos', 'bowel', 'nights', 'cycle', 'body-signals', 'therapy', 'therapy-response', 'trackers', 'lab-history'],
   },
   {
     key: 'r-nutrition',
+    group: 'For someone else',
     label: 'For a Nutritionist',
     icon: 'nutrition-outline',
     title: 'Lifestead: For the Nutritionist',
@@ -112,19 +165,21 @@ export const REPORT_KINDS: ReportKindDef[] = [
   },
   {
     key: 'r-trainer',
+    group: 'For someone else',
     label: 'For a Trainer',
     icon: 'barbell-outline',
     title: 'Lifestead: For the Trainer',
     preface: [
-      'Movement, sleep, weight, blood pressure, resting heart rate, heart rate variability and hydration over the range. Conditions, medicines and symptoms are left out of this one on purpose; the Overview carries them.',
+      'Movement, sleep, weight, blood pressure, resting heart rate, heart rate variability, hydration, workouts and pacing over the range. Conditions, medicines and symptoms are left out of this one on purpose; the Overview carries them.',
       SELF_REPORTED,
     ],
-    help: 'Steps and sleep from the phone, weight and blood pressure, resting heart rate and heart rate variability against your usual range, hydration, nights up, and how the work weeks went. Conditions, medicines and symptoms are left out on purpose.',
+    help: 'Steps and sleep from the phone, weight and blood pressure, resting heart rate and heart rate variability against your usual range, hydration, nights up, the workouts logged, and how activity was paced. Conditions, medicines and symptoms are left out on purpose.',
     core: ['movement', 'body', 'heart'],
-    extras: ['blood-pressure', 'hydration', 'nights', 'work'],
+    extras: ['blood-pressure', 'hydration', 'nights', 'workouts', 'pacing'],
   },
   {
     key: 'r-month',
+    group: 'Life and time',
     label: 'Looking Back',
     icon: 'time-outline',
     title: 'Lifestead: Looking Back',
@@ -135,6 +190,7 @@ export const REPORT_KINDS: ReportKindDef[] = [
   },
   {
     key: 'r-care',
+    group: 'For someone else',
     label: 'For a Caregiver',
     icon: 'people-outline',
     title: 'Lifestead: For a Caregiver',
@@ -148,6 +204,7 @@ export const REPORT_KINDS: ReportKindDef[] = [
   },
   {
     key: 'r-medical-costs',
+    group: 'Money',
     label: 'Medical Costs',
     icon: 'receipt-outline',
     title: 'Lifestead: Medical Costs',
@@ -161,6 +218,7 @@ export const REPORT_KINDS: ReportKindDef[] = [
   },
   {
     key: 'r-garden',
+    group: 'Food and home',
     label: 'Garden Record',
     icon: 'leaf-outline',
     title: 'Lifestead: Garden Record',
@@ -171,6 +229,7 @@ export const REPORT_KINDS: ReportKindDef[] = [
   },
   {
     key: 'r-variety',
+    group: 'Food and home',
     label: 'Eating Variety',
     icon: 'color-palette-outline',
     title: 'Lifestead: Eating Variety',
@@ -181,6 +240,163 @@ export const REPORT_KINDS: ReportKindDef[] = [
     help: 'Different foods and different plants week by week, the meals and foods that came back most and how many days they took, food groups not logged at all, meals made at home, from a package or eaten out, meals from the plan against meals decided on the day, and foods that feed the gut.',
     core: [],
     extras: ['variety-full'],
+  },
+  {
+    key: 'r-meds',
+    group: 'Health records',
+    label: 'Medication List',
+    icon: 'list-outline',
+    title: 'Lifestead: Medication List',
+    preface: [
+      'Every medicine and supplement taken now, the allergies on record, the interaction notes that touch them, and the emergency card, as the person entered them.',
+      'Medicine questions go to the prescriber. Nothing here changes a dose or a time.',
+    ],
+    help: 'A list to hand over at a pharmacy, a new clinic or a hospital: the tracked conditions, every active medicine and supplement with its dose and how often, drug and food allergies, the interaction notes for these meds, and the emergency card. It is what is true on the day it is made, whatever the range.',
+    core: ['conditions'],
+    extras: ['med-list', 'allergies', 'interactions', 'emergency'],
+  },
+  {
+    key: 'r-labs',
+    group: 'Health records',
+    label: 'Lab History',
+    icon: 'flask-outline',
+    title: 'Lifestead: Lab History',
+    preface: ['Every lab result with a test date in the range, grouped by test, with the range the lab printed beside it.', SELF_REPORTED],
+    help: 'The newest result for each test, then every result in the range grouped by test with the oldest first, so a change over time can be read down a column.',
+    core: ['labs'],
+    extras: ['lab-history'],
+  },
+  {
+    key: 'r-bp',
+    group: 'Health records',
+    label: 'Blood Pressure Log',
+    icon: 'heart-outline',
+    title: 'Lifestead: Blood Pressure Log',
+    preface: ['Blood pressure over the range: how it ran, then every reading with the time it was taken and the pulse.', SELF_REPORTED],
+    help: 'How blood pressure ran over the range, as Trends shows it, then every reading with its time and pulse, the way a clinician often asks to see a home log.',
+    core: [],
+    extras: ['blood-pressure', 'bp-log'],
+  },
+  {
+    key: 'r-gut',
+    group: 'Health records',
+    label: 'Gut and Digestion',
+    icon: 'restaurant-outline',
+    title: 'Lifestead: Gut and Digestion',
+    preface: ['Bowel movements, reactions after meals, stool tests, ferments and how varied eating was over the range, as the person entered them.', SELF_REPORTED],
+    help: 'For a gastroenterologist or a dietitian: bowel movements in brief and one by one, after-meal reactions, every microbiome test entered, the ferments made and eaten, and eating variety in brief.',
+    core: [],
+    extras: ['bowel', 'reactions', 'microbiome', 'ferments', 'variety'],
+  },
+  {
+    key: 'r-cycle',
+    group: 'Health records',
+    label: 'Cycle',
+    icon: 'ellipse-outline',
+    title: 'Lifestead: Cycle',
+    preface: ['The cycle over the range beside the symptoms and flares logged, as the person entered them.', SELF_REPORTED],
+    help: 'Cycle days and lengths as Trends reads them, with symptoms and flares over the same range.',
+    core: ['symptoms'],
+    extras: ['cycle'],
+  },
+  {
+    key: 'r-therapy',
+    group: 'For someone else',
+    label: 'For a Therapist',
+    icon: 'hand-left-outline',
+    title: 'Lifestead: For a Physio or Chiropractor',
+    preface: ['Hands-on therapy sessions over the range, how the days after them went, symptoms and flares, and how activity was paced.', SELF_REPORTED],
+    help: 'For a physio, chiropractor or massage therapist: symptoms and flares, every session with its practitioner and focus, how the days after a session went beside the other days, and pacing.',
+    core: ['symptoms'],
+    extras: ['therapy', 'therapy-response', 'pacing'],
+  },
+  {
+    key: 'r-trackers',
+    group: 'Health records',
+    label: 'My Trackers',
+    icon: 'analytics-outline',
+    title: 'Lifestead: My Trackers',
+    preface: ['What was logged on the trackers the person made, over the range.', SELF_REPORTED],
+    help: 'Each tracker you made, how often it was logged in the range, and every entry with its value.',
+    core: [],
+    extras: ['trackers'],
+  },
+  {
+    key: 'r-finances',
+    group: 'Money',
+    label: 'Household Money',
+    icon: 'wallet-outline',
+    title: 'Lifestead: Household Money',
+    preface: ['Where household money stands now, and the money entered in and out over the range.', 'Only money entered against a day is counted. Repeating bills are not guessed into it.'],
+    help: 'The Money reading from Insights, then every entry in and out over the range with its category, and the totals each way.',
+    core: [],
+    extras: ['money-now', 'money-entries'],
+  },
+  {
+    key: 'r-upkeep',
+    group: 'Food and home',
+    label: 'Home Upkeep',
+    icon: 'construct-outline',
+    title: 'Lifestead: Home Upkeep',
+    preface: ['Everything kept up around the home, when each is next due, and what was done over the range.'],
+    help: 'Every active upkeep item with when it was last done, when it is next due and what it costs, then what was marked done in the range and how it lined up with its date. Useful for a landlord, a buyer or whoever minds the house next.',
+    core: [],
+    extras: ['upkeep-standing', 'upkeep-done'],
+  },
+  {
+    key: 'r-meals',
+    group: 'Food and home',
+    label: 'Meals and Shopping',
+    icon: 'cart-outline',
+    title: 'Lifestead: Meals and Shopping',
+    preface: ['The meals ahead, how planned meals went over the range, and the grocery list now open.'],
+    help: 'For whoever shares the cooking or the shopping: meals scheduled for the coming week, planned against eaten over the range, and the open grocery list by aisle.',
+    core: [],
+    extras: ['meals-ahead', 'planned', 'grocery'],
+  },
+  {
+    key: 'r-kitchen',
+    group: 'Food and home',
+    label: 'Kitchen on Hand',
+    icon: 'basket-outline',
+    title: 'Lifestead: Kitchen on Hand',
+    preface: ['What is in the kitchen now, as the person entered it.'],
+    help: 'The Kitchen reading from Insights, then every food on hand with how much is left, where it is kept and when it came in.',
+    core: [],
+    extras: ['kitchen-now', 'kitchen-items'],
+  },
+  {
+    key: 'r-keeping',
+    group: 'Life and time',
+    label: 'Keeping Up',
+    icon: 'checkmark-done-outline',
+    title: 'Lifestead: Keeping Up',
+    preface: ['The checks, routines and captured thoughts over the range, counted from what was marked. A week with nothing marked is shown as a gap, with no mark against it.'],
+    help: 'For a coach, a counsellor or anyone helping with the day: Did I Do It checks, routines started and finished, and things captured and sorted, as Trends > Keeping Up reads them.',
+    core: [],
+    extras: ['keeping-checks', 'keeping-routines', 'keeping-captures'],
+  },
+  {
+    key: 'r-interests',
+    group: 'Life and time',
+    label: 'Interests and Projects',
+    icon: 'color-wand-outline',
+    title: 'Lifestead: Interests and Projects',
+    preface: ['The interests kept, the time given to them over the range, the projects under way and the cards answered in Learn.'],
+    help: 'Every interest with its stages, time given to interests in the range, every project with its steps done, and how many Learn cards were answered, each as a plain count.',
+    core: [],
+    extras: ['interests', 'interest-time', 'projects', 'learn'],
+  },
+  {
+    key: 'r-work',
+    group: 'Life and time',
+    label: 'Work',
+    icon: 'briefcase-outline',
+    title: 'Lifestead: Work',
+    preface: ['How the work weeks went over the range, from the check-ins answered, and the work projects kept.'],
+    help: 'The work check-ins as Trends > Work reads them, and every project kept under work with its steps done.',
+    core: [],
+    extras: ['work', 'work-projects'],
   },
 ];
 
@@ -229,6 +445,36 @@ export const SECTION_LABELS: Record<ReportSectionId, string> = {
   'garden-yield': 'Harvests, grows, compost and sharing',
   'on-hand': 'On hand now',
   'planting-photos': 'Planting photos',
+  'lab-history': 'Every lab result in the range',
+  'bp-log': 'Every blood pressure reading',
+  bowel: 'Bowel movements',
+  microbiome: 'Microbiome tests',
+  cycle: 'Cycle',
+  'body-signals': 'Body signals',
+  therapy: 'Hands-on therapy sessions',
+  'therapy-response': 'How the days after a session went',
+  trackers: 'My trackers',
+  workouts: 'Workouts',
+  pacing: 'Pacing',
+  'med-list': 'Medicines and supplements taken now',
+  allergies: 'Allergies',
+  emergency: 'Emergency card',
+  'money-now': 'Where money stands',
+  'money-entries': 'Money in and out',
+  'upkeep-standing': 'Everything kept up',
+  'upkeep-done': 'Upkeep done',
+  'meals-ahead': 'Meals ahead',
+  grocery: 'Grocery list',
+  'kitchen-now': 'The kitchen in brief',
+  'kitchen-items': 'Everything on hand',
+  'keeping-checks': 'Did I Do It',
+  'keeping-routines': 'Routines',
+  'keeping-captures': 'Things captured',
+  interests: 'Interests',
+  'interest-time': 'Time given to interests',
+  projects: 'Projects',
+  learn: 'Learn',
+  'work-projects': 'Work projects',
 };
 
 export type ReportSectionChoice = { id: ReportSectionId; label: string };

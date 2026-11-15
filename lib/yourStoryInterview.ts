@@ -551,6 +551,20 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     'r-medical-costs': 'Medical Costs',
     'r-garden': 'Garden Record',
     'r-variety': 'Eating Variety',
+    'r-meds': 'Medication List',
+    'r-labs': 'Lab History',
+    'r-bp': 'Blood Pressure Log',
+    'r-gut': 'Gut and Digestion',
+    'r-cycle': 'Cycle',
+    'r-therapy': 'For a Therapist',
+    'r-trackers': 'My Trackers',
+    'r-finances': 'Household Money',
+    'r-upkeep': 'Home Upkeep',
+    'r-meals': 'Meals and Shopping',
+    'r-kitchen': 'Kitchen on Hand',
+    'r-keeping': 'Keeping Up',
+    'r-interests': 'Interests and Projects',
+    'r-work': 'Work',
   },
 };
 
@@ -715,6 +729,20 @@ export const TOUR_LENS_LINES: Record<string, Record<string, string>> = {
     'r-medical-costs': 'Medical bills, where the insurance plan stands, and what the conditions cost.',
     'r-garden': 'Harvests, how long each grow took, compost and what was shared.',
     'r-variety': 'Different foods and plants week by week, the meals that came back most, food groups not logged, and where meals came from.',
+    'r-meds': 'Every medicine and supplement taken now, allergies, interaction notes and the emergency card.',
+    'r-labs': 'The newest result for each test, then every result in the range grouped by test.',
+    'r-bp': 'How blood pressure ran, then every reading with its time and pulse.',
+    'r-gut': 'Bowel movements, after-meal reactions, stool tests, ferments and eating variety.',
+    'r-cycle': 'The cycle over the range beside the symptoms and flares logged.',
+    'r-therapy': 'Hands-on therapy sessions, how the days after them went, symptoms and pacing.',
+    'r-trackers': 'Every tracker you made, how often it was logged, and every entry.',
+    'r-finances': 'Where money stands now, and every entry in and out over the range.',
+    'r-upkeep': 'Everything kept up, when each is next due, and what was done.',
+    'r-meals': 'The meals ahead, planned against eaten, and the open grocery list.',
+    'r-kitchen': 'Everything in the kitchen now, with how much is left and where it is.',
+    'r-keeping': 'Checks, routines and things captured, counted and never scored.',
+    'r-interests': 'Interests, time given to them, projects and Learn cards answered.',
+    'r-work': 'How the work weeks went and the work projects kept.',
   },
 };
 
@@ -1157,7 +1185,7 @@ export const TOUR_TABS: TourTabDef[] = [
     title: 'Reports',
     question: 'What is Reports for?',
     answer:
-      'Reports turns your records into a document to hand to somebody, so you walk in with the facts rather than trying to remember them. The Overview holds everything; the other reports are each put together for one reader, a doctor, a nutritionist, a trainer or a caregiver, or one subject, a look back, medical costs or the garden, over the last week, month or three months, each figure saying where it came from. It is made on this device and shared as a PDF only when you choose.',
+      'Reports turns your records into a document to hand to somebody, so you walk in with the facts rather than trying to remember them. The Overview holds everything; the other reports are each put together for one reader, a doctor, a nutritionist, a trainer, a therapist or a caregiver, or one subject, from a medication list or lab history to household money, home upkeep or interests, over a week, a month, a year or a start date you pick, each figure saying where it came from. It is made on this device and shared as a PDF only when you choose.',
     relyOn: [
       'To remember the weeks between appointments for you.',
       'To say where every figure came from, so nothing in it is a guess.',
@@ -1165,8 +1193,11 @@ export const TOUR_TABS: TourTabDef[] = [
     ],
     groups: [
       { title: 'Everything', line: 'Choose 7, 30 or 90 days or a start date you pick, read it on screen, and save or share it as a PDF.', lenses: ['overview'] },
-      { title: 'For one reader', lenses: ['r-doctor', 'r-nutrition', 'r-trainer', 'r-care'] },
-      { title: 'On one subject', lenses: ['r-month', 'r-medical-costs', 'r-garden', 'r-variety'] },
+      { title: 'For one reader', lenses: ['r-doctor', 'r-nutrition', 'r-trainer', 'r-care', 'r-therapy'] },
+      { title: 'Health records', lenses: ['r-meds', 'r-labs', 'r-bp', 'r-gut', 'r-cycle', 'r-trackers'] },
+      { title: 'Food and home', lenses: ['r-garden', 'r-variety', 'r-meals', 'r-kitchen', 'r-upkeep'] },
+      { title: 'Money', lenses: ['r-medical-costs', 'r-finances'] },
+      { title: 'Life and time', lenses: ['r-month', 'r-keeping', 'r-interests', 'r-work'] },
     ],
     steps: [
       {
