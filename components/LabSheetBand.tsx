@@ -50,6 +50,7 @@ import {
   type SheetDate,
 } from '../lib/labImport';
 import { explainNotYet } from '../lib/notYet';
+import { saveOrSay, sayNotSaved } from '../lib/saveProblem';
 import { recognizeLinesFromImage } from '../lib/ocr';
 import { ThumbEndRow } from './ThumbEndRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
@@ -216,7 +217,10 @@ export function LabSheetBand({
           : 'They are on this lens and on Trends.',
       );
     } catch (error) {
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+      // Rows are saved one by one, so some may already be kept: say so,
+      // so nobody saves the whole sheet twice.
+      onSaved();
+      sayNotSaved('Not every result from the sheet was saved. Any that were show in the list above; check it before saving again.', error);
     } finally {
       setSaving(false);
     }
@@ -230,7 +234,8 @@ export function LabSheetBand({
       destructive: true,
     });
     if (!ok) return;
-    const outcome = await removeOwnLabTest(test.code);
+    const outcome = await saveOrSay('The test was not removed. Try again.', () => removeOwnLabTest(test.code));
+    if (!outcome) return;
     onSaved();
     showInfoAlert(
       outcome === 'retired' ? 'Kept for its history' : 'Removed',
@@ -243,7 +248,11 @@ export function LabSheetBand({
   async function finishRename() {
     if (!renaming) return;
     if (renaming.name.trim()) {
-      await renameOwnLabTest(renaming.code, renaming.name);
+      const done = await saveOrSay('The new name was not saved. Try again.', async () => {
+        await renameOwnLabTest(renaming.code, renaming.name);
+        return true;
+      });
+      if (!done) return;
       onSaved();
     }
     setRenaming(null);

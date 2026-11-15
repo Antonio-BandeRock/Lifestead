@@ -22192,6 +22192,30 @@ export async function createPersonalRule(input: {
   return id;
 }
 
+// The wording, where it came from and what it is tied to can all be
+// corrected; whether it is paused stays as it was.
+export async function updatePersonalRule(
+  id: string,
+  input: {
+    description: string;
+    source: 'self' | 'doctor';
+    linkType: 'none' | 'food' | 'treatment';
+    linkValue?: string | null;
+    linkLabel?: string | null;
+  },
+): Promise<void> {
+  const db = await getDatabase();
+  await db.runAsync(
+    'UPDATE personal_rules SET description = ?, source = ?, link_type = ?, link_value = ?, link_label = ? WHERE id = ?',
+    input.description.trim(),
+    input.source,
+    input.linkType,
+    input.linkValue?.trim() || null,
+    input.linkLabel?.trim() || null,
+    id,
+  );
+}
+
 export async function setPersonalRuleActive(id: string, active: boolean): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('UPDATE personal_rules SET active = ? WHERE id = ?', active ? 1 : 0, id);
@@ -23860,6 +23884,25 @@ export async function getLabResultTrend(testCode: string) {
 export async function deleteLabResult(id: string) {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM lab_results WHERE id = ?', id);
+}
+
+// A result typed wrong is corrected in place, keeping its id, so anything
+// that refers to it (Trends, a report) reads the corrected figure. The
+// printed range is kept as it was unless the caller passes a new one.
+export async function updateLabResult(
+  id: string,
+  input: { testCode: string; value: number; unit: string; testedAt: string; labName?: string },
+) {
+  const db = await getDatabase();
+  await db.runAsync(
+    'UPDATE lab_results SET test_code = ?, value = ?, unit = ?, tested_at = ?, lab_name = ? WHERE id = ?',
+    input.testCode,
+    input.value,
+    input.unit,
+    input.testedAt,
+    input.labName?.trim() || null,
+    id,
+  );
 }
 
 // 'food_trial_daily' added 2026-08-14, the structured food-testing

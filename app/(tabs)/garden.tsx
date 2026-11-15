@@ -2680,7 +2680,7 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
                 <Text style={styles.bodyText}>
                   {task.title}: {dateLabel(day)}
                   {time ? `, ${formatTime12(time.slice(0, 5))}` : ''}
-                  {task.repeatGroupId ? ' (repeats)' : ''}
+                  {task.repeatGroupId ? t(' (repeats)') : ''}
                 </Text>
                 {note ? (
                   <Text style={[styles.captionText, note.rain && { color: colors.textSecondary }]}>

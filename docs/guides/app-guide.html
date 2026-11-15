@@ -417,7 +417,7 @@
     <h1>What is inside Lifestead, and how it is put together</h1>
     <p class="dek">Lifestead is an everything-about-a-person's-life app, tagline "Everything in your life has a place." It started with, and runs deepest on, food and autoimmune health: 19 tracked conditions, each a target for the same depth, alone or combined. It is also for somebody who needs an outside place to hold the details of daily living so they stop taking up room in their head, through Life, Schedules, reminders and capture. Garden, budget, family, interests, learning and the body are all in scope.</p>
     <p class="dek">Its job in food and health is finding the personal patterns between what someone eats and how their body responds, and doing that work for the person. Records stay on the person's devices, and no company server holds them.</p>
-    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-15 (1.0.90.11).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
+    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-15 (1.0.90.12).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
     <div class="stats">
       <div class="stat"><span class="n">16,140</span><span class="l">whole foods shown from the reference database</span></div>
       <div class="stat"><span class="n">10</span><span class="l">data sources (9 national tables plus a Derived set)</span></div>
@@ -799,8 +799,8 @@
         <li><strong>Safe Foods</strong>: foods with zero 6-Dimensions flags</li>
         <li><strong>Healing Stage</strong>: a food finder scoped to Stage 1/Stage 2 of the healing-journey framework</li>
         <li><strong>Hydration</strong>: a daily water ring, food and drink combined</li>
-        <li><strong>Labs</strong>: lab-result entry and most-recent-value tracking</li>
-        <li><strong>My Meds &amp; Interactions</strong>: a read-only rollup of active treatments and interaction checks</li>
+        <li><strong>Labs</strong>: lab-result entry and most-recent-value tracking. Tapping a test opens every result it has, each with Change and Remove; a test the list lacks can be added with its unit, the unit field takes whatever the report prints, a date that does not exist or has not come yet is caught before saving, and every day with results or a report file is listed under The report from, paged with Show more</li>
+        <li><strong>My Meds &amp; Interactions</strong>: a read-only rollup of active treatments and interaction checks, plus the personal rules, each of which can be changed, paused or deleted</li>
         <li><strong>Today's Advisories</strong>: a same-day scan of logged meals against the alcohol/coffee/juice advisory rules</li>
         <li><strong>Energy &amp; Portions</strong>: a personalized BMR/TDEE calculator (Mifflin-St Jeor, scaled by an activity-level setting in Profile), with protein/fat/carb targets and produce portions derived from it (protein carries a per-condition override, e.g. Chronic Kidney Disease's own pre-dialysis vs. on-dialysis reversal), compared against what's actually been eaten today</li>
         <li><strong>Your Day</strong>: today in one place, meals and doses in clock order, what is due, and anything left open from yesterday</li>
@@ -816,6 +816,7 @@
       <ul class="lenslist">
         <li><strong>Check a Label</strong>: Each ingredient on a label is checked against the allergies, diet and conditions in Profile, plus lists that apply to anybody.</li>
       </ul>
+      <p>When a lens cannot read what was recorded, it says so with Try again and that nothing recorded is lost. On My Meds &amp; Interactions and Today&rsquo;s Advisories it also says plainly that the checks did not run, so an empty screen is never read as nothing to worry about. When a change cannot be saved, a note names what was not saved.</p>
     </div>
   </section>
 

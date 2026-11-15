@@ -41,6 +41,10 @@ import {
   rankFoodsByNutrient,
   recordLabResult,
   setPersonalRuleActive,
+  updateLabResult,
+  updatePersonalRule,
+  deleteLabResult,
+  addOwnLabTest,
   type DailyDimensionItemBreakdown,
   type DailyNutrientBreakdown,
   type DailyNutrientScopeTotals,
@@ -131,6 +135,9 @@ import { DimensionChart } from '../../components/DimensionChart';
 import type { ConditionDimensionSummary } from '../../lib/conditionDimensions';
 import { AppTextInput } from '../../components/AppTextInput';
 import { AttachedFiles } from '../../components/AttachedFiles';
+import { ReadProblem } from '../../components/ReadProblem';
+import { saveOrSay, sayNotSaved } from '../../lib/saveProblem';
+import { countAttachmentsByOwner } from '../../lib/attachmentsDb';
 import { t } from '../../lib/i18n';
 import { NotesInput } from '../../components/NotesInput';
 import { useConfirmSheet } from '../../components/ConfirmSheet';
@@ -794,6 +801,21 @@ export default function InsightsScreen() {
   // than one per lens.
   const [lensExplainerExpanded, setLensExplainerExpanded] = useState(true);
   const folds = useBandFolds();
+  // Which reads failed, by name, so the lens that needs one says it could
+  // not be read (with Try again) in place of an empty list or a list that
+  // was never checked. readRetryTick re-runs every loader below.
+  const [readFailed, setReadFailed] = useState<Record<string, true>>({});
+  const [readRetryTick, setReadRetryTick] = useState(0);
+  const noteRead = useCallback((key: string, ok: boolean, error?: unknown) => {
+    if (!ok) console.warn(`[insights] could not read ${key}`, error);
+    setReadFailed((current) => {
+      if (ok ? !current[key] : current[key]) return current;
+      const next = { ...current };
+      if (ok) delete next[key];
+      else next[key] = true;
+      return next;
+    });
+  }, []);
   const [moreView, setMoreView] = useState<ReadingView | null>(null);
   const [moreLoading, setMoreLoading] = useState(false);
   // Reloads on focus and on switching into one of these lenses, the same
@@ -806,10 +828,14 @@ export default function InsightsScreen() {
       setMoreView(null);
       loadInsightsMoreView(lens)
         .then((view) => {
-          if (!cancelled) setMoreView(view);
+          if (cancelled) return;
+          setMoreView(view);
+          noteRead('more', true);
         })
-        .catch(() => {
-          if (!cancelled) setMoreView(null);
+        .catch((error) => {
+          if (cancelled) return;
+          setMoreView(null);
+          noteRead('more', false, error);
         })
         .finally(() => {
           if (!cancelled) setMoreLoading(false);
@@ -818,10 +844,9 @@ export default function InsightsScreen() {
         cancelled = true;
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps -- vaultKey reads again as the vault opens or closes
-    }, [lens, vaultKey]),
+    }, [lens, vaultKey, readRetryTick]),
   );
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   // 2026-08-26, direct report: "we associated and wired up all of the
   // conditions, food alergies, and general health specific tracking
@@ -837,8 +862,13 @@ export default function InsightsScreen() {
   // and Nutrient Ranking (a diet/allergy filter on the ranked list).
   const [personalizationProfile, setPersonalizationProfile] = useState<PersonalizationProfile | null>(null);
   useEffect(() => {
-    getPersonalizationProfile().then(setPersonalizationProfile);
-  }, []);
+    getPersonalizationProfile()
+      .then((profile) => {
+        setPersonalizationProfile(profile);
+        noteRead('profile', true);
+      })
+      .catch((error) => noteRead('profile', false, error));
+  }, [noteRead, readRetryTick]);
 
   const [nutrientBreakdown, setNutrientBreakdown] = useState<DailyNutrientBreakdown | null>(null);
   // What today would add up to if every still-planned meal is eaten, plus
@@ -917,11 +947,21 @@ export default function InsightsScreen() {
   const [rankingDriRows, setRankingDriRows] = useState<DietaryReferenceIntake[]>([]);
   const [rankingFoodServing, setRankingFoodServing] = useState<{ grams: number; label: string } | null>(null);
   useEffect(() => {
-    listTrackedNutrients().then(setAllNutrients);
-  }, []);
+    listTrackedNutrients()
+      .then((rows) => {
+        setAllNutrients(rows);
+        noteRead('nutrientList', true);
+      })
+      .catch((error) => noteRead('nutrientList', false, error));
+  }, [noteRead, readRetryTick]);
   useEffect(() => {
-    getDietaryReferenceIntakesForCurrentUser().then(setRankingDriRows);
-  }, []);
+    getDietaryReferenceIntakesForCurrentUser()
+      .then((rows) => {
+        setRankingDriRows(rows);
+        noteRead('dri', true);
+      })
+      .catch((error) => noteRead('dri', false, error));
+  }, [noteRead, readRetryTick]);
   useEffect(() => {
     // 2026-08-14, gated on rankingPrepGroupTouched too, not just
     // rankingNutrient -- see that flag's own comment above. Skipping the
@@ -955,11 +995,17 @@ export default function InsightsScreen() {
         : rows;
       setRankedFoods(filtered);
       setRankingLoading(false);
+      noteRead('ranking', true);
+    }).catch((error) => {
+      if (!isCurrent) return;
+      setRankedFoods([]);
+      setRankingLoading(false);
+      noteRead('ranking', false, error);
     });
     return () => {
       isCurrent = false;
     };
-  }, [rankingNutrient, rankingPrepGroup, rankingPrepGroupTouched, personalizationProfile]);
+  }, [rankingNutrient, rankingPrepGroup, rankingPrepGroupTouched, personalizationProfile, noteRead, readRetryTick]);
   useEffect(() => {
     if (!rankingFood) {
       setFoodRankings([]);
@@ -978,12 +1024,18 @@ export default function InsightsScreen() {
           unitWeight ? { grams: unitWeight.gramsPerUnit, label: `1 ${unitWeight.unitLabel} (${Math.round(unitWeight.gramsPerUnit)}g)` } : { grams: 100, label: '100g' },
         );
         setFoodRankingsLoading(false);
+        noteRead('ranking', true);
       }
+    }).catch((error) => {
+      if (!isCurrent) return;
+      setFoodRankings([]);
+      setFoodRankingsLoading(false);
+      noteRead('ranking', false, error);
     });
     return () => {
       isCurrent = false;
     };
-  }, [rankingFood, rankingPrepGroup]);
+  }, [rankingFood, rankingPrepGroup, noteRead, readRetryTick]);
 
   // Safe Foods lens, 2026-08-08 -- same "independent of today's log,
   // load once" nature as Nutrient Ranking above.
@@ -1026,11 +1078,19 @@ export default function InsightsScreen() {
     if (lens !== 'safeFoods' || safeFoodCategoriesRequested.current || !personalizationProfile) return;
     safeFoodCategoriesRequested.current = true;
     setSafeFoodCategoriesLoading(true);
-    listSafeFoodCategories(personalizationProfile.trackedConditions.map((condition) => condition.code)).then((categories) => {
-      setSafeFoodCategories(categories);
-      setSafeFoodCategoriesLoading(false);
-    });
-  }, [lens, personalizationProfile]);
+    listSafeFoodCategories(personalizationProfile.trackedConditions.map((condition) => condition.code))
+      .then((categories) => {
+        setSafeFoodCategories(categories);
+        setSafeFoodCategoriesLoading(false);
+        noteRead('safeFoods', true);
+      })
+      .catch((error) => {
+        // Let Try again ask once more.
+        safeFoodCategoriesRequested.current = false;
+        setSafeFoodCategoriesLoading(false);
+        noteRead('safeFoods', false, error);
+      });
+  }, [lens, personalizationProfile, noteRead, readRetryTick]);
   useEffect(() => {
     if (!safeFoodCategory || !personalizationProfile) {
       setSafeFoods([]);
@@ -1055,11 +1115,17 @@ export default function InsightsScreen() {
       );
       setSafeFoods(filtered);
       setSafeFoodsLoading(false);
+      noteRead('safeFoods', true);
+    }).catch((error) => {
+      if (!isCurrent) return;
+      setSafeFoods([]);
+      setSafeFoodsLoading(false);
+      noteRead('safeFoods', false, error);
     });
     return () => {
       isCurrent = false;
     };
-  }, [safeFoodCategory, personalizationProfile]);
+  }, [safeFoodCategory, personalizationProfile, noteRead, readRetryTick]);
 
   // Healing Stage Food Finder lens, 2026-08-08 -- same "independent of
   // today's log, load once" nature as the two lenses just above. Both
@@ -1095,8 +1161,12 @@ export default function InsightsScreen() {
       setStage1Groups(stage1.map(filterGroup));
       setStage2Rounds(stage2.map(filterGroup));
       setHealingStageLoading(false);
+      noteRead('healingStage', true);
+    }).catch((error) => {
+      setHealingStageLoading(false);
+      noteRead('healingStage', false, error);
     });
-  }, [personalizationProfile]);
+  }, [personalizationProfile, noteRead, readRetryTick]);
 
   // Labs lens, 2026-08-08 -- unlike the four lenses above, this reads a
   // real, growing personal log (lab_results), not static reference data,
@@ -1108,12 +1178,15 @@ export default function InsightsScreen() {
   const [labsLoading, setLabsLoading] = useState(true);
   const loadLabs = useCallback(() => {
     setLabsLoading(true);
-    Promise.all([getLabTests(), listLabResults()]).then(([tests, results]) => {
-      setLabTests(tests);
-      setLabResults(results);
-      setLabsLoading(false);
-    });
-  }, []);
+    Promise.all([getLabTests(), listLabResults()])
+      .then(([tests, results]) => {
+        setLabTests(tests);
+        setLabResults(results);
+        noteRead('labs', true);
+      })
+      .catch((error) => noteRead('labs', false, error))
+      .finally(() => setLabsLoading(false));
+  }, [noteRead]);
   useFocusEffect(useCallback(() => loadLabs(), [loadLabs]));
   useOnVaultChange(loadLabs);
 
@@ -1144,10 +1217,12 @@ export default function InsightsScreen() {
         setMyMedsReferenceOnly(evaluation.referenceOnly);
         setMyMedsPersonalRuleMatches(evaluation.personalRules);
         setMyMedsAllPersonalRules(allPersonalRules);
-        setMyMedsLoading(false);
+        noteRead('myMeds', true);
       },
-    );
-  }, []);
+    )
+      .catch((error) => noteRead('myMeds', false, error))
+      .finally(() => setMyMedsLoading(false));
+  }, [noteRead]);
   useFocusEffect(useCallback(() => loadMyMeds(), [loadMyMeds]));
   useOnVaultChange(loadMyMeds);
 
@@ -1155,15 +1230,17 @@ export default function InsightsScreen() {
   // this reloads on focus too, same reasoning as Labs/My Meds above.
   const [advisories, setAdvisories] = useState<TriggeredAdvisory[]>([]);
   const [advisoriesLoading, setAdvisoriesLoading] = useState(true);
-  useFocusEffect(
-    useCallback(() => {
-      setAdvisoriesLoading(true);
-      getTodaysAdvisories(todayDateString()).then((rows) => {
+  const loadAdvisories = useCallback(() => {
+    setAdvisoriesLoading(true);
+    getTodaysAdvisories(todayDateString())
+      .then((rows) => {
         setAdvisories(rows);
-        setAdvisoriesLoading(false);
-      });
-    }, []),
-  );
+        noteRead('advisories', true);
+      })
+      .catch((error) => noteRead('advisories', false, error))
+      .finally(() => setAdvisoriesLoading(false));
+  }, [noteRead]);
+  useFocusEffect(useCallback(() => loadAdvisories(), [loadAdvisories]));
 
   // Energy & Portions lens, 2026-08-15 -- profile/weight/condition stages
   // can all change mid-session in Profile, and today's own totals grow as
@@ -1192,9 +1269,11 @@ export default function InsightsScreen() {
       );
       setPortionsConditionStages(stages);
       setPortionsBreakdown(breakdown);
-      setPortionsLoading(false);
-    });
-  }, []);
+      noteRead('portions', true);
+    })
+      .catch((error) => noteRead('portions', false, error))
+      .finally(() => setPortionsLoading(false));
+  }, [noteRead]);
   useOnVaultChange(() => {
     if (lens === 'portions') loadPortions();
   });
@@ -1263,20 +1342,63 @@ export default function InsightsScreen() {
                 .map((item) => ({ title: item.title, time: formatTime12(item.scheduledFor.slice(11, 16)) })),
             });
           }
+          noteRead('day', true);
         })
         .catch((error) => {
           if (cancelled) return;
-          setErrorMessage(`Could not load today's data: ${error instanceof Error ? error.message : String(error)}`);
+          noteRead('day', false, error);
         })
         .finally(() => {
           if (!cancelled) setLoading(false);
         });
 
+      // Try again bumps readRetryTick, which re-runs this read.
+      void readRetryTick;
       return () => {
         cancelled = true;
       };
-    }, [lens, personalizationProfile]),
+    }, [lens, personalizationProfile, noteRead, readRetryTick]),
   );
+
+  // Every read that failed is asked again; the lens on screen shows its
+  // loading line while it does.
+  const tryReadsAgain = useCallback(() => {
+    setReadFailed({});
+    loadLabs();
+    loadMyMeds();
+    loadAdvisories();
+    if (lens === 'portions') loadPortions();
+    setReadRetryTick((tick) => tick + 1);
+  }, [lens, loadLabs, loadMyMeds, loadAdvisories, loadPortions]);
+
+  // The one read problem the lens on screen depends on, in its own words.
+  // Safety lenses say plainly that their check did not run.
+  const lensReadProblem: string | null = (() => {
+    if (readFailed.myMeds && lens === 'myMeds') {
+      return 'Your medications and the interaction checks could not be read just now, so the checks have not run. Nothing you recorded is lost.';
+    }
+    if (readFailed.advisories && lens === 'advisories') {
+      return "Today's advisories could not be worked out just now, so nothing here has been checked. Nothing you recorded is lost.";
+    }
+    if (readFailed.labs && lens === 'labs') return 'Your lab results could not be read just now. Nothing you recorded is lost.';
+    if (readFailed.portions && lens === 'portions') {
+      return "Your profile and today's meals could not be read just now. Nothing you recorded is lost.";
+    }
+    if (readFailed.profile && (lens === 'safeFoods' || lens === 'healingStage' || lens === 'sixDs' || lens === 'labelCheck')) {
+      return 'Your conditions, diet and allergies could not be read just now, so this list cannot be fitted to you. Nothing you recorded is lost.';
+    }
+    if (readFailed.safeFoods && lens === 'safeFoods') return 'The safe foods could not be read just now.';
+    if (readFailed.healingStage && lens === 'healingStage') return 'The foods for each stage could not be read just now.';
+    if (lens === 'nutrientRanking') {
+      if (readFailed.nutrientList) return 'The list of nutrients could not be read just now.';
+      if (readFailed.ranking || readFailed.dri) return 'The ranking could not be worked out just now.';
+    }
+    if (readFailed.more && isMoreLens(lens)) return 'This could not be read just now. Nothing you recorded is lost.';
+    if (readFailed.day && (lens === 'nutrients' || lens === 'hydration' || lens === 'sixDs' || lens === 'prep')) {
+      return "Today's meals could not be read just now. Nothing you recorded is lost.";
+    }
+    return null;
+  })();
 
   function changeScope(next: Scope) {
     setScope(next);
@@ -1344,6 +1466,7 @@ export default function InsightsScreen() {
             // once the actual cause is fully confirmed, not assumed
             // permanent either way.
             <View style={styles.foodLookupActiveListContainer}>
+              {lensReadProblem ? <ReadProblem message={lensReadProblem} onTryAgain={tryReadsAgain} /> : null}
               <NutrientRankingView
                 nutrients={allNutrients}
                 selected={rankingNutrient}
@@ -1378,7 +1501,9 @@ export default function InsightsScreen() {
               />
               <VaultClosedBand color={TAB_COLOR} categories={lensVault} />
               <LensFeedersRow tabPath="/insights" lensKey={lens} tabColor={TAB_COLOR} />
-              {lens === 'labelCheck' ? (
+              {lensReadProblem ? (
+                <ReadProblem message={lensReadProblem} onTryAgain={tryReadsAgain} />
+              ) : lens === 'labelCheck' ? (
               <View style={styles.bandColumn}>
                 <LabelCheckView
                   tabColor={TAB_COLOR}
@@ -1465,8 +1590,6 @@ export default function InsightsScreen() {
               </View>
             ) : loading ? (
               <LensLoadingCard />
-            ) : errorMessage ? (
-              <Text style={[styles.errorText, styles.panelStandalone]}>{errorMessage}</Text>
             ) : lens === 'nutrients' ? (
               !nutrientBreakdown || nutrientBreakdown.meals.length === 0 ? (
                 <Text style={[styles.emptyText, styles.panelStandalone]}>Save a meal to see this.</Text>
@@ -3702,9 +3825,12 @@ function HealingStageView({
 // build one from). lab_results/lab_tests are both real, already-built
 // infrastructure (recordLabResult/listLabResults/getLabTests) that simply
 // had zero UI anywhere in the app before this.
-const LAB_DATE_YEAR_OPTIONS = Array.from({ length: 6 }, (_, i) => String(new Date().getFullYear() - i));
+// Thirty years back, so an old report can be entered or changed.
+const LAB_DATE_YEAR_OPTIONS = Array.from({ length: 30 }, (_, i) => String(new Date().getFullYear() - i));
 const LAB_DATE_MONTH_OPTIONS = Array.from({ length: 12 }, (_, i) => String(i + 1));
 const LAB_DATE_DAY_OPTIONS = Array.from({ length: 31 }, (_, i) => String(i + 1));
+/** Report days shown before Show more, and how many more each press adds. */
+const LAB_DRAW_DAYS_STEP = 6;
 
 function daysAgoLabel(dateString: string): string {
   const then = new Date(`${dateString.slice(0, 10)}T00:00:00`);
@@ -3741,8 +3867,34 @@ function LabsView({
   const [formYear, setFormYear] = useState(String(now.getFullYear()));
   const [formMonth, setFormMonth] = useState(String(now.getMonth() + 1));
   const [formDay, setFormDay] = useState(String(now.getDate()));
+  const [formUnit, setFormUnit] = useState('');
+  // The result being changed, or null for a new one.
+  const [editingId, setEditingId] = useState<string | null>(null);
+  // A test the list does not have, added from the form.
+  const [ownTestOpen, setOwnTestOpen] = useState(false);
+  const [ownTestName, setOwnTestName] = useState('');
+  const [ownTestUnit, setOwnTestUnit] = useState('');
+  // Which test's whole history is open.
+  const [expandedTest, setExpandedTest] = useState<string | null>(null);
+  const [drawDaysShown, setDrawDaysShown] = useState(LAB_DRAW_DAYS_STEP);
+  // Days that hold a report file, so a draw whose results were removed
+  // still shows its files.
+  const [fileDays, setFileDays] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [confirm, confirmElement] = useConfirmSheet();
+
+  useEffect(() => {
+    let current = true;
+    countAttachmentsByOwner('lab_draw')
+      .then((counts) => {
+        if (current) setFileDays([...counts.keys()]);
+      })
+      .catch((error) => console.warn('[insights] could not count lab report files', error));
+    return () => {
+      current = false;
+    };
+  }, [labResults]);
 
   const testByCode = new Map(labTests.map((test) => [test.code, test]));
   // See NutrientRankingView's own identical comment.
@@ -3751,28 +3903,93 @@ function LabsView({
     [labTests],
   );
 
-  // Most recent result per test -- listLabResults already returns
-  // most-recent-first, so the first row seen per testCode is the one to
-  // keep.
-  const mostRecentByTest = new Map<string, LabResultRecord>();
+  // Every result per test, newest first (listLabResults already returns
+  // most-recent-first). The newest one leads each row; the rest open
+  // under it.
+  const resultsByTest = new Map<string, LabResultRecord[]>();
   for (const result of labResults) {
-    if (!mostRecentByTest.has(result.testCode)) mostRecentByTest.set(result.testCode, result);
+    const list = resultsByTest.get(result.testCode);
+    if (list) list.push(result);
+    else resultsByTest.set(result.testCode, [result]);
   }
-  const recentResults = Array.from(mostRecentByTest.values()).sort((a, b) => b.testedAt.localeCompare(a.testedAt));
+  const recentResults = Array.from(resultsByTest.values(), (list) => list[0]).sort((a, b) => b.testedAt.localeCompare(a.testedAt));
   // The lab's report belongs to a draw, not to one test, so its files are
-  // kept by the day the blood was drawn (owner kind lab_draw), the newest
-  // six days that have results.
-  const drawDays = [...new Set(labResults.map((result) => result.testedAt.slice(0, 10)))]
-    .sort((a, b) => b.localeCompare(a))
-    .slice(0, 6);
+  // kept by the day the blood was drawn (owner kind lab_draw): every day
+  // with a result or a file, newest first, a page at a time.
+  const allDrawDays = [...new Set([...labResults.map((result) => result.testedAt.slice(0, 10)), ...fileDays])].sort((a, b) =>
+    b.localeCompare(a),
+  );
+  const drawDays = allDrawDays.slice(0, drawDaysShown);
 
   function resetForm() {
+    setEditingId(null);
     setFormTestCode(null);
     setFormValue('');
+    setFormUnit('');
     setFormLabName('');
+    setOwnTestOpen(false);
+    setOwnTestName('');
+    setOwnTestUnit('');
     setFormYear(String(now.getFullYear()));
     setFormMonth(String(now.getMonth() + 1));
     setFormDay(String(now.getDate()));
+  }
+
+  function pickTest(code: string | null) {
+    setFormTestCode(code);
+    // The unit starts as the test's usual one and can be changed to what
+    // the report prints.
+    setFormUnit(code ? (testByCode.get(code)?.rangeUnit ?? '') : '');
+  }
+
+  function startChange(result: LabResultRecord) {
+    resetForm();
+    setEditingId(result.id);
+    setFormTestCode(result.testCode);
+    setFormValue(String(result.value));
+    setFormUnit(result.unit);
+    setFormLabName(result.labName ?? '');
+    setFormYear(result.testedAt.slice(0, 4));
+    setFormMonth(String(Number(result.testedAt.slice(5, 7))));
+    setFormDay(String(Number(result.testedAt.slice(8, 10))));
+    setFormOpen(true);
+  }
+
+  async function handleRemove(result: LabResultRecord) {
+    const name = testByCode.get(result.testCode)?.displayName ?? result.testCode;
+    const ok = await confirm({
+      title: 'Remove this result?',
+      message: t('{name} from {day} ({value} {unit}) will be removed. A report file kept for that day stays.', {
+        name,
+        day: result.testedAt.slice(0, 10),
+        value: String(result.value),
+        unit: result.unit,
+      }),
+      confirmLabel: 'Remove',
+      destructive: true,
+    });
+    if (!ok) return;
+    const done = await saveOrSay('The result was not removed. Try again.', async () => {
+      await deleteLabResult(result.id);
+      return true;
+    });
+    if (done) onSaved();
+  }
+
+  async function handleAddOwnTest() {
+    const name = ownTestName.trim();
+    if (!name) {
+      showInfoAlert('Almost there', 'Type the name of the test as the report prints it.');
+      return;
+    }
+    const code = await saveOrSay('The test was not added. Try again.', () => addOwnLabTest(name, ownTestUnit.trim()));
+    if (!code) return;
+    setFormTestCode(code);
+    setFormUnit(ownTestUnit.trim());
+    setOwnTestOpen(false);
+    setOwnTestName('');
+    setOwnTestUnit('');
+    onSaved();
   }
 
   async function handleSave() {
@@ -3781,31 +3998,40 @@ function LabsView({
       return;
     }
     const value = Number(formValue);
-    if (!Number.isFinite(value)) {
-      showInfoAlert('Almost there', 'Enter a valid number for the result.');
+    if (formValue.trim() === '' || !Number.isFinite(value)) {
+      showInfoAlert('Almost there', 'Enter the result as a number, such as 2.4.');
       return;
     }
     const year = Number(formYear);
     const month = Number(formMonth);
     const day = Number(formDay);
-    const pad = (n: number) => String(n).padStart(2, '0');
-    const testedAt = `${year}-${pad(month)}-${pad(day)}`;
-    const test = testByCode.get(formTestCode);
-    setSaving(true);
-    try {
-      await recordLabResult({
-        testCode: formTestCode,
-        value,
-        unit: test?.rangeUnit ?? '',
-        testedAt,
-        labName: formLabName.trim() || undefined,
-      });
-    } catch (error) {
-      setSaving(false);
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+    // A day the month does not have (February 31) rolls into the next
+    // month in a Date, which is how it is caught.
+    const drawn = new Date(year, month - 1, day);
+    if (drawn.getMonth() !== month - 1 || drawn.getDate() !== day) {
+      showInfoAlert('Almost there', 'That date does not exist. Check the day and the month.');
       return;
     }
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const testedAt = `${year}-${pad(month)}-${pad(day)}`;
+    if (testedAt > todayDateString()) {
+      showInfoAlert('Almost there', 'That date has not come yet. Pick the day the blood was drawn.');
+      return;
+    }
+    const test = testByCode.get(formTestCode);
+    const unit = formUnit.trim() || test?.rangeUnit || '';
+    const labName = formLabName.trim() || undefined;
+    setSaving(true);
+    const done = await saveOrSay(
+      editingId ? 'The change to this result was not saved. Try again.' : 'The result was not saved. Try again.',
+      async () => {
+        if (editingId) await updateLabResult(editingId, { testCode: formTestCode, value, unit, testedAt, labName });
+        else await recordLabResult({ testCode: formTestCode, value, unit, testedAt, labName });
+        return true;
+      },
+    );
     setSaving(false);
+    if (!done) return;
     setFormOpen(false);
     resetForm();
     onSaved();
@@ -3814,13 +4040,14 @@ function LabsView({
   return (
     <>
       {infoAlertElement}
+      {confirmElement}
       {loading ? (
         <Text style={[styles.emptyText, styles.panelStandalone]}>Loading…</Text>
       ) : recentResults.length === 0 ? (
         <Text style={[styles.emptyText, styles.panelStandalone]}>Nothing logged yet. Tap below to log your first result.</Text>
       ) : (
         <View style={styles.table}>
-          {recentResults.map((result) => {
+          {recentResults.map((result, index) => {
             const test = testByCode.get(result.testCode);
             // The lab's printed range when the result carries one; the
             // reference figure only when it is written in the same unit,
@@ -3831,20 +4058,59 @@ function LabsView({
             const high = printedRange ? result.labRangeHigh : sameUnit ? (test?.typicalRangeHigh ?? null) : null;
             const beyond = (low != null && result.value < low) || (high != null && result.value > high);
             const outsideRange = beyond && (printedRange || (low != null && high != null));
+            const history = resultsByTest.get(result.testCode) ?? [result];
+            const open = expandedTest === result.testCode;
             return (
-              <View key={result.testCode} style={styles.rankRow}>
-                <View style={styles.rankTextWrap}>
-                  <Text style={styles.rankFoodName}>
-                    {test?.displayName ?? result.testCode}
+              <View key={result.testCode}>
+                <TouchableOpacity
+                  ref={index === 0 ? walkMark.ref('labs.history') : undefined}
+                  style={styles.rankRow}
+                  onPress={() => setExpandedTest(open ? null : result.testCode)}
+                >
+                  <View style={styles.rankTextWrap}>
+                    <Text style={styles.rankFoodName}>
+                      {test?.displayName ?? result.testCode}
+                    </Text>
+                    <Text style={styles.rankFoodCategory}>
+                      {daysAgoLabel(result.testedAt)}
+                      {outsideRange ? (printedRange ? t(" · outside the lab's printed range") : t(' · outside typical range')) : ''}
+                      {history.length > 1 ? t(' · {count} results', { count: history.length }) : ''}
+                    </Text>
+                  </View>
+                  <Text style={styles.rankAmount}>
+                    {result.value} {result.unit}
                   </Text>
-                  <Text style={styles.rankFoodCategory}>
-                    {daysAgoLabel(result.testedAt)}
-                    {outsideRange ? (printedRange ? " · outside the lab's printed range" : ' · outside typical range') : ''}
-                  </Text>
-                </View>
-                <Text style={styles.rankAmount}>
-                  {result.value} {result.unit}
-                </Text>
+                  <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={16} color={colors.textMuted} />
+                </TouchableOpacity>
+                {open
+                  ? history.map((entry, entryIndex) => (
+                      <View key={entry.id} style={[styles.rankRow, { paddingLeft: 16 }]}>
+                        <View style={styles.rankTextWrap}>
+                          <Text style={styles.rankFoodCategory}>
+                            {entry.testedAt.slice(0, 10)}
+                            {entry.labName ? ` · ${entry.labName}` : ''}
+                          </Text>
+                          <Text style={styles.rankAmount}>
+                            {entry.value} {entry.unit}
+                          </Text>
+                        </View>
+                        <TouchableOpacity
+                          ref={index === 0 && entryIndex === 0 ? walkMark.ref('labs.change') : undefined}
+                          style={styles.rankActionButton}
+                          onPress={() => startChange(entry)}
+                        >
+                          <Text style={[styles.rankActionText, { color: tabColor }]}>Change</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          ref={index === 0 && entryIndex === 0 ? walkMark.ref('labs.remove') : undefined}
+                          style={styles.rankActionButton}
+                          onPress={() => handleRemove(entry)}
+                        >
+                          <Text style={[styles.rankActionText, { color: colors.danger }]}>Remove</Text>
+                        </TouchableOpacity>
+                      </View>
+                    ))
+                  : null}
               </View>
             );
           })}
@@ -3864,25 +4130,78 @@ function LabsView({
               />
             </View>
           ))}
+          {allDrawDays.length > drawDays.length ? (
+            <TouchableOpacity
+              style={[styles.secondaryButton, styles.rankSpaced]}
+              onPress={() => setDrawDaysShown((shown) => shown + LAB_DRAW_DAYS_STEP)}
+            >
+              <Text style={styles.secondaryButtonText}>
+                {t('Show more ({count} earlier)', { count: allDrawDays.length - drawDays.length })}
+              </Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
       ) : null}
 
       {formOpen ? (
         <View style={[styles.formCard, styles.rankSpaced, { borderColor: tabColor }]}>
-          <Text style={[styles.sectionLabel, { color: tabColor }]}>Test</Text>
+          <Text style={[styles.sectionLabel, { color: tabColor }]}>{editingId ? 'Change This Result' : 'Test'}</Text>
           <PopoverSelect
             options={testOptions}
             selected={formTestCode}
-            onSelect={setFormTestCode}
+            onSelect={pickTest}
             tabColor={tabColor}
             searchable
             markRef={walkMark.ref('labs.test')}
             placeholder="Pick a test..."
             minWidth={220}
           />
-          <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>
-            Result{testByCode.get(formTestCode ?? '')?.rangeUnit ? ` (${testByCode.get(formTestCode ?? '')?.rangeUnit})` : ''}
-          </Text>
+          {ownTestOpen ? (
+            <View style={styles.rankSpaced}>
+              <Text style={[styles.sectionLabel, { color: tabColor }]}>Name of the test, as the report prints it</Text>
+              <AppTextInput
+                onVoiceResult={setOwnTestName}
+                micColor={tabColor}
+                style={styles.labInput}
+                value={ownTestName}
+                onChangeText={setOwnTestName}
+                placeholder="e.g. Reverse T3"
+                placeholderTextColor={colors.textMuted}
+              />
+              <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Its unit (optional)</Text>
+              <AppTextInput
+                style={styles.labInput}
+                value={ownTestUnit}
+                onChangeText={setOwnTestUnit}
+                placeholder="e.g. ng/dL"
+                placeholderTextColor={colors.textMuted}
+              />
+              <ThumbRow primary="last" style={styles.buttonRow}>
+                <TouchableOpacity
+                  style={[styles.secondaryButton, { flex: 1 }]}
+                  onPress={() => {
+                    setOwnTestOpen(false);
+                    setOwnTestName('');
+                    setOwnTestUnit('');
+                  }}
+                >
+                  <Text style={styles.secondaryButtonText}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.primaryButton, { flex: 1 }]} onPress={handleAddOwnTest}>
+                  <Text style={styles.primaryButtonText}>Add This Test</Text>
+                </TouchableOpacity>
+              </ThumbRow>
+            </View>
+          ) : (
+            <TouchableOpacity
+              ref={walkMark.ref('labs.ownTest')}
+              style={[styles.secondaryButton, styles.rankSpaced]}
+              onPress={() => setOwnTestOpen(true)}
+            >
+              <Text style={styles.secondaryButtonText}>+ Add a Test of Your Own</Text>
+            </TouchableOpacity>
+          )}
+          <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Result</Text>
           <AppTextInput
             style={styles.labInput}
             value={formValue}
@@ -3891,6 +4210,16 @@ function LabsView({
             placeholderTextColor={colors.textMuted}
             keyboardType="decimal-pad"
           />
+          <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Unit, as printed on the report</Text>
+          <View ref={walkMark.ref('labs.unit')} collapsable={false}>
+            <AppTextInput
+              style={styles.labInput}
+              value={formUnit}
+              onChangeText={setFormUnit}
+              placeholder="e.g. mIU/L"
+              placeholderTextColor={colors.textMuted}
+            />
+          </View>
           <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Date Drawn</Text>
           <View style={styles.labDateRow}>
             <PopoverSelect options={LAB_DATE_YEAR_OPTIONS} selected={formYear} onSelect={setFormYear} tabColor={tabColor} minWidth={72} />
@@ -3923,7 +4252,7 @@ function LabsView({
               onPress={handleSave}
               disabled={saving}
             >
-              <Text style={styles.primaryButtonText}>{saving ? 'Saving…' : 'Save Result'}</Text>
+              <Text style={styles.primaryButtonText}>{saving ? 'Saving…' : editingId ? 'Save Change' : 'Save Result'}</Text>
             </TouchableOpacity>
           </ThumbRow>
         </View>
@@ -3931,7 +4260,10 @@ function LabsView({
         <TouchableOpacity
           ref={walkMark.ref('labs.add')}
           style={[styles.secondaryButton, styles.rankSpaced, { borderWidth: 1, borderColor: tabColor }]}
-          onPress={() => setFormOpen(true)}
+          onPress={() => {
+            resetForm();
+            setFormOpen(true);
+          }}
         >
           <Text style={styles.secondaryButtonText}>+ Log a Result</Text>
         </TouchableOpacity>
@@ -3981,6 +4313,8 @@ function MyMedsView({
   const [formLinkType, setFormLinkType] = useState<'none' | 'food' | 'treatment'>('none');
   const [formFoodKeyword, setFormFoodKeyword] = useState('');
   const [formTreatmentId, setFormTreatmentId] = useState<string | null>(null);
+  // The rule being changed, or null for a new one.
+  const [editingRuleId, setEditingRuleId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
   const treatmentOptions = useMemo(
@@ -3995,6 +4329,17 @@ function MyMedsView({
     setFormLinkType('none');
     setFormFoodKeyword('');
     setFormTreatmentId(null);
+    setEditingRuleId(null);
+  }
+
+  function startChangeRule(rule: PersonalRule) {
+    setEditingRuleId(rule.id);
+    setFormDescription(rule.description);
+    setFormSource(rule.source);
+    setFormLinkType(rule.linkType);
+    setFormFoodKeyword(rule.linkType === 'food' ? (rule.linkLabel ?? rule.linkValue ?? '') : '');
+    setFormTreatmentId(rule.linkType === 'treatment' ? (rule.linkValue ?? null) : null);
+    setFormOpen(true);
   }
 
   async function handleSaveRule() {
@@ -4011,23 +4356,25 @@ function MyMedsView({
       showInfoAlert('Almost there', 'Pick which medication or supplement this is about.');
       return;
     }
+    const input = {
+      description,
+      source: formSource,
+      linkType: formLinkType,
+      linkValue: formLinkType === 'food' ? formFoodKeyword : formLinkType === 'treatment' ? formTreatmentId : null,
+      linkLabel:
+        formLinkType === 'food'
+          ? formFoodKeyword.trim()
+          : formLinkType === 'treatment'
+            ? (treatmentById.get(formTreatmentId ?? '')?.name ?? null)
+            : null,
+    };
     setSaving(true);
     try {
-      await createPersonalRule({
-        description,
-        source: formSource,
-        linkType: formLinkType,
-        linkValue: formLinkType === 'food' ? formFoodKeyword : formLinkType === 'treatment' ? formTreatmentId : null,
-        linkLabel:
-          formLinkType === 'food'
-            ? formFoodKeyword.trim()
-            : formLinkType === 'treatment'
-              ? (treatmentById.get(formTreatmentId ?? '')?.name ?? null)
-              : null,
-      });
+      if (editingRuleId) await updatePersonalRule(editingRuleId, input);
+      else await createPersonalRule(input);
     } catch (error) {
       setSaving(false);
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+      sayNotSaved(editingRuleId ? 'The change to this rule was not saved. Try again.' : 'The rule was not saved. Try again.', error);
       return;
     }
     setSaving(false);
@@ -4037,8 +4384,14 @@ function MyMedsView({
   }
 
   async function handleToggleRule(rule: PersonalRule) {
-    await setPersonalRuleActive(rule.id, !rule.active);
-    onPersonalRuleChanged();
+    const done = await saveOrSay(
+      rule.active ? 'The rule was not paused. Try again.' : 'The rule was not turned back on. Try again.',
+      async () => {
+        await setPersonalRuleActive(rule.id, !rule.active);
+        return true;
+      },
+    );
+    if (done) onPersonalRuleChanged();
   }
 
   async function handleDeleteRule(rule: PersonalRule) {
@@ -4049,8 +4402,11 @@ function MyMedsView({
       destructive: true,
     });
     if (!ok) return;
-    await deletePersonalRule(rule.id);
-    onPersonalRuleChanged();
+    const done = await saveOrSay('The rule was not deleted. Try again.', async () => {
+      await deletePersonalRule(rule.id);
+      return true;
+    });
+    if (done) onPersonalRuleChanged();
   }
 
   if (loading) {
@@ -4204,6 +4560,9 @@ function MyMedsView({
                       {linkSummary ? ` · ${linkSummary}` : ''}
                     </Text>
                   </TouchableOpacity>
+                  <TouchableOpacity ref={walkMark.ref('meds.changeRule')} style={styles.rankActionButton} onPress={() => startChangeRule(rule)}>
+                    <Text style={[styles.rankActionText, { color: tabColor }]}>Change</Text>
+                  </TouchableOpacity>
                   <TouchableOpacity ref={walkMark.ref('meds.pause')} style={styles.rankActionButton} onPress={() => handleToggleRule(rule)}>
                     <Text style={[styles.rankActionText, { color: tabColor }]}>{rule.active ? 'Pause' : 'Resume'}</Text>
                   </TouchableOpacity>
@@ -4218,7 +4577,9 @@ function MyMedsView({
 
         {formOpen ? (
           <View style={[styles.formCard, styles.rankSpaced, { borderColor: tabColor }]}>
-            <Text style={[styles.sectionLabel, { color: tabColor }]}>What did you notice, or what were you told?</Text>
+            <Text style={[styles.sectionLabel, { color: tabColor }]}>
+              {editingRuleId ? 'Change this rule: what did you notice, or what were you told?' : 'What did you notice, or what were you told?'}
+            </Text>
             <View ref={walkMark.ref('meds.ruleText')} collapsable={false}>
             <NotesInput
               micColor={tabColor}
@@ -4311,7 +4672,7 @@ function MyMedsView({
                 onPress={handleSaveRule}
                 disabled={saving}
               >
-                <Text style={styles.primaryButtonText}>{saving ? 'Saving…' : 'Save Rule'}</Text>
+                <Text style={styles.primaryButtonText}>{saving ? 'Saving…' : editingRuleId ? 'Save Change' : 'Save Rule'}</Text>
               </TouchableOpacity>
             </ThumbRow>
           </View>
@@ -4319,7 +4680,10 @@ function MyMedsView({
           <TouchableOpacity
             ref={walkMark.ref('meds.addRule')}
             style={[styles.secondaryButton, styles.rankSpaced, { borderWidth: 1, borderColor: tabColor }]}
-            onPress={() => setFormOpen(true)}
+            onPress={() => {
+              resetRuleForm();
+              setFormOpen(true);
+            }}
           >
             <Text style={styles.secondaryButtonText}>+ Add a Rule of Your Own</Text>
           </TouchableOpacity>

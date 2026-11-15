@@ -167,6 +167,11 @@ export type ToolMark =
   | 'capture.attachFile'
   | 'appointments.files'
   | 'labs.files'
+  | 'labs.history'
+  | 'labs.change'
+  | 'labs.remove'
+  | 'labs.ownTest'
+  | 'labs.unit'
   | 'finance.planFiles'
   | 'finance.medFiles'
   | 'emergency.files'
@@ -647,6 +652,7 @@ export type ToolMark =
   | 'meds.addRule'
   | 'meds.delete'
   | 'meds.pause'
+  | 'meds.changeRule'
   | 'meds.ruleText'
   | 'meds.saveRule'
   | 'meds.source'
@@ -5987,24 +5993,47 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Tap + Log a Result.', mark: 'labs.add' },
         { say: 'Tap the Test picker and pick the test.', mark: 'labs.test' },
-        { say: 'Type the value, set the date it was drawn, and add the lab if you like.' },
+        { say: 'Type the value. The unit starts as the usual one; change it to what the report prints.', mark: 'labs.unit' },
+        { say: 'Set the date it was drawn, and add the lab if you like.' },
         { say: 'Tap Save Result.', mark: 'labs.save' },
       ],
-      forYou: 'It joins your recent results and the lab charts on Trends > Labs.',
+      forYou: 'It joins your results and the lab charts on Trends > Labs. A date that does not exist, or one that has not come yet, is caught before saving.',
+    },
+    {
+      key: 'ownTest',
+      title: 'Add a test the list does not have',
+      steps: [
+        { say: 'Tap + Log a Result.', mark: 'labs.add' },
+        { say: 'Tap + Add a Test of Your Own.', mark: 'labs.ownTest' },
+        { say: 'Type its name as the report prints it, and its unit if you know it, then tap Add This Test.' },
+        { say: 'It is now picked. Type the value and tap Save Result.', mark: 'labs.save' },
+      ],
+      forYou: 'Tests you add are offered every time you log a result, beside the ones the app knows.',
     },
     {
       key: 'read',
-      title: 'Read your recent results',
+      title: 'Read every result for a test',
       steps: [
-        { say: 'Read Recent results. Each line gives the value, the date and how long ago it was.' },
+        { say: 'Each line shows the newest result for a test: the value, how long ago, and how many results it has.' },
+        { say: 'Tap a test to open every result it has, newest first.', mark: 'labs.history' },
       ],
-      forYou: 'For results over time, open Labs on Trends.',
+      forYou: 'For results over time as a chart, open Labs on Trends.',
+    },
+    {
+      key: 'change',
+      title: 'Change or remove a result',
+      steps: [
+        { say: 'Tap the test to open its results.', mark: 'labs.history' },
+        { say: 'Tap Change beside a result to correct the value, unit, date or lab, then tap Save Change.', mark: 'labs.change' },
+        { say: 'Or tap Remove to take it out. It asks first.', mark: 'labs.remove' },
+      ],
+      forYou: "A report file kept for that day stays where it is, under The report from.",
     },
     {
       key: 'files',
       title: "Keep the lab's report",
       steps: [
-        { say: "Under The report from, find the day the blood was drawn and tap Files.", mark: 'labs.files', stay: true },
+        { say: "Under The report from, find the day the blood was drawn and tap Files. Tap Show more for earlier days.", mark: 'labs.files', stay: true },
         { say: "Tap Attach a File and pick it: the PDF from the lab, a download from a patient portal, or a photo of the printout." },
       ],
       forYou: "The report is kept by the day of the draw, so every result from that day shares it. The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
@@ -6034,9 +6063,10 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     {
       key: 'manage',
-      title: 'Pause or delete a rule',
+      title: 'Change, pause or delete a rule',
       steps: [
-        { say: 'Under Manage Your Rules, tap Pause to stop a rule showing, or Resume to bring it back.', mark: 'meds.pause' },
+        { say: 'Under Manage Your Rules, tap Change to reword a rule or what it is tied to, then tap Save Change.', mark: 'meds.changeRule' },
+        { say: 'Tap Pause to stop a rule showing, or Resume to bring it back.', mark: 'meds.pause' },
         { say: 'Tap Delete to remove it for good.', mark: 'meds.delete' },
       ],
       forYou: 'Pause keeps the rule for later. Delete asks first.',
