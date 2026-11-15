@@ -136,7 +136,7 @@ const AREAS: readonly Area[] = [
     one: 'routine',
     many: 'routines',
     count: ['routines'],
-    quiet: ['routine_steps', 'routine_occasions', 'routine_runs'],
+    quiet: ['routine_steps', 'routine_occasions', 'routine_runs', 'routine_run_steps'],
   },
   {
     one: 'To Do List entry',

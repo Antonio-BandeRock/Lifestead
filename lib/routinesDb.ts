@@ -819,6 +819,83 @@ export async function finishRoutineRun(
   );
 }
 
+/** One step of a walk answered, done or skipped. Written as the person
+ *  answers it, beside the run's counts, so Life > Did I Do It can list the
+ *  steps under the walk they belong to. Going Back and answering a step
+ *  again replaces its row rather than adding a second one. */
+export async function recordRoutineRunStep(
+  runId: string | null,
+  routineId: string,
+  step: { id: string; text: string; checkId: string | null; position: number },
+  answer: 'done' | 'skipped',
+  at?: string,
+): Promise<void> {
+  if (!runId) return;
+  const db = await getDatabase();
+  await db.runAsync(`DELETE FROM routine_run_steps WHERE run_id = ? AND step_id = ?`, runId, step.id);
+  await db.runAsync(
+    `INSERT INTO routine_run_steps (id, run_id, routine_id, step_id, step_text, check_id, position, answer, answered_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    newId('rstep'),
+    runId,
+    routineId,
+    step.id,
+    step.text,
+    step.checkId,
+    step.position,
+    answer,
+    at ?? new Date().toISOString(),
+  );
+}
+
+/** Takes a step answer back, for when the person unticks it on the walk. */
+export async function clearRoutineRunStep(runId: string | null, stepId: string): Promise<void> {
+  if (!runId) return;
+  const db = await getDatabase();
+  await db.runAsync(`DELETE FROM routine_run_steps WHERE run_id = ? AND step_id = ?`, runId, stepId);
+}
+
+/** How long a walk answered from notifications stays one walk. A routine
+ *  walked from the lock screen has no screen to open and close, so each
+ *  press finds the walk it belongs to: the newest unfinished walk of this
+ *  routine started within this many hours, or a new one. */
+const NOTIFICATION_WALK_HOURS = 6;
+
+/** The walk a step answered from a notification belongs to, started if
+ *  there is none. Returns the run's id and how many steps it has had done. */
+export async function runForNotificationStep(
+  routineId: string,
+  routineName: string,
+  stepsTotal: number,
+  firstStep: string | null,
+): Promise<string | null> {
+  if (stepsTotal <= 0) return null;
+  const db = await getDatabase();
+  const since = new Date(Date.now() - NOTIFICATION_WALK_HOURS * 3600_000).toISOString();
+  const open = await db.getFirstAsync<{ id: string }>(
+    `SELECT id FROM routine_runs
+      WHERE routine_id = ? AND completed_at IS NULL AND started_at >= ?
+      ORDER BY started_at DESC LIMIT 1`,
+    routineId,
+    since,
+  );
+  if (open) return open.id;
+  return startRoutineRun(routineId, routineName, stepsTotal, firstStep);
+}
+
+/** The run's counts worked out again from its step rows, for a walk whose
+ *  steps were answered one notification at a time. */
+export async function runStepCounts(runId: string): Promise<{ done: number; skipped: number }> {
+  const db = await getDatabase();
+  const row = await db.getFirstAsync<{ done: number | null; skipped: number | null }>(
+    `SELECT SUM(CASE WHEN answer = 'done' THEN 1 ELSE 0 END) AS done,
+            SUM(CASE WHEN answer = 'skipped' THEN 1 ELSE 0 END) AS skipped
+       FROM routine_run_steps WHERE run_id = ?`,
+    runId,
+  );
+  return { done: row?.done ?? 0, skipped: row?.skipped ?? 0 };
+}
+
 // ------------------------------------------------------------ what Home reads
 
 export async function getRoutinesHomeData(): Promise<{

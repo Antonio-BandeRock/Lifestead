@@ -185,6 +185,7 @@ import { getGardenYieldHomeSummary } from '../../lib/harvestYieldDb';
 import { describeReconcileQueue, lookbackDateString } from '../../lib/reconciliation';
 import {
   describeChecksSummary,
+  routineForCheck,
   describeLaterOnList,
   describeRoutineStanding,
   orderRoutinesForNow,
@@ -4241,7 +4242,13 @@ export default function HomeScreen() {
   // door. This is the door, and it is there whether the band is empty or
   // full, because the moment somebody wants a second routine is the
   // moment the band is no longer empty.
-  function renderBandWayIn(lens: string, title: string, detail: string, markRef?: (node: unknown) => void) {
+  function renderBandWayIn(
+    lens: string,
+    title: string,
+    detail: string,
+    markRef?: (node: unknown) => void,
+    icon: ComponentProps<typeof Ionicons>['name'] = 'add-circle-outline',
+  ) {
     return (
       <TouchableOpacity
         ref={markRef}
@@ -4249,7 +4256,7 @@ export default function HomeScreen() {
         activeOpacity={0.8}
         onPress={() => router.push({ pathname: '/life', params: { openLifeLens: lens } })}
       >
-        <Ionicons name="add-circle-outline" size={18} color={colors.tabLife} style={textShadow} />
+        <Ionicons name={icon} size={18} color={colors.tabLife} style={textShadow} />
         <View style={styles.reminderBody}>
           <Text style={styles.reminderTitle}>{title}</Text>
           <Text style={styles.reminderDetail}>{detail}</Text>
@@ -4505,7 +4512,13 @@ export default function HomeScreen() {
   function renderDoneChecks() {
     if (!isHomeSectionVisible(visualPrefs, 'doneChecks')) return null;
     const now = new Date();
-    const checks = data?.doneChecks ?? [];
+    // Only the things no routine walks past (2026-11-15, direct
+    // instruction): a routine's steps are checked off in its walk and shown
+    // under it, never mixed in among the things done on their own.
+    const routinesHere = data?.routines ?? [];
+    const allChecks = data?.doneChecks ?? [];
+    const checks = allChecks.filter((check) => routineForCheck(check.id, routinesHere) === null);
+    const inRoutines = allChecks.length - checks.length;
     const summaryLine = describeChecksSummary(summarizeChecks(checks, now));
     // In clock order, and only what is waiting or due within the look-ahead
     // (toDoListView in lib/routines.ts, 2026-10-28). The rest is counted
@@ -4573,14 +4586,30 @@ export default function HomeScreen() {
           );
         })}
         {laterLine ? <Text style={styles.bandCaption}>{laterLine}</Text> : null}
+        {inRoutines > 0 ? (
+          <Text style={styles.bandCaption}>
+            {inRoutines === 1
+              ? t('1 more is a step in a routine, checked off as you walk it.')
+              : t('{count} more are steps in your routines, checked off as you walk them.', { count: inRoutines })}
+          </Text>
+        ) : null}
         {renderBandWayIn(
           'didIDoIt',
-          checks.length === 0 ? 'Add the first thing to do' : 'Add or change something to do',
-          checks.length === 0
+          allChecks.length === 0 ? 'Add the first thing to do' : 'Add or change something to do',
+          allChecks.length === 0
             ? 'The things you need to do regularly, each with its times and days. Check one off when you do it and you will know later whether you did.'
             : 'Opens Life, where these get their times and are checked off.',
           walkMark.ref('home.checkWayIn'),
         )}
+        {allChecks.length > 0
+          ? renderBandWayIn(
+              'lookBack',
+              'Look back at what you did',
+              'Opens Did I Do It: what you checked off on a day, things on their own and each routine with its steps.',
+              undefined,
+              'time-outline',
+            )
+          : null}
       </View>,
       // A row of its own since 2026-10-28, still in Life's colour.
       { color: colors.tabLife, icon: 'checkmark-done' },

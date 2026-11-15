@@ -28,6 +28,7 @@ import { DaysUntilSection } from '../../components/DaysUntilSection';
 import { TodoSection } from '../../components/TodoSection';
 import { ProjectsSection } from '../../components/ProjectsSection';
 import { DidIDoItSection } from '../../components/DidIDoItSection';
+import { DidIDoItLookBack } from '../../components/DidIDoItLookBack';
 import { KitchenSection } from '../../components/KitchenSection';
 import { RoutinesSection } from '../../components/RoutinesSection';
 import { MOVEMENT_HELP_SECTIONS, MovementSection } from '../../components/MovementSection';
@@ -196,6 +197,7 @@ type LifeLens =
   | 'workouts'
   | 'routines'
   | 'didIDoIt'
+  | 'lookBack'
   | 'daysUntil'
   | 'todos'
   | 'projects';
@@ -318,6 +320,25 @@ const ROUTINES_HELP_SECTIONS: HelpSection[] = [
   {
     heading: 'What it will not do',
     body: 'When it happens is used for the order they are listed in and nothing else: it never makes anything go off. Only a nudge does that, and only at the time you gave it. Even then the nudge says the name of the routine and waits, because tapping it is what opens the walk. Nothing here walks a step for you, and the routine only counts as done once you reach the last step.',
+  },
+];
+
+const LOOK_BACK_HELP_SECTIONS: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'Looking back at a day to see what you checked off. Did I take my pill this morning, did I water the plants yesterday. Only what was checked off is listed, so anything not here was not checked off that day.',
+  },
+  {
+    heading: 'On their own, then each routine',
+    body: 'Things you checked off by themselves come first: the things on your To Do List no routine walks past, and Tasks you marked done, each with the times you checked it off. Each routine comes after, with every walk you made that day and the steps you did on it listed under the walk. A step is never listed again among the things on their own.',
+  },
+  {
+    heading: 'Going back a day',
+    body: 'Earlier and Later move a day at a time, and Today comes back to today. Nothing here changes a record: things are set up and checked off on the To Do List, Tasks and Routines.',
+  },
+  {
+    heading: 'Walks from before each step was kept',
+    body: 'Each step of a routine walk is kept from this version on. A walk from before then shows how many steps were done, and the things it checked off are listed under the routine.',
   },
 ];
 
@@ -583,6 +604,7 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
   // step can write a check, which is the join the whole design rests on.
   { key: 'routines', label: 'Routines', icon: 'footsteps-outline', help: ROUTINES_HELP_SECTIONS },
   { key: 'didIDoIt', label: 'To Do List', icon: 'checkmark-done-outline', help: DID_I_DO_IT_HELP_SECTIONS },
+  { key: 'lookBack', label: 'Did I Do It', icon: 'time-outline', help: LOOK_BACK_HELP_SECTIONS },
   // 2026-09-22, when a Days Until counter stopped having to be about the
   // garden. Every counter of either kind reads here, in the order they
   // land; a counter started here belongs to nothing unless a garden area
@@ -602,7 +624,7 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
 // subject, with the lenses opened lately on top (lib/lensMenu.ts). Every
 // lens is in exactly one group; scripts/test_lens_menu.js checks that.
 const LIFE_LENS_GROUPS: readonly { group: string; keys: readonly LifeLens[] }[] = [
-  { group: 'Day to day', keys: ['groceryList', 'kitchen', 'todos', 'didIDoIt', 'routines', 'upkeep', 'daysUntil', 'projects'] },
+  { group: 'Day to day', keys: ['groceryList', 'kitchen', 'todos', 'didIDoIt', 'lookBack', 'routines', 'upkeep', 'daysUntil', 'projects'] },
   { group: 'Health', keys: ['conditions', 'myMeds', 'emergency', 'movement', 'workouts'] },
   { group: 'Money and work', keys: ['finances', 'work'] },
   { group: 'Reading', keys: ['healthLiteracy', 'earthMatters', 'searchReading'] },
@@ -2150,6 +2172,7 @@ export default function LifeScreen() {
             {lens === 'workouts' ? <WorkoutsSection tabColor={TAB_COLOR} onDragChange={setRowDragging} /> : null}
             {lens === 'routines' ? <RoutinesSection tabColor={TAB_COLOR} /> : null}
             {lens === 'didIDoIt' ? <DidIDoItSection tabColor={TAB_COLOR} /> : null}
+            {lens === 'lookBack' ? <DidIDoItLookBack tabColor={TAB_COLOR} /> : null}
             {lens === 'daysUntil' ? (
               <View style={band.box}>
                 <Text style={styles.cardTitle}>Days Until</Text>

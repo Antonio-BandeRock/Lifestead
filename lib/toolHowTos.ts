@@ -215,6 +215,9 @@ export type ToolMark =
   | 'routines.stepEdit'
   | 'routines.speak'
   | 'didIDoIt.yes'
+  | 'lookBack.earlier'
+  | 'lookBack.onTheirOwn'
+  | 'lookBack.routine'
   | 'didIDoIt.mistake'
   | 'didIDoIt.change'
   | 'didIDoIt.moveDown'
@@ -1532,6 +1535,18 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Remove it to say yes. The steps go with it, and anything already checked off stays recorded.' },
       ],
       forYou: 'Your routines hold only the ones you still use.',
+    },
+  ],
+  '/life#lookBack': [
+    {
+      key: 'day',
+      title: 'Look back at what you checked off on a day',
+      steps: [
+        { say: 'Today opens first. Tap Earlier to go back a day, as many times as you need.', mark: 'lookBack.earlier' },
+        { say: 'Open On their own for the things and Tasks you checked off by themselves, each with its times.', mark: 'lookBack.onTheirOwn' },
+        { say: 'Open a routine to see each walk you made that day, with the steps you did listed under it.', mark: 'lookBack.routine' },
+      ],
+      forYou: 'Only what was checked off is listed, so anything missing from the day was not checked off. Nothing here changes a record.',
     },
   ],
   '/life#didIDoIt': [

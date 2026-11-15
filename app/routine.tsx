@@ -62,6 +62,7 @@ import {
   getRoutineOccasions,
   markDoneCheck,
   markRoutineRunProgress,
+  recordRoutineRunStep,
   startRoutineRun,
   undoLastCheckMark,
 } from '../lib/routinesDb';
@@ -331,6 +332,15 @@ export default function RoutineWalkScreen() {
       setTicked((current) => ({ ...current, [stepId]: markedAt }));
     }
     const nextSkipped = skipThisOne && !skipped.includes(stepId) ? [...skipped, stepId] : skipped;
+    // The step's own line in the walk's record, for Life > Did I Do It. A
+    // step ticked earlier on this screen keeps the time it was ticked.
+    await recordRoutineRunStep(
+      runIdRef.current,
+      routine.id,
+      { id: stepId, text: step.text, checkId: checkId ?? null, position: index },
+      skipThisOne ? 'skipped' : 'done',
+      skipThisOne ? undefined : ticked[stepId],
+    );
     if (index + 1 < steps.length) {
       setIndex(index + 1);
       await markRoutineRunProgress(runIdRef.current, progressFor(index + 1, nextSkipped));

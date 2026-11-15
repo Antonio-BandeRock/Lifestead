@@ -201,6 +201,7 @@ export const VOICE_LENS_DIRECTORY: VoiceLensPlace[] = [
   { tab: '/life', param: 'openLifeLens', key: 'workouts', label: 'Workouts' },
   { tab: '/life', param: 'openLifeLens', key: 'routines', label: 'Routines' },
   { tab: '/life', param: 'openLifeLens', key: 'didIDoIt', label: 'To Do List' },
+  { tab: '/life', param: 'openLifeLens', key: 'lookBack', label: 'Did I Do It' },
   { tab: '/life', param: 'openLifeLens', key: 'daysUntil', label: 'Days Until' },
   { tab: '/life', param: 'openLifeLens', key: 'todos', label: 'Tasks' },
   { tab: '/life', param: 'openLifeLens', key: 'projects', label: 'Projects' },

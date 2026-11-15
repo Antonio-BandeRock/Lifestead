@@ -6141,6 +6141,27 @@ async function runDatabaseInitialization() {
       );
       CREATE INDEX IF NOT EXISTS idx_routine_runs_routine ON routine_runs(routine_id, started_at);
 
+      -- Each step of a walk, done or skipped, 2026-11-15, so Life > Did I
+      -- Do It can list a routine's steps under the walk they were part of
+      -- (direct instruction: "each routine with its tasks being a sub
+      -- characteristic of them"). The wording and the check are carried for
+      -- the same reason routine_runs carries the routine's name: the record
+      -- outlives an edit to the routine. One row per step per walk; going
+      -- Back and answering again replaces it. Walks from before this table
+      -- keep only routine_runs' counts.
+      CREATE TABLE IF NOT EXISTS routine_run_steps (
+        id TEXT PRIMARY KEY,
+        run_id TEXT NOT NULL,
+        routine_id TEXT NOT NULL,
+        step_id TEXT NOT NULL,
+        step_text TEXT NOT NULL,
+        check_id TEXT,
+        position INTEGER NOT NULL DEFAULT 0,
+        answer TEXT NOT NULL,
+        answered_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_routine_run_steps_run ON routine_run_steps(run_id, position);
+
       -- --- Emergency & Essentials: what someone else needs to know (2026-09-05) --
       --
       -- Life gains its fifth area. NOTHING HERE IS AN ALERT SYSTEM, and the

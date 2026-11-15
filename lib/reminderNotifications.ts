@@ -91,11 +91,14 @@ import {
 import {
   completeRoutine,
   finishRoutineRun,
+  markRoutineRunProgress,
+  recordRoutineRunStep,
+  runForNotificationStep,
+  runStepCounts,
   getRoutine,
   listCheckReminders,
   listRoutineReminders,
   markDoneCheck,
-  startRoutineRun,
 } from './routinesDb';
 import { listExercisePlans, listPlanMarks } from './exercisePlanDb';
 import { listWorkouts } from './workoutsDb';
@@ -3087,13 +3090,31 @@ async function recordAnswer(
     const step = steps[index];
     if (!step) return;
     if (step.checkId) await markDoneCheck(step.checkId, 'routine', id, now.toISOString());
-    if (index === steps.length - 1) {
-      // The last step: the routine is done, and the walk goes into the
-      // record Keeping Up reads, the same as a walk in the app.
+    // Each press goes into the walk it belongs to, step by step, the same
+    // record a walk in the app keeps, so Life > Did I Do It lists the step
+    // under its routine (2026-11-15). The walk is found or started here,
+    // since a walk on the lock screen has no screen that opens it.
+    const routine = await getRoutine(id);
+    const runId = await runForNotificationStep(id, routine?.name ?? '', steps.length, step.text);
+    const known = routine?.steps[index];
+    const stepId = known && known.text === step.text ? known.id : `position-${index}`;
+    await recordRoutineRunStep(runId, id, { id: stepId, text: step.text, checkId: step.checkId, position: index }, 'done', now.toISOString());
+    if (runId) {
+      const counts = await runStepCounts(runId);
+      if (index === steps.length - 1) {
+        // The last step: the routine is done and the walk is finished.
+        await completeRoutine(id);
+        await finishRoutineRun(runId, counts.done, counts.skipped);
+      } else {
+        await markRoutineRunProgress(runId, {
+          stepsDone: counts.done,
+          stepsSkipped: counts.skipped,
+          step: steps[index + 1]?.text ?? null,
+          position: index + 1,
+        });
+      }
+    } else if (index === steps.length - 1) {
       await completeRoutine(id);
-      const routine = await getRoutine(id);
-      const runId = await startRoutineRun(id, routine?.name ?? '', steps.length, null);
-      await finishRoutineRun(runId, steps.length, 0);
     }
     return;
   }
