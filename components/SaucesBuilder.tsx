@@ -58,6 +58,7 @@ import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPane
 import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
 import type { SpokenIngredient } from '../lib/spokenIngredients';
 import { useConfirmSheet } from './ConfirmSheet';
+import { offerToLogSavedDish } from '../lib/builderSavedOffer';
 import { describePrepMismatch } from '../lib/cookingMethodResolution';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -1183,11 +1184,12 @@ export function SaucesBuilder({
       depthData,
     };
 
+    let savedDishId: string | null = null;
     try {
       if (editSauceId) {
         await updateSauce(editSauceId, payload);
       } else {
-        await saveSauce(payload);
+        savedDishId = (await saveSauce(payload)).id;
       }
     } catch (error) {
       console.error('[SaucesBuilder] Failed to save sauce', error);
@@ -1240,7 +1242,15 @@ export function SaucesBuilder({
     setReportData(null);
     setReportNutrientData([]);
     setStagePickerFor(null);
-    showInfoAlert('Sauce saved', `${finishedName} is saved. Starting a fresh sauce now.`);
+    void offerToLogSavedDish({
+      confirm: confirmSheet,
+      router,
+      componentType: 'sauce',
+      title: 'Sauce saved',
+      listTitle: 'Saved Sauces',
+      name: finishedName,
+      id: savedDishId,
+    });
   }
 
   // The optional half of "choice to create the report or not" -- see

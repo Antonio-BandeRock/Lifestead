@@ -56,7 +56,6 @@ const ALLOWED = {
   'app/(tabs)/index.tsx': {
     "limit: 60 })": 'Home reads the newest flares and reactions for the last two days and whether any exist; the full log is on Signals.',
     'listSymptomAssessments(1)': 'The newest one.',
-    'listUpcomingGardenTasks(5)': 'The next five garden tasks as a preview; every task is listed in Garden.',
   },
   'app/(tabs)/insights.tsx': { 'listSafeFoods(safeFoodCategory, 200': "Reference foods offered for a category, not a person's records." },
   'app/voice-log.tsx': { 'listRecentDistinctMeals(40)': 'Recent meals offered to match spoken words against; every meal is in Find a Meal.' },

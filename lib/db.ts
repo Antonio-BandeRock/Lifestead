@@ -17161,6 +17161,8 @@ export async function resolveMealComponent(selection: MealComponentSelection): P
 export type TodaysMealComponent = {
   name: string;
   componentType: MealComponentType;
+  // The saved dish, so Home can open its builder to write the steps.
+  componentId: string;
   yourSharePercent: number;
   ingredients: { foodName: string; quantity: number; unit: string; notes?: string }[];
   instructions: string[];
@@ -17200,6 +17202,7 @@ export async function listTodaysMealsWithRecipes(date: string): Promise<TodaysMe
         components.push({
           name: resolved.name,
           componentType: resolved.componentType,
+          componentId: component.componentId,
           yourSharePercent: resolved.yourSharePercent,
           ingredients: resolved.ingredients.map((ingredient) => ({
             foodName: ingredient.foodName,

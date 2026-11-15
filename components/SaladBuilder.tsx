@@ -55,6 +55,7 @@ import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPane
 import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
 import type { SpokenIngredient } from '../lib/spokenIngredients';
 import { useConfirmSheet } from './ConfirmSheet';
+import { offerToLogSavedDish } from '../lib/builderSavedOffer';
 import { describePrepMismatch } from '../lib/cookingMethodResolution';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -1207,11 +1208,12 @@ export function SaladBuilder({
       depthData,
     };
 
+    let savedDishId: string | null = null;
     try {
       if (editSaladId) {
         await updateSalad(editSaladId, payload);
       } else {
-        await saveSalad(payload);
+        savedDishId = (await saveSalad(payload)).id;
       }
     } catch (error) {
       console.error('[SaladBuilder] Failed to save salad', error);
@@ -1264,7 +1266,15 @@ export function SaladBuilder({
     setReportData(null);
     setReportNutrientData([]);
     setStagePickerFor(null);
-    showInfoAlert('Salad saved', `${finishedName} is saved. Starting a fresh salad now.`);
+    void offerToLogSavedDish({
+      confirm: confirmSheet,
+      router,
+      componentType: 'salad',
+      title: 'Salad saved',
+      listTitle: 'Saved Salads & Bowls',
+      name: finishedName,
+      id: savedDishId,
+    });
   }
 
   // The optional half of "choice to create the report or not" -- see

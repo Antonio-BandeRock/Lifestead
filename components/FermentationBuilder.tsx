@@ -69,6 +69,7 @@ import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPane
 import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
 import type { SpokenIngredient } from '../lib/spokenIngredients';
 import { useConfirmSheet } from './ConfirmSheet';
+import { offerToLogSavedDish } from '../lib/builderSavedOffer';
 import { describePrepMismatch } from '../lib/cookingMethodResolution';
 import { linkifyText, useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -1611,7 +1612,15 @@ export function FermentationBuilder({
     setReportData(null);
     setReportNutrientData([]);
     setStagePickerFor(null);
-    showInfoAlert('Fermentation saved', `${finishedName} is saved. Starting a fresh fermentation now.`);
+    void offerToLogSavedDish({
+      confirm: confirmSheet,
+      router,
+      componentType: 'fermentation',
+      title: 'Fermentation saved',
+      listTitle: 'Saved Fermentations',
+      name: finishedName,
+      id: savedFermentationId,
+    });
   }
 
   // The optional half of "choice to create the report or not" -- see

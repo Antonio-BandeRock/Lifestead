@@ -58,6 +58,7 @@ import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPane
 import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
 import type { SpokenIngredient } from '../lib/spokenIngredients';
 import { useConfirmSheet } from './ConfirmSheet';
+import { offerToLogSavedDish } from '../lib/builderSavedOffer';
 import { describePrepMismatch } from '../lib/cookingMethodResolution';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -1201,11 +1202,12 @@ export function SoupBuilder({
       depthData,
     };
 
+    let savedDishId: string | null = null;
     try {
       if (editSoupId) {
         await updateSoup(editSoupId, payload);
       } else {
-        await saveSoup(payload);
+        savedDishId = (await saveSoup(payload)).id;
       }
     } catch (error) {
       console.error('[SoupBuilder] Failed to save soup', error);
@@ -1258,7 +1260,15 @@ export function SoupBuilder({
     setReportData(null);
     setReportNutrientData([]);
     setStagePickerFor(null);
-    showInfoAlert('Soup saved', `${finishedName} is saved. Starting a fresh soup now.`);
+    void offerToLogSavedDish({
+      confirm: confirmSheet,
+      router,
+      componentType: 'soup',
+      title: 'Soup saved',
+      listTitle: 'Saved Soups',
+      name: finishedName,
+      id: savedDishId,
+    });
   }
 
   // The optional half of "choice to create the report or not" -- see

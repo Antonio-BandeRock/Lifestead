@@ -458,6 +458,10 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     dessertBuilder: 'Desserts',
     fermentationBuilder: 'Fermentation',
     systemRecipes: 'System Recipes',
+    myRecipes: 'My Recipes',
+    myFoodProducts: 'My Food Products',
+    mySafeFoods: 'My Safe Foods',
+    myWholeFoods: 'My Whole Foods',
   },
   '/garden': {
     myZone: 'My Zone',
@@ -636,6 +640,10 @@ export const TOUR_LENS_LINES: Record<string, Record<string, string>> = {
     dessertBuilder: 'Something sweet to finish.',
     fermentationBuilder: 'Yogurt, sauerkraut, kombucha and the rest, each batch followed from the first day to the jar and drawn down as you use it.',
     systemRecipes: 'Hundreds of home-cooked recipes, sorted to your conditions and eating style.',
+    myRecipes: 'Everything you have built and saved, and your favorites, under the builder that made each.',
+    myFoodProducts: 'Every product you have scanned, with the prices you paid.',
+    mySafeFoods: 'The foods you have marked safe for you, not worked out yet, or not for you. Your call comes before the app\'s.',
+    myWholeFoods: 'What you have on hand from your garden, and produce somebody gave you.',
     importRecipe: 'A recipe from a web page or a pasted list, each line matched to a food and scored in the builder you choose.',
   },
   '/garden': {
@@ -872,6 +880,7 @@ export const TOUR_TABS: TourTabDef[] = [
       },
       { title: 'Ferment', lenses: ['fermentationBuilder'] },
       { title: 'Recipes', lenses: ['systemRecipes', 'importRecipe'] },
+      { title: 'What you keep', lenses: ['myRecipes', 'myFoodProducts', 'mySafeFoods', 'myWholeFoods'] },
     ],
     steps: [
       {

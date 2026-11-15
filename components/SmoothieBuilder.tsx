@@ -55,6 +55,7 @@ import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPane
 import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
 import type { SpokenIngredient } from '../lib/spokenIngredients';
 import { useConfirmSheet } from './ConfirmSheet';
+import { offerToLogSavedDish } from '../lib/builderSavedOffer';
 import { describePrepMismatch } from '../lib/cookingMethodResolution';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -1201,11 +1202,12 @@ export function SmoothieBuilder({
       depthData,
     };
 
+    let savedDishId: string | null = null;
     try {
       if (editSmoothieId) {
         await updateSmoothie(editSmoothieId, payload);
       } else {
-        await saveSmoothie(payload);
+        savedDishId = (await saveSmoothie(payload)).id;
       }
     } catch (error) {
       console.error('[SmoothieBuilder] Failed to save smoothie', error);
@@ -1258,7 +1260,15 @@ export function SmoothieBuilder({
     setReportData(null);
     setReportNutrientData([]);
     setStagePickerFor(null);
-    showInfoAlert('Smoothie saved', `${finishedName} is saved. Starting a fresh smoothie now.`);
+    void offerToLogSavedDish({
+      confirm: confirmSheet,
+      router,
+      componentType: 'smoothie',
+      title: 'Smoothie saved',
+      listTitle: 'Saved Smoothies',
+      name: finishedName,
+      id: savedDishId,
+    });
   }
 
   // The optional half of "choice to create the report or not" -- see

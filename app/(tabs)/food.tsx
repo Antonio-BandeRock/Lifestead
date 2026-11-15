@@ -198,36 +198,36 @@ const FOOD_LENS_COPY: Record<FoodLens, string> = {
   findMeal:
     'Every meal you can reach without opening a builder, in groups you tap to open: meals you have logged or saved, meals already on your schedule, and the system recipes. Tap a meal to see what it is made of, then Use this meal logs it now, logs it for earlier today, puts it on your schedule, or swaps it in for a meal that was planned. To build something new from what is here, tick dishes from as many meals as you like; a Meal you are building box at the top shows the combination, and Build a meal with these opens Meal Builder with all of them loaded. Before you order out, Read a Menu checks each dish on a photographed or pasted menu against what you set in Profile.',
   mealBuilder:
-    "Built 2026-08-02, last of the eleven. Name the meal (optional) and choose a meal type, or start from a whole meal you already have (a meal favorite, one on your schedule, or one you have logged before). \"Add from...\" opens any builder's dishes, your saved ones and the system recipes together: pick one, then say how much of THAT ONE DISH's stated servings you actually had (100% = the whole thing, not a share of the whole meal split between people). Repeat for as many items as the meal actually has. Checks for raw goitrogenic foods combined ACROSS the whole meal (not just within one builder's ingredient list) before logging. Log This Now saves a meal for right now; Save & Schedule for Later saves it for a chosen time today instead. Also reachable from Past Meals' own \"Adjust\" link, to correct how much of each item an already-logged meal actually turned out to have. Save Changes there updates that same meal in place, and any food trial riding on a changed item gets a separate prompt about whether to correct its start date or mark it as never having happened.",
+    "Put a whole meal together from dishes you have. Naming the meal is optional; choose its meal type, or start from a whole meal you already have (a favorite, one on your schedule, or one you have logged before). Add From opens every builder's dishes, your saved ones and the system recipes together: pick one, then say how much of that one dish's servings you had (100% is the whole dish, not a share of the meal split between people). Add as many dishes as the meal has. Before logging, it checks for raw goitrogenic foods across the whole meal, not only inside one dish. Log This Now logs the meal for right now; Save & Schedule for Later puts it on your schedule for a time you choose. Adjust on Past Meals opens a logged meal here to correct how much of each dish you had; Save Changes updates that meal, and a food trial riding on a changed dish asks whether to correct its start date or mark it as never having happened.",
   sideBuilder:
-    "In progress. Name the dish (optional), set # of Servings and Serving Size, then add one or more ingredients (category -> type -> food -> prep, then quantity/unit); nutrient lookup itself lives on Insights' own Food Lookup lens instead of being duplicated here. Done leads into a required \"how was this cooked\" step (cooking method changes retained nutrients), then a soft, skippable nudge if no cooking oil/fat or seasoning was logged, easy to miss both by accident. Saving the finished side as a reusable favorite isn't wired up yet.",
+    "Anything served beside a main dish. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   saladBuilder:
-    'In progress. Same builder flow as Sides (name, servings/serving size, then ingredients with category -> type -> food -> prep, quantity/unit, cut prep, cook prep), plus one twist: finishing a salad or bowl checks for two or more raw goitrogenic vegetables mixed together (easy to eat far more of them raw and combined than cooked and separate) and warns before saving, rather than silently letting it through. Covers salads, grain bowls, poke, burrito bowls, and breakfast bowls: the same ingredient-assembly logic covers all of them. Saving as a reusable favorite isn\'t wired up yet, same as Sides.',
+    "Salads, grain bowls, poke, burrito bowls and breakfast bowls. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. Before saving, it warns when two or more raw goitrogenic vegetables are mixed together, since raw and combined is the easiest way to eat a lot of them at once. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   smoothieBuilder:
-    'In progress. Same builder flow as Sides and Salads & Bowls, plus the same twist Salads & Bowls has, reworded for blending: finishing a smoothie checks for two or more raw goitrogenic vegetables blended together (easy to eat far more of them at once than cooked and separate) and warns before saving. Saving as a reusable favorite isn\'t wired up yet, same as Sides and Salads & Bowls.',
+    "Smoothies and anything else blended to drink. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. Before saving, it warns when two or more raw goitrogenic vegetables are blended together, since blending makes it easy to take in a lot of them at once. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   fermentationBuilder:
-    "In progress. Same builder flow as Sides (name, servings/serving size, then ingredients), plus a 'Fermented' Cook Prep option the other builders don't have, so the step that actually makes something a fermentation has an answer to select. Bacterial-strain tracking (specific cultures like Lactobacillus acidophilus, eventually with cited effects) is still a separate, not-yet-started research workstream; this covers logging the fermented food itself, not identifying what's living in it. Saving as a reusable favorite isn't wired up yet, same as Sides/Salads & Bowls/Smoothies.",
+    "Fermented foods and drinks. It first asks what kind of fermentation you are making. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. Cook Prep has a Fermented choice, and you can name the cultures or probiotics in it. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   beverageBuilder:
-    "In progress. Same builder flow as Sides, minus the \"no cooking oil/fat or seasoning\" nudge Sides/Salads & Bowls/Smoothies/Fermentation all have; not a concern for a drink, so it's left out here rather than shown for no reason. Water and other drinks, including anything dissolved or mixed in. Saving as a reusable favorite isn't wired up yet, same as the others.",
+    "Water and other drinks, with anything dissolved or mixed in. It first asks what kind of drink you are making. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. An ingredient with alcohol in it is noted with what it means for the conditions you track.",
   snackBuilder:
-    "In progress. Same builder flow as Sides, including the \"no cooking oil/fat or seasoning\" nudge (kept here, unlike Beverages, since spiced nuts or oil-popped popcorn can involve either). For anything that isn't already a full meal or a side on its own. Saving as a reusable favorite isn't wired up yet, same as the others.",
+    "Anything eaten between meals that is not a full meal or a side. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   bakedGoodsBuilder:
-    "In progress. Same builder flow as Sides, including the \"no cooking oil/fat or seasoning\" nudge (kept here, same reasoning as Snacks, since butter/oil and cinnamon/salt are both common). Bread, muffins, and other home-baked items, distinct from Meal/Sides since a baked good is usually made once and portioned out over several separate sittings (already what Servings/Serving Size capture). Saving as a reusable favorite isn't wired up yet, same as the others.",
+    "Bread, muffins and other home baking, usually made once and eaten over several sittings, which is what servings and serving size are for. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   soupBuilder:
-    "In progress. Same builder flow as Sides, plus a 'Simmered' Cook Prep option the other builders don't have, distinct from 'Boiled' (lower heat, longer time, less mechanical breakdown). Broth-base tracking and simmered-down ingredient-concentration math are still deferred; both would need dedicated research (how does a given ingredient's nutrient contribution change as broth reduces?) before being more than a guess. Saving as a reusable favorite isn't wired up yet, same as the others.",
+    "Soups, stews and broths. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. Cook Prep has a Simmered choice, slower and gentler than Boiled. An ingredient with alcohol in it is noted with what it means for the conditions you track. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   saucesBuilder:
-    "In progress. Same builder flow as Sides, plus a 'Reduced' Cook Prep option the other builders don't have: arguably THE defining sauce-making technique (pan sauces, gravies, glazes). Covers sauces, gravies, dressings, dips, and anything else in that family. Saving as a reusable favorite isn't wired up yet, same as the others.",
+    "Sauces, gravies, dressings and dips. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. Cook Prep has a Reduced choice for a sauce cooked down. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   handheldsBuilder:
-    "New 2026-08-04, requested alongside the plural-naming pass: \"Layers\" as a working name, renamed to \"Handhelds\" since every other builder is named after a recognizable food category, not a structural description. Same builder flow as Sides, reordered around four layers: outer casing (bread, tortilla, bun, lettuce wrap), primary protein, toppings, and condiment/spread, covering sandwiches, wraps, burgers, and tacos with one flexible tool instead of four near-identical ones. Saving as a reusable favorite isn't wired up yet, same as the others.",
+    "Sandwiches, wraps, burgers and tacos, built in four layers: the outside (bread, tortilla, bun or lettuce), the main protein, the toppings, and condiments or spreads. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   dessertBuilder:
-    "New 2026-08-14, the twelfth builder. Same builder flow as Sides, plus a 'Chilled/Frozen' Cook Prep option the other builders don't have (a common state none of them covered: mousse, panna cotta, pudding, no-bake cheesecake, and ice cream are never heated at all). Reaches further into Alcohol, Brewing, and Bev than most sides/snacks-style builders do, since desserts draw on all three (rum cake, tiramisu, mocha-flavored bakes), so it gets the same alcohol calculator and general-health advisories Beverage/Fermentation/Soup/Sauces already have. Covers cakes, cookies, pies, custards, puddings, and frozen desserts. Saving as a reusable favorite isn't wired up yet, same as the others.",
+    "Cakes, cookies, pies, custards, puddings and frozen desserts. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. Cook Prep has a Chilled or Frozen choice for the ones never heated, and an ingredient with alcohol in it, such as rum or a liqueur, is noted with what it means for the conditions you track. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
 };
 
 // The full name shown in PageIdentityLabel's own corner box once a lens
 // is picked, 2026-07-28 -- deliberately separate from FOOD_LENSES' own
 // short grid label (below): that label dropped "Builder" from every
 // option back on 2026-07-27 (see that change's own comment) specifically
-// because the popup's shared header already says "Nutrition Builders"
+// because the popup's shared header already says "Food Tools" and groups them under Builders
 // once for the whole grid, but the corner box has no such shared header
 // nearby to lean on, so it needs the real full name spelled out on its
 // own. "Side Dish Builder" was originally chosen, not the mechanical
@@ -278,6 +278,24 @@ const FOOD_LENS_FULL_NAMES: Record<FoodLens, string> = {
 // Meal Builder has favorites only, no standalone saved list, which is
 // the same asymmetry the old Saved & Favorites submenu carried: see
 // mealFavoriteCount's own comment below for why.
+// Which band of My Recipes a builder's own My Recipes link puts first
+// (2026-11-15), so somebody coming from Soups sees their soups, not
+// Favorite Meals at the top of a long list.
+const BUILDER_RECIPE_ITEM_TYPE: Partial<Record<FoodLens, string>> = {
+  mealBuilder: 'meal',
+  sideBuilder: 'side',
+  saladBuilder: 'salad',
+  smoothieBuilder: 'smoothie',
+  fermentationBuilder: 'fermentation',
+  beverageBuilder: 'beverage',
+  snackBuilder: 'snack',
+  bakedGoodsBuilder: 'bakedGoods',
+  soupBuilder: 'soup',
+  saucesBuilder: 'sauce',
+  handheldsBuilder: 'handheld',
+  dessertBuilder: 'dessert',
+};
+
 const MY_RECIPES_SECTIONS: FoodItemsListParams[] = [
   { itemType: 'meal', status: 'favorite', title: 'Favorite Meals' },
   { itemType: 'side', status: 'saved', title: 'Saved Sides' },
@@ -312,90 +330,105 @@ const MY_RECIPES_SECTIONS: FoodItemsListParams[] = [
 // 2026-07-27: "Builder" dropped from every option's own label here (was
 // "Meal Builder," "Side Builder," etc.) -- every single one of these is a
 // builder, so that's said once now, in the popup's own header instead (see
-// this file's own <LensHub headerLabel="Nutrition Builders" .../> below),
+// this file's own <LensHub headerLabel="Food Tools" .../> below, whose
+// Builders group header says it once more),
 // rather than repeated ten times over. Each `help` heading was shortened
 // to match, for the same reason -- it used to just repeat the label.
 const FOOD_LENSES: LensOption<FoodLens>[] = [
   {
     key: 'findMeal',
+    group: 'Log and Bring In',
     label: 'Log or Schedule',
     icon: 'search-outline',
     help: [{ heading: 'Log or Schedule a Meal', body: FOOD_LENS_COPY.findMeal }],
   },
   {
     key: 'scanProduct',
+    group: 'Log and Bring In',
     label: 'Scan a Product',
     icon: 'barcode-outline',
     help: [{ heading: 'Scan a Product', body: FOOD_LENS_COPY.scanProduct }],
   },
   {
     key: 'importRecipe',
+    group: 'Log and Bring In',
     label: 'Import a Recipe',
     icon: 'link-outline',
     help: [{ heading: 'Import a Recipe', body: FOOD_LENS_COPY.importRecipe }],
   },
   {
     key: 'mealBuilder',
+    group: 'Builders',
     label: 'Meal',
     icon: 'restaurant-outline',
     help: [{ heading: 'Meal', body: FOOD_LENS_COPY.mealBuilder }],
   },
   {
     key: 'sideBuilder',
+    group: 'Builders',
     label: 'Sides',
     icon: 'fast-food-outline',
     help: [{ heading: 'Sides', body: FOOD_LENS_COPY.sideBuilder }],
   },
   {
     key: 'saladBuilder',
+    group: 'Builders',
     label: 'Salads & Bowls',
     icon: 'leaf-outline',
     help: [{ heading: 'Salads & Bowls', body: FOOD_LENS_COPY.saladBuilder }],
   },
   {
     key: 'smoothieBuilder',
+    group: 'Builders',
     label: 'Smoothies',
     icon: 'wine-outline',
     help: [{ heading: 'Smoothies', body: FOOD_LENS_COPY.smoothieBuilder }],
   },
   {
     key: 'fermentationBuilder',
+    group: 'Builders',
     label: 'Fermentation',
     icon: 'flask-outline',
     help: [{ heading: 'Fermentation', body: FOOD_LENS_COPY.fermentationBuilder }],
   },
   {
     key: 'beverageBuilder',
+    group: 'Builders',
     label: 'Beverages',
     icon: 'cafe-outline',
     help: [{ heading: 'Beverages', body: FOOD_LENS_COPY.beverageBuilder }],
   },
   {
     key: 'snackBuilder',
+    group: 'Builders',
     label: 'Snacks',
     icon: 'nutrition-outline',
     help: [{ heading: 'Snacks', body: FOOD_LENS_COPY.snackBuilder }],
   },
   {
     key: 'bakedGoodsBuilder',
+    group: 'Builders',
     label: 'Baked Goods',
     icon: 'pizza-outline',
     help: [{ heading: 'Baked Goods', body: FOOD_LENS_COPY.bakedGoodsBuilder }],
   },
   {
     key: 'soupBuilder',
+    group: 'Builders',
     label: 'Soups',
     icon: 'flame-outline',
     help: [{ heading: 'Soups', body: FOOD_LENS_COPY.soupBuilder }],
   },
   {
     key: 'saucesBuilder',
+    group: 'Builders',
     label: 'Sauces',
     icon: 'water-outline',
     help: [{ heading: 'Sauces', body: FOOD_LENS_COPY.saucesBuilder }],
   },
   {
     key: 'handheldsBuilder',
+    group: 'Builders',
     label: 'Handhelds',
     icon: 'layers-outline',
     help: [{ heading: 'Handhelds', body: FOOD_LENS_COPY.handheldsBuilder }],
@@ -411,6 +444,7 @@ const FOOD_LENSES: LensOption<FoodLens>[] = [
     // full rows, with Info centered on its own 5th row below them, with
     // zero manual adjustment required for this addition.
     key: 'dessertBuilder',
+    group: 'Builders',
     label: 'Desserts',
     // A plain Ionicons glyph, like every other Food-tab lens tile -- no
     // custom renderIcon needed here. 2026-08-14 originally shipped this
@@ -431,16 +465,16 @@ const FOOD_LENSES: LensOption<FoodLens>[] = [
 
 const FOOD_HELP_SECTIONS: HelpSection[] = [
   {
-    heading: 'What this page is for',
-    body: 'So building something to eat automatically gets nutrient and condition scoring as you go, instead of you having to work that out yourself afterward. The Food tab is built from one all-in-one meal builder into twelve focused builders, one per kind of thing you actually make: a full meal, a side, a salad or bowl, a smoothie, a fermented food, a beverage, a snack, a baked good, a soup, a sauce/gravy/dressing/dip, a sandwich/wrap/burger/taco, or a dessert.',
+    heading: "What this page is for",
+    body: "Everything about what you eat: log a meal or put one on your schedule, scan a product, bring in a recipe, or build a dish in one of twelve builders that work out its nutrients and what it means for the conditions you track as you go, so you do not have to work that out afterward.",
   },
   {
-    heading: 'The twelve builders',
-    body: 'Meal, Sides, Salads & Bowls, Smoothies, Fermentation, Beverages, Snacks, Baked Goods, Soups, Sauces, Handhelds, and Desserts: pick one from the button to the left of the main navigation button, bottom of the screen.',
+    heading: "The Food menu",
+    body: "The Food button beside the main navigation button opens the menu. Log and Bring In holds Log or Schedule a Meal, Scan a Product and Import a Recipe. Builders holds Meal, Sides, Salads & Bowls, Smoothies, Fermentation, Beverages, Snacks, Baked Goods, Soups, Sauces, Handhelds and Desserts. Meal puts a whole meal together from the dishes the other eleven make.",
   },
   {
-    heading: 'Status',
-    body: "All twelve builders are built: Sides, Salads & Bowls, Smoothies, Fermentation, Beverages, Snacks, Baked Goods, Soups, Sauces, Handhelds, and Desserts each build and save a dish, and can also be saved as a reusable favorite; Meal (built last, on purpose, since it assembles the other eleven's saved output) assembles a meal out of them, logs it now, or schedules it for later.",
+    heading: "My Foods",
+    body: "The My Foods button opens what you keep: Log or Schedule a Meal, My Food Products (what you have scanned, with its prices), My Recipes (what you have built and saved, and your favorites, under the builder that made each), My Safe Foods (the foods you mark safe, undecided or not for you), My Whole Foods (what you have on hand from your garden) and System Recipes (every recipe that comes with the app).",
   },
 ];
 
@@ -1448,6 +1482,7 @@ export default function FoodScreen() {
             <FoodItemsView
               sections={MY_RECIPES_SECTIONS}
               title="My Recipes"
+              focusItemType={recipesReturnLens ? BUILDER_RECIPE_ITEM_TYPE[recipesReturnLens] : undefined}
               intro="Everything you have built here and saved, plus everything you have marked a favorite, under the tool that made it. Tap one to read the whole recipe, or to build on it again."
               // 2026-09-18: "My Recipes should be setup the same way with
               // the user's recipes used and grouped from the builders that
@@ -1692,7 +1727,7 @@ export default function FoodScreen() {
       />
       <LensHub
         pageTitle="Food"
-        headerLabel="Nutrition Builders"
+        headerLabel="Food Tools"
         buttonLabel="Food"
         options={FOOD_LENSES}
         selected={revealed ? lens : undefined}

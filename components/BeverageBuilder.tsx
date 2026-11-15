@@ -58,6 +58,7 @@ import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPane
 import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
 import type { SpokenIngredient } from '../lib/spokenIngredients';
 import { useConfirmSheet } from './ConfirmSheet';
+import { offerToLogSavedDish } from '../lib/builderSavedOffer';
 import { describePrepMismatch } from '../lib/cookingMethodResolution';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -1328,11 +1329,12 @@ export function BeverageBuilder({
       depthData,
     };
 
+    let savedDishId: string | null = null;
     try {
       if (editBeverageId) {
         await updateBeverage(editBeverageId, payload);
       } else {
-        await saveBeverage(payload);
+        savedDishId = (await saveBeverage(payload)).id;
       }
     } catch (error) {
       console.error('[BeverageBuilder] Failed to save beverage', error);
@@ -1385,7 +1387,15 @@ export function BeverageBuilder({
     setReportData(null);
     setReportNutrientData([]);
     setStagePickerFor(null);
-    showInfoAlert('Beverage saved', `${finishedName} is saved. Starting a fresh beverage now.`);
+    void offerToLogSavedDish({
+      confirm: confirmSheet,
+      router,
+      componentType: 'beverage',
+      title: 'Beverage saved',
+      listTitle: 'Saved Beverages',
+      name: finishedName,
+      id: savedDishId,
+    });
   }
 
   // The optional half of "choice to create the report or not" -- see

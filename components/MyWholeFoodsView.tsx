@@ -20,6 +20,8 @@ import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { t, tl } from '../lib/i18n';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { ReadProblem } from './ReadProblem';
+import { useWalkMark } from './WalkMark';
 
 // My Whole Foods: what the person has on hand from their own garden, and
 // from other people's.
@@ -68,6 +70,7 @@ function isDateString(value: string): boolean {
 
 export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; onChanged?: () => void }) {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
+  const walkMark = useWalkMark();
   const [picture, setPicture] = useState<GardenMoneyPicture | null>(null);
   const [foods, setFoods] = useState<PurchasableFood[]>([]);
   const [addingGift, setAddingGift] = useState(false);
@@ -78,14 +81,23 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
   const [giftDate, setGiftDate] = useState(todayDateString());
   const [giftError, setGiftError] = useState<string | null>(null);
 
+  // A failed read says so with Try Again rather than leaving the page
+  // blank (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const [money, foodRows] = await Promise.all([loadGardenMoneyPicture(), listPurchasableFoods()]);
-    setPicture(money);
-    setFoods(foodRows);
+    try {
+      const [money, foodRows] = await Promise.all([loadGardenMoneyPicture(), listPurchasableFoods()]);
+      setPicture(money);
+      setFoods(foodRows);
+      setReadFailed(false);
+    } catch (error) {
+      console.error('[MyWholeFoods] Failed to read', error);
+      setReadFailed(true);
+    }
   }, []);
 
   useEffect(() => {
-    load();
+    void load();
   }, [load]);
 
   useEffect(() => {
@@ -222,6 +234,13 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
           <Text style={styles.backLink}>‹ Back</Text>
         </TouchableOpacity>
 
+        {readFailed ? (
+          <ReadProblem
+            message="What you have on hand could not be read just now. Nothing you recorded is lost."
+            onTryAgain={() => void load()}
+          />
+        ) : null}
+
         <HomeSectionBand
           kind="static"
           title="On Hand from Your Garden"
@@ -327,7 +346,7 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
                   </ThumbRow>
                 </View>
               ) : (
-                <TouchableOpacity onPress={() => setAddingGift(true)} activeOpacity={0.7} style={styles.primaryAction}>
+                <TouchableOpacity ref={walkMark.ref('wholeFoods.gift')} onPress={() => setAddingGift(true)} activeOpacity={0.7} style={styles.primaryAction}>
                   <Text style={styles.primaryActionText}>+ Someone Gave You Produce</Text>
                 </TouchableOpacity>
               )}

@@ -86,6 +86,7 @@ import { buildTime24, describeTimeInputProblem, formatTime12, type TimeOfDayInpu
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { ReadProblem } from './ReadProblem';
 
 // Every meal and favourite is read, with no count (2026-11-15: a history is
 // limited by its dates, never by how many records there are). SQLite reads
@@ -269,6 +270,8 @@ export function FindMealView({
   const [scope, setScope] = useState<Scope>('yours');
   const [sections, setSections] = useState<ListSection[]>([]);
   const [loading, setLoading] = useState(true);
+  // A failed read says so rather than looking like an empty list.
+  const [loadFailed, setLoadFailed] = useState(false);
   const [mode, setMode] = useState<Mode>('list');
   const [selected, setSelected] = useState<PickableMeal | null>(null);
   const [busy, setBusy] = useState(false);
@@ -484,6 +487,7 @@ export function FindMealView({
 
   const load = useCallback(async (search: string, currentScope: Scope) => {
     setLoading(true);
+    setLoadFailed(false);
     try {
       const [recent, favorites, curated, scheduled] = await Promise.all([
         listRecentDistinctMeals(LIST_LIMIT, search),
@@ -574,6 +578,7 @@ export function FindMealView({
     } catch (error) {
       console.error('[FindMealScreen] Failed to load meals', error);
       setSections([]);
+      setLoadFailed(true);
     } finally {
       setLoading(false);
     }
@@ -1137,7 +1142,12 @@ export function FindMealView({
         </View>
         }
         ListEmptyComponent={
-          loading ? null : (
+          loading ? null : loadFailed ? (
+            <ReadProblem
+              message="Your meals could not be read just now. Nothing you recorded is lost."
+              onTryAgain={() => void load(query, scope)}
+            />
+          ) : (
             <View style={styles.card}>
               <Text style={styles.muted}>
                 {query.trim()

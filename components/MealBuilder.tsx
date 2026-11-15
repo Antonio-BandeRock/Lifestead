@@ -57,6 +57,7 @@ import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { ReadProblem } from './ReadProblem';
 
 // Deliberately last of the ten Food-tab builders, per this app's own build
 // order (see CLAUDE.md's Next steps) -- this is the only one that assembles
@@ -763,6 +764,9 @@ export function MealBuilder({
   const [browsingCategory, setBrowsingCategory] = useState<MealComponentType | null>(null);
   const [categoryOptions, setCategoryOptions] = useState<MealComponentOption[]>([]);
   const [categoryOptionsLoading, setCategoryOptionsLoading] = useState(false);
+  // A category whose dishes could not be read says so with Try Again,
+  // rather than spinning forever (2026-11-15).
+  const [categoryReadFailed, setCategoryReadFailed] = useState(false);
   // 2026-08-16, direct request: "there should be a search utility like in
   // the Digest areas to search the saved side or whatever for the items
   // they want to add." Deliberately a plain, un-debounced filter, not
@@ -782,12 +786,18 @@ export function MealBuilder({
     dismissKeyboard();
     setBrowsingCategory(type);
     setCategoryOptionsLoading(true);
+    setCategoryReadFailed(false);
     setCategorySearchQuery('');
-    Promise.all([listMealComponentOptions(type), listCuratedRecipeComponentOptions(type)]).then(([saved, curated]) => {
-      setCategoryOptions(saved);
-      setCuratedOptions(curated);
-      setCategoryOptionsLoading(false);
-    });
+    Promise.all([listMealComponentOptions(type), listCuratedRecipeComponentOptions(type)])
+      .then(([saved, curated]) => {
+        setCategoryOptions(saved);
+        setCuratedOptions(curated);
+      })
+      .catch((error) => {
+        console.error('[MealBuilder] Failed to read a category', error);
+        setCategoryReadFailed(true);
+      })
+      .finally(() => setCategoryOptionsLoading(false));
   }
 
   function closeCategory() {
@@ -2032,6 +2042,11 @@ export function MealBuilder({
             <HomeSectionBand kind="static" title={`${meta.label}s`} icon={meta.icon} color={tabColor}>
               {categoryOptionsLoading ? (
                 <ActivityIndicator color={tabColor} />
+              ) : categoryReadFailed && browsingCategory ? (
+                <ReadProblem
+                  message="These dishes could not be read just now. Nothing you recorded is lost."
+                  onTryAgain={() => openCategory(browsingCategory)}
+                />
               ) : (
                 <View style={styles.categorySearchRow}>
                   <AppTextInput
@@ -2047,7 +2062,7 @@ export function MealBuilder({
               )}
             </HomeSectionBand>
           </View>
-          {categoryOptionsLoading ? null : (
+          {categoryOptionsLoading || categoryReadFailed ? null : (
             <>
               {/* Both bands show even when one is empty, so it is plain
                   which kind a row is and that the other kind was looked

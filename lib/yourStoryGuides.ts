@@ -1548,7 +1548,9 @@ export const LENS_NAMES: Record<string, Record<string, string>> = {
 };
 
 // Lenses reached from the small bookmarks button rather than the corner one.
-export const MY_ITEMS_LENSES: Record<string, string[]> = { '/food': ['systemRecipes'] };
+export const MY_ITEMS_LENSES: Record<string, string[]> = {
+  '/food': ['systemRecipes', 'myRecipes', 'myFoodProducts', 'mySafeFoods', 'myWholeFoods'],
+};
 
 // Screens opened from a band on Home: the band's name and its button.
 export const FROM_HOME: Record<string, [string, string]> = {

@@ -32,6 +32,8 @@ import { ThumbRow } from './ThumbRow';
 import { useOnVaultChange } from '../lib/vaultReads';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { ReadProblem } from './ReadProblem';
+import { useWalkMark } from './WalkMark';
 
 // My Safe Foods: the person's list, kept by the person.
 //
@@ -96,6 +98,7 @@ const BROWSE_PAGE = 40;
 
 export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; onChanged?: () => void }) {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
+  const walkMark = useWalkMark();
 
   const [entries, setEntries] = useState<MySafeFoodRecord[] | null>(null);
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -110,6 +113,10 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
   const [browseShown, setBrowseShown] = useState(BROWSE_PAGE);
   const [scheduled, setScheduled] = useState<ScheduledFoodName[] | null>(null);
   const [backgrounds, setBackgrounds] = useState<Map<string, MyFoodBackground>>(new Map());
+  // A failed read says so with Try Again rather than leaving the lists
+  // blank (2026-11-15). readAttempt reruns the reads that failed.
+  const [readFailed, setReadFailed] = useState(false);
+  const [readAttempt, setReadAttempt] = useState(0);
 
   const refresh = useCallback(async () => {
     const [rows, trials] = await Promise.all([listMySafeFoods(), listFoodTrials()]);
@@ -128,8 +135,12 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
   }, []);
 
   useEffect(() => {
-    refresh();
-  }, [refresh]);
+    setReadFailed(false);
+    refresh().catch((error) => {
+      console.error('[MySafeFoods] Failed to read the list', error);
+      setReadFailed(true);
+    });
+  }, [refresh, readAttempt]);
   // Cleared food experiments are offered from the vault, so opening it here
   // offers them and closing it takes them away.
   useOnVaultChange(() => {
@@ -138,21 +149,28 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
 
   useEffect(() => {
     let isCurrent = true;
-    Promise.all([getTrackedConditionsWithNames(), getReferenceCategories()]).then(([tracked, cats]) => {
-      if (!isCurrent) return;
-      setConditions(tracked);
-      setCategories(cats);
-    });
+    Promise.all([getTrackedConditionsWithNames(), getReferenceCategories()])
+      .then(([tracked, cats]) => {
+        if (!isCurrent) return;
+        setConditions(tracked);
+        setCategories(cats);
+      })
+      .catch((error) => {
+        console.error('[MySafeFoods] Failed to read conditions and categories', error);
+        if (isCurrent) setReadFailed(true);
+      });
     // Six weeks of planned meals means resolving every one of them into its
     // own ingredients, so this is left to arrive on its own rather than made
     // to hold up the rest of the screen.
-    listScheduledFoodNames(42).then((planned) => {
-      if (isCurrent) setScheduled(planned);
-    });
+    listScheduledFoodNames(42)
+      .then((planned) => {
+        if (isCurrent) setScheduled(planned);
+      })
+      .catch((error) => console.error('[MySafeFoods] Failed to read planned meals', error));
     return () => {
       isCurrent = false;
     };
-  }, []);
+  }, [readAttempt]);
 
   useEffect(() => {
     let isCurrent = true;
@@ -160,9 +178,14 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
       setBrowseFoods([]);
       return;
     }
-    listBrowsableFoodNames(browseCategory).then((found) => {
-      if (isCurrent) setBrowseFoods(found);
-    });
+    listBrowsableFoodNames(browseCategory)
+      .then((found) => {
+        if (isCurrent) setBrowseFoods(found);
+      })
+      .catch((error) => {
+        console.error('[MySafeFoods] Failed to read a category', error);
+        if (isCurrent) setReadFailed(true);
+      });
     return () => {
       isCurrent = false;
     };
@@ -179,9 +202,14 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
       setMatches([]);
       return;
     }
-    searchReferenceFoodNamesAcrossCategories(trimmed, undefined, 12).then((found) => {
-      if (isCurrent) setMatches(found);
-    });
+    searchReferenceFoodNamesAcrossCategories(trimmed, undefined, 12)
+      .then((found) => {
+        if (isCurrent) setMatches(found);
+      })
+      .catch((error) => {
+        console.error('[MySafeFoods] Failed to search foods', error);
+        if (isCurrent) setReadFailed(true);
+      });
     return () => {
       isCurrent = false;
     };
@@ -310,6 +338,13 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
           <Text style={styles.backLink}>‹ Back</Text>
         </TouchableOpacity>
 
+        {readFailed ? (
+          <ReadProblem
+            message="Some of your safe foods could not be read just now. Nothing you recorded is lost."
+            onTryAgain={() => setReadAttempt((n) => n + 1)}
+          />
+        ) : null}
+
         <HomeSectionBand
           kind="static"
           title="Add a Food"
@@ -383,13 +418,15 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
             </View>
           ) : (
             <>
-              <AppTextInput
-                style={styles.input}
-                value={query}
-                onChangeText={setQuery}
-                placeholder="Search for a food"
-                placeholderTextColor={colors.textMuted}
-              />
+              <View ref={walkMark.ref('safeFoods.search')} collapsable={false}>
+                <AppTextInput
+                  style={styles.input}
+                  value={query}
+                  onChangeText={setQuery}
+                  placeholder="Search for a food"
+                  placeholderTextColor={colors.textMuted}
+                />
+              </View>
               {matches.map((match) => renderFoodRow(match.baseName, match.category))}
               {query.trim().length >= 2 && matches.length === 0 ? (
                 <Text style={styles.emptyText}>Nothing by that name in the food database.</Text>

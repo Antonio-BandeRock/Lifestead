@@ -557,6 +557,9 @@ export type ToolMark =
   | 'recipes.build'
   | 'recipes.cook'
   | 'import.read'
+  | 'foodItems.lists'
+  | 'safeFoods.search'
+  | 'wholeFoods.gift'
   | 'import.paste'
   | 'import.readLines'
   | 'import.line'
@@ -5097,6 +5100,52 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap All ingredients to see the whole list, and Next to move on. A step that names a time offers a timer.' },
       ],
       forYou: 'Everything a step needs is on the screen with it, so you never leave cook mode to look back at the list.',
+    },
+  ],
+  '/food#myRecipes': [
+    {
+      key: 'open',
+      title: 'Open a dish you saved',
+      steps: [
+        { say: 'Open the band for the builder that made it, such as Saved Soups or Favorite Soups.', mark: 'foodItems.lists', stay: true },
+        { say: 'Tap the dish to open it in place and read the whole recipe.' },
+        { say: 'Tap the pencil to change it in its builder, or the bin to remove it.' },
+      ],
+      forYou: 'Arriving from a builder, that builder\'s dishes are listed first. A changed dish keeps its place in your logged meals.',
+    },
+  ],
+  '/food#myFoodProducts': [
+    {
+      key: 'open',
+      title: 'Look back at a product you scanned',
+      steps: [
+        { say: 'Find the product in the list.', mark: 'foodItems.lists', stay: true },
+        { say: 'Tap it to see what it means for your conditions and every price you recorded for it.' },
+      ],
+      forYou: 'A product a recall may name says so on its row.',
+    },
+  ],
+  '/food#mySafeFoods': [
+    {
+      key: 'mark',
+      title: 'Mark a food safe, unsure or not for you',
+      steps: [
+        { say: 'Type the food in Search for a food.', mark: 'safeFoods.search', stay: true },
+        { say: 'Tap plus for safe for you, the question mark for not worked out yet, or minus for not for you.' },
+        { say: 'Tap the food name to add a line about why.' },
+      ],
+      forYou: 'Your mark comes before what the app works out from your conditions, wherever safe foods are listed, and the meal plan follows it.',
+    },
+  ],
+  '/food#myWholeFoods': [
+    {
+      key: 'gift',
+      title: 'Record produce somebody gave you',
+      steps: [
+        { say: 'Tap Someone Gave You Produce.', mark: 'wholeFoods.gift' },
+        { say: 'Say who it came from, pick the food, say how much and when, and save it.' },
+      ],
+      forYou: 'It is listed with what you have on hand from your garden, and drawn down the same way.',
     },
   ],
   '/food#importRecipe': [

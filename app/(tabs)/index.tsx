@@ -257,6 +257,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { t, tl } from '../../lib/i18n';
+import { explainNotYet } from '../../lib/notYet';
 import { appLocale } from '@/lib/language';
 import { BringToTopProvider, useBringToTopHost } from '../../components/BringToTop';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
@@ -714,10 +715,33 @@ const ASSESSMENT_DUE_AFTER_DAYS = 30;
 // ordinary start finishes well inside it; past it, the page shows what it
 // has rather than one line with nothing to do.
 const HOME_LOAD_PATIENCE_MS = 20_000;
+
+// The Food param that opens a saved dish in its builder: editSideId,
+// editBakedGoodsId and so on.
+function builderEditParam(type: string): string {
+  return `edit${type.charAt(0).toUpperCase()}${type.slice(1)}Id`;
+}
+
+// How many upcoming garden tasks the Home card lists before saying how
+// many more there are.
+const GARDEN_TASKS_ON_HOME = 5;
+
+// The Trends lens each Your Week line opens.
+const YOUR_WEEK_LENS: Record<'meals' | 'flares' | 'sleep' | 'steps' | 'mood' | 'energy' | 'stress', string> = {
+  meals: 'variety',
+  flares: 'symptoms',
+  sleep: 'movement',
+  steps: 'movement',
+  mood: 'symptoms',
+  energy: 'symptoms',
+  stress: 'symptoms',
+};
 const HOME_LOAD_RUNNING_LONG_TEXT =
   'Today is taking longer than usual to read. Each card fills in as its records arrive, and the rest of the app is open to you meanwhile.';
 const HOME_LOAD_PROBLEM_TEXT =
-  'Some of today could not be read. Visit another tab and come back to Home to try again.';
+  'Some of today could not be read just now. Nothing you recorded is lost.';
+const HOME_REFRESH_PROBLEM_TEXT =
+  'Today could not be read again just now, so the cards below may be from earlier. Nothing you recorded is lost.';
 
 // otherCount, 2026-09-12: flags that were tripped this week but are tied
 // to no condition the person tracks, so they are not in thisWeekCount.
@@ -922,11 +946,11 @@ const HOME_LENS_DESTINATIONS: Partial<
     color: colors.tabBioCompass,
     href: '/assessment' as Href,
   },
-  morningCheckin: { label: 'Morning Check-In', icon: 'sunny', color: colors.tabBioCompass, href: '/log' as Href },
+  morningCheckin: { label: 'Morning Check-In', icon: 'sunny', color: colors.tabBioCompass, href: { pathname: '/log', params: { openSignalsLens: 'generalNote' } } as Href },
   oneAtATime: { label: 'One Question at a Time', icon: 'list-outline', color: colors.tabBioCompass, href: '/daily-checkin' as Href },
-  todaysCheckin: { label: "Today's Check-In", icon: 'checkmark-circle', color: colors.tabBioCompass, href: '/log' as Href },
-  howYoureFeeling: { label: "How You're Feeling", icon: 'heart', color: colors.tabBioCompass, href: '/log' as Href },
-  logFlare: { label: 'Log a Flare', icon: 'flame', color: colors.tabBioCompass, href: '/log' as Href },
+  todaysCheckin: { label: "Today's Check-In", icon: 'checkmark-circle', color: colors.tabBioCompass, href: { pathname: '/log', params: { openSignalsLens: 'generalNote' } } as Href },
+  howYoureFeeling: { label: "How You're Feeling", icon: 'heart', color: colors.tabBioCompass, href: { pathname: '/log', params: { openSignalsLens: 'flares' } } as Href },
+  logFlare: { label: 'Log a Flare', icon: 'flame', color: colors.tabBioCompass, href: { pathname: '/log', params: { openSignalsLens: 'flares' } } as Href },
   logBloodPressure: { label: 'Log Blood Pressure', icon: 'heart-circle', color: colors.tabBioCompass, open: 'bp' },
   logExercise: { label: 'Log Exercise', icon: 'walk', color: colors.tabBioCompass, open: 'exercise' },
   // What it tells you.
@@ -1007,7 +1031,7 @@ const HOME_LENS_DESTINATIONS: Partial<
     href: { pathname: '/garden', params: { openGardenLens: 'upcomingTasks' } } as Href,
   },
   daysUntil: {
-    label: 'Days Until',
+    label: 'Days Until in the Garden',
     icon: 'hourglass',
     color: colors.tabGarden,
     href: { pathname: '/garden', params: { openGardenLens: 'daysUntil' } } as Href,
@@ -1388,6 +1412,11 @@ export default function HomeScreen() {
   // rest is still coming; a load that fails outright says so instead.
   const [loadRunningLong, setLoadRunningLong] = useState(false);
   const [loadProblem, setLoadProblem] = useState(false);
+  // A refresh after the first load that failed: the page keeps what it
+  // showed, and says so.
+  const [refreshProblem, setRefreshProblem] = useState(false);
+  // Try Again: a new value reads Home again.
+  const [homeReadAttempt, setHomeReadAttempt] = useState(0);
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   // Only ever opens when "Worth a look" is genuinely made of both kinds of
   // flag at once -- see handleWorthALookPress below.
@@ -1758,7 +1787,9 @@ export default function HomeScreen() {
       // addition above it was: the destructure below stays append-only.
       // Five rather than the default twenty, since this is a Home card and
       // the lens itself is one tap away.
-      listUpcomingGardenTasks(5),
+      // Every upcoming task is read; the card shows the first few and says
+      // how many more there are.
+      listUpcomingGardenTasks(),
       // The capture inbox, 2026-09-16. Appended last for the same reason
       // as everything above it. One aggregate query over one small table,
       // and it reads no note text: Home only needs to know whether there
@@ -2071,6 +2102,7 @@ export default function HomeScreen() {
         .then(() => {
         if (patience) clearTimeout(patience);
         setLoadProblem(false);
+        setRefreshProblem(false);
         if (!isFirstLoad || hasLoadedOnceRef.current) return;
         hasLoadedOnceRef.current = true;
         // Past the time limit the person may already be reading or
@@ -2098,8 +2130,12 @@ export default function HomeScreen() {
         .catch((error) => {
           if (patience) clearTimeout(patience);
           console.warn('Home load failed', error);
-          // A later refresh failing leaves what is already on the page.
-          if (hasLoadedOnceRef.current) return;
+          // A later refresh failing leaves what is already on the page,
+          // and says the cards may be from earlier.
+          if (hasLoadedOnceRef.current) {
+            setRefreshProblem(true);
+            return;
+          }
           homeShownRef.current = true;
           setLoadRunningLong(false);
           setLoadProblem(true);
@@ -2109,7 +2145,9 @@ export default function HomeScreen() {
       return () => {
         if (patience) clearTimeout(patience);
       };
-    }, [load, loadWeekTrend, loadSkyData, loadDigestConditionScope, loadSharedFolderState, announceAppliedUpdate, repairSavedDishes, refreshTestDataBanner]),
+    // homeReadAttempt is the Try Again trigger.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [load, loadWeekTrend, loadSkyData, loadDigestConditionScope, loadSharedFolderState, announceAppliedUpdate, repairSavedDishes, refreshTestDataBanner, homeReadAttempt]),
   );
 
   // Your Story reads the same records Home just reloaded, so it reads them
@@ -2738,7 +2776,8 @@ export default function HomeScreen() {
     }
     const key = destination.section as HomeSectionKey;
     if (!(key in HOME_SECTION_LABELS) || !isHomeSectionVisible(visualPrefs, key)) {
-      router.push('/log' as Href);
+      // The day's check-in is kept on Signals > General Note.
+      router.push({ pathname: '/log', params: { openSignalsLens: 'generalNote' } } as Href);
       return;
     }
     revealHomeSection(key, true);
@@ -2911,8 +2950,12 @@ export default function HomeScreen() {
                   { backgroundColor: tabColorFor('/log') },
                   !feelingHasAnswer && styles.feelingSaveButtonDisabled,
                 ]}
-                onPress={saveFeelingCheckin}
-                disabled={!feelingHasAnswer || feelingSaving}
+                onPress={() =>
+                  feelingHasAnswer
+                    ? saveFeelingCheckin()
+                    : explainNotYet('Pick how you feel first: rate something on your list, set a scale, or tap one of the words above.')
+                }
+                disabled={feelingSaving}
               >
                 <Text style={styles.feelingSaveButtonText}>{feelingSaving ? 'Saving…' : 'Save'}</Text>
               </TouchableOpacity>
@@ -2972,6 +3015,14 @@ export default function HomeScreen() {
               : `Next: ${upNext.item.title} at ${formatTime12(upNext.item.scheduledFor.slice(11, 16))}`
             : 'Nothing scheduled yet today.'}
         </Text>
+        {!upNext && (data?.scheduledToday.length ?? 0) === 0 ? (
+          <TouchableOpacity
+            onPress={() => router.push({ pathname: '/schedule', params: { openScheduleLens: 'meals' } })}
+            accessibilityRole="button"
+          >
+            <Text style={[styles.emptyLink, styles.emptyLinkCentered, { color: tabColorFor('/schedule') }]}>Plan a meal for today</Text>
+          </TouchableOpacity>
+        ) : null}
       </>,
       { contentStyle: styles.bandContentCentered },
     );
@@ -3044,16 +3095,16 @@ export default function HomeScreen() {
             >
               <Text style={styles.reminderTime}>{formatTime12(reminder.scheduledFor.slice(11, 16))}</Text>
               <View style={styles.reminderBody}>
-                <Text style={styles.reminderTitle} numberOfLines={1}>
+                <Text style={styles.reminderTitle}>
                   {reminder.title}
                 </Text>
                 {detail ? (
-                  <Text style={styles.reminderDetail} numberOfLines={1}>
+                  <Text style={styles.reminderDetail}>
                     {detail}
                   </Text>
                 ) : null}
                 {foodNote ? (
-                  <Text style={styles.reminderFoodNote} numberOfLines={2}>
+                  <Text style={styles.reminderFoodNote}>
                     {foodNote.headline}
                   </Text>
                 ) : null}
@@ -3084,10 +3135,10 @@ export default function HomeScreen() {
                 {datedDayLabel(lead)}
               </Text>
               <View style={styles.reminderBody}>
-                <Text style={styles.reminderTitle} numberOfLines={1}>
+                <Text style={styles.reminderTitle}>
                   {prefix ? t('{kind}: {title}', { kind: tl(prefix), title: source.title }) : source.title}
                 </Text>
-                <Text style={styles.reminderDetail} numberOfLines={2}>
+                <Text style={styles.reminderDetail}>
                   {detail}
                 </Text>
               </View>
@@ -3200,7 +3251,7 @@ export default function HomeScreen() {
   }
 
   function renderLogFlare() {
-    return renderActionRow('logFlare', 'Log a Flare', () => router.navigate('/log'));
+    return renderActionRow('logFlare', 'Log a Flare', () => router.navigate({ pathname: '/log', params: { openSignalsLens: 'flares' } } as Href));
   }
 
   function renderLogBloodPressure() {
@@ -3239,7 +3290,7 @@ export default function HomeScreen() {
         <EnergyOrb
           recentMaxSeverity={data?.recentMaxSeverity ?? null}
           hasAnyHistory={data?.hasAnyLogHistory ?? false}
-          onPress={() => router.navigate('/log')}
+          onPress={() => router.navigate({ pathname: '/log', params: { openSignalsLens: 'flares' } } as Href)}
           textColor={tabColorFor('/log')}
         />
       </>,
@@ -3280,6 +3331,12 @@ export default function HomeScreen() {
         "Today's Fuel Gauges",
         <>
           <Text style={[styles.emptyText, { color: tabColorFor('/insights') }]}>Log a meal to see today’s fuel gauges fill in.</Text>
+          <TouchableOpacity
+            onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'findMeal' } })}
+            accessibilityRole="button"
+          >
+            <Text style={[styles.emptyLink, { color: tabColorFor('/food') }]}>Log a meal</Text>
+          </TouchableOpacity>
           {renderGaugeChooser()}
         </>,
       );
@@ -3465,17 +3522,25 @@ export default function HomeScreen() {
     return renderBand(
       'outsideUsual',
       'Outside Your Usual',
-      <TouchableOpacity
-        onPress={() => router.push({ pathname: '/trends', params: { openTrendsLens: 'movement' } })}
-        activeOpacity={0.75}
-      >
+      <View>
+        {/* Each line opens the Trends lens that charts that reading: sleep
+            and steps on Movement, heart rate and HRV on Body Signals. */}
         {data.outsideUsual.map((line) => (
-          <Text key={line.key} style={[styles.trendDelta, { color: tabColorFor('/trends') }]}>
-            {line.sentence}
-          </Text>
+          <TouchableOpacity
+            key={line.key}
+            onPress={() =>
+              router.push({
+                pathname: '/trends',
+                params: { openTrendsLens: line.key === 'sleep' || line.key === 'steps' ? 'movement' : 'bodySignals' },
+              })
+            }
+            activeOpacity={0.75}
+          >
+            <Text style={[styles.trendDelta, { color: tabColorFor('/trends') }]}>{line.sentence}</Text>
+          </TouchableOpacity>
         ))}
         <Text style={[styles.trendCaption, { color: tabColorFor('/trends') }]}>{OUTSIDE_USUAL_CAPTION}</Text>
-      </TouchableOpacity>,
+      </View>,
     );
   }
 
@@ -3516,10 +3581,16 @@ export default function HomeScreen() {
         {week.nothingLogged ? (
           <Text style={[styles.trendDelta, { color: tabColorFor('/trends') }]}>{nothingLoggedSentence(week)}</Text>
         ) : (
+          // Each line opens the Trends lens that charts it, the way every
+          // other Trends card on Home does.
           week.lines.map((line) => (
-            <Text key={line.key} style={[styles.trendDelta, { color: tabColorFor('/trends') }]}>
-              {line.sentence}
-            </Text>
+            <TouchableOpacity
+              key={line.key}
+              onPress={() => router.push({ pathname: '/trends', params: { openTrendsLens: YOUR_WEEK_LENS[line.key] } })}
+              activeOpacity={0.75}
+            >
+              <Text style={[styles.trendDelta, { color: tabColorFor('/trends') }]}>{line.sentence}</Text>
+            </TouchableOpacity>
           ))
         )}
         <Text style={[styles.trendCaption, { color: tabColorFor('/trends') }]}>{YOUR_WEEK_CAPTION}</Text>
@@ -3771,6 +3842,7 @@ export default function HomeScreen() {
       await load();
     } catch (error) {
       console.error('[Home] Failed to undo the usual meal', error);
+      showInfoAlert('That was not undone', 'The meal is still logged. You can remove it from Past Meals on Schedules.');
     } finally {
       setUsualMealBusy(false);
     }
@@ -3785,6 +3857,7 @@ export default function HomeScreen() {
       await load();
     } catch (error) {
       console.error('[Home] Failed to put the packed meal aside', error);
+      showInfoAlert('That did not change', 'The meal could not be put aside just now. Nothing you recorded is lost, so try again in a moment.');
     }
   }
 
@@ -3794,6 +3867,7 @@ export default function HomeScreen() {
       await load();
     } catch (error) {
       console.error('[Home] Failed to put the usual meal away for today', error);
+      showInfoAlert('That did not change', 'The meal could not be put away for today just now. Nothing you recorded is lost, so try again in a moment.');
     }
   }
 
@@ -4189,7 +4263,9 @@ export default function HomeScreen() {
   // actually marked done.
   function renderGardenTasks() {
     if (!isHomeSectionVisible(visualPrefs, 'gardenTasks')) return null;
-    const tasks = data?.gardenTasks ?? [];
+    const allTasks = data?.gardenTasks ?? [];
+    const tasks = allTasks.slice(0, GARDEN_TASKS_ON_HOME);
+    const moreTasks = allTasks.length - tasks.length;
     const today = todayDateString();
     return renderBand(
       'gardenTasks',
@@ -4213,16 +4289,16 @@ export default function HomeScreen() {
                 {gardenTaskDayLabel(task.scheduledFor, today)}
               </Text>
               <View style={styles.reminderBody}>
-                <Text style={styles.reminderTitle} numberOfLines={1}>
+                <Text style={styles.reminderTitle}>
                   {task.title}
                 </Text>
                 {task.notes ? (
-                  <Text style={styles.reminderDetail} numberOfLines={1}>
+                  <Text style={styles.reminderDetail}>
                     {task.notes}
                   </Text>
                 ) : null}
                 {rain ? (
-                  <Text style={styles.reminderDetail} numberOfLines={2}>
+                  <Text style={styles.reminderDetail}>
                     {rain.rain ? '🌧 ' : ''}
                     {rain.line.split('. ')[0].replace(/\.$/, '')}.
                   </Text>
@@ -4232,6 +4308,16 @@ export default function HomeScreen() {
             );
           })
         )}
+        {moreTasks > 0 ? (
+          <TouchableOpacity
+            onPress={() => router.push({ pathname: '/garden', params: { openGardenLens: 'upcomingTasks' } })}
+            accessibilityRole="button"
+          >
+            <Text style={[styles.emptyLink, { color: tabColorFor('/garden') }]}>
+              {t(moreTasks === 1 ? 'One more in Upcoming Tasks' : '{count} more in Upcoming Tasks', { count: moreTasks })}
+            </Text>
+          </TouchableOpacity>
+        ) : null}
       </View>,
     );
   }
@@ -4291,10 +4377,10 @@ export default function HomeScreen() {
             onPress={() => router.push({ pathname: '/routine', params: { id: routine.id } })}
           >
             <View style={styles.reminderBody}>
-              <Text style={styles.reminderTitle} numberOfLines={1}>
+              <Text style={styles.reminderTitle}>
                 {routine.name}
               </Text>
-              <Text style={styles.reminderDetail} numberOfLines={2}>
+              <Text style={styles.reminderDetail}>
                 {describeRoutineStanding(routine, now)}
               </Text>
             </View>
@@ -4481,6 +4567,20 @@ export default function HomeScreen() {
               {meal.hasComponents && cookable.length === 0 ? (
                 <Text style={styles.reminderDetail}>No steps were written for these dishes yet. Editing a dish in its builder adds them.</Text>
               ) : null}
+              {/* Each dish with no steps opens its builder, where they are written. */}
+              {meal.components
+                .filter((component) => !component.instructions.some((step) => step.trim().length > 0))
+                .map((component) => (
+                  <TouchableOpacity
+                    key={`write-${component.componentId}`}
+                    onPress={() => router.push({ pathname: '/food', params: { [builderEditParam(component.componentType)]: component.componentId } })}
+                    accessibilityRole="button"
+                  >
+                    <Text style={[styles.emptyLink, { color: tabColorFor('/food') }]}>
+                      {t('Write the steps for {name}', { name: component.name })}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
             </View>
           );
         })}
@@ -4569,10 +4669,10 @@ export default function HomeScreen() {
               onPress={() => router.push({ pathname: '/life', params: { openLifeLens: 'didIDoIt' } })}
             >
               <View style={styles.reminderBody}>
-                <Text style={styles.reminderTitle} numberOfLines={1}>
+                <Text style={styles.reminderTitle}>
                   {check.name}
                 </Text>
-                <Text style={[styles.reminderDetail, late && styles.reminderDetailLate]} numberOfLines={2}>
+                <Text style={[styles.reminderDetail, late && styles.reminderDetailLate]}>
                   {standing.line}
                 </Text>
               </View>
@@ -4772,7 +4872,7 @@ export default function HomeScreen() {
     if (!isHomeSectionVisible(visualPrefs, 'daysUntil')) return null;
     return renderBand(
       'daysUntil',
-      'Days Until',
+      'Days Until in the Garden',
       <View style={styles.bandBody}>
         <DaysUntilSection compact showHeading={false} />
       </View>,
@@ -5153,9 +5253,20 @@ export default function HomeScreen() {
               check-in already made is not read as one still to do. */}
           <VaultClosedBand color={colors.tabHome} categories={HOME_VAULT} />
 
-          {!loading && (loadRunningLong || loadProblem) ? (
+          {!loading && (loadRunningLong || loadProblem || refreshProblem) ? (
             <View style={styles.loadingCard}>
-              <Text style={styles.loadingText}>{loadProblem ? HOME_LOAD_PROBLEM_TEXT : HOME_LOAD_RUNNING_LONG_TEXT}</Text>
+              <Text style={styles.loadingText}>
+                {loadProblem ? HOME_LOAD_PROBLEM_TEXT : refreshProblem ? HOME_REFRESH_PROBLEM_TEXT : HOME_LOAD_RUNNING_LONG_TEXT}
+              </Text>
+              {loadProblem || refreshProblem ? (
+                <TouchableOpacity
+                  style={styles.homeTryAgain}
+                  onPress={() => setHomeReadAttempt((n) => n + 1)}
+                  accessibilityRole="button"
+                >
+                  <Text style={styles.homeTryAgainText}>Try Again</Text>
+                </TouchableOpacity>
+              ) : null}
             </View>
           ) : null}
 
@@ -5581,6 +5692,8 @@ const styles = StyleSheet.create({
     ...homeBandNoHairlines,
   },
   loadingText: { ...typography.body, ...textShadow, color: colors.textSecondary },
+  homeTryAgain: { ...BUTTON_SECONDARY, alignSelf: 'flex-start', marginTop: 12 },
+  homeTryAgainText: { ...BUTTON_SECONDARY_TEXT },
 
   // Same card treatment as loadingCard above (plain surface/border, no
   // per-tab color -- this isn't about any one tab), shown only once every
@@ -5644,6 +5757,8 @@ const styles = StyleSheet.create({
   // card at once (see that style's own comment) rather than needing it
   // repeated, inconsistently, on each card individually.
   emptyText: { ...typography.body, ...textShadow, color: colors.textSecondary },
+  emptyLink: { ...typography.bodyEmphasis, ...textShadow, marginTop: 8 },
+  emptyLinkCentered: { textAlign: 'center' },
 
   // Stays neutral (colors.textSecondary), not tab-colored -- unlike
   // statNumber/trendNumber below, this is a full descriptive sentence, not

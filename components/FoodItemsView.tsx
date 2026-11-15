@@ -44,6 +44,8 @@ import { RecipeBuildRow, RecipeDetailCard } from './RecipeDetailCard';
 import { useConfirmSheet, type ConfirmSheetRequest } from './ConfirmSheet';
 import { scannedProductIdsWithRecalls } from '../lib/recallsDb';
 import { useInfoAlert } from './InfoAlert';
+import { ReadProblem } from './ReadProblem';
+import { useWalkMark } from './WalkMark';
 
 // A Food lens since 2026-09-13 (it was app/food-items.tsx, a Stack push
 // outside the (tabs) group, from 2026-08-01 until then): "only Profile
@@ -87,6 +89,7 @@ export function FoodItemsView({
   sections,
   intro,
   expandInPlace,
+  focusItemType,
   onOpenProduct,
   onOpenDetail,
   onOpenBuilder,
@@ -112,6 +115,11 @@ export function FoodItemsView({
   // other caller) keeps its own tap, since a scanned label is a
   // different shape with no recipe in it.
   expandInPlace?: boolean;
+  // My Recipes reached from one builder's Find a Recipe link (2026-11-15):
+  // that builder's bands come first and its saved band opens, rather than
+  // the whole list landing closed with the dishes asked for somewhere in
+  // the middle.
+  focusItemType?: string;
   // A scanned product's own detail (FoodProductDetailView).
   onOpenProduct: (id: string, title: string) => void;
   // A saved dish's own detail (FoodItemDetailView).
@@ -126,13 +134,19 @@ export function FoodItemsView({
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [confirmSheet, confirmSheetElement] = useConfirmSheet();
 
-  const resolvedSections = useMemo<FoodItemsListParams[]>(
-    () => sections ?? [{ itemType: itemType ?? '', status: status ?? '', title: title ?? '' }],
-    [sections, itemType, status, title],
-  );
+  const resolvedSections = useMemo<FoodItemsListParams[]>(() => {
+    const all = sections ?? [{ itemType: itemType ?? '', status: status ?? '', title: title ?? '' }];
+    if (!focusItemType) return all;
+    return [...all.filter((section) => section.itemType === focusItemType), ...all.filter((section) => section.itemType !== focusItemType)];
+  }, [sections, itemType, status, title, focusItemType]);
   const grouped = resolvedSections.length > 1;
   const [itemsByKey, setItemsByKey] = useState<Record<string, FoodItemEntry[] | null>>({});
   const [openKey, setOpenKey] = useState<string | null>(null);
+  // A read that failed says so, rather than drawing an empty list that
+  // reads as nothing saved. Try Again bumps the attempt.
+  const [loadFailed, setLoadFailed] = useState(false);
+  const [loadAttempt, setLoadAttempt] = useState(0);
+  const walkMark = useWalkMark();
   // Recipes somebody sent, 2026-09-18: they lived in the Digest under My
   // Kitchen until the recipes themselves moved here ("I also think that
   // all recipes should live in Food rather than having the system meals
@@ -145,17 +159,33 @@ export function FoodItemsView({
   useEffect(() => {
     let isCurrent = true;
     setItemsByKey({});
+    setLoadFailed(false);
     Promise.all(
       resolvedSections.map(
         async (section) => [sectionKey(section), await loadItems(section.itemType, section.status)] as const,
       ),
-    ).then((pairs) => {
-      if (isCurrent) setItemsByKey(Object.fromEntries(pairs));
-    });
+    )
+      .then((pairs) => {
+        if (!isCurrent) return;
+        const loaded = Object.fromEntries(pairs);
+        setItemsByKey(loaded);
+        // The builder that sent somebody here: open the first of its bands
+        // with something in it.
+        if (focusItemType) {
+          const first = resolvedSections.find(
+            (section) => section.itemType === focusItemType && (loaded[sectionKey(section)] ?? []).length > 0,
+          );
+          if (first) setOpenKey(sectionKey(first));
+        }
+      })
+      .catch((error) => {
+        console.error('[FoodItemsView] Could not load the list', error);
+        if (isCurrent) setLoadFailed(true);
+      });
     return () => {
       isCurrent = false;
     };
-  }, [resolvedSections]);
+  }, [resolvedSections, focusItemType, loadAttempt]);
 
   const reloadShared = useCallback(async () => {
     if (!expandInPlace) return;
@@ -232,6 +262,18 @@ export function FoodItemsView({
             ))}
           </HomeSectionBand>
         ) : null}
+        {loadFailed ? (
+          <ReadProblem
+            message={grouped ? 'Your recipes could not be read just now. Nothing you recorded is lost.' : 'This list could not be read just now. Nothing you recorded is lost.'}
+            onTryAgain={() => setLoadAttempt((n) => n + 1)}
+          />
+        ) : null}
+        {focusItemType && allLoaded && !loadFailed && !resolvedSections.some((section) => section.itemType === focusItemType && (itemsByKey[sectionKey(section)] ?? []).length > 0) ? (
+          <View style={styles.introBox}>
+            <Text style={styles.emptyText}>Nothing from this builder is saved yet. What you save there is listed here first.</Text>
+          </View>
+        ) : null}
+        <View ref={walkMark.ref('foodItems.lists')} collapsable={false} style={styles.sectionsWrap}>
         {shownSections.map((section) => (
           <FoodItemsSection
             key={sectionKey(section)}
@@ -249,7 +291,8 @@ export function FoodItemsView({
             confirmSheet={confirmSheet}
           />
         ))}
-        {grouped && allLoaded && shownSections.length === 0 ? (
+        </View>
+        {grouped && allLoaded && !loadFailed && shownSections.length === 0 ? (
           <View style={styles.introBox}>
             <Text style={styles.emptyText}>
               Nothing here yet. Anything you build in one of the Food tools and save, or mark as a favorite, is
@@ -955,6 +998,9 @@ const styles = StyleSheet.create({
   backPill: { ...PILL, ...PILL_ON, alignSelf: 'flex-start', marginLeft: HOME_BAND_CONTENT_PADDING },
   backPillText: { ...PILL_ON_TEXT },
   bandBody: { gap: HOME_BAND_ACCENT_WIDTH },
+  // The builders' bands, wrapped so a tutorial can ring them; same gap
+  // as the page around them.
+  sectionsWrap: { gap: HOME_BAND_ACCENT_WIDTH },
   // A line of its own above the bands, on a surface rather than
   // straight on the Food background (see CLAUDE.md's standing rule).
   introBox: {

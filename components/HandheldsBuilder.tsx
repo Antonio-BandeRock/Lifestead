@@ -55,6 +55,7 @@ import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPane
 import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
 import type { SpokenIngredient } from '../lib/spokenIngredients';
 import { useConfirmSheet } from './ConfirmSheet';
+import { offerToLogSavedDish } from '../lib/builderSavedOffer';
 import { describePrepMismatch } from '../lib/cookingMethodResolution';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -1181,11 +1182,12 @@ export function HandheldsBuilder({
       depthData,
     };
 
+    let savedDishId: string | null = null;
     try {
       if (editHandheldId) {
         await updateHandheld(editHandheldId, payload);
       } else {
-        await saveHandheld(payload);
+        savedDishId = (await saveHandheld(payload)).id;
       }
     } catch (error) {
       console.error('[HandheldsBuilder] Failed to save handheld', error);
@@ -1238,7 +1240,15 @@ export function HandheldsBuilder({
     setReportData(null);
     setReportNutrientData([]);
     setStagePickerFor(null);
-    showInfoAlert('Handheld saved', `${finishedName} is saved. Starting a fresh handheld now.`);
+    void offerToLogSavedDish({
+      confirm: confirmSheet,
+      router,
+      componentType: 'handheld',
+      title: 'Handheld saved',
+      listTitle: 'Saved Handhelds',
+      name: finishedName,
+      id: savedDishId,
+    });
   }
 
   // The optional half of "choice to create the report or not" -- see

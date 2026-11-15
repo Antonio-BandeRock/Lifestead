@@ -55,6 +55,7 @@ import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPane
 import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
 import type { SpokenIngredient } from '../lib/spokenIngredients';
 import { useConfirmSheet } from './ConfirmSheet';
+import { offerToLogSavedDish } from '../lib/builderSavedOffer';
 import { describePrepMismatch } from '../lib/cookingMethodResolution';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -1111,11 +1112,12 @@ export function BakedGoodsBuilder({
       depthData,
     };
 
+    let savedDishId: string | null = null;
     try {
       if (editBakedGoodsId) {
         await updateBakedGoods(editBakedGoodsId, payload);
       } else {
-        await saveBakedGoods(payload);
+        savedDishId = (await saveBakedGoods(payload)).id;
       }
     } catch (error) {
       console.error('[BakedGoodsBuilder] Failed to save baked good', error);
@@ -1168,7 +1170,15 @@ export function BakedGoodsBuilder({
     setReportData(null);
     setReportNutrientData([]);
     setStagePickerFor(null);
-    showInfoAlert('Baked Good saved', `${finishedName} is saved. Starting a fresh baked good now.`);
+    void offerToLogSavedDish({
+      confirm: confirmSheet,
+      router,
+      componentType: 'bakedGoods',
+      title: 'Baked Good saved',
+      listTitle: 'Saved Baked Goods',
+      name: finishedName,
+      id: savedDishId,
+    });
   }
 
   // The optional half of "choice to create the report or not" -- see
