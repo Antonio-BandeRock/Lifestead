@@ -25,3 +25,23 @@ export async function saveOrSay<T>(problem: string, work: () => Promise<T>): Pro
     return undefined;
   }
 }
+
+/**
+ * For a save already inside a try: shows `problem` the same way saveOrSay
+ * does. The error goes to the log, never to the person, since a database
+ * message is not something anybody can act on.
+ */
+export function sayNotSaved(problem: string, error: unknown): void {
+  console.warn(problem, error);
+  explainNotYet(problem, NOT_SAVED_TITLE);
+}
+
+/**
+ * For a sheet that shows its own message line: logs the error and returns
+ * `problem`, so the line names what was not saved instead of the
+ * database's words.
+ */
+export function notSavedLine(problem: string, error: unknown): string {
+  console.warn(problem, error);
+  return problem;
+}

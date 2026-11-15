@@ -31,6 +31,9 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useRouter, type Href } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState, type ComponentProps } from 'react';
 import { StyleSheet, Switch, Text, TouchableOpacity, View, useWindowDimensions, type LayoutChangeEvent } from 'react-native';
+import { ReadProblem } from './ReadProblem';
+import { t } from '../lib/i18n';
+import { saveOrSay } from '../lib/saveProblem';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -123,12 +126,19 @@ export function DayTimeline({ tabColor, compact = false }: { tabColor: string; c
   const [calendarOn, setCalendarOn] = useState(false);
   const [moveNote, setMoveNote] = useState<string | null>(null);
   const [confirm, confirmElement] = useConfirmSheet();
+  const [readFailed, setReadFailed] = useState(false);
 
   const refresh = useCallback(async () => {
     const at = Date.now();
     setNow(at);
-    setView(await loadDayTimeline(at));
-    setCalendarOn(await getTimelineCalendarOn());
+    try {
+      setView(await loadDayTimeline(at));
+      setCalendarOn(await getTimelineCalendarOn());
+      setReadFailed(false);
+    } catch (error) {
+      console.warn('[DayTimeline] the day could not be read', error);
+      setReadFailed(true);
+    }
   }, []);
 
   async function toggleCalendar(next: boolean) {
@@ -136,12 +146,22 @@ export function DayTimeline({ tabColor, compact = false }: { tabColor: string; c
       setMoveNote('The phone did not allow reading its calendar, so nothing from it is shown. That can be changed in the phone\'s settings for Lifestead.');
       return;
     }
-    await setTimelineCalendarOn(next);
-    await refresh();
+    const saved = await saveOrSay(next ? 'The phone calendar was not turned on here. Try again.' : 'The phone calendar was not turned off here. Try again.', async () => {
+      await setTimelineCalendarOn(next);
+      return true;
+    });
+    if (saved) await refresh();
   }
 
   async function moveRest() {
-    const plan = await loadMovePlan();
+    let plan: Awaited<ReturnType<typeof loadMovePlan>>;
+    try {
+      plan = await loadMovePlan();
+    } catch (error) {
+      console.warn('[DayTimeline] what is left today could not be read', error);
+      setMoveNote('What is left today could not be read just now, so nothing was moved. Nothing you recorded is lost. Try again.');
+      return;
+    }
     const words = describeMovePlan(plan);
     if (!words) {
       setMoveNote('Nothing left today can move: what is still ahead is a dose or an appointment, or there is nothing still ahead.');
@@ -149,8 +169,9 @@ export function DayTimeline({ tabColor, compact = false }: { tabColor: string; c
     }
     const ok = await confirm({ title: 'Move what is left to tomorrow?', message: words, confirmLabel: 'Move them' });
     if (!ok) return;
-    const placed = await applyMovePlan(plan);
-    setMoveNote(placed === 1 ? '1 thing is now on tomorrow.' : `${placed} things are now on tomorrow.`);
+    const placed = await saveOrSay('Nothing was moved to tomorrow. Try again.', () => applyMovePlan(plan));
+    if (placed === undefined) return;
+    setMoveNote(placed === 1 ? t('1 thing is now on tomorrow.') : t('{count} things are now on tomorrow.', { count: placed }));
     await refresh();
   }
 
@@ -188,6 +209,9 @@ export function DayTimeline({ tabColor, compact = false }: { tabColor: string; c
     setViewport(event.nativeEvent.layout.width);
   }
 
+  if (readFailed && (!view || !layout)) {
+    return <ReadProblem message={'The days around today could not be read just now. Nothing you recorded is lost.'} onTryAgain={() => void refresh()} />;
+  }
   if (!view || !layout) {
     return <Text style={styles.muted}>Reading the days around today...</Text>;
   }

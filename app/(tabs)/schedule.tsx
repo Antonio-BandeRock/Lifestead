@@ -11,6 +11,8 @@ import { AppActionSheet, type AppActionSheetAction } from '../../components/AppA
 import { useConfirmSheet } from '../../components/ConfirmSheet';
 import type { HelpSection } from '../../components/HelpButton';
 import { useInfoAlert } from '../../components/InfoAlert';
+import { ReadProblem } from '../../components/ReadProblem';
+import { notSavedLine, saveOrSay, sayNotSaved } from '../../lib/saveProblem';
 import { FoodSafetyRow, useFoodSafetyMarks } from '../../components/FoodSafetyMarks';
 import {
   addDaysToLocalDate,
@@ -635,74 +637,65 @@ const LENSES: LensOption<Lens>[] = [
   },
 ];
 
+// The Schedules menu in groups, so ten lenses read as four kinds of plan.
+const SCHEDULE_LENS_GROUPS: { group: string; keys: Lens[] }[] = [
+  { group: 'Today', keys: ['timeline', 'todaysMeals'] },
+  { group: 'Meals', keys: ['meals', 'dailyMealPlan', 'pastMeals'] },
+  { group: 'Drinks, Meds and Exercise', keys: ['hydration', 'meds', 'exercise'] },
+  { group: 'Appointments and Upkeep', keys: ['appointments', 'upkeep'] },
+];
+const SCHEDULE_MENU: LensOption<Lens>[] = SCHEDULE_LENS_GROUPS.flatMap(({ group, keys }) =>
+  keys.map((key) => ({ ...LENSES.find((option) => option.key === key)!, group })),
+);
+
 const SCHEDULE_HELP_SECTIONS: HelpSection[] = [
   {
-    heading: 'What this page is for',
-    body: "So meals, hydration, supplements, prescriptions, and appointments actually happen when they're supposed to, instead of being remembered and then forgotten. Plan them here ahead of time, and this app reminds you and keeps a record of whether each one actually happened.",
+    heading: 'What this tab is for',
+    body: 'Planning what you mean to do, so meals, drinks, doses, appointments, exercise and upkeep come round when they should and you do not have to hold them in your head. Plan them here ahead of time; Lifestead reminds you and keeps a record of what happened.',
+  },
+  {
+    heading: 'The four groups in the menu',
+    body: 'Today holds Timeline and Today\'s Meals. Meals holds Meals, Meal Plan and Past Meals. Drinks, Meds and Exercise holds Hydration, Meds and Exercise. Appointments and Upkeep holds Appointments and Upkeep.',
+  },
+  {
+    heading: 'Defined where it lives, timed here',
+    body: 'A thing is set up on its own tab and given its times here. Meds and supplements are set up in Life > My Meds, with what one dose contains and whether you are taking it now; Meds here shows their doses through the day. Upkeep is set up in Life > Upkeep, and workouts in Life > Workouts.',
   },
   {
     heading: 'Planning vs. logging',
-    body: 'This page is for planning what you intend to do, before you do it. Meals still get logged on the Food tab, either through "Log now" here or by creating a meal there directly.',
-  },
-  {
-    heading: 'Six schedule types',
-    body: 'Meals, Hydration, Supplements, Prescriptions, Appointments and Exercise each have a lens here.',
+    body: 'This tab is for what you intend to do. Meals are logged on the Food tab, either through "Log now" here or by making a meal there.',
   },
   {
     heading: 'Hydration is Meals, filtered',
-    body: 'A "Beverage" meal (water, tea, coffee, a smoothie; see the Food tab) already is a hydration entry. This lens doesn\'t track anything separately: it\'s the same schedule/meal data, just filtered to beverages and shown with a running water total, so logging or scheduling a drink from either tab shows up in both automatically.',
+    body: 'A drink is a meal of the Beverage type (water, tea, coffee, a smoothie). Hydration shows the same schedule filtered to drinks, with a running water total, so a drink scheduled or logged on either tab shows on both.',
   },
   {
-    heading: 'From templates & favorites, or unplanned',
-    body: 'On the Food tab, pick a meal type first. "From templates & favorites" shows only your saved meals/favorites that match that meal type. "Something unplanned" is for when the day did not go as planned (e.g. you ate out); type in your best guess of what you actually had.',
-  },
-  {
-    heading: '"Log now"',
-    body: 'Turns a planned meal into a logged entry. If it was scheduled from a template or favorite, the Meals builder opens with those exact ingredients already filled in.',
-  },
-  {
-    heading: '"Rotate" (smoothies, mixed vegetables, mixed fruit)',
-    body: 'Shows up on a planned meal only when it was scheduled from a favorite that has at least one ingredient marked Rotating (set on the Food tab: tap "Rotate?" next to an ingredient in a side). Tap any alternate to make it current for this specific scheduled meal, or randomize one or all of them, then Save. This choice belongs to this one occurrence only; rotating a Tuesday smoothie never changes what a Wednesday one shows, even if both were scheduled from the same favorite, so you can plan variety across several upcoming days ahead of time. Whatever\'s chosen is exactly what "Log now" prefills and what actually gets logged, so nutrients, condition scores, and Trends always reflect the ingredient actually used that day.',
+    heading: '"Log now" and "Rotate"',
+    body: '"Log now" turns a planned meal into a logged one, filled in from the template or favorite it came from. "Rotate" shows on a meal scheduled from a favorite with a Rotating ingredient; what you pick belongs to that one day only, and it is exactly what "Log now" fills in, so nutrients and Trends follow the ingredient used that day.',
   },
   {
     heading: 'Planned, Logged, Skipped',
-    body: 'A planned meal you never got to stays marked "Planned," not silently dropped. "Skip" marks it as intentionally not happening today, without deleting the record of what you had planned.',
+    body: 'A planned meal you never got to stays marked Planned rather than disappearing. Skip marks it as not happening that day and keeps the record of what was planned.',
   },
   {
-    heading: 'Usual meal times & fasting window',
-    body: 'Set in Profile. "Usual meal times" just pre-fills the time picker for that meal type. If you turn on fasting and set an eating window, this page will not let you schedule a meal outside it.',
+    heading: 'Usual meal times and the fasting window',
+    body: 'Set in Profile. Usual meal times fill in the time for that meal type. With fasting turned on and an eating window set, a meal cannot be scheduled outside the window.',
   },
   {
-    heading: 'Supplements: document every ingredient',
-    body: 'For a supplement\'s contribution to count toward your daily totals, document exactly what one dose contains: each ingredient, its amount, and its unit (mg, mcg, g, or IU). A single-ingredient product gets one row; a multivitamin gets one row per nutrient on its label.',
+    heading: 'Appointments and the phone calendar',
+    body: 'Doctor, lab, nutritionist, trainer or other visits, each with a type, time, place and provider. Mark one done or cancelled once it has passed, or remove it. "Import from Phone Calendar" brings in an event from the phone, and "Add to Phone Calendar" sends one out so the phone reminds you too. Lifestead never signs in to Google or Microsoft; it only asks the phone once for permission.',
   },
   {
-    heading: 'Tracking / Not tracking',
-    body: 'This one toggle covers stopping a supplement, cycling on and off it, or taking it temporarily (e.g. only during a training block); flip it off when you are not taking it and back on when you are. Nothing is deleted either way, so you never have to re-enter its ingredients.',
-  },
-  {
-    heading: 'Reminder times are separate from tracking',
-    body: 'A supplement\'s contribution to your daily totals always comes from the Tracking toggle alone. Adding reminder times underneath it is optional and purely a personal adherence record: for a supplement that needs a specific dose time (e.g. away from calcium, or with a meal for fat solubility), not a second way of counting it.',
-  },
-  {
-    heading: 'Prescriptions',
-    body: 'Track what you take, its dose and frequency, and (optionally) specific reminder times: same on/off Tracking toggle and repeat picker as Supplements. Prescriptions don\'t contribute nutrients, so there\'s no ingredient list to document.',
-  },
-  {
-    heading: 'Appointments',
-    body: 'Doctor, lab/bloodwork, nutritionist, trainer, or other visits: title, type, date/time, location, and provider. Mark one completed or cancelled once it\'s past, or remove it. Appointments don\'t repeat yet (most get booked one at a time anyway); add each one as it\'s scheduled.',
-  },
-  {
-    heading: 'Phone calendar sync',
-    body: 'Appointments can connect to your phone\'s Calendar app: if you\'ve already added your Outlook or Google account in your phone\'s Settings, its events already live there. "Import from Phone Calendar" pulls in an existing event as an appointment here; "Add to Phone Calendar" pushes an appointment you made here out to your phone\'s calendar so those reminders fire too. No separate sign-in, and nothing beyond a one-time permission prompt: this app never talks to Google or Microsoft directly.',
-  },
-  {
-    heading: 'Interaction checking, once there is data to check',
-    body: 'Calcium/iron/zinc timing and the fat-soluble vitamins are checked automatically. Levothyroxine + calcium/iron timing is checked too, once you track levothyroxine as a prescription and calcium/iron as supplements with reminder times set. This app matches a prescription by name (e.g. "levothyroxine" anywhere in what you named it). Biotin + an upcoming lab draw is checked automatically too, once you\'re tracking biotin and have a "Lab / bloodwork" appointment scheduled within the next couple weeks. Anything triggered shows under "Things to check" on the Supplements and Prescriptions tabs.',
+    heading: 'Timing between meds, food and lab draws',
+    body: 'Calcium, iron and zinc timing, the fat-soluble vitamins, and levothyroxine against calcium or iron are checked once reminder times are set; a med is matched by name, so "levothyroxine" anywhere in its name counts. Biotin before a lab appointment in the next couple of weeks is checked too. Anything found shows under Things to check on Meds.',
   },
   {
     heading: 'Repeating schedules',
-    body: 'Meal, drink, supplement, and prescription reminders can repeat every day, on chosen days of the week (every week, or every 2 or more weeks for something like a fortnightly injection), every few days, or once a month on the same date (the last day of a shorter month when that date does not exist). Each one runs indefinitely, a set number of times, or until a date you choose. Entries are generated about 60 days ahead and topped up automatically, so editing, skipping, or removing one day never touches any other.',
+    body: 'Meals, drinks and doses can repeat every day, on chosen days of the week (every week, or every few weeks for something like a fortnightly injection), every few days, or once a month on the same date (the last day of a shorter month when that date does not exist). Each runs with no end, a set number of times, or until a date you choose. Days are made about 60 days ahead and topped up, so changing, skipping or removing one day leaves every other day as it was.',
+  },
+  {
+    heading: 'When something cannot be read or saved',
+    body: 'If a list cannot be read, the lens says so in place of the list, with Try again, and nothing you recorded is lost. If a change cannot be saved, a note says what was not saved, and what was on screen stays as it was so you can try again.',
   },
 ];
 
@@ -1016,6 +1009,8 @@ function MealsLens() {
   const [viewMonth, setViewMonth] = useState<string>(() => monthOf(todayDateString()));
   const [monthMarks, setMonthMarks] = useState<Map<string, DayMarks>>(() => new Map());
   const monthWeeks = useMemo(() => monthGridWeeks(viewMonth), [viewMonth]);
+  const [monthReadFailed, setMonthReadFailed] = useState(false);
+  const [monthTick, setMonthTick] = useState(0);
   useEffect(() => {
     if (calendarView !== 'month') return;
     let cancelled = false;
@@ -1023,13 +1018,17 @@ function MealsLens() {
     Promise.all([listScheduledMealsForDateRange(from, to), listCalendarNotes(from, to)])
       .then(([monthMeals, monthNotes]) => {
         if (cancelled) return;
+        setMonthReadFailed(false);
         setMonthMarks(marksByDate(monthMeals.map((meal) => meal.scheduledFor), monthNotes.map((note) => note.scheduledFor)));
       })
-      .catch((error) => console.error('month grid load failed', error));
+      .catch((error) => {
+        console.warn('[Schedules] the month could not be read', error);
+        if (!cancelled) setMonthReadFailed(true);
+      });
     return () => {
       cancelled = true;
     };
-  }, [calendarView, viewMonth, items, notes]);
+  }, [calendarView, viewMonth, items, notes, monthTick]);
 
   function showCalendarView(view: 'week' | 'month') {
     if (view === 'month') setViewMonth(monthOf(selectedDate));
@@ -1046,6 +1045,7 @@ function MealsLens() {
 
   const load = useCallback(() => {
     setLoading(true);
+    setErrorMessage('');
     const weekEnd = addDaysToDateStringLocal(weekStart, 6);
     // settlePastScheduledMeals first, 2026-08-14 -- a real, idempotent
     // "catch anything that's lapsed since this screen was last open" pass
@@ -1075,7 +1075,8 @@ function MealsLens() {
         setCalendarPermissionGranted(granted);
       })
       .catch((error) => {
-        setErrorMessage(`Could not load this week's schedule: ${error instanceof Error ? error.message : String(error)}`);
+        console.warn('[Schedules] this week could not be read', error);
+        setErrorMessage("This week's schedule could not be read just now. Nothing you recorded is lost.");
       })
       .finally(() => setLoading(false));
     // weekStart in deps, deliberately -- this is what makes the existing
@@ -1250,7 +1251,7 @@ function MealsLens() {
       closeForm();
       load();
     } catch (error) {
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The meal was not saved. Try again.', error);
     }
   }
 
@@ -1268,10 +1269,7 @@ function MealsLens() {
     // them pointing at nothing (deleteScheduledMeal in lib/db.ts).
     if (!hasRepeat && item.leftoverCount > 0) {
       const removeCooked = (withLeftovers: boolean) => {
-        void (async () => {
-          await deleteScheduledMeal(item.id, { withLeftovers });
-          load();
-        })();
+        void saveOrSay('The meal was not removed. Try again.', () => deleteScheduledMeal(item.id, { withLeftovers })).then(() => load());
       };
       setRemovePrompt({
         title: 'Remove this planned meal?',
@@ -1286,22 +1284,20 @@ function MealsLens() {
     }
 
     const removeOne = (alsoRemoveFromCalendar: boolean) => {
-      void (async () => {
+      void saveOrSay('The meal was not removed. Try again.', async () => {
         if (alsoRemoveFromCalendar && item.linkedDeviceCalendarEventId) {
           await deleteDeviceCalendarEvent(item.linkedDeviceCalendarEventId);
         }
         await deleteScheduledMeal(item.id);
-        load();
-      })();
+      }).then(() => load());
     };
     const removeSeries = (alsoRemoveFromCalendar: boolean) => {
-      void (async () => {
+      void saveOrSay('The repeating meal was not removed. Try again.', async () => {
         if (alsoRemoveFromCalendar && item.linkedDeviceCalendarEventId) {
           await deleteDeviceCalendarEvent(item.linkedDeviceCalendarEventId);
         }
         await deleteScheduleSeries(item.repeatGroupId!);
-        load();
-      })();
+      }).then(() => load());
     };
 
     let actions: AppActionSheetAction[];
@@ -1381,19 +1377,24 @@ function MealsLens() {
       await linkScheduleItemToDeviceCalendarEvent(item.id, eventId);
       load();
     } catch (error) {
-      showInfoAlert('Could not add to calendar', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The meal was not added to the phone calendar. Try again.', error);
     }
   }
 
   async function handleRemoveFromDeviceCalendar(item: ScheduleItemRecord) {
     if (!item.linkedDeviceCalendarEventId) return;
-    await deleteDeviceCalendarEvent(item.linkedDeviceCalendarEventId);
-    await unlinkScheduleItemFromDeviceCalendarEvent(item.id);
+    const eventId = item.linkedDeviceCalendarEventId;
+    await saveOrSay('The meal was not taken off the phone calendar. Try again.', async () => {
+      await deleteDeviceCalendarEvent(eventId);
+      await unlinkScheduleItemFromDeviceCalendarEvent(item.id);
+    });
     load();
   }
 
   async function handleToggleSkipped(item: ScheduleItemRecord) {
-    await setScheduledMealSkipped(item.id, item.status !== 'skipped');
+    await saveOrSay(item.status === 'skipped' ? 'The meal is still marked skipped. Try again.' : 'The meal was not marked skipped. Try again.', () =>
+      setScheduledMealSkipped(item.id, item.status !== 'skipped'),
+    );
     load();
   }
 
@@ -1515,7 +1516,7 @@ function MealsLens() {
       closeRotateSheet();
       load();
     } catch (error) {
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The rotated ingredients were not saved. Try again.', error);
     }
   }
 
@@ -1551,7 +1552,7 @@ function MealsLens() {
       {loading ? (
           <View style={styles.bandBox}><Text style={styles.emptyText}>Loading…</Text></View>
         ) : errorMessage ? (
-          <View style={styles.bandBox}><Text style={styles.errorText}>{errorMessage}</Text></View>
+          <ReadProblem message={errorMessage} onTryAgain={load} />
         ) : (
           <>
             <View style={styles.weekStripCard}>
@@ -1592,6 +1593,12 @@ function MealsLens() {
               </View>
               {calendarView === 'month' ? (
                 <View>
+                  {monthReadFailed ? (
+                    <ReadProblem
+                      message={'This month could not be read just now, so its days show no marks. Nothing you recorded is lost.'}
+                      onTryAgain={() => setMonthTick((n) => n + 1)}
+                    />
+                  ) : null}
                   <View style={styles.monthHeaderRow}>
                     {weekdayInitials().map((initial, index) => (
                       <Text key={index} style={styles.monthHeaderText}>{initial}</Text>
@@ -2254,7 +2261,10 @@ function MoveMealSheet({
             .map((meal) => ({ date: meal.scheduledFor.slice(0, 10), mealType: meal.mealType })),
         );
       })
-      .catch((error) => console.error('[Move meal] Failed to read the days ahead', error));
+      .catch((error) => {
+        console.warn('[Move meal] the days ahead could not be read', error);
+        setMessage('The days ahead could not be read just now, so meals already planned on them are not marked. Nothing you recorded is lost.');
+      });
   }, [item]);
 
   const links = { cookScheduledFor: item && (item.leftoverOf || item.leftoverOfMeal) ? item.cookScheduledFor : null, leftoverTimes };
@@ -2295,7 +2305,7 @@ function MoveMealSheet({
       }
       onMoved(date, text);
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : String(error));
+      setMessage(notSavedLine('The meal was not moved. Try again.', error));
     }
   }
 
@@ -2363,7 +2373,10 @@ function LeftoverSheet({ cook, profile, onClose }: { cook: LeftoverCook | null; 
     setPlanned([]);
     listLeftoversOf(cook.id, cook.kind === 'meal')
       .then((rows) => setPlanned(rows.map((row) => ({ scheduledFor: row.scheduledFor, mealType: row.mealType }))))
-      .catch((error) => console.error('[Leftovers] Failed to read planned leftovers', error));
+      .catch((error) => {
+        console.warn('[Leftovers] planned leftovers could not be read', error);
+        setMessage({ text: 'Leftovers already planned could not be read just now, so a day may already have some. Nothing you recorded is lost.', problem: true });
+      });
   }, [cook]);
 
   const choices = cook ? leftoverDayChoices(cook.scheduledFor.slice(0, 10), todayDateString()) : [];
@@ -2384,7 +2397,7 @@ function LeftoverSheet({ cook, profile, onClose }: { cook: LeftoverCook | null; 
       const label = `${capitalize(mealType)}, ${describeRelativeDate(date)}, ${formatTime12(time)}`;
       setMessage({ text: eatAgainAdded(label, daysBetween(cook.scheduledFor, date)), problem: false });
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The leftovers were not added. Try again.', error), problem: true });
     }
   }
 
@@ -2494,7 +2507,7 @@ function CalendarNotesBand({
       setDraft(null);
       onChanged();
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The note was not saved. Try again.', error), problem: true });
     }
   }
 
@@ -2506,7 +2519,7 @@ function CalendarNotesBand({
       setMessage(null);
       onChanged();
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The note was not removed. Try again.', error), problem: true });
     }
   }
 
@@ -2617,7 +2630,10 @@ function SavedWeeksBand({
   const reload = useCallback(() => {
     listSavedWeeks()
       .then(setWeeks)
-      .catch((error) => console.error('[SavedWeeks] Failed to read saved weeks', error));
+      .catch((error) => {
+        console.warn('[SavedWeeks] saved weeks could not be read', error);
+        setMessage({ text: 'Your saved weeks could not be read just now. Nothing you recorded is lost.', problem: true });
+      });
   }, []);
 
   useEffect(() => {
@@ -2635,7 +2651,7 @@ function SavedWeeksBand({
         reload();
       }
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The week was not saved. Try again.', error), problem: true });
     }
   }
 
@@ -2652,7 +2668,7 @@ function SavedWeeksBand({
       setMessage({ text: savedWeekApplied(added), problem: false });
       onChanged();
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The saved week was not put on your schedule. Try again.', error), problem: true });
     }
   }
 
@@ -2662,7 +2678,7 @@ function SavedWeeksBand({
       setRenamingId(null);
       reload();
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The new name was not saved. Try again.', error), problem: true });
     }
   }
 
@@ -2673,7 +2689,7 @@ function SavedWeeksBand({
       await removeSavedWeek(week.id);
       reload();
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The saved week was not removed. Try again.', error), problem: true });
     }
   }
 
@@ -2793,13 +2809,22 @@ function HouseholdMealCalendarBand({
   const reload = useCallback(() => {
     listHouseholdMeals(weekStart, weekEnd)
       .then(setEntries)
-      .catch((error) => console.error('[HouseholdCalendar] Failed to read the calendar', error));
+      .catch((error) => {
+        console.warn('[HouseholdCalendar] the household calendar could not be read', error);
+        setMessage({ text: 'The household calendar could not be read just now. Nothing you recorded is lost.', problem: true });
+      });
     listMyDayMeals(weekStart, weekEnd)
       .then(setMyMeals)
-      .catch((error) => console.error('[HouseholdCalendar] Failed to read the week', error));
+      .catch((error) => {
+        console.warn('[HouseholdCalendar] the household calendar could not be read', error);
+        setMessage({ text: 'The household calendar could not be read just now. Nothing you recorded is lost.', problem: true });
+      });
     getCalendarPartners()
       .then(setPartners)
-      .catch((error) => console.error('[HouseholdCalendar] Failed to read connections', error));
+      .catch((error) => {
+        console.warn('[HouseholdCalendar] the household calendar could not be read', error);
+        setMessage({ text: 'The household calendar could not be read just now. Nothing you recorded is lost.', problem: true });
+      });
   }, [weekStart, weekEnd]);
 
   useEffect(() => {
@@ -2834,7 +2859,7 @@ function HouseholdMealCalendarBand({
       setMessage(null);
       reload();
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The household meal was not saved. Try again.', error), problem: true });
     }
   }
 
@@ -2855,7 +2880,7 @@ function HouseholdMealCalendarBand({
       reload();
       onChanged();
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The meal was not put on your schedule. Try again.', error), problem: true });
     }
   }
 
@@ -2871,7 +2896,7 @@ function HouseholdMealCalendarBand({
       await removeHouseholdMeal(entry.id);
       reload();
     } catch (error) {
-      setMessage({ text: error instanceof Error ? error.message : String(error), problem: true });
+      setMessage({ text: notSavedLine('The household meal was not removed. Try again.', error), problem: true });
     }
   }
 
@@ -3026,17 +3051,23 @@ function PastMealsLens() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [leftoverCook, setLeftoverCook] = useState<LeftoverCook | null>(null);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const load = useCallback(() => {
     setLoading(true);
+    setErrorMessage('');
+    const failed = (what: string) => (error: unknown) => {
+      console.warn('[PastMeals] ' + what + ' could not be read', error);
+      setErrorMessage('Past meals could not be read just now. Nothing you recorded is lost.');
+    };
     getUserProfile()
       .then(setProfile)
-      .catch((error) => console.error('[PastMeals] Failed to read profile', error));
+      .catch(failed('the profile'));
     // Meals logged straight from Food, voice or a scan in the last week,
     // which have no schedule row, so their leftovers can be saved too (H3).
     listRecentUnscheduledMeals(addDays(todayDateString(), -7))
       .then(setLoggedMeals)
-      .catch((error) => console.error('[PastMeals] Failed to read logged meals', error));
+      .catch(failed('logged meals'));
     // settlePastScheduledMeals first, same reasoning as MealsLens' own
     // load() -- catches anything that's lapsed since this lens was last
     // open, so what's shown here is never stale relative to what Trends
@@ -3045,6 +3076,7 @@ function PastMealsLens() {
       .catch((error) => console.error('settlePastScheduledMeals failed', error))
       .then(() => listPastScheduledMeals())
       .then((rows) => setItems(rows))
+      .catch(failed('past meals'))
       .finally(() => setLoading(false));
   }, []);
 
@@ -3073,6 +3105,8 @@ function PastMealsLens() {
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {loading ? (
         <View style={styles.bandBox}><Text style={styles.emptyText}>Loading…</Text></View>
+      ) : errorMessage ? (
+        <ReadProblem message={errorMessage} onTryAgain={load} />
       ) : (
         <ScheduleBand folds={folds} id="schedule:pastMeals:list" title="Past meals" icon="time-outline" count={items.length} markRef={walkMark.ref('pastMeals.listBand')}>
         {items.length === 0 ? (
@@ -3350,7 +3384,8 @@ function PlateSwapScroller({
         setState({ handle, choices: shown, notes: [...notes, ...more] });
       })
       .catch((error) => {
-        if (!cancelled) setFailed(error instanceof Error ? error.message : String(error));
+        console.warn('[MealPlan] swap choices could not be read', error);
+        if (!cancelled) setFailed('The choices could not be read just now. Close this and open it again. Nothing in the plan has changed.');
       });
     return () => {
       cancelled = true;
@@ -3387,7 +3422,7 @@ function PlateSwapScroller({
           takes the day past a limit says so on its card.
         </Text>
       ) : null}
-      {failed ? <Text style={styles.helperText}>Could not load the choices: {failed}</Text> : null}
+      {failed ? <Text style={styles.helperText}>{failed}</Text> : null}
       {!state && !failed ? <Text style={styles.helperText}>Loading the choices...</Text> : null}
       {state && state.choices.length === 0 ? <Text style={styles.helperText}>Nothing else fits this plate.</Text> : null}
       {state && state.choices.length > 0 ? (
@@ -3907,7 +3942,7 @@ function DailyMealPlanLens() {
   const [usualMeals, setUsualMeals] = useState<UsualMeal[]>([]);
   function changeOpenRules(next: OpenMealRule[]) {
     setOpenRules(next);
-    saveOpenMealRules(next).catch((error) => console.error('[MealPlan] Failed to save the open meal', error));
+    void saveOrSay('The open meal was not saved. Try again.', () => saveOpenMealRules(next));
   }
   // 2026-08-26, direct request: "Each week per day needs to be available
   // for viewing so they can go through their whole week and swap things
@@ -3937,8 +3972,17 @@ function DailyMealPlanLens() {
   const draftLoadedRef = useRef(false);
   // The plan as read back, so showing it is not written straight back again.
   const draftReadRef = useRef<unknown>(null);
+  // A failed read leaves draftLoadedRef false, so nothing made here
+  // overwrites the kept plan until Try again reads it.
+  const [draftReadFailed, setDraftReadFailed] = useState(false);
+  const [draftReadTick, setDraftReadTick] = useState(0);
+  // Conditions and diet, and prices or the kitchen, each say so when
+  // they could not be read, since a plan made without them is different.
+  const [profileReadFailed, setProfileReadFailed] = useState(false);
+  const [extrasReadFailed, setExtrasReadFailed] = useState(false);
   useEffect(() => {
     let cancelled = false;
+    setDraftReadFailed(false);
     loadMealPlanDraft()
       .then((draft) => {
         if (cancelled || !draft) return;
@@ -3951,18 +3995,21 @@ function DailyMealPlanLens() {
         draftReadRef.current = draft.plans;
         setPlans((current) => (current.length > 0 ? current : draft.plans));
       })
-      .catch((error) => console.error('[MealPlan] Failed to read the kept plan', error))
-      .finally(() => {
+      .then(() => {
         if (!cancelled) draftLoadedRef.current = true;
+      })
+      .catch((error) => {
+        console.warn('[MealPlan] the kept plan could not be read', error);
+        if (!cancelled) setDraftReadFailed(true);
       });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [draftReadTick]);
   useEffect(() => {
     if (!draftLoadedRef.current || plans.length === 0 || plans === draftReadRef.current) return;
-    saveMealPlanDraft({ generatedStart, scheduleDate, plannedOpenRules, planningScope, planHousehold, plannedDiet, plans }).catch((error) =>
-      console.error('[MealPlan] Failed to keep the plan', error),
+    void saveOrSay('The plan on screen was not kept, so it may be gone the next time this opens. Change anything in it to try again.', () =>
+      saveMealPlanDraft({ generatedStart, scheduleDate, plannedOpenRules, planningScope, planHousehold, plannedDiet, plans }),
     );
     // Saved when the plan itself changes; the start date field alone is
     // saved with the next change to the plan.
@@ -3975,6 +4022,7 @@ function DailyMealPlanLens() {
       Promise.all([getUserConditions(), getDietPreferences(), getUserNutrientWeekdayTargets(), getOpenMealRules(), listUsualMeals(), getCuisinePreferences()])
         .then(([codes, tags, weekdayTargets, rules, usual, cuisineNames]) => {
           if (cancelled) return;
+          setProfileReadFailed(false);
           setOpenRules(rules);
           setUsualMeals(usual);
           setConditionCodes(codes);
@@ -3984,22 +4032,30 @@ function DailyMealPlanLens() {
           if (!dietTouchedRef.current) setPlanDiet(fromProfile);
           setHasWeekdayTargets(weekdayTargets.length > 0);
         })
-        .catch(() => {
-          // Best-effort only -- a failure here just means generation runs
-          // with no declared condition/diet narrowing, the same as
-          // someone who genuinely hasn't set either on Profile yet.
+        .catch((error) => {
+          // A plan made now would not be shaped by conditions or diet, so
+          // the screen says so rather than quietly planning without them.
+          console.warn('[MealPlan] conditions and diet could not be read', error);
+          if (!cancelled) setProfileReadFailed(true);
         });
+      setExtrasReadFailed(false);
       getRecordedGroceryPrices()
         .then((prices) => (prices.size > 0 ? getCuratedDishCosts(prices) : new Map<string, DishCost>()))
         .then((costs) => {
           if (!cancelled) setDishCosts(costs);
         })
-        .catch((error) => console.error('[MealPlan] Failed to read recorded prices', error));
+        .catch((error) => {
+          console.warn('[MealPlan] recorded prices could not be read', error);
+          if (!cancelled) setExtrasReadFailed(true);
+        });
       getOnHandDishes()
         .then((dishes) => {
           if (!cancelled) setOnHandDishes(dishes);
         })
-        .catch((error) => console.error('[MealPlan] Failed to read what is in the kitchen', error));
+        .catch((error) => {
+          console.warn('[MealPlan] the kitchen could not be read', error);
+          if (!cancelled) setExtrasReadFailed(true);
+        });
       // On focus rather than once, because a plan arrives through a sync the
       // person runs on the Connections screen and then comes straight back
       // here to look at it.
@@ -4099,7 +4155,8 @@ function DailyMealPlanLens() {
       setPlannedDiet(planDiet);
       setPlans(results);
     } catch (error) {
-      showInfoAlert('Could not generate a plan', error instanceof Error ? error.message : String(error));
+      console.warn('[MealPlan] a plan could not be made', error);
+      showInfoAlert('Plan not made', 'A plan could not be made just now. Nothing you recorded has changed. Try again.');
     } finally {
       setGenerating(false);
     }
@@ -4139,7 +4196,8 @@ function DailyMealPlanLens() {
       });
       setPlans((current) => current.map((day, i) => (i === index ? result : day)));
     } catch (error) {
-      showInfoAlert('Could not regenerate this day', error instanceof Error ? error.message : String(error));
+      console.warn('[MealPlan] a day could not be made again', error);
+      showInfoAlert('Day not remade', 'This day could not be made again just now. The plan on screen is unchanged. Try again.');
     } finally {
       setRegeneratingDayIndex(null);
     }
@@ -4213,7 +4271,7 @@ function DailyMealPlanLens() {
           (skippedIncomplete > 0 ? `. ${skippedIncomplete} generated day${skippedIncomplete === 1 ? '' : 's'} were incomplete and skipped.` : '.'),
       );
     } catch (error) {
-      showInfoAlert('Could not add to schedule', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The plan was not added to your schedule. Look at Meals before trying again, in case some days went on.', error);
     } finally {
       setScheduling(false);
     }
@@ -4225,6 +4283,24 @@ function DailyMealPlanLens() {
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {confirmSheetElement}
+      {draftReadFailed ? (
+        <ReadProblem
+          message={'The meal plan you were working on could not be read just now, so nothing made here is kept until it can be. Nothing you recorded is lost.'}
+          onTryAgain={() => setDraftReadTick((n) => n + 1)}
+        />
+      ) : null}
+      {profileReadFailed ? (
+        <ReadProblem
+          message={'Your conditions and diet could not be read just now, so a plan made now would not be shaped by them. Nothing you recorded is lost.'}
+          onTryAgain={() => setFormerTick((n) => n + 1)}
+        />
+      ) : null}
+      {extrasReadFailed ? (
+        <ReadProblem
+          message={'Recorded prices or what is in the kitchen could not be read just now, so a plan made now leaves them out. Nothing you recorded is lost.'}
+          onTryAgain={() => setFormerTick((n) => n + 1)}
+        />
+      ) : null}
       <View style={styles.formCard}>
         <Text style={styles.label}>What you eat</Text>
         <Text style={styles.helperText}>{BASE_DIET_CHOICES.find((choice) => choice.tag === planDiet.base)?.caption}</Text>
@@ -4536,7 +4612,7 @@ function DailyMealPlanLens() {
                 await forgetFormerPartner(former.id);
                 setFormerTick((n) => n + 1);
               } catch (error) {
-                console.error('[MealPlan] Failed to let go of a kept plan', error);
+                sayNotSaved('What was kept was not let go. Try again.', error);
               }
             }}
           >
@@ -4672,9 +4748,10 @@ function TodaysMealsLens() {
         setMeals(todaysMeals);
         setTimeline(buildDayTimeline(day.meals, day.doses, day.rules, day.timings, day.nutrientNames));
       })
-      .catch((error) =>
-        setErrorMessage(`Could not load today's meals: ${error instanceof Error ? error.message : String(error)}`),
-      )
+      .catch((error) => {
+        console.warn("[Schedules] today's meals could not be read", error);
+        setErrorMessage("Today's meals could not be read just now. Nothing you recorded is lost.");
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -4885,7 +4962,7 @@ function TodaysMealsLens() {
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, styles.calmGap, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
-      {errorMessage ? <View style={[styles.bandBox, styles.calmEdges]}><Text style={styles.errorText}>{errorMessage}</Text></View> : null}
+      {errorMessage ? <ReadProblem message={errorMessage} onTryAgain={load} /> : null}
       {loading ? (
         <View style={[styles.bandBox, styles.calmEdges]}><Text style={styles.emptyText}>Loading…</Text></View>
       ) : timeline.length === 0 ? (
@@ -4992,6 +5069,7 @@ function HydrationLens() {
 
   const load = useCallback(() => {
     setLoading(true);
+    setErrorMessage('');
     const date = todayDateString();
     ensureScheduleSeriesGenerated()
       .then(() =>
@@ -5016,7 +5094,8 @@ function HydrationLens() {
         setCaffeineMg(caffeineToday(analysis.foodTotals));
       })
       .catch((error) => {
-        setErrorMessage(`Could not load today's hydration: ${error instanceof Error ? error.message : String(error)}`);
+        console.warn("[Schedules] today's drinks could not be read", error);
+        setErrorMessage("Today's drinks could not be read just now. Nothing you recorded is lost.");
       })
       .finally(() => setLoading(false));
   }, []);
@@ -5045,7 +5124,7 @@ function HydrationLens() {
       load();
       void syncReminderNotifications();
     } catch (error) {
-      showInfoAlert('Could not log it', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The drink was not logged. Try again.', error);
     } finally {
       setQuickBusy(false);
     }
@@ -5059,7 +5138,7 @@ function HydrationLens() {
       load();
       void syncReminderNotifications();
     } catch (error) {
-      showInfoAlert('Could not take it back', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The drink was not taken back. Try again.', error);
     }
   }
 
@@ -5146,7 +5225,7 @@ function HydrationLens() {
       closeForm();
       load();
     } catch (error) {
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The drink was not saved. Try again.', error);
     }
   }
 
@@ -5159,20 +5238,14 @@ function HydrationLens() {
           {
             label: 'Just this one',
             onPress: () => {
-              void (async () => {
-                await deleteScheduledMeal(item.id);
-                load();
-              })();
+              void saveOrSay('The drink was not removed. Try again.', () => deleteScheduledMeal(item.id)).then(() => load());
             },
           },
           {
             label: 'This and future',
             destructive: true,
             onPress: () => {
-              void (async () => {
-                await deleteScheduleSeries(item.repeatGroupId!);
-                load();
-              })();
+              void saveOrSay('The repeating drink was not removed. Try again.', () => deleteScheduleSeries(item.repeatGroupId!)).then(() => load());
             },
           },
           { label: 'Cancel', onPress: () => {} },
@@ -5188,10 +5261,7 @@ function HydrationLens() {
           label: 'Remove',
           destructive: true,
           onPress: () => {
-            void (async () => {
-              await deleteScheduledMeal(item.id);
-              load();
-            })();
+            void saveOrSay('The drink was not removed. Try again.', () => deleteScheduledMeal(item.id)).then(() => load());
           },
         },
         { label: 'Cancel', onPress: () => {} },
@@ -5200,7 +5270,9 @@ function HydrationLens() {
   }
 
   async function handleToggleSkipped(item: ScheduleItemRecord) {
-    await setScheduledMealSkipped(item.id, item.status !== 'skipped');
+    await saveOrSay(item.status === 'skipped' ? 'The drink is still marked skipped. Try again.' : 'The drink was not marked skipped. Try again.', () =>
+      setScheduledMealSkipped(item.id, item.status !== 'skipped'),
+    );
     load();
   }
 
@@ -5255,7 +5327,7 @@ function HydrationLens() {
       {loading ? (
         <View style={styles.bandBox}><Text style={styles.emptyText}>Loading…</Text></View>
       ) : errorMessage ? (
-        <View style={styles.bandBox}><Text style={styles.errorText}>{errorMessage}</Text></View>
+        <ReadProblem message={errorMessage} onTryAgain={load} />
       ) : (
         <>
           {waterEntry && movedTarget ? (
@@ -5576,6 +5648,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
 
   const load = useCallback(() => {
     setLoading(true);
+    setErrorMessage('');
     const today = todayDateString();
     ensureScheduleSeriesGenerated()
       .then(() =>
@@ -5627,7 +5700,8 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
         }
       })
       .catch((error) => {
-        setErrorMessage(`Could not load your meds: ${error instanceof Error ? error.message : String(error)}`);
+        console.warn('[Schedules] meds could not be read', error);
+        setErrorMessage('Your meds and their doses could not be read just now. Nothing you recorded is lost.');
       })
       .finally(() => setLoading(false));
     // folds is stable per mount; re-running on it would refetch on every fold.
@@ -5677,7 +5751,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
       await ensureReminderPermission(reminderPermissionGranted, setReminderPermissionGranted, showInfoAlert);
       load();
     } catch (error) {
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The dose time was not saved. Try again.', error);
     }
   }
 
@@ -5704,11 +5778,10 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
         ...siteChoices(injection.rotation, injection.history).map(({ site, label }) => ({
           label,
           onPress: () => {
-            void (async () => {
+            void saveOrSay(alsoMarkTaken ? 'The dose and where it went were not saved. Try again.' : 'Where the shot went was not saved. Try again.', async () => {
               if (alsoMarkTaken) await markScheduledDoseTaken(item.id);
               await recordSite({ treatmentId, site, scheduleItemId: item.id, recordedAt });
-              load();
-            })();
+            }).then(() => load());
           },
         })),
         ...(alsoMarkTaken
@@ -5716,10 +5789,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
               {
                 label: 'Taken, no site noted',
                 onPress: () => {
-                  void (async () => {
-                    await markScheduledDoseTaken(item.id);
-                    load();
-                  })();
+                  void saveOrSay('The dose was not marked taken. Try again.', () => markScheduledDoseTaken(item.id)).then(() => load());
                 },
               },
             ]
@@ -5761,7 +5831,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
         {
           label: `Make ${zoneName(hereZone)} my home time zone`,
           onPress: () => {
-            void setHomeZoneToHere().then(() => load());
+            void saveOrSay('The home time zone was not changed. Try again.', () => setHomeZoneToHere()).then(() => load());
           },
         },
         { label: `Keep ${zoneName(homeZone)} as home`, onPress: () => {} },
@@ -5771,12 +5841,14 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
 
   async function handleMarkDoseTaken(item: ScheduleItemRecord) {
     if (askSite(item, true)) return;
-    await markScheduledDoseTaken(item.id);
+    await saveOrSay('The dose was not marked taken. Try again.', () => markScheduledDoseTaken(item.id));
     load();
   }
 
   async function handleToggleDoseSkipped(item: ScheduleItemRecord) {
-    await setScheduledMealSkipped(item.id, item.status !== 'skipped');
+    await saveOrSay(item.status === 'skipped' ? 'The dose is still marked skipped. Try again.' : 'The dose was not marked skipped. Try again.', () =>
+      setScheduledMealSkipped(item.id, item.status !== 'skipped'),
+    );
     load();
   }
 
@@ -5789,20 +5861,14 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
           {
             label: 'Just this one',
             onPress: () => {
-              void (async () => {
-                await deleteScheduledMeal(item.id);
-                load();
-              })();
+              void saveOrSay('The reminder was not removed. Try again.', () => deleteScheduledMeal(item.id)).then(() => load());
             },
           },
           {
             label: 'This and future',
             destructive: true,
             onPress: () => {
-              void (async () => {
-                await deleteScheduleSeries(item.repeatGroupId!);
-                load();
-              })();
+              void saveOrSay('The repeating reminder was not removed. Try again.', () => deleteScheduleSeries(item.repeatGroupId!)).then(() => load());
             },
           },
           { label: 'Cancel', onPress: () => {} },
@@ -5817,10 +5883,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
           label: 'Remove',
           destructive: true,
           onPress: () => {
-            void (async () => {
-              await deleteScheduledMeal(item.id);
-              load();
-            })();
+            void saveOrSay('The reminder was not removed. Try again.', () => deleteScheduledMeal(item.id)).then(() => load());
           },
         },
         { label: 'Cancel', onPress: () => {} },
@@ -6031,7 +6094,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
       {loading ? (
         <View style={[styles.bandBox, styles.calmEdges]}><Text style={styles.emptyText}>Loading…</Text></View>
       ) : errorMessage ? (
-        <View style={[styles.bandBox, styles.calmEdges]}><Text style={styles.errorText}>{errorMessage}</Text></View>
+        <ReadProblem message={errorMessage} onTryAgain={load} />
       ) : (
         <>
           {medsClosed ? (
@@ -6368,6 +6431,7 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
 
   const load = useCallback(() => {
     setLoading(true);
+    setErrorMessage('');
     const today = todayDateString();
     Promise.all([
       listUpcomingAppointments(
@@ -6401,7 +6465,8 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
         }
       })
       .catch((error) => {
-        setErrorMessage(`Could not load appointments: ${error instanceof Error ? error.message : String(error)}`);
+        console.warn('[Schedules] appointments could not be read', error);
+        setErrorMessage('Your appointments could not be read just now. Nothing you recorded is lost.');
       })
       .finally(() => setLoading(false));
   }, [importCalendarEvent, importCalendarAt]);
@@ -6501,19 +6566,18 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
       await ensureReminderPermission(reminderPermissionGranted, setReminderPermissionGranted, showInfoAlert);
       load();
     } catch (error) {
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The appointment was not saved. Try again.', error);
     }
   }
 
   function handleRemove(item: ScheduleItemRecord) {
     const removeIt = (alsoRemoveFromCalendar: boolean) => {
-      void (async () => {
+      void saveOrSay('The appointment was not removed. Try again.', async () => {
         if (alsoRemoveFromCalendar && item.linkedDeviceCalendarEventId) {
           await deleteDeviceCalendarEvent(item.linkedDeviceCalendarEventId);
         }
         await deleteScheduledMeal(item.id);
-        load();
-      })();
+      }).then(() => load());
     };
 
     if (item.linkedDeviceCalendarEventId) {
@@ -6539,12 +6603,14 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
   }
 
   async function handleMarkCompleted(item: ScheduleItemRecord) {
-    await markAppointmentCompleted(item.id);
+    await saveOrSay('The appointment was not marked done. Try again.', () => markAppointmentCompleted(item.id));
     load();
   }
 
   async function handleToggleCancelled(item: ScheduleItemRecord) {
-    await setAppointmentCancelled(item.id, item.status !== 'cancelled');
+    await saveOrSay(item.status === 'cancelled' ? 'The appointment is still marked cancelled. Try again.' : 'The appointment was not marked cancelled. Try again.', () =>
+      setAppointmentCancelled(item.id, item.status !== 'cancelled'),
+    );
     load();
   }
 
@@ -6577,14 +6643,17 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
       await linkScheduleItemToDeviceCalendarEvent(item.id, eventId);
       load();
     } catch (error) {
-      showInfoAlert('Could not add to calendar', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The appointment was not added to the phone calendar. Try again.', error);
     }
   }
 
   async function handleRemoveFromDeviceCalendar(item: ScheduleItemRecord) {
     if (!item.linkedDeviceCalendarEventId) return;
-    await deleteDeviceCalendarEvent(item.linkedDeviceCalendarEventId);
-    await unlinkScheduleItemFromDeviceCalendarEvent(item.id);
+    const eventId = item.linkedDeviceCalendarEventId;
+    await saveOrSay('The appointment was not taken off the phone calendar. Try again.', async () => {
+      await deleteDeviceCalendarEvent(eventId);
+      await unlinkScheduleItemFromDeviceCalendarEvent(item.id);
+    });
     load();
   }
 
@@ -6604,7 +6673,8 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
       setDeviceEvents(events.filter((event) => !alreadyLinkedIds.has(event.id)));
       setShowImportPicker(true);
     } catch (error) {
-      showInfoAlert('Could not read phone calendar', error instanceof Error ? error.message : String(error));
+      console.warn('[Schedules] the phone calendar could not be read', error);
+      showInfoAlert('Phone calendar', 'The phone calendar could not be read just now. Nothing here has changed. Try again.');
     } finally {
       setImportLoading(false);
     }
@@ -6645,7 +6715,7 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
       {loading ? (
         <View style={styles.bandBox}><Text style={styles.emptyText}>Loading…</Text></View>
       ) : errorMessage ? (
-        <View style={styles.bandBox}><Text style={styles.errorText}>{errorMessage}</Text></View>
+        <ReadProblem message={errorMessage} onTryAgain={load} />
       ) : (
         <>
           {!showForm && !showImportPicker ? (
@@ -6981,9 +7051,13 @@ function UpkeepLens() {
 
   const load = useCallback(() => {
     setLoading(true);
+    setErrorMessage('');
     listUpkeepItems()
       .then(setItems)
-      .catch((error) => setErrorMessage(`Could not load upkeep: ${error instanceof Error ? error.message : String(error)}`))
+      .catch((error) => {
+        console.warn('[Schedules] upkeep could not be read', error);
+        setErrorMessage('Your upkeep could not be read just now. Nothing you recorded is lost.');
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -7024,7 +7098,7 @@ function UpkeepLens() {
       );
       load();
     } catch (error) {
-      showInfoAlert('Could not record that', error instanceof Error ? error.message : String(error));
+      sayNotSaved(t('{name} was not marked done. Try again.', { name: standing.item.name }), error);
     }
   }
 
@@ -7045,7 +7119,7 @@ function UpkeepLens() {
       {loading ? (
         <View style={styles.bandBox}><Text style={styles.emptyText}>Loading…</Text></View>
       ) : errorMessage ? (
-        <View style={styles.bandBox}><Text style={styles.errorText}>{errorMessage}</Text></View>
+        <ReadProblem message={errorMessage} onTryAgain={load} />
       ) : items.filter((item) => item.active).length === 0 ? (
         <View style={styles.bandBox}>
           <Text style={styles.emptyText}>
@@ -7245,7 +7319,7 @@ export default function ScheduleScreen() {
       />
       <LensHub
         pageTitle="Schedules"
-        options={LENSES}
+        options={SCHEDULE_MENU}
         selected={revealed ? lens : undefined}
         columns={3}
         autoOpenSignal={autoOpenLensHub}

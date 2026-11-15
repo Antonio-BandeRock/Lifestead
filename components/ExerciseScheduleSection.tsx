@@ -9,6 +9,8 @@ import { NotesInput } from './NotesInput';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HomeSectionBand, homeBandNoHairlines, homeBandStyle } from './HomeSectionBand';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
+import { ReadProblem } from './ReadProblem';
+import { sayNotSaved } from '../lib/saveProblem';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
@@ -119,6 +121,7 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
 
   const load = useCallback(() => {
     setToday(localDate(new Date()));
+    setErrorMessage('');
     Promise.all([listExercisePlans(), listPlanMarks(), listWorkouts()])
       .then(([nextPlans, nextMarks, nextWorkouts]) => {
         setPlans(nextPlans);
@@ -126,7 +129,10 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
         setWorkouts(nextWorkouts);
         setErrorMessage('');
       })
-      .catch((error) => setErrorMessage(`Could not load planned exercise: ${error instanceof Error ? error.message : String(error)}`))
+      .catch((error) => {
+        console.warn('[Exercise] planned exercise could not be read', error);
+        setErrorMessage('Your planned exercise could not be read just now. Nothing you recorded is lost.');
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -192,7 +198,7 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
       setForm(null);
       afterChange();
     } catch (error) {
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+      sayNotSaved('The exercise plan was not saved. Try again.', error);
     }
   }
 
@@ -214,7 +220,7 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
               await removeExercisePlan(plan);
               afterChange();
             } catch (error) {
-              showInfoAlert('Could not remove', error instanceof Error ? error.message : String(error));
+              sayNotSaved('The exercise plan was not removed. Try again.', error);
             }
           },
         },
@@ -228,12 +234,12 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
     router.push({ pathname: '/workout', params: { id: entry.plan.workoutId, planId: entry.plan.id, on: entry.date } });
   }
 
-  async function run(action: () => Promise<void>, failure: string) {
+  async function run(action: () => Promise<void>, problem: string) {
     try {
       await action();
       afterChange();
     } catch (error) {
-      showInfoAlert(failure, error instanceof Error ? error.message : String(error));
+      sayNotSaved(problem, error);
     }
   }
 
@@ -254,7 +260,7 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
           destructive: true,
           onPress: () => {
             setSheet(null);
-            void run(() => clearPlanMark(mark), 'Could not clear');
+            void run(() => clearPlanMark(mark), 'The mark was not cleared. Try again.');
           },
         },
         { label: 'Leave it', onPress: () => setSheet(null) },
@@ -283,12 +289,12 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
                 </TouchableOpacity>
               ) : null}
               {!canStart && (pastDay || entry.date === today) ? (
-                <TouchableOpacity onPress={() => run(() => markPlanDone(entry.plan, entry.title, entry.date), 'Could not mark')}>
+                <TouchableOpacity onPress={() => run(() => markPlanDone(entry.plan, entry.title, entry.date), 'The day was not marked done. Try again.')}>
                   <Text style={styles.actionText}>Did it</Text>
                 </TouchableOpacity>
               ) : null}
               {pastDay || entry.date === today ? (
-                <TouchableOpacity onPress={() => run(() => markPlanSkipped(entry.plan.id, entry.date), 'Could not mark')}>
+                <TouchableOpacity onPress={() => run(() => markPlanSkipped(entry.plan.id, entry.date), 'The day was not marked skipped. Try again.')}>
                   <Text style={styles.actionText}>Skipped</Text>
                 </TouchableOpacity>
               ) : null}
@@ -307,11 +313,7 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
     );
   }
   if (errorMessage) {
-    return (
-      <View style={styles.bandBox}>
-        <Text style={styles.errorText}>{errorMessage}</Text>
-      </View>
-    );
+    return <ReadProblem message={errorMessage} onTryAgain={load} />;
   }
 
   const selectedWorkout = form?.draft.workoutId ?? ACTIVITY;
