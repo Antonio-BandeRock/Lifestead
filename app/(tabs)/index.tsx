@@ -44,13 +44,13 @@ import {
 } from '../../components/HomeSectionBand';
 import { AppActionSheet } from '../../components/AppActionSheet';
 import { useInfoAlert } from '../../components/InfoAlert';
-import { YourStorySection, useStoryGo, useYourStory } from '../../components/YourStorySection';
-import { NextThing } from '../../components/NextThing';
+import { YourStorySection, useYourStory } from '../../components/YourStorySection';
 import { TesterWelcome, TESTER_WELCOME_TITLE } from '../../components/TesterWelcome';
 import { WaitingAnswersList } from '../../components/WaitingAnswersList';
 import { nextLine, type StoryDestination } from '../../lib/yourStory';
 import { buildTabGuide, tabGuideLine } from '../../lib/yourStoryTabs';
 import { interviewLine } from '../../lib/yourStoryInterview';
+import { setupWaiting } from '../../lib/setupSections';
 import { ProgressRing } from '../../components/ProgressRing';
 
 import { useBackgroundBottomInset } from '../../components/ScreenBackground';
@@ -231,10 +231,15 @@ import {
   homeGroupIdOf,
   isTutorialSection,
   TUTORIAL_SECTION_PATH,
+  UNTRIED_SECTION_PATH,
+  isUntriedSection,
   type HomeSectionDisplayGroup,
 } from '../../lib/homeSections';
 import { TAB_TUTORIALS_BAND_TITLE } from '../../lib/tutorials';
 import { TabTutorialCards } from '../../components/TabTutorialCards';
+import { UntriedLensCards } from '../../components/UntriedLensCards';
+import { UNTRIED_BAND_TITLE } from '../../lib/untriedLenses';
+import { loadUntriedLenses, type UntriedByTab } from '../../lib/untriedLensesDb';
 import { APP_TOUR_BAND_TITLE, AppTourBand } from '../../components/AppTourBand';
 import { homeGroupIdentity } from '../../constants/homeGroups';
 import { HomeArrangeList } from '../../components/HomeArrangeList';
@@ -1061,12 +1066,6 @@ const HOME_LENS_DESTINATIONS: Partial<
     color: colors.homeNoTab,
     href: '/waiting-answers' as Href,
   },
-  nextThing: {
-    label: 'One Next Thing',
-    icon: 'arrow-forward-circle-outline',
-    color: colors.homeNoTab,
-    href: '/your-story' as Href,
-  },
   yourStory: {
     label: 'Your Guide',
     icon: 'compass-outline',
@@ -1094,7 +1093,6 @@ const HOME_LENS_DESTINATIONS: Partial<
 const HOME_LENS_ORDER: HomeSectionKey[] = [
   'waitingAnswers',
   'today',
-  'nextThing',
   'yourStory',
   'captureInbox',
   'todaysMeals',
@@ -1397,8 +1395,22 @@ export default function HomeScreen() {
   // own data reloads (below), so a meal or a check-in logged right here
   // ticks its item without leaving the page.
   const [yourStory, reloadYourStory, yourStoryGuides, yourStoryInterview, yourStoryRecords] = useYourStory();
-  // One Next Thing (C18) opens a Your Story item the way the card does.
-  const storyGo = useStoryGo('home', goToHomeDestination);
+  // Not Tried Yet (lib/untriedLenses.ts), read again each time Home comes
+  // back into view, so a lens leaves the list once something is recorded.
+  const [untried, setUntried] = useState<UntriedByTab | null>(null);
+  useFocusEffect(
+    useCallback(() => {
+      let live = true;
+      loadUntriedLenses()
+        .then((next) => {
+          if (live) setUntried(next);
+        })
+        .catch((error) => console.warn('Home: could not read which lenses are untried', error));
+      return () => {
+        live = false;
+      };
+    }, []),
+  );
   // Quick-log phase 4. Two sheets rather than one: picking where a photo comes
   // from, and deciding what an already-taken one actually was.
   const [photoSourceSheetOpen, setPhotoSourceSheetOpen] = useState(false);
@@ -4636,26 +4648,14 @@ export default function HomeScreen() {
     );
   }
 
-  // C16 and C18: one sentence, one button. See components/NextThing.tsx.
-  function renderNextThing() {
-    if (!isHomeSectionVisible(visualPrefs, 'nextThing')) return null;
-    return renderBand(
-      'nextThing',
-      'One Next Thing',
-      <View style={styles.bandBody}>
-        <NextThing
-          view={yourStory}
-          tabColor={colors.primary}
-          onGo={(destination) =>
-            destination.kind === 'beats' ? revealHomeSection('yourStory', true) : storyGo(destination)
-          }
-        />
-      </View>,
-      { icon: 'arrow-forward-circle-outline', color: colors.homeNoTab },
-    );
-  }
-
+  // Shown only while setup is waiting (direct instruction, 2026-11-15):
+  // "once the actual setup tasks are done, that band should automatically
+  // be hidden unless the user choose from Profile to rerun setup again."
+  // Run Setup Again in Profile reopens setup, which brings it back. Until
+  // the interview has been read nothing is drawn, so a finished setup never
+  // flashes the band.
   function renderYourStory() {
+    if (!yourStoryInterview || !setupWaiting(yourStoryInterview)) return null;
     return renderBand(
       'yourStory',
       yourStory?.heading ?? 'Your Guide',
@@ -4957,8 +4957,6 @@ export default function HomeScreen() {
         return renderRoutines();
       case 'doneChecks':
         return renderDoneChecks();
-      case 'nextThing':
-        return renderNextThing();
       case 'testerWelcome':
         return renderTesterWelcome();
       case 'waitingAnswers':
@@ -4979,6 +4977,13 @@ export default function HomeScreen() {
         // Each tab's tutorials, the last card in its band (2026-10-28).
         if (isTutorialSection(key)) {
           return renderBand(key, TAB_TUTORIALS_BAND_TITLE, <TabTutorialCards path={TUTORIAL_SECTION_PATH[key]} />, { icon: 'school' });
+        }
+        // Not Tried Yet, drawn only while the tab has a lens not used yet.
+        if (isUntriedSection(key)) {
+          const path = UNTRIED_SECTION_PATH[key];
+          const lenses = untried?.[path] ?? [];
+          if (lenses.length === 0) return null;
+          return renderBand(key, UNTRIED_BAND_TITLE, <UntriedLensCards path={path} lenses={lenses} />, { icon: 'sparkles-outline' });
         }
         return null;
     }

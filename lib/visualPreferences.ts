@@ -387,7 +387,6 @@ export type HomeSectionKey =
   | 'todayPicks'
   // C16 and C18, 2026-09-26: one sentence and one button, the welcome-back
   // line after a gap or the first Your Story item not done.
-  | 'nextThing'
   // 1.0.60.3, direct request 2026-10-03: the reminders still showing on
   // the phone, answerable in one list. At the very top, and drawn only
   // while something is waiting.
@@ -414,7 +413,17 @@ export type HomeSectionKey =
   | 'tutorialsSignals'
   | 'tutorialsInsights'
   | 'tutorialsTrends'
-  | 'tutorialsReports';
+  | 'tutorialsReports'
+  // Not Tried Yet inside each tab's band, 2026-11-15 (lib/untriedLenses.ts):
+  // the lenses on that tab not yet used for what they do. One key per tab,
+  // just before its tutorials, so each can be moved or turned off on its own.
+  | 'untriedLife'
+  | 'untriedFood'
+  | 'untriedGarden'
+  | 'untriedInterests'
+  | 'untriedSchedule'
+  | 'untriedSignals'
+  | 'untriedInsights';
 
 // The default order, 2026-09-12: grouped by the tab each section is a
 // window into (see lib/homeSections.ts), in the same order TabHub's own
@@ -433,8 +442,6 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   // a new key after its nearest neighbour above).
   'waitingAnswers',
   'sharedFolderSetup',
-  // One next thing, ahead of everything that asks more of a person.
-  'nextThing',
   // Your Story, ahead of Capture: before anything is set up it is the
   // most useful thing on the page, and once everything is it has folded to
   // one line that names nothing left to do.
@@ -460,21 +467,25 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'todayPicks',
   'countdowns',
   'startWorkout',
+  'untriedLife',
   'tutorialsLife',
   // Food.
   'todaysMeals',
   'usualMeal',
   'logAgain',
   'scanProduct',
+  'untriedFood',
   'tutorialsFood',
   // Garden.
   'gardenTasks',
   'daysUntil',
   'logHarvest',
+  'untriedGarden',
   'tutorialsGarden',
   // Interests.
   'insideKnowledge',
   'languageBasics',
+  'untriedInterests',
   'tutorialsInterests',
   // Schedules. mealsLoggedToday is stated here beside its tab-mates
   // rather than further down: the grouping pulled it up anyway, and a
@@ -484,6 +495,7 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'todaysReminders',
   'mealsLoggedToday',
   'sinceLastMeal',
+  'untriedSchedule',
   'tutorialsSchedule',
   // Signals.
   'symptomCheckinReminder',
@@ -494,10 +506,12 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'logFlare',
   'logBloodPressure',
   'logExercise',
+  'untriedSignals',
   'tutorialsSignals',
   // Insights.
   'worthALook',
   'fuelGauges',
+  'untriedInsights',
   'tutorialsInsights',
   // Trends.
   'weekTrend',
@@ -596,7 +610,6 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   startWorkout: 'Start a Workout',
   groceryQuickAdd: 'Add to the Grocery List',
   todayPicks: 'Today I Want To',
-  nextThing: 'One Next Thing',
   testerWelcome: 'For Testers',
   waitingAnswers: 'Waiting for an Answer',
   tutorialsHome: 'Home Tutorials',
@@ -611,6 +624,13 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   tutorialsInsights: 'Insights Tutorials',
   tutorialsTrends: 'Trends Tutorials',
   tutorialsReports: 'Reports Tutorials',
+  untriedLife: 'Not Tried Yet in Life',
+  untriedFood: 'Not Tried Yet in Food',
+  untriedGarden: 'Not Tried Yet in Garden',
+  untriedInterests: 'Not Tried Yet in Interests',
+  untriedSchedule: 'Not Tried Yet in Schedules',
+  untriedSignals: 'Not Tried Yet in Signals',
+  untriedInsights: 'Not Tried Yet in Insights',
 };
 
 export type VisualPreferences = {
@@ -924,7 +944,7 @@ export const HOME_SECTIONS_ALWAYS_SHOWN: ReadonlySet<HomeSectionKey> = new Set<H
 ]);
 
 // Simple View, P1 (1.0.68.5). Chosen for someone who came to run their day:
-// the greeting, the one next thing, Sort It Out, and reminders waiting for an
+// the greeting, Sort It Out, and reminders waiting for an
 // answer. Your Guide stays too, since it is never hidden
 // (HOME_SECTIONS_ALWAYS_SHOWN). Routines and the To Do List joined in
 // 1.0.75.15, direct instruction: "Their To Do List and Routines need to be
@@ -932,7 +952,6 @@ export const HOME_SECTIONS_ALWAYS_SHOWN: ReadonlySet<HomeSectionKey> = new Set<H
 export const SIMPLE_VIEW_SECTIONS: ReadonlySet<HomeSectionKey> = new Set<HomeSectionKey>([
   'testerWelcome',
   'today',
-  'nextThing',
   'captureInbox',
   'waitingAnswers',
   'routines',

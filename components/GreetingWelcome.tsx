@@ -1,8 +1,7 @@
 // The welcome-back and first-week lines, in the greeting at the top of Home
-// since 2026-10-28. They were the first two things the One Next Thing card
-// could say (components/NextThing.tsx), and moved here so they reach
-// everybody who opens Home, Simple View included, while One Next Thing keeps
-// to the next thing to set up in Your Guide.
+// since 2026-10-28, so they reach everybody who opens Home, Simple View
+// included. (They began in the One Next Thing card, which left Home on
+// 2026-11-15.)
 //
 // After a gap of a few days with nothing recorded it is the welcome-back line
 // (lib/welcomeBack.ts), which asks for nothing about the days in between. On

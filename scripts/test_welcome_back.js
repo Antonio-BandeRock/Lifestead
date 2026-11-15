@@ -68,8 +68,8 @@ for (const days of [3, 9, 20, 200]) {
   shown.push(line.sentence, line.action);
 }
 const card = ts.createSourceFile(
-  'NextThing.tsx',
-  fs.readFileSync(path.join(__dirname, '..', 'components/NextThing.tsx'), 'utf8'),
+  'GreetingWelcome.tsx',
+  fs.readFileSync(path.join(__dirname, '..', 'components/GreetingWelcome.tsx'), 'utf8'),
   ts.ScriptTarget.ES2020,
   true,
   ts.ScriptKind.TSX,
@@ -81,7 +81,7 @@ const card = ts.createSourceFile(
   if (text && /[A-Za-z]+ [a-z]/.test(text)) shown.push(text);
   ts.forEachChild(node, walk);
 })(card);
-check('found the card sentences', shown.length > 9, true);
+check('found the card sentences', shown.length > 8, true);
 for (const line of shown) check(`no verdict words: ${line}`, FORBIDDEN.test(line), false);
 
 console.log(failures === 0 ? `All ${total} checks passed` : `\n${failures} of ${total} checks failed`);

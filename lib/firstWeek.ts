@@ -1,7 +1,7 @@
 // The first week, P1 of the competitive build plan (1.0.68.5). Direct
 // statement behind it, 2026-09-16: someone who came for help running their
 // day "should recognize the app as theirs on the first screen". Days one,
-// two and seven each get one line on the One Next Thing card, aimed at the
+// two and seven each get one line under the greeting (GreetingWelcome), aimed at the
 // daily-living core rather than at food or a condition, since that is the
 // part of the app every person can use without setting anything else up.
 //

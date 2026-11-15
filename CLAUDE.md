@@ -240,7 +240,7 @@ Five priced tiers plus one bundled role, decided 2026-08-08. Full reasoning and 
 
 | Tier | Price | Scope |
 |---|---|---|
-| **Free** | $0 | **The [free/paid board](https://claude.ai/artifact/U9AUm2LG8f6dzrWmHPDJCt) is the authority (2026-10-08)**, trimmed item by item; condition scoring, the Reports, Pattern Finder, sync and companions sit above its line. Always Free: safety (P28) and **what safety reads** (My Meds, dose reminders, allergies, conditions in Profile), plus The one next thing and Simple View. |
+| **Free** | $0 | **The [free/paid board](https://claude.ai/artifact/U9AUm2LG8f6dzrWmHPDJCt) is the authority (2026-10-08)**, trimmed item by item; condition scoring, the Reports, Pattern Finder, sync and companions sit above its line. Always Free: safety (P28) and **what safety reads** (My Meds, dose reminders, allergies, conditions in Profile), plus Simple View and Not Tried Yet. |
 | **Individual** | $9.99/mo, $89.99/yr | The 1.0x base unit. Everything Free lacks: full condition scoring, full rules engine, Trends, Reports, full Schedule, complete Digest, and sync across the person's own devices. **Includes the person's first caregiver link** (2026-10-07). |
 | **Partner** | $14.99/mo, $134.99/yr for both (~1.5x) | Two people, each with full Individual access to their own data, plus granular opt-in per-category visibility into each other's. Meals and shopping are shared by default; symptoms, labs, and notes are private by default; medications are an explicit choice at setup. Symmetric, and not an extension of the household model. |
 | **Household / Family** | Free for first 2-3 seats, then $1.99/mo, $17.99/yr per seat (~0.2x) | Read access to shared meal plan, shopping list, and Trends summary, with one narrow write exception (shopping-list checkoffs, marking tasks done) and no visibility into the subscriber's personal health domain. |
@@ -310,7 +310,7 @@ Each item's full wording is in the archive; rows live in the Project Tracker.
 
 27. **External data program**, nine lookup projects behind one Cloudflare Worker, Decision row [three privacy shapes, one Worker](https://app.notion.com/p/3db53652f272816d8051f1d335574853). Not built.
 
-28. **The daily-living program for the second audience**, eleven Project Tracker rows (2026-09-16). Most of it reaches Home now, Simple View and One Next Thing included; still unbuilt are **a way in that does not require a condition**, and **whether ADHD and autism become selectable profiles** without implying that diet treats them.
+28. **The daily-living program for the second audience**, eleven Project Tracker rows (2026-09-16). Most of it reaches Home now, Simple View included (One Next Thing gave way to Not Tried Yet in each tab group, `lib/untriedLenses.ts`, 2026-11-15); still unbuilt are **a way in that does not require a condition**, and **whether ADHD and autism become selectable profiles** without implying that diet treats them.
 
 29. **What grows on the freed tab screens**, designed, not built ([Decision](https://app.notion.com/p/3e553652f27281c383fcc4155c7b6e79)). **What grows is made of the person's records, never awarded for them**: no streaks, levels, points, percentages, praise or animation.
 

@@ -8,7 +8,6 @@ export type VoiceLensPlace = { tab: string; param: string; key: string; label: s
 export const VOICE_LENS_DIRECTORY: VoiceLensPlace[] = [
   { tab: '/', param: 'openHomeSection', key: 'waitingAnswers', label: 'Waiting for an Answer' },
   { tab: '/', param: 'openHomeSection', key: 'today', label: 'Today' },
-  { tab: '/', param: 'openHomeSection', key: 'nextThing', label: 'One Next Thing' },
   { tab: '/', param: 'openHomeSection', key: 'yourStory', label: 'Your Guide' },
   { tab: '/', param: 'openHomeSection', key: 'captureInbox', label: 'Sort It Out' },
   { tab: '/', param: 'openHomeSection', key: 'todaysMeals', label: "Today's Meals" },

@@ -37,7 +37,6 @@ export const HOME_SECTION_TAB_PATH: Record<HomeSectionKey, string | null> = {
   yourStory: null,
   // The App Tour, 2026-11-14: it goes through every tab, so it belongs to none.
   appTour: null,
-  nextThing: null,
   // The tester welcome, T5: about the app being tested, not any one tab.
   testerWelcome: null,
   // Waiting for an Answer, 1.0.60.3. Null because the reminders waiting
@@ -156,6 +155,14 @@ export const HOME_SECTION_TAB_PATH: Record<HomeSectionKey, string | null> = {
   tutorialsInsights: '/insights',
   tutorialsTrends: '/trends',
   tutorialsReports: '/reports',
+  // Not Tried Yet, in each tab's group (2026-11-15).
+  untriedLife: '/life',
+  untriedFood: '/food',
+  untriedGarden: '/garden',
+  untriedInterests: '/interests',
+  untriedSchedule: '/schedule',
+  untriedSignals: '/log',
+  untriedInsights: '/insights',
 };
 
 // Which tab's tutorials each tutorials card shows.
@@ -176,6 +183,23 @@ export type TutorialSectionKey = keyof typeof TUTORIAL_SECTION_PATH;
 
 export function isTutorialSection(key: HomeSectionKey): key is TutorialSectionKey {
   return key in TUTORIAL_SECTION_PATH;
+}
+
+// Which tab's untried lenses each Not Tried Yet card lists.
+export const UNTRIED_SECTION_PATH = {
+  untriedLife: '/life',
+  untriedFood: '/food',
+  untriedGarden: '/garden',
+  untriedInterests: '/interests',
+  untriedSchedule: '/schedule',
+  untriedSignals: '/log',
+  untriedInsights: '/insights',
+} as const satisfies Partial<Record<HomeSectionKey, string>>;
+
+export type UntriedSectionKey = keyof typeof UNTRIED_SECTION_PATH;
+
+export function isUntriedSection(key: HomeSectionKey): key is UntriedSectionKey {
+  return key in UNTRIED_SECTION_PATH;
 }
 
 // Regroups an already-ordered list so sections from the same tab sit

@@ -342,7 +342,6 @@ export type ToolMark =
   | 'home.captureSay'
   | 'home.captureSort'
   | 'capture.readPage'
-  | 'home.nextGo'
   | 'home.welcomeGo'
   | 'home.welcomeNotNow'
   | 'home.waitingOpen'
@@ -353,6 +352,7 @@ export type ToolMark =
   | 'home.tourStart'
   | 'home.continueSetup'
   | 'home.tourTab'
+  | 'home.untriedLens'
   | 'home.waitingAnswer'
   | 'home.waitingKinds'
   | 'home.waitingChoose'
@@ -2639,15 +2639,6 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The title, who wrote it, when it came out and the link go across, so nothing is typed, and the note is marked done.',
     },
     {
-      key: 'nextThing',
-      title: 'Do the one next thing',
-      steps: [
-        { say: 'Open the band with the name of One Next Thing.', mark: 'homeBand.nextThing', stay: true },
-        { say: 'Read the sentence, then tap the button under it to go straight there.', mark: 'home.nextGo' },
-      ],
-      forYou: 'Only one thing is offered at a time, so there is no list to work through.',
-    },
-    {
       key: 'nextThingLater',
       title: 'Answer or set aside the welcome line',
       steps: [
@@ -2674,6 +2665,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap a tab in the list. The tour goes through that tab and each of its lenses only.', mark: 'home.tourTab' },
       ],
       forYou: "A tick beside a tab means you have been through all of it. Each tab's band on Home has its tour too.",
+    },
+    {
+      key: 'untriedLenses',
+      title: 'See what a tab can do that you have not used yet',
+      steps: [
+        { say: 'Open the band with the name of Life, then Not Tried Yet. Each tab on Home has one while it has something you have not used.', mark: 'homeBand.untriedLife', stay: true },
+        { say: 'Tap one to go straight to it. It leaves the list once you record something with it.', mark: 'home.untriedLens' },
+      ],
+      forYou: 'Opening a lens to look around does not take it off the list. Only using it does.',
     },
     {
       key: 'languageBasics',
