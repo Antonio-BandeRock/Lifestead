@@ -602,11 +602,11 @@ function FoodRow({
             </Text>
           ) : null}
           {extraMeta ? (
-            <Text style={styles.rowMeta} numberOfLines={1}>
+            <Text style={styles.rowMeta}>
               {extraMeta}
             </Text>
           ) : category ? (
-            <Text style={styles.rowMeta} numberOfLines={1}>
+            <Text style={styles.rowMeta}>
               {categoryLabel(category)}
             </Text>
           ) : null}

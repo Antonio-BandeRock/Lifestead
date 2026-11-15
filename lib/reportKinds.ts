@@ -375,7 +375,7 @@ export const REPORT_KINDS: ReportKindDef[] = [
     icon: 'checkmark-done-outline',
     title: 'Lifestead: Keeping Up',
     preface: ['The checks, routines and captured thoughts over the range, counted from what was marked. A week with nothing marked is shown as a gap, with no mark against it.'],
-    help: 'For a coach, a counsellor or anyone helping with the day: Did I Do It checks, routines started and finished, and things captured and sorted, as Trends > Keeping Up reads them.',
+    help: 'For a coach, a counsellor or anyone helping with the day: Checklist checks, routines started and finished, and things captured and sorted, as Trends > Keeping Up reads them.',
     core: [],
     extras: ['keeping-checks', 'keeping-routines', 'keeping-captures'],
   },

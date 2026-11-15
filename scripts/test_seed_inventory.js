@@ -17,7 +17,7 @@ function load(file) {
   const out = ts.transpileModule(src, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } });
   const mod = { exports: {} };
   cache[file] = mod.exports;
-  const allowed = { './plantNutrients': 'lib/plantNutrients.ts', './cropProblems': 'lib/cropProblems.ts', './cropGuides': 'lib/cropGuides.ts' };
+  const allowed = { './plantNutrients': 'lib/plantNutrients.ts', './cropProblems': 'lib/cropProblems.ts', './cropGuides': 'lib/cropGuides.ts', './ingredientShortName': 'lib/ingredientShortName.ts' };
   new Function('module', 'exports', 'require', out.outputText)(mod, mod.exports, (name) => {
     if (allowed[name]) return load(allowed[name]);
     throw new Error(`${file} imported ${name}, which this test does not allow`);

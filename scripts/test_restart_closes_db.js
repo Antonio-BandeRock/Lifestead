@@ -37,10 +37,14 @@ for (const file of files) {
 ok('only lib/restartApp.ts calls reloadAsync', direct.length === 0, direct.join(', '));
 
 const helper = fs.readFileSync(path.join(root, 'lib/restartApp.ts'), 'utf8');
-ok('helper closes before reloading', /await closeDatabasesForRestart\(\);\s*await Updates\.reloadAsync\(\);/.test(helper));
+// On a computer the address is reset between the two (App Lock, 1.0.60.7);
+// nothing between them reaches the database.
+const between = /await closeDatabasesForRestart\(\);([\s\S]{0,300}?)await Updates\.reloadAsync\(\);/.exec(helper);
+ok('helper closes before reloading', between !== null && !/getDatabase|Database\(/.test(between[1]));
 
 const db = fs.readFileSync(path.join(root, 'lib/db.ts'), 'utf8');
-ok('busy_timeout set before write tracking', /openDatabaseAsync\(DB_NAME\)\.then\(async \(db\) => \{[\s\S]{0,600}PRAGMA busy_timeout = 5000;[\s\S]{0,200}return attachWriteTracking\(db\);/.test(db));
+// App Lock's key pragma comes first on the connection, then busy_timeout.
+ok('busy_timeout set before write tracking', /openDatabaseAsync\(DB_NAME\);[\s\S]{0,200}\}\)\(\)\.then\(async \(db\) => \{[\s\S]{0,600}PRAGMA busy_timeout = 5000;[\s\S]{0,200}return attachWriteTracking\(db\);/.test(db));
 const close = db.match(/export async function closeDatabasesForRestart\(\)[\s\S]*?\n\}/);
 ok('closeDatabasesForRestart exists', !!close);
 if (close) {

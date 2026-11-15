@@ -109,13 +109,13 @@ export function CollapsibleOverlayCard({
                 <TouchableOpacity style={styles.collapseButton} onPress={onCollapse} accessibilityLabel="Collapse this card">
                   <Ionicons name="chevron-up-circle" size={30} color={tabColor} />
                 </TouchableOpacity>
-                <Text style={[styles.headerLabel, { color: tabColor }]} numberOfLines={1}>
+                <Text style={[styles.headerLabel, { color: tabColor }]}>
                   {collapsedLabel}
                 </Text>
               </>
             ) : (
               <>
-                <Text style={[styles.headerLabel, { color: tabColor }]} numberOfLines={1}>
+                <Text style={[styles.headerLabel, { color: tabColor }]}>
                   {collapsedLabel}
                 </Text>
                 <TouchableOpacity style={styles.collapseButton} onPress={onCollapse} accessibilityLabel="Collapse this card">
@@ -178,13 +178,13 @@ export function CollapsibleOverlayCard({
       {navigationHand === 'left' ? (
         <>
           <Ionicons name="chevron-down-circle-outline" size={22} color={tabColor} />
-          <Text style={[styles.collapsedLabel, { color: tabColor }]} numberOfLines={1}>
+          <Text style={[styles.collapsedLabel, { color: tabColor }]}>
             {collapsedLabel}
           </Text>
         </>
       ) : (
         <>
-          <Text style={[styles.collapsedLabel, { color: tabColor }]} numberOfLines={1}>
+          <Text style={[styles.collapsedLabel, { color: tabColor }]}>
             {collapsedLabel}
           </Text>
           <Ionicons name="chevron-down-circle-outline" size={22} color={tabColor} />

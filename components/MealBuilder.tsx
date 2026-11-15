@@ -1482,10 +1482,10 @@ export function MealBuilder({
                 >
                   <TouchableOpacity style={styles.savedRow} onPress={() => void toggleStartingPointExpanded(row)} disabled={loadingStartingPoint}>
                     <View style={styles.savedRowText}>
-                      <Text style={styles.savedRowName} numberOfLines={1}>
+                      <Text style={styles.savedRowName}>
                         {row.name}
                       </Text>
-                      <Text style={styles.savedRowDetail} numberOfLines={1}>
+                      <Text style={styles.savedRowDetail}>
                         {row.detail}
                       </Text>
                     </View>
@@ -1604,10 +1604,10 @@ export function MealBuilder({
                 {Object.entries(tickedDishes).map(([key, dish]) => (
                   <View key={key} style={styles.savedRow}>
                     <View style={styles.savedRowText}>
-                      <Text style={styles.savedRowName} numberOfLines={1}>
+                      <Text style={styles.savedRowName}>
                         {dish.name}
                       </Text>
-                      <Text style={styles.savedRowDetail} numberOfLines={1}>
+                      <Text style={styles.savedRowDetail}>
                         {`From ${dish.from}`}
                       </Text>
                     </View>
@@ -2019,10 +2019,10 @@ export function MealBuilder({
       rows.map((option) => (
         <TouchableOpacity key={keyOf(option)} style={styles.savedRow} onPress={() => onPick(option)}>
           <View style={styles.savedRowText}>
-            <Text style={styles.savedRowName} numberOfLines={1}>
+            <Text style={styles.savedRowName}>
               {option.name}
             </Text>
-            <Text style={styles.savedRowDetail} numberOfLines={1}>
+            <Text style={styles.savedRowDetail}>
               {option.ingredientNames || `${option.ingredientCount} ingredient${option.ingredientCount === 1 ? '' : 's'}`}
             </Text>
           </View>
@@ -2209,7 +2209,7 @@ export function MealBuilder({
               {components.map((component) => (
                 <View key={component.key} style={styles.savedRow}>
                   <View style={styles.savedRowText}>
-                    <Text style={styles.savedRowName} numberOfLines={1}>
+                    <Text style={styles.savedRowName}>
                       {component.name}
                     </Text>
                     <Text style={styles.savedRowDetail}>

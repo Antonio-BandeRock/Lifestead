@@ -57,6 +57,8 @@ import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { useFadingMessage } from '../hooks/useFadingMessage';
+import { saveOrSay } from '../lib/saveProblem';
+import { ReadProblem } from './ReadProblem';
 
 const OWN_KIND = '__own_kind__';
 const NO_KIND = '__no_kind__';
@@ -117,10 +119,18 @@ export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
   const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
+  // A read that fails says so with Try again, never as an empty list (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    setInterests(await listInterests());
-    setChanges(await listInterestStageChanges());
-    setHoldings(await listInterestHoldings());
+    setReadFailed(false);
+    try {
+      setInterests(await listInterests());
+      setChanges(await listInterestStageChanges());
+      setHoldings(await listInterestHoldings());
+    } catch (error) {
+      console.warn('MyInterestsSection could not be read', error);
+      setReadFailed(true);
+    }
   }, []);
 
   useFocusEffect(
@@ -185,11 +195,16 @@ export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
       startedOn: since.startedOn,
     };
     if (form.id) {
-      await updateInterest(form.id, input);
+      const formId = form.id;
+      if (!(await saveOrSay('The interest was not saved. Try again.', async () => {
+        await updateInterest(formId, input);
+        return true;
+      }))) return;
       setForm(null);
       await afterChange(`${name}: changed.`);
     } else {
-      const id = await addInterest(input);
+      const id = await saveOrSay('The interest was not saved. Try again.', () => addInterest(input));
+      if (id === undefined) return;
       setForm(null);
       setOpenId(id);
       await afterChange(`Added: ${name}.`);
@@ -198,7 +213,10 @@ export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
 
   async function handleStage(interest: Interest, stage: InterestStage) {
     const on = !interest.stages[stage];
-    await setInterestStage(interest.id, stage, on);
+    if (!(await saveOrSay('The change was not saved. Try again.', async () => {
+      await setInterestStage(interest.id, stage, on);
+      return true;
+    }))) return;
     const words = INTEREST_STAGE_LABELS[stage].toLowerCase();
     await afterChange(on ? `${interest.name}: started ${words}.` : `${interest.name}: stepped back from ${words}.`);
   }
@@ -206,7 +224,10 @@ export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
   async function saveLeftOff() {
     if (!leftOff) return;
     const interest = interests.find((entry) => entry.id === leftOff.id);
-    await setInterestLeftOff(leftOff.id, leftOff.note);
+    if (!(await saveOrSay('Where you left off was not saved. Try again.', async () => {
+      await setInterestLeftOff(leftOff.id, leftOff.note);
+      return true;
+    }))) return;
     setLeftOff(null);
     await afterChange(interest ? (leftOff.note.trim() ? `${interest.name}: where you left off is kept.` : `${interest.name}: note cleared.`) : null);
   }
@@ -217,7 +238,10 @@ export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
       explainNotYet('Type the new name for this kind first.');
       return;
     }
-    await renameInterestKind(renaming.from, renaming.to);
+    if (!(await saveOrSay('The new name was not saved. Try again.', async () => {
+      await renameInterestKind(renaming.from, renaming.to);
+      return true;
+    }))) return;
     if (form && form.kind === renaming.from) setForm({ ...form, kind: renaming.to.trim() });
     setRenaming(null);
     await afterChange(`Renamed on every interest that had it: ${renaming.to.trim()}.`);
@@ -232,7 +256,10 @@ export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
           label: 'Step Back',
           onPress: async () => {
             setConfirm(null);
-            await setInterestRetired(interest.id, true);
+            if (!(await saveOrSay('The change was not saved. Try again.', async () => {
+              await setInterestRetired(interest.id, true);
+              return true;
+            }))) return;
             await afterChange(`${interest.name}: stepped back, everything kept.`);
           },
         },
@@ -242,12 +269,16 @@ export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
   }
 
   async function handleComeBack(interest: Interest) {
-    await setInterestRetired(interest.id, false);
+    if (!(await saveOrSay('The change was not saved. Try again.', async () => {
+      await setInterestRetired(interest.id, false);
+      return true;
+    }))) return;
     await afterChange(`${interest.name}: back with your interests.`);
   }
 
   async function askRemove(interest: Interest) {
-    const references = await countInterestReferences(interest.id);
+    const references = await saveOrSay('What this interest holds could not be read just now. Nothing is lost. Try again.', () => countInterestReferences(interest.id));
+    if (references === undefined) return;
     if (references.projects > 0) {
       explainNotYet(
         references.projects === 1
@@ -315,7 +346,10 @@ export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
           onPress: async () => {
             setConfirm(null);
             if (openId === interest.id) setOpenId(null);
-            await deleteInterest(interest.id);
+            if (!(await saveOrSay('The interest was not removed. Try again.', async () => {
+              await deleteInterest(interest.id);
+              return true;
+            }))) return;
             await afterChange(`${interest.name}: removed.`);
           },
         },
@@ -589,7 +623,9 @@ export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
       )}
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
-      {interests.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your interests could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : interests.length === 0 ? (
         <Text style={styles.captionText}>
           No interests yet. Add anything you enjoy, whether you only read about it or do it every week.
         </Text>

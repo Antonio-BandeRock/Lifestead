@@ -55,6 +55,7 @@ import {
 } from '../lib/lifeSquares';
 import { loadPresence, loadRecords, rememberedSquarePlace, rememberSquarePlace } from '../lib/lifeSquaresDb';
 import { useWalkMark } from './WalkMark';
+import { ReadProblem } from './ReadProblem';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -110,6 +111,8 @@ export function LifeInSquares({ startAt = 'remembered' }: Props) {
   const [loaded, setLoaded] = useState<Loaded | null>(null);
   const [width, setWidth] = useState(0);
   const [reload, setReload] = useState(0);
+  // A read that fails says so with Try again, never as empty squares (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const pager = useRef<ScrollView>(null);
   const { today, nowHour } = nowParts();
   const key = periodKey(place);
@@ -128,13 +131,18 @@ export function LifeInSquares({ startAt = 'remembered' }: Props) {
   // Only the period on screen is read.
   useEffect(() => {
     let live = true;
+    setReadFailed(false);
     const reading = place.level === 'year' || place.level === 'month' ? loadPresence(place).then((presence) => ({ key, presence })) : loadRecords(place).then((records) => ({ key, records }));
     reading
       .then((result) => {
         if (live) setLoaded(result);
       })
-      .catch(() => {
-        if (live) setLoaded({ key, presence: new Map(), records: [] });
+      .catch((error) => {
+        console.warn('Your Life in Squares could not be read', error);
+        if (live) {
+          setLoaded({ key, presence: new Map(), records: [] });
+          setReadFailed(true);
+        }
       });
     return () => {
       live = false;
@@ -182,6 +190,7 @@ export function LifeInSquares({ startAt = 'remembered' }: Props) {
 
   return (
     <View style={styles.root} onLayout={onLayout}>
+      {readFailed ? <ReadProblem message="This period could not be read just now. Nothing you recorded is lost." onTryAgain={() => setReload((n) => n + 1)} /> : null}
       <View style={styles.crumbs}>
         {crumbs.map((crumb, index) => {
           const current = index === crumbs.length - 1;

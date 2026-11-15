@@ -135,7 +135,7 @@ for (const source of M.SQUARE_SOURCES) {
   const file = tabFiles[source.tab];
   tabSource[file] = tabSource[file] || read(path.join('app', '(tabs)', file));
   ok(`${source.key}: ${file} has lens ${source.lens}`, tabSource[file].includes(`key: '${source.lens}'`));
-  const labelled = new RegExp(`key: '${source.lens}',\\s*label: ['"]${source.lensLabel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"]`);
+  const labelled = new RegExp(`key: '${source.lens}',(?:\\s*group: '[^']+',)?\\s*label: ['"]${source.lensLabel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"]`);
   ok(`${source.key}: lens label ${source.lensLabel}`, labelled.test(tabSource[file]));
   ok(`${source.key}: an outline icon`, /-outline$/.test(source.icon));
   const route = M.squareRoute(source);

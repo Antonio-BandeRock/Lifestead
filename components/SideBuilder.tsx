@@ -2068,7 +2068,7 @@ export function SideBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes', recipesFrom: 'sideBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   My Recipes (your saved sides)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />
@@ -2078,7 +2078,7 @@ export function SideBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes', recipesFrom: 'sideBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   System Recipes (built into the app)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />

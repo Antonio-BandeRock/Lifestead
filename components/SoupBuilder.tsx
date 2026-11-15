@@ -1952,7 +1952,7 @@ export function SoupBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes', recipesFrom: 'soupBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   My Recipes (your saved soups)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />
@@ -1962,7 +1962,7 @@ export function SoupBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes', recipesFrom: 'soupBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   System Recipes (built into the app)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />

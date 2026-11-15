@@ -2314,7 +2314,7 @@ export function FermentationBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes', recipesFrom: 'fermentationBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   My Recipes (your saved fermentations)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />
@@ -2324,7 +2324,7 @@ export function FermentationBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes', recipesFrom: 'fermentationBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   System Recipes (built into the app)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />
@@ -2550,7 +2550,7 @@ export function FermentationBuilder({
                         >
                           <Text style={styles.strainRowTitle}>{strain.commonName ?? strain.scientificName}</Text>
                           {strain.useCases ? (
-                            <Text style={styles.strainRowSubtitle} numberOfLines={1}>
+                            <Text style={styles.strainRowSubtitle}>
                               {strain.useCases}
                             </Text>
                           ) : null}

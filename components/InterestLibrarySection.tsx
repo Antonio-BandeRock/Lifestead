@@ -53,6 +53,8 @@ import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEX
 import { useFadingMessage } from '../hooks/useFadingMessage';
 import { ShowMoreButton, useShownPart } from './ShowMoreButton';
 import { OnlyInterestLine } from './OnlyInterestLine';
+import { saveOrSay } from '../lib/saveProblem';
+import { ReadProblem } from './ReadProblem';
 
 const NO_INTEREST = '__no_interest__';
 
@@ -107,9 +109,17 @@ export function InterestLibrarySection({ tabColor, fromNoteId, onlyInterestId }:
   const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
+  // A read that fails says so with Try again, never as an empty list (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    setInterests(await listInterests());
-    setEntries(await listLibrary());
+    setReadFailed(false);
+    try {
+      setInterests(await listInterests());
+      setEntries(await listLibrary());
+    } catch (error) {
+      console.warn('InterestLibrarySection could not be read', error);
+      setReadFailed(true);
+    }
   }, []);
 
   useFocusEffect(
@@ -215,12 +225,19 @@ export function InterestLibrarySection({ tabColor, fromNoteId, onlyInterestId }:
     };
     const title = form.title.trim();
     if (form.id) {
-      await updateLibraryEntry(form.id, input);
+      const formId = form.id;
+      if (!(await saveOrSay('The entry was not saved. Try again.', async () => {
+        await updateLibraryEntry(formId, input);
+        return true;
+      }))) return;
       setForm(null);
       await afterChange(`${title}: changed.`);
       return;
     }
-    await addLibraryEntry(input);
+    if (!(await saveOrSay('The entry was not saved. Try again.', async () => {
+      await addLibraryEntry(input);
+      return true;
+    }))) return;
     if (form.fromNoteId) await setCaptureNoteDone(form.fromNoteId, true).catch(() => undefined);
     setForm(null);
     await afterChange(
@@ -232,14 +249,20 @@ export function InterestLibrarySection({ tabColor, fromNoteId, onlyInterestId }:
 
   async function moveTo(entry: LibraryEntry, status: LibraryStatus) {
     if (entry.status === status) return;
-    await setLibraryStatus(entry.id, status);
+    if (!(await saveOrSay('The change was not saved. Try again.', async () => {
+      await setLibraryStatus(entry.id, status);
+      return true;
+    }))) return;
     await afterChange(describeStatusChange(entry.title, status));
   }
 
   async function keepLeftOff() {
     if (!leftOffDraft) return;
     const entry = entries.find((one) => one.id === leftOffDraft.id);
-    await setLibraryLeftOff(leftOffDraft.id, leftOffDraft.text);
+    if (!(await saveOrSay('Where you left off was not saved. Try again.', async () => {
+      await setLibraryLeftOff(leftOffDraft.id, leftOffDraft.text);
+      return true;
+    }))) return;
     setLeftOffDraft(null);
     await afterChange(entry ? `${entry.title}: where you left off is kept.` : null);
   }
@@ -250,7 +273,10 @@ export function InterestLibrarySection({ tabColor, fromNoteId, onlyInterestId }:
 
   async function retire(entry: LibraryEntry, retiredNow: boolean) {
     setOpenId(null);
-    await setLibraryRetired(entry.id, retiredNow);
+    if (!(await saveOrSay('The change was not saved. Try again.', async () => {
+      await setLibraryRetired(entry.id, retiredNow);
+      return true;
+    }))) return;
     await afterChange(
       retiredNow ? `${entry.title} is under No Longer Part of It, with everything it had.` : `${entry.title} is back.`,
     );
@@ -267,7 +293,10 @@ export function InterestLibrarySection({ tabColor, fromNoteId, onlyInterestId }:
           onPress: async () => {
             setConfirm(null);
             setOpenId(null);
-            await deleteLibraryEntry(entry.id);
+            if (!(await saveOrSay('The entry was not removed. Try again.', async () => {
+              await deleteLibraryEntry(entry.id);
+              return true;
+            }))) return;
             await afterChange(`${entry.title}: removed.`);
           },
         },
@@ -520,7 +549,9 @@ export function InterestLibrarySection({ tabColor, fromNoteId, onlyInterestId }:
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
       {onlyId ? <OnlyInterestLine name={nameOf(onlyId)} onShowEvery={() => setOnlyId(null)} /> : null}
-      {listed.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your library could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : listed.length === 0 ? (
         <Text style={styles.captionText}>Nothing in the library yet. Each thing you add shows here under its interest.</Text>
       ) : (
         listed

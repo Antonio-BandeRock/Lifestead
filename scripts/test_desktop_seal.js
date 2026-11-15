@@ -1,3 +1,5 @@
+// eslint-config-expo lints this repo as app code, which has no Node globals.
+/* global __dirname, Buffer */
 // App Lock on the computer (1.0.60.7): the sealed records file
 // (desktop/sealedDb.js), the connection layer that opens it into memory
 // (desktop/sqlite.js), and the wiring from the app down to both.
@@ -231,7 +233,10 @@ async function main() {
     for (const channel of ['sqlite:unlock', 'sqlite:close', 'sqlite:seal', 'sqlite:unseal', 'sqlite:keepSealed', 'sqlite:abandonSeal', 'sqlite:filesOnDisk', 'hello:available', 'hello:wrapKey', 'hello:unwrapKey', 'hello:remove']) {
       check(`main.js handles ${channel}`, main.includes(`ipcMain.handle('${channel}'`));
     }
-    check('main.js closes sealed records when the page reloads', main.includes("on('did-start-loading', () => sqlite.closeSealed())"));
+    // Only a new page counts: 'did-start-loading' also fired on every change of
+    // screen and sealed the records under an open page (1.0.60.7 to 1.0.62.3).
+    check('main.js closes sealed records when the page reloads', main.includes("on('did-start-navigation'") && main.includes('if (details.isMainFrame && !details.isSameDocument) sqlite.closeSealed();'));
+    check('main.js no longer seals on every change of screen', !main.includes("on('did-start-loading'"));
     check('main.js closes sealed records when the page crashes', main.includes("on('render-process-gone', () => sqlite.closeSealed())"));
     const preload = read('desktop/preload.js');
     for (const channel of ['sqlite:unlock', 'sqlite:close', 'sqlite:seal', 'sqlite:unseal', 'sqlite:keepSealed', 'sqlite:abandonSeal', 'sqlite:filesOnDisk', 'hello:available', 'hello:wrapKey', 'hello:unwrapKey', 'hello:remove']) {

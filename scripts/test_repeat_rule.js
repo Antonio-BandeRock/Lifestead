@@ -35,6 +35,7 @@ const {
   weekdaysToColumn,
   weekdaysFromColumn,
   weekdayOf,
+  repeatFromOccurrence,
 } = load('lib/repeatRule.ts');
 
 let failures = 0;
@@ -168,6 +169,14 @@ check(
 check('weekdays to column', weekdaysToColumn([4, 1, 4]), '1,4');
 check('weekdays from column', weekdaysFromColumn('1,4'), [1, 4]);
 check('empty weekdays column', weekdaysFromColumn(null), undefined);
+
+// Changing a series from one of its days on keeps only what is left of it.
+const base = { repeatType: 'every_n_days', repeatEndType: 'count', repeatCount: 10, repeatUntil: null, repeatIndex: 4, repeatInterval: 3, repeatWeekdays: null };
+check('count series from its 4th day keeps 7', repeatFromOccurrence(base), { type: 'every_n_days', endType: 'count', count: 7, interval: 3 });
+check('indefinite weekly keeps its weekdays', repeatFromOccurrence({ ...base, repeatType: 'weekly', repeatEndType: 'indefinite', repeatCount: null, repeatInterval: 2, repeatWeekdays: '1,4' }), { type: 'weekly', endType: 'indefinite', interval: 2, weekdays: [1, 4] });
+check('until-date series keeps its end', repeatFromOccurrence({ ...base, repeatEndType: 'until_date', repeatCount: null, repeatUntil: '2027-01-31' }), { type: 'every_n_days', endType: 'until_date', until: '2027-01-31', interval: 3 });
+check('a one-off is none', repeatFromOccurrence({ ...base, repeatType: 'none' }), { type: 'none' });
+check('never below one time', repeatFromOccurrence({ ...base, repeatIndex: 40 }).count, 1);
 
 // No sentence this module writes may use a dash in place of punctuation.
 const source = fs.readFileSync(path.join(__dirname, '..', 'lib/repeatRule.ts'), 'utf8');

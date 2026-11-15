@@ -45,6 +45,8 @@ import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { useFadingMessage } from '../hooks/useFadingMessage';
+import { saveOrSay } from '../lib/saveProblem';
+import { ReadProblem } from './ReadProblem';
 
 const NO_INTEREST = '__no_interest__';
 const DIRECTIONS: MoneyDirection[] = ['out', 'in'];
@@ -84,10 +86,18 @@ export function InterestMoneySection({ tabColor, onlyInterestId }: Props) {
   const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
+  // A read that fails says so with Try again, never as an empty list (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    setInterests(await listInterests());
-    setEntries(await listInterestMoney());
-    setThings(await listInterestThings());
+    setReadFailed(false);
+    try {
+      setInterests(await listInterests());
+      setEntries(await listInterestMoney());
+      setThings(await listInterestThings());
+    } catch (error) {
+      console.warn('InterestMoneySection could not be read', error);
+      setReadFailed(true);
+    }
   }, []);
 
   useFocusEffect(
@@ -174,8 +184,19 @@ export function InterestMoneySection({ tabColor, onlyInterestId }: Props) {
       who: form.who,
       note: form.note,
     };
-    if (form.id) await updateInterestMoney(form.id, input);
-    else await addInterestMoney(input);
+    if (form.id) {
+      const formId = form.id;
+      if (!(await saveOrSay('The amount was not saved. Try again.', async () => {
+        await updateInterestMoney(formId, input);
+        return true;
+      }))) return;
+    }
+    else {
+      if (!(await saveOrSay('The amount was not saved. Try again.', async () => {
+        await addInterestMoney(input);
+        return true;
+      }))) return;
+    }
     setForm(null);
     await afterChange(form.id ? `${form.what.trim()}: changed.` : describeMoneySaved({ amount, direction: form.direction, what: form.what.trim() }, nameOf(form.interestId)));
   }
@@ -191,7 +212,10 @@ export function InterestMoneySection({ tabColor, onlyInterestId }: Props) {
           onPress: async () => {
             setConfirm(null);
             setOpenId(null);
-            await deleteInterestMoney(entry.id);
+            if (!(await saveOrSay('The amount was not removed. Try again.', async () => {
+              await deleteInterestMoney(entry.id);
+              return true;
+            }))) return;
             await afterChange(`${entry.what}: removed.`);
           },
         },
@@ -369,7 +393,9 @@ export function InterestMoneySection({ tabColor, onlyInterestId }: Props) {
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
       {onlyId ? <OnlyInterestLine name={nameOf(onlyId)} onShowEvery={() => setOnlyId(null)} /> : null}
-      {shownIds.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your amounts could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : shownIds.length === 0 ? (
         <Text style={styles.captionText}>
           Nothing spent or earned kept yet. Each amount you add shows here under its interest, with the prices kept on its supplies and collected things beside it.
         </Text>

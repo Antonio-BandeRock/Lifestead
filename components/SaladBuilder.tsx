@@ -1963,7 +1963,7 @@ export function SaladBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes', recipesFrom: 'saladBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   My Recipes (your saved salads)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />
@@ -1973,7 +1973,7 @@ export function SaladBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes', recipesFrom: 'saladBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   System Recipes (built into the app)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />

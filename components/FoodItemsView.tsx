@@ -451,11 +451,11 @@ function FoodItemsSection({
                     }}
                   >
                     <View style={styles.itemTextWrap}>
-                      <Text style={styles.itemTitle} numberOfLines={1}>
+                      <Text style={styles.itemTitle}>
                         {item.title}
                       </Text>
                       {item.subtitle ? (
-                        <Text style={styles.itemSubtitle} numberOfLines={1}>
+                        <Text style={styles.itemSubtitle}>
                           {item.subtitle}
                         </Text>
                       ) : null}

@@ -38,6 +38,9 @@ function load(relPath) {
   cache[relPath] = module;
   const dir = path.dirname(relPath);
   new Function('exports', 'module', 'require', outputText)(module.exports, module, (name) => {
+    // lib/databaseActivity.ts asks the vault (lib/vaultState.ts) before each
+    // read and write; the vault stays off here, so nothing is refused.
+    if (name === './vaultState') return { vaultRefusalNow: () => null, noteVaultRecordWritten: () => {} };
     if (!name.startsWith('.')) throw new Error(`${relPath} must stay free of runtime imports (asked for ${name})`);
     return load(path.posix.join(dir, name) + '.ts');
   });
@@ -132,6 +135,9 @@ check(A.sessionRefusalFor('INSERT INTO app_meta (key) VALUES (1); INSERT INTO me
   const db = A.attachWriteTracking({
     runAsync: async (sql) => ran.push(sql),
     execAsync: async (sql) => ran.push(sql),
+    // The vault wraps the two read methods as well (lib/databaseActivity.ts).
+    getAllAsync: async () => [],
+    getFirstAsync: async () => null,
   });
   let threw = null;
   try {

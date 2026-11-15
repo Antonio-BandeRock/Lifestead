@@ -3131,7 +3131,7 @@ export default function HomeScreen() {
                     : router.push({ pathname: '/life', params: { openLifeLens: source.lens } })
               }
             >
-              <Text style={styles.reminderTime} numberOfLines={1}>
+              <Text style={styles.reminderTime}>
                 {datedDayLabel(lead)}
               </Text>
               <View style={styles.reminderBody}>
@@ -4285,7 +4285,7 @@ export default function HomeScreen() {
                 router.push({ pathname: '/garden', params: { openGardenLens: 'upcomingTasks' } })
               }
             >
-              <Text style={styles.reminderTime} numberOfLines={1}>
+              <Text style={styles.reminderTime}>
                 {gardenTaskDayLabel(task.scheduledFor, today)}
               </Text>
               <View style={styles.reminderBody}>

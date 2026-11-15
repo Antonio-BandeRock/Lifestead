@@ -4484,7 +4484,7 @@ function MyMedsView({
                 onPress={() => showInfoAlert(rule.source === 'doctor' ? 'Your doctor told you this' : 'You noted this', rule.description)}
               >
                 <View style={styles.rankTextWrap}>
-                  <Text style={styles.rankFoodName} numberOfLines={1}>
+                  <Text style={styles.rankFoodName}>
                     {rule.description}
                   </Text>
                   <Text style={styles.rankFoodCategory}>
@@ -4551,7 +4551,7 @@ function MyMedsView({
                       )
                     }
                   >
-                    <Text style={styles.rankFoodName} numberOfLines={1}>
+                    <Text style={styles.rankFoodName}>
                       {rule.description}
                     </Text>
                     <Text style={styles.rankFoodCategory} numberOfLines={1}>
@@ -5521,7 +5521,6 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     textAlign: 'center',
     marginTop: 10,
-    maxWidth: 280,
 
     ...textShadow,
 

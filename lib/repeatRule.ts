@@ -255,3 +255,32 @@ export function weekdaysFromColumn(value: string | null | undefined): number[] |
     .filter((day) => Number.isInteger(day) && day >= 0 && day <= 6);
   return days.length > 0 ? days : undefined;
 }
+
+// The rule one occurrence of a series still has to run from its own day on
+// (2026-11-15): what "change this day and every one after" starts from. A
+// series that stops after a number of times keeps only the times left,
+// counting this one, so changing the rest never adds days the person did
+// not ask for.
+export function repeatFromOccurrence(row: {
+  repeatType: string | null;
+  repeatEndType: string | null;
+  repeatCount: number | null;
+  repeatUntil: string | null;
+  repeatIndex: number | null;
+  repeatInterval: number | null;
+  repeatWeekdays: string | null;
+}): RepeatConfig {
+  const types: RepeatType[] = ['daily', 'every_n_days', 'weekly', 'monthly'];
+  const type = types.find((value) => value === row.repeatType);
+  if (!type) return { type: 'none' };
+  const endType: RepeatEndType = row.repeatEndType === 'count' || row.repeatEndType === 'until_date' ? row.repeatEndType : 'indefinite';
+  const left = row.repeatCount != null ? Math.max(1, row.repeatCount - Math.max(0, (row.repeatIndex ?? 1) - 1)) : undefined;
+  return {
+    type,
+    endType,
+    count: endType === 'count' ? left : undefined,
+    until: endType === 'until_date' ? row.repeatUntil ?? undefined : undefined,
+    interval: row.repeatInterval ?? undefined,
+    weekdays: weekdaysFromColumn(row.repeatWeekdays),
+  };
+}

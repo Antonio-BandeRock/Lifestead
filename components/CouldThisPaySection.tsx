@@ -52,6 +52,8 @@ import { useCategoryClosed } from '../lib/vaultSession';
 import { VaultClosedBand } from './VaultClosedBand';
 import { AppTextInput } from './AppTextInput';
 import { useWalkMark } from './WalkMark';
+import { saveOrSay } from '../lib/saveProblem';
+import { ReadProblem } from './ReadProblem';
 
 type Props = { tabColor: string };
 
@@ -71,18 +73,26 @@ export function CouldThisPaySection({ tabColor }: Props) {
   const [words, setWords] = useState<PayWords>({});
   const [result, setResult] = useState<PayResult | null>(null);
 
+  // A read that fails says so with Try again, never as an empty list (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const all = await listInterests();
-    setInterests(all);
-    setEntries(await listInterestMoney());
-    setThings(await listInterestThings());
-    setSessions(await listInterestSessions());
-    const last = (await readOrClosed(lastPayWorksheetInterests, [] as string[])).filter((id) => all.some((interest) => interest.id === id));
-    setChosen((was) => (was.length > 0 ? was : last));
-    if (last.length > 0) {
-      const kept = await readOrClosed(() => getPayWorksheet(last), {} as PayWords);
-      setWords((was) => (Object.keys(was).length > 0 ? was : kept));
-      setResult((was) => was ?? workOutPay(kept));
+    setReadFailed(false);
+    try {
+      const all = await listInterests();
+      setInterests(all);
+      setEntries(await listInterestMoney());
+      setThings(await listInterestThings());
+      setSessions(await listInterestSessions());
+      const last = (await readOrClosed(lastPayWorksheetInterests, [] as string[])).filter((id) => all.some((interest) => interest.id === id));
+      setChosen((was) => (was.length > 0 ? was : last));
+      if (last.length > 0) {
+        const kept = await readOrClosed(() => getPayWorksheet(last), {} as PayWords);
+        setWords((was) => (Object.keys(was).length > 0 ? was : kept));
+        setResult((was) => was ?? workOutPay(kept));
+      }
+    } catch (error) {
+      console.warn('CouldThisPaySection could not be read', error);
+      setReadFailed(true);
     }
   }, []);
 
@@ -143,7 +153,10 @@ export function CouldThisPaySection({ tabColor }: Props) {
       explainNotYet('Your worksheets are in the vault, and keeping this one would write over the one already kept. Open the vault first, then work it out.');
       return;
     }
-    await savePayWorksheet(chosen, words);
+    if (!(await saveOrSay('The worksheet was not saved. Try again.', async () => {
+      await savePayWorksheet(chosen, words);
+      return true;
+    }))) return;
     setResult(workOutPay(words));
   }
 
@@ -194,6 +207,7 @@ export function CouldThisPaySection({ tabColor }: Props) {
   return (
     <View style={styles.section}>
       <VaultClosedBand color={tabColor} categories={['finances']} inline />
+      {readFailed ? <ReadProblem message="What the worksheet uses could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} /> : null}
       <Text style={styles.captionText}>
         Rough sums for selling from an interest, or several together: what comes in a month, what is left after costs and money kept for tax, what that is per hour, and what to save before you start. Every number used is listed beside the result.
       </Text>

@@ -48,6 +48,8 @@ import { useFadingMessage } from '../hooks/useFadingMessage';
 import { AttachedFiles } from './AttachedFiles';
 import { ShowMoreButton, useShownPart } from './ShowMoreButton';
 import { OnlyInterestLine } from './OnlyInterestLine';
+import { saveOrSay } from '../lib/saveProblem';
+import { ReadProblem } from './ReadProblem';
 
 const NO_INTEREST = '__no_interest__';
 
@@ -109,9 +111,17 @@ export function InterestThingsSection({ kind, tabColor, onlyInterestId }: Props)
   const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
+  // A read that fails says so with Try again, never as an empty list (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    setInterests(await listInterests());
-    setThings(await listInterestThings());
+    setReadFailed(false);
+    try {
+      setInterests(await listInterests());
+      setThings(await listInterestThings());
+    } catch (error) {
+      console.warn('InterestThingsSection could not be read', error);
+      setReadFailed(true);
+    }
   }, []);
 
   useFocusEffect(
@@ -201,11 +211,18 @@ export function InterestThingsSection({ kind, tabColor, onlyInterestId }: Props)
     };
     const name = form.name.trim();
     if (form.id) {
-      await updateInterestThing(form.id, input);
+      const formId = form.id;
+      if (!(await saveOrSay('The item was not saved. Try again.', async () => {
+        await updateInterestThing(formId, input);
+        return true;
+      }))) return;
       setForm(null);
       await afterChange(`${name}: changed.`);
     } else {
-      await addInterestThing(input);
+      if (!(await saveOrSay('The item was not saved. Try again.', async () => {
+        await addInterestThing(input);
+        return true;
+      }))) return;
       setForm(null);
       await afterChange(`${name}: kept under ${nameOf(form.interestId)}.`);
     }
@@ -224,7 +241,10 @@ export function InterestThingsSection({ kind, tabColor, onlyInterestId }: Props)
           onPress: async () => {
             setConfirm(null);
             setOpenId(null);
-            await gotWish(thing.id, to);
+            if (!(await saveOrSay('The change was not saved. Try again.', async () => {
+              await gotWish(thing.id, to);
+              return true;
+            }))) return;
             await afterChange(describeGotIt(thing.name, to));
           },
         })),
@@ -235,7 +255,10 @@ export function InterestThingsSection({ kind, tabColor, onlyInterestId }: Props)
 
   async function retire(thing: InterestThing, retiredNow: boolean) {
     setOpenId(null);
-    await setInterestThingRetired(thing.id, retiredNow);
+    if (!(await saveOrSay('The change was not saved. Try again.', async () => {
+      await setInterestThingRetired(thing.id, retiredNow);
+      return true;
+    }))) return;
     await afterChange(retiredNow ? `${thing.name} is under No Longer Have It, with everything it had.` : `${thing.name} is back.`);
   }
 
@@ -253,7 +276,10 @@ export function InterestThingsSection({ kind, tabColor, onlyInterestId }: Props)
           onPress: async () => {
             setConfirm(null);
             setOpenId(null);
-            await deleteInterestThing(thing.id);
+            if (!(await saveOrSay('The item was not removed. Try again.', async () => {
+              await deleteInterestThing(thing.id);
+              return true;
+            }))) return;
             await afterChange(`${thing.name}: removed.`);
           },
         },
@@ -472,7 +498,9 @@ export function InterestThingsSection({ kind, tabColor, onlyInterestId }: Props)
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
       {onlyId ? <OnlyInterestLine name={nameOf(onlyId)} onShowEvery={() => setOnlyId(null)} /> : null}
-      {listed.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="What you keep for your interests could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : listed.length === 0 ? (
         <Text style={styles.captionText}>{EMPTY[kind]}</Text>
       ) : (
         listed

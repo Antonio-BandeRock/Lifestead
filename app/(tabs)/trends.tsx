@@ -23,6 +23,7 @@ import { PopoverSelect } from '../../components/PopoverSelect';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { CycleShadingContext, TrendLineChart } from '../../components/TrendLineChart';
 import { CompareTwoLens } from '../../components/CompareTwoLens';
+import { ReadProblem } from '../../components/ReadProblem';
 import { LifeInSquares } from '../../components/LifeInSquares';
 import { listAllCycleDays } from '../../lib/cycleDb';
 import type { CycleDay } from '../../lib/cycle';
@@ -887,7 +888,7 @@ const TRENDS_LENSES: LensOption<TrendsLens>[] = [
     help: [
       {
         heading: 'Pattern Finder',
-        body: "Looks at everything recorded before each flare or reaction you've logged, food and everything else: sleep, stress and other check-in tags, workouts, steps, doses, water and your trackers, and shows what turns up more than once. It also lists what you marked as going on at each flare, and symptoms that keep coming back outside what the app lists for what you marked in Profile. This is a count of what's already in your data, not a diagnosis. Something showing up before 2 flares is worth a look; it's not proof of anything on its own.",
+        body: "Looks at everything recorded before each flare or reaction you've logged, food and everything else: sleep, stress and other check-in tags, workouts, steps, doses, water and your trackers, and shows what turns up more than once. It also lists what you marked as going on at each flare, and symptoms that keep coming back outside what the app lists for what you marked in Profile. This is a count of what's already in your data, to look over with your doctor. Something showing up before 2 flares is worth a look; it's not proof of anything on its own.",
       },
       {
         heading: 'Condition scoring factors',
@@ -1093,7 +1094,7 @@ function renderWeekRows(weeks: WeekCount[], emptyLabel: string = 'not logged') {
     <View style={styles.weekRows}>
       {weeks.map((week) => (
         <View key={week.weekStart} style={styles.shareRow}>
-          <Text style={styles.shareLabel} numberOfLines={1}>
+          <Text style={styles.shareLabel}>
             {shortDate(week.weekStart)}
           </Text>
           <View style={styles.shareTrack}>
@@ -1106,7 +1107,7 @@ function renderWeekRows(weeks: WeekCount[], emptyLabel: string = 'not logged') {
               />
             )}
           </View>
-          <Text style={styles.weekValue} numberOfLines={1}>
+          <Text style={styles.weekValue}>
             {week.value === null ? emptyLabel : String(week.value)}
           </Text>
         </View>
@@ -1126,7 +1127,7 @@ function renderPeriodRows(rows: PeriodRow[]) {
     <View style={styles.weekRows}>
       {rows.map((row) => (
         <View key={row.key} style={styles.shareRow}>
-          <Text style={styles.shareLabel} numberOfLines={1}>
+          <Text style={styles.shareLabel}>
             {row.label}
           </Text>
           <View style={styles.shareTrack}>
@@ -1139,7 +1140,7 @@ function renderPeriodRows(rows: PeriodRow[]) {
               />
             )}
           </View>
-          <Text style={styles.weekValue} numberOfLines={1}>
+          <Text style={styles.weekValue}>
             {row.display}
           </Text>
         </View>
@@ -1159,7 +1160,7 @@ function renderAverageRows(rows: PeriodAverage[], format: (value: number) => str
     <View style={styles.averageRows}>
       {rows.map((row) => (
         <View key={row.key} style={styles.shareRow}>
-          <Text style={styles.shareLabel} numberOfLines={1}>
+          <Text style={styles.shareLabel}>
             {row.label}
           </Text>
           <View style={styles.shareTrack}>
@@ -1172,7 +1173,7 @@ function renderAverageRows(rows: PeriodAverage[], format: (value: number) => str
               />
             )}
           </View>
-          <Text style={styles.averageValue} numberOfLines={1}>
+          <Text style={styles.averageValue}>
             {periodValueText(row, format, unit)}
           </Text>
         </View>
@@ -1220,15 +1221,25 @@ export default function TrendsScreen() {
   // every visit, since a day logged in Signals should show on return.
   const [cycleDays, setCycleDays] = useState<CycleDay[]>([]);
   const [shadeCycle, setShadeCycle] = useState(false);
+  const [cycleReadFailed, setCycleReadFailed] = useState(false);
+  const [cycleRetry, setCycleRetry] = useState(0);
   // Changes as the vault opens or closes, so every load below reads again.
   const vaultKey = useVaultReloadKey();
   useFocusEffect(
     useCallback(() => {
-      listAllCycleDays().then(setCycleDays).catch(() => setCycleDays([]));
+      setCycleReadFailed(false);
+      listAllCycleDays()
+        .then(setCycleDays)
+        .catch((error) => {
+          // Only the shading is lost; the lens itself says if its own read fails.
+          console.warn('Cycle days for shading could not be read', error);
+          setCycleDays([]);
+          setCycleReadFailed(true);
+        });
       getVisualPreferences().then((prefs) => setShadeCycle(prefs.trendsCycleShading));
       return subscribeToVisualPreferences((prefs) => setShadeCycle(prefs.trendsCycleShading));
       // eslint-disable-next-line react-hooks/exhaustive-deps -- vaultKey reads again as the vault opens or closes
-    }, [vaultKey]),
+    }, [vaultKey, cycleRetry]),
   );
   const autoOpenLensHub = useAutoOpenLensHubSignal();
   const [lens, setLens] = useState<TrendsLens>('nutrients');
@@ -1342,6 +1353,7 @@ export default function TrendsScreen() {
   // 1.0.90.3: a read that fails says so, in place of Loading forever.
   const [loadFailed, setLoadFailed] = useState(false);
   const [labCodesWithResults, setLabCodesWithResults] = useState<{ testCode: string; count: number }[]>([]);
+  const [labCodesFailed, setLabCodesFailed] = useState(false);
 
   const [nutrientSeries, setNutrientSeries] = useState<NutrientTrendSeries | null>(null);
   const [sixDsSeries, setSixDsSeries] = useState<TrendPoint[] | null>(null);
@@ -1429,7 +1441,14 @@ export default function TrendsScreen() {
   useFocusEffect(
     useCallback(() => {
       getLabTests().then(setLabTests);
-      listLabTestCodesWithResults().then(setLabCodesWithResults).catch(() => setLabCodesWithResults([]));
+      setLabCodesFailed(false);
+      listLabTestCodesWithResults()
+        .then(setLabCodesWithResults)
+        .catch((error) => {
+          console.warn('Lab tests with results could not be read', error);
+          setLabCodesWithResults([]);
+          setLabCodesFailed(true);
+        });
       getStoredMeasurementSystem().then(setMeasurementSystem);
     }, []),
   );
@@ -1476,7 +1495,11 @@ export default function TrendsScreen() {
     if (isMoreLens(lens)) {
       loadTrendsMoreView(lens, days)
         .then(setMoreView)
-        .catch(() => setMoreView(null))
+        .catch((error) => {
+          console.warn('Trends lens could not be read', error);
+          setMoreView(null);
+          setLoadFailed(true);
+        })
         .finally(() => setLoading(false));
     } else if (lens === 'nutrients') {
       Promise.all([
@@ -1703,7 +1726,14 @@ export default function TrendsScreen() {
     const key = `${candidate.foodId}|${candidate.source}`;
     setStartingTrialKey(key);
     try {
-      const identity = await getFoodIdentity(candidate.foodId, candidate.source);
+      const identity = await getFoodIdentity(candidate.foodId, candidate.source).catch((error) => {
+        console.warn('Food identity could not be read', error);
+        return undefined;
+      });
+      if (identity === undefined) {
+        showInfoAlert('Could not start a test', 'This food could not be read just now. Try again.');
+        return;
+      }
       if (!identity) {
         showInfoAlert('Could not start a trial', "This food's reference entry could not be found.");
         return;
@@ -1742,7 +1772,10 @@ export default function TrendsScreen() {
     // rather than its full reference name with the preparation on the
     // end. baseName is exactly that; the name itself is the fallback
     // when the identity row cannot be read.
-    const identity = await getFoodIdentity(candidate.foodId, candidate.source);
+    const identity = await getFoodIdentity(candidate.foodId, candidate.source).catch((error) => {
+      console.warn('Food identity could not be read; the food name is used instead', error);
+      return null;
+    });
     const proposal = proposeFoodPatternRule({
       foodName: candidate.foodName,
       keyword: identity?.baseName ?? keywordFromFoodName(candidate.foodName),
@@ -1779,8 +1812,9 @@ export default function TrendsScreen() {
         linkLabel: ruleDraft.proposal.linkLabel,
       });
     } catch (error) {
+      console.warn('Personal rule was not saved', error);
       setSavingRule(false);
-      showInfoAlert('Could not save', error instanceof Error ? error.message : String(error));
+      showInfoAlert('Not saved', 'The rule was not saved. Try again.');
       return;
     }
     setSavingRule(false);
@@ -2095,6 +2129,11 @@ export default function TrendsScreen() {
               </View>
             )}
 
+            {cycleReadFailed && CYCLE_SHADED_LENSES.has(lens) ? (
+              <View style={band.box}>
+                <ReadProblem message="Your cycle days could not be read just now, so the chart cannot be shaded by cycle. Nothing you recorded is lost." onTryAgain={() => setCycleRetry((n) => n + 1)} />
+              </View>
+            ) : null}
             {offersCycleShading ? (
               <View ref={walkMark.ref('trends.cycle')} collapsable={false} style={[band.box, styles.shadeRow]}>
                 <View style={styles.patternRowText}>
@@ -2371,7 +2410,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{varietySummary.methodMix.headline}</Text>
                     {varietySummary.methodMix.shares.map((share) => (
                       <View key={share.method} style={styles.shareRow}>
-                        <Text style={styles.shareLabel} numberOfLines={1}>
+                        <Text style={styles.shareLabel}>
                           {share.method}
                         </Text>
                         <View style={styles.shareTrack}>
@@ -2385,7 +2424,7 @@ export default function TrendsScreen() {
                             ]}
                           />
                         </View>
-                        <Text style={styles.weekValue} numberOfLines={1}>{`${Math.round(share.share * 100)}%`}</Text>
+                        <Text style={styles.weekValue}>{`${Math.round(share.share * 100)}%`}</Text>
                       </View>
                     ))}
                     {varietySummary.methodMix.notSaidNote ? (
@@ -2403,7 +2442,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{varietySummary.packaged.headline}</Text>
                     {varietySummary.packaged.boughtShare !== null ? (
                       <View style={styles.shareRow}>
-                        <Text style={styles.shareLabel} numberOfLines={1}>
+                        <Text style={styles.shareLabel}>
                           Bought ready
                         </Text>
                         <View style={styles.shareTrack}>
@@ -2417,7 +2456,7 @@ export default function TrendsScreen() {
                             ]}
                           />
                         </View>
-                        <Text style={styles.weekValue} numberOfLines={1}>
+                        <Text style={styles.weekValue}>
                           {`${Math.round(varietySummary.packaged.boughtShare * 100)}%`}
                         </Text>
                       </View>
@@ -3631,6 +3670,19 @@ export default function TrendsScreen() {
                   placeholder="Pick a test..."
                   minWidth={220}
                 />
+                {labCodesFailed ? (
+                  <View style={band.box}>
+                    <ReadProblem message="Which tests have results could not be read just now. Nothing you recorded is lost." onTryAgain={() => {
+                      setLabCodesFailed(false);
+                      listLabTestCodesWithResults()
+                        .then(setLabCodesWithResults)
+                        .catch((error) => {
+                          console.warn('Lab tests with results could not be read', error);
+                          setLabCodesFailed(true);
+                        });
+                    }} />
+                  </View>
+                ) : null}
                 {!selectedTestCode ? (
                   <View style={band.boxMuted}>
                     <Text style={styles.loadingText}>Pick a test above to see its trend.</Text>
@@ -3957,7 +4009,10 @@ export default function TrendsScreen() {
                               setWeatherBusy(true);
                               setWeatherOn(true)
                                 .then(() => refreshWeather(patternResult.weather.rangeStart, new Date().toISOString().slice(0, 10)))
-                                .catch(() => null)
+                                .catch((error) => {
+                                  console.warn('Weather was not added', error);
+                                  showInfoAlert('Not added', 'The weather could not be added just now. Try again.');
+                                })
                                 .finally(() => {
                                   setWeatherBusy(false);
                                   setWeatherTick((n) => n + 1);
@@ -3988,7 +4043,10 @@ export default function TrendsScreen() {
                                     }
                                     await refreshWeather(patternResult.weather.rangeStart, new Date().toISOString().slice(0, 10));
                                   })
-                                  .catch(() => null)
+                                  .catch((error) => {
+                                    console.warn('Rough location or weather failed', error);
+                                    showInfoAlert('Not added', 'The location or the weather could not be read just now. Try again.');
+                                  })
                                   .finally(() => {
                                     setWeatherBusy(false);
                                     setWeatherTick((n) => n + 1);
@@ -4020,7 +4078,10 @@ export default function TrendsScreen() {
                             style={[styles.trialButton, { borderColor: colors.border }]}
                             onPress={() => {
                               setWeatherOn(false)
-                                .catch(() => null)
+                                .catch((error) => {
+                                  console.warn('Weather was not turned off', error);
+                                  showInfoAlert('Not saved', 'The weather was not turned off. Try again.');
+                                })
                                 .finally(() => setWeatherTick((n) => n + 1));
                             }}
                           >

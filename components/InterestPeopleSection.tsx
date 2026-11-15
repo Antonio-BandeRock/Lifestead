@@ -43,6 +43,8 @@ import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEX
 import { useFadingMessage } from '../hooks/useFadingMessage';
 import { ShowMoreButton, useShownPart } from './ShowMoreButton';
 import { OnlyInterestLine } from './OnlyInterestLine';
+import { saveOrSay } from '../lib/saveProblem';
+import { ReadProblem } from './ReadProblem';
 
 const NO_INTEREST = '__no_interest__';
 
@@ -71,9 +73,17 @@ export function InterestPeopleSection({ tabColor, onlyInterestId }: Props) {
   const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
+  // A read that fails says so with Try again, never as an empty list (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    setInterests(await listInterests());
-    setPeople(await listInterestPeople());
+    setReadFailed(false);
+    try {
+      setInterests(await listInterests());
+      setPeople(await listInterestPeople());
+    } catch (error) {
+      console.warn('InterestPeopleSection could not be read', error);
+      setReadFailed(true);
+    }
   }, []);
 
   useFocusEffect(
@@ -145,15 +155,29 @@ export function InterestPeopleSection({ tabColor, onlyInterestId }: Props) {
       about: form.about,
     };
     const name = form.name.trim();
-    if (form.id) await updateInterestPerson(form.id, input);
-    else await addInterestPerson(input);
+    if (form.id) {
+      const formId = form.id;
+      if (!(await saveOrSay('The person was not saved. Try again.', async () => {
+        await updateInterestPerson(formId, input);
+        return true;
+      }))) return;
+    }
+    else {
+      if (!(await saveOrSay('The person was not saved. Try again.', async () => {
+        await addInterestPerson(input);
+        return true;
+      }))) return;
+    }
     setForm(null);
     await afterChange(form.id ? `${name}: changed.` : `${name}: kept under ${nameOf(form.interestId)}.`);
   }
 
   async function retire(person: InterestPerson, retiredNow: boolean) {
     setOpenId(null);
-    await setInterestPersonRetired(person.id, retiredNow);
+    if (!(await saveOrSay('The change was not saved. Try again.', async () => {
+      await setInterestPersonRetired(person.id, retiredNow);
+      return true;
+    }))) return;
     await afterChange(
       retiredNow ? `${person.name} is under No Longer Part of It, with everything kept about them.` : `${person.name} is back.`,
     );
@@ -170,7 +194,10 @@ export function InterestPeopleSection({ tabColor, onlyInterestId }: Props) {
           onPress: async () => {
             setConfirm(null);
             setOpenId(null);
-            await deleteInterestPerson(person.id);
+            if (!(await saveOrSay('The person was not removed. Try again.', async () => {
+              await deleteInterestPerson(person.id);
+              return true;
+            }))) return;
             await afterChange(`${person.name}: removed.`);
           },
         },
@@ -372,7 +399,9 @@ export function InterestPeopleSection({ tabColor, onlyInterestId }: Props) {
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
       {onlyId ? <OnlyInterestLine name={nameOf(onlyId)} onShowEvery={() => setOnlyId(null)} /> : null}
-      {listed.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your people and places could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : listed.length === 0 ? (
         <Text style={styles.captionText}>Nobody here yet. Each person or place you add shows here under its interest.</Text>
       ) : (
         listed

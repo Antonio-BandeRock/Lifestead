@@ -682,14 +682,15 @@ export function LensHub<T extends string>({
   // -- shouldn't happen for a real tab, but cheaper than a crash if a
   // future page's title drifts out of sync.
   const tabRoute = TAB_ROUTES.find((route) => route.title === pageTitle);
-  // Spanish runs about a quarter longer than the English (2026-10-26), so in
-  // any language but English a label may take a second line rather than
-  // being cut off. The card already scrolls when its grid outgrows it.
+  // Every label may take a second line rather than being cut off, in every
+  // language: Spanish since 2026-10-26, English too since 1.0.91.1, when
+  // "New Foods & Experiments" was showing as "New Foods & Exp...". The card
+  // already scrolls when its grid outgrows it.
   const language = useLanguage();
   // A longer label is also broken on purpose at its most even space
   // (lib/labelSplit.ts), since one that fills its column on one line runs
   // into the label beside it.
-  const labelLines = language === 'en' ? itemLabelLines : Math.max(itemLabelLines, 2);
+  const labelLines = Math.max(itemLabelLines, 2);
   const tier = useTier();
   const tabIcon = icon ?? tabRoute?.icon ?? 'list';
   const tabColor = color ?? tabRoute?.color ?? colors.primary;
@@ -1083,9 +1084,9 @@ export function LensHub<T extends string>({
                           ellipsizeMode="tail"
                           maxFontSizeMultiplier={MENU_MAX_FONT_SCALE}
                         >
-                          {language === 'en'
-                            ? option.gridLabel ?? option.label
-                            : splitLabelEvenly(translateIn(language, option.gridLabel ?? option.label))}
+                          {splitLabelEvenly(
+                            language === 'en' ? option.gridLabel ?? option.label : translateIn(language, option.gridLabel ?? option.label),
+                          )}
                         </Text>
                       </TouchableOpacity>
                     </Fragment>
@@ -1464,8 +1465,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  // 2 columns -- wide enough that even this app's longest lens labels
-  // ("Cooking & Prep", "Prescriptions", "Food Reactions") sit on one line.
+  // A label longer than its column takes a second line, split evenly
+  // (lib/labelSplit.ts), in every language.
   // width: '50%' here is only ever a fallback -- every real usage overrides
   // it inline with itemWidthPercent (100 / gridColumns), so the grid's own
   // column count can vary per page and with the card's width (see the

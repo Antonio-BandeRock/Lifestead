@@ -75,7 +75,7 @@ export function GeneralHealthAdvisories({
           onPress={() => onExplain(match.title, match.message)}
         >
           <Ionicons name="information-circle-outline" size={16} color={tabColor} />
-          <Text style={[styles.text, { color: tabColor }]} numberOfLines={1}>
+          <Text style={[styles.text, { color: tabColor }]}>
             {match.title} (tap to learn more)
           </Text>
         </TouchableOpacity>

@@ -243,7 +243,7 @@ const PROJECTS_HELP: HelpSection[] = [
 const LANGUAGES_HELP: HelpSection[] = [
   {
     heading: 'What this is for',
-    body: 'The basics of a language: what to learn first so the rest gets easier. A set has 26 plainly named units in the order they should be learned, and each unit is divided into small decks.',
+    body: 'The basics of a language, set out so each part makes the next one easier. A set has 26 plainly named units in learning order, and each unit is divided into small decks.',
   },
   {
     heading: 'How to use it',

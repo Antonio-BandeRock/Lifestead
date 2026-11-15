@@ -277,7 +277,10 @@ export default function ReportsScreen() {
   function chooseSections(next: ReportSectionId[]) {
     const clean = cleanLeftOut(lens, next);
     setLeftOut(clean);
-    setReportLeftOut(lens, clean).catch((error: unknown) => console.warn('[reports] could not keep the section choice', error));
+    setReportLeftOut(lens, clean).catch((error: unknown) => {
+      console.warn('[reports] could not keep the section choice', error);
+      showInfoAlert('Not saved', 'Which sections this report leaves out was not kept for next time. Try again.');
+    });
   }
 
   function noteSent(how: ReportSentHow) {
@@ -289,7 +292,10 @@ export default function ReportsScreen() {
         setAskForId(id);
         setHistoryKey((key) => key + 1);
       })
-      .catch((error: unknown) => console.warn('[reports] could not keep the report in history', error));
+      .catch((error: unknown) => {
+        console.warn('[reports] could not keep the report in history', error);
+        showInfoAlert('Not saved', 'The report was sent, but it was not added to the list of reports you have sent.');
+      });
   }
 
   function makeAgain(entry: ReportHistoryEntry) {
@@ -300,7 +306,10 @@ export default function ReportsScreen() {
       setLens(kind.key);
       setLeftOut(again);
       setLeftOutFor(kind.key);
-      setReportLeftOut(kind.key, again).catch((error: unknown) => console.warn('[reports] could not keep the section choice', error));
+      setReportLeftOut(kind.key, again).catch((error: unknown) => {
+        console.warn('[reports] could not keep the section choice', error);
+        showInfoAlert('Not saved', 'Which sections this report leaves out was not kept for next time. Try again.');
+      });
     }
     const again = againRange(entry, localDateString(new Date()));
     if (again.rangeKey === 'custom' && again.customStart) {

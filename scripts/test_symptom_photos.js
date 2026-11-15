@@ -23,6 +23,17 @@ const { outputText } = ts.transpileModule(source, {
 });
 const mod = { exports: {} };
 new Function('exports', 'module', 'require', outputText)(mod.exports, mod, (name) => {
+  // ingredientShortName is pure and import-free itself.
+  if (name === './ingredientShortName') {
+    const short = ts.transpileModule(fs.readFileSync(path.join(__dirname, '..', 'lib', 'ingredientShortName.ts'), 'utf8'), {
+      compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
+    }).outputText;
+    const shortMod = { exports: {} };
+    new Function('exports', 'module', 'require', short)(shortMod.exports, shortMod, () => {
+      throw new Error('lib/ingredientShortName.ts must stay free of imports');
+    });
+    return shortMod.exports;
+  }
   throw new Error('lib/symptomPhotos.ts must stay free of imports (asked for ' + name + ')');
 });
 const P = mod.exports;

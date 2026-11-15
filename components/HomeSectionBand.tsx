@@ -251,13 +251,13 @@ export function HomeSectionBand(props: FoldProps | ActionProps | StaticProps) {
           {glyph}
           {props.caption ? (
             <View style={styles.titleColumn}>
-              <Text style={[styles.title, { color: textColor }]} numberOfLines={1}>
+              <Text style={[styles.title, { color: textColor }]}>
                 {title}
               </Text>
               <Text style={styles.caption}>{props.caption}</Text>
             </View>
           ) : (
-            <Text style={[styles.title, { color: textColor }]} numberOfLines={1}>
+            <Text style={[styles.title, { color: textColor }]}>
               {title}
             </Text>
           )}
@@ -274,7 +274,7 @@ export function HomeSectionBand(props: FoldProps | ActionProps | StaticProps) {
       <View style={bandStyle}>
         <View style={styles.header} accessibilityRole="header">
           {glyph}
-          <Text style={[styles.title, { color: textColor }]} numberOfLines={1}>
+          <Text style={[styles.title, { color: textColor }]}>
             {title}
           </Text>
         </View>
@@ -301,13 +301,13 @@ export function HomeSectionBand(props: FoldProps | ActionProps | StaticProps) {
         {glyph}
         {!expanded && props.foldedCaption ? (
           <View style={styles.titleColumn}>
-            <Text style={[styles.title, { color: textColor }]} numberOfLines={1}>
+            <Text style={[styles.title, { color: textColor }]}>
               {title}
             </Text>
             <Text style={styles.caption}>{props.foldedCaption}</Text>
           </View>
         ) : (
-          <Text style={[styles.title, { color: textColor }]} numberOfLines={1}>
+          <Text style={[styles.title, { color: textColor }]}>
             {title}
           </Text>
         )}

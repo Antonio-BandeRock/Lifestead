@@ -43,6 +43,7 @@ import {
 } from '../lib/tagMarks';
 import { CompareTwoChart } from './CompareTwoChart';
 import { PopoverSelect } from './PopoverSelect';
+import { ReadProblem } from './ReadProblem';
 import { useTabBandStyles, TabBand } from './TabBand';
 import { useWalkMark } from './WalkMark';
 import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
@@ -74,6 +75,9 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
   const [end] = useState(todayString);
   const [tags, setTags] = useState<{ days: number; rows: TagMarkRow[] } | null>(null);
   const [pickedTags, setPickedTags] = useState<string[]>([]);
+  // A read that fails says so with Try again, never as an empty chart (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
+  const [retry, setRetry] = useState(0);
 
   useEffect(() => {
     if (initialA) setKeyA(initialA);
@@ -82,17 +86,24 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
   useFocusEffect(
     useCallback(() => {
       let live = true;
+      setReadFailed(false);
       loadCompareChoices(weightUnit)
         .then((loaded) => {
           if (live) setChoices(loaded);
         })
-        .catch(() => {
-          if (live) setChoices([]);
+        .catch((error) => {
+          console.warn('Compare Two could not read its choices', error);
+          if (live) {
+            setChoices([]);
+            setReadFailed(true);
+          }
         });
       return () => {
         live = false;
       };
-    }, [weightUnit]),
+      // retry is only here so Try again reads once more.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [weightUnit, retry]),
   );
 
   useEffect(() => {
@@ -102,13 +113,17 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
       .then((keys) => {
         if (live) setWithData({ days, keys });
       })
-      .catch(() => {
-        if (live) setWithData({ days, keys: new Set() });
+      .catch((error) => {
+        console.warn('Compare Two could not read which series have readings', error);
+        if (live) {
+          setWithData({ days, keys: new Set() });
+          setReadFailed(true);
+        }
       });
     return () => {
       live = false;
     };
-  }, [choices, end, days]);
+  }, [choices, end, days, retry]);
 
   useEffect(() => {
     let live = true;
@@ -152,15 +167,19 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
       .then(([a, b]) => {
         if (live) setPoints({ key: loadKey, a, b });
       })
-      .catch(() => {
-        if (live) setPoints({ key: loadKey, a: [], b: [] });
+      .catch((error) => {
+        console.warn('Compare Two could not read the two series', error);
+        if (live) {
+          setPoints({ key: loadKey, a: [], b: [] });
+          setReadFailed(true);
+        }
       });
     return () => {
       live = false;
     };
     // choiceA and choiceB are found again from loadKey on every render.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadKey, end]);
+  }, [loadKey, end, retry]);
 
   const comparison = useMemo(() => {
     if (!choiceA || !choiceB || !points || points.key !== loadKey) return null;
@@ -215,6 +234,11 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
 
   return (
     <>
+      {readFailed ? (
+        <View style={band.box}>
+          <ReadProblem message="What you recorded could not be read just now, so the comparison may be missing readings. Nothing you recorded is lost." onTryAgain={() => setRetry((n) => n + 1)} />
+        </View>
+      ) : null}
       <View style={band.box}>
         <Text style={styles.label}>First, read off the left scale</Text>
         <PopoverSelect

@@ -2084,7 +2084,7 @@ export function BeverageBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes', recipesFrom: 'beverageBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   My Recipes (your saved beverages)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />
@@ -2094,7 +2094,7 @@ export function BeverageBuilder({
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes', recipesFrom: 'beverageBuilder' } })}
               >
-                <Text style={styles.findRecipeLinkText} numberOfLines={1}>
+                <Text style={styles.findRecipeLinkText}>
                   System Recipes (built into the app)
                 </Text>
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />

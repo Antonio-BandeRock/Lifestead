@@ -25,6 +25,8 @@ import { AppTextInput } from './AppTextInput';
 import { useConfirmSheet } from './ConfirmSheet';
 import { useTabBandStyles } from './TabBand';
 import { useWalkMark } from './WalkMark';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
 
 const SHOWN_AT_FIRST = 10;
@@ -46,13 +48,16 @@ export function ReportHistoryBand({ tabColor, refreshKey, askForId, onMakeAgain 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState('');
   const [confirm, confirmElement] = useConfirmSheet();
+  const [readFailed, setReadFailed] = useState(false);
 
   const reload = useCallback(() => {
+    setReadFailed(false);
     listReportHistory()
       .then(setEntries)
       .catch((error: unknown) => {
         console.warn('[reports] could not read report history', error);
         setEntries([]);
+        setReadFailed(true);
       });
   }, []);
 
@@ -71,7 +76,10 @@ export function ReportHistoryBand({ tabColor, refreshKey, askForId, onMakeAgain 
   }
 
   async function saveName(id: string, name: string | null) {
-    await setReportForWhom(id, name);
+    if (!(await saveOrSay('Who it was for was not saved. Try again.', async () => {
+      await setReportForWhom(id, name);
+      return true;
+    }))) return;
     setEditingId(null);
     reload();
   }
@@ -84,7 +92,10 @@ export function ReportHistoryBand({ tabColor, refreshKey, askForId, onMakeAgain 
       destructive: true,
     });
     if (!ok) return;
-    await removeReportHistory(entry.id);
+    if (!(await saveOrSay('The line was not removed. Try again.', async () => {
+      await removeReportHistory(entry.id);
+      return true;
+    }))) return;
     if (editingId === entry.id) setEditingId(null);
     reload();
   }
@@ -97,7 +108,11 @@ export function ReportHistoryBand({ tabColor, refreshKey, askForId, onMakeAgain 
   return (
     <View style={band.box}>
       <Text style={styles.heading}>{REPORT_HISTORY_HEADING}</Text>
-      <Text style={styles.caption}>{list.length > 0 ? REPORT_HISTORY_CAPTION : REPORT_HISTORY_EMPTY}</Text>
+      {readFailed ? (
+        <ReadProblem message="The reports you have sent could not be read just now. Nothing you recorded is lost." onTryAgain={reload} />
+      ) : (
+        <Text style={styles.caption}>{list.length > 0 ? REPORT_HISTORY_CAPTION : REPORT_HISTORY_EMPTY}</Text>
+      )}
       {shown.map((entry) => (
         <View key={entry.id} style={styles.row}>
           <Text style={styles.title}>{historyTitle(entry, kindLabel(entry.kind))}</Text>

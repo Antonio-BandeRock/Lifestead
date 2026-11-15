@@ -594,7 +594,7 @@ export function DaysUntilSection({
           <Text style={styles.linkText}>
             {heldBack > 0
               ? t('{count} more running, and every counter, on {where}', { count: heldBack, where: tl(seeAllWhere) })
-              : `Every counter, finished ones too, on ${seeAllWhere}`}
+              : t('Every counter, finished ones too, on {seeAllWhere}', { seeAllWhere: tl(seeAllWhere) })}
           </Text>
         </TouchableOpacity>
       ) : null}

@@ -589,6 +589,7 @@ export type ToolMark =
   | 'garden.onHand'
   | 'garden.yield'
   | 'garden.addTask'
+  | 'garden.taskSeries'
   | 'garden.taskDone'
   | 'garden.taskChange'
   | 'garden.taskDelete'
@@ -5490,6 +5491,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Only that one day changes. A repeating task keeps its other days as they were.',
     },
     {
+      key: 'changeSeries',
+      title: 'Change how a garden task repeats',
+      steps: [
+        { say: 'Tap Change under a repeating task.', mark: 'garden.taskChange' },
+        { say: 'Tap This day and every one after.', mark: 'garden.taskSeries' },
+        { say: 'Change the words, the time or how often it repeats.' },
+        { say: 'Tap Save Change.', mark: 'garden.addTask' },
+      ],
+      forYou: 'That day and every one after it follow the new pattern. Earlier days and days already done stay as they were.',
+    },
+    {
       key: 'delete',
       title: 'Delete a garden task',
       steps: [
@@ -6491,7 +6503,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
   }),
   '/reports#r-keeping': reportHowTos({
     name: 'the keeping up report',
-    holds: 'Did I Do It checks, routines started and finished, and things captured and sorted over the range. Nothing in it scores anybody.',
+    holds: 'Checklist checks, routines started and finished, and things captured and sorted over the range. Nothing in it scores anybody.',
   }),
   '/reports#r-interests': reportHowTos({
     name: 'the interests and projects report',

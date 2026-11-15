@@ -1707,10 +1707,10 @@ export function FoodLookup({
                     style={styles.voiceFoodResultRow}
                     onPress={() => selectGlobalMatch(match)}
                   >
-                    <Text style={styles.voiceFoodResultText} numberOfLines={1}>
+                    <Text style={styles.voiceFoodResultText}>
                       {match.baseName}
                     </Text>
-                    <Text style={styles.voiceFoodResultMeta} numberOfLines={1}>
+                    <Text style={styles.voiceFoodResultMeta}>
                       {categoryLabel(match.category)}
                       {match.subcategory ? ` · ${match.subcategory}` : ''}
                     </Text>
@@ -1752,7 +1752,7 @@ export function FoodLookup({
               style={[styles.summaryRow, { borderColor: tabColor }, squareTop && styles.squareTop]}
               onPress={() => setRichNutrientCode(null)}
             >
-              <Text style={styles.summaryText} numberOfLines={1}>
+              <Text style={styles.summaryText}>
                 {richNutrient.displayName}
               </Text>
               <Text style={[styles.summaryChange, { color: tabColor }]}>Change</Text>
@@ -1931,7 +1931,7 @@ export function FoodLookup({
             style={[styles.summaryRow, { borderColor: tabColor }, squareTop && styles.squareTop]}
             onPress={changeCategory}
           >
-            <Text style={styles.summaryText} numberOfLines={1}>
+            <Text style={styles.summaryText}>
               {categoryLabel(category)}
             </Text>
             <Text style={[styles.summaryChange, { color: tabColor }]}>Change</Text>
@@ -1953,7 +1953,7 @@ export function FoodLookup({
             />
           ) : (
             <TouchableOpacity style={[styles.summaryRow, { borderColor: tabColor }]} onPress={changeSubcategory}>
-              <Text style={styles.summaryText} numberOfLines={1}>
+              <Text style={styles.summaryText}>
                 {subcategory}
               </Text>
               <Text style={[styles.summaryChange, { color: tabColor }]}>Change</Text>
@@ -1978,7 +1978,7 @@ export function FoodLookup({
             />
           ) : (
             <TouchableOpacity style={[styles.summaryRow, { borderColor: tabColor }]} onPress={changeBaseName}>
-              <Text style={styles.summaryText} numberOfLines={1}>
+              <Text style={styles.summaryText}>
                 {baseName}
               </Text>
               <Text style={[styles.summaryChange, { color: tabColor }]}>Change</Text>
@@ -2000,7 +2000,7 @@ export function FoodLookup({
             />
           ) : (
             <TouchableOpacity style={[styles.summaryRow, { borderColor: tabColor }]} onPress={() => setPrepMethod(null)}>
-              <Text style={styles.summaryText} numberOfLines={1}>
+              <Text style={styles.summaryText}>
                 {prepMethod}
               </Text>
               <Text style={[styles.summaryChange, { color: tabColor }]}>Change</Text>
@@ -2159,7 +2159,7 @@ export function FoodLookup({
                 const caution = personalEvaluation.conditionCautions[condition.code];
                 return (
                   <View key={condition.code} style={styles.personalConditionRow}>
-                    <Text style={styles.personalConditionName} numberOfLines={1}>
+                    <Text style={styles.personalConditionName}>
                       {condition.name}
                     </Text>
                     <View style={[styles.personalVerdictPill, { backgroundColor: verdict.color }]}>

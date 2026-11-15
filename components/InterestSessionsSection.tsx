@@ -51,6 +51,8 @@ import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { useFadingMessage } from '../hooks/useFadingMessage';
 import { t } from '../lib/i18n';
+import { saveOrSay } from '../lib/saveProblem';
+import { ReadProblem } from './ReadProblem';
 
 const NO_PROJECT = '__no_project__';
 const NO_INTEREST = '__no_interest__';
@@ -105,10 +107,18 @@ export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm 
     if (onlyInterestId) setFilterId(onlyInterestId);
   }, [onlyInterestId]);
 
+  // A read that fails says so with Try again, never as an empty list (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    setInterests(await listInterests());
-    setProjects(await listProjects('everything'));
-    setSessions(await listInterestSessions());
+    setReadFailed(false);
+    try {
+      setInterests(await listInterests());
+      setProjects(await listProjects('everything'));
+      setSessions(await listInterestSessions());
+    } catch (error) {
+      console.warn('InterestSessionsSection could not be read', error);
+      setReadFailed(true);
+    }
   }, []);
 
   useFocusEffect(
@@ -202,7 +212,9 @@ export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm 
     }
     const name = nameOf(form.interestId);
     if (form.mode === 'timer') {
-      const timerId = await startInterestTimer(form.interestId, form.projectId);
+      const interestId = form.interestId;
+      const timerId = await saveOrSay('The timer was not started. Try again.', () => startInterestTimer(interestId, form.projectId));
+      if (timerId === undefined) return;
       void showInterestTimerNotice({ id: timerId, startedAt: new Date().toISOString(), createdAt: new Date().toISOString() }, name);
       setForm(null);
       setStopping({ note: '', leftOff: '' });
@@ -228,11 +240,18 @@ export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm 
       leftOff: form.leftOff,
     };
     if (form.id) {
-      await updateInterestSession(form.id, input);
+      const formId = form.id;
+      if (!(await saveOrSay('The session was not saved. Try again.', async () => {
+        await updateInterestSession(formId, input);
+        return true;
+      }))) return;
       setForm(null);
       await afterChange(`${name}: session changed.`);
     } else {
-      await addInterestSession(input);
+      if (!(await saveOrSay('The session was not saved. Try again.', async () => {
+        await addInterestSession(input);
+        return true;
+      }))) return;
       setForm(null);
       await afterChange(length.minutes === null ? `${name}: session kept.` : `${name}: ${formatMinutes(length.minutes)} kept.`);
     }
@@ -241,7 +260,8 @@ export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm 
   async function stopTimer() {
     if (!running) return;
     const name = nameOf(running.interestId);
-    const minutes = await stopInterestTimer(running.id, stopping);
+    const minutes = await saveOrSay('The timer was not stopped. Try again.', () => stopInterestTimer(running.id, stopping));
+    if (minutes === undefined) return;
     void clearInterestTimerNotice(running.id);
     setStopping({ note: '', leftOff: '' });
     await afterChange(`${name}: ${formatMinutes(minutes)} kept.`);
@@ -258,7 +278,10 @@ export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm 
           destructive: true,
           onPress: async () => {
             setConfirm(null);
-            await discardInterestTimer(running.id);
+            if (!(await saveOrSay('The timer was not thrown away. Try again.', async () => {
+              await discardInterestTimer(running.id);
+              return true;
+            }))) return;
             void clearInterestTimerNotice(running.id);
             await afterChange('Timer thrown away.');
           },
@@ -279,7 +302,10 @@ export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm 
           onPress: async () => {
             setConfirm(null);
             setOpenId(null);
-            await deleteInterestSession(session.id);
+            if (!(await saveOrSay('The session was not removed. Try again.', async () => {
+              await deleteInterestSession(session.id);
+              return true;
+            }))) return;
             await afterChange('Session removed.');
           },
         },
@@ -308,7 +334,10 @@ export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm 
       setPracticeError(TIME_HELP);
       return;
     }
-    await setInterestPractice(practice.interestId, practice.days, time);
+    if (!(await saveOrSay('The practice time was not saved. Try again.', async () => {
+      await setInterestPractice(practice.interestId, practice.days, time);
+      return true;
+    }))) return;
     const name = nameOf(practice.interestId);
     setPractice(null);
     await syncReminderNotifications();
@@ -318,7 +347,10 @@ export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm 
   async function turnOffPractice() {
     if (!practice) return;
     const name = nameOf(practice.interestId);
-    await setInterestPractice(practice.interestId, [], null);
+    if (!(await saveOrSay('The practice time was not saved. Try again.', async () => {
+      await setInterestPractice(practice.interestId, [], null);
+      return true;
+    }))) return;
     setPractice(null);
     await syncReminderNotifications();
     await afterChange(`${name}: no practice time.`);
@@ -608,7 +640,9 @@ export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm 
         </View>
       ) : null}
 
-      {months.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your sessions could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : months.length === 0 ? (
         <Text style={styles.captionText}>
           {filterId !== null && sessions.some((session) => !session.running) ? t('No sessions kept for {name} yet.', { name: nameOf(filterId) }) : 'No sessions yet. Each one you keep shows here by month.'}
         </Text>

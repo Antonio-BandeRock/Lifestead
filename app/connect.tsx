@@ -433,7 +433,7 @@ export default function ConnectScreen() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.background },
-  body: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32, gap: 12 },
+  body: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingVertical: 32, paddingHorizontal: 16, gap: 12 },
   title: { ...typography.sectionTitle, color: colors.textPrimary, textAlign: 'center', ...textShadow },
   text: { ...typography.body, color: colors.textSecondary, textAlign: 'center', ...textShadow },
   fingerprintBox: {

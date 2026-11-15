@@ -1,3 +1,5 @@
+// eslint-config-expo lints this repo as app code, which has no Node globals.
+/* global __dirname */
 // Runs lib/qrLayout.ts and the invite round trip that travels through it.
 //
 // Built 2026-09-06, after a deep link and then a .is file each failed to reach
@@ -225,7 +227,11 @@ for (const [label, invite] of [
   const code = encodeInviteCode(invite);
   const scanned = parseInviteInput(code);
   ok(`${label}: a scanned code is accepted`, scanned !== null);
-  check(`${label}: the invite survives the round trip`, sortedKeys(decodeConnectionInvite(scanned)), sortedKeys(invite));
+  // The decoder fills in every sharing switch an invite does not name as off
+  // (meds, emergency card, appointments and money start off until switched on).
+  const decoded = decodeConnectionInvite(scanned);
+  const allOff = Object.fromEntries(Object.keys(decoded?.grants ?? {}).map((key) => [key, false]));
+  check(`${label}: the invite survives the round trip`, sortedKeys(decoded), sortedKeys({ ...invite, grants: { ...allOff, ...invite.grants } }));
 }
 
 // A scanner hands back exactly the string in the code, so the bare code is the

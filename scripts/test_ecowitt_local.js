@@ -35,6 +35,9 @@ function load(relPath) {
   cache[relPath] = module;
   const dir = path.dirname(relPath);
   new Function('exports', 'module', 'require', outputText)(module.exports, module, (name) => {
+    // lib/databaseActivity.ts asks the vault (lib/vaultState.ts) before each
+    // read and write; the vault stays off here, so nothing is refused.
+    if (name === './vaultState') return { vaultRefusalNow: () => null, noteVaultRecordWritten: () => {} };
     if (!name.startsWith('.')) throw new Error(`unexpected import ${name}`);
     return load(path.posix.join(dir, name) + '.ts');
   });

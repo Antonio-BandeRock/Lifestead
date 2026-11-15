@@ -1118,10 +1118,10 @@ export function FindMealView({
                 <View key={key} style={[styles.rowWrap, styles.row]}>
                   <Ionicons name="checkbox" size={18} color={colors.accent} style={textShadow} />
                   <View style={styles.rowTextWrap}>
-                    <Text style={styles.rowName} numberOfLines={1}>
+                    <Text style={styles.rowName}>
                       {dish.name}
                     </Text>
-                    <Text style={styles.rowMeta} numberOfLines={1}>
+                    <Text style={styles.rowMeta}>
                       {`From ${dish.from}`}
                     </Text>
                   </View>
@@ -1206,7 +1206,7 @@ export function FindMealView({
                       <Text style={styles.rowName} numberOfLines={2}>
                         {item.meal.name}
                       </Text>
-                      <Text style={styles.rowMeta} numberOfLines={1}>
+                      <Text style={styles.rowMeta}>
                         {describeMeal(item.meal)}
                       </Text>
                       {/* The enticement, the Digest's own line for this
@@ -1266,7 +1266,7 @@ export function FindMealView({
                                     }
                                   >
                                     <Ionicons name={isTicked ? 'checkbox' : 'square-outline'} size={20} color={colors.accent} />
-                                    <Text style={styles.dishRowName} numberOfLines={1}>
+                                    <Text style={styles.dishRowName}>
                                       {dish.name}
                                     </Text>
                                   </TouchableOpacity>

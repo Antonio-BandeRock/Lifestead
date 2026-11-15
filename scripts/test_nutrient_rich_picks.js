@@ -28,6 +28,8 @@ function loadModule(relPath, deps = {}) {
   const module = { exports: {} };
   new Function('exports', 'module', 'require', outputText)(module.exports, module, (name) => {
     if (deps[name]) return deps[name];
+    // Pure and import-free itself; borrowed for short ingredient names.
+    if (name === './ingredientShortName') return loadModule('lib/ingredientShortName.ts');
     throw new Error(`unexpected import ${name}`);
   });
   return module.exports;

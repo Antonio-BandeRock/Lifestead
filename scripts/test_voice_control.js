@@ -53,7 +53,8 @@ check('lens on another tab', t.resolveVoiceCommand('Open Horticulture', home), {
 check('lens on another tab, said bare', t.resolveVoiceCommand('Horticulture', home), { kind: 'elsewhere', ids: ['/garden|horticulture'] });
 check('a tab beats a lens elsewhere', t.resolveVoiceCommand('Go to Garden', home), { kind: 'tab', id: 'Garden#7' });
 const twice = t.resolveVoiceCommand('open days until', home);
-check('same name on two tabs comes back as a choice', twice.kind === 'elsewhere' && twice.ids.length === 2, true);
+// Days Until is on Garden, Interests and Life.
+check('same name on several tabs comes back as a choice', twice.kind === 'elsewhere' && twice.ids.length === 3, true);
 check('naming the tab settles it', t.resolveVoiceCommand('open days until on life', home), { kind: 'elsewhere', ids: ['/life|daysUntil'] });
 check('this tab first', t.resolveVoiceCommand('Open Days Until', { ...screen, currentTab: 'Garden', elsewhere }), { kind: 'lens', id: 'Days Until#3' });
 check('a button here beats a lens elsewhere', t.resolveVoiceCommand('Save', home), { kind: 'press', ids: ['Save#0'] });

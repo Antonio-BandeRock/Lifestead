@@ -165,7 +165,7 @@ export function TesterWelcome({ showHeading = false }: Props) {
           {okState.renewSoon ? (
             <View style={styles.buttonRow}>
               <TouchableOpacity
-                ref={walkMark.ref("tester.renew")}
+                ref={walkMark.ref('tester.renew')}
                 style={styles.primaryButton}
                 activeOpacity={0.8}
                 onPress={() => void askToRenew()}
@@ -199,7 +199,7 @@ export function TesterWelcome({ showHeading = false }: Props) {
           </Text>
           <View style={styles.buttonRow}>
             <TouchableOpacity
-              ref={walkMark.ref("tester.installer")}
+              ref={walkMark.ref('tester.installer')}
               style={styles.primaryButton}
               activeOpacity={0.8}
               onPress={openInstaller}
@@ -253,7 +253,7 @@ export function TesterWelcome({ showHeading = false }: Props) {
       </Text>
       <View style={styles.buttonRow}>
         <TouchableOpacity
-          ref={walkMark.ref("tester.report")}
+          ref={walkMark.ref('tester.report')}
           style={styles.button}
           activeOpacity={0.8}
           onPress={() => openReportProblem({})}
@@ -264,7 +264,7 @@ export function TesterWelcome({ showHeading = false }: Props) {
         </TouchableOpacity>
         {updatedSinceInstall ? (
           <TouchableOpacity
-            ref={walkMark.ref("tester.whatChanged")}
+            ref={walkMark.ref('tester.whatChanged')}
             style={styles.button}
             activeOpacity={0.8}
             onPress={showWhatChanged}

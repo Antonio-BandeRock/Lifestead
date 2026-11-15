@@ -189,7 +189,7 @@ check('recordTrialStep replaces the check-ins', record.includes('cancelFoodTrial
 check('recordTrialStep records a step once', record.includes('if (existing) return;'));
 const del = db.slice(db.indexOf('export async function deleteFoodTrial'), db.indexOf('export async function deleteFoodTrial') + 600);
 check('deleting a trial removes its steps', del.includes('DELETE FROM trial_steps WHERE trial_id = ?'));
-check('every trial SELECT reads the step columns', (db.match(/subject_kind AS subjectKind,\n\s+step_days AS stepDays/g) || []).length === 3);
+check('every trial SELECT reads the step columns', (db.match(/subject_kind AS subjectKind,\r?\n\s+step_days AS stepDays/g) || []).length === 3);
 
 check('trial_steps is personal health', /'trial_steps',/.test(peers));
 check('snapshot changes quiet on steps', changes.includes("quiet: ['food_trial_task_links', 'trial_steps']"));

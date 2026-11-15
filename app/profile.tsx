@@ -1081,7 +1081,7 @@ export default function ProfileScreen() {
     return (
       <TouchableOpacity ref={(node) => { headerRef(`card:${key}`)(node); walkMark.ref(`profile.${key}` as WalkMark)(node); }} style={[styles.cardHeaderRow, styles.cardHeaderRowTop, walkMark(`profile.${key}` as WalkMark)]} onPress={() => toggleSection(key)} activeOpacity={0.7}>
         <Ionicons name={PROFILE_CARD_ICONS[key]} size={16} color={colors.tabProfile} style={textShadow} />
-        <Text style={styles.cardTitle} numberOfLines={1}>{title}</Text>
+        <Text style={styles.cardTitle}>{title}</Text>
         <Ionicons name={collapsed ? 'chevron-down' : 'chevron-up'} size={18} color={colors.tabProfile} style={textShadow} />
       </TouchableOpacity>
     );
@@ -1120,7 +1120,7 @@ export default function ProfileScreen() {
         accessibilityState={{ expanded: !collapsed }}
       >
         <Ionicons name={PROFILE_GROUP_ICONS[title] ?? 'ellipse-outline'} size={16} color={colors.tabProfile} style={textShadow} />
-        <Text style={styles.groupHeadingText} numberOfLines={1}>{title}</Text>
+        <Text style={styles.groupHeadingText}>{title}</Text>
         <Ionicons name={collapsed ? 'chevron-down' : 'chevron-up'} size={18} color={colors.tabProfile} style={textShadow} />
       </TouchableOpacity>
     );
@@ -1158,7 +1158,7 @@ export default function ProfileScreen() {
         onPress={() => toggleIconGroup(key)}
         activeOpacity={0.7}
       >
-        <Text style={styles.subsectionTitle} numberOfLines={1}>{title}</Text>
+        <Text style={styles.subsectionTitle}>{title}</Text>
         <Ionicons name={collapsed ? 'chevron-down' : 'chevron-up'} size={16} color={colors.menuIconMuted} />
       </TouchableOpacity>
     );
@@ -1198,7 +1198,7 @@ export default function ProfileScreen() {
         onPress={() => toggleAppearanceSubsection(key)}
         activeOpacity={0.7}
       >
-        <Text style={styles.subsectionTitle} numberOfLines={1}>{title}</Text>
+        <Text style={styles.subsectionTitle}>{title}</Text>
         <Ionicons name={collapsed ? 'chevron-down' : 'chevron-up'} size={17} color={colors.menuIconMuted} />
       </TouchableOpacity>
     );

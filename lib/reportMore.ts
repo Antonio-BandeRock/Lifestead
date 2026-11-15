@@ -459,7 +459,7 @@ export function keepingUpSections(summary: KeepingUpSummary | null): ReportSecti
       heading: 'Did I Do It',
       note: [checks.gapNote, checks.caveat].filter(Boolean).join(' ') || undefined,
       rows: checks.hasChecks ? [checks.headline, ...checks.standings.map((standing) => `${standing.name}: ${standing.line}`)] : [],
-      empty: 'No checks made yet. Life > Did I Do It is where one is made.',
+      empty: 'No checks made yet. Life > Checklist is where one is made.',
     },
     {
       kind: 'list',

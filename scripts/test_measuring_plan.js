@@ -203,7 +203,7 @@ check('table exists', /CREATE TABLE IF NOT EXISTS garden_measure_plan/.test(db))
 check('removing an area removes its plan', /DELETE FROM garden_measure_plan WHERE plot_id = \?/.test(db));
 const setupDb = read('lib/growSetupDb.ts');
 check('removing a measurement removes its plan rows', /garden_measure_plan WHERE measurement = \?/.test(setupDb));
-check('sync names the plan with readings', /quiet: \['garden_measure_plan'\]/.test(read('lib/snapshotChanges.ts')));
+check('sync names the plan with readings', /quiet: \[[^\]]*'garden_measure_plan'/.test(read('lib/snapshotChanges.ts')));
 
 console.log(`${passes} passed, ${failures} failed`);
 process.exit(failures > 0 ? 1 : 0);

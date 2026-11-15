@@ -98,7 +98,7 @@ const src = fs.readFileSync(path.join(ROOT, 'app/(tabs)/schedule.tsx'), 'utf8');
 ok(src.includes('monthGridRange(viewMonth)') && src.includes('listScheduledMealsForDateRange(from, to), listCalendarNotes(from, to)'), 'the grid reads meals and notes for its whole range in one pass');
 ok(src.includes('styles.weekDayDot') && src.includes('styles.weekDayRing') && src.includes('monthMarks.get(date)'), 'the grid uses the same dot and ring as the week strip');
 ok(/function pickMonthDay[\s\S]{0,200}setWeekStart\(startOfWeekLocal\(date\)\)/.test(src), 'tapping a day moves the week to that day');
-ok(src.includes('[calendarView, viewMonth, items, notes]'), 'the grid reloads when the week reloads');
+ok(/\[calendarView, viewMonth, items, notes(, monthTick)?\]/.test(src), 'the grid reloads when the week reloads');
 
 console.log(failures === 0 ? '\nAll passed.' : `\n${failures} failed.`);
 if (failures > 0) process.exit(1);

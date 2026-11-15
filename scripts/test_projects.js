@@ -174,7 +174,8 @@ const said = [
   P.describeProjectDay('2026-01-01', TODAY),
   P.describeStepsLeft(0),
   ...reminders.map((r) => `${r.title} ${r.detail}`),
-  fs.readFileSync(path.join(__dirname, '..', 'components', 'ProjectsSection.tsx'), 'utf8'),
+  // Developer-only console lines are never said to anybody.
+  fs.readFileSync(path.join(__dirname, '..', 'components', 'ProjectsSection.tsx'), 'utf8').replace(/console\.(warn|log|error)\([^\n]*/g, ''),
 ].join('\n');
 for (const word of ['late', 'missed', 'failed', 'failure', 'abandoned', 'gave up', 'give up', 'overdue', 'streak', 'behind', 'genuine', 'genuinely', 'real', 'percent', 'progress bar']) {
   check(`no "${word}"`, !new RegExp(`\\b${word}\\b`, 'i').test(said));

@@ -18341,9 +18341,13 @@ export async function ensureScheduleSeriesGenerated(): Promise<void> {
 // Before that, a series that never ended kept saying so on its past rows,
 // so the next top-up in ensureScheduleSeriesGenerated drew its future
 // straight back in after it had been removed.
-export async function deleteScheduleSeries(repeatGroupId: string): Promise<void> {
+//
+// fromDay (2026-11-15) starts the removal on a chosen day instead of today,
+// so "this day and every one after" on a task next week leaves the days
+// between now and then in place.
+export async function deleteScheduleSeries(repeatGroupId: string, fromDay?: string): Promise<void> {
   const db = await getDatabase();
-  const today = todayDateStringLocal();
+  const today = fromDay && fromDay > todayDateStringLocal() ? fromDay : todayDateStringLocal();
   await db.runAsync(
     `UPDATE schedule_items SET repeat_end_type = 'until_date', repeat_until = ? WHERE repeat_group_id = ?`,
     addDaysToDateString(today, -1),
@@ -26471,6 +26475,44 @@ export async function updateGardenTask(id: string, input: { title: string; sched
     new Date().toISOString(),
     id,
   );
+}
+
+// Change a repeating garden task from one of its days on (2026-11-15): its
+// words, time and how it repeats. A new series starts on the chosen day, tied
+// to the same plot or planting, and only then does the old one lose its days
+// from that day on, so a failure part way leaves a task twice, never none.
+// Days already done stay recorded under the old series.
+export async function changeGardenTaskSeries(
+  id: string,
+  input: { title: string; scheduledFor: string; repeat: RepeatConfig },
+): Promise<string> {
+  const db = await getDatabase();
+  const row = await db.getFirstAsync<{ groupId: string | null; scheduledFor: string; notes: string | null }>(
+    `SELECT repeat_group_id AS groupId, scheduled_for AS scheduledFor, notes FROM schedule_items WHERE id = ? AND item_type = 'garden'`,
+    id,
+  );
+  if (!row) throw new Error('That garden task could not be found.');
+  if (!row.groupId) {
+    await updateGardenTask(id, input);
+    return id;
+  }
+  const link = await db.getFirstAsync<{ plotId: string | null; plantingId: string | null }>(
+    `SELECT l.plot_id AS plotId, l.planting_id AS plantingId FROM garden_task_links l
+      JOIN schedule_items s ON s.id = l.schedule_item_id
+      WHERE s.repeat_group_id = ? LIMIT 1`,
+    row.groupId,
+  );
+  const newId = await scheduleGardenTask({
+    title: input.title.trim(),
+    scheduledFor: input.scheduledFor,
+    notes: row.notes ?? undefined,
+    plotId: link?.plotId ?? null,
+    plantingId: link?.plantingId ?? null,
+    repeat: input.repeat,
+  });
+  const fromDay = row.scheduledFor.slice(0, 10) < input.scheduledFor.slice(0, 10) ? row.scheduledFor.slice(0, 10) : input.scheduledFor.slice(0, 10);
+  await deleteScheduleSeries(row.groupId, fromDay);
+  return newId;
 }
 
 // The repeating Garden tasks tied to one planting that still have a day to

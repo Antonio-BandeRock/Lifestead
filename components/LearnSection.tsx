@@ -48,6 +48,8 @@ import { LearnCardView } from './LearnCardView';
 import { LearnHowItHasGone } from './LearnHowItHasGone';
 import { LearnMyDecksEditor } from './LearnMyDecksEditor';
 import { useWalkMark } from './WalkMark';
+import { saveOrSay } from '../lib/saveProblem';
+import { ReadProblem } from './ReadProblem';
 
 type Props = { tabColor: string };
 
@@ -72,15 +74,23 @@ export function LearnSection({ tabColor }: Props) {
   const [myDecks, setMyDecks] = useState<LearnDeck[]>([]);
   const [printing, setPrinting] = useState<{ deckId: string; layout: DeckPrintLayout; busy: boolean; said: string | null } | null>(null);
 
+  // A read that fails says so with Try again, never as an empty list (2026-11-15).
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const [all, fromRecords, mine] = await Promise.all([
-      listLearnReviews(),
-      loadRecordDecks(today(), t),
-      listMyDecks().catch((): LearnDeck[] => []),
-    ]);
-    setReviews(all);
-    setRecordDecks(fromRecords);
-    setMyDecks(mine);
+    setReadFailed(false);
+    try {
+      const [all, fromRecords, mine] = await Promise.all([
+        listLearnReviews(),
+        loadRecordDecks(today(), t),
+        listMyDecks().catch((): LearnDeck[] => []),
+      ]);
+      setReviews(all);
+      setRecordDecks(fromRecords);
+      setMyDecks(mine);
+    } catch (error) {
+      console.warn('LearnSection could not be read', error);
+      setReadFailed(true);
+    }
   }, []);
 
   const studyMine = myDecks.filter((deck) => deck.cards.length > 0);
@@ -123,7 +133,8 @@ export function LearnSection({ tabColor }: Props) {
     if (!sitting) return;
     const cardId = sitting.queue[sitting.index];
     const found = cardById(cardId);
-    const review = await addLearnReview(sitting.deckId, cardId, grade, found ? kindOf(found.card) : null, matched);
+    const review = await saveOrSay('Your answer was not saved. Try again.', () => addLearnReview(sitting.deckId, cardId, grade, found ? kindOf(found.card) : null, matched));
+    if (review === undefined) return;
     const all = [...reviews, review];
     setReviews(all);
     let queue = sitting.queue;
@@ -169,6 +180,7 @@ export function LearnSection({ tabColor }: Props) {
 
   return (
     <View style={styles.section}>
+      {readFailed ? <ReadProblem message="Your decks and answers could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} /> : null}
       <Text style={styles.knownText}>{describeKnown(known)}</Text>
 
       {allDecks.map((deck, index) => {

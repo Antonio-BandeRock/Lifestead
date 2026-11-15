@@ -35,6 +35,8 @@ function loadModule(relPath) {
   });
   const module = { exports: {} };
   new Function('exports', 'module', 'require', outputText)(module.exports, module, (name) => {
+    // Pure and import-free itself; borrowed for short ingredient names.
+    if (name === './ingredientShortName') return loadModule('lib/ingredientShortName.ts');
     throw new Error(`unexpected import ${name}`);
   });
   return module.exports;
@@ -72,7 +74,8 @@ const food = proposeFoodPatternRule({
 check(
   'the proposed wording is the count from their data',
   food.description,
-  'Broccoli, raw was in what I ate before 4 of my 11 logged flares or reactions.',
+  // Short food names since 1.0.77.5: the preparation after the comma is left off.
+  'Broccoli was in what I ate before 4 of my 11 logged flares or reactions.',
 );
 const verdictWords = ['avoid', 'caus', 'stop eating', 'trigger', 'should not', 'bad for', 'allergic'];
 checkTrue(

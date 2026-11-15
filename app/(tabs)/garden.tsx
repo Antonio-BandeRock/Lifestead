@@ -59,6 +59,7 @@ import {
   deleteScheduleSeries,
   setScheduleItemStatus,
   updateGardenTask,
+  changeGardenTaskSeries,
   recordGardenHarvest,
   setGardenHarvestOnHand,
   scheduleGardenTask,
@@ -128,7 +129,7 @@ import { saveOrSay } from '../../lib/saveProblem';
 import { ReadProblem } from '../../components/ReadProblem';
 import { AppActionSheet, type AppActionSheetAction } from '../../components/AppActionSheet';
 import { RepeatRulePicker } from '../../components/RepeatRulePicker';
-import { validateRepeatRule, type RepeatConfig } from '../../lib/repeatRule';
+import { repeatFromOccurrence, validateRepeatRule, type RepeatConfig } from '../../lib/repeatRule';
 import { buildTime24, describeTimeInputProblem, formatTime12, splitTime24, type TimeOfDayInput } from '../../lib/timeOfDay';
 import { syncReminderNotifications } from '../../lib/reminderNotifications';
 import { removeUnclaimedPacketPhotos } from '../../lib/seedPacketDb';
@@ -2510,7 +2511,9 @@ function DaysUntilLens({ scrollBottomPadding }: { scrollBottomPadding: number })
 // deleted here. Before this every task went in for tomorrow at 9:00 and
 // could not be touched again from Garden. A repeating task asks whether
 // to delete that day or the whole series, the way Schedules asks.
-type TaskForm = { editingId: string | null; title: string; day: string; time: TimeOfDayInput; repeat: RepeatConfig };
+// scope: whether a change to a repeating task is this day only or this day
+// and every one after (2026-11-15). Null when the task does not repeat.
+type TaskForm = { editingId: string | null; title: string; day: string; time: TimeOfDayInput; repeat: RepeatConfig; scope: 'one' | 'after' | null };
 
 function tomorrowDateString(): string {
   const next = new Date();
@@ -2519,7 +2522,7 @@ function tomorrowDateString(): string {
 }
 
 function emptyTaskForm(): TaskForm {
-  return { editingId: null, title: '', day: tomorrowDateString(), time: { hour: '9', minute: '00', ampm: 'AM' }, repeat: { type: 'none' } };
+  return { editingId: null, title: '', day: tomorrowDateString(), time: { hour: '9', minute: '00', ampm: 'AM' }, repeat: { type: 'none' }, scope: null };
 }
 
 function isCalendarDay(value: string): boolean {
@@ -2572,14 +2575,16 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
     if (!isCalendarDay(form.day)) return explainNotYet('Type the day as year, month and day, for example 2026-05-14, or tap Today or Tomorrow.');
     const time = buildTime24(form.time.hour, form.time.minute, form.time.ampm);
     if (!time) return explainNotYet(`The time is not complete yet: ${describeTimeInputProblem(form.time.hour, form.time.minute, form.time.ampm)}`);
-    if (!form.editingId && form.repeat.type !== 'none') {
+    const changesSeries = form.editingId !== null && form.scope === 'after';
+    if ((!form.editingId || changesSeries) && form.repeat.type !== 'none') {
       const problem = validateRepeatRule(form.repeat);
       if (problem) return explainNotYet(problem);
     }
     const scheduledFor = `${form.day}T${time}`;
     const editingId = form.editingId;
     const saved = await saveOrSay(editingId ? 'The task was not changed. Try again.' : 'The task was not saved. Try again.', async () => {
-      if (editingId) await updateGardenTask(editingId, { title, scheduledFor });
+      if (editingId && changesSeries) await changeGardenTaskSeries(editingId, { title, scheduledFor, repeat: form.repeat });
+      else if (editingId) await updateGardenTask(editingId, { title, scheduledFor });
       else await scheduleGardenTask({ title, scheduledFor, repeat: form.repeat });
       return true;
     });
@@ -2598,7 +2603,14 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
 
   function startChange(task: (typeof upcomingTasks)[number]) {
     const [day, time] = task.scheduledFor.split('T');
-    setForm({ editingId: task.id, title: task.title, day, time: splitTime24(time ? time.slice(0, 5) : null), repeat: { type: 'none' } });
+    setForm({
+      editingId: task.id,
+      title: task.title,
+      day,
+      time: splitTime24(time ? time.slice(0, 5) : null),
+      repeat: task.repeatGroupId ? repeatFromOccurrence(task) : { type: 'none' },
+      scope: task.repeatGroupId ? 'one' : null,
+    });
   }
 
   function askDelete(task: (typeof upcomingTasks)[number]) {
@@ -2627,7 +2639,7 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
             onPress: () => {
               void (async () => {
                 const saved = await saveOrSay('The repeating task was not deleted. Try again.', async () => {
-                  await deleteScheduleSeries(groupId);
+                  await deleteScheduleSeries(groupId, task.scheduledFor.slice(0, 10));
                   return true;
                 });
                 if (saved) {
@@ -2771,11 +2783,34 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
             </TouchableOpacity>
           ))}
         </View>
-        {form.editingId ? (
-          <Text style={styles.captionText}>
-            Changes this one day only. A repeating task keeps its other days as they are.
-          </Text>
-        ) : (
+        {form.editingId && form.scope ? (
+          <>
+            <Text style={styles.captionText}>This task repeats. Change which days?</Text>
+            <View style={styles.pillRow}>
+              {([
+                ['one', 'Just this day'],
+                ['after', 'This day and every one after'],
+              ] as const).map(([value, label]) => (
+                <TouchableOpacity
+                  key={value}
+                  ref={value === 'after' ? walkMark.ref('garden.taskSeries') : undefined}
+                  style={[styles.pill, form.scope === value && styles.pillActive]}
+                  onPress={() => patchForm({ scope: value })}
+                >
+                  <Text style={[styles.pillText, form.scope === value && styles.pillTextActive]}>{label}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            {form.scope === 'after' ? (
+              <>
+                <RepeatRulePicker repeat={form.repeat} onChange={(repeat) => patchForm({ repeat })} startDate={form.day} color={TAB_COLOR} />
+                <Text style={styles.captionText}>The days before this one, and every day already done, stay as they are.</Text>
+              </>
+            ) : (
+              <Text style={styles.captionText}>The other days keep their words, time and repeat.</Text>
+            )}
+          </>
+        ) : form.editingId ? null : (
           <RepeatRulePicker repeat={form.repeat} onChange={(repeat) => patchForm({ repeat })} startDate={form.day} color={TAB_COLOR} />
         )}
         <View style={styles.actionRow}>

@@ -194,6 +194,8 @@ import { t, tl } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
+import { saveOrSay } from '../../lib/saveProblem';
+import { ReadProblem } from '../../components/ReadProblem';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -1327,12 +1329,19 @@ function FlaresLens() {
   const [savedCount, setSavedCount] = useState(0);
   const personal = usePersonFirst(savedCount);
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
     setLoading(true);
-    listCheckins({ checkinType: 'flare', limit }).then((rows) => {
-      setEntries(rows);
-      setLoading(false);
-    });
+    setReadFailed(false);
+    listCheckins({ checkinType: 'flare', limit })
+      .then((rows) => {
+        setEntries(rows);
+      })
+      .catch((error) => {
+        console.warn('Flares could not be read', error);
+        setReadFailed(true);
+      })
+      .finally(() => setLoading(false));
   }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -1381,11 +1390,15 @@ function FlaresLens() {
       showInfoAlert('Almost there', 'Select how severe this flare felt.');
       return;
     }
-    if (editingId) {
-      await updateCheckinRecord(editingId, { loggedAt, severity, notes, tags, bodyRegions: regions, contributors, ...detailForSave(detail, tags) });
-    } else {
-      await recordCheckin({ loggedAt, checkinType: 'flare', valence: 'negative', severity, notes, tags, bodyRegions: regions, contributors, ...detailForSave(detail, tags) });
-    }
+    const saved = await saveOrSay('The flare was not saved. Try again.', async () => {
+      if (editingId) {
+        await updateCheckinRecord(editingId, { loggedAt, severity, notes, tags, bodyRegions: regions, contributors, ...detailForSave(detail, tags) });
+      } else {
+        await recordCheckin({ loggedAt, checkinType: 'flare', valence: 'negative', severity, notes, tags, bodyRegions: regions, contributors, ...detailForSave(detail, tags) });
+      }
+      return true;
+    });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     setSavedCount((n) => n + 1);
@@ -1400,7 +1413,11 @@ function FlaresLens() {
       destructive: true,
     });
     if (!ok) return;
-    await deleteCheckin(id);
+    const removed = await saveOrSay('The flare was not removed. Try again.', async () => {
+      await deleteCheckin(id);
+      return true;
+    });
+    if (!removed) return;
     if (editingId === id) {
       setFormOpen(false);
       resetForm();
@@ -1443,7 +1460,9 @@ function FlaresLens() {
 
       <SymptomPhotosOverTime tabColor={TAB_COLOR} />
 
-      {loading ? (
+      {readFailed ? (
+        <ReadProblem message="Your flares could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+      ) : loading ? (
         <View style={styles.panelStandalone}>
           <Text style={styles.emptyText}>Loading…</Text>
         </View>
@@ -1495,12 +1514,19 @@ function FoodReactionsLens() {
   const [savedCount, setSavedCount] = useState(0);
   const personal = usePersonFirst(savedCount);
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
     setLoading(true);
-    listCheckins({ checkinType: 'post_meal', limit }).then((rows) => {
-      setEntries(rows);
-      setLoading(false);
-    });
+    setReadFailed(false);
+    listCheckins({ checkinType: 'post_meal', limit })
+      .then((rows) => {
+        setEntries(rows);
+      })
+      .catch((error) => {
+        console.warn('Food reactions could not be read', error);
+        setReadFailed(true);
+      })
+      .finally(() => setLoading(false));
     void listMeals(10).then((meals) =>
       setRecentMeals(meals.filter((m) => m.name).map((m) => ({ id: m.id, name: m.name, eatenAt: m.eaten_at }))),
     );
@@ -1540,31 +1566,35 @@ function FoodReactionsLens() {
       showInfoAlert('Almost there', 'Select how severe the reaction felt.');
       return;
     }
-    if (editingId) {
-      await updateCheckinRecord(editingId, {
-        loggedAt,
-        severity,
-        notes,
-        foodName: foodName.trim(),
-        relatedMealId,
-        tags,
-        bodyRegions: regions,
-        ...detailForSave(detail, tags),
-      });
-    } else {
-      await recordCheckin({
-        loggedAt,
-        checkinType: 'post_meal',
-        valence: 'negative',
-        severity,
-        notes,
-        foodName,
-        ...(relatedMealId ? { relatedMealId } : {}),
-        tags,
-        bodyRegions: regions,
-        ...detailForSave(detail, tags),
-      });
-    }
+    const saved = await saveOrSay('The reaction was not saved. Try again.', async () => {
+      if (editingId) {
+        await updateCheckinRecord(editingId, {
+          loggedAt,
+          severity,
+          notes,
+          foodName: foodName.trim(),
+          relatedMealId,
+          tags,
+          bodyRegions: regions,
+          ...detailForSave(detail, tags),
+        });
+      } else {
+        await recordCheckin({
+          loggedAt,
+          checkinType: 'post_meal',
+          valence: 'negative',
+          severity,
+          notes,
+          foodName,
+          ...(relatedMealId ? { relatedMealId } : {}),
+          tags,
+          bodyRegions: regions,
+          ...detailForSave(detail, tags),
+        });
+      }
+      return true;
+    });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     setSavedCount((n) => n + 1);
@@ -1579,7 +1609,11 @@ function FoodReactionsLens() {
       destructive: true,
     });
     if (!ok) return;
-    await deleteCheckin(id);
+    const removed = await saveOrSay('The reaction was not removed. Try again.', async () => {
+      await deleteCheckin(id);
+      return true;
+    });
+    if (!removed) return;
     if (editingId === id) {
       setFormOpen(false);
       resetForm();
@@ -1634,7 +1668,9 @@ function FoodReactionsLens() {
 
       <SymptomPhotosOverTime tabColor={TAB_COLOR} />
 
-      {loading ? (
+      {readFailed ? (
+        <ReadProblem message="Your food reactions could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+      ) : loading ? (
         <View style={styles.panelStandalone}>
           <Text style={styles.emptyText}>Loading…</Text>
         </View>
@@ -1762,8 +1798,10 @@ function NewFoodsLens({
   const [escalateCustomDate, setEscalateCustomDate] = useState('');
   const [escalateTime, setEscalateTime] = useState<TimeOfDayInput>(() => splitTime24(nowTimeString24()));
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
     setLoading(true);
+    setReadFailed(false);
     Promise.all([
       listFoodTrials(),
       getUserConditions(),
@@ -1771,7 +1809,8 @@ function NewFoodsLens({
       listFoodAllergies(),
       listTrialSeries(),
       listTrialSteps(),
-    ]).then(
+    ])
+      .then(
       async ([rows, selectedCodes, allConditions, allergies, seriesRows, stepRows]) => {
         setTrials(rows);
         setSeries(seriesRows);
@@ -1801,7 +1840,12 @@ function NewFoodsLens({
         );
         setTodaysCheckinByTrial(Object.fromEntries(entries));
       },
-    );
+    )
+      .catch((error) => {
+        console.warn('Food tests could not be read', error);
+        setReadFailed(true);
+        setLoading(false);
+      });
   }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -1882,29 +1926,41 @@ function NewFoodsLens({
       return;
     }
     const days = Number(observationDays);
-    await createFoodTrial({
-      foodName,
-      startedAt: new Date().toISOString(),
-      observationDays: Number.isFinite(days) && days > 0 ? days : 3,
-      conditionCode: selectedConditionCode,
-      design: 'remove_return',
-      removalDays,
-      removalStartedOn: todayDateString(),
-      measure,
-      subjectKind: subject,
+    const saved = await saveOrSay('The experiment was not saved. Try again.', async () => {
+      await createFoodTrial({
+        foodName,
+        startedAt: new Date().toISOString(),
+        observationDays: Number.isFinite(days) && days > 0 ? days : 3,
+        conditionCode: selectedConditionCode,
+        design: 'remove_return',
+        removalDays,
+        removalStartedOn: todayDateString(),
+        measure,
+        subjectKind: subject,
+      });
+      return true;
     });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     load();
   }
 
   async function handleRecordStep(id: string, step: StepKey) {
-    await recordTrialStep(id, step);
+    const done = await saveOrSay('The step was not recorded. Try again.', async () => {
+      await recordTrialStep(id, step);
+      return true;
+    });
+    if (!done) return;
     load();
   }
 
   async function handleBackToUsual(id: string) {
-    await markExperimentBack(id);
+    const done = await saveOrSay('Back to usual was not recorded. Try again.', async () => {
+      await markExperimentBack(id);
+      return true;
+    });
+    if (!done) return;
     load();
   }
 
@@ -1920,18 +1976,22 @@ function NewFoodsLens({
     if (design === 'stepped') {
       // Waits until the first step is pressed, typed or picked, so there is
       // no start date to ask for and no check-ins to schedule yet.
-      await createFoodTrial({
-        foodName,
-        startedAt: new Date().toISOString(),
-        foodId: pickedFood?.foodId ?? null,
-        source: pickedFood?.source ?? null,
-        prepMethod: pickedFood?.prepMethod ?? null,
-        conditionCode: selectedConditionCode,
-        design: 'stepped',
-        stepDays,
-        washoutDays,
-        amounts: { small: amountSmall, medium: amountMedium, large: amountLarge },
+      const saved = await saveOrSay('The test was not saved. Try again.', async () => {
+        await createFoodTrial({
+          foodName,
+          startedAt: new Date().toISOString(),
+          foodId: pickedFood?.foodId ?? null,
+          source: pickedFood?.source ?? null,
+          prepMethod: pickedFood?.prepMethod ?? null,
+          conditionCode: selectedConditionCode,
+          design: 'stepped',
+          stepDays,
+          washoutDays,
+          amounts: { small: amountSmall, medium: amountMedium, large: amountLarge },
+        });
+        return true;
       });
+      if (!saved) return;
       setFormOpen(false);
       resetForm();
       load();
@@ -1961,19 +2021,23 @@ function NewFoodsLens({
       startedAt = `${date}T${nowTimeString24()}`;
     }
 
-    const { id: trialId, status } = await createFoodTrial({
-      foodName,
-      startedAt,
-      observationDays: realObservationDays,
-      foodId: pickedFood?.foodId ?? null,
-      source: pickedFood?.source ?? null,
-      prepMethod: pickedFood?.prepMethod ?? null,
-      conditionCode: selectedConditionCode,
-      design: pickedFood ? design : 'watch',
-      removalDays,
-      removalStartedOn: todayDateString(),
-      measure: pickedFood && design === 'remove_return' ? measure : null,
-    });
+    const created = await saveOrSay('The test was not saved. Try again.', () =>
+      createFoodTrial({
+        foodName,
+        startedAt,
+        observationDays: realObservationDays,
+        foodId: pickedFood?.foodId ?? null,
+        source: pickedFood?.source ?? null,
+        prepMethod: pickedFood?.prepMethod ?? null,
+        conditionCode: selectedConditionCode,
+        design: pickedFood ? design : 'watch',
+        removalDays,
+        removalStartedOn: todayDateString(),
+        measure: pickedFood && design === 'remove_return' ? measure : null,
+      }),
+    );
+    if (!created) return;
+    const { id: trialId, status } = created;
 
     // Only a real, immediately-'trialing' free-text trial gets its
     // reminders scheduled here -- a 'waiting' trial's own reminders don't
@@ -1982,11 +2046,14 @@ function NewFoodsLens({
     // about a day the food was never actually eaten on.
     if (status === 'trialing') {
       const date = startedAt.slice(0, 10);
-      await scheduleFoodTrialCheckins({
-        foodTrialId: trialId,
-        foodName,
-        firstScheduledFor: `${date}T20:00`,
-        observationDays: realObservationDays,
+      await saveOrSay('The test was saved, but its evening check-in reminders were not set.', async () => {
+        await scheduleFoodTrialCheckins({
+          foodTrialId: trialId,
+          foodName,
+          firstScheduledFor: `${date}T20:00`,
+          observationDays: realObservationDays,
+        });
+        return true;
       });
     }
 
@@ -2026,24 +2093,36 @@ function NewFoodsLens({
       return;
     }
     const days = Number(seriesDays);
-    await createTrialSeries({
-      name: seriesName,
-      observationDays: Number.isFinite(days) && days > 0 ? days : 3,
-      conditionCode: seriesConditionCode,
-      foods,
+    const saved = await saveOrSay('The plan was not saved. Try again.', async () => {
+      await createTrialSeries({
+        name: seriesName,
+        observationDays: Number.isFinite(days) && days > 0 ? days : 3,
+        conditionCode: seriesConditionCode,
+        foods,
+      });
+      return true;
     });
+    if (!saved) return;
     setSeriesFormOpen(false);
     resetSeriesForm();
     load();
   }
 
   async function handleSkipSeriesItem(itemId: string) {
-    await skipTrialSeriesItem(itemId);
+    const done = await saveOrSay('The food was not skipped. Try again.', async () => {
+      await skipTrialSeriesItem(itemId);
+      return true;
+    });
+    if (!done) return;
     load();
   }
 
   async function handleStopSeries(seriesId: string) {
-    await stopTrialSeries(seriesId);
+    const done = await saveOrSay('The plan was not stopped. Try again.', async () => {
+      await stopTrialSeries(seriesId);
+      return true;
+    });
+    if (!done) return;
     load();
   }
 
@@ -2055,12 +2134,20 @@ function NewFoodsLens({
       destructive: true,
     });
     if (!ok) return;
-    await deleteTrialSeries(seriesId);
+    const done = await saveOrSay('The plan was not removed. Try again.', async () => {
+      await deleteTrialSeries(seriesId);
+      return true;
+    });
+    if (!done) return;
     load();
   }
 
   async function handleResolve(trial: FoodTrialRecord, status: 'cleared' | 'flagged') {
-    await resolveFoodTrial(trial.id, status);
+    const done = await saveOrSay('The result was not saved. Try again.', async () => {
+      await resolveFoodTrial(trial.id, status);
+      return true;
+    });
+    if (!done) return;
     load();
   }
 
@@ -2072,7 +2159,11 @@ function NewFoodsLens({
       destructive: true,
     });
     if (!ok) return;
-    await deleteFoodTrial(id);
+    const done = await saveOrSay('The test was not removed. Try again.', async () => {
+      await deleteFoodTrial(id);
+      return true;
+    });
+    if (!done) return;
     load();
   }
 
@@ -2081,20 +2172,28 @@ function NewFoodsLens({
   // real, fresh reminder series (see its own comment in lib/db.ts) --
   // this just needs to call it and refresh the list.
   async function handleReopen(id: string) {
-    await reopenFoodTrial(id);
+    const done = await saveOrSay('The test was not reopened. Try again.', async () => {
+      await reopenFoodTrial(id);
+      return true;
+    });
+    if (!done) return;
     load();
   }
 
   // The lightweight daily prompt's own "nothing to report" path -- one
   // tap, a real but minimal wellbeing_checkins row, no escalation needed.
   async function handleTodayNothingToReport(trial: FoodTrialRecord) {
-    await recordCheckin({
-      loggedAt: localStamp(new Date()),
-      checkinType: 'food_trial_daily',
-      valence: 'neutral',
-      foodName: trial.foodName,
-      foodTrialId: trial.id,
+    const saved = await saveOrSay('Today\'s answer was not saved. Try again.', async () => {
+      await recordCheckin({
+        loggedAt: localStamp(new Date()),
+        checkinType: 'food_trial_daily',
+        valence: 'neutral',
+        foodName: trial.foodName,
+        foodTrialId: trial.id,
+      });
+      return true;
     });
+    if (!saved) return;
     load();
   }
 
@@ -2124,18 +2223,22 @@ function NewFoodsLens({
       showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
-    await recordCheckin({
-      loggedAt,
-      checkinType: 'food_trial_daily',
-      valence: 'negative',
-      severity: escalateSeverity,
-      notes: escalateNotes,
-      foodName: trial.foodName,
-      foodTrialId: trial.id,
-      tags: escalateTags,
-      bodyRegions: escalateRegions,
-      ...detailForSave(escalateDetail, escalateTags),
+    const saved = await saveOrSay('What you felt was not saved. Try again.', async () => {
+      await recordCheckin({
+        loggedAt,
+        checkinType: 'food_trial_daily',
+        valence: 'negative',
+        severity: escalateSeverity,
+        notes: escalateNotes,
+        foodName: trial.foodName,
+        foodTrialId: trial.id,
+        tags: escalateTags,
+        bodyRegions: escalateRegions,
+        ...detailForSave(escalateDetail, escalateTags),
+      });
+      return true;
     });
+    if (!saved) return;
     setEscalatingTrialId(null);
     load();
   }
@@ -2693,7 +2796,9 @@ function NewFoodsLens({
           })}
         </View>
       ) : null}
-      {loading ? (
+      {readFailed ? (
+        <ReadProblem message="Your food tests could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+      ) : loading ? (
         <View style={styles.panelStandalone}>
           <Text style={styles.emptyText}>Loading…</Text>
         </View>
@@ -2916,8 +3021,15 @@ function ExerciseSection() {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [confirm, confirmElement] = useConfirmSheet();
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
-    listExerciseLogs(limit).then(setLogs);
+    setReadFailed(false);
+    listExerciseLogs(limit)
+      .then(setLogs)
+      .catch((error) => {
+        console.warn('Exercise could not be read', error);
+        setReadFailed(true);
+      });
     // What was done before, most recent first, so a repeat is one tap.
     listExerciseLogs().then((rows) => {
       const seen = new Map<string, string>();
@@ -2926,7 +3038,7 @@ function ExerciseSection() {
         if (key && !seen.has(key)) seen.set(key, row.exerciseType.trim());
       }
       setPastTypes([...seen.values()].slice(0, 12));
-    });
+    }).catch(() => undefined); // Only quick-pick suggestions; the list above reports a failed read.
   }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -2966,16 +3078,20 @@ function ExerciseSection() {
     }
     const minutes = Number(durationMinutes);
     const duration = Number.isFinite(minutes) && minutes > 0 ? minutes : null;
-    if (editingId) {
-      await updateExerciseLog(editingId, { loggedAt, exerciseType, durationMinutes: duration, intensity });
-    } else {
-      await recordExercise({
-        loggedAt,
-        exerciseType,
-        durationMinutes: duration ?? undefined,
-        intensity: intensity ?? undefined,
-      });
-    }
+    const saved = await saveOrSay('The activity was not saved. Try again.', async () => {
+      if (editingId) {
+        await updateExerciseLog(editingId, { loggedAt, exerciseType, durationMinutes: duration, intensity });
+      } else {
+        await recordExercise({
+          loggedAt,
+          exerciseType,
+          durationMinutes: duration ?? undefined,
+          intensity: intensity ?? undefined,
+        });
+      }
+      return true;
+    });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     load();
@@ -2984,7 +3100,11 @@ function ExerciseSection() {
   async function handleDelete(id: string) {
     const ok = await confirm({ title: 'Remove this activity?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
     if (!ok) return;
-    await deleteExerciseLog(id);
+    const removed = await saveOrSay('The activity was not removed. Try again.', async () => {
+      await deleteExerciseLog(id);
+      return true;
+    });
+    if (!removed) return;
     if (editingId === id) {
       setFormOpen(false);
       resetForm();
@@ -3058,7 +3178,9 @@ function ExerciseSection() {
         </View>
       )}
 
-      {logs.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your activities could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+      ) : logs.length === 0 ? (
         <View style={styles.panelStandalone}>
           <Text style={styles.emptyText}>No exercise logged yet.</Text>
         </View>
@@ -3158,14 +3280,21 @@ function BloodPressureSection({ onChanged }: { onChanged?: () => void }) {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [confirm, confirmElement] = useConfirmSheet();
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
+    setReadFailed(false);
     Promise.all([
       listBodyMeasurements('blood_pressure_systolic', limit),
       listBodyMeasurements('blood_pressure_diastolic', limit),
       listBodyMeasurements('heart_rate_bpm', limit),
-    ]).then(([systolicRows, diastolicRows, bpmRows]) => {
-      setReadings(pairBloodPressureReadings(systolicRows, diastolicRows, bpmRows));
-    });
+    ])
+      .then(([systolicRows, diastolicRows, bpmRows]) => {
+        setReadings(pairBloodPressureReadings(systolicRows, diastolicRows, bpmRows));
+      })
+      .catch((error) => {
+        console.warn('Blood pressure could not be read', error);
+        setReadFailed(true);
+      });
   }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -3207,23 +3336,27 @@ function BloodPressureSection({ onChanged }: { onChanged?: () => void }) {
     }
     const heartRate = Number(bpm);
     const hasHeartRate = bpm.trim() !== '' && Number.isFinite(heartRate) && heartRate > 0;
-    if (editing) {
-      await updateBodyMeasurement(editing.systolicId, { loggedAt, value: sys });
-      await updateBodyMeasurement(editing.diastolicId, { loggedAt, value: dia });
-      if (editing.bpmId && hasHeartRate) {
-        await updateBodyMeasurement(editing.bpmId, { loggedAt, value: heartRate });
-      } else if (editing.bpmId) {
-        await deleteBodyMeasurement(editing.bpmId);
-      } else if (hasHeartRate) {
-        await recordBodyMeasurement({ loggedAt, measurementType: 'heart_rate_bpm', value: heartRate, unit: 'bpm' });
+    const saved = await saveOrSay('The reading was not saved. Try again.', async () => {
+      if (editing) {
+        await updateBodyMeasurement(editing.systolicId, { loggedAt, value: sys });
+        await updateBodyMeasurement(editing.diastolicId, { loggedAt, value: dia });
+        if (editing.bpmId && hasHeartRate) {
+          await updateBodyMeasurement(editing.bpmId, { loggedAt, value: heartRate });
+        } else if (editing.bpmId) {
+          await deleteBodyMeasurement(editing.bpmId);
+        } else if (hasHeartRate) {
+          await recordBodyMeasurement({ loggedAt, measurementType: 'heart_rate_bpm', value: heartRate, unit: 'bpm' });
+        }
+      } else {
+        await recordBodyMeasurement({ loggedAt, measurementType: 'blood_pressure_systolic', value: sys, unit: 'mmHg' });
+        await recordBodyMeasurement({ loggedAt, measurementType: 'blood_pressure_diastolic', value: dia, unit: 'mmHg' });
+        if (hasHeartRate) {
+          await recordBodyMeasurement({ loggedAt, measurementType: 'heart_rate_bpm', value: heartRate, unit: 'bpm' });
+        }
       }
-    } else {
-      await recordBodyMeasurement({ loggedAt, measurementType: 'blood_pressure_systolic', value: sys, unit: 'mmHg' });
-      await recordBodyMeasurement({ loggedAt, measurementType: 'blood_pressure_diastolic', value: dia, unit: 'mmHg' });
-      if (hasHeartRate) {
-        await recordBodyMeasurement({ loggedAt, measurementType: 'heart_rate_bpm', value: heartRate, unit: 'bpm' });
-      }
-    }
+      return true;
+    });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     load();
@@ -3233,11 +3366,15 @@ function BloodPressureSection({ onChanged }: { onChanged?: () => void }) {
   async function handleDelete(reading: BpReading) {
     const ok = await confirm({ title: 'Remove this reading?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
     if (!ok) return;
-    await deleteBodyMeasurement(reading.systolicId);
-    await deleteBodyMeasurement(reading.diastolicId);
-    if (reading.bpmId) {
-      await deleteBodyMeasurement(reading.bpmId);
-    }
+    const removed = await saveOrSay('The reading was not removed. Try again.', async () => {
+      await deleteBodyMeasurement(reading.systolicId);
+      await deleteBodyMeasurement(reading.diastolicId);
+      if (reading.bpmId) {
+        await deleteBodyMeasurement(reading.bpmId);
+      }
+      return true;
+    });
+    if (!removed) return;
     if (editing?.systolicId === reading.systolicId) {
       setFormOpen(false);
       resetForm();
@@ -3304,7 +3441,9 @@ function BloodPressureSection({ onChanged }: { onChanged?: () => void }) {
         </View>
       )}
 
-      {readings.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your blood pressure readings could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+      ) : readings.length === 0 ? (
         <View style={styles.panelStandalone}>
           <Text style={styles.emptyText}>No blood pressure readings yet.</Text>
         </View>
@@ -3363,13 +3502,18 @@ function WeightSection() {
   const [confirm, confirmElement] = useConfirmSheet();
   const unit = imperial ? 'lb' : 'kg';
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
+    setReadFailed(false);
     Promise.all([listBodyMeasurements('weight', limit), getStoredMeasurementSystem()])
       .then(([rows, system]) => {
         setReadings(rows);
         setImperial(system === 'imperial');
       })
-      .catch(() => setReadings([]));
+      .catch((error) => {
+        console.warn('Weight could not be read', error);
+        setReadFailed(true);
+      });
   }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -3411,11 +3555,15 @@ function WeightSection() {
       return;
     }
     const kg = imperial ? lbToKg(entered) : entered;
-    if (editing) {
-      await updateBodyMeasurement(editing.id, { loggedAt, value: kg });
-    } else {
-      await recordBodyMeasurement({ loggedAt, measurementType: 'weight', value: kg, unit: 'kg' });
-    }
+    const saved = await saveOrSay('The weight was not saved. Try again.', async () => {
+      if (editing) {
+        await updateBodyMeasurement(editing.id, { loggedAt, value: kg });
+      } else {
+        await recordBodyMeasurement({ loggedAt, measurementType: 'weight', value: kg, unit: 'kg' });
+      }
+      return true;
+    });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     load();
@@ -3424,7 +3572,11 @@ function WeightSection() {
   async function handleDelete(reading: BodyMeasurementRecord) {
     const ok = await confirm({ title: 'Remove this weight?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
     if (!ok) return;
-    await deleteBodyMeasurement(reading.id);
+    const removed = await saveOrSay('The weight was not removed. Try again.', async () => {
+      await deleteBodyMeasurement(reading.id);
+      return true;
+    });
+    if (!removed) return;
     if (editing?.id === reading.id) {
       setFormOpen(false);
       resetForm();
@@ -3469,7 +3621,9 @@ function WeightSection() {
         </View>
       )}
 
-      {readings.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your weights could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+      ) : readings.length === 0 ? (
         <View style={styles.panelStandalone}>
           <Text style={styles.emptyText}>No weight logged yet.</Text>
         </View>
@@ -3521,8 +3675,15 @@ function GeneralNoteSection() {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [confirm, confirmElement] = useConfirmSheet();
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
-    listCheckins({ checkinType: 'general', limit }).then(setNotesList);
+    setReadFailed(false);
+    listCheckins({ checkinType: 'general', limit })
+      .then(setNotesList)
+      .catch((error) => {
+        console.warn('Notes could not be read', error);
+        setReadFailed(true);
+      });
   }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -3558,19 +3719,23 @@ function GeneralNoteSection() {
       showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
-    if (editingId) {
-      await updateCheckinRecord(editingId, {
-        loggedAt,
-        severity: null,
-        severityTen: null,
-        notes,
-        tags: [],
-        bodyRegions: [],
-        scales,
-      });
-    } else {
-      await recordCheckin({ loggedAt, checkinType: 'general', valence: 'neutral', notes: notes.trim() || undefined, ...scales });
-    }
+    const saved = await saveOrSay('The note was not saved. Try again.', async () => {
+      if (editingId) {
+        await updateCheckinRecord(editingId, {
+          loggedAt,
+          severity: null,
+          severityTen: null,
+          notes,
+          tags: [],
+          bodyRegions: [],
+          scales,
+        });
+      } else {
+        await recordCheckin({ loggedAt, checkinType: 'general', valence: 'neutral', notes: notes.trim() || undefined, ...scales });
+      }
+      return true;
+    });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     load();
@@ -3579,7 +3744,11 @@ function GeneralNoteSection() {
   async function handleDelete(id: string) {
     const ok = await confirm({ title: 'Remove this note?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
     if (!ok) return;
-    await deleteCheckin(id);
+    const removed = await saveOrSay('The note was not removed. Try again.', async () => {
+      await deleteCheckin(id);
+      return true;
+    });
+    if (!removed) return;
     if (editingId === id) {
       setFormOpen(false);
       resetForm();
@@ -3642,7 +3811,9 @@ function GeneralNoteSection() {
         </View>
       )}
 
-      {notesList.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your notes could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+      ) : notesList.length === 0 ? (
         <View style={styles.panelStandalone}>
           <Text style={styles.emptyText}>No notes yet.</Text>
         </View>
@@ -3752,8 +3923,15 @@ function NocturiaLens() {
   const [customDate, setCustomDate] = useState('');
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
-    listNocturiaNights(limit).then(setNights);
+    setReadFailed(false);
+    listNocturiaNights(limit)
+      .then(setNights)
+      .catch((error) => {
+        console.warn('Nights could not be read', error);
+        setReadFailed(true);
+      });
   }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -3790,15 +3968,19 @@ function NocturiaLens() {
       return;
     }
     const wake = firstWake.hour.trim() ? buildTime24(firstWake.hour, firstWake.minute || '00', firstWake.ampm) : null;
-    if (editingId) {
-      const result = await updateNocturiaNight(editingId, { nightOf, times: count, firstWake: wake, notes });
-      if (result === 'taken') {
-        showInfoAlert('That night already has an entry', 'Edit that entry instead, or remove one of the two first.');
-        return;
+    const saved = await saveOrSay('The night was not saved. Try again.', async () => {
+      if (editingId) {
+        const result = await updateNocturiaNight(editingId, { nightOf, times: count, firstWake: wake, notes });
+        if (result === 'taken') {
+          showInfoAlert('That night already has an entry', 'Edit that entry instead, or remove one of the two first.');
+          return;
+        }
+      } else {
+        await saveNocturiaNight({ nightOf, times: count, firstWake: wake, notes });
       }
-    } else {
-      await saveNocturiaNight({ nightOf, times: count, firstWake: wake, notes });
-    }
+      return true;
+    });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     load();
@@ -3807,7 +3989,11 @@ function NocturiaLens() {
   async function handleDelete(id: string) {
     const ok = await confirm({ title: 'Remove this night?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
     if (!ok) return;
-    await deleteNocturiaNight(id);
+    const removed = await saveOrSay('The night was not removed. Try again.', async () => {
+      await deleteNocturiaNight(id);
+      return true;
+    });
+    if (!removed) return;
     if (editingId === id) {
       setFormOpen(false);
       resetForm();
@@ -3854,7 +4040,9 @@ function NocturiaLens() {
           </View>
         )}
 
-        {nights.length === 0 ? (
+        {readFailed ? (
+          <ReadProblem message="Your nights could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+        ) : nights.length === 0 ? (
           <View style={styles.panelStandalone}>
             <Text style={styles.emptyText}>No nights logged yet.</Text>
           </View>
@@ -3916,8 +4104,15 @@ function BowelLens() {
   const [time, setTime] = useState<TimeOfDayInput>(() => splitTime24(nowTimeString24()));
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
-    listBowelEntries(limit).then(setEntries);
+    setReadFailed(false);
+    listBowelEntries(limit)
+      .then(setEntries)
+      .catch((error) => {
+        console.warn('Bowel entries could not be read', error);
+        setReadFailed(true);
+      });
   }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -3959,11 +4154,15 @@ function BowelLens() {
       showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
-    if (editingId) {
-      await updateBowelEntry(editingId, { occurredAt, bristolType: bristol, urgency, blood, pain, note });
-    } else {
-      await addBowelEntry({ occurredAt, bristolType: bristol, urgency, blood, pain, note });
-    }
+    const saved = await saveOrSay('The entry was not saved. Try again.', async () => {
+      if (editingId) {
+        await updateBowelEntry(editingId, { occurredAt, bristolType: bristol, urgency, blood, pain, note });
+      } else {
+        await addBowelEntry({ occurredAt, bristolType: bristol, urgency, blood, pain, note });
+      }
+      return true;
+    });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     load();
@@ -3972,7 +4171,11 @@ function BowelLens() {
   async function handleRemove(id: string) {
     const ok = await confirm({ title: 'Remove this entry?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
     if (!ok) return;
-    await removeBowelEntry(id);
+    const removed = await saveOrSay('The entry was not removed. Try again.', async () => {
+      await removeBowelEntry(id);
+      return true;
+    });
+    if (!removed) return;
     if (editingId === id) {
       setFormOpen(false);
       resetForm();
@@ -4053,7 +4256,9 @@ function BowelLens() {
           </View>
         )}
 
-        {entries.length === 0 ? (
+        {readFailed ? (
+          <ReadProblem message="Your bowel entries could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+        ) : entries.length === 0 ? (
           <View style={styles.panelStandalone}>
             <Text style={styles.emptyText}>No bowel movements logged yet.</Text>
           </View>
@@ -4143,13 +4348,20 @@ function CycleLens() {
   const [customDate, setCustomDate] = useState('');
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
-    Promise.all([listCycleDays(limit), listAllCycleDays()]).then(([recent, all]) => {
-      const periods = periodsFrom(all);
-      setDays(recent);
-      setAverage(nextPeriodSentence(periods, localStamp(new Date()).slice(0, 10)));
-      setSummary(periodsSentence(periods));
-    });
+    setReadFailed(false);
+    Promise.all([listCycleDays(limit), listAllCycleDays()])
+      .then(([recent, all]) => {
+        const periods = periodsFrom(all);
+        setDays(recent);
+        setAverage(nextPeriodSentence(periods, localStamp(new Date()).slice(0, 10)));
+        setSummary(periodsSentence(periods));
+      })
+      .catch((error) => {
+        console.warn('Cycle days could not be read', error);
+        setReadFailed(true);
+      });
   }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -4178,15 +4390,19 @@ function CycleLens() {
       showInfoAlert('Almost there', 'Enter a valid date.');
       return;
     }
-    if (editingId) {
-      const result = await updateCycleDay(editingId, { day, flow, notes });
-      if (result === 'taken') {
-        showInfoAlert('That day already has an entry', 'Edit that entry instead, or remove one of the two first.');
-        return;
+    const saved = await saveOrSay('The day was not saved. Try again.', async () => {
+      if (editingId) {
+        const result = await updateCycleDay(editingId, { day, flow, notes });
+        if (result === 'taken') {
+          showInfoAlert('That day already has an entry', 'Edit that entry instead, or remove one of the two first.');
+          return;
+        }
+      } else {
+        await saveCycleDay({ day, flow, notes });
       }
-    } else {
-      await saveCycleDay({ day, flow, notes });
-    }
+      return true;
+    });
+    if (!saved) return;
     setFormOpen(false);
     resetForm();
     load();
@@ -4195,7 +4411,11 @@ function CycleLens() {
   async function handleDelete(id: string) {
     const ok = await confirm({ title: 'Remove this day?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
     if (!ok) return;
-    await deleteCycleDay(id);
+    const removed = await saveOrSay('The day was not removed. Try again.', async () => {
+      await deleteCycleDay(id);
+      return true;
+    });
+    if (!removed) return;
     if (editingId === id) {
       setFormOpen(false);
       resetForm();
@@ -4251,7 +4471,9 @@ function CycleLens() {
           </View>
         )}
 
-        {days.length === 0 ? (
+        {readFailed ? (
+          <ReadProblem message="Your cycle days could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+        ) : days.length === 0 ? (
           <View style={styles.panelStandalone}>
             <Text style={styles.emptyText}>No period days logged yet.</Text>
           </View>
@@ -4329,8 +4551,17 @@ function MyTrackersLens() {
   const past = pastTrackers(trackers);
   const selected = active.find((tracker) => tracker.id === selectedId) ?? active[0] ?? null;
 
+  const [readFailed, setReadFailed] = useState(false);
+  const [entriesFailed, setEntriesFailed] = useState(false);
+  const [entriesRetry, setEntriesRetry] = useState(0);
   const load = useCallback(() => {
-    listCustomTrackers().then(setTrackers);
+    setReadFailed(false);
+    listCustomTrackers()
+      .then(setTrackers)
+      .catch((error) => {
+        console.warn('Trackers could not be read', error);
+        setReadFailed(true);
+      });
   }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
@@ -4340,8 +4571,14 @@ function MyTrackersLens() {
       setEntries([]);
       return;
     }
-    listTrackerEntries(selected.id, limit).then(setEntries);
-  }, [selected?.id, selected?.entryCount, limit, entriesVersion]); // eslint-disable-line react-hooks/exhaustive-deps
+    setEntriesFailed(false);
+    listTrackerEntries(selected.id, limit)
+      .then(setEntries)
+      .catch((error) => {
+        console.warn('Tracker entries could not be read', error);
+        setEntriesFailed(true);
+      });
+  }, [selected?.id, selected?.entryCount, limit, entriesVersion, entriesRetry]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function resetEntryForm() {
     setValueText('');
@@ -4397,22 +4634,30 @@ function MyTrackersLens() {
       showInfoAlert('Almost there', problem);
       return;
     }
-    if (trackerForm === 'rename' && selected) {
-      await updateCustomTracker(selected.id, {
-        name: trackerName,
-        unit: selected.entryCount === 0 ? trackerUnit : undefined,
-      });
-    } else {
-      const id = await createCustomTracker({ name: trackerName, kind: trackerKind, unit: trackerUnit });
-      setSelectedId(id);
-    }
+    const saved = await saveOrSay('The tracker was not saved. Try again.', async () => {
+      if (trackerForm === 'rename' && selected) {
+        await updateCustomTracker(selected.id, {
+          name: trackerName,
+          unit: selected.entryCount === 0 ? trackerUnit : undefined,
+        });
+      } else {
+        const id = await createCustomTracker({ name: trackerName, kind: trackerKind, unit: trackerUnit });
+        setSelectedId(id);
+      }
+      return true;
+    });
+    if (!saved) return;
     setTrackerForm('closed');
     load();
   }
 
   async function handleRemoveTracker() {
     if (!selected) return;
-    await removeCustomTracker(selected.id);
+    const removed = await saveOrSay('The tracker was not removed. Try again.', async () => {
+      await removeCustomTracker(selected.id);
+      return true;
+    });
+    if (!removed) return;
     setConfirmRemove(false);
     setTrackerForm('closed');
     setSelectedId(null);
@@ -4420,7 +4665,11 @@ function MyTrackersLens() {
   }
 
   async function handleRestore(tracker: CustomTracker) {
-    await restoreCustomTracker(tracker.id);
+    const saved = await saveOrSay('The tracker was not brought back. Try again.', async () => {
+      await restoreCustomTracker(tracker.id);
+      return true;
+    });
+    if (!saved) return;
     setSelectedId(tracker.id);
     load();
   }
@@ -4437,16 +4686,20 @@ function MyTrackersLens() {
       showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
-    if (editingEntryId) {
-      await updateTrackerEntry(editingEntryId, {
-        value: parsed.value,
-        loggedAt,
-        notes: entryNotes.trim() ? entryNotes.trim() : null,
-      });
-      setEntriesVersion((n) => n + 1);
-    } else {
-      await addTrackerEntry({ trackerId: selected.id, value: parsed.value, loggedAt, notes: entryNotes });
-    }
+    const saved = await saveOrSay('The entry was not saved. Try again.', async () => {
+      if (editingEntryId) {
+        await updateTrackerEntry(editingEntryId, {
+          value: parsed.value,
+          loggedAt,
+          notes: entryNotes.trim() ? entryNotes.trim() : null,
+        });
+        setEntriesVersion((n) => n + 1);
+      } else {
+        await addTrackerEntry({ trackerId: selected.id, value: parsed.value, loggedAt, notes: entryNotes });
+      }
+      return true;
+    });
+    if (!saved) return;
     setEntryOpen(false);
     resetEntryForm();
     load();
@@ -4455,7 +4708,11 @@ function MyTrackersLens() {
   async function handleDeleteEntry(id: string) {
     const ok = await confirm({ title: 'Remove this entry?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
     if (!ok) return;
-    await deleteTrackerEntry(id);
+    const removed = await saveOrSay('The entry was not removed. Try again.', async () => {
+      await deleteTrackerEntry(id);
+      return true;
+    });
+    if (!removed) return;
     if (editingEntryId === id) {
       setEntryOpen(false);
       resetEntryForm();
@@ -4549,7 +4806,9 @@ function MyTrackersLens() {
           </View>
         )}
 
-        {active.length === 0 ? (
+        {readFailed ? (
+          <ReadProblem message="Your trackers could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+        ) : active.length === 0 ? (
           <View style={styles.panelStandalone}>
             <Text style={styles.emptyText}>{TRACKERS_EMPTY_LINE}</Text>
           </View>
@@ -4651,7 +4910,9 @@ function MyTrackersLens() {
               </View>
             )}
 
-            {entries.length === 0 ? (
+            {entriesFailed ? (
+              <ReadProblem message="This tracker's entries could not be read just now. Nothing you recorded is lost." onTryAgain={() => setEntriesRetry((n) => n + 1)} />
+            ) : entries.length === 0 ? (
               <View style={styles.panelStandalone}>
                 <Text style={styles.emptyText}>{`Nothing logged for ${selected.name} yet.`}</Text>
               </View>

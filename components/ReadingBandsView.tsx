@@ -27,7 +27,7 @@ function Rows({ rows, color }: { rows: ReadingRow[]; color: string }) {
     <View style={styles.rows}>
       {rows.map((row) => (
         <View key={row.key} style={styles.row}>
-          <Text style={styles.rowLabel} numberOfLines={1}>
+          <Text style={styles.rowLabel}>
             {row.label}
           </Text>
           <View style={styles.track}>
@@ -40,7 +40,7 @@ function Rows({ rows, color }: { rows: ReadingRow[]; color: string }) {
               />
             )}
           </View>
-          <Text style={styles.rowValue} numberOfLines={1}>
+          <Text style={styles.rowValue}>
             {row.display}
           </Text>
         </View>
