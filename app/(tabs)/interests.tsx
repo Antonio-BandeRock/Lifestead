@@ -12,7 +12,7 @@ import { LensHub, type LensOption } from '../../components/LensHub';
 import { MyItemsHub, type MyItemsCategory } from '../../components/MyItemsHub';
 import { PageIdentityLabel } from '../../components/PageIdentityLabel';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
-import { MyInterestsSection } from '../../components/MyInterestsSection';
+import { MyInterestsSection, type InterestHoldingLens } from '../../components/MyInterestsSection';
 import { ProjectsSection } from '../../components/ProjectsSection';
 import { InterestSessionsSection } from '../../components/InterestSessionsSection';
 import { InterestThingsSection } from '../../components/InterestThingsSection';
@@ -23,6 +23,7 @@ import { CouldThisPaySection } from '../../components/CouldThisPaySection';
 import { DaysUntilSection } from '../../components/DaysUntilSection';
 import { DigestCategoryLens, DIGEST_READING_HELP } from '../../components/DigestCategoryLens';
 import { countInterestMoney } from '../../lib/interestMoneyDb';
+import { countInterestSessions } from '../../lib/interestSessionsDb';
 import { countRunningInterestCountdowns } from '../../lib/countdownDb';
 import { colors } from '../../constants/colors';
 import { typography, textShadow } from '../../constants/typography';
@@ -95,7 +96,7 @@ const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   wishList: 'Wish List',
   library: 'Library',
   people: 'People & Places',
-  money: 'Money',
+  money: 'Spending and Earning',
   daysUntil: 'Days Until',
   projects: 'Projects',
   learn: 'Flashcards',
@@ -201,7 +202,7 @@ const PEOPLE_HELP: HelpSection[] = [
 const MONEY_HELP: HelpSection[] = [
   {
     heading: 'What this is for',
-    body: 'What has gone out on an interest and what has come in from it, each on its day: a class, club dues, a stall fee, a sale, a commission. Who it went to or came from, and a note, are optional.',
+    body: 'What you spend on your hobbies and interests, and anything they bring in, each on its day: a class, club dues, a stall fee, a sale, a commission. Who it went to or came from, and a note, are optional. This is not about interest from a bank or a loan; that belongs in Life, under Finances.',
   },
   {
     heading: 'Nothing typed twice',
@@ -286,19 +287,19 @@ const MAKING_IT_PAY_HELP: HelpSection[] = [
 ];
 
 const LENSES: LensOption<InterestsLens>[] = [
-  { key: 'myInterests', label: 'My Interests', icon: 'color-palette-outline', help: MY_INTERESTS_HELP },
-  { key: 'sessions', label: 'Sessions', icon: 'timer-outline', help: SESSIONS_HELP },
-  { key: 'supplies', label: 'Supplies & Equipment', icon: 'construct-outline', help: SUPPLIES_HELP },
-  { key: 'collections', label: 'Collections', icon: 'albums-outline', help: COLLECTIONS_HELP },
-  { key: 'wishList', label: 'Wish List', icon: 'gift-outline', help: WISH_LIST_HELP },
-  { key: 'library', label: 'Library', icon: 'library-outline', help: LIBRARY_HELP },
-  { key: 'people', label: 'People & Places', icon: 'people-outline', help: PEOPLE_HELP },
-  { key: 'money', label: 'Money', icon: 'cash-outline', help: MONEY_HELP },
-  { key: 'daysUntil', label: 'Days Until', icon: 'hourglass-outline', help: DAYS_UNTIL_HELP },
-  { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP },
-  { key: 'learn', label: 'Flashcards', icon: 'school-outline', renderIcon: (size, color) => <FlipCardIcon size={size} color={color} />, help: LEARN_HELP },
-  { key: 'languages', label: 'Languages', icon: 'language-outline', help: LANGUAGES_HELP },
-  { key: 'makingItPay', label: 'Making It Pay', icon: 'trending-up-outline', help: MAKING_IT_PAY_HELP },
+  { key: 'myInterests', label: 'My Interests', icon: 'color-palette-outline', help: MY_INTERESTS_HELP, group: 'Your interests' },
+  { key: 'sessions', label: 'Sessions', icon: 'timer-outline', help: SESSIONS_HELP, group: 'Your interests' },
+  { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP, group: 'Your interests' },
+  { key: 'daysUntil', label: 'Days Until', icon: 'hourglass-outline', help: DAYS_UNTIL_HELP, group: 'Your interests' },
+  { key: 'supplies', label: 'Supplies & Equipment', icon: 'construct-outline', help: SUPPLIES_HELP, group: 'Things' },
+  { key: 'collections', label: 'Collections', icon: 'albums-outline', help: COLLECTIONS_HELP, group: 'Things' },
+  { key: 'wishList', label: 'Wish List', icon: 'gift-outline', help: WISH_LIST_HELP, group: 'Things' },
+  { key: 'library', label: 'Library', icon: 'library-outline', help: LIBRARY_HELP, group: 'Things' },
+  { key: 'people', label: 'People & Places', icon: 'people-outline', help: PEOPLE_HELP, group: 'Things' },
+  { key: 'money', label: 'Spending and Earning', icon: 'cash-outline', help: MONEY_HELP, group: 'Money' },
+  { key: 'makingItPay', label: 'Making It Pay', icon: 'trending-up-outline', help: MAKING_IT_PAY_HELP, group: 'Money' },
+  { key: 'learn', label: 'Flashcards', icon: 'school-outline', renderIcon: (size, color) => <FlipCardIcon size={size} color={color} />, help: LEARN_HELP, group: 'Learning' },
+  { key: 'languages', label: 'Languages', icon: 'language-outline', help: LANGUAGES_HELP, group: 'Learning' },
 ];
 
 const HELP_SECTIONS: HelpSection[] = [
@@ -308,7 +309,7 @@ const HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Where to start',
-    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, Projects is for anything with steps that belongs to an interest, Flashcards goes through decks of cards a few at a time, Languages holds the basics of a language, and Making It Pay is reading with figures for anyone wondering about selling from one.',
+    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Spending and Earning keeps what went out on an interest and what came in from it, Days Until counts to what an interest is waiting on, Projects is for anything with steps that belongs to an interest, Flashcards goes through decks of cards a few at a time, Languages holds the basics of a language, and Making It Pay is reading with figures for anyone wondering about selling from one.',
   },
 ];
 
@@ -324,11 +325,27 @@ export default function InterestsScreen() {
   const [lens, setLens] = useState<InterestsLens>('myInterests');
   const [revealed, setRevealed] = useState(false);
   const [myOpen, setMyOpen] = useState(false);
+  // Opened from an interest on My Interests: the lens shows that interest
+  // alone. `n` remounts the lens so a second tap starts fresh (2026-11-15).
+  const [narrow, setNarrow] = useState<{ interestId: string; log: boolean; n: number } | null>(null);
+  const narrowKey = narrow ? `${narrow.interestId}-${narrow.n}` : 'every';
+  const openForInterest = useCallback((key: InterestHoldingLens, interestId: string, log?: boolean) => {
+    setNarrow((was) => ({ interestId, log: log === true, n: (was?.n ?? 0) + 1 }));
+    setLens(key);
+    setRevealed(true);
+    scrollRef.current?.scrollTo({ y: 0, animated: false });
+  }, []);
+  const chooseLens = useCallback((key: InterestsLens) => {
+    setNarrow(null);
+    setLens(key);
+    setRevealed(true);
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
       const asked = LENS_KEYS.find((key) => key === openInterestsLens);
       if (asked) {
+        setNarrow(null);
         setLens(asked);
         setRevealed(true);
         return;
@@ -344,15 +361,18 @@ export default function InterestsScreen() {
   const [shelfCounts, setShelfCounts] = useState<{ library: number; people: number } | undefined>(undefined);
   const [moneyCount, setMoneyCount] = useState<number | undefined>(undefined);
   const [counterCount, setCounterCount] = useState<number | undefined>(undefined);
+  const [sessionCount, setSessionCount] = useState<number | undefined>(undefined);
   const loadCounts = useCallback(async () => {
-    const [interests, projects, things, shelves, money, counters] = await Promise.all([
+    const [interests, projects, things, shelves, money, counters, sessions] = await Promise.all([
       listInterests(),
       listProjects('interests'),
       countInterestThings(),
       countLibraryAndPeople(),
       countInterestMoney(),
       countRunningInterestCountdowns(),
+      countInterestSessions(),
     ]);
+    setSessionCount(sessions);
     setMoneyCount(money);
     setCounterCount(counters);
     setInterestCount(interests.filter((interest) => !interest.retiredAt).length);
@@ -363,20 +383,28 @@ export default function InterestsScreen() {
   useOnVaultChange(() => {
     void loadCounts();
   });
+  // The counts read again every time the tab comes into view, so a record
+  // added a moment ago is counted without waiting for the vault to change.
+  useFocusEffect(
+    useCallback(() => {
+      void loadCounts().catch(() => undefined);
+    }, [loadCounts]),
+  );
 
   const categories: MyItemsCategory[] = [
-    { id: 'interests', label: 'Interests', count: interestCount, onPress: () => { setLens('myInterests'); setRevealed(true); } },
+    { id: 'interests', label: 'Interests', count: interestCount, onPress: () => chooseLens('myInterests') },
+    { id: 'sessions', label: 'Sessions', count: sessionCount, onPress: () => chooseLens('sessions') },
     ...THING_LENSES.map(({ lens: thingLens, kind }) => ({
       id: thingLens,
       label: LENS_FULL_NAMES[thingLens],
       count: thingCounts?.[kind],
-      onPress: () => { setLens(thingLens); setRevealed(true); },
+      onPress: () => chooseLens(thingLens),
     })),
-    { id: 'library', label: 'Library', count: shelfCounts?.library, onPress: () => { setLens('library'); setRevealed(true); } },
-    { id: 'people', label: 'People & Places', count: shelfCounts?.people, onPress: () => { setLens('people'); setRevealed(true); } },
-    { id: 'money', label: 'Money', count: moneyCount, onPress: () => { setLens('money'); setRevealed(true); } },
-    { id: 'daysUntil', label: 'Days Until', count: counterCount, onPress: () => { setLens('daysUntil'); setRevealed(true); } },
-    { id: 'projects', label: 'Projects', count: projectCount, onPress: () => { setLens('projects'); setRevealed(true); } },
+    { id: 'library', label: 'Library', count: shelfCounts?.library, onPress: () => chooseLens('library') },
+    { id: 'people', label: 'People & Places', count: shelfCounts?.people, onPress: () => chooseLens('people') },
+    { id: 'money', label: 'Spending and Earning', count: moneyCount, onPress: () => chooseLens('money') },
+    { id: 'daysUntil', label: 'Days Until', count: counterCount, onPress: () => chooseLens('daysUntil') },
+    { id: 'projects', label: 'Projects', count: projectCount, onPress: () => chooseLens('projects') },
   ];
 
   return (
@@ -388,39 +416,39 @@ export default function InterestsScreen() {
               {lens === 'myInterests' ? (
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>My Interests</Text>
-                  <MyInterestsSection tabColor={TAB_COLOR} />
+                  <MyInterestsSection tabColor={TAB_COLOR} onOpenLens={openForInterest} />
                 </View>
               ) : null}
               {lens === 'sessions' ? (
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>Sessions</Text>
-                  <InterestSessionsSection tabColor={TAB_COLOR} />
+                  <InterestSessionsSection key={narrowKey} tabColor={TAB_COLOR} onlyInterestId={narrow?.interestId} openLogForm={narrow?.log} />
                 </View>
               ) : null}
               {THING_LENSES.map(({ lens: thingLens, kind }) =>
                 lens === thingLens ? (
                   <View key={thingLens} style={band.box}>
                     <Text style={styles.cardTitle}>{LENS_FULL_NAMES[thingLens]}</Text>
-                    <InterestThingsSection kind={kind} tabColor={TAB_COLOR} />
+                    <InterestThingsSection key={narrowKey} kind={kind} tabColor={TAB_COLOR} onlyInterestId={narrow?.interestId} />
                   </View>
                 ) : null,
               )}
               {lens === 'library' ? (
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>Library</Text>
-                  <InterestLibrarySection tabColor={TAB_COLOR} fromNoteId={libraryFromNote || undefined} />
+                  <InterestLibrarySection key={narrowKey} tabColor={TAB_COLOR} fromNoteId={libraryFromNote || undefined} onlyInterestId={narrow?.interestId} />
                 </View>
               ) : null}
               {lens === 'people' ? (
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>People & Places</Text>
-                  <InterestPeopleSection tabColor={TAB_COLOR} />
+                  <InterestPeopleSection key={narrowKey} tabColor={TAB_COLOR} onlyInterestId={narrow?.interestId} />
                 </View>
               ) : null}
               {lens === 'money' ? (
                 <View style={band.box}>
-                  <Text style={styles.cardTitle}>Money</Text>
-                  <InterestMoneySection tabColor={TAB_COLOR} />
+                  <Text style={styles.cardTitle}>Spending and Earning</Text>
+                  <InterestMoneySection key={narrowKey} tabColor={TAB_COLOR} onlyInterestId={narrow?.interestId} />
                 </View>
               ) : null}
               {lens === 'money' ? (
@@ -438,7 +466,7 @@ export default function InterestsScreen() {
               {lens === 'projects' ? (
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>Projects</Text>
-                  <ProjectsSection scope="interests" tabColor={TAB_COLOR} />
+                  <ProjectsSection key={narrowKey} scope="interests" tabColor={TAB_COLOR} onlyInterestId={narrow?.interestId} />
                 </View>
               ) : null}
               {lens === 'learn' ? (
@@ -474,13 +502,11 @@ export default function InterestsScreen() {
         pageTitle="Interests"
         buttonLabel="Interests"
         options={LENSES}
+        recentKey="Interests"
         selected={revealed ? lens : undefined}
         columns={3}
         autoOpenSignal={openLensHub}
-        onSelect={(key) => {
-          setLens(key);
-          setRevealed(true);
-        }}
+        onSelect={chooseLens}
       />
     </View>
   );

@@ -51,10 +51,12 @@ function run(relPath, resolve) {
 // costOfEating.ts borrows its months, its weights and its money formatting
 // rather than growing a second copy of any of them.
 const V = run('lib/eatingVariety.ts', {});
-const T = run('lib/harvestTrade.ts', {});
+const N = run('lib/ingredientShortName.ts', {});
+const T = run('lib/harvestTrade.ts', { './ingredientShortName': N });
 const U = run('lib/unitConversion.ts', {});
 const H = run('lib/harvestYield.ts', {
-  './plantingEvents': run('lib/plantingEvents.ts', {}),
+  './plantingEvents': run('lib/plantingEvents.ts', { './ingredientShortName': N }),
+  './ingredientShortName': N,
   './eatingVariety': V,
   './harvestTrade': T,
   './unitConversion': U,
@@ -75,6 +77,7 @@ const {
   summarizeGrowingCosts,
   summarizeSupplementCosts,
   summarizeCosts,
+  summarizeHobbyCosts,
   HEALTH_COST_LABELS,
 } = C;
 const { buildMonths } = H;
@@ -571,6 +574,7 @@ check('every band comes back', Object.keys(whole).sort(), [
   'food',
   'growing',
   'hasAnything',
+  'hobbies',
   'months',
   'startDate',
   'supplements',
@@ -596,6 +600,29 @@ const emptyWhole = summarizeCosts({
   coverageDays: 30,
 });
 check('an empty lens says it has nothing', emptyWhole.hasAnything, false);
+check('an older caller with no hobbies gets an empty hobbies band', emptyWhole.hobbies.hasAnything, false);
+
+// Hobbies and interests (2026-11-15): money from Interests, Spending and
+// Earning, never called plain interest so it is not read as a bank's.
+{
+  const hobbyMonths = whole.months;
+  const hobby = summarizeHobbyCosts(hobbyMonths, [
+    { occurredOn: '2026-04-02', amount: 30, direction: 'out', interestName: 'Pottery' },
+    { occurredOn: '2026-05-10', amount: 10, direction: 'out', interestName: 'Birding' },
+    { occurredOn: '2026-05-12', amount: 25, direction: 'in', interestName: 'Pottery' },
+    { occurredOn: '2026-05-13', amount: 0, direction: 'out', interestName: 'Pottery' },
+  ]);
+  check('hobby money knows it has something', hobby.hasAnything, true);
+  check('hobby spending is split by interest, largest first', hobby.byInterest.map((slice) => slice.name), ['Pottery', 'Birding']);
+  checkTrue('money in is said apart from money out', (hobby.inLine || '').includes('came in'));
+  checkTrue('the headline averages over months with anything recorded', hobby.headline.includes('2 months with anything recorded'));
+  checkTrue('the note keeps hobbies apart from bank interest', hobby.note.includes('Interest paid on a loan or earned at a bank is in Finances'));
+  checkTrue('no line calls it plain interest money', !/interest money/i.test([hobby.headline, hobby.note, hobby.inLine].join(' ')));
+  const onlyIn = summarizeHobbyCosts(hobbyMonths, [{ occurredOn: '2026-04-02', amount: 5, direction: 'in', interestName: 'Pottery' }]);
+  checkTrue('only money in still counts as something', onlyIn.hasAnything && onlyIn.headline.startsWith('Nothing spent'));
+  const none = summarizeHobbyCosts(hobbyMonths, []);
+  check('nothing recorded says so', none.headline, 'Nothing spent or earned on hobbies and interests recorded in this stretch.');
+}
 collect(
   emptyWhole.condition.headline,
   emptyWhole.food.headline,

@@ -264,7 +264,7 @@ async function allMatches(recalls?: Recall[]): Promise<{ meds: { med: { id: stri
   const [treatments, common, products, labelRows] = await Promise.all([
     listAllActiveTreatments(),
     listCommonMedications().catch(() => []),
-    listScannedProducts(10000),
+    listScannedProducts(),
     db.getAllAsync<{ treatment_id: string; document_json: string }>('SELECT treatment_id, document_json FROM medicine_labels'),
   ]);
   const labels = new Map<string, LabelDocument>();

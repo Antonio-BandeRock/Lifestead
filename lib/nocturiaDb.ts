@@ -14,7 +14,7 @@ export type NocturiaNight = {
 
 const COLUMNS = 'id, night_of AS nightOf, times, first_wake AS firstWake, notes';
 
-export async function listNocturiaNights(limit = 30): Promise<NocturiaNight[]> {
+export async function listNocturiaNights(limit = -1): Promise<NocturiaNight[]> {
   const db = await getDatabase();
   return readOrClosed(() => db.getAllAsync<NocturiaNight>(
     `SELECT ${COLUMNS} FROM nocturia_nights ORDER BY night_of DESC, created_at DESC LIMIT ?`,

@@ -1108,7 +1108,7 @@ export default function InsightsScreen() {
   const [labsLoading, setLabsLoading] = useState(true);
   const loadLabs = useCallback(() => {
     setLabsLoading(true);
-    Promise.all([getLabTests(), listLabResults(undefined, 300)]).then(([tests, results]) => {
+    Promise.all([getLabTests(), listLabResults()]).then(([tests, results]) => {
       setLabTests(tests);
       setLabResults(results);
       setLabsLoading(false);

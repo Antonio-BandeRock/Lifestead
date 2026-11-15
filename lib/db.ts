@@ -4309,7 +4309,7 @@ export async function getMyFoodBackground(
 
   // listFoodTrials comes back newest first, so the first resolved trial
   // seen for a name is the one that still stands.
-  const trials = await listFoodTrials(200);
+  const trials = await listFoodTrials();
   for (const trial of trials) {
     if (trial.status !== 'cleared' && trial.status !== 'flagged') continue;
     const key = mySafeFoodKey(trial.foodName);
@@ -11651,7 +11651,7 @@ export type SideRecord = {
 // still fully resolvable by id, so every scheduled meal still rebuilds
 // correctly; they are simply not things the person made, so they do not belong
 // in a list of things the person made.
-export async function listSides(limit = 50): Promise<SideRecord[]> {
+export async function listSides(limit = -1): Promise<SideRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<SideRecord>(
     `
@@ -12108,7 +12108,7 @@ export type SaladRecord = {
   createdAt: string;
 };
 
-export async function listSalads(limit = 50): Promise<SaladRecord[]> {
+export async function listSalads(limit = -1): Promise<SaladRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<SaladRecord>(
     `
@@ -12456,7 +12456,7 @@ export type SmoothieRecord = {
   createdAt: string;
 };
 
-export async function listSmoothies(limit = 50): Promise<SmoothieRecord[]> {
+export async function listSmoothies(limit = -1): Promise<SmoothieRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<SmoothieRecord>(
     `
@@ -12827,7 +12827,7 @@ export type FermentationRecord = {
   createdAt: string;
 };
 
-export async function listFermentations(limit = 50): Promise<FermentationRecord[]> {
+export async function listFermentations(limit = -1): Promise<FermentationRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<FermentationRecord>(
     `
@@ -13241,7 +13241,7 @@ export type BeverageRecord = {
   createdAt: string;
 };
 
-export async function listBeverages(limit = 50): Promise<BeverageRecord[]> {
+export async function listBeverages(limit = -1): Promise<BeverageRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<BeverageRecord>(
     `
@@ -13631,7 +13631,7 @@ export type SnackRecord = {
   createdAt: string;
 };
 
-export async function listSnacks(limit = 50): Promise<SnackRecord[]> {
+export async function listSnacks(limit = -1): Promise<SnackRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<SnackRecord>(
     `
@@ -13987,7 +13987,7 @@ export type BakedGoodsRecord = {
   createdAt: string;
 };
 
-export async function listBakedGoods(limit = 50): Promise<BakedGoodsRecord[]> {
+export async function listBakedGoods(limit = -1): Promise<BakedGoodsRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<BakedGoodsRecord>(
     `
@@ -14359,7 +14359,7 @@ export type SoupRecord = {
   createdAt: string;
 };
 
-export async function listSoups(limit = 50): Promise<SoupRecord[]> {
+export async function listSoups(limit = -1): Promise<SoupRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<SoupRecord>(
     `
@@ -14761,7 +14761,7 @@ export type SauceRecord = {
   createdAt: string;
 };
 
-export async function listSauces(limit = 50): Promise<SauceRecord[]> {
+export async function listSauces(limit = -1): Promise<SauceRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<SauceRecord>(
     `
@@ -15141,7 +15141,7 @@ export type HandheldRecord = {
   createdAt: string;
 };
 
-export async function listHandhelds(limit = 50): Promise<HandheldRecord[]> {
+export async function listHandhelds(limit = -1): Promise<HandheldRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<HandheldRecord>(
     `
@@ -15518,7 +15518,7 @@ export type DessertRecord = {
   createdAt: string;
 };
 
-export async function listDesserts(limit = 50): Promise<DessertRecord[]> {
+export async function listDesserts(limit = -1): Promise<DessertRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<DessertRecord>(
     `
@@ -15752,7 +15752,7 @@ export async function getDessertSixDimensionsBreakdown(
 // callers -- like the very first favorites list this app had -- don't care
 // about the distinction).
 export async function listFavorites(
-  limit = 8,
+  limit = -1,
   itemType?:
     | 'meal'
     | 'side'
@@ -18669,9 +18669,9 @@ export async function getOutsideEatingWindowCountsByDateRange(
 // the full "why"). By the time someone opens this, every real past
 // scheduled meal is either 'logged' (materialized automatically, or
 // explicitly "Log now"-ed) or 'skipped' (a real, deliberate "this didn't
-// happen") -- 'planned' rows this old shouldn't exist anymore, matching
-// this app's own established list-size convention (listMeals(100),
-// listFoodTrials()), not unbounded.
+// happen") -- 'planned' rows this old shouldn't exist anymore. Every past
+// meal is listed, with no count (2026-11-15: a history read is limited by
+// its dates, never by how many records there are).
 //
 // Two more statuses join the list in 1.0.39.15: 'partial' (some of it was
 // eaten) and 'replaced' (something else was eaten instead), both written by
@@ -18680,7 +18680,7 @@ export async function getOutsideEatingWindowCountsByDateRange(
 // deleted or a row in some state nobody has thought about out of a list
 // people read back as what happened. See describeStatus in
 // lib/reconciliation.ts for the words each one shows as.
-export async function listPastScheduledMeals(limit = 100): Promise<ScheduleItemRecord[]> {
+export async function listPastScheduledMeals(limit = -1): Promise<ScheduleItemRecord[]> {
   const db = await getDatabase();
   const now = nowLocalDateTimeString();
   return db.getAllAsync<ScheduleItemRecord>(
@@ -20110,7 +20110,7 @@ export async function clearSyncFolderUri() {
   await db.runAsync('DELETE FROM app_meta WHERE key = ?', SYNC_FOLDER_URI_KEY);
 }
 
-export async function listMeals(limit = 10) {
+export async function listMeals(limit = -1) {
   const db = await getDatabase();
   return db.getAllAsync<MealRecord>(
     `
@@ -20740,7 +20740,7 @@ export async function createMealPhotoDraft(photoUri: string, capturedAt: string,
 
 // Oldest first, deliberately: a photo waiting since breakfast should be the one
 // asking to be dealt with, not the one taken a minute ago.
-export async function listMealPhotoDrafts(limit = 12): Promise<MealPhotoDraft[]> {
+export async function listMealPhotoDrafts(limit = -1): Promise<MealPhotoDraft[]> {
   const db = await getDatabase();
   return db.getAllAsync<MealPhotoDraft>(
     `
@@ -23789,7 +23789,10 @@ export async function recordLabResult(input: {
 // Every logged result across every test, most recent first -- pass
 // testCode to scope to one test. Use getLabResultTrend instead when you
 // specifically want one test's history in chronological order for charting.
-export async function listLabResults(testCode?: string, limit = 100) {
+// No count unless a caller passes one: a history read is limited by its
+// dates, never by how many records there are (2026-11-15). SQLite reads
+// LIMIT -1 as no limit.
+export async function listLabResults(testCode?: string, limit?: number) {
   const db = await getDatabase();
   return readOrClosed(() => db.getAllAsync<LabResultRecord>(
     `
@@ -23800,7 +23803,7 @@ export async function listLabResults(testCode?: string, limit = 100) {
       ORDER BY tested_at DESC
       LIMIT ?
     `,
-    ...(testCode ? [testCode, limit] : [limit]),
+    ...(testCode ? [testCode, limit ?? -1] : [limit ?? -1]),
   ), []);
 }
 
@@ -24177,7 +24180,7 @@ export async function listCheckins(
   }
 
   const whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
-  const limit = filters.limit ?? 50;
+  const limit = filters.limit ?? -1;
 
   const rows = await readOrClosed(() => db.getAllAsync<CheckinRowBase>(
     `
@@ -24381,7 +24384,7 @@ export async function listTherapySessions(
       LIMIT ?
     `,
     ...params,
-    filters.limit ?? 200,
+    filters.limit ?? -1,
   ), []);
 
   return rows;
@@ -24506,7 +24509,7 @@ export async function recordExercise(input: {
   return id;
 }
 
-export async function listExerciseLogs(limit = 50) {
+export async function listExerciseLogs(limit = -1) {
   const db = await getDatabase();
   return db.getAllAsync<ExerciseLog>(
     `
@@ -24586,7 +24589,10 @@ export async function recordBodyMeasurement(input: {
   return id;
 }
 
-export async function listBodyMeasurements(measurementType?: string, limit = 100) {
+// No count unless a caller passes one: a history read is limited by its
+// dates, never by how many records there are (2026-11-15). SQLite reads
+// LIMIT -1 as no limit.
+export async function listBodyMeasurements(measurementType?: string, limit?: number) {
   const db = await getDatabase();
   return readOrClosed(() => db.getAllAsync<BodyMeasurementRecord>(
     `
@@ -24596,7 +24602,7 @@ export async function listBodyMeasurements(measurementType?: string, limit = 100
       ORDER BY logged_at DESC
       LIMIT ?
     `,
-    ...(measurementType ? [measurementType, limit] : [limit]),
+    ...(measurementType ? [measurementType, limit ?? -1] : [limit ?? -1]),
   ), []);
 }
 
@@ -25110,7 +25116,7 @@ export async function createFoodTrial(input: {
   return { id, status };
 }
 
-export async function listFoodTrials(limit = 100): Promise<FoodTrialRecord[]> {
+export async function listFoodTrials(limit = -1): Promise<FoodTrialRecord[]> {
   const db = await getDatabase();
   return readOrClosed(() => db.getAllAsync<FoodTrialRecord>(
     `
@@ -25723,7 +25729,7 @@ export async function recordSymptomAssessment(input: {
 
 // Most-recent-first, without responses -- use getSymptomAssessmentResponses
 // for one assessment's actual answers.
-export async function listSymptomAssessments(limit = 50) {
+export async function listSymptomAssessments(limit = -1) {
   const db = await getDatabase();
   return readOrClosed(() => db.getAllAsync<SymptomAssessmentRecord>(
     `
@@ -26263,7 +26269,7 @@ export async function recordGardenHarvest(input: {
   return id;
 }
 
-export async function listGardenHarvests(limit = 50): Promise<GardenHarvest[]> {
+export async function listGardenHarvests(limit = -1): Promise<GardenHarvest[]> {
   const db = await getDatabase();
   return db.getAllAsync<GardenHarvest>(
     `SELECT ${GARDEN_HARVEST_COLUMNS} FROM garden_harvests ORDER BY harvested_at DESC LIMIT ?`,
@@ -26782,7 +26788,7 @@ export async function listAvailableFermentationHarvests(): Promise<FermentationH
   );
 }
 
-export async function listAllFermentationHarvests(limit = 50): Promise<FermentationHarvest[]> {
+export async function listAllFermentationHarvests(limit = -1): Promise<FermentationHarvest[]> {
   const db = await getDatabase();
   return db.getAllAsync<FermentationHarvest>(
     `SELECT ${FERMENTATION_HARVEST_COLUMNS} FROM fermentation_harvests ORDER BY ready_at DESC LIMIT ?`,
@@ -26818,7 +26824,7 @@ export async function deleteFermentationHarvest(id: string): Promise<void> {
 
 // Every planned, not-yet-happened real garden task from today onward, most
 // imminent first -- the Garden tab's own real "Upcoming Tasks" list.
-export async function listUpcomingGardenTasks(limit = 20): Promise<
+export async function listUpcomingGardenTasks(limit = -1): Promise<
   (ScheduleItemRecord & { plotId: string | null; plantingId: string | null })[]
 > {
   const db = await getDatabase();
@@ -26879,7 +26885,7 @@ export async function getScannedProduct(id: number): Promise<ScannedProductRecor
 // Most-recently-scanned first -- matches every other "My Foods"-style list
 // in this app (listSides, listFavorites, etc.) and is also what a
 // "Recently Scanned" quick-pick actually wants.
-export async function listScannedProducts(limit = 100): Promise<ScannedProductRecord[]> {
+export async function listScannedProducts(limit = -1): Promise<ScannedProductRecord[]> {
   const db = await getDatabase();
   return db.getAllAsync<ScannedProductRecord>(
     `SELECT ${SCANNED_PRODUCT_COLUMNS} FROM scanned_products ORDER BY scanned_at DESC LIMIT ?`,

@@ -8,7 +8,7 @@
 
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -17,6 +17,8 @@ import { listInterests } from '../lib/interestsDb';
 import {
   describePersonLine,
   groupPeople,
+  reachLinks,
+  type ReachLink,
   kindChoices,
   PEOPLE_KINDS,
   retiredPeople,
@@ -30,16 +32,21 @@ import {
   updateInterestPerson,
 } from '../lib/interestLibraryDb';
 import { explainNotYet } from '../lib/notYet';
+import { useInfoAlert } from './InfoAlert';
+import { t } from '../lib/i18n';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { useFadingMessage } from '../hooks/useFadingMessage';
+import { ShowMoreButton, useShownPart } from './ShowMoreButton';
+import { OnlyInterestLine } from './OnlyInterestLine';
 
 const NO_INTEREST = '__no_interest__';
 
-type Props = { tabColor: string };
+type Props = { tabColor: string; onlyInterestId?: string };
 
 type PersonForm = {
   id: string | null;
@@ -55,13 +62,13 @@ function emptyForm(interestId: string | null): PersonForm {
   return { id: null, interestId, kind: '', name: '', reach: '', place: '', about: '' };
 }
 
-export function InterestPeopleSection({ tabColor }: Props) {
+export function InterestPeopleSection({ tabColor, onlyInterestId }: Props) {
   const [interests, setInterests] = useState<Interest[]>([]);
   const [people, setPeople] = useState<InterestPerson[]>([]);
   const [form, setForm] = useState<PersonForm | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [showRetired, setShowRetired] = useState(false);
-  const [saidBack, setSaidBack] = useState<string | null>(null);
+  const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
   const load = useCallback(async () => {
@@ -76,11 +83,19 @@ export function InterestPeopleSection({ tabColor }: Props) {
   );
 
   const walkMark = useWalkMark();
+  const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const { current } = groupInterests(interests);
   const nameOf = (id: string) => interests.find((interest) => interest.id === id)?.name ?? 'An interest no longer listed';
   const groups = groupPeople(people, nameOf);
+  // Opened from an interest on My Interests, the list starts on that interest
+  // alone; Show Every Interest widens it. A long list shows its first part
+  // and carries on with Show more (2026-11-15).
+  const [onlyId, setOnlyId] = useState<string | null>(onlyInterestId ?? null);
+  const listed = onlyId ? groups.filter((group) => group.interestId === onlyId) : groups;
+  const { shown, more, showMore } = useShownPart(listed.flatMap((group) => group.kinds.flatMap((part) => part.people)));
+  const shownIds = new Set(shown.map((item) => item.id));
   const retired = retiredPeople(people);
-  const firstPersonId = groups[0]?.kinds[0]?.people[0]?.id;
+  const firstPersonId = shown[0]?.id;
   const kinds = kindChoices(
     PEOPLE_KINDS,
     people.map((person) => person.kind),
@@ -236,6 +251,21 @@ export function InterestPeopleSection({ tabColor }: Props) {
     );
   }
 
+  // A number, an email or a web address under How to reach them opens the
+  // phone's dialler, mail or browser in one tap (2026-11-15).
+  function openReach(link: ReachLink) {
+    Linking.openURL(link.url).catch(() =>
+      showInfoAlert(
+        t('Nothing opened'),
+        link.kind === 'call'
+          ? t('This device could not open a call. The number is {shown}.', { shown: link.shown })
+          : link.kind === 'email'
+            ? t('This device could not open an email. The address is {shown}.', { shown: link.shown })
+            : t('This device could not open the page. The address is {shown}.', { shown: link.shown }),
+      ),
+    );
+  }
+
   function renderPerson(person: InterestPerson) {
     const open = openId === person.id;
     const first = person.id === firstPersonId;
@@ -256,6 +286,26 @@ export function InterestPeopleSection({ tabColor }: Props) {
             {open && person.about ? <Text style={styles.captionText}>{person.about}</Text> : null}
           </View>
         </TouchableOpacity>
+        {open && reachLinks(person.reach).length > 0 ? (
+          <View style={styles.links}>
+            {reachLinks(person.reach).map((link, index) => (
+              <TouchableOpacity
+                key={link.url}
+                ref={first && index === 0 ? walkMark.ref('people.reach') : undefined}
+                onPress={() => openReach(link)}
+                accessibilityRole="link"
+              >
+                <Text style={styles.linkText}>
+                  {link.kind === 'call'
+                    ? t('Call {shown}', { shown: link.shown })
+                    : link.kind === 'email'
+                      ? t('Email {shown}', { shown: link.shown })
+                      : t('Open {shown}', { shown: link.shown })}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ) : null}
         {open ? (
           <View style={styles.links}>
             <TouchableOpacity ref={first ? walkMark.ref('people.change') : undefined} onPress={() => startChange(person)}>
@@ -321,24 +371,31 @@ export function InterestPeopleSection({ tabColor }: Props) {
       )}
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
-      {groups.length === 0 ? (
+      {onlyId ? <OnlyInterestLine name={nameOf(onlyId)} onShowEvery={() => setOnlyId(null)} /> : null}
+      {listed.length === 0 ? (
         <Text style={styles.captionText}>Nobody here yet. Each person or place you add shows here under its interest.</Text>
       ) : (
-        groups.map((group) => (
-          <View key={group.interestId} style={styles.group}>
-            <Text style={styles.groupHeading}>{group.interestName}</Text>
-            {group.kinds.map((part) => (
-              <View key={part.kind ?? '__none__'} style={styles.group}>
-                {part.kind ? <Text style={styles.setHeading}>{part.kind}</Text> : null}
-                {part.people.map(renderPerson)}
-              </View>
-            ))}
-          </View>
-        ))
+        listed
+          .filter((group) => group.kinds.some((part) => part.people.some((person) => shownIds.has(person.id))))
+          .map((group) => (
+            <View key={group.interestId} style={styles.group}>
+              <Text style={styles.groupHeading}>{group.interestName}</Text>
+              {group.kinds
+                .filter((part) => part.people.some((person) => shownIds.has(person.id)))
+                .map((part) => (
+                  <View key={part.kind ?? '__none__'} style={styles.group}>
+                    {part.kind ? <Text style={styles.setHeading}>{part.kind}</Text> : null}
+                    {part.people.filter((person) => shownIds.has(person.id)).map(renderPerson)}
+                  </View>
+                ))}
+            </View>
+          ))
       )}
+      <ShowMoreButton more={more} onPress={showMore} />
 
       {renderRetired()}
 
+      {infoAlertElement}
       <AppActionSheet
         visible={confirm !== null}
         onClose={() => setConfirm(null)}

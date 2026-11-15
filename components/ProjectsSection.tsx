@@ -47,6 +47,10 @@ import {
 import { readTodoWhen } from '../lib/todos';
 import { interestChoices, type Interest } from '../lib/interests';
 import { listInterests } from '../lib/interestsDb';
+import { listSessionsForProject } from '../lib/interestSessionsDb';
+import { describeSessionTotal, type InterestSession } from '../lib/interestSessions';
+import { OnlyInterestLine } from './OnlyInterestLine';
+import { t } from '../lib/i18n';
 import { addCountdown } from '../lib/countdownDb';
 import { calendarDaysBetween } from '../lib/countdown';
 import { explainNotYet } from '../lib/notYet';
@@ -57,6 +61,7 @@ import { AttachedFiles } from './AttachedFiles';
 import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { useFadingMessage } from '../hooks/useFadingMessage';
 
 function todayLocal(): string {
   const now = new Date();
@@ -70,6 +75,8 @@ type Props = {
   tabColor: string;
   /** 'everything' on Life, an area where one tab shows its own. */
   scope: ProjectScope;
+  /** On Interests, opened from an interest on My Interests: only its projects show. */
+  onlyInterestId?: string;
 };
 
 type ProjectForm = { id: string | null; name: string; about: string; when: string; area: ProjectArea; interestId: string | null };
@@ -89,8 +96,12 @@ function dayCaption(words: string, today: string): string {
 
 const DAY_HELP = 'The day could not be read. Try "tomorrow", "15 November" or "next Friday", or leave it empty for no day.';
 
-export function ProjectsSection({ tabColor, scope }: Props) {
+export function ProjectsSection({ tabColor, scope, onlyInterestId }: Props) {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [onlyId, setOnlyId] = useState<string | null>(onlyInterestId ?? null);
+  // Sessions logged against each project, so a project on Interests shows the
+  // time it has taken (2026-11-15).
+  const [projectSessions, setProjectSessions] = useState<Record<string, InterestSession[]>>({});
   const [interests, setInterests] = useState<Interest[]>([]);
   const [steps, setSteps] = useState<ProjectStep[]>([]);
   const [form, setForm] = useState<ProjectForm | null>(null);
@@ -101,14 +112,19 @@ export function ProjectsSection({ tabColor, scope }: Props) {
   const [stepError, setStepError] = useState<string | null>(null);
   const [pausing, setPausing] = useState<{ id: string; note: string } | null>(null);
   const [showClosed, setShowClosed] = useState<Record<string, boolean>>({});
-  const [saidBack, setSaidBack] = useState<string | null>(null);
+  const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
   const load = useCallback(async () => {
     const list = await listProjects(scope);
     setProjects(list);
     setSteps(await listProjectSteps(list.map((project) => project.id)));
-    if (scope === 'interests') setInterests(await listInterests());
+    if (scope === 'interests') {
+      setInterests(await listInterests());
+      const linked = list.filter((project) => project.linkKind === 'interest');
+      const pairs = await Promise.all(linked.map(async (project) => [project.id, await listSessionsForProject(project.id)] as const));
+      setProjectSessions(Object.fromEntries(pairs));
+    }
   }, [scope]);
 
   useFocusEffect(
@@ -118,7 +134,7 @@ export function ProjectsSection({ tabColor, scope }: Props) {
   );
 
   const today = todayLocal();
-  const groups = groupProjects(projects);
+  const groups = groupProjects(onlyId ? projects.filter((project) => project.linkKind === 'interest' && project.linkId === onlyId) : projects);
   // The first project carries the tutorial rings (lib/toolHowTos.ts).
   const walkMark = useWalkMark();
   const firstId = groups[0]?.projects[0]?.id;
@@ -523,6 +539,9 @@ export function ProjectsSection({ tabColor, scope }: Props) {
           <View style={styles.itemText}>
             <Text style={styles.bodyText}>{project.name}</Text>
             {where ? <Text style={styles.captionText}>{where}</Text> : null}
+            {(projectSessions[project.id]?.length ?? 0) > 0 ? (
+              <Text style={styles.captionText}>{describeSessionTotal(projectSessions[project.id])}</Text>
+            ) : null}
             {lines.map((line) => (
               <Text key={line} style={styles.captionText}>{line}</Text>
             ))}
@@ -631,6 +650,7 @@ export function ProjectsSection({ tabColor, scope }: Props) {
         </Text>
       ) : null}
 
+      {onlyId ? <OnlyInterestLine name={interests.find((interest) => interest.id === onlyId)?.name ?? t('this interest')} onShowEvery={() => setOnlyId(null)} /> : null}
       {groups.map((group) => {
         const collapsible = group.key === 'finished' || group.key === 'stopped';
         const shown = !collapsible || showClosed[group.key];

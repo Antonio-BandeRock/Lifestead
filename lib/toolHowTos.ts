@@ -96,16 +96,19 @@ export type ToolMark =
   | 'thing.supplyRow'
   | 'thing.supplyChange'
   | 'thing.supplyRetire'
+  | 'thing.supplyFiles'
   | 'thing.collectionAdd'
   | 'thing.collectionSave'
   | 'thing.collectionRow'
   | 'thing.collectionChange'
   | 'thing.collectionRetire'
+  | 'thing.collectionFiles'
   | 'thing.wishAdd'
   | 'thing.wishSave'
   | 'thing.wishRow'
   | 'thing.wishChange'
   | 'thing.wishGot'
+  | 'thing.wishFiles'
   | 'library.add'
   | 'library.save'
   | 'library.row'
@@ -115,6 +118,7 @@ export type ToolMark =
   | 'people.add'
   | 'people.save'
   | 'people.row'
+  | 'people.reach'
   | 'people.change'
   | 'money.add'
   | 'money.save'
@@ -346,6 +350,7 @@ export type ToolMark =
   | 'home.welcomeNotNow'
   | 'home.waitingOpen'
   | 'home.insideKnowledgeOpen'
+  | 'home.interestTimerStop'
   | 'home.languageBasicsOpen'
   | 'home.languageBasicsUnit'
   | 'home.languageBasicsGroup'
@@ -2694,6 +2699,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'A group shows here once you have studied those units together under Interests, Languages. The six most recent are kept. With Simple View on, Profile, Simple View can keep this card on Home, and the graduation cap button at the edge of the screen opens Language Basics from any screen.',
     },
     {
+      key: 'interestTimer',
+      title: 'Stop a timer running on an interest',
+      steps: [
+        { say: 'Open the band with the name of Interests, then Interest Timer Running. It shows only while a timer runs.', mark: 'homeBand.interestTimer', stay: true },
+        { say: 'Tap Stop and Keep.', mark: 'home.interestTimerStop' },
+      ],
+      forYou: 'The time so far is kept as a session on Interests, Sessions, dated the day it started. The notification that stays up while a timer runs has Stop and Keep too, and it works on a locked phone. To throw the time away instead, tap Open Sessions.',
+    },
+    {
       key: 'insideKnowledge',
       title: 'See what you now know from Flashcards',
       steps: [
@@ -3254,6 +3268,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       ],
       forYou: 'No Longer Have It keeps the thing with everything it had, under No Longer Have It at the bottom, where Have It Again brings it back.',
     },
+    {
+      key: 'files',
+      title: "Keep a photo or paper with a supply",
+      steps: [
+        { say: "Tap the supply to open it.", mark: 'thing.supplyRow', stay: true },
+        { say: "Tap Files.", mark: 'thing.supplyFiles', stay: true },
+        { say: "Tap Attach a File and pick it: a photo of it, a receipt, a manual or a certificate." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
   ],
   '/interests#collections': [
     {
@@ -3275,6 +3299,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       ],
       forYou: 'Something given away or sold stays under No Longer Have It with when and how it came.',
     },
+    {
+      key: 'files',
+      title: "Keep a photo or paper with something in a collection",
+      steps: [
+        { say: "Tap the thing to open it.", mark: 'thing.collectionRow', stay: true },
+        { say: "Tap Files.", mark: 'thing.collectionFiles', stay: true },
+        { say: "Tap Attach a File and pick it: a photo of it, a receipt, a manual or a certificate." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
   ],
   '/interests#wishList': [
     {
@@ -3295,6 +3329,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Got It, then pick Supplies & Equipment or Collections.', mark: 'thing.wishGot' },
       ],
       forYou: 'Nothing is typed again. It moves with its price and where it came from, dated today.',
+    },
+    {
+      key: 'files',
+      title: "Keep a photo or paper with a wish",
+      steps: [
+        { say: "Tap the wish to open it.", mark: 'thing.wishRow', stay: true },
+        { say: "Tap Files.", mark: 'thing.wishFiles', stay: true },
+        { say: "Tap Attach a File and pick it: a photo of it, a receipt, a manual or a certificate." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. Once you have it, the files move with it. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/interests#library': [
@@ -3365,6 +3409,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Change, or No Longer Part of It.', mark: 'people.change' },
       ],
       forYou: 'No Longer Part of It keeps what you wrote about them, at the bottom, where Part of It Again brings them back.',
+    },
+    {
+      key: 'reach',
+      title: 'Call, email or open a page in one tap',
+      steps: [
+        { say: 'Tap the name to open it.', mark: 'people.row', stay: true },
+        { say: 'Tap Call, Email or Open under the name.', mark: 'people.reach' },
+      ],
+      forYou: "A phone number, an email or a web address you typed under How to reach them opens in the phone's dialler, mail or browser. Anything else you wrote there stays as you wrote it.",
     },
   ],
   '/interests#money': [

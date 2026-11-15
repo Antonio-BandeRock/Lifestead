@@ -96,7 +96,7 @@ export async function addTrackerEntry(input: { trackerId: string; value: number;
   );
 }
 
-export async function listTrackerEntries(trackerId: string, limit = 30): Promise<TrackerEntry[]> {
+export async function listTrackerEntries(trackerId: string, limit = -1): Promise<TrackerEntry[]> {
   const db = await getDatabase();
   return db.getAllAsync<TrackerEntry>(
     `SELECT ${ENTRY_COLUMNS} FROM custom_tracker_entries WHERE tracker_id = ? ORDER BY logged_at DESC, created_at DESC LIMIT ?`,

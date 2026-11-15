@@ -266,13 +266,13 @@ async function findFactorFamilies(input: {
   const reachBack = dateStringDaysAgo(days + 1);
   const dayTotals = windowHours >= DAY_TOTAL_MIN_HOURS;
   const [checkins, doses, stepRows, water, trackers, trackerEntries, exercise] = await Promise.all([
-    listCheckins({ limit: 2000 }),
+    listCheckins(),
     listScheduledDoses(rangeForDays(days + 2, today)),
     getStepCountTrend(days + 2),
     dayTotals ? getNutrientTrendSeriesForRange('water', reachBack, today) : Promise.resolve(null),
     listCustomTrackers(),
     listTrackerEntriesSince(reachBack),
-    listExerciseLogs(2000),
+    listExerciseLogs(),
   ]);
 
   const moments: FactorMoment[] = [];
@@ -512,7 +512,7 @@ export async function findFoodPatterns(
   // energy 1 or 2, or their stress 4 or 5, one per day at the time of that
   // answer (lib/patternOutcome.ts). Everything below counts whichever
   // population this is; only the words change.
-  const generalCheckins = await listCheckins({ checkinType: 'general', limit: Math.max(1000, days * 6) });
+  const generalCheckins = await listCheckins({ checkinType: 'general' });
   type OutcomeMoment = Pick<Awaited<ReturnType<typeof listCheckins>>[number], 'loggedAt' | 'severity' | 'severityTen'>;
   const symptomCheckins: OutcomeMoment[] =
     bodyRead
@@ -526,8 +526,8 @@ export async function findFoodPatterns(
         ).map((stamp) => ({ loggedAt: stamp, severity: null, severityTen: null }))
       : outcome === 'flares'
       ? await Promise.all([
-          listCheckins({ checkinType: 'flare', limit: Math.max(200, days * 4) }),
-          listCheckins({ checkinType: 'post_meal', limit: Math.max(200, days * 4) }),
+          listCheckins({ checkinType: 'flare' }),
+          listCheckins({ checkinType: 'post_meal' }),
         ]).then(([flares, reactions]) =>
           [...flares, ...reactions].filter(
             (checkin) => checkin.severity != null && checkin.loggedAt.slice(0, 10) >= rangeStart,

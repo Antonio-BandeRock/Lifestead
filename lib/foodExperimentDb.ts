@@ -23,8 +23,8 @@ function localToday(): string {
 export async function readExperimentInput(trial: FoodTrialRecord): Promise<ExperimentInput | null> {
   if (trial.design !== 'remove_return' || !trial.removalStartedOn || !trial.removalDays) return null;
   const [flares, reactions] = await Promise.all([
-    listCheckins({ checkinType: 'flare', limit: 500 }),
-    listCheckins({ checkinType: 'post_meal', limit: 500 }),
+    listCheckins({ checkinType: 'flare' }),
+    listCheckins({ checkinType: 'post_meal' }),
   ]);
   const db = await getDatabase();
   const subject = subjectOf(trial.subjectKind);
@@ -68,8 +68,8 @@ export async function readSteppedInput(trial: FoodTrialRecord): Promise<SteppedR
   ), []);
   if (!steps.length) return null;
   const [flares, reactions] = await Promise.all([
-    listCheckins({ checkinType: 'flare', limit: 500 }),
-    listCheckins({ checkinType: 'post_meal', limit: 500 }),
+    listCheckins({ checkinType: 'flare' }),
+    listCheckins({ checkinType: 'post_meal' }),
   ]);
   const eaten =
     trial.foodId != null && trial.source

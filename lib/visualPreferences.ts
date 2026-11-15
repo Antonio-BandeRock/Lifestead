@@ -395,6 +395,9 @@ export type HomeSectionKey =
   // have cards back for their day, in the Interests group
   // (components/InsideKnowledgeCard.tsx). Never a share of answers.
   | 'insideKnowledge'
+  // A timer running on Interests > Sessions, 2026-11-15
+  // (components/InterestTimerHomeCard.tsx). Drawn only while one runs.
+  | 'interestTimer'
   // Language basics, 2026-11-05: the units turned on under Interests > Languages,
   // in the order they should be learned (components/LanguageBasicsHomeCard.tsx).
   | 'languageBasics'
@@ -483,6 +486,7 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'untriedGarden',
   'tutorialsGarden',
   // Interests.
+  'interestTimer',
   'insideKnowledge',
   'languageBasics',
   'untriedInterests',
@@ -616,6 +620,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   tutorialsLife: 'Life Tutorials',
   tutorialsFood: 'Food Tutorials',
   tutorialsGarden: 'Garden Tutorials',
+  interestTimer: 'Interest Timer Running',
   insideKnowledge: 'Inside Knowledge',
   languageBasics: 'Language Basics',
   tutorialsInterests: 'Interests Tutorials',

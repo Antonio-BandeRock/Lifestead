@@ -257,7 +257,7 @@ export async function deleteCompostEvent(id: string): Promise<void> {
 }
 
 /** Newest first, every pile, so one query feeds every summary. */
-export async function listCompostEvents(limit = 500): Promise<CompostEvent[]> {
+export async function listCompostEvents(limit = -1): Promise<CompostEvent[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<{
     id: string;

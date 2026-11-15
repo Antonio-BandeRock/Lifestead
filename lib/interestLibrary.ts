@@ -125,6 +125,40 @@ export function describePersonLine(person: InterestPerson): string {
   return [person.kind, person.place, person.reach].filter(Boolean).join(' · ');
 }
 
+/**
+ * The ways to reach someone found in what the person typed under How to
+ * reach them (2026-11-15): a phone number to call, an email to write to, a
+ * web address to open. Anything else in the words stays words. Only what
+ * looks plainly like one of the three is offered, so "meets Tuesdays at 7"
+ * offers nothing.
+ */
+export type ReachLink = { kind: 'call' | 'email' | 'web'; shown: string; url: string };
+
+export function reachLinks(reach: string | null | undefined): ReachLink[] {
+  if (!reach) return [];
+  const links: ReachLink[] = [];
+  let rest = reach;
+  const take = (pattern: RegExp, make: (found: string) => ReachLink | null) => {
+    rest = rest.replace(pattern, (found) => {
+      const link = make(found.replace(/[.,;:!?)]+$/, ''));
+      if (link && !links.some((other) => other.url === link.url)) links.push(link);
+      return ' ';
+    });
+  };
+  take(/\bhttps?:\/\/[^\s<>]+/gi, (found) => ({ kind: 'web', shown: found.replace(/^https?:\/\//i, '').replace(/\/$/, ''), url: found }));
+  take(/\bwww\.[^\s<>]+\.[a-z]{2,}[^\s<>]*/gi, (found) => ({ kind: 'web', shown: found, url: `https://${found}` }));
+  take(/[^\s,;<>()]+@[^\s,;<>()@]+\.[a-z]{2,}/gi, (found) => ({ kind: 'email', shown: found, url: `mailto:${found}` }));
+  // A date or a time is not a number to call.
+  rest = rest.replace(/\b\d{4}-\d{2}-\d{2}\b/g, ' ').replace(/\b\d{1,2}:\d{2}\b/g, ' ');
+  take(/\+?\(?\d[\d\s().-]{5,}\d/g, (found) => {
+    const digits = found.replace(/\D/g, '');
+    if (digits.length < 7 || digits.length > 15) return null;
+    const number = found.trim().startsWith('+') ? `+${digits}` : digits;
+    return { kind: 'call', shown: found.trim(), url: `tel:${number}` };
+  });
+  return links;
+}
+
 /** What is said back after a status change. */
 export function describeStatusChange(title: string, status: LibraryStatus): string {
   if (status === 'done') return `${title} is under Finished, dated today.`;

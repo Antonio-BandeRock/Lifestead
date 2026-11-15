@@ -36,6 +36,8 @@ import {
 import {
   addInterest,
   countInterestReferences,
+  listInterestHoldings,
+  type InterestHoldings,
   deleteInterest,
   listInterestStageChanges,
   listInterests,
@@ -46,6 +48,7 @@ import {
   updateInterest,
 } from '../lib/interestsDb';
 import { explainNotYet } from '../lib/notYet';
+import { t } from '../lib/i18n';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
 import { AttachedFiles } from './AttachedFiles';
@@ -53,6 +56,7 @@ import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { useFadingMessage } from '../hooks/useFadingMessage';
 
 const OWN_KIND = '__own_kind__';
 const NO_KIND = '__no_kind__';
@@ -63,7 +67,27 @@ function todayLocal(): string {
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
 }
 
-type Props = { tabColor: string };
+/** A lens on Interests that keeps records for one interest. */
+export type InterestHoldingLens = 'sessions' | 'supplies' | 'collections' | 'wishList' | 'library' | 'people' | 'money' | 'projects';
+
+type Props = {
+  tabColor: string;
+  /** Opens a lens on this tab narrowed to one interest; `log` starts a session for it. */
+  onOpenLens?: (lens: InterestHoldingLens, interestId: string, log?: boolean) => void;
+};
+
+// What an interest holds, in the order the links show (2026-11-15). Each
+// opens its lens with only that interest showing.
+const HOLDING_LINKS: { key: keyof InterestHoldings; lens: InterestHoldingLens; one: string; many: string }[] = [
+  { key: 'sessions', lens: 'sessions', one: '1 session', many: '{n} sessions' },
+  { key: 'projects', lens: 'projects', one: '1 project', many: '{n} projects' },
+  { key: 'supply', lens: 'supplies', one: '1 supply', many: '{n} supplies' },
+  { key: 'collection', lens: 'collections', one: '1 collected thing', many: '{n} collected things' },
+  { key: 'wish', lens: 'wishList', one: '1 wish', many: '{n} wishes' },
+  { key: 'library', lens: 'library', one: '1 in the library', many: '{n} in the library' },
+  { key: 'people', lens: 'people', one: '1 person or place', many: '{n} people and places' },
+  { key: 'money', lens: 'money', one: '1 amount spent or earned', many: '{n} amounts spent or earned' },
+];
 
 type InterestForm = {
   id: string | null;
@@ -79,8 +103,9 @@ type InterestForm = {
 
 const SINCE_HELP = 'That could not be read as a time already gone by. Try "2019", "March 2024" or "3 March 2024", or leave it empty.';
 
-export function MyInterestsSection({ tabColor }: Props) {
+export function MyInterestsSection({ tabColor, onOpenLens }: Props) {
   const [interests, setInterests] = useState<Interest[]>([]);
+  const [holdings, setHoldings] = useState<Record<string, InterestHoldings>>({});
   const [changes, setChanges] = useState<InterestStageChange[]>([]);
   const [form, setForm] = useState<InterestForm | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
@@ -89,12 +114,13 @@ export function MyInterestsSection({ tabColor }: Props) {
   const [renaming, setRenaming] = useState<{ from: string; to: string } | null>(null);
   const [showSteppedBack, setShowSteppedBack] = useState(false);
   const [showExplained, setShowExplained] = useState(false);
-  const [saidBack, setSaidBack] = useState<string | null>(null);
+  const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
   const load = useCallback(async () => {
     setInterests(await listInterests());
     setChanges(await listInterestStageChanges());
+    setHoldings(await listInterestHoldings());
   }, []);
 
   useFocusEffect(
@@ -258,8 +284,8 @@ export function MyInterestsSection({ tabColor }: Props) {
     if (references.money > 0) {
       explainNotYet(
         references.money === 1
-          ? 'An amount on Money is kept for this interest, and removing it would leave that pointing at nothing. Step back from it instead, which keeps everything.'
-          : `${references.money} amounts on Money are kept for this interest, and removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
+          ? 'An amount on Spending and Earning is kept for this interest, and removing it would leave that pointing at nothing. Step back from it instead, which keeps everything.'
+          : `${references.money} amounts on Spending and Earning are kept for this interest, and removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
       );
       return;
     }
@@ -274,8 +300,8 @@ export function MyInterestsSection({ tabColor }: Props) {
     if (references.worksheets > 0) {
       explainNotYet(
         references.worksheets === 1
-          ? 'A Could This Pay? worksheet on Money covers this interest, and removing it would leave that pointing at nothing. Step back from it instead, which keeps everything.'
-          : `${references.worksheets} Could This Pay? worksheets on Money cover this interest, and removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
+          ? 'A Could This Pay? worksheet on Spending and Earning covers this interest, and removing it would leave that pointing at nothing. Step back from it instead, which keeps everything.'
+          : `${references.worksheets} Could This Pay? worksheets on Spending and Earning cover this interest, and removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
       );
       return;
     }
@@ -411,6 +437,30 @@ export function MyInterestsSection({ tabColor }: Props) {
     );
   }
 
+  function renderHoldings(interest: Interest) {
+    if (!onOpenLens) return null;
+    const held = holdings[interest.id];
+    const links = HOLDING_LINKS.filter((link) => (held?.[link.key] ?? 0) > 0);
+    return (
+      <View style={styles.interestLinks}>
+        {links.length === 0 ? <Text style={styles.captionText}>Nothing kept for it yet on the other lenses.</Text> : null}
+        {links.map((link) => {
+          const n = held?.[link.key] ?? 0;
+          return (
+            <TouchableOpacity key={link.key} onPress={() => onOpenLens(link.lens, interest.id)} accessibilityRole="button">
+              <Text style={styles.linkText}>{n === 1 ? t(link.one) : t(link.many, { n: String(n) })}</Text>
+            </TouchableOpacity>
+          );
+        })}
+        {!interest.retiredAt ? (
+          <TouchableOpacity onPress={() => onOpenLens('sessions', interest.id, true)} accessibilityRole="button">
+            <Text style={styles.linkText}>Log a Session</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+    );
+  }
+
   function renderInterest(interest: Interest) {
     const open = openId === interest.id;
     const first = interest.id === firstId;
@@ -440,6 +490,7 @@ export function MyInterestsSection({ tabColor }: Props) {
           <View style={styles.interestBody}>
             {note ? <Text style={styles.bodyText}>{note}</Text> : null}
             {interest.about ? <Text style={styles.captionText}>{interest.about}</Text> : null}
+            {renderHoldings(interest)}
             {!interest.retiredAt ? renderStagePills(interest.stages, (stage) => handleStage(interest, stage), first) : null}
             <AttachedFiles
               ownerKind="interest"

@@ -391,7 +391,7 @@ export function MealBuilder({
     setStartingPointSearch('');
     try {
       const [favorites, scheduled, recent] = await Promise.all([
-        listFavorites(200, 'meal'),
+        listFavorites(undefined, 'meal'),
         listScheduledMealsForDateRange(todayLocalDateString(), dateStringDaysFromToday(STARTING_POINT_LOOKAHEAD_DAYS)),
         listRecentDistinctMeals(200),
       ]);

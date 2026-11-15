@@ -195,7 +195,7 @@ export default function VoiceLogScreen() {
       // ingredients and amounts, so nothing has to be inferred at all.
       const [recentMeals, favorites] = await Promise.all([
         listRecentDistinctMeals(40),
-        listFavorites(40, 'meal'),
+        listFavorites(undefined, 'meal'),
       ]);
       const mealCandidates: MealProposal[] = [
         ...recentMeals.map((meal: RecentMealSummary) => ({

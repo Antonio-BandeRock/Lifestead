@@ -10,7 +10,7 @@ import { readOrClosed } from './vaultReads';
 
 export type CycleDayRow = { id: string; day: string; flow: number | null; source: string; notes: string | null };
 
-export async function listCycleDays(limit = 120): Promise<CycleDayRow[]> {
+export async function listCycleDays(limit = -1): Promise<CycleDayRow[]> {
   const db = await getDatabase();
   return readOrClosed(() => db.getAllAsync<CycleDayRow>(
     'SELECT id, day, flow, source, notes FROM cycle_days ORDER BY day DESC, source ASC LIMIT ?',

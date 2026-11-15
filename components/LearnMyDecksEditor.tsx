@@ -58,6 +58,7 @@ import { PhotoStrip } from './PhotoStrip';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
+import { useFadingMessage } from '../hooks/useFadingMessage';
 
 type Props = {
   tabColor: string;
@@ -82,7 +83,7 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
   const [cards, setCards] = useState<MyCardRow[]>([]);
   const [cardForm, setCardForm] = useState<CardForm | null>(null);
   const [importForm, setImportForm] = useState<ImportForm | null>(null);
-  const [saidBack, setSaidBack] = useState<string | null>(null);
+  const [saidBack, setSaidBack] = useFadingMessage();
   const [sharing, setSharing] = useState(false);
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 

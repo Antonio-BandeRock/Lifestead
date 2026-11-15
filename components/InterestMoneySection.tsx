@@ -34,6 +34,8 @@ import {
   type MoneyDirection,
   type MoneyEntry,
 } from '../lib/interestMoney';
+import { ShowMoreButton } from './ShowMoreButton';
+import { OnlyInterestLine } from './OnlyInterestLine';
 import { addInterestMoney, deleteInterestMoney, listInterestMoney, updateInterestMoney } from '../lib/interestMoneyDb';
 import { explainNotYet } from '../lib/notYet';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
@@ -42,12 +44,13 @@ import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { useFadingMessage } from '../hooks/useFadingMessage';
 
 const NO_INTEREST = '__no_interest__';
 const DIRECTIONS: MoneyDirection[] = ['out', 'in'];
 const MONEY_DAY_HELP = 'That day could not be read. Try "yesterday", "Monday", "28 October", or leave it empty for today.';
 
-type Props = { tabColor: string };
+type Props = { tabColor: string; onlyInterestId?: string };
 
 type MoneyForm = {
   id: string | null;
@@ -64,13 +67,21 @@ function emptyMoneyForm(interestId: string | null): MoneyForm {
   return { id: null, interestId, direction: 'out', amount: '', what: '', day: '', who: '', note: '' };
 }
 
-export function InterestMoneySection({ tabColor }: Props) {
+/** Months each interest shows before Show more. */
+const MONTHS_FIRST = 6;
+
+export function InterestMoneySection({ tabColor, onlyInterestId }: Props) {
   const [interests, setInterests] = useState<Interest[]>([]);
   const [entries, setEntries] = useState<MoneyEntry[]>([]);
   const [things, setThings] = useState<InterestThing[]>([]);
   const [form, setForm] = useState<MoneyForm | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
+  // Opened from an interest on My Interests, only that interest shows.
+  const [onlyId, setOnlyId] = useState<string | null>(onlyInterestId ?? null);
+  // How many months each interest shows; Show more carries on six at a time.
+  const [monthsShown, setMonthsShown] = useState<Record<string, number>>({});
   const [openId, setOpenId] = useState<string | null>(null);
-  const [saidBack, setSaidBack] = useState<string | null>(null);
+  const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
   const load = useCallback(async () => {
@@ -96,7 +107,9 @@ export function InterestMoneySection({ tabColor }: Props) {
       ...entries.map((entry) => entry.interestId),
       ...things.filter((thing) => thing.kind !== 'wish' && thing.cost !== null && thing.cost > 0).map((thing) => thing.interestId),
     ]),
-  ].sort((a, b) => nameOf(a).localeCompare(nameOf(b), undefined, { sensitivity: 'base' }));
+  ]
+    .filter((id) => onlyId === null || id === onlyId)
+    .sort((a, b) => nameOf(a).localeCompare(nameOf(b), undefined, { sensitivity: 'base' }));
   // The how-to rings the first amount on the screen.
   const firstShownWithMoney = shownIds.find((id) => entries.some((entry) => entry.interestId === id));
   const firstEntryId = firstShownWithMoney
@@ -131,24 +144,27 @@ export function InterestMoneySection({ tabColor }: Props) {
 
   async function saveMoneyForm() {
     if (!form) return;
+    // What is still missing shows under the form, beside Keep It, instead of
+    // a pop-up that covers what was typed (2026-11-15).
     if (!form.interestId) {
-      explainNotYet('Pick the interest this belongs to first.');
+      setFormError('Pick the interest this belongs to first.');
       return;
     }
     const amount = readMoneyAmount(form.amount);
     if (amount === null) {
-      explainNotYet('Put in how much, more than nothing: "12", "$12.50" or "12,50".');
+      setFormError('Put in how much, more than nothing: "12", "$12.50" or "12,50".');
       return;
     }
     if (!form.what.trim()) {
-      explainNotYet(form.direction === 'in' ? 'Say what it came in for first: a sale, a commission, a prize.' : 'Say what it went on first: a class, dues, a fee, a ticket.');
+      setFormError(form.direction === 'in' ? 'Say what it came in for first: a sale, a commission, a prize.' : 'Say what it went on first: a class, dues, a fee, a ticket.');
       return;
     }
     const day = readSessionDay(form.day, today);
     if (!day.ok || !day.day) {
-      explainNotYet(MONEY_DAY_HELP);
+      setFormError(MONEY_DAY_HELP);
       return;
     }
+    setFormError(null);
     const input = {
       interestId: form.interestId,
       direction: form.direction,
@@ -250,11 +266,17 @@ export function InterestMoneySection({ tabColor }: Props) {
             Something bought for Supplies & Equipment or Collections with its price kept there is already counted here, so it needs no second entry.
           </Text>
         ) : null}
+        {formError ? <Text style={styles.formErrorText}>{formError}</Text> : null}
         <ThumbRow primary="first" style={styles.actionRow}>
           <TouchableOpacity ref={walkMark.ref('money.save')} style={styles.primaryButton} onPress={saveMoneyForm}>
             <Text style={styles.primaryButtonText}>{form.id ? 'Save' : 'Keep It'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setForm(null)}>
+          <TouchableOpacity
+            onPress={() => {
+              setForm(null);
+              setFormError(null);
+            }}
+          >
             <Text style={styles.linkText}>Cancel</Text>
           </TouchableOpacity>
         </ThumbRow>
@@ -311,7 +333,7 @@ export function InterestMoneySection({ tabColor }: Props) {
           </Text>
         ))}
         {noDayLine ? <Text style={styles.captionText}>{noDayLine}</Text> : null}
-        {groupMoneyByMonth(own).map((month) => (
+        {groupMoneyByMonth(own).slice(0, monthsShown[interestId] ?? MONTHS_FIRST).map((month) => (
           <View key={month.month} style={styles.group}>
             <Text style={styles.setHeading}>
               {[monthHeading(month.month), month.out > 0 ? `${formatMoney(month.out)} out` : null, month.in > 0 ? `${formatMoney(month.in)} in` : null]
@@ -321,6 +343,12 @@ export function InterestMoneySection({ tabColor }: Props) {
             {month.entries.map(renderMoneyEntry)}
           </View>
         ))}
+        <ShowMoreButton
+          more={Math.max(0, groupMoneyByMonth(own).length - (monthsShown[interestId] ?? MONTHS_FIRST))}
+          page={MONTHS_FIRST}
+          monthly
+          onPress={() => setMonthsShown((shown) => ({ ...shown, [interestId]: (shown[interestId] ?? MONTHS_FIRST) + MONTHS_FIRST }))}
+        />
       </View>
     );
   }
@@ -328,7 +356,7 @@ export function InterestMoneySection({ tabColor }: Props) {
   return (
     <View style={styles.section}>
       <Text style={styles.captionText}>
-        What has gone out on an interest and what has come in from it, each on its day: a class, club dues, a stall fee, a sale, a commission.
+        What you spend on your hobbies and interests, and anything they bring in, each on its day: a class, club dues, a stall fee, a sale, a commission. Bank and loan interest belong in Life, under Finances.
       </Text>
 
       {form && !form.id ? (
@@ -340,9 +368,10 @@ export function InterestMoneySection({ tabColor }: Props) {
       )}
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
+      {onlyId ? <OnlyInterestLine name={nameOf(onlyId)} onShowEvery={() => setOnlyId(null)} /> : null}
       {shownIds.length === 0 ? (
         <Text style={styles.captionText}>
-          No money kept yet. Each amount you add shows here under its interest, with the prices kept on its supplies and collected things beside it.
+          Nothing spent or earned kept yet. Each amount you add shows here under its interest, with the prices kept on its supplies and collected things beside it.
         </Text>
       ) : (
         shownIds.map(renderMoneyInterest)
@@ -361,6 +390,7 @@ export function InterestMoneySection({ tabColor }: Props) {
 
 const styles = StyleSheet.create({
   section: { gap: 10 },
+  formErrorText: { ...typography.caption, color: colors.danger, fontWeight: '600' },
   group: { gap: 8 },
   groupHeading: { ...typography.label, color: colors.textPrimary, ...textShadow },
   setHeading: { ...typography.caption, color: colors.textPrimary, ...textShadow },

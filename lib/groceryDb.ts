@@ -457,7 +457,7 @@ export async function getActiveGroceryList(): Promise<GroceryListRecord | null> 
   return row ? mapGroceryList(row) : null;
 }
 
-export async function listGroceryLists(limit: number = 30): Promise<GroceryListRecord[]> {
+export async function listGroceryLists(limit: number = -1): Promise<GroceryListRecord[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<GroceryListRow>(
     `SELECT ${GROCERY_LIST_COLUMNS} FROM grocery_lists ORDER BY created_at DESC LIMIT ?`,
@@ -705,7 +705,7 @@ type GroceryFoodSummaryRow = Omit<GroceryFoodSummary, 'lastPrice' | 'lastPriceUn
 
 // Everything ever put on a grocery list, most often bought first: the "usage
 // over time" half of what this was asked to feed into Trends.
-export async function listGroceryFoodSummaries(limit: number = 200): Promise<GroceryFoodSummary[]> {
+export async function listGroceryFoodSummaries(limit: number = -1): Promise<GroceryFoodSummary[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<GroceryFoodSummaryRow>(
     `

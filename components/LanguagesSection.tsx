@@ -22,23 +22,41 @@ export function LanguagesSection() {
   const walkMark = useWalkMark();
   const language = useLanguage();
   const [sets, setSets] = useState<CourseEntry[] | null>(null);
+  // A read that fails says so, rather than looking like there are no sets
+  // (2026-11-15). Nothing is lost when it fails.
+  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useFocusEffect(
     useCallback(() => {
       let live = true;
       void listCourses()
         .then((all) => {
-          if (live) setSets(setsForLanguage(all, language));
+          if (!live) return;
+          setFailed(false);
+          setSets(setsForLanguage(all, language));
         })
         .catch(() => {
-          if (live) setSets([]);
+          if (live) setFailed(true);
         });
       return () => {
         live = false;
       };
-    }, [language]),
+    // attempt is the Try again trigger: a new value reads again.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [language, attempt]),
   );
 
+  if (failed) {
+    return (
+      <View style={styles.list}>
+        <Text style={styles.caption}>The language sets could not be read just now. Nothing you have learned is lost.</Text>
+        <TouchableOpacity style={styles.button} onPress={() => setAttempt((n) => n + 1)} accessibilityRole="button">
+          <Text style={styles.buttonText}>Try Again</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
   if (sets === null) return null;
   if (sets.length === 0) {
     return <Text style={styles.caption}>There are no language basics yet for the language this app is in.</Text>;

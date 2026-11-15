@@ -30,6 +30,7 @@ import {
   type FoodCostRecord,
   type GroceryLine,
   type GrowingCostRecord,
+  type HobbyCostRecord,
   type HealthCostKind,
   type HealthCostRecord,
   type SupplementRun,
@@ -234,6 +235,33 @@ async function readGrowingCosts(startDate: string, endDate: string): Promise<Gro
   return rows.filter((row) => (row.amount ?? 0) > 0);
 }
 
+/** Interests > Spending and Earning in this stretch, with each interest's
+ *  name. An interest removed since keeps its money under a plain name. */
+async function readHobbyCosts(startDate: string, endDate: string): Promise<HobbyCostRecord[]> {
+  const db = await getDatabase();
+  const rows = await readOrClosed(() => db.getAllAsync<{ occurredOn: string; amount: number; direction: string; interestName: string | null }>(
+    `
+      SELECT m.on_day AS occurredOn,
+             m.amount AS amount,
+             m.direction AS direction,
+             i.name AS interestName
+      FROM interest_money m
+      LEFT JOIN interests i ON i.id = m.interest_id
+      WHERE m.on_day >= ? AND m.on_day <= ?
+    `,
+    startDate,
+    endDate,
+  ), []);
+  return rows
+    .filter((row) => (row.amount ?? 0) > 0)
+    .map((row) => ({
+      occurredOn: row.occurredOn,
+      amount: row.amount,
+      direction: row.direction === 'in' ? 'in' : 'out',
+      interestName: row.interestName ?? 'An interest no longer listed',
+    }));
+}
+
 // ---------------------------------------------------------------------------
 // Band 4
 // ---------------------------------------------------------------------------
@@ -341,6 +369,7 @@ export async function getEarliestMoneyDate(): Promise<string | null> {
         SELECT MIN(occurred_on) AS earliest FROM finance_entries
         UNION ALL SELECT MIN(service_date) FROM finance_medical_bills
         UNION ALL SELECT MIN(substr(performed_at, 1, 10)) FROM therapy_sessions
+        UNION ALL SELECT MIN(on_day) FROM interest_money
       )
     `,
   ), null);
@@ -351,7 +380,7 @@ export async function getCostSummary(startDate: string, endDate: string): Promis
   const storedSystem = await getStoredMeasurementSystem();
   const system: MeasureSystem = storedSystem === 'imperial' ? 'imperial' : 'metric';
 
-  const [health, conditionNames, food, groceryLines, growing, harvests, lastPaid, supplements, supplementSpend] =
+  const [health, conditionNames, food, groceryLines, growing, harvests, lastPaid, supplements, supplementSpend, hobbies] =
     await Promise.all([
       readHealthCosts(startDate, endDate),
       readConditionNames(),
@@ -362,6 +391,7 @@ export async function getCostSummary(startDate: string, endDate: string): Promis
       getLastPaidPrices(),
       readSupplements(),
       readSupplementSpend(startDate, endDate),
+      readHobbyCosts(startDate, endDate),
     ]);
 
   // Only the nutrients belonging to supplements that ended inside this
@@ -390,6 +420,7 @@ export async function getCostSummary(startDate: string, endDate: string): Promis
     supplementSpend,
     foodCoverage,
     coverageDays: COVERAGE_DAYS,
+    hobbies,
   };
   return summarizeCosts(inputs);
 }

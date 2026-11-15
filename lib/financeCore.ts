@@ -250,6 +250,11 @@ export type TrackedSpending = {
   // everywhere else. So it is reported as what it is: lines that did not
   // have to be bought.
   kitchenCoveredLines: number;
+  /** Spent on hobbies and interests this month, from Interests, Spending and
+   *  Earning. Optional so an older caller that never read it counts nothing. */
+  hobbySpend?: number;
+  /** Came in from hobbies and interests this month. */
+  hobbyEarned?: number;
 };
 
 export type MonthPicture = {
@@ -300,6 +305,10 @@ export function buildMonthPicture(
   if (tracked.therapySpend > 0) {
     categoryTotals.set('therapies', (categoryTotals.get('therapies') ?? 0) + tracked.therapySpend);
   }
+  const hobbySpend = tracked.hobbySpend ?? 0;
+  if (hobbySpend > 0) {
+    categoryTotals.set('hobbies', (categoryTotals.get('hobbies') ?? 0) + hobbySpend);
+  }
 
   return {
     month,
@@ -309,7 +318,7 @@ export function buildMonthPicture(
     loggedIncome,
     loggedSpend,
     tracked,
-    knownSpendTotal: loggedSpend + tracked.grocerySpend + tracked.therapySpend,
+    knownSpendTotal: loggedSpend + tracked.grocerySpend + tracked.therapySpend + hobbySpend,
     incompleteRecords: tracked.groceryLinesWithoutPrice + tracked.therapySessionsWithoutCost,
     byCategory: [...categoryTotals.entries()]
       .map(([category, monthly]) => ({ category, monthly }))

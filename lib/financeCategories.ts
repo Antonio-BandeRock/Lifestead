@@ -62,7 +62,7 @@ export type FinanceCategoryDefinition = {
   // already being counted. See lib/financeDb.ts's own rollup for what is
   // actually read, and note that nothing is copied into the finance tables
   // to make this work.
-  alreadyTracked?: 'groceries' | 'therapies';
+  alreadyTracked?: 'groceries' | 'therapies' | 'hobbies';
 };
 
 export const FINANCE_EXPENSE_CATEGORIES: FinanceCategoryDefinition[] = [
@@ -146,7 +146,16 @@ export const FINANCE_INCOME_CATEGORIES: FinanceCategoryDefinition[] = [
 // consumed, which is the difference between a tight month and a good one.
 export const SET_ASIDE_GROUP: FinanceCategoryGroup = 'setAside';
 
-const ALL_CATEGORIES = [...FINANCE_EXPENSE_CATEGORIES, ...FINANCE_INCOME_CATEGORIES];
+// Money read from somewhere else in the app and never typed into Finances,
+// so it has a name when it appears in a month's breakdown but is not offered
+// in the picker. Hobbies and interests (2026-11-15) are recorded under
+// Interests, Spending and Earning; the plain name keeps them from being read
+// as interest on a loan or at a bank.
+const TRACKED_ONLY_CATEGORIES: FinanceCategoryDefinition[] = [
+  { code: 'hobbies', label: 'Hobbies and interests', group: 'everyday', alreadyTracked: 'hobbies' },
+];
+
+const ALL_CATEGORIES = [...FINANCE_EXPENSE_CATEGORIES, ...FINANCE_INCOME_CATEGORIES, ...TRACKED_ONLY_CATEGORIES];
 
 export function financeCategoriesFor(direction: FinanceDirection): FinanceCategoryDefinition[] {
   return direction === 'income' ? FINANCE_INCOME_CATEGORIES : FINANCE_EXPENSE_CATEGORIES;

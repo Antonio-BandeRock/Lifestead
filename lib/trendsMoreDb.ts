@@ -137,7 +137,7 @@ export async function loadVisitRecords(today: string): Promise<SinceLastVisitInp
   const db = await getDatabase();
   const [appointments, labRows, labTests, flares, treatments] = await Promise.all([
     listAllAppointments(),
-    listLabResults(undefined, 200),
+    listLabResults(),
     getLabTests(),
     readOrClosed(() => db.getAllAsync<{ loggedAt: string; severity: number | null; notes: string | null }>(
       `SELECT logged_at AS loggedAt, severity, notes FROM wellbeing_checkins WHERE checkin_type = 'flare' ORDER BY logged_at ASC`,
@@ -522,7 +522,7 @@ export async function loadTrendsMoreView(lens: TrendsMoreLens, days: number): Pr
     }
     case 'work': {
       const [checkins, sleep, flareDates] = await Promise.all([
-        readOrClosed(() => listWorkCheckins(260), []),
+        readOrClosed(() => listWorkCheckins(), []),
         getSleepTrendPoints(days + 7),
         listFlareDates(),
       ]);
@@ -537,7 +537,7 @@ export async function loadTrendsMoreView(lens: TrendsMoreLens, days: number): Pr
       return buildReactionsView({ range, mealDates: meals.map((m) => localDay(m.eatenAt)), reactions, trials });
     }
     case 'nights': {
-      const [nights, meals, afterTags] = await Promise.all([listNocturiaNights(400), listMealsAround(range), loadTagNights(range)]);
+      const [nights, meals, afterTags] = await Promise.all([listNocturiaNights(), listMealsAround(range), loadTagNights(range)]);
       return buildNightsView({ range, nights, meals, afterTags });
     }
     case 'ferments': {

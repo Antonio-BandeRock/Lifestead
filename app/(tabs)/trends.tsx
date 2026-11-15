@@ -3078,6 +3078,32 @@ export default function TrendsScreen() {
                   <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
+                    id="trends:cost:hobbies"
+                    title="Hobbies and interests"
+                    icon="color-palette-outline"
+                  >
+                    <Text style={styles.patternRowCaption}>{costSummary.hobbies.headline}</Text>
+                    {renderPeriodRows(costSummary.hobbies.rows)}
+                    {costSummary.hobbies.gapNote ? (
+                      <Text style={styles.patternRowCaption}>{costSummary.hobbies.gapNote}</Text>
+                    ) : null}
+                    {costSummary.hobbies.byInterest.map((slice) => (
+                      <View key={`hobby:${slice.name}`} style={styles.patternRow}>
+                        <Text style={styles.patternRowTitle}>{slice.name}</Text>
+                        <Text style={styles.patternRowCaption}>
+                          {slice.share === null ? slice.display : `${slice.display}, ${slice.share}% of it`}
+                        </Text>
+                      </View>
+                    ))}
+                    {costSummary.hobbies.inLine ? (
+                      <Text style={styles.patternRowCaption}>{costSummary.hobbies.inLine}</Text>
+                    ) : null}
+                    <Text style={styles.patternRowCaption}>{costSummary.hobbies.note}</Text>
+                  </TabBand>
+
+                  <TabBand markRef={walkMark.ref('trends.band')}
+                    folds={folds}
+                    color={TAB_COLOR}
                     id="trends:cost:plate"
                     title="What the garden put on your plate"
                     icon="leaf-outline"

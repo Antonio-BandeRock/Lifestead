@@ -151,12 +151,18 @@ export async function startInterestTimer(interestId: string, projectId: string |
   return id;
 }
 
-/** Stops the timer into a finished session, dated the day it started. */
-export async function stopInterestTimer(id: string, extra: { note: string | null; leftOff: string | null }): Promise<number> {
+/** Stops the timer into a finished session, dated the day it started. `stoppedAt`
+ *  is when Stop and Keep was pressed on the notification, which can be a while
+ *  before the records could be opened to write it. */
+export async function stopInterestTimer(
+  id: string,
+  extra: { note: string | null; leftOff: string | null },
+  stoppedAt: Date = new Date(),
+): Promise<number> {
   const db = await getDatabase();
   const row = await db.getFirstAsync<SessionRow>(`SELECT ${COLUMNS} FROM interest_sessions WHERE id = ?`, id);
-  if (!row) return 0;
-  const minutes = timerMinutes(row.startedAt ?? row.createdAt, new Date());
+  if (!row || row.running !== 1) return 0;
+  const minutes = timerMinutes(row.startedAt ?? row.createdAt, stoppedAt);
   await db.runAsync(
     'UPDATE interest_sessions SET minutes = ?, note = ?, left_off = ?, running = 0, updated_at = ? WHERE id = ?',
     minutes,
@@ -173,4 +179,21 @@ export async function stopInterestTimer(id: string, extra: { note: string | null
 export async function discardInterestTimer(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM interest_sessions WHERE id = ? AND running = 1', id);
+}
+
+/** How many finished sessions are kept, for the count on the tab's front page. */
+export async function countInterestSessions(): Promise<number> {
+  const db = await getDatabase();
+  const row = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM interest_sessions WHERE running = 0');
+  return Number(row?.n ?? 0);
+}
+
+/** Every finished session given to one project, newest first, for the project's own card. */
+export async function listSessionsForProject(projectId: string): Promise<InterestSession[]> {
+  const db = await getDatabase();
+  const rows = await db.getAllAsync<SessionRow>(
+    `SELECT ${COLUMNS} FROM interest_sessions WHERE project_id = ? AND running = 0 ORDER BY done_on DESC, created_at DESC`,
+    projectId,
+  );
+  return rows.map(fromRow);
 }

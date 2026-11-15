@@ -336,7 +336,7 @@ export async function listEntries(filters: { month?: string; limit?: number } = 
       LIMIT ?
     `,
     ...params,
-    filters.limit ?? 300,
+    filters.limit ?? -1,
   ), []);
   return rows;
 }
@@ -423,12 +423,28 @@ export async function getTrackedSpending(month: string): Promise<TrackedSpending
     else therapySpend += row.cost;
   }
 
+  // Hobbies and interests, kept under Interests, Spending and Earning and
+  // never typed into Finances (2026-11-15).
+  const hobbyRows = await readOrClosed(() => db.getAllAsync<{ direction: string; total: number | null }>(
+    `
+      SELECT direction, SUM(amount) AS total
+      FROM interest_money
+      WHERE on_day LIKE ? || '%' AND amount > 0
+      GROUP BY direction
+    `,
+    month,
+  ), []);
+  const hobbySpend = hobbyRows.filter((row) => row.direction !== 'in').reduce((sum, row) => sum + (row.total ?? 0), 0);
+  const hobbyEarned = hobbyRows.filter((row) => row.direction === 'in').reduce((sum, row) => sum + (row.total ?? 0), 0);
+
   return {
     grocerySpend,
     groceryLinesWithoutPrice,
     therapySpend,
     therapySessionsWithoutCost,
     kitchenCoveredLines,
+    hobbySpend,
+    hobbyEarned,
   };
 }
 

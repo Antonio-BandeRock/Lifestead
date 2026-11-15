@@ -180,7 +180,7 @@ export const VOICE_LENS_DIRECTORY: VoiceLensPlace[] = [
   { tab: '/interests', param: 'openInterestsLens', key: 'wishList', label: 'Wish List' },
   { tab: '/interests', param: 'openInterestsLens', key: 'library', label: 'Library' },
   { tab: '/interests', param: 'openInterestsLens', key: 'people', label: 'People & Places' },
-  { tab: '/interests', param: 'openInterestsLens', key: 'money', label: 'Money' },
+  { tab: '/interests', param: 'openInterestsLens', key: 'money', label: 'Spending and Earning' },
   { tab: '/interests', param: 'openInterestsLens', key: 'daysUntil', label: 'Days Until' },
   { tab: '/interests', param: 'openInterestsLens', key: 'projects', label: 'Projects' },
   { tab: '/interests', param: 'openInterestsLens', key: 'learn', label: 'Flashcards' },

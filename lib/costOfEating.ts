@@ -137,6 +137,8 @@ export type CostInputs = {
   foodCoverage: FoodCoverage[];
   /** How many days the coverage figures above were read over. */
   coverageDays: number;
+  /** Interests > Spending and Earning, in this stretch. */
+  hobbies?: HobbyCostRecord[];
 };
 
 // ---------------------------------------------------------------------------
@@ -215,6 +217,7 @@ export type CostSummary = {
   food: FoodCostBand;
   growing: GrowingCostBand;
   supplements: SupplementCostBand;
+  hobbies: HobbyCostBand;
 };
 
 // ---------------------------------------------------------------------------
@@ -761,6 +764,78 @@ export function summarizeSupplementCosts(
 }
 
 // ---------------------------------------------------------------------------
+// Band 5: hobbies and interests (2026-11-15)
+// ---------------------------------------------------------------------------
+
+/** Money spent or earned on something followed under Interests, recorded
+ *  under Interests > Spending and Earning. Kept apart from Finances, so
+ *  nothing here is counted twice. */
+export type HobbyCostRecord = {
+  occurredOn: string;
+  amount: number;
+  direction: 'out' | 'in';
+  interestName: string;
+};
+
+export type HobbyCostBand = {
+  hasAnything: boolean;
+  headline: string;
+  rows: PeriodRow[];
+  blankMonths: number;
+  gapNote: string | null;
+  byInterest: CostSlice[];
+  inLine: string | null;
+  note: string;
+};
+
+/**
+ * What hobbies and interests have cost, month by month, and what they
+ * brought in. Named "hobbies and interests" so it is never read as interest
+ * paid on a loan or earned at a bank, which belongs to Finances.
+ */
+export function summarizeHobbyCosts(months: YieldMonth[], records: HobbyCostRecord[]): HobbyCostBand {
+  const note =
+    'Recorded under Interests, Spending and Earning, and kept apart from Finances, so nothing is counted twice. Interest paid on a loan or earned at a bank is in Finances, not here.';
+  const spent = records.filter((row) => row.direction === 'out' && usable(row.amount) > 0);
+  const earned = records.filter((row) => row.direction === 'in' && usable(row.amount) > 0);
+
+  const rows = spent.length > 0 ? monthlyMoneyRows(months, spent) : [];
+  const counted = monthsWithAnything(rows);
+  const blank = rows.length - counted;
+  const total = totalOf(rows);
+
+  const perInterest = new Map<string, number>();
+  for (const row of spent) perInterest.set(row.interestName, (perInterest.get(row.interestName) ?? 0) + usable(row.amount));
+  const byInterest = moneySlices([...perInterest.entries()].map(([name, amount]) => ({ name, amount })));
+
+  const earnedTotal = roundMoney(earned.reduce((sum, row) => sum + usable(row.amount), 0));
+  const inLine =
+    earnedTotal > 0
+      ? `${formatTradeMoney(earnedTotal)} came in from them over the same stretch: sales, prizes, fees, anything recorded as money in.`
+      : null;
+
+  let headline: string;
+  if (total > 0 && counted > 0) {
+    headline = `${formatTradeMoney(total)} spent on hobbies and interests, averaging ${formatTradeMoney(roundMoney(total / counted))} a month across ${counted === 1 ? 'the one month with anything recorded' : `${counted} months with anything recorded`}.`;
+  } else if (earnedTotal > 0) {
+    headline = 'Nothing spent on hobbies and interests recorded in this stretch.';
+  } else {
+    headline = 'Nothing spent or earned on hobbies and interests recorded in this stretch.';
+  }
+
+  return {
+    hasAnything: spent.length > 0 || earned.length > 0,
+    headline,
+    rows,
+    blankMonths: blank,
+    gapNote: describeBlankMonths(blank, rows.length, 'hobby spending'),
+    byInterest,
+    inLine,
+    note,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // The whole lens
 // ---------------------------------------------------------------------------
 
@@ -779,16 +854,18 @@ export function summarizeCosts(input: CostInputs): CostSummary {
     input.startDate,
     input.endDate,
   );
+  const hobbies = summarizeHobbyCosts(months, input.hobbies ?? []);
 
   return {
     startDate: input.startDate,
     endDate: input.endDate,
     system: input.system,
     months,
-    hasAnything: condition.hasAnything || food.hasAnything || growing.hasAnything || supplements.hasAnything,
+    hasAnything: condition.hasAnything || food.hasAnything || growing.hasAnything || supplements.hasAnything || hobbies.hasAnything,
     condition,
     food,
     growing,
     supplements,
+    hobbies,
   };
 }

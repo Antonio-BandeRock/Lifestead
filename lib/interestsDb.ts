@@ -281,3 +281,34 @@ export async function deleteInterest(id: string): Promise<void> {
   });
   await removeAttachmentsOf('interest', id);
 }
+
+/** What each interest holds, by kind, for My Interests (2026-11-15). Every row
+ *  counts, stepped back or not; finished sessions only. */
+export type InterestHoldings = {
+  sessions: number;
+  supply: number;
+  collection: number;
+  wish: number;
+  library: number;
+  people: number;
+  money: number;
+  projects: number;
+};
+
+export async function listInterestHoldings(): Promise<Record<string, InterestHoldings>> {
+  const db = await getDatabase();
+  const out: Record<string, InterestHoldings> = {};
+  const at = (id: string) => (out[id] ??= { sessions: 0, supply: 0, collection: 0, wish: 0, library: 0, people: 0, money: 0, projects: 0 });
+  const counted = async (sql: string, key: keyof InterestHoldings) => {
+    for (const row of await db.getAllAsync<{ id: string; n: number }>(sql)) at(row.id)[key] = row.n;
+  };
+  await counted('SELECT interest_id AS id, COUNT(*) AS n FROM interest_sessions WHERE running = 0 GROUP BY interest_id', 'sessions');
+  for (const row of await db.getAllAsync<{ id: string; kind: string; n: number }>('SELECT interest_id AS id, kind, COUNT(*) AS n FROM interest_things GROUP BY interest_id, kind')) {
+    if (row.kind === 'supply' || row.kind === 'collection' || row.kind === 'wish') at(row.id)[row.kind] = row.n;
+  }
+  await counted('SELECT interest_id AS id, COUNT(*) AS n FROM interest_library GROUP BY interest_id', 'library');
+  await counted('SELECT interest_id AS id, COUNT(*) AS n FROM interest_people GROUP BY interest_id', 'people');
+  await counted('SELECT interest_id AS id, COUNT(*) AS n FROM interest_money GROUP BY interest_id', 'money');
+  await counted("SELECT link_id AS id, COUNT(*) AS n FROM projects WHERE link_kind = 'interest' GROUP BY link_id", 'projects');
+  return out;
+}

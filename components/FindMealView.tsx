@@ -87,10 +87,10 @@ import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
 
-// How many rows are loaded at once. High enough that a personal history is
-// covered whole, and the search runs in SQL rather than over this list, so a
-// name past the cap is still reachable by typing it.
-const LIST_LIMIT = 300;
+// Every meal and favourite is read, with no count (2026-11-15: a history is
+// limited by its dates, never by how many records there are). SQLite reads
+// LIMIT -1 as no limit.
+const LIST_LIMIT = -1;
 
 // Scrolling an opened meal to the top of the list, 2026-09-13: "I tap the
 // recipe name and instead of it expanding and moving itself to the top so

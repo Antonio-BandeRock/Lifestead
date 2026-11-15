@@ -6,7 +6,7 @@ import {
   listAllActiveTreatments,
   listAllConditions,
   listBodyMeasurements,
-  listCheckins,
+  listCheckinsBetween,
   listLabResults,
   listPersonalRules,
   listFoodTrials,
@@ -71,6 +71,9 @@ import {
   groceryListSection,
   interestTimeSection,
   interestsSection,
+  hobbyMoneySection,
+  interestThingsSection,
+  interestLibrarySection,
   keepingUpSections,
   kitchenItemsSection,
   labHistorySection,
@@ -102,6 +105,9 @@ import { getKeepingUpSummary } from './keepingUpDb';
 import { getActiveGroceryList, getGroceryListItems } from './groceryDb';
 import { listKitchenInventory } from './kitchenDb';
 import { listInterests } from './interestsDb';
+import { listInterestMoney } from './interestMoneyDb';
+import { listInterestThings } from './interestThingsDb';
+import { listLibrary } from './interestLibraryDb';
 import { listProjectSteps, listProjects } from './projectsDb';
 import { listLearnReviews } from './learnDb';
 import { isRecalled } from './learnSchedule';
@@ -328,16 +334,9 @@ export async function buildReport(
   // Symptom/flare log -- real, chronological, everything actually logged
   // in the window, not just a count the way the 6-DFF section above is.
   if (want.has('symptoms')) {
-    // 1.0.90.4: 200 of each cut a long range short without saying so. The
-    // limit is now far past any range, and the note says if it was reached.
-    const SYMPTOM_LIMIT = 5000;
-    const [flares, reactions] = await Promise.all([
-      listCheckins({ checkinType: 'flare', limit: SYMPTOM_LIMIT }),
-      listCheckins({ checkinType: 'post_meal', limit: SYMPTOM_LIMIT }),
-    ]);
-    const symptomsCut = flares.length >= SYMPTOM_LIMIT || reactions.length >= SYMPTOM_LIMIT;
-    const symptomEntries = [...flares, ...reactions]
-      .filter((entry) => entry.loggedAt.slice(0, 10) >= rangeStart)
+    // Read by the range alone, never by a count (2026-11-15), so a long
+    // range is never cut short.
+    const symptomEntries = (await listCheckinsBetween(['flare', 'post_meal'], rangeStart, rangeEnd))
       .sort((a, b) => a.loggedAt.localeCompare(b.loggedAt));
     const perDay = new Map<string, number>();
     for (const entry of symptomEntries) {
@@ -361,9 +360,7 @@ export async function buildReport(
           },
         },
       ],
-      note: symptomsCut
-        ? `The newest ${SYMPTOM_LIMIT} flares and ${SYMPTOM_LIMIT} after-meal reactions, so the start of this range may be missing. Severity is as the person rated it at the time.`
-        : 'Every flare and after-meal reaction logged in the range, in order. Severity is as the person rated it at the time.',
+      note: 'Every flare and after-meal reaction logged in the range, in order. Severity is as the person rated it at the time.',
       columns: ['When', 'Kind', 'Severity', 'Food', 'Tags', 'Notes'],
       rows: symptomEntries.map((entry) => [
         entry.loggedAt.slice(0, 16).replace('T', ' '),
@@ -444,7 +441,7 @@ export async function buildReport(
   // typed in or brought in from the phone, plus the earliest in the range
   // for weight so a change over the window is visible without a chart.
   if (want.has('body')) {
-    const measurements = await listBodyMeasurements(undefined, 400);
+    const measurements = await listBodyMeasurements();
     const latestOf = (type: string) => measurements.find((row) => row.measurementType === type) ?? null;
     const bodyRows: string[][] = [];
     const weight = latestOf('weight');
@@ -531,7 +528,7 @@ export async function buildReport(
   // lab drawn 4 months ago is still the real, current, relevant value for
   // a report handed to a doctor, unlike daily nutrient/symptom logging.
   if (want.has('labs')) {
-    const [labResults, labTests] = await Promise.all([listLabResults(undefined, 100), getLabTests()]);
+    const [labResults, labTests] = await Promise.all([listLabResults(), getLabTests()]);
     const testNames = new Map(labTests.map((test) => [test.code, test.displayName]));
     const mostRecentByTest = new Map<string, LabResultRecord>();
     for (const result of labResults) {
@@ -584,8 +581,8 @@ async function glanceSection(rangeStart: string, rangeEnd: string): Promise<Repo
         addDays(rangeStart, -1),
       ), []),
       listScheduledDoses({ start: rangeStart, end: rangeEnd }),
-      listBodyMeasurements(undefined, 400),
-      listLabResults(undefined, 200),
+      listBodyMeasurements(),
+      listLabResults(),
       getLabTests(),
     ]);
     const checkins: GlanceTag[] = tagRows.map((row) => {
@@ -646,7 +643,7 @@ async function noticedSections(days: number, rangeStart: string, rangeEnd: strin
     return null;
   });
   const experiments = (async () => {
-    const trials = (await listFoodTrials(500)).filter(
+    const trials = (await listFoodTrials()).filter(
       (trial) => trial.design === 'remove_return' || trial.design === 'stepped',
     );
     const made: ExperimentForReport[] = [];
@@ -792,7 +789,7 @@ function extraSectionLoaders(days: number): Record<ExtraSectionId, () => Promise
         .catch(() => [eatingCostSection(null)]),
     today: () => insights('i-today', 'Today'),
     bills: async () => {
-      const [bills, plan] = await Promise.all([listMedicalBills(1000), getActiveInsurancePlan()]);
+      const [bills, plan] = await Promise.all([listMedicalBills(), getActiveInsurancePlan()]);
       return [medicalBillsSection(bills, start, end), insuranceSection(plan ? describePlanStanding(planStanding(plan, bills)) : null)];
     },
     costs: () =>
@@ -811,7 +808,7 @@ function extraSectionLoaders(days: number): Record<ExtraSectionId, () => Promise
     'planting-photos': () => plantingPhotoSection(start, end).then((section) => [section]),
     'lab-history': () =>
       guarded('labs', 'Lab results in this range', async () => {
-        const [results, tests] = await Promise.all([listLabResults(undefined, 5000), getLabTests()]);
+        const [results, tests] = await Promise.all([listLabResults(), getLabTests()]);
         const names = new Map(tests.map((test) => [test.code, test.displayName]));
         return [
           labHistorySection(
@@ -840,7 +837,7 @@ function extraSectionLoaders(days: number): Record<ExtraSectionId, () => Promise
     'body-signals': () => trends('bodySignals', 'Body signals', days),
     therapy: () =>
       guarded('therapy', 'Hands-on therapy sessions', async () => {
-        const sessions = await listTherapySessions({ sinceDate: start, limit: 5000 });
+        const sessions = await listTherapySessions({ sinceDate: start });
         return [
           therapySessionsSection(
             sessions.map((session) => ({
@@ -900,7 +897,7 @@ function extraSectionLoaders(days: number): Record<ExtraSectionId, () => Promise
         return [emergencyCardSection(buildEmergencyCard({ profile, fromApp, contacts, today: end }))];
       }),
     'money-now': () => guarded('finances', 'Where money stands', () => insights('i-money', 'Where money stands')),
-    'money-entries': () => guarded('finances', 'Money in and out', async () => [moneyEntriesSection(await listEntries({ limit: 20000 }), start, end)]),
+    'money-entries': () => guarded('finances', 'Money in and out', async () => [moneyEntriesSection(await listEntries(), start, end)]),
     'upkeep-standing': () =>
       guarded(null, 'Everything kept up, and when it is next due', async () => {
         const [items, places] = await Promise.all([listUpkeepItems(), listUpkeepPlaces()]);
@@ -936,6 +933,21 @@ function extraSectionLoaders(days: number): Record<ExtraSectionId, () => Promise
       getKeepingUpSummary(start, end)
         .then((summary) => [interestTimeSection(summary)])
         .catch(() => [interestTimeSection(null)]),
+    'hobby-money': () =>
+      guarded(null, 'Hobbies and interests', async () => {
+        const [entries, interests] = await Promise.all([listInterestMoney(), listInterests()]);
+        return [hobbyMoneySection(entries, interests, start, end)];
+      }),
+    'interest-things': () =>
+      guarded(null, 'Supplies, collections and wishes', async () => {
+        const [things, interests] = await Promise.all([listInterestThings(), listInterests()]);
+        return [interestThingsSection(things, interests)];
+      }),
+    'interest-library': () =>
+      guarded(null, 'Library', async () => {
+        const [entries, interests] = await Promise.all([listLibrary(), listInterests()]);
+        return [interestLibrarySection(entries, interests, start, end)];
+      }),
     projects: () => guarded(null, 'Projects', () => projectsPart(null)),
     learn: () =>
       guarded(null, 'Learn', async () => {

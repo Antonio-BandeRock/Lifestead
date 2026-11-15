@@ -110,7 +110,17 @@ import { markUpkeepDone, listUpkeepItems } from './upkeepDb';
 import { getTodo, markTodoDone } from './todosDb';
 import { getProjectStep, setProjectStepDone } from './projectsDb';
 import { listInterests } from './interestsDb';
-import { addInterestSession, listInterestSessionsOn } from './interestSessionsDb';
+import { addInterestSession, getRunningSession, listInterestSessionsOn, stopInterestTimer } from './interestSessionsDb';
+import {
+  INTEREST_TIMER_FILE_NAME,
+  INTEREST_TIMER_PREFIX,
+  addTimerStop,
+  interestTimerIdentifier,
+  interestTimerText,
+  parseTimerStops,
+  sessionIdFromTimerIdentifier,
+  type InterestTimerStops,
+} from './interestTimerNotice';
 import { hasSessionOn, practiceFireTimes, practiceReminderText } from './interestSessions';
 import { getMorningCheckin, saveMorningCheckin } from './morningCheckinDb';
 import { isLockedNow, reminderDetailHidden } from './appLockSession';
@@ -164,6 +174,7 @@ import { readSyncState } from './snapshotSyncDevice';
 import { markVaultOffered, takeVaultSetUpWaiting } from './vaultSession';
 import { APP_UPDATE_NOTIFICATION_ID, updateReadyText } from './appUpdate';
 import { APP_VERSION } from '../constants/version';
+import { File, Paths } from 'expo-file-system';
 import { inAppLanguage, queuedEnglish } from './notificationWords';
 import { t, tl } from './i18n';
 
@@ -1378,6 +1389,96 @@ async function offerKitchenLowIfDue(now: Date, enabled: boolean): Promise<void> 
   }
 }
 
+// The notification that stays up while a timer runs on Interests > Sessions
+// (lib/interestTimerNotice.ts). Posted when the timer starts and again
+// whenever the app finds one running without it (after a restart of the
+// phone, say); taken down when the timer stops or is thrown away.
+export async function showInterestTimerNotice(session: { id: string; startedAt: string | null; createdAt: string }, interestName: string | null): Promise<void> {
+  if (!supported || Platform.OS === 'web') return;
+  try {
+    if (!(await hasReminderPermission())) return;
+    await ensureAndroidChannels();
+    await ensureCategories();
+    const words = interestTimerText(interestName, session.startedAt ?? session.createdAt, reminderDetailHidden());
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
+      identifier: interestTimerIdentifier(session.id),
+      content: {
+        title: t(words.title.en, words.title.values),
+        body: t(words.body.en, words.body.values),
+        data: { tab: 'interestTimer', sessionId: session.id },
+        sound: false,
+        sticky: true,
+        categoryIdentifier: REMINDER_CATEGORY_IDS.interestTimer,
+      },
+      trigger: { channelId: ANDROID_DATED_CHANNEL_ID },
+    }));
+  } catch (error) {
+    console.warn('[reminderNotifications] the running timer could not be shown', error);
+  }
+}
+
+/** Puts the timer's notification up if a timer runs and it is not showing. */
+export async function ensureInterestTimerNotice(): Promise<void> {
+  if (!supported || Platform.OS === 'web' || isLockedNow()) return;
+  try {
+    const running = await getRunningSession();
+    if (!running) return;
+    const shown = await Notifications.getPresentedNotificationsAsync();
+    if (shown.some((item) => item.request.identifier === interestTimerIdentifier(running.id))) return;
+    const interests = await listInterests();
+    const name = interests.find((interest) => interest.id === running.interestId)?.name ?? null;
+    await showInterestTimerNotice(running, name);
+  } catch (error) {
+    console.warn('[reminderNotifications] the running timer could not be checked', error);
+  }
+}
+
+export async function clearInterestTimerNotice(sessionId: string): Promise<void> {
+  if (!supported || Platform.OS === 'web') return;
+  await Notifications.dismissNotificationAsync(interestTimerIdentifier(sessionId)).catch(() => undefined);
+}
+
+function readTimerStops(): InterestTimerStops {
+  try {
+    const file = new File(Paths.document, INTEREST_TIMER_FILE_NAME);
+    if (file.exists) return parseTimerStops(file.textSync());
+  } catch (error) {
+    console.error('[reminderNotifications] the timer stops could not be read', error);
+  }
+  return {};
+}
+
+function writeTimerStops(stops: InterestTimerStops): void {
+  try {
+    const file = new File(Paths.document, INTEREST_TIMER_FILE_NAME);
+    if (!file.exists) file.create();
+    file.write(JSON.stringify(stops));
+  } catch (error) {
+    console.error('[reminderNotifications] the timer stops could not be written', error);
+  }
+}
+
+// Stop and Keep pressed on the running timer, written once the records can
+// be opened, at the moment it was pressed.
+let stoppingTimers = false;
+export async function stopWaitingInterestTimers(): Promise<void> {
+  if (stoppingTimers || Platform.OS === 'web' || isLockedNow()) return;
+  const stops = readTimerStops();
+  const ids = Object.keys(stops);
+  if (ids.length === 0) return;
+  stoppingTimers = true;
+  try {
+    writeTimerStops({});
+    for (const id of ids) {
+      await stopInterestTimer(id, { note: null, leftOff: null }, new Date(stops[id])).catch((error) =>
+        console.error('[reminderNotifications] a timer was not stopped', error),
+      );
+    }
+  } finally {
+    stoppingTimers = false;
+  }
+}
+
 // Add to list pressed on a running-low notification, written once the
 // records can be opened. A food already on the list is left as it is.
 let addingKitchenFoods = false;
@@ -1855,6 +1956,9 @@ async function runSync(): Promise<ReminderSyncResult> {
     .then((prefs) => offerKitchenLowIfDue(now, isReminderKindEnabled(prefs, 'kitchenLow')))
     .catch((error) => console.warn('[reminderNotifications] the kitchen could not be checked for low food', error));
   void addWaitingKitchenFoods().catch((error) => console.error('[reminderNotifications] low foods not added', error));
+  void stopWaitingInterestTimers()
+    .then(() => ensureInterestTimerNotice())
+    .catch((error) => console.error('[reminderNotifications] timer stops not written', error));
   const today = localDateString(now);
   const horizon = new Date(now);
   horizon.setDate(horizon.getDate() + LOOKAHEAD_DAYS);
@@ -2317,6 +2421,9 @@ export function resolveReminderTap(response: Notifications.NotificationResponse 
   // Something running low, tapped rather than answered, opens the Kitchen,
   // where its mark and Add to list sit.
   if (request?.identifier?.startsWith(KITCHEN_LOW_PREFIX)) return { pathname: '/life', params: { openLifeLens: 'kitchen' } };
+  // A running timer, tapped, opens Sessions, where it can be stopped with a
+  // note or thrown away.
+  if (request?.identifier?.startsWith(INTEREST_TIMER_PREFIX)) return { pathname: '/interests', params: { openInterestsLens: 'sessions' } };
   if (request?.identifier === APP_UPDATE_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'updates', install: '1' } };
   // A16: an alert about somebody else's dose opens Meds, where the band of
   // doses you watch sits. Queued by lib/peerDosesDb.ts, not by this module.
@@ -2478,6 +2585,17 @@ async function answerPress(response: Notifications.NotificationResponse): Promis
     const markId = typeof data.markId === 'string' ? data.markId : '';
     writeKitchenLowState(answerKitchenLowOffer(readKitchenLowState(), response.actionIdentifier, markId, Date.now()));
     await addWaitingKitchenFoods().catch((error) => console.error('[reminderNotifications] low foods not added', error));
+    return;
+  }
+  // Stop and Keep on a running timer, kept in a plain file with the moment
+  // it was pressed and written once the records can be opened.
+  if (request.identifier.startsWith(INTEREST_TIMER_PREFIX)) {
+    await Notifications.dismissNotificationAsync(request.identifier).catch(() => undefined);
+    const sessionId = sessionIdFromTimerIdentifier(request.identifier);
+    if (sessionId && response.actionIdentifier === 'timerStop') {
+      writeTimerStops(addTimerStop(readTimerStops(), sessionId, Date.now()));
+      await stopWaitingInterestTimers().catch((error) => console.error('[reminderNotifications] timer stops not written', error));
+    }
     return;
   }
   // The vault offer is not a reminder and writes nothing to the database.
@@ -3036,6 +3154,8 @@ export function listenForReminderTaps(navigate: (target: ReminderTapTarget) => v
     .catch((error) => console.error('[reminderNotifications] calendar adds not written', error))
     .then(() => addWaitingKitchenFoods())
     .catch((error) => console.error('[reminderNotifications] low foods not added', error))
+    .then(() => stopWaitingInterestTimers())
+    .catch((error) => console.error('[reminderNotifications] timer stops not written', error))
     .then(() => Notifications.getLastNotificationResponseAsync())
     .then((response) => {
       handleResponse(response, navigate);

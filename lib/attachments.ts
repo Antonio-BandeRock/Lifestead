@@ -51,7 +51,8 @@ export type AttachmentOwnerKind =
   | 'garden_area'
   | 'seed_stock'
   | 'interest'
-  | 'library_entry';
+  | 'library_entry'
+  | 'interest_thing';
 
 /** What a file is, in the terms a place keeps it by. */
 export type AttachmentFamily =
@@ -168,6 +169,11 @@ export const ATTACHMENT_PLACES: Readonly<Record<AttachmentOwnerKind, AttachmentP
     accepts: ['pdf', 'image', 'document', 'text', 'audio', 'video', 'book'],
     takes: 'A library entry takes a PDF, a photo or scan, a document, a text file, a recording, a video or a book file.',
     removal: '{name} goes from this library entry, from this device and from the Files folder in your shared folder. The entry stays.',
+  },
+  interest_thing: {
+    accepts: ['pdf', 'image', 'document', 'text', 'video'],
+    takes: 'A supply, a collected thing or a wish takes a photo or scan, a PDF, a document, a text file or a video: the thing itself, a receipt, a manual, a certificate.',
+    removal: '{name} goes from this thing, from this device and from the Files folder in your shared folder. The thing stays.',
   },
 };
 

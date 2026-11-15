@@ -44,7 +44,7 @@ function toEntry(row: Row): ReportHistoryEntry | null {
 }
 
 /** Newest first. */
-export async function listReportHistory(limit = 200): Promise<ReportHistoryEntry[]> {
+export async function listReportHistory(limit = -1): Promise<ReportHistoryEntry[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<Row>(
     'SELECT id, kind, range_key, range_start, range_end, days, how, for_whom, left_out, made_at FROM report_history ORDER BY made_at DESC LIMIT ?',

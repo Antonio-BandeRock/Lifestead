@@ -206,7 +206,7 @@ export async function getEatingVarietyInputs(startDate: string, endDate: string)
 // take whole, and both are cumulative rather than ranged, so the range gets
 // applied by lib/eatingVariety.ts rather than by the query.
 export async function getSafeListInputs(): Promise<{ safeFoods: SafeFoodInput[]; trials: FoodTrialInput[] }> {
-  const [safeRows, trialRows] = await Promise.all([listMySafeFoods(), listFoodTrials(500)]);
+  const [safeRows, trialRows] = await Promise.all([listMySafeFoods(), listFoodTrials()]);
   return {
     safeFoods: safeRows.map((row) => ({
       foodName: row.foodName,

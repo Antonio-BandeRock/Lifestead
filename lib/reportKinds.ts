@@ -101,6 +101,9 @@ export type ExtraSectionId =
   | 'keeping-captures'
   | 'interests'
   | 'interest-time'
+  | 'hobby-money'
+  | 'interest-things'
+  | 'interest-library'
   | 'projects'
   | 'learn'
   | 'work-projects';
@@ -328,9 +331,9 @@ export const REPORT_KINDS: ReportKindDef[] = [
     icon: 'wallet-outline',
     title: 'Lifestead: Household Money',
     preface: ['Where household money stands now, and the money entered in and out over the range.', 'Only money entered against a day is counted. Repeating bills are not guessed into it.'],
-    help: 'The Money reading from Insights, then every entry in and out over the range with its category, and the totals each way.',
+    help: 'The Money reading from Insights, then every entry in and out over the range with its category, and the totals each way, then what hobbies and interests cost and brought in.',
     core: [],
-    extras: ['money-now', 'money-entries'],
+    extras: ['money-now', 'money-entries', 'hobby-money'],
   },
   {
     key: 'r-upkeep',
@@ -382,10 +385,10 @@ export const REPORT_KINDS: ReportKindDef[] = [
     label: 'Interests and Projects',
     icon: 'color-wand-outline',
     title: 'Lifestead: Interests and Projects',
-    preface: ['The interests kept, the time given to them over the range, the projects under way and the cards answered in Learn.'],
-    help: 'Every interest with its stages, time given to interests in the range, every project with its steps done, and how many Learn cards were answered, each as a plain count.',
+    preface: ['The interests kept, the time and money given to them over the range, what is kept for them, the Library, the projects under way and the cards answered in Learn.'],
+    help: 'Every interest with its stages, time given to interests in the range, what was spent and earned on them, every supply, collection and wish, the Library, every project with its steps done, and how many Learn cards were answered, each as a plain count.',
     core: [],
-    extras: ['interests', 'interest-time', 'projects', 'learn'],
+    extras: ['interests', 'interest-time', 'hobby-money', 'interest-things', 'interest-library', 'projects', 'learn'],
   },
   {
     key: 'r-work',
@@ -472,6 +475,9 @@ export const SECTION_LABELS: Record<ReportSectionId, string> = {
   'keeping-captures': 'Things captured',
   interests: 'Interests',
   'interest-time': 'Time given to interests',
+  'hobby-money': 'Hobbies and interests',
+  'interest-things': 'Supplies, collections and wishes',
+  'interest-library': 'Library',
   projects: 'Projects',
   learn: 'Learn',
   'work-projects': 'Work projects',

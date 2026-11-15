@@ -115,7 +115,8 @@ export type ReminderActionId =
   | 'calendarNotThis'
   | 'calendarStop'
   | 'kitchenAdd'
-  | 'kitchenNotYet';
+  | 'kitchenNotYet'
+  | 'timerStop';
 
 export type ReminderCategoryKey =
   | 'plain'
@@ -135,7 +136,8 @@ export type ReminderCategoryKey =
   | 'vaultOffer'
   | 'backupOffer'
   | 'calendarOffer'
-  | 'kitchenLow';
+  | 'kitchenLow'
+  | 'interestTimer';
 
 // 'plain' keeps the identifier the single category always had, so a
 // reminder already queued is still correct and is left alone by the
@@ -162,6 +164,7 @@ export const REMINDER_CATEGORY_IDS: Record<ReminderCategoryKey, string> = {
   backupOffer: 'inside-story-backup-offer',
   calendarOffer: 'inside-story-calendar-offer',
   kitchenLow: 'inside-story-kitchen-low',
+  interestTimer: 'inside-story-interest-timer',
 };
 
 // The 1 to 5 value each morning button saves. Each title is that value's
@@ -264,6 +267,8 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
       return 'Add to list';
     case 'kitchenNotYet':
       return 'Not yet';
+    case 'timerStop':
+      return 'Stop and Keep';
   }
 }
 
@@ -300,6 +305,10 @@ export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> =
   // puts it on the list being shopped; Not yet asks again in a few days if it
   // is still low.
   kitchenLow: ['kitchenAdd', 'kitchenNotYet'],
+  // A timer running on Interests > Sessions (lib/interestTimerNotice.ts).
+  // Stop and Keep only: throwing the time away stays on the lens, where it
+  // can be seen first.
+  interestTimer: ['timerStop'],
 };
 
 /**

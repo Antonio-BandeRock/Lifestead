@@ -167,7 +167,7 @@ async function recordNetWorthSnapshot(): Promise<void> {
   );
 }
 
-export async function listNetWorthHistory(limit = 24): Promise<NetWorthPoint[]> {
+export async function listNetWorthHistory(limit = -1): Promise<NetWorthPoint[]> {
   const db = await getDatabase();
   const rows = await readOrClosed(() => db.getAllAsync<{ date: string; assets: number; liabilities: number }>(
     `

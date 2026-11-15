@@ -130,5 +130,19 @@ for (const rel of sources) {
   }
 }
 
+// --- ways to reach someone ------------------------------------------------------------
+{
+  const urls = (text) => L.reachLinks(text).map((link) => link.url);
+  check('nothing typed offers nothing', same(urls(''), []) && same(urls(null), []));
+  check('plain words offer nothing', same(urls('meets Tuesdays at 7:30, ask at the front desk'), []));
+  check('a phone number is offered to call', same(urls('Call Ana on 322 123 4567'), ['tel:3221234567']));
+  check('a + number keeps its +', same(urls('+52 (322) 123-4567'), ['tel:+523221234567']));
+  check('an email is offered to write to', same(urls('ana@club.mx.'), ['mailto:ana@club.mx']));
+  check('a web address opens', same(urls('see https://club.example.org/events, or www.club.mx'), ['https://club.example.org/events', 'https://www.club.mx']));
+  check('a date is not a number', same(urls('since 2026-11-15'), []));
+  check('one of each together', same(L.reachLinks('ana@club.mx, 555 123 4567').map((link) => link.kind), ['email', 'call']));
+  check('the same number twice is offered once', urls('555 123 4567 or 555-123-4567').length === 1);
+}
+
 console.log(`${pass + fail} checks, ${fail} failures`);
 process.exit(fail ? 1 : 0);

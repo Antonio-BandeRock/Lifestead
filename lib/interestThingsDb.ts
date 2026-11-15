@@ -4,6 +4,7 @@
 // lib/db.ts.
 
 import { getDatabase } from './db';
+import { removeAttachmentsOf } from './attachmentsDb';
 import { cleanInterestText, localDayOf } from './interests';
 import type { InterestThing, ThingKind } from './interestThings';
 
@@ -141,6 +142,7 @@ export async function setInterestThingRetired(id: string, retired: boolean): Pro
 export async function deleteInterestThing(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM interest_things WHERE id = ?', id);
+  await removeAttachmentsOf('interest_thing', id);
 }
 
 /** Counts for the My Items hub. */

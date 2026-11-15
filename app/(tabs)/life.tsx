@@ -65,6 +65,7 @@ import {
   summarizeRecurring,
   upcomingBills,
   type RecurringItem,
+  type TrackedSpending,
 } from '../../lib/financeCore';
 import {
   WEEKDAY_NAMES,
@@ -852,12 +853,14 @@ export default function LifeScreen() {
   const [section, setSection] = useState<FinanceSection>('overview');
   const [recurring, setRecurring] = useState<FinanceRecurringRecord[]>([]);
   const [entries, setEntries] = useState<FinanceEntryRecord[]>([]);
-  const [tracked, setTracked] = useState({
+  const [tracked, setTracked] = useState<TrackedSpending>({
     grocerySpend: 0,
     groceryLinesWithoutPrice: 0,
     therapySpend: 0,
     therapySessionsWithoutCost: 0,
     kitchenCoveredLines: 0,
+    hobbySpend: 0,
+    hobbyEarned: 0,
   });
   const [loading, setLoading] = useState(false);
   const [recurringForm, setRecurringForm] = useState<RecurringForm | null>(null);
@@ -1248,6 +1251,7 @@ export default function LifeScreen() {
           {renderStat('Recorded spending', formatFinanceMoney(picture.knownSpendTotal))}
           {tracked.grocerySpend > 0 ? renderStat('  from groceries', formatFinanceMoney(tracked.grocerySpend)) : null}
           {tracked.therapySpend > 0 ? renderStat('  from therapies', formatFinanceMoney(tracked.therapySpend)) : null}
+          {(tracked.hobbySpend ?? 0) > 0 ? renderStat('  from hobbies and interests', formatFinanceMoney(tracked.hobbySpend ?? 0)) : null}
           {picture.loggedIncome > 0 ? renderStat('Extra income logged', formatFinanceMoney(picture.loggedIncome)) : null}
           {picture.incompleteRecords > 0 ? (
             <Text style={styles.footnote}>
@@ -1915,13 +1919,15 @@ export default function LifeScreen() {
           )}
         </TabBand>
 
-        {tracked.grocerySpend > 0 || tracked.therapySpend > 0 || tracked.groceryLinesWithoutPrice > 0 ? (
+        {tracked.grocerySpend > 0 || tracked.therapySpend > 0 || tracked.groceryLinesWithoutPrice > 0 || (tracked.hobbySpend ?? 0) > 0 || (tracked.hobbyEarned ?? 0) > 0 ? (
           <TabBand folds={folds} color={TAB_COLOR} id="life:finances:already-counted-for-you" title="Already counted for you" icon="cash-outline">
             {tracked.grocerySpend > 0 ? renderStat('Groceries', formatFinanceMoney(tracked.grocerySpend)) : null}
             {tracked.therapySpend > 0 ? renderStat('Hands-on therapies', formatFinanceMoney(tracked.therapySpend)) : null}
+            {(tracked.hobbySpend ?? 0) > 0 ? renderStat('Hobbies and interests, spent', formatFinanceMoney(tracked.hobbySpend ?? 0)) : null}
+            {(tracked.hobbyEarned ?? 0) > 0 ? renderStat('Hobbies and interests, came in', formatFinanceMoney(tracked.hobbyEarned ?? 0)) : null}
             <Text style={styles.footnote}>
-              Read from your grocery lists and therapy sessions rather than copied here, so a price corrected there is
-              corrected everywhere. Do not enter these again by hand.
+              Read from your grocery lists, therapy sessions and Interests, Spending and Earning rather than copied here, so a price corrected there is
+              corrected everywhere. Do not enter these again by hand. Interest on a loan or at a bank is not part of hobbies and interests.
               {picture.incompleteRecords > 0
                 ? ` ${picture.incompleteRecords} of them have no amount recorded and are left out rather than guessed at.`
                 : ''}

@@ -41,18 +41,27 @@ import {
 import { listProjects } from '../lib/projectsDb';
 import type { Project } from '../lib/projects';
 import { explainNotYet } from '../lib/notYet';
-import { syncReminderNotifications } from '../lib/reminderNotifications';
+import { clearInterestTimerNotice, showInterestTimerNotice, syncReminderNotifications } from '../lib/reminderNotifications';
+import { ShowMoreButton, useShownPart } from './ShowMoreButton';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { useFadingMessage } from '../hooks/useFadingMessage';
+import { t } from '../lib/i18n';
 
 const NO_PROJECT = '__no_project__';
 const NO_INTEREST = '__no_interest__';
 
-type Props = { tabColor: string };
+type Props = {
+  tabColor: string;
+  /** Opened from an interest on My Interests: the list starts on that interest. */
+  onlyInterestId?: string;
+  /** Log a Session on My Interests: the log form opens already on that interest. */
+  openLogForm?: boolean;
+};
 
 type SessionForm = {
   /** Null for a new session. */
@@ -71,20 +80,30 @@ const DAY_HELP = 'That day could not be read. Try "yesterday", "Monday", "28 Oct
 const LENGTH_HELP = 'That could not be read as a length of time. Try "45", "45 min", "1h 20m" or "1:20", or leave it empty if it was not timed.';
 const TIME_HELP = 'That could not be read as a time of day. Try "7pm", "7:30 pm" or "19:30".';
 
-export function InterestSessionsSection({ tabColor }: Props) {
+export function InterestSessionsSection({ tabColor, onlyInterestId, openLogForm }: Props) {
   const [interests, setInterests] = useState<Interest[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [sessions, setSessions] = useState<InterestSession[]>([]);
-  const [form, setForm] = useState<SessionForm | null>(null);
+  const [form, setForm] = useState<SessionForm | null>(() =>
+    openLogForm && onlyInterestId
+      ? { id: null, mode: 'log', interestId: onlyInterestId, projectId: null, day: '', length: '', note: '', leftOff: '' }
+      : null,
+  );
   const [formError, setFormError] = useState<string | null>(null);
   const [stopping, setStopping] = useState<{ note: string; leftOff: string }>({ note: '', leftOff: '' });
   const [practice, setPractice] = useState<{ interestId: string; days: number[]; time: string } | null>(null);
   const [practiceError, setPracticeError] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [showPractice, setShowPractice] = useState(false);
-  const [saidBack, setSaidBack] = useState<string | null>(null);
+  const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
   const [now, setNow] = useState(() => new Date());
+  // Which interest's sessions the list shows; null shows every one. Opened
+  // from an interest on My Interests, it starts on that interest.
+  const [filterId, setFilterId] = useState<string | null>(onlyInterestId ?? null);
+  useEffect(() => {
+    if (onlyInterestId) setFilterId(onlyInterestId);
+  }, [onlyInterestId]);
 
   const load = useCallback(async () => {
     setInterests(await listInterests());
@@ -113,8 +132,16 @@ export function InterestSessionsSection({ tabColor }: Props) {
   const { current } = groupInterests(interests);
   const nameOf = (id: string) => interests.find((interest) => interest.id === id)?.name ?? 'An interest no longer listed';
   const projectNameOf = (id: string | null) => (id ? (projects.find((project) => project.id === id)?.name ?? null) : null);
-  const months = groupSessionsByMonth(sessions);
-  const firstSessionId = months[0]?.sessions[0]?.id;
+  const finished = sessions.filter((session) => !session.running && (filterId === null || session.interestId === filterId));
+  const { shown, more, showMore } = useShownPart(finished);
+  // A month's total counts every session in it, even while Show more has
+  // only some of its rows on screen.
+  const shownIds = new Set(shown.map((session) => session.id));
+  const months = groupSessionsByMonth(finished)
+    .map((month) => ({ ...month, showing: month.sessions.filter((session) => shownIds.has(session.id)) }))
+    .filter((month) => month.showing.length > 0);
+  const withSessions = interests.filter((interest) => sessions.some((session) => !session.running && session.interestId === interest.id));
+  const firstSessionId = months[0]?.showing[0]?.id;
 
   async function afterChange(message: string | null) {
     setSaidBack(message);
@@ -140,7 +167,7 @@ export function InterestSessionsSection({ tabColor }: Props) {
   function startLog() {
     if (needsAnInterest()) return;
     setFormError(null);
-    setForm({ id: null, mode: 'log', interestId: current.length === 1 ? current[0].id : null, projectId: null, day: '', length: '', note: '', leftOff: '' });
+    setForm({ id: null, mode: 'log', interestId: filterId ?? (current.length === 1 ? current[0].id : null), projectId: null, day: '', length: '', note: '', leftOff: '' });
   }
 
   function startTimerForm() {
@@ -150,7 +177,7 @@ export function InterestSessionsSection({ tabColor }: Props) {
       return;
     }
     setFormError(null);
-    setForm({ id: null, mode: 'timer', interestId: current.length === 1 ? current[0].id : null, projectId: null, day: '', length: '', note: '', leftOff: '' });
+    setForm({ id: null, mode: 'timer', interestId: filterId ?? (current.length === 1 ? current[0].id : null), projectId: null, day: '', length: '', note: '', leftOff: '' });
   }
 
   function startChange(session: InterestSession) {
@@ -175,7 +202,8 @@ export function InterestSessionsSection({ tabColor }: Props) {
     }
     const name = nameOf(form.interestId);
     if (form.mode === 'timer') {
-      await startInterestTimer(form.interestId, form.projectId);
+      const timerId = await startInterestTimer(form.interestId, form.projectId);
+      void showInterestTimerNotice({ id: timerId, startedAt: new Date().toISOString(), createdAt: new Date().toISOString() }, name);
       setForm(null);
       setStopping({ note: '', leftOff: '' });
       await afterChange(`Timer started for ${name}.`);
@@ -214,6 +242,7 @@ export function InterestSessionsSection({ tabColor }: Props) {
     if (!running) return;
     const name = nameOf(running.interestId);
     const minutes = await stopInterestTimer(running.id, stopping);
+    void clearInterestTimerNotice(running.id);
     setStopping({ note: '', leftOff: '' });
     await afterChange(`${name}: ${formatMinutes(minutes)} kept.`);
   }
@@ -230,6 +259,7 @@ export function InterestSessionsSection({ tabColor }: Props) {
           onPress: async () => {
             setConfirm(null);
             await discardInterestTimer(running.id);
+            void clearInterestTimerNotice(running.id);
             await afterChange('Timer thrown away.');
           },
         },
@@ -554,17 +584,44 @@ export function InterestSessionsSection({ tabColor }: Props) {
 
       {renderPractice()}
 
+      {withSessions.length > 1 ? (
+        <View style={styles.pillRow}>
+          <TouchableOpacity
+            style={[styles.pill, filterId === null && styles.pillActive]}
+            onPress={() => setFilterId(null)}
+            accessibilityRole="button"
+            accessibilityState={{ selected: filterId === null }}
+          >
+            <Text style={filterId === null ? styles.pillTextOn : styles.pillText}>Every interest</Text>
+          </TouchableOpacity>
+          {withSessions.map((interest) => (
+            <TouchableOpacity
+              key={interest.id}
+              style={[styles.pill, filterId === interest.id && styles.pillActive]}
+              onPress={() => setFilterId(interest.id)}
+              accessibilityRole="button"
+              accessibilityState={{ selected: filterId === interest.id }}
+            >
+              <Text style={filterId === interest.id ? styles.pillTextOn : styles.pillText}>{interest.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      ) : null}
+
       {months.length === 0 ? (
-        <Text style={styles.captionText}>No sessions yet. Each one you keep shows here by month.</Text>
+        <Text style={styles.captionText}>
+          {filterId !== null && sessions.some((session) => !session.running) ? t('No sessions kept for {name} yet.', { name: nameOf(filterId) }) : 'No sessions yet. Each one you keep shows here by month.'}
+        </Text>
       ) : (
         months.map((month) => (
           <View key={month.month} style={styles.group}>
             <Text style={styles.groupHeading}>{month.label}</Text>
             <Text style={styles.captionText}>{describeSessionTotal(month.sessions)}</Text>
-            {month.sessions.map(renderSession)}
+            {month.showing.map(renderSession)}
           </View>
         ))
       )}
+      <ShowMoreButton more={more} onPress={showMore} />
 
       <AppActionSheet
         visible={confirm !== null}

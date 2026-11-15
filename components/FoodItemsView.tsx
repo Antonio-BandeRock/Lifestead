@@ -694,7 +694,7 @@ const FAVORITE_BUILDER_PARAM: Record<string, string> = {
 async function loadItems(itemType: string | undefined, status: string | undefined): Promise<FoodItemEntry[]> {
   if (itemType === 'side') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'side');
+      const favorites = await listFavorites(undefined, 'side');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const sides = await listSides();
@@ -711,7 +711,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'salad') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'salad');
+      const favorites = await listFavorites(undefined, 'salad');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const salads = await listSalads();
@@ -723,7 +723,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'smoothie') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'smoothie');
+      const favorites = await listFavorites(undefined, 'smoothie');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const smoothies = await listSmoothies();
@@ -735,7 +735,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'fermentation') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'fermentation');
+      const favorites = await listFavorites(undefined, 'fermentation');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const fermentations = await listFermentations();
@@ -748,7 +748,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'beverage') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'beverage');
+      const favorites = await listFavorites(undefined, 'beverage');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const beverages = await listBeverages();
@@ -760,7 +760,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'snack') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'snack');
+      const favorites = await listFavorites(undefined, 'snack');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const snacks = await listSnacks();
@@ -772,7 +772,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'bakedGoods') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'bakedGoods');
+      const favorites = await listFavorites(undefined, 'bakedGoods');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const bakedGoods = await listBakedGoods();
@@ -784,7 +784,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'soup') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'soup');
+      const favorites = await listFavorites(undefined, 'soup');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const soups = await listSoups();
@@ -796,7 +796,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'sauce') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'sauce');
+      const favorites = await listFavorites(undefined, 'sauce');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const sauces = await listSauces();
@@ -808,7 +808,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'handheld') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'handheld');
+      const favorites = await listFavorites(undefined, 'handheld');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const handhelds = await listHandhelds();
@@ -820,7 +820,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   }
   if (itemType === 'dessert') {
     if (status === 'favorite') {
-      const favorites = await listFavorites(50, 'dessert');
+      const favorites = await listFavorites(undefined, 'dessert');
       return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
     }
     const desserts = await listDesserts();
@@ -834,7 +834,7 @@ async function loadItems(itemType: string | undefined, status: string | undefine
   // "Saved Meals" tile -- see food.tsx's own mealFavoriteCount comment for
   // why), only 'favorite'.
   if (itemType === 'meal' && status === 'favorite') {
-    const favorites = await listFavorites(50, 'meal');
+    const favorites = await listFavorites(undefined, 'meal');
     return favorites.map((favorite) => ({ id: favorite.id, title: favorite.name }));
   }
   // "My Food Products," 2026-08-16 -- real barcode-scanned items, always

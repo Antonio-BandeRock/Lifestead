@@ -479,7 +479,7 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     wishList: 'Wish List',
     library: 'Library',
     people: 'People & Places',
-    money: 'Money',
+    money: 'Spending and Earning',
     daysUntil: 'Days Until',
     projects: 'Projects',
     learn: 'Flashcards',

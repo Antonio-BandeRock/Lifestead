@@ -1194,7 +1194,7 @@ function MealsLens() {
         Promise.all([
           listScheduledMealsForDateRange(weekStart, weekEnd),
           getUserProfile(),
-          listFavorites(100, 'meal'),
+          listFavorites(undefined, 'meal'),
           listMeals(100),
           hasCalendarPermission(),
           listCalendarNotes(weekStart, weekEnd),
@@ -3177,7 +3177,7 @@ function PastMealsLens() {
     // already counts.
     settlePastScheduledMeals()
       .catch((error) => console.error('settlePastScheduledMeals failed', error))
-      .then(() => listPastScheduledMeals(100))
+      .then(() => listPastScheduledMeals())
       .then((rows) => setItems(rows))
       .finally(() => setLoading(false));
   }, []);
@@ -5132,7 +5132,7 @@ function HydrationLens() {
         Promise.all([
           listScheduledMealsForDate(date),
           listMealsForDate(date),
-          listFavorites(100, 'meal'),
+          listFavorites(undefined, 'meal'),
           listMeals(100),
           getDailyNutrientAnalysis(date),
           getReminderPreferences(),

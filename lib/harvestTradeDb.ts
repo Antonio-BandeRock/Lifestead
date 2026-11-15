@@ -147,7 +147,7 @@ export async function deleteDisposition(id: string): Promise<void> {
   await db.runAsync('DELETE FROM harvest_dispositions WHERE id = ?', id);
 }
 
-export async function listDispositions(limit = 100): Promise<DispositionRecord[]> {
+export async function listDispositions(limit = -1): Promise<DispositionRecord[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<{
     id: string; occurredOn: string; kind: string; foodName: string;

@@ -178,7 +178,10 @@ export async function deleteMedicalBill(id: string): Promise<void> {
   await removeAttachmentsOf('medical_bill', id);
 }
 
-export async function listMedicalBills(limit = 200): Promise<MedicalBill[]> {
+// No count unless a caller passes one: a history read is limited by its
+// dates, never by how many records there are (2026-11-15). SQLite reads
+// LIMIT -1 as no limit.
+export async function listMedicalBills(limit?: number): Promise<MedicalBill[]> {
   const db = await getDatabase();
   return readOrClosed(() => db.getAllAsync<MedicalBill>(
     `
@@ -190,7 +193,7 @@ export async function listMedicalBills(limit = 200): Promise<MedicalBill[]> {
       ORDER BY service_date DESC
       LIMIT ?
     `,
-    limit,
+    limit ?? -1,
   ), []);
 }
 

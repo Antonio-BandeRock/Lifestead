@@ -73,7 +73,7 @@ export function timerMinutes(startedAt: string, now: Date): number {
   return Math.min(MAX_SESSION_MINUTES, Math.max(1, minutes));
 }
 
-function clockOf(iso: string): string {
+export function clockOf(iso: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return '';
   const hours = date.getHours();

@@ -96,7 +96,7 @@ export function FinanceMoneySection({ tabColor }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
-    Promise.all([listAccounts(), listNetWorthHistory(), listAllBalanceHistory(), listEntries({ limit: 400 }), listRecurring()])
+    Promise.all([listAccounts(), listNetWorthHistory(), listAllBalanceHistory(), listEntries(), listRecurring()])
       .then(([rows, points, perAccount, entryRows, recurringRows]) => {
         setAccounts(rows); setHistory(points); setBalanceHistory(perAccount);
         setEntries(entryRows); setRecurring(recurringRows);

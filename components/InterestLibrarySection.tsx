@@ -50,10 +50,15 @@ import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { useFadingMessage } from '../hooks/useFadingMessage';
+import { ShowMoreButton, useShownPart } from './ShowMoreButton';
+import { OnlyInterestLine } from './OnlyInterestLine';
 
 const NO_INTEREST = '__no_interest__';
 
 type Props = {
+  /** Opened from an interest on My Interests: the list starts on that interest. */
+  onlyInterestId?: string;
   tabColor: string;
   /** A Capture note whose read page should open the add form, filled in. */
   fromNoteId?: string;
@@ -91,7 +96,7 @@ function emptyForm(interestId: string | null): LibraryForm {
   };
 }
 
-export function InterestLibrarySection({ tabColor, fromNoteId }: Props) {
+export function InterestLibrarySection({ tabColor, fromNoteId, onlyInterestId }: Props) {
   const [interests, setInterests] = useState<Interest[]>([]);
   const [entries, setEntries] = useState<LibraryEntry[]>([]);
   const [form, setForm] = useState<LibraryForm | null>(null);
@@ -99,7 +104,7 @@ export function InterestLibrarySection({ tabColor, fromNoteId }: Props) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [leftOffDraft, setLeftOffDraft] = useState<{ id: string; text: string } | null>(null);
   const [showRetired, setShowRetired] = useState(false);
-  const [saidBack, setSaidBack] = useState<string | null>(null);
+  const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
   const load = useCallback(async () => {
@@ -136,8 +141,15 @@ export function InterestLibrarySection({ tabColor, fromNoteId }: Props) {
   const { current } = groupInterests(interests);
   const nameOf = (id: string) => interests.find((interest) => interest.id === id)?.name ?? 'An interest no longer listed';
   const groups = groupLibrary(entries, nameOf);
+  // Opened from an interest on My Interests, the list starts on that interest
+  // alone; Show Every Interest widens it. A long list shows its first part
+  // and carries on with Show more (2026-11-15).
+  const [onlyId, setOnlyId] = useState<string | null>(onlyInterestId ?? null);
+  const listed = onlyId ? groups.filter((group) => group.interestId === onlyId) : groups;
+  const { shown, more, showMore } = useShownPart(listed.flatMap((group) => group.statuses.flatMap((part) => part.entries)));
+  const shownIds = new Set(shown.map((item) => item.id));
   const retired = retiredLibrary(entries);
-  const firstEntryId = groups[0]?.statuses[0]?.entries[0]?.id;
+  const firstEntryId = shown[0]?.id;
   const kinds = kindChoices(
     LIBRARY_KINDS,
     entries.map((entry) => entry.kind),
@@ -507,21 +519,27 @@ export function InterestLibrarySection({ tabColor, fromNoteId }: Props) {
       )}
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
-      {groups.length === 0 ? (
+      {onlyId ? <OnlyInterestLine name={nameOf(onlyId)} onShowEvery={() => setOnlyId(null)} /> : null}
+      {listed.length === 0 ? (
         <Text style={styles.captionText}>Nothing in the library yet. Each thing you add shows here under its interest.</Text>
       ) : (
-        groups.map((group) => (
-          <View key={group.interestId} style={styles.group}>
-            <Text style={styles.groupHeading}>{group.interestName}</Text>
-            {group.statuses.map((part) => (
-              <View key={part.status} style={styles.group}>
-                <Text style={styles.setHeading}>{`${LIBRARY_STATUS_LABELS[part.status]} · ${part.entries.length}`}</Text>
-                {part.entries.map(renderLibraryEntry)}
-              </View>
-            ))}
-          </View>
-        ))
+        listed
+          .filter((group) => group.statuses.some((part) => part.entries.some((entry) => shownIds.has(entry.id))))
+          .map((group) => (
+            <View key={group.interestId} style={styles.group}>
+              <Text style={styles.groupHeading}>{group.interestName}</Text>
+              {group.statuses
+                .filter((part) => part.entries.some((entry) => shownIds.has(entry.id)))
+                .map((part) => (
+                  <View key={part.status} style={styles.group}>
+                    <Text style={styles.setHeading}>{`${LIBRARY_STATUS_LABELS[part.status]} · ${part.entries.length}`}</Text>
+                    {part.entries.filter((entry) => shownIds.has(entry.id)).map(renderLibraryEntry)}
+                  </View>
+                ))}
+            </View>
+          ))
       )}
+      <ShowMoreButton more={more} onPress={showMore} />
 
       {renderRetired()}
 

@@ -230,7 +230,7 @@ export function CouldThisPaySection({ tabColor }: Props) {
                   </Text>
                 ))
               ) : (
-                <Text style={styles.captionText}>Nothing is kept on Money, Sessions or supplies for these yet, so the worksheet works from your numbers alone.</Text>
+                <Text style={styles.captionText}>No money, sessions or supplies are kept for these yet, so the worksheet works from your numbers alone.</Text>
               )}
             </View>
           ) : null}

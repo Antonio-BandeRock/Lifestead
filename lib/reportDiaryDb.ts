@@ -29,8 +29,8 @@ export async function listDiaryMeals(rangeStart: string, rangeEnd: string): Prom
 /** Every flare and after-meal reaction logged in the range. */
 export async function listDiaryCheckins(rangeStart: string, rangeEnd: string): Promise<DiaryCheckin[]> {
   const [flares, reactions] = await Promise.all([
-    listCheckins({ checkinType: 'flare', limit: 2000 }),
-    listCheckins({ checkinType: 'post_meal', limit: 2000 }),
+    listCheckins({ checkinType: 'flare' }),
+    listCheckins({ checkinType: 'post_meal' }),
   ]);
   return [...flares, ...reactions]
     .filter((entry) => {

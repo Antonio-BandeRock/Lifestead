@@ -23,6 +23,7 @@ import { GroceryQuickAdd } from '../../components/GroceryQuickAdd';
 import { TodayPicks } from '../../components/TodayPicks';
 import { DaysUntilSection } from '../../components/DaysUntilSection';
 import { InsideKnowledgeCard } from '../../components/InsideKnowledgeCard';
+import { InterestTimerHomeCard, useRunningInterestTimer } from '../../components/InterestTimerHomeCard';
 import { LanguageBasicsHomeCard } from '../../components/LanguageBasicsHomeCard';
 import { StartWorkoutCard } from '../../components/StartWorkoutCard';
 import { DailyScalesPicker } from '../../components/DailyScalesPicker';
@@ -1316,6 +1317,7 @@ export default function HomeScreen() {
   // already is, so a toggle flipped on Profile reaches Home immediately.
   const visualPrefs = useVisualPreferences();
   const waiting = useWaitingReminders();
+  const interestTimer = useRunningInterestTimer();
   // Which of Home's per-tab groups are open, kept under "homeTab:/food"
   // and the rest (see HOME_TAB_GROUP_BAND_KEY_PREFIX). A group is a band
   // like any other, so it remembers its fold the same way.
@@ -1553,6 +1555,7 @@ export default function HomeScreen() {
   // is not a row at all.
   function homeSectionHasContent(key: HomeSectionKey) {
     if (key === 'sharedFolderSetup') return sharedFolderReady === false;
+    if (key === 'interestTimer') return Boolean(interestTimer.timer);
     if (key === 'weekTrend') return Boolean(weekTrend);
     if (key === 'outsideUsual') return (data?.outsideUsual.length ?? 0) > 0;
     if (key === 'pacingToday') return (data?.pacingToday.length ?? 0) > 0;
@@ -1578,7 +1581,7 @@ export default function HomeScreen() {
     // homeSectionHasContent is rebuilt every render and reads exactly the
     // two values listed here, so those are the dependencies that matter.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [visualPrefs, sharedFolderReady, weekTrend, data],
+    [visualPrefs, sharedFolderReady, weekTrend, data, interestTimer.timer],
   );
 
   const userConditionCodesRef = useRef(userConditionCodes);
@@ -1742,7 +1745,7 @@ export default function HomeScreen() {
       // listMealsForDate above so the destructure below stays a stable
       // append-only list. One indexed query over meals, no per-row work.
       // Quick-log phase 4, 2026-08-30.
-      listMealPhotoDrafts(12),
+      listMealPhotoDrafts(),
       // The Grocery List, 2026-09-01. One row plus one count, see
       // getActiveGroceryListSummary.
       getActiveGroceryListSummary(),
@@ -4747,6 +4750,22 @@ export default function HomeScreen() {
     );
   }
 
+  // A timer running on Interests > Sessions (2026-11-15): drawn only while
+  // one runs, so a timer started and forgotten is seen on Home.
+  function renderInterestTimer() {
+    if (!isHomeSectionVisible(visualPrefs, 'interestTimer')) return null;
+    const running = interestTimer.timer;
+    if (!running) return null;
+    return renderBand(
+      'interestTimer',
+      'Interest Timer Running',
+      <View style={styles.bandBody}>
+        <InterestTimerHomeCard key={running.session.id} timer={running} onChanged={interestTimer.reload} />
+      </View>,
+      { icon: 'timer-outline', foldedCaption: running.interestName },
+    );
+  }
+
   // Inside Knowledge, 2026-10-31: Interests > Learn on Home. Things you now
   // know and which decks have cards back, never a share of answers.
   function renderInsideKnowledge() {
@@ -4947,6 +4966,8 @@ export default function HomeScreen() {
         return renderDaysUntil();
       case 'logHarvest':
         return renderLogHarvest();
+      case 'interestTimer':
+        return renderInterestTimer();
       case 'insideKnowledge':
         return renderInsideKnowledge();
       case 'languageBasics':
@@ -5136,7 +5157,9 @@ export default function HomeScreen() {
               restingCaption={(key) =>
                 key === 'waitingAnswers' && waiting.groups && countWaiting(waiting.groups) === 0
                   ? 'Nothing waiting now. Shows here when a reminder needs an answer.'
-                  : null
+                  : key === 'interestTimer' && !interestTimer.timer
+                    ? 'No timer running now. Shows here while one runs on Interests, Sessions.'
+                    : null
               }
               openFor={arrangeOpenKey}
               onReveal={(y) => scrollRef.current?.scrollTo({ y: Math.max(0, y - 12), animated: false })}

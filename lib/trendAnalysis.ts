@@ -404,7 +404,7 @@ export type CheckinSeverityPoint = {
 export async function getCheckinSeverityTrendSeries(checkinTypes: CheckinType[], days: number): Promise<CheckinSeverityPoint[]> {
   const rangeStart = dateStringDaysAgo(days - 1);
   // F17: a year of flares can pass 200, so the limit grows with the range.
-  const results = await Promise.all(checkinTypes.map((checkinType) => listCheckins({ checkinType, limit: Math.max(200, days * 4) })));
+  const results = await Promise.all(checkinTypes.map((checkinType) => listCheckins({ checkinType })));
 
   const points: CheckinSeverityPoint[] = [];
   for (const entries of results) {
@@ -449,7 +449,7 @@ export async function getCustomTrackerSeries(days: number): Promise<{ tracker: C
 
 export async function getDailyScaleSeries(days: number): Promise<Record<DailyScaleKey, DailyScalePoint[]>> {
   const rangeStart = dateStringDaysAgo(days - 1);
-  const checkins = await listCheckins({ checkinType: 'general', limit: Math.max(1000, days * 6) });
+  const checkins = await listCheckins({ checkinType: 'general' });
   return {
     mood: dailyScaleSeries(checkins, 'mood', rangeStart),
     energy: dailyScaleSeries(checkins, 'energy', rangeStart),

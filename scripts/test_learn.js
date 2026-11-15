@@ -455,7 +455,7 @@ check('every deck offers Print the Deck', read0('components/LearnSection.tsx').i
   const deck = (id, title, n) => ({ id, title, about: '', cards: Array.from({ length: n }, (_, i) => ({ id: id + i, front: 'Q', back: 'A', thinking: true })) });
   const decks = [deck('a', 'Soil', 3), deck('b', 'Gut', 3), deck('c', 'Bees', 3)];
   const fresh = K.insideKnowledge(decks, [], '2026-10-31');
-  check('with no answers the card offers the ready-made decks', fresh.ready.startsWith('Learn has ready-made decks') && fresh.readyDecks.length === 0);
+  check('with no answers the card offers the ready-made decks', fresh.ready.startsWith('Flashcards has ready-made decks') && fresh.readyDecks.length === 0);
   const old = { cardId: 'a0', day: '2026-10-01', grade: 'knewIt', answeredAt: '2026-10-01T10:00:00Z' };
   const recent = { cardId: 'b0', day: '2026-10-31', grade: 'knewIt', answeredAt: '2026-10-31T10:00:00Z' };
   const some = K.insideKnowledge(decks, [old, recent], '2026-10-31');

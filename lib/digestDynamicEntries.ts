@@ -354,7 +354,7 @@ export async function buildMyFavoritesEntries(): Promise<DigestEntry[]> {
   const entries: DigestEntry[] = [];
 
   for (const componentType of COMPONENT_TYPES) {
-    const records = await listFavorites(200, componentType as BuilderFavoriteItemType);
+    const records = await listFavorites(undefined, componentType as BuilderFavoriteItemType);
     for (const record of records) {
       try {
         const payload = JSON.parse(record.payload_json) as BuilderFavoritePayload;
@@ -366,7 +366,7 @@ export async function buildMyFavoritesEntries(): Promise<DigestEntry[]> {
     }
   }
 
-  const mealRecords = await listFavorites(200, 'meal');
+  const mealRecords = await listFavorites(undefined, 'meal');
   for (const record of mealRecords) {
     const entry = await buildMyFavoritesMealEntry(record.id, conditions);
     if (entry) entries.push(entry);
@@ -408,7 +408,7 @@ export async function buildEntryForMyRecipe(
     // listFavorites rather than getBuilderFavorite, for the same reason
     // buildMyFavoritesEntries gives: getBuilderFavorite touches
     // last_used_at, and reading a recipe should not reorder anything.
-    const records = await listFavorites(500, componentType as BuilderFavoriteItemType);
+    const records = await listFavorites(undefined, componentType as BuilderFavoriteItemType);
     const record = records.find((candidate) => candidate.id === id);
     if (!record) return null;
     try {

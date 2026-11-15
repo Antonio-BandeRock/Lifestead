@@ -140,7 +140,7 @@ export function TherapySessionsSection({ tabColor }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
-    listTherapySessions({ limit: 200 })
+    listTherapySessions()
       .then(setSessions)
       .catch((error) => {
         setErrorMessage(`Could not load sessions: ${error instanceof Error ? error.message : String(error)}`);

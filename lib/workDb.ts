@@ -175,7 +175,7 @@ export async function deleteWorkCheckin(weekOfDate: string): Promise<void> {
   await db.runAsync('DELETE FROM work_checkins WHERE week_of = ?', weekOf(weekOfDate));
 }
 
-export async function listWorkCheckins(limit = 52): Promise<WorkCheckin[]> {
+export async function listWorkCheckins(limit = -1): Promise<WorkCheckin[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<WorkCheckin>(
     `

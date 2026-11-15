@@ -44,10 +44,14 @@ import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { useFadingMessage } from '../hooks/useFadingMessage';
+import { AttachedFiles } from './AttachedFiles';
+import { ShowMoreButton, useShownPart } from './ShowMoreButton';
+import { OnlyInterestLine } from './OnlyInterestLine';
 
 const NO_INTEREST = '__no_interest__';
 
-type Props = { kind: ThingKind; tabColor: string };
+type Props = { kind: ThingKind; tabColor: string; onlyInterestId?: string };
 
 type ThingForm = {
   /** Null for a new thing. */
@@ -95,14 +99,14 @@ function emptyForm(interestId: string | null): ThingForm {
   return { id: null, interestId, name: '', about: '', amount: '', place: '', cost: '', source: '', cameBy: '', gotOn: '', setName: '' };
 }
 
-export function InterestThingsSection({ kind, tabColor }: Props) {
+export function InterestThingsSection({ kind, tabColor, onlyInterestId }: Props) {
   const [interests, setInterests] = useState<Interest[]>([]);
   const [things, setThings] = useState<InterestThing[]>([]);
   const [form, setForm] = useState<ThingForm | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [showRetired, setShowRetired] = useState(false);
-  const [saidBack, setSaidBack] = useState<string | null>(null);
+  const [saidBack, setSaidBack] = useFadingMessage();
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
   const load = useCallback(async () => {
@@ -121,8 +125,15 @@ export function InterestThingsSection({ kind, tabColor }: Props) {
   const { current } = groupInterests(interests);
   const nameOf = (id: string) => interests.find((interest) => interest.id === id)?.name ?? 'An interest no longer listed';
   const groups = groupThings(things, kind, nameOf);
+  // Opened from an interest on My Interests, the list starts on that interest
+  // alone; Show Every Interest widens it. A long list shows its first part
+  // and carries on with Show more (2026-11-15).
+  const [onlyId, setOnlyId] = useState<string | null>(onlyInterestId ?? null);
+  const listed = onlyId ? groups.filter((group) => group.interestId === onlyId) : groups;
+  const { shown, more, showMore } = useShownPart(listed.flatMap((group) => (kind === 'collection' ? group.sets.flatMap((set) => set.things) : group.things)));
+  const shownIds = new Set(shown.map((item) => item.id));
   const retired = kind === 'wish' ? [] : retiredThings(things, kind);
-  const firstThingId = groups[0]?.things[0]?.id;
+  const firstThingId = shown[0]?.id;
 
   async function afterChange(message: string | null) {
     setSaidBack(message);
@@ -383,6 +394,14 @@ export function InterestThingsSection({ kind, tabColor }: Props) {
           </View>
         </TouchableOpacity>
         {open ? (
+          <AttachedFiles
+            ownerKind="interest_thing"
+            ownerId={thing.id}
+            tabColor={tabColor}
+            openerRef={first ? walkMark.ref(`thing.${kind}Files`) : undefined}
+          />
+        ) : null}
+        {open ? (
           <View style={styles.links}>
             {kind === 'wish' ? (
               <TouchableOpacity ref={first ? walkMark.ref('thing.wishGot') : undefined} onPress={() => askGotIt(thing)}>
@@ -452,24 +471,30 @@ export function InterestThingsSection({ kind, tabColor }: Props) {
       )}
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
-      {groups.length === 0 ? (
+      {onlyId ? <OnlyInterestLine name={nameOf(onlyId)} onShowEvery={() => setOnlyId(null)} /> : null}
+      {listed.length === 0 ? (
         <Text style={styles.captionText}>{EMPTY[kind]}</Text>
       ) : (
-        groups.map((group) => (
-          <View key={group.interestId} style={styles.group}>
-            <Text style={styles.groupHeading}>{group.interestName}</Text>
-            <Text style={styles.captionText}>{describeThingsTotal(group.things)}</Text>
-            {kind === 'collection'
-              ? group.sets.map((set) => (
-                  <View key={set.setName ?? '__no_set__'} style={styles.group}>
-                    {set.setName ? <Text style={styles.setHeading}>{`${set.setName} · ${set.things.length}`}</Text> : null}
-                    {set.things.map(renderThing)}
-                  </View>
-                ))
-              : group.things.map(renderThing)}
-          </View>
-        ))
+        listed
+          .filter((group) => group.things.some((thing) => shownIds.has(thing.id)))
+          .map((group) => (
+            <View key={group.interestId} style={styles.group}>
+              <Text style={styles.groupHeading}>{group.interestName}</Text>
+              <Text style={styles.captionText}>{describeThingsTotal(group.things)}</Text>
+              {kind === 'collection'
+                ? group.sets
+                    .filter((set) => set.things.some((thing) => shownIds.has(thing.id)))
+                    .map((set) => (
+                      <View key={set.setName ?? '__no_set__'} style={styles.group}>
+                        {set.setName ? <Text style={styles.setHeading}>{`${set.setName} · ${set.things.length}`}</Text> : null}
+                        {set.things.filter((thing) => shownIds.has(thing.id)).map(renderThing)}
+                      </View>
+                    ))
+                : group.things.filter((thing) => shownIds.has(thing.id)).map(renderThing)}
+            </View>
+          ))
       )}
+      <ShowMoreButton more={more} onPress={showMore} />
 
       {renderRetired()}
 

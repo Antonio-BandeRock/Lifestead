@@ -9,7 +9,7 @@ import { readOrClosed } from './vaultReads';
 const COLUMNS =
   'id, occurred_at AS occurredAt, bristol_type AS bristolType, urgency, blood, pain, note';
 
-export async function listBowelEntries(limit = 50): Promise<BowelEntry[]> {
+export async function listBowelEntries(limit = -1): Promise<BowelEntry[]> {
   const db = await getDatabase();
   return readOrClosed(() => db.getAllAsync<BowelEntry>(
     `SELECT ${COLUMNS} FROM bowel_movements ORDER BY occurred_at DESC, created_at DESC LIMIT ?`,

@@ -9,6 +9,9 @@ import { formatTrackerValue, type CustomTracker, type TrackerEntry } from './cus
 import { formatFinanceMoney } from './financeCore';
 import { financeCategoryLabel } from './financeCategories';
 import { INTEREST_STAGES, INTEREST_STAGE_LABELS, type Interest } from './interests';
+import { LIBRARY_STATUS_LABELS, type LibraryEntry, type LibraryStatus } from './interestLibrary';
+import type { MoneyEntry } from './interestMoney';
+import type { InterestThing, ThingKind } from './interestThings';
 import type { KeepingUpSummary } from './keepingUp';
 import type { MicrobiomeResult, MicrobiomeTest } from './microbiome';
 import { PROJECT_AREA_LABELS, type Project, type ProjectArea, type ProjectStep } from './projects';
@@ -514,6 +517,95 @@ export function projectsSection(projects: Project[], steps: ProjectStep[], area:
       ];
     }),
     empty: 'No projects kept yet.',
+  };
+}
+
+// Money spent and earned on hobbies and interests (2026-11-15). Called
+// "hobbies and interests" everywhere money is read, so it is never taken for
+// interest paid on a loan or earned at a bank.
+export function hobbyMoneySection(entries: MoneyEntry[], interests: Interest[], start: string, end: string): ReportTableSection {
+  const names = new Map(interests.map((interest) => [interest.id, interest.name]));
+  const rows = entries.filter((entry) => inRange(entry.onDay, start, end) && entry.amount > 0);
+  const byInterest = new Map<string, { out: number; in: number; count: number }>();
+  for (const entry of rows) {
+    const name = names.get(entry.interestId) ?? 'An interest no longer listed';
+    const sums = byInterest.get(name) ?? { out: 0, in: 0, count: 0 };
+    if (entry.direction === 'in') sums.in += entry.amount;
+    else sums.out += entry.amount;
+    sums.count += 1;
+    byInterest.set(name, sums);
+  }
+  const spent = rows.filter((entry) => entry.direction !== 'in').reduce((sum, entry) => sum + entry.amount, 0);
+  const earned = rows.filter((entry) => entry.direction === 'in').reduce((sum, entry) => sum + entry.amount, 0);
+  return {
+    kind: 'table',
+    heading: 'Hobbies and interests',
+    note:
+      rows.length > 0
+        ? `${count(rows.length, 'entry', 'entries')} in the range. Spent: ${formatFinanceMoney(spent)}. Came in: ${formatFinanceMoney(earned)}. Recorded under Interests, Spending and Earning, apart from Finances, so nothing is counted twice. Interest paid on a loan or earned at a bank is in Finances, not here.`
+        : 'Recorded under Interests, Spending and Earning, apart from Finances. Interest paid on a loan or earned at a bank is in Finances, not here.',
+    columns: ['Interest', 'Spent', 'Came in', 'Entries'],
+    rows: [...byInterest.entries()]
+      .sort((a, b) => b[1].out - a[1].out || a[0].localeCompare(b[0]))
+      .map(([name, sums]) => [name, sums.out > 0 ? formatFinanceMoney(sums.out) : '', sums.in > 0 ? formatFinanceMoney(sums.in) : '', String(sums.count)]),
+    empty: 'Nothing spent or earned on hobbies and interests in this range. Interests, Spending and Earning is where it goes in.',
+  };
+}
+
+const THING_KIND_WORDS: Record<ThingKind, string> = { supply: 'Supply or equipment', collection: 'Collection', wish: 'Wished for' };
+
+/** Supplies, collections and wishes as they stand now, kept ones first. */
+export function interestThingsSection(things: InterestThing[], interests: Interest[]): ReportTableSection {
+  const names = new Map(interests.map((interest) => [interest.id, interest.name]));
+  const order: ThingKind[] = ['supply', 'collection', 'wish'];
+  const rows = [...things].sort(
+    (a, b) =>
+      Number(Boolean(a.retiredAt)) - Number(Boolean(b.retiredAt)) ||
+      order.indexOf(a.kind) - order.indexOf(b.kind) ||
+      a.name.localeCompare(b.name),
+  );
+  return {
+    kind: 'table',
+    heading: 'Supplies, collections and wishes',
+    note: 'Everything kept under Interests as it stands today, whatever the range. Things no longer had come last.',
+    columns: ['Thing', 'Kind', 'Interest', 'How many', 'Cost', 'Now'],
+    rows: rows.map((thing) => [
+      thing.setName ? `${thing.name} (${thing.setName})` : thing.name,
+      THING_KIND_WORDS[thing.kind],
+      names.get(thing.interestId) ?? 'An interest no longer listed',
+      thing.amount ?? '',
+      thing.cost == null ? '' : formatFinanceMoney(thing.cost),
+      thing.retiredAt ? 'No longer had' : thing.kind === 'wish' ? 'Wished for' : 'Kept',
+    ]),
+    empty: 'No supplies, collections or wishes kept yet. Interests holds them.',
+  };
+}
+
+/** The Library as it stands now, with what was finished in the range said first. */
+export function interestLibrarySection(entries: LibraryEntry[], interests: Interest[], start: string, end: string): ReportTableSection {
+  const names = new Map(interests.map((interest) => [interest.id, interest.name]));
+  const finished = entries.filter((entry) => entry.doneOn && inRange(entry.doneOn, start, end)).length;
+  const order: LibraryStatus[] = ['going', 'following', 'want', 'done'];
+  const rows = [...entries].sort(
+    (a, b) =>
+      Number(Boolean(a.retiredAt)) - Number(Boolean(b.retiredAt)) ||
+      order.indexOf(a.status) - order.indexOf(b.status) ||
+      a.title.localeCompare(b.title),
+  );
+  return {
+    kind: 'table',
+    heading: 'Library',
+    note: `${count(finished, 'entry', 'entries')} marked Finished in the range. The list is the Library as it stands today, entries taken off it last.`,
+    columns: ['Title', 'Kind', 'By', 'Interest', 'Where it stands', 'Left off'],
+    rows: rows.map((entry) => [
+      entry.title,
+      entry.kind ?? '',
+      entry.byWhom ?? '',
+      names.get(entry.interestId) ?? 'An interest no longer listed',
+      entry.retiredAt ? 'Taken off the list' : entry.status === 'done' && entry.doneOn ? `${LIBRARY_STATUS_LABELS.done}, ${entry.doneOn}` : LIBRARY_STATUS_LABELS[entry.status],
+      entry.leftOff ?? '',
+    ]),
+    empty: 'Nothing in the Library yet. Interests, Library is where a book, a course or a channel goes in.',
   };
 }
 

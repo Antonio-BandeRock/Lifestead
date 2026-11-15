@@ -2919,7 +2919,7 @@ function ExerciseSection() {
   const load = useCallback(() => {
     listExerciseLogs(limit).then(setLogs);
     // What was done before, most recent first, so a repeat is one tap.
-    listExerciseLogs(200).then((rows) => {
+    listExerciseLogs().then((rows) => {
       const seen = new Map<string, string>();
       for (const row of rows) {
         const key = row.exerciseType.trim().toLowerCase();

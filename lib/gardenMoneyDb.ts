@@ -222,7 +222,7 @@ export async function deleteGrowingCost(financeEntryId: string): Promise<void> {
 
 /** Newest first. Every garden_supplies expense, whether or not the Garden
  *  tab annotated it; one typed straight into Finances shows with no kind. */
-export async function listGrowingCosts(limit = 200): Promise<GrowingCostRecord[]> {
+export async function listGrowingCosts(limit = -1): Promise<GrowingCostRecord[]> {
   const db = await getDatabase();
   const rows = await readOrClosed(() => db.getAllAsync<{
     id: string;
@@ -364,7 +364,7 @@ export async function deleteReceivedShare(id: string): Promise<void> {
 }
 
 /** Oldest first, so a summary can name when the first one was. */
-export async function listReceivedShares(limit = 200): Promise<ReceivedShareRecord[]> {
+export async function listReceivedShares(limit = -1): Promise<ReceivedShareRecord[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<{
     id: string;
@@ -454,7 +454,7 @@ export async function loadGardenMoneyPicture(): Promise<GardenMoneyPicture> {
     getLastPaidPrices(),
     getGrowingCostTotal(),
     listGardenPlots(),
-    listGrowingCosts(5000),
+    listGrowingCosts(),
     listGardenCostGroups(),
   ]);
   const harvestPlot = await resolveHarvestPlotIds(harvests);

@@ -513,10 +513,10 @@ export default function GardenScreen() {
     const [plots, plantings, harvests, tasks, piles, costs, countdowns] = await Promise.all([
       listGardenPlots(),
       listGardenPlantings(),
-      listGardenHarvests(500),
-      listUpcomingGardenTasks(500),
+      listGardenHarvests(),
+      listUpcomingGardenTasks(),
       listCompostPiles(),
-      listGrowingCosts(500),
+      listGrowingCosts(),
       countRunningGardenCountdowns(),
     ]);
     setPlotCount(plots.length);
@@ -2138,7 +2138,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
 
   const load = useCallback(async () => {
     const [harvestRows, plantingRows, plotRows] = await Promise.all([
-      listGardenHarvests(30),
+      listGardenHarvests(),
       listGardenPlantings(),
       listGardenPlots(),
     ]);
@@ -2392,7 +2392,7 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
   const [rain, setRain] = useState<RainForecastResult | null>(null);
 
   const load = useCallback(async () => {
-    const rows = await listUpcomingGardenTasks(20);
+    const rows = await listUpcomingGardenTasks();
     setUpcomingTasks(rows);
     setRain(anyWateringSoon(rows, dateKey(new Date())) ? await getRainForecast() : null);
   }, []);
