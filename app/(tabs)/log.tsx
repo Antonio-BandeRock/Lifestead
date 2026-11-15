@@ -86,7 +86,10 @@ import {
   recordBodyMeasurement,
   recordCheckin,
   recordExercise,
-  updateCheckinDetail,
+  updateCheckinRecord,
+  updateExerciseLog,
+  updateBodyMeasurement,
+  listMeals,
   markExperimentBack,
   reopenFoodTrial,
   recordTrialStep,
@@ -129,9 +132,9 @@ import {
   type RecordedStep,
   type StepKey,
 } from '../../lib/steppedReintroduction';
-import { deleteNocturiaNight, listNocturiaNights, saveNocturiaNight, type NocturiaNight } from '../../lib/nocturiaDb';
+import { deleteNocturiaNight, listNocturiaNights, saveNocturiaNight, updateNocturiaNight, type NocturiaNight } from '../../lib/nocturiaDb';
 import { explainNotYet } from '../../lib/notYet';
-import { deleteCycleDay, listAllCycleDays, listCycleDays, saveCycleDay, type CycleDayRow } from '../../lib/cycleDb';
+import { deleteCycleDay, listAllCycleDays, listCycleDays, saveCycleDay, updateCycleDay, type CycleDayRow } from '../../lib/cycleDb';
 import {
   BLOOD_NOTE,
   BLOOD_WORDS,
@@ -143,7 +146,7 @@ import {
   type BowelEntry,
   type BristolType,
 } from '../../lib/bowel';
-import { addBowelEntry, listBowelEntries, removeBowelEntry } from '../../lib/bowelDb';
+import { addBowelEntry, listBowelEntries, removeBowelEntry, updateBowelEntry } from '../../lib/bowelDb';
 import BristolPicture from '../../components/BristolPicture';
 import {
   FLOW_WORDS,
@@ -177,8 +180,10 @@ import {
   removeCustomTracker,
   restoreCustomTracker,
   updateCustomTracker,
+  updateTrackerEntry,
 } from '../../lib/customTrackersDb';
 import { ThumbRow } from '../../components/ThumbRow';
+import { useConfirmSheet } from '../../components/ConfirmSheet';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultLensFrame } from '../../components/VaultLensFrame';
 import { useWalkMark } from '../../components/WalkMark';
@@ -536,6 +541,25 @@ function resolveDateTime(choice: DateChoice, customDate: string, time: TimeOfDay
   const time24 = buildTime24(time.hour, time.minute, time.ampm);
   if (!time24) return null;
   return `${date}T${time24}`;
+}
+
+/** The date choice that shows a saved day again, for Edit. */
+function dateChoiceFor(day: string): { choice: DateChoice; custom: string } {
+  if (day === todayDateString()) return { choice: 'today', custom: '' };
+  if (day === dateStringDaysAgo(1)) return { choice: 'yesterday', custom: '' };
+  return { choice: 'custom', custom: day };
+}
+
+/** How many more rows each Show More brings in. */
+const LIST_STEP = 50;
+
+/** Under a list that stopped at its limit, so older entries stay reachable. */
+function ShowMoreButton({ onPress }: { onPress: () => void }) {
+  return (
+    <TouchableOpacity style={styles.addButton} onPress={onPress}>
+      <Text style={styles.addButtonText}>Show more</Text>
+    </TouchableOpacity>
+  );
 }
 
 function DateChoicePicker({
@@ -1053,7 +1077,14 @@ function CheckinForm({
   /** D11: areas marked on the body map. */
   regions: string[];
   onRegionsChange: (next: string[]) => void;
-  foodNameField?: { value: string; onChange: (text: string) => void };
+  foodNameField?: {
+    value: string;
+    onChange: (text: string) => void;
+    /** Reactions: recent meals to pick from, so the reaction is tied to the meal. */
+    recent?: { id: string; name: string; eatenAt: string }[];
+    pickedId?: string | null;
+    onPick?: (meal: { id: string; name: string } | null) => void;
+  };
   severity: number | null;
   onSeverityChange: (value: number) => void;
   tags: string[];
@@ -1083,6 +1114,27 @@ function CheckinForm({
             value={foodNameField.value}
             onChangeText={foodNameField.onChange}
           />
+          {foodNameField.recent && foodNameField.recent.length > 0 ? (
+            <>
+              <Text style={styles.helperText}>Or pick a meal you logged</Text>
+              <View style={styles.pillRow}>
+                {foodNameField.recent.map((meal) => {
+                  const on = foodNameField.pickedId === meal.id;
+                  return (
+                    <TouchableOpacity
+                      key={meal.id}
+                      style={[styles.pill, on && styles.pillActive]}
+                      onPress={() => foodNameField.onPick?.(on ? null : meal)}
+                    >
+                      <Text style={[styles.pillText, on && styles.pillTextActive]}>
+                        {`${meal.name}, ${formatEntryDateTime(meal.eatenAt)}`}
+                      </Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </>
+          ) : null}
         </>
       ) : null}
       <Text style={styles.label}>When did it start?</Text>
@@ -1146,70 +1198,39 @@ function CheckinForm({
   );
 }
 
+/** What a saved check-in puts back into the form when Edit is pressed. */
+function checkinFormValues(entry: WellbeingCheckin) {
+  const stamp = localStampOf(entry.loggedAt);
+  const day = dateChoiceFor(stamp.slice(0, 10));
+  return {
+    dateChoice: day.choice,
+    customDate: day.custom,
+    time: splitTime24(stamp.slice(11, 16) || '00:00'),
+    severity: entry.severity,
+    tags: [...entry.tags],
+    regions: [...entry.bodyRegions],
+    contributors: [...entry.contributors],
+    notes: entry.notes ?? '',
+    ten: entry.severityTen,
+    perTag: { ...entry.tagSeverity },
+  };
+}
+
 function CheckinRow({
   entry,
   onDelete,
-  onChanged,
-  personal,
-  withContributors,
+  onEdit,
   first,
 }: {
   entry: WellbeingCheckin;
   onDelete: (id: string) => void;
-  /** Given where a saved row can be finished or corrected in place. */
-  onChanged?: () => void;
-  personal?: PersonFirst | null;
-  withContributors?: boolean;
+  /** Opens the lens's form with this entry in it. */
+  onEdit?: (entry: WellbeingCheckin) => void;
   /** The top row, which a how-to step rings. */
   first?: boolean;
 }) {
   const walkMark = useWalkMark();
   const severityLabel = describeSeverity(entry.severity, entry.severityTen) ?? undefined;
-  const [editing, setEditing] = useState(false);
-  const [tags, setTags] = useState<string[]>(entry.tags);
-  const [contributors, setContributors] = useState<string[]>(entry.contributors);
-
-  if (editing) {
-    return (
-      <View style={styles.formCard}>
-        <Text style={styles.label}>What was it like?</Text>
-        <TagPicker
-          selected={tags}
-          onToggle={(code) => setTags((current) => (current.includes(code) ? current.filter((c) => c !== code) : [...current, code]))}
-          personal={personal}
-        />
-        {withContributors ? (
-          <>
-            <Text style={styles.label}>What was going on?</Text>
-            <ContributorPicker selected={contributors} onChange={setContributors} personal={personal} />
-          </>
-        ) : null}
-        <ThumbRow primary="last" style={styles.formActions}>
-          <TouchableOpacity
-            style={styles.secondaryButton}
-            onPress={() => {
-              setTags(entry.tags);
-              setContributors(entry.contributors);
-              setEditing(false);
-            }}
-          >
-            <Text style={styles.secondaryButtonText}>Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.primaryButton}
-            onPress={() => {
-              void updateCheckinDetail(entry.id, { tags, ...(withContributors ? { contributors } : {}) }).then(() => {
-                setEditing(false);
-                onChanged?.();
-              });
-            }}
-          >
-            <Text style={styles.primaryButtonText}>Save</Text>
-          </TouchableOpacity>
-        </ThumbRow>
-      </View>
-    );
-  }
 
   return (
     <View style={styles.row}>
@@ -1254,14 +1275,8 @@ function CheckinRow({
         </View>
       </View>
       <View style={styles.rowActions}>
-        {onChanged ? (
-          <TouchableOpacity ref={first ? walkMark.ref('signals.editFirst') : undefined}
-            onPress={() => {
-              setTags(entry.tags);
-              setContributors(entry.contributors);
-              setEditing(true);
-            }}
-          >
+        {onEdit ? (
+          <TouchableOpacity ref={first ? walkMark.ref('signals.editFirst') : undefined} onPress={() => onEdit(entry)}>
             <Text style={styles.actionText}>Edit</Text>
           </TouchableOpacity>
         ) : null}
@@ -1275,6 +1290,10 @@ function CheckinRow({
 
 function FlaresLens() {
   const walkMark = useWalkMark();
+  const scrollRef = useRef<ScrollView>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [limit, setLimit] = useState(LIST_STEP);
+  const [confirm, confirmElement] = useConfirmSheet();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [entries, setEntries] = useState<WellbeingCheckin[]>([]);
   const [loading, setLoading] = useState(true);
@@ -1294,11 +1313,11 @@ function FlaresLens() {
 
   const load = useCallback(() => {
     setLoading(true);
-    listCheckins({ checkinType: 'flare', limit: 100 }).then((rows) => {
+    listCheckins({ checkinType: 'flare', limit }).then((rows) => {
       setEntries(rows);
       setLoading(false);
     });
-  }, []);
+  }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -1312,6 +1331,24 @@ function FlaresLens() {
     setContributors([]);
     setNotes('');
     detail.reset();
+    setEditingId(null);
+  }
+
+  function startEdit(entry: WellbeingCheckin) {
+    const v = checkinFormValues(entry);
+    setDateChoice(v.dateChoice);
+    setCustomDate(v.customDate);
+    setTime(v.time);
+    setSeverity(v.severity);
+    setTags(v.tags);
+    setRegions(v.regions);
+    setContributors(v.contributors);
+    setNotes(v.notes);
+    detail.setTen(v.ten);
+    detail.setPerTag(() => v.perTag);
+    setEditingId(entry.id);
+    setFormOpen(true);
+    scrollRef.current?.scrollTo({ y: 0, animated: true });
   }
 
   function toggleTag(code: string) {
@@ -1328,7 +1365,11 @@ function FlaresLens() {
       showInfoAlert('Almost there', 'Select how severe this flare felt.');
       return;
     }
-    await recordCheckin({ loggedAt, checkinType: 'flare', valence: 'negative', severity, notes, tags, bodyRegions: regions, contributors, ...detailForSave(detail, tags) });
+    if (editingId) {
+      await updateCheckinRecord(editingId, { loggedAt, severity, notes, tags, bodyRegions: regions, contributors, ...detailForSave(detail, tags) });
+    } else {
+      await recordCheckin({ loggedAt, checkinType: 'flare', valence: 'negative', severity, notes, tags, bodyRegions: regions, contributors, ...detailForSave(detail, tags) });
+    }
     setFormOpen(false);
     resetForm();
     setSavedCount((n) => n + 1);
@@ -1336,13 +1377,25 @@ function FlaresLens() {
   }
 
   async function handleDelete(id: string) {
+    const ok = await confirm({
+      title: 'Remove this flare?',
+      message: 'This cannot be undone.',
+      confirmLabel: 'Remove',
+      destructive: true,
+    });
+    if (!ok) return;
     await deleteCheckin(id);
+    if (editingId === id) {
+      setFormOpen(false);
+      resetForm();
+    }
     load();
   }
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <ScrollView ref={scrollRef} style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
+      {confirmElement}
       {!formOpen ? (
         <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Log a flare</Text>
@@ -1366,7 +1419,7 @@ function FlaresLens() {
           onTimeChange={setTime}
           onCancel={() => { setFormOpen(false); resetForm(); }}
           onSave={handleSave}
-          saveLabel="Save flare"
+          saveLabel={editingId ? 'Save changes' : 'Save flare'}
           personal={personal}
           contributors={{ value: contributors, onChange: setContributors }}
         />
@@ -1390,16 +1443,12 @@ function FlaresLens() {
               entry={entry}
               first={entry.id === entries[0]?.id}
               onDelete={handleDelete}
-              onChanged={() => {
-                setSavedCount((n) => n + 1);
-                load();
-              }}
-              personal={personal}
-              withContributors
+              onEdit={startEdit}
             />
           ))}
         </View>
       )}
+      {entries.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
       <YearInSquaresBand set="flares" color={TAB_COLOR} reloadKey={entries.length} />
     </ScrollView>
   );
@@ -1407,6 +1456,12 @@ function FlaresLens() {
 
 function FoodReactionsLens() {
   const walkMark = useWalkMark();
+  const scrollRef = useRef<ScrollView>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [limit, setLimit] = useState(LIST_STEP);
+  const [confirm, confirmElement] = useConfirmSheet();
+  const [relatedMealId, setRelatedMealId] = useState<string | null>(null);
+  const [recentMeals, setRecentMeals] = useState<{ id: string; name: string; eatenAt: string }[]>([]);
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [entries, setEntries] = useState<WellbeingCheckin[]>([]);
   const [loading, setLoading] = useState(true);
@@ -1426,11 +1481,14 @@ function FoodReactionsLens() {
 
   const load = useCallback(() => {
     setLoading(true);
-    listCheckins({ checkinType: 'post_meal', limit: 100 }).then((rows) => {
+    listCheckins({ checkinType: 'post_meal', limit }).then((rows) => {
       setEntries(rows);
       setLoading(false);
     });
-  }, []);
+    void listMeals(10).then((meals) =>
+      setRecentMeals(meals.filter((m) => m.name).map((m) => ({ id: m.id, name: m.name, eatenAt: m.eaten_at }))),
+    );
+  }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -1443,6 +1501,8 @@ function FoodReactionsLens() {
     setTags([]);
     setRegions([]);
     setNotes('');
+    setRelatedMealId(null);
+    setEditingId(null);
     detail.reset();
   }
 
@@ -1464,17 +1524,31 @@ function FoodReactionsLens() {
       showInfoAlert('Almost there', 'Select how severe the reaction felt.');
       return;
     }
-    await recordCheckin({
-      loggedAt,
-      checkinType: 'post_meal',
-      valence: 'negative',
-      severity,
-      notes,
-      foodName,
-      tags,
-      bodyRegions: regions,
-      ...detailForSave(detail, tags),
-    });
+    if (editingId) {
+      await updateCheckinRecord(editingId, {
+        loggedAt,
+        severity,
+        notes,
+        foodName: foodName.trim(),
+        relatedMealId,
+        tags,
+        bodyRegions: regions,
+        ...detailForSave(detail, tags),
+      });
+    } else {
+      await recordCheckin({
+        loggedAt,
+        checkinType: 'post_meal',
+        valence: 'negative',
+        severity,
+        notes,
+        foodName,
+        ...(relatedMealId ? { relatedMealId } : {}),
+        tags,
+        bodyRegions: regions,
+        ...detailForSave(detail, tags),
+      });
+    }
     setFormOpen(false);
     resetForm();
     setSavedCount((n) => n + 1);
@@ -1482,20 +1556,44 @@ function FoodReactionsLens() {
   }
 
   async function handleDelete(id: string) {
+    const ok = await confirm({
+      title: 'Remove this reaction?',
+      message: 'This cannot be undone.',
+      confirmLabel: 'Remove',
+      destructive: true,
+    });
+    if (!ok) return;
     await deleteCheckin(id);
+    if (editingId === id) {
+      setFormOpen(false);
+      resetForm();
+    }
     load();
   }
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <ScrollView ref={scrollRef} style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
+      {confirmElement}
       {!formOpen ? (
         <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Log a food reaction</Text>
         </TouchableOpacity>
       ) : (
         <CheckinForm
-          foodNameField={{ value: foodName, onChange: setFoodName }}
+          foodNameField={{
+            value: foodName,
+            onChange: (text) => {
+              setFoodName(text);
+              setRelatedMealId(null);
+            },
+            recent: recentMeals,
+            pickedId: relatedMealId,
+            onPick: (meal) => {
+              setRelatedMealId(meal ? meal.id : null);
+              if (meal) setFoodName(meal.name);
+            },
+          }}
           detail={detail}
           severity={severity}
           onSeverityChange={setSeverity}
@@ -1513,7 +1611,7 @@ function FoodReactionsLens() {
           onTimeChange={setTime}
           onCancel={() => { setFormOpen(false); resetForm(); }}
           onSave={handleSave}
-          saveLabel="Save reaction"
+          saveLabel={editingId ? 'Save changes' : 'Save reaction'}
           personal={personal}
         />
       )}
@@ -1536,15 +1634,29 @@ function FoodReactionsLens() {
               entry={entry}
               first={entry.id === entries[0]?.id}
               onDelete={handleDelete}
-              onChanged={() => {
-                setSavedCount((n) => n + 1);
-                load();
+              onEdit={(entry) => {
+                const v = checkinFormValues(entry);
+                setFoodName(entry.foodName ?? '');
+                setRelatedMealId(entry.relatedMealId);
+                setDateChoice(v.dateChoice);
+                setCustomDate(v.customDate);
+                setTime(v.time);
+                setSeverity(v.severity);
+                setTags(v.tags);
+                setRegions(v.regions);
+                setNotes(v.notes);
+                detail.setTen(v.ten);
+                detail.setPerTag(() => v.perTag);
+                setEditingId(entry.id);
+                setFormOpen(true);
+                scrollRef.current?.scrollTo({ y: 0, animated: true });
               }}
-              personal={personal}
             />
           ))}
         </View>
       )}
+      {entries.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
+      <YearInSquaresBand set="reactions" color={TAB_COLOR} reloadKey={entries.length} />
     </ScrollView>
   );
 }
@@ -1573,6 +1685,8 @@ function NewFoodsLens({
 }) {
   const walkMark = useWalkMark();
   const router = useRouter();
+  const [confirm, confirmElement] = useConfirmSheet();
+  const personal = usePersonFirst(0);
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [trials, setTrials] = useState<FoodTrialRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -1918,6 +2032,13 @@ function NewFoodsLens({
   }
 
   async function handleRemoveSeries(seriesId: string) {
+    const ok = await confirm({
+      title: 'Remove this plan?',
+      message: 'The trials it started stay on your list.',
+      confirmLabel: 'Remove',
+      destructive: true,
+    });
+    if (!ok) return;
     await deleteTrialSeries(seriesId);
     load();
   }
@@ -1928,6 +2049,13 @@ function NewFoodsLens({
   }
 
   async function handleDelete(id: string) {
+    const ok = await confirm({
+      title: 'Remove this test?',
+      message: 'The test and its result go. Anything you logged on the days stays in your records.',
+      confirmLabel: 'Remove',
+      destructive: true,
+    });
+    if (!ok) return;
     await deleteFoodTrial(id);
     load();
   }
@@ -2056,6 +2184,7 @@ function NewFoodsLens({
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
+      {confirmElement}
       {arrivedViaPrefill ? (
         // router.navigate, not router.back() -- 2026-08-14, direct report:
         // back() actually landed on Home. Confirmed why: switching tabs
@@ -2282,8 +2411,7 @@ function NewFoodsLens({
           <AppTextInput
           onVoiceResult={setFoodName}
           style={styles.input}
-          placeholder="e.g.
-          Quinoa"
+          placeholder="e.g. Quinoa"
           value={foodName}
           onChangeText={setFoodName}
           />
@@ -2558,8 +2686,18 @@ function NewFoodsLens({
           <Text style={styles.emptyText}>No food trials or experiments yet.</Text>
         </View>
       ) : (
-        <View style={styles.table}>
-          {trials.map((trial) => {
+        <>
+        {[
+          { key: 'running', title: 'Tests under way', rows: trials.filter((row) => row.status === 'waiting' || row.status === 'trialing') },
+          { key: 'finished', title: 'Finished tests', rows: trials.filter((row) => row.status === 'cleared' || row.status === 'flagged') },
+        ]
+          .filter((group) => group.rows.length > 0)
+          .map((group) => (
+        <View key={group.key} style={styles.table}>
+          <View style={styles.tableHeading}>
+            <Text style={styles.rowTitle}>{group.title}</Text>
+          </View>
+          {group.rows.map((trial) => {
             const daysElapsed = Math.floor((Date.now() - new Date(trial.startedAt).getTime()) / (24 * 60 * 60 * 1000));
             const daysLeft = trial.observationDays - daysElapsed;
             const todaysCheckin = todaysCheckinByTrial[trial.id];
@@ -2731,13 +2869,17 @@ function NewFoodsLens({
                     onCancel={() => setEscalatingTrialId(null)}
                     onSave={() => handleSaveEscalation(trial)}
                     saveLabel="Save today's report"
+                    personal={personal}
                   />
                 ) : null}
               </View>
             );
           })}
         </View>
+          ))}
+        </>
       )}
+      <YearInSquaresBand set="newFoods" color={TAB_COLOR} reloadKey={trials.length} />
     </ScrollView>
   );
 }
@@ -2745,17 +2887,31 @@ function NewFoodsLens({
 function ExerciseSection() {
   const walkMark = useWalkMark();
   const [logs, setLogs] = useState<ExerciseLog[]>([]);
+  const [limit, setLimit] = useState(20);
   const [formOpen, setFormOpen] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [exerciseType, setExerciseType] = useState('');
   const [durationMinutes, setDurationMinutes] = useState('');
   const [intensity, setIntensity] = useState<'light' | 'moderate' | 'vigorous' | null>(null);
   const [dateChoice, setDateChoice] = useState<DateChoice>('today');
   const [customDate, setCustomDate] = useState('');
+  const [time, setTime] = useState<TimeOfDayInput>(() => splitTime24(nowTimeString24()));
+  const [pastTypes, setPastTypes] = useState<string[]>([]);
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [confirm, confirmElement] = useConfirmSheet();
 
   const load = useCallback(() => {
-    listExerciseLogs(20).then(setLogs);
-  }, []);
+    listExerciseLogs(limit).then(setLogs);
+    // What was done before, most recent first, so a repeat is one tap.
+    listExerciseLogs(200).then((rows) => {
+      const seen = new Map<string, string>();
+      for (const row of rows) {
+        const key = row.exerciseType.trim().toLowerCase();
+        if (key && !seen.has(key)) seen.set(key, row.exerciseType.trim());
+      }
+      setPastTypes([...seen.values()].slice(0, 12));
+    });
+  }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -2765,6 +2921,21 @@ function ExerciseSection() {
     setIntensity(null);
     setDateChoice('today');
     setCustomDate('');
+    setTime(splitTime24(nowTimeString24()));
+    setEditingId(null);
+  }
+
+  function startEdit(log: ExerciseLog) {
+    const stamp = localStampOf(log.loggedAt);
+    const day = dateChoiceFor(stamp.slice(0, 10));
+    setExerciseType(log.exerciseType);
+    setDurationMinutes(log.durationMinutes ? String(log.durationMinutes) : '');
+    setIntensity(log.intensity === 'light' || log.intensity === 'moderate' || log.intensity === 'vigorous' ? log.intensity : null);
+    setDateChoice(day.choice);
+    setCustomDate(day.custom);
+    setTime(splitTime24(stamp.slice(11, 16) || '00:00'));
+    setEditingId(log.id);
+    setFormOpen(true);
   }
 
   async function handleSave() {
@@ -2772,31 +2943,43 @@ function ExerciseSection() {
       showInfoAlert('Almost there', 'Enter what kind of activity this was.');
       return;
     }
-    const date = resolveDateChoice(dateChoice, customDate);
-    if (!date) {
-      showInfoAlert('Almost there', 'Enter a valid date.');
+    const loggedAt = resolveDateTime(dateChoice, customDate, time);
+    if (!loggedAt) {
+      showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
     const minutes = Number(durationMinutes);
-    await recordExercise({
-      loggedAt: `${date}T${nowTimeString24()}`,
-      exerciseType,
-      durationMinutes: Number.isFinite(minutes) && minutes > 0 ? minutes : undefined,
-      intensity: intensity ?? undefined,
-    });
+    const duration = Number.isFinite(minutes) && minutes > 0 ? minutes : null;
+    if (editingId) {
+      await updateExerciseLog(editingId, { loggedAt, exerciseType, durationMinutes: duration, intensity });
+    } else {
+      await recordExercise({
+        loggedAt,
+        exerciseType,
+        durationMinutes: duration ?? undefined,
+        intensity: intensity ?? undefined,
+      });
+    }
     setFormOpen(false);
     resetForm();
     load();
   }
 
   async function handleDelete(id: string) {
+    const ok = await confirm({ title: 'Remove this activity?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    if (!ok) return;
     await deleteExerciseLog(id);
+    if (editingId === id) {
+      setFormOpen(false);
+      resetForm();
+    }
     load();
   }
 
   return (
     <View style={styles.sectionColumn}>
       {infoAlertElement}
+      {confirmElement}
       {!formOpen ? (
         <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Log exercise</Text>
@@ -2805,15 +2988,24 @@ function ExerciseSection() {
         <View style={styles.formCard}>
           <Text style={styles.label}>What did you do?</Text>
           <AppTextInput
-          onVoiceResult={setExerciseType}
-          style={styles.input}
-          placeholder="e.g.
-          Walk,
-          yoga,
-          weights"
-          value={exerciseType}
-          onChangeText={setExerciseType}
+            onVoiceResult={setExerciseType}
+            style={styles.input}
+            placeholder="e.g. Walk, yoga, weights"
+            value={exerciseType}
+            onChangeText={setExerciseType}
           />
+          {pastTypes.length > 0 ? (
+            <View style={styles.pillRow}>
+              {pastTypes.map((type) => {
+                const on = exerciseType.trim().toLowerCase() === type.toLowerCase();
+                return (
+                  <TouchableOpacity key={type} style={[styles.pill, on && styles.pillActive]} onPress={() => setExerciseType(type)}>
+                    <Text style={[styles.pillText, on && styles.pillTextActive]}>{type}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          ) : null}
           <Text style={styles.label}>How long? (minutes, optional)</Text>
           <AppTextInput
             style={[styles.input, styles.timeInput]}
@@ -2827,22 +3019,24 @@ function ExerciseSection() {
               <TouchableOpacity
                 key={option}
                 style={[styles.pill, intensity === option && styles.pillActive]}
-                onPress={() => setIntensity(option)}
+                onPress={() => setIntensity((current) => (current === option ? null : option))}
               >
                 <Text style={[styles.pillText, intensity === option && styles.pillTextActive]}>
-                  {option[0].toUpperCase() + option.slice(1)}
+                  {option === 'light' ? 'Light' : option === 'moderate' ? 'Moderate' : 'Vigorous'}
                 </Text>
               </TouchableOpacity>
             ))}
           </View>
           <Text style={styles.label}>When?</Text>
           <DateChoicePicker value={dateChoice} onChange={setDateChoice} customDate={customDate} onCustomDateChange={setCustomDate} />
+          <Text style={styles.label}>About what time?</Text>
+          <TimePicker value={time} onChange={setTime} />
           <ThumbRow primary="last" style={styles.formActions}>
             <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
-              <Text style={styles.primaryButtonText}>Save</Text>
+              <Text style={styles.primaryButtonText}>{editingId ? 'Save changes' : 'Save'}</Text>
             </TouchableOpacity>
           </ThumbRow>
         </View>
@@ -2861,10 +3055,13 @@ function ExerciseSection() {
                 <Text style={styles.rowMeta}>
                   {formatEntryDateTime(log.loggedAt)}
                   {log.durationMinutes ? ` · ${log.durationMinutes} min` : ''}
-                  {log.intensity ? ` · ${log.intensity}` : ''}
+                  {log.intensity ? ` · ${tl(log.intensity)}` : ''}
                 </Text>
               </View>
               <View style={styles.rowActions}>
+                <TouchableOpacity ref={log.id === logs[0]?.id ? walkMark.ref('signals.editFirst') : undefined} onPress={() => startEdit(log)}>
+                  <Text style={styles.actionText}>Edit</Text>
+                </TouchableOpacity>
                 <TouchableOpacity ref={log.id === logs[0]?.id ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(log.id)}>
                   <Text style={styles.actionTextRemove}>Remove</Text>
                 </TouchableOpacity>
@@ -2873,6 +3070,7 @@ function ExerciseSection() {
           ))}
         </View>
       )}
+      {logs.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
     </View>
   );
 }
@@ -2887,52 +3085,72 @@ type BpReading = {
   bpmId: string | null;
 };
 
+// The three numbers of one reading are saved as three rows with the same
+// time. Two readings in the same minute share that time too, so rows are
+// matched by their place among the rows at that time, never by time alone.
 function pairBloodPressureReadings(
   systolicRows: BodyMeasurementRecord[],
   diastolicRows: BodyMeasurementRecord[],
   bpmRows: BodyMeasurementRecord[],
 ): BpReading[] {
-  const diastolicByTime = new Map(diastolicRows.map((row) => [row.loggedAt, row]));
-  const bpmByTime = new Map(bpmRows.map((row) => [row.loggedAt, row]));
-  const readings: BpReading[] = [];
-  for (const sys of systolicRows) {
-    const dia = diastolicByTime.get(sys.loggedAt);
-    if (dia) {
-      const bpm = bpmByTime.get(sys.loggedAt);
-      readings.push({
-        loggedAt: sys.loggedAt,
-        systolic: sys.value,
-        diastolic: dia.value,
-        bpm: bpm?.value ?? null,
-        systolicId: sys.id,
-        diastolicId: dia.id,
-        bpmId: bpm?.id ?? null,
-      });
+  const byTime = (rows: BodyMeasurementRecord[]) => {
+    const map = new Map<string, BodyMeasurementRecord[]>();
+    for (const row of [...rows].sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id))) {
+      const list = map.get(row.loggedAt) ?? [];
+      list.push(row);
+      map.set(row.loggedAt, list);
     }
+    return map;
+  };
+  const diastolicByTime = byTime(diastolicRows);
+  const bpmByTime = byTime(bpmRows);
+  const seenAtTime = new Map<string, number>();
+  const readings: BpReading[] = [];
+  const systolicInOrder = [...systolicRows].sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id));
+  for (const sys of systolicInOrder) {
+    const index = seenAtTime.get(sys.loggedAt) ?? 0;
+    seenAtTime.set(sys.loggedAt, index + 1);
+    const dia = diastolicByTime.get(sys.loggedAt)?.[index];
+    if (!dia) continue;
+    const bpm = bpmByTime.get(sys.loggedAt)?.[index];
+    readings.push({
+      loggedAt: sys.loggedAt,
+      systolic: sys.value,
+      diastolic: dia.value,
+      bpm: bpm?.value ?? null,
+      systolicId: sys.id,
+      diastolicId: dia.id,
+      bpmId: bpm?.id ?? null,
+    });
   }
-  return readings;
+  return readings.sort((a, b) => b.loggedAt.localeCompare(a.loggedAt));
 }
 
-function BloodPressureSection() {
+function BloodPressureSection({ onChanged }: { onChanged?: () => void }) {
   const walkMark = useWalkMark();
+  const router = useRouter();
   const [readings, setReadings] = useState<BpReading[]>([]);
+  const [limit, setLimit] = useState(30);
   const [formOpen, setFormOpen] = useState(false);
+  const [editing, setEditing] = useState<BpReading | null>(null);
   const [systolic, setSystolic] = useState('');
   const [diastolic, setDiastolic] = useState('');
   const [bpm, setBpm] = useState('');
   const [dateChoice, setDateChoice] = useState<DateChoice>('today');
   const [customDate, setCustomDate] = useState('');
+  const [time, setTime] = useState<TimeOfDayInput>(() => splitTime24(nowTimeString24()));
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [confirm, confirmElement] = useConfirmSheet();
 
   const load = useCallback(() => {
     Promise.all([
-      listBodyMeasurements('blood_pressure_systolic', 30),
-      listBodyMeasurements('blood_pressure_diastolic', 30),
-      listBodyMeasurements('heart_rate_bpm', 30),
+      listBodyMeasurements('blood_pressure_systolic', limit),
+      listBodyMeasurements('blood_pressure_diastolic', limit),
+      listBodyMeasurements('heart_rate_bpm', limit),
     ]).then(([systolicRows, diastolicRows, bpmRows]) => {
       setReadings(pairBloodPressureReadings(systolicRows, diastolicRows, bpmRows));
     });
-  }, []);
+  }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -2942,6 +3160,21 @@ function BloodPressureSection() {
     setBpm('');
     setDateChoice('today');
     setCustomDate('');
+    setTime(splitTime24(nowTimeString24()));
+    setEditing(null);
+  }
+
+  function startEdit(reading: BpReading) {
+    const stamp = localStampOf(reading.loggedAt);
+    const day = dateChoiceFor(stamp.slice(0, 10));
+    setSystolic(String(reading.systolic));
+    setDiastolic(String(reading.diastolic));
+    setBpm(reading.bpm != null ? String(reading.bpm) : '');
+    setDateChoice(day.choice);
+    setCustomDate(day.custom);
+    setTime(splitTime24(stamp.slice(11, 16) || '00:00'));
+    setEditing(reading);
+    setFormOpen(true);
   }
 
   async function handleSave() {
@@ -2951,35 +3184,56 @@ function BloodPressureSection() {
       showInfoAlert('Almost there', 'Enter both a systolic and diastolic number.');
       return;
     }
-    const date = resolveDateChoice(dateChoice, customDate);
-    if (!date) {
-      showInfoAlert('Almost there', 'Enter a valid date.');
+    const loggedAt = resolveDateTime(dateChoice, customDate, time);
+    if (!loggedAt) {
+      showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
-    const loggedAt = `${date}T${nowTimeString24()}`;
-    await recordBodyMeasurement({ loggedAt, measurementType: 'blood_pressure_systolic', value: sys, unit: 'mmHg' });
-    await recordBodyMeasurement({ loggedAt, measurementType: 'blood_pressure_diastolic', value: dia, unit: 'mmHg' });
     const heartRate = Number(bpm);
-    if (Number.isFinite(heartRate) && heartRate > 0) {
-      await recordBodyMeasurement({ loggedAt, measurementType: 'heart_rate_bpm', value: heartRate, unit: 'bpm' });
+    const hasHeartRate = bpm.trim() !== '' && Number.isFinite(heartRate) && heartRate > 0;
+    if (editing) {
+      await updateBodyMeasurement(editing.systolicId, { loggedAt, value: sys });
+      await updateBodyMeasurement(editing.diastolicId, { loggedAt, value: dia });
+      if (editing.bpmId && hasHeartRate) {
+        await updateBodyMeasurement(editing.bpmId, { loggedAt, value: heartRate });
+      } else if (editing.bpmId) {
+        await deleteBodyMeasurement(editing.bpmId);
+      } else if (hasHeartRate) {
+        await recordBodyMeasurement({ loggedAt, measurementType: 'heart_rate_bpm', value: heartRate, unit: 'bpm' });
+      }
+    } else {
+      await recordBodyMeasurement({ loggedAt, measurementType: 'blood_pressure_systolic', value: sys, unit: 'mmHg' });
+      await recordBodyMeasurement({ loggedAt, measurementType: 'blood_pressure_diastolic', value: dia, unit: 'mmHg' });
+      if (hasHeartRate) {
+        await recordBodyMeasurement({ loggedAt, measurementType: 'heart_rate_bpm', value: heartRate, unit: 'bpm' });
+      }
     }
     setFormOpen(false);
     resetForm();
     load();
+    onChanged?.();
   }
 
   async function handleDelete(reading: BpReading) {
+    const ok = await confirm({ title: 'Remove this reading?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    if (!ok) return;
     await deleteBodyMeasurement(reading.systolicId);
     await deleteBodyMeasurement(reading.diastolicId);
     if (reading.bpmId) {
       await deleteBodyMeasurement(reading.bpmId);
     }
+    if (editing?.systolicId === reading.systolicId) {
+      setFormOpen(false);
+      resetForm();
+    }
     load();
+    onChanged?.();
   }
 
   return (
     <View style={styles.sectionColumn}>
       {infoAlertElement}
+      {confirmElement}
       {!formOpen ? (
         <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Log a blood pressure reading</Text>
@@ -3021,12 +3275,14 @@ function BloodPressureSection() {
           </View>
           <Text style={styles.label}>When?</Text>
           <DateChoicePicker value={dateChoice} onChange={setDateChoice} customDate={customDate} onCustomDateChange={setCustomDate} />
+          <Text style={styles.label}>About what time?</Text>
+          <TimePicker value={time} onChange={setTime} />
           <ThumbRow primary="last" style={styles.formActions}>
             <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
-              <Text style={styles.primaryButtonText}>Save</Text>
+              <Text style={styles.primaryButtonText}>{editing ? 'Save changes' : 'Save'}</Text>
             </TouchableOpacity>
           </ThumbRow>
         </View>
@@ -3047,6 +3303,9 @@ function BloodPressureSection() {
                 <Text style={styles.rowMeta}>{formatEntryDateTime(reading.loggedAt)}</Text>
               </View>
               <View style={styles.rowActions}>
+                <TouchableOpacity ref={reading === readings[0] ? walkMark.ref('signals.editFirst') : undefined} onPress={() => startEdit(reading)}>
+                  <Text style={styles.actionText}>Edit</Text>
+                </TouchableOpacity>
                 <TouchableOpacity ref={reading === readings[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(reading)}>
                   <Text style={styles.actionTextRemove}>Remove</Text>
                 </TouchableOpacity>
@@ -3055,6 +3314,15 @@ function BloodPressureSection() {
           ))}
         </View>
       )}
+      {readings.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
+      {readings.length > 0 ? (
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => router.push({ pathname: '/trends', params: { openTrendsLens: 'bloodPressure' } })}
+        >
+          <Text style={styles.addButtonText}>See it over time in Trends</Text>
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 }
@@ -3062,17 +3330,21 @@ function BloodPressureSection() {
 function GeneralNoteSection() {
   const walkMark = useWalkMark();
   const [notesList, setNotesList] = useState<WellbeingCheckin[]>([]);
+  const [limit, setLimit] = useState(30);
   const [formOpen, setFormOpen] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [notes, setNotes] = useState('');
   // Mood, energy and stress (D1, 2026-09-26), each optional.
   const [scales, setScales] = useState<DailyScaleValues>(EMPTY_DAILY_SCALES);
   const [dateChoice, setDateChoice] = useState<DateChoice>('today');
   const [customDate, setCustomDate] = useState('');
+  const [time, setTime] = useState<TimeOfDayInput>(() => splitTime24(nowTimeString24()));
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [confirm, confirmElement] = useConfirmSheet();
 
   const load = useCallback(() => {
-    listCheckins({ checkinType: 'general', limit: 30 }).then(setNotesList);
-  }, []);
+    listCheckins({ checkinType: 'general', limit }).then(setNotesList);
+  }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -3081,6 +3353,20 @@ function GeneralNoteSection() {
     setScales(EMPTY_DAILY_SCALES);
     setDateChoice('today');
     setCustomDate('');
+    setTime(splitTime24(nowTimeString24()));
+    setEditingId(null);
+  }
+
+  function startEdit(entry: WellbeingCheckin) {
+    const stamp = localStampOf(entry.loggedAt);
+    const day = dateChoiceFor(stamp.slice(0, 10));
+    setNotes(entry.notes ?? '');
+    setScales({ mood: entry.mood, energy: entry.energy, stress: entry.stress });
+    setDateChoice(day.choice);
+    setCustomDate(day.custom);
+    setTime(splitTime24(stamp.slice(11, 16) || '00:00'));
+    setEditingId(entry.id);
+    setFormOpen(true);
   }
 
   async function handleSave() {
@@ -3088,25 +3374,44 @@ function GeneralNoteSection() {
       showInfoAlert('Almost there', 'Write a quick note or pick a number for mood, energy or stress first.');
       return;
     }
-    const date = resolveDateChoice(dateChoice, customDate);
-    if (!date) {
-      showInfoAlert('Almost there', 'Enter a valid date.');
+    const loggedAt = resolveDateTime(dateChoice, customDate, time);
+    if (!loggedAt) {
+      showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
-    await recordCheckin({ loggedAt: `${date}T${nowTimeString24()}`, checkinType: 'general', valence: 'neutral', notes: notes.trim() || undefined, ...scales });
+    if (editingId) {
+      await updateCheckinRecord(editingId, {
+        loggedAt,
+        severity: null,
+        severityTen: null,
+        notes,
+        tags: [],
+        bodyRegions: [],
+        scales,
+      });
+    } else {
+      await recordCheckin({ loggedAt, checkinType: 'general', valence: 'neutral', notes: notes.trim() || undefined, ...scales });
+    }
     setFormOpen(false);
     resetForm();
     load();
   }
 
   async function handleDelete(id: string) {
+    const ok = await confirm({ title: 'Remove this note?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    if (!ok) return;
     await deleteCheckin(id);
+    if (editingId === id) {
+      setFormOpen(false);
+      resetForm();
+    }
     load();
   }
 
   return (
     <View style={styles.sectionColumn}>
       {infoAlertElement}
+      {confirmElement}
       {!formOpen ? (
         <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Add a note</Text>
@@ -3145,12 +3450,14 @@ function GeneralNoteSection() {
           <DailyScalesPicker values={scales} onChange={setScales} accent={TAB_COLOR} />
           <Text style={styles.label}>When?</Text>
           <DateChoicePicker value={dateChoice} onChange={setDateChoice} customDate={customDate} onCustomDateChange={setCustomDate} />
+          <Text style={styles.label}>About what time?</Text>
+          <TimePicker value={time} onChange={setTime} />
           <ThumbRow primary="last" style={styles.formActions}>
             <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
-              <Text style={styles.primaryButtonText}>Save</Text>
+              <Text style={styles.primaryButtonText}>{editingId ? 'Save changes' : 'Save'}</Text>
             </TouchableOpacity>
           </ThumbRow>
         </View>
@@ -3170,6 +3477,9 @@ function GeneralNoteSection() {
                 <Text style={styles.rowMeta}>{formatEntryDateTime(entry.loggedAt)}</Text>
               </View>
               <View style={styles.rowActions}>
+                <TouchableOpacity ref={entry === notesList[0] ? walkMark.ref('signals.editFirst') : undefined} onPress={() => startEdit(entry)}>
+                  <Text style={styles.actionText}>Edit</Text>
+                </TouchableOpacity>
                 <TouchableOpacity ref={entry === notesList[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(entry.id)}>
                   <Text style={styles.actionTextRemove}>Remove</Text>
                 </TouchableOpacity>
@@ -3178,6 +3488,7 @@ function GeneralNoteSection() {
           ))}
         </View>
       )}
+      {notesList.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
     </View>
   );
 }
@@ -3201,9 +3512,11 @@ function ExerciseLens() {
 
 function BloodPressureLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
+  const [changes, setChanges] = useState(0);
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
-      <BloodPressureSection />
+      <BloodPressureSection onChanged={() => setChanges((n) => n + 1)} />
+      <YearInSquaresBand set="bloodPressure" color={TAB_COLOR} reloadKey={changes} />
     </ScrollView>
   );
 }
@@ -3240,6 +3553,9 @@ function NocturiaLens() {
   const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [nights, setNights] = useState<NocturiaNight[]>([]);
+  const [limit, setLimit] = useState(30);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [confirm, confirmElement] = useConfirmSheet();
   const [formOpen, setFormOpen] = useState(false);
   const [times, setTimes] = useState('');
   const [firstWake, setFirstWake] = useState<TimeOfDayInput>({ hour: '', minute: '', ampm: 'AM' });
@@ -3249,8 +3565,8 @@ function NocturiaLens() {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
   const load = useCallback(() => {
-    listNocturiaNights(30).then(setNights);
-  }, []);
+    listNocturiaNights(limit).then(setNights);
+  }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -3260,6 +3576,18 @@ function NocturiaLens() {
     setNotes('');
     setDateChoice('yesterday');
     setCustomDate('');
+    setEditingId(null);
+  }
+
+  function startEdit(night: NocturiaNight) {
+    const day = dateChoiceFor(night.nightOf);
+    setTimes(String(night.times));
+    setFirstWake(night.firstWake ? splitTime24(night.firstWake) : { hour: '', minute: '', ampm: 'AM' });
+    setNotes(night.notes ?? '');
+    setDateChoice(day.choice);
+    setCustomDate(day.custom);
+    setEditingId(night.id);
+    setFormOpen(true);
   }
 
   async function handleSave() {
@@ -3274,20 +3602,35 @@ function NocturiaLens() {
       return;
     }
     const wake = firstWake.hour.trim() ? buildTime24(firstWake.hour, firstWake.minute || '00', firstWake.ampm) : null;
-    await saveNocturiaNight({ nightOf, times: count, firstWake: wake, notes });
+    if (editingId) {
+      const result = await updateNocturiaNight(editingId, { nightOf, times: count, firstWake: wake, notes });
+      if (result === 'taken') {
+        showInfoAlert('That night already has an entry', 'Edit that entry instead, or remove one of the two first.');
+        return;
+      }
+    } else {
+      await saveNocturiaNight({ nightOf, times: count, firstWake: wake, notes });
+    }
     setFormOpen(false);
     resetForm();
     load();
   }
 
   async function handleDelete(id: string) {
+    const ok = await confirm({ title: 'Remove this night?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    if (!ok) return;
     await deleteNocturiaNight(id);
+    if (editingId === id) {
+      setFormOpen(false);
+      resetForm();
+    }
     load();
   }
 
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
+      {confirmElement}
       <View style={styles.sectionColumn}>
         {!formOpen ? (
           <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
@@ -3317,7 +3660,7 @@ function NocturiaLens() {
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
-                <Text style={styles.primaryButtonText}>Save</Text>
+                <Text style={styles.primaryButtonText}>{editingId ? 'Save changes' : 'Save'}</Text>
               </TouchableOpacity>
             </ThumbRow>
           </View>
@@ -3346,6 +3689,9 @@ function NocturiaLens() {
                     </Text>
                   </View>
                   <View style={styles.rowActions}>
+                    <TouchableOpacity ref={night === nights[0] ? walkMark.ref('signals.editFirst') : undefined} onPress={() => startEdit(night)}>
+                      <Text style={styles.actionText}>Edit</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity ref={night === nights[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(night.id)}>
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
@@ -3355,18 +3701,22 @@ function NocturiaLens() {
             })}
           </View>
         )}
+        {nights.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
       </View>
     </ScrollView>
   );
 }
 
-// Bowel Movements (D10, 2026-09-30). One entry per movement, never edited:
-// a mistaken one is removed and logged again. Every sentence about a type,
+// Bowel Movements (D10, 2026-09-30). One entry per movement; Edit corrects
+// one in place. Every sentence about a type,
 // and the blood note, lives in lib/bowel.ts.
 function BowelLens() {
   const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [entries, setEntries] = useState<BowelEntry[]>([]);
+  const [limit, setLimit] = useState(50);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [confirm, confirmElement] = useConfirmSheet();
   const [formOpen, setFormOpen] = useState(false);
   const [bristol, setBristol] = useState<BristolType | null>(null);
   const [urgency, setUrgency] = useState<number | null>(null);
@@ -3379,8 +3729,8 @@ function BowelLens() {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
   const load = useCallback(() => {
-    listBowelEntries(50).then(setEntries);
-  }, []);
+    listBowelEntries(limit).then(setEntries);
+  }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -3393,6 +3743,22 @@ function BowelLens() {
     setDateChoice('today');
     setCustomDate('');
     setTime(splitTime24(nowTimeString24()));
+    setEditingId(null);
+  }
+
+  function startEdit(entry: BowelEntry) {
+    const stamp = localStampOf(entry.occurredAt);
+    const day = dateChoiceFor(stamp.slice(0, 10));
+    setBristol(entry.bristolType);
+    setUrgency(entry.urgency);
+    setBlood(entry.blood);
+    setPain(entry.pain);
+    setNote(entry.note ?? '');
+    setDateChoice(day.choice);
+    setCustomDate(day.custom);
+    setTime(splitTime24(stamp.slice(11, 16) || '00:00'));
+    setEditingId(entry.id);
+    setFormOpen(true);
   }
 
   async function handleSave() {
@@ -3405,14 +3771,24 @@ function BowelLens() {
       showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
-    await addBowelEntry({ occurredAt, bristolType: bristol, urgency, blood, pain, note });
+    if (editingId) {
+      await updateBowelEntry(editingId, { occurredAt, bristolType: bristol, urgency, blood, pain, note });
+    } else {
+      await addBowelEntry({ occurredAt, bristolType: bristol, urgency, blood, pain, note });
+    }
     setFormOpen(false);
     resetForm();
     load();
   }
 
   async function handleRemove(id: string) {
+    const ok = await confirm({ title: 'Remove this entry?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    if (!ok) return;
     await removeBowelEntry(id);
+    if (editingId === id) {
+      setFormOpen(false);
+      resetForm();
+    }
     load();
   }
 
@@ -3438,6 +3814,7 @@ function BowelLens() {
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
+      {confirmElement}
       <View style={styles.sectionColumn}>
         {!formOpen ? (
           <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
@@ -3482,7 +3859,7 @@ function BowelLens() {
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
-                <Text style={styles.primaryButtonText}>Save</Text>
+                <Text style={styles.primaryButtonText}>{editingId ? 'Save changes' : 'Save'}</Text>
               </TouchableOpacity>
             </ThumbRow>
           </View>
@@ -3508,6 +3885,9 @@ function BowelLens() {
                     {entry.blood === 1 ? <Text style={styles.rowMeta}>{BLOOD_NOTE}</Text> : null}
                   </View>
                   <View style={styles.rowActions}>
+                    <TouchableOpacity ref={entry === entries[0] ? walkMark.ref('signals.editFirst') : undefined} onPress={() => startEdit(entry)}>
+                      <Text style={styles.actionText}>Edit</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity ref={entry === entries[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleRemove(entry.id)}>
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
@@ -3517,6 +3897,7 @@ function BowelLens() {
             })}
           </View>
         )}
+        {entries.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
       </View>
     </ScrollView>
   );
@@ -3564,6 +3945,9 @@ function CycleLens() {
   const [days, setDays] = useState<CycleDayRow[]>([]);
   const [average, setAverage] = useState<string | null>(null);
   const [summary, setSummary] = useState('');
+  const [limit, setLimit] = useState(90);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [confirm, confirmElement] = useConfirmSheet();
   const [formOpen, setFormOpen] = useState(false);
   const [flow, setFlow] = useState<number | null>(null);
   const [notes, setNotes] = useState('');
@@ -3572,13 +3956,13 @@ function CycleLens() {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
   const load = useCallback(() => {
-    Promise.all([listCycleDays(90), listAllCycleDays()]).then(([recent, all]) => {
+    Promise.all([listCycleDays(limit), listAllCycleDays()]).then(([recent, all]) => {
       const periods = periodsFrom(all);
       setDays(recent);
       setAverage(nextPeriodSentence(periods, localStamp(new Date()).slice(0, 10)));
       setSummary(periodsSentence(periods));
     });
-  }, []);
+  }, [limit]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
@@ -3587,6 +3971,17 @@ function CycleLens() {
     setNotes('');
     setDateChoice('today');
     setCustomDate('');
+    setEditingId(null);
+  }
+
+  function startEdit(row: CycleDayRow) {
+    const day = dateChoiceFor(row.day);
+    setFlow(row.flow);
+    setNotes(row.notes ?? '');
+    setDateChoice(day.choice);
+    setCustomDate(day.custom);
+    setEditingId(row.id);
+    setFormOpen(true);
   }
 
   async function handleSave() {
@@ -3595,20 +3990,35 @@ function CycleLens() {
       showInfoAlert('Almost there', 'Enter a valid date.');
       return;
     }
-    await saveCycleDay({ day, flow, notes });
+    if (editingId) {
+      const result = await updateCycleDay(editingId, { day, flow, notes });
+      if (result === 'taken') {
+        showInfoAlert('That day already has an entry', 'Edit that entry instead, or remove one of the two first.');
+        return;
+      }
+    } else {
+      await saveCycleDay({ day, flow, notes });
+    }
     setFormOpen(false);
     resetForm();
     load();
   }
 
   async function handleDelete(id: string) {
+    const ok = await confirm({ title: 'Remove this day?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    if (!ok) return;
     await deleteCycleDay(id);
+    if (editingId === id) {
+      setFormOpen(false);
+      resetForm();
+    }
     load();
   }
 
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
+      {confirmElement}
       <View style={styles.sectionColumn}>
         <View style={styles.panelStandalone}>
           <Text style={styles.rowTitle}>{average ?? TOO_FEW_CYCLES}</Text>
@@ -3647,7 +4057,7 @@ function CycleLens() {
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
-                <Text style={styles.primaryButtonText}>Save</Text>
+                <Text style={styles.primaryButtonText}>{editingId ? 'Save changes' : 'Save'}</Text>
               </TouchableOpacity>
             </ThumbRow>
           </View>
@@ -3671,6 +4081,11 @@ function CycleLens() {
                     </Text>
                   </View>
                   <View style={styles.rowActions}>
+                    {row.source === 'hand' ? (
+                      <TouchableOpacity ref={row === days[0] ? walkMark.ref('signals.editFirst') : undefined} onPress={() => startEdit(row)}>
+                        <Text style={styles.actionText}>Edit</Text>
+                      </TouchableOpacity>
+                    ) : null}
                     <TouchableOpacity ref={row === days[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(row.id)}>
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
@@ -3680,6 +4095,7 @@ function CycleLens() {
             })}
           </View>
         )}
+        {days.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
       </View>
     </ScrollView>
   );
@@ -3697,6 +4113,9 @@ function MyTrackersLens() {
   const [trackers, setTrackers] = useState<CustomTracker[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [entries, setEntries] = useState<TrackerEntry[]>([]);
+  const [limit, setLimit] = useState(30);
+  const [editingEntryId, setEditingEntryId] = useState<string | null>(null);
+  const [confirm, confirmElement] = useConfirmSheet();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
   // Making or renaming a tracker.
@@ -3708,6 +4127,8 @@ function MyTrackersLens() {
 
   // Logging an entry.
   const [entryOpen, setEntryOpen] = useState(false);
+  // Bumped after an edit, which changes no count, so the list reloads.
+  const [entriesVersion, setEntriesVersion] = useState(0);
   const [valueText, setValueText] = useState('');
   const [hoursText, setHoursText] = useState('');
   const [minutesText, setMinutesText] = useState('');
@@ -3731,8 +4152,8 @@ function MyTrackersLens() {
       setEntries([]);
       return;
     }
-    listTrackerEntries(selected.id, 30).then(setEntries);
-  }, [selected?.id, selected?.entryCount]); // eslint-disable-line react-hooks/exhaustive-deps
+    listTrackerEntries(selected.id, limit).then(setEntries);
+  }, [selected?.id, selected?.entryCount, limit, entriesVersion]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function resetEntryForm() {
     setValueText('');
@@ -3742,6 +4163,28 @@ function MyTrackersLens() {
     setDateChoice('today');
     setCustomDate('');
     setTime(splitTime24(nowTimeString24()));
+    setEditingEntryId(null);
+  }
+
+  function startEditEntry(entry: TrackerEntry) {
+    if (!selected) return;
+    const stamp = localStampOf(entry.loggedAt);
+    const day = dateChoiceFor(stamp.slice(0, 10));
+    if (selected.kind === 'duration') {
+      setHoursText(String(Math.floor(entry.value / 60)));
+      setMinutesText(String(Math.round(entry.value % 60)));
+      setValueText('');
+    } else {
+      setValueText(String(entry.value));
+      setHoursText('');
+      setMinutesText('');
+    }
+    setEntryNotes(entry.notes ?? '');
+    setDateChoice(day.choice);
+    setCustomDate(day.custom);
+    setTime(splitTime24(stamp.slice(11, 16) || '00:00'));
+    setEditingEntryId(entry.id);
+    setEntryOpen(true);
   }
 
   function openNewTracker() {
@@ -3806,14 +4249,29 @@ function MyTrackersLens() {
       showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
-    await addTrackerEntry({ trackerId: selected.id, value: parsed.value, loggedAt, notes: entryNotes });
+    if (editingEntryId) {
+      await updateTrackerEntry(editingEntryId, {
+        value: parsed.value,
+        loggedAt,
+        notes: entryNotes.trim() ? entryNotes.trim() : null,
+      });
+      setEntriesVersion((n) => n + 1);
+    } else {
+      await addTrackerEntry({ trackerId: selected.id, value: parsed.value, loggedAt, notes: entryNotes });
+    }
     setEntryOpen(false);
     resetEntryForm();
     load();
   }
 
   async function handleDeleteEntry(id: string) {
+    const ok = await confirm({ title: 'Remove this entry?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    if (!ok) return;
     await deleteTrackerEntry(id);
+    if (editingEntryId === id) {
+      setEntryOpen(false);
+      resetEntryForm();
+    }
     load();
   }
 
@@ -3822,6 +4280,7 @@ function MyTrackersLens() {
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
+      {confirmElement}
       <View style={styles.sectionColumn}>
         {trackerForm === 'closed' ? (
           <TouchableOpacity ref={walkMark.ref('trackers.addTracker')} style={styles.addButton} onPress={openNewTracker}>
@@ -3998,7 +4457,7 @@ function MyTrackersLens() {
                     <Text style={styles.secondaryButtonText}>Cancel</Text>
                   </TouchableOpacity>
                   <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSaveEntry}>
-                    <Text style={styles.primaryButtonText}>Save</Text>
+                    <Text style={styles.primaryButtonText}>{editingEntryId ? 'Save changes' : 'Save'}</Text>
                   </TouchableOpacity>
                 </ThumbRow>
               </View>
@@ -4019,6 +4478,9 @@ function MyTrackersLens() {
                       </Text>
                     </View>
                     <View style={styles.rowActions}>
+                      <TouchableOpacity ref={entry === entries[0] ? walkMark.ref('signals.editFirst') : undefined} onPress={() => startEditEntry(entry)}>
+                        <Text style={styles.actionText}>Edit</Text>
+                      </TouchableOpacity>
                       <TouchableOpacity ref={entry === entries[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDeleteEntry(entry.id)}>
                         <Text style={styles.actionTextRemove}>Remove</Text>
                       </TouchableOpacity>
@@ -4027,6 +4489,7 @@ function MyTrackersLens() {
                 ))}
               </View>
             )}
+            {entries.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
 
             {trackerForm === 'closed' ? (
               <View style={styles.panelStandalone}>
@@ -4326,6 +4789,8 @@ const styles = StyleSheet.create({
   // Border color/width match TAB_COLOR/Home's own TAB_BORDER_WIDTH rule, 2026-07-27.
   // The table is a band whose rows carry the content inset themselves.
   table: { ...homeBandStyle, ...homeBandNoHairlines, borderColor: TAB_COLOR, overflow: 'hidden' },
+  // A heading that names the rows of the table it sits in.
+  tableHeading: { paddingHorizontal: HOME_BAND_CONTENT_PADDING, paddingTop: 12, paddingBottom: 8 },
   row: { borderTopWidth: 1, borderTopColor: colors.border, paddingVertical: 12, paddingHorizontal: HOME_BAND_CONTENT_PADDING },
   rowTextCol: { flex: 1 },
   rowTitle: { ...typography.label, color: TAB_COLOR,

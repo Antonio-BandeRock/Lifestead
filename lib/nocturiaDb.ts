@@ -67,6 +67,33 @@ export async function saveNocturiaNight(input: {
   );
 }
 
+/** Corrects a logged night from Edit in Signals > Nights. Moving it onto a
+ *  night that already has its own entry is refused with 'taken', so two
+ *  records never quietly become one. */
+export async function updateNocturiaNight(
+  id: string,
+  input: { nightOf: string; times: number; firstWake: string | null; notes: string | null },
+): Promise<'saved' | 'taken'> {
+  const db = await getDatabase();
+  const other = await db.getFirstAsync<{ id: string }>(
+    '/* vault:tool */ SELECT id FROM nocturia_nights WHERE night_of = ? AND id <> ?',
+    input.nightOf,
+    id,
+  );
+  if (other) return 'taken';
+  const notes = input.notes && input.notes.trim() ? input.notes.trim() : null;
+  await db.runAsync(
+    'UPDATE nocturia_nights SET night_of = ?, times = ?, first_wake = ?, notes = ?, updated_at = ? WHERE id = ?',
+    input.nightOf,
+    input.times,
+    input.firstWake,
+    notes,
+    new Date().toISOString(),
+    id,
+  );
+  return 'saved';
+}
+
 export async function deleteNocturiaNight(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM nocturia_nights WHERE id = ?', id);

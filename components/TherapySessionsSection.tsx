@@ -31,6 +31,12 @@ function todayDateString(): string {
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
 }
 
+function yesterdayDateString(): string {
+  const day = new Date();
+  day.setDate(day.getDate() - 1);
+  return `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`;
+}
+
 function isValidDateString(value: string): boolean {
   return /^\d{4}-\d{2}-\d{2}$/.test(value);
 }
@@ -310,12 +316,18 @@ export function TherapySessionsSection({ tabColor }: Props) {
                   value={form.date}
                   onChangeText={(text) => setForm((current) => ({ ...current, date: text }))}
                 />
-                <TouchableOpacity
-                  style={styles.pillSmall}
-                  onPress={() => setForm((current) => ({ ...current, date: todayDateString() }))}
-                >
-                  <Text style={styles.pillTextSmall}>Today</Text>
-                </TouchableOpacity>
+                {([
+                  ['Today', todayDateString()],
+                  ['Yesterday', yesterdayDateString()],
+                ] as const).map(([label, day]) => (
+                  <TouchableOpacity
+                    key={label}
+                    style={[styles.pillSmall, form.date === day && styles.pillActive]}
+                    onPress={() => setForm((current) => ({ ...current, date: day }))}
+                  >
+                    <Text style={[styles.pillTextSmall, form.date === day && styles.pillTextActive]}>{label}</Text>
+                  </TouchableOpacity>
+                ))}
               </ThumbEndRow>
 
               <Text style={styles.label}>Time</Text>

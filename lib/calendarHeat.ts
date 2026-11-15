@@ -216,6 +216,16 @@ export const YEAR_STRIPS = {
     heading: 'Steps',
     describe: (v: number) => plural(Math.round(v), 'step'),
   },
+  trialDays: {
+    key: 'trialDays',
+    heading: 'Food test check-ins where something felt off',
+    describe: (v: number) => (v === 0 ? 'food test check-in, nothing felt off' : plural(v, 'food test check-in') + ' where something felt off'),
+  },
+  bloodPressure: {
+    key: 'bloodPressure',
+    heading: 'Blood pressure, top number',
+    describe: (v: number) => `top number ${Math.round(v)} mmHg, the average of the day's readings`,
+  },
   done: {
     key: 'done',
     heading: 'Things marked done',
@@ -233,7 +243,9 @@ export type YearSquareSet =
   | 'keepingUp'
   | 'trackers'
   | 'flares'
-  | 'exercise';
+  | 'exercise'
+  | 'newFoods'
+  | 'bloodPressure';
 
 // Which strips each lens shows, in order.
 export const YEAR_SQUARE_SETS: Record<YearSquareSet, (keyof typeof YEAR_STRIPS | 'trackers')[]> = {
@@ -247,6 +259,8 @@ export const YEAR_SQUARE_SETS: Record<YearSquareSet, (keyof typeof YEAR_STRIPS |
   trackers: ['trackers'],
   flares: ['flares', 'mood'],
   exercise: ['exercise'],
+  newFoods: ['trialDays'],
+  bloodPressure: ['bloodPressure'],
 };
 
 // A count per day: each event day adds one, and a day in `recordedDays`

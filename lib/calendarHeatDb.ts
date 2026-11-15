@@ -94,6 +94,28 @@ async function valuesFor(key: keyof typeof YEAR_STRIPS, from: string, through: s
       );
       return daySums(rows.map((row) => ({ day: localDay(row.loggedAt), value: row.minutes })));
     }
+    case 'trialDays': {
+      const checkins = await checkinDays(from, through);
+      const trial = checkins.filter((c) => c.type === 'food_trial_daily');
+      return dayCounts(
+        trial.filter((c) => c.valence === 'negative').map((c) => c.day),
+        trial.map((c) => c.day),
+      );
+    }
+    case 'bloodPressure': {
+      const rows = await readOrClosed(() => db.getAllAsync<{ loggedAt: string; value: number }>(
+        `SELECT logged_at AS loggedAt, value FROM body_measurements
+         WHERE measurement_type = 'blood_pressure_systolic' AND logged_at >= ? AND logged_at < ?`,
+        from,
+        through,
+      ), []);
+      const byDay = new Map<string, number[]>();
+      for (const row of rows) {
+        const day = localDay(row.loggedAt);
+        byDay.set(day, [...(byDay.get(day) ?? []), row.value]);
+      }
+      return new Map([...byDay].map(([day, values]) => [day, values.reduce((a, b) => a + b, 0) / values.length]));
+    }
     case 'steps': {
       const points = await getStepTrendPoints(YEAR_DAYS + 1);
       return new Map(points.map((p) => [p.date, p.value]));

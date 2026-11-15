@@ -23987,6 +23987,82 @@ export async function updateCheckinDetail(
   await db.runAsync('UPDATE wellbeing_checkins SET updated_at = ? WHERE id = ?', new Date().toISOString(), checkinId);
 }
 
+/**
+ * Corrects everything a flare or reaction says, from Edit in Signals: when,
+ * how bad, what it was like and how bad each part was, where, what was
+ * going on, the food and the notes. A symptom rated None today stays unless
+ * it is now marked, so a check-in's no answers survive an edit.
+ */
+export async function updateCheckinRecord(
+  checkinId: string,
+  input: {
+    loggedAt: string;
+    severity: number | null;
+    severityTen: number | null;
+    notes: string;
+    /** Reactions only; left as it is when absent. */
+    foodName?: string;
+    /** Reactions only; left as it is when absent. */
+    relatedMealId?: string | null;
+    tags: string[];
+    tagSeverity?: Record<string, number>;
+    bodyRegions: string[];
+    /** Flares only; left as they are when absent. */
+    contributors?: string[];
+    /** General notes only: mood, energy and stress; left as they are when absent. */
+    scales?: { mood: number | null; energy: number | null; stress: number | null };
+  },
+) {
+  const db = await getDatabase();
+  const now = new Date().toISOString();
+  if (input.scales) {
+    await db.runAsync(
+      'UPDATE wellbeing_checkins SET mood = ?, energy = ?, stress = ? WHERE id = ?',
+      input.scales.mood,
+      input.scales.energy,
+      input.scales.stress,
+      checkinId,
+    );
+  }
+  await db.runAsync(
+    'UPDATE wellbeing_checkins SET logged_at = ?, severity = ?, severity_ten = ?, notes = ?, updated_at = ? WHERE id = ?',
+    input.loggedAt,
+    input.severity,
+    input.severityTen,
+    input.notes.trim() || null,
+    now,
+    checkinId,
+  );
+  if (input.foodName !== undefined) {
+    await db.runAsync('UPDATE wellbeing_checkins SET food_name = ? WHERE id = ?', input.foodName.trim() || null, checkinId);
+  }
+  if (input.relatedMealId !== undefined) {
+    await db.runAsync('UPDATE wellbeing_checkins SET related_meal_id = ? WHERE id = ?', input.relatedMealId, checkinId);
+  }
+  const marked = new Set(input.tags);
+  const existing = await db.getAllAsync<{ tag_code: string; severity: number | null }>(
+    'SELECT tag_code, severity FROM checkin_tags WHERE checkin_id = ?',
+    checkinId,
+  );
+  for (const row of existing) {
+    if (row.severity === 0 && !marked.has(row.tag_code)) continue;
+    await db.runAsync('DELETE FROM checkin_tags WHERE checkin_id = ? AND tag_code = ?', checkinId, row.tag_code);
+  }
+  for (const [index, code] of input.tags.entries()) {
+    await db.runAsync(
+      'INSERT INTO checkin_tags (id, checkin_id, tag_code, severity) VALUES (?, ?, ?, ?)',
+      `checkin_tag_${Date.now()}_${index}_${checkinId}`,
+      checkinId,
+      code,
+      input.tagSeverity?.[code] ?? null,
+    );
+  }
+  await updateCheckinDetail(checkinId, {
+    bodyRegions: input.bodyRegions,
+    ...(input.contributors ? { contributors: input.contributors } : {}),
+  });
+}
+
 async function attachCheckinTags(
   db: SQLite.SQLiteDatabase,
   checkins: CheckinRowBase[],
@@ -24412,6 +24488,22 @@ export async function listExerciseLogs(limit = 50) {
   );
 }
 
+/** Corrects a logged activity from Edit in Signals > Exercise. */
+export async function updateExerciseLog(
+  id: string,
+  input: { loggedAt: string; exerciseType: string; durationMinutes: number | null; intensity: 'light' | 'moderate' | 'vigorous' | null },
+) {
+  const db = await getDatabase();
+  await db.runAsync(
+    'UPDATE exercise_logs SET logged_at = ?, exercise_type = ?, duration_minutes = ?, intensity = ? WHERE id = ?',
+    input.loggedAt,
+    input.exerciseType.trim(),
+    input.durationMinutes,
+    input.intensity,
+    id,
+  );
+}
+
 export async function deleteExerciseLog(id: string) {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM exercise_logs WHERE id = ?', id);
@@ -24440,7 +24532,9 @@ export async function recordBodyMeasurement(input: {
   notes?: string;
 }) {
   const db = await getDatabase();
-  const id = `body_measurement_${Date.now()}`;
+  // Blood pressure saves two or three readings in one go, so the time alone
+  // is not enough to keep their ids apart.
+  const id = `body_measurement_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   const now = new Date().toISOString();
 
   await db.runAsync(
@@ -24472,6 +24566,12 @@ export async function listBodyMeasurements(measurementType?: string, limit = 100
     `,
     ...(measurementType ? [measurementType, limit] : [limit]),
   ), []);
+}
+
+/** Corrects one reading's time and value, from Edit in Signals > Blood Pressure. */
+export async function updateBodyMeasurement(id: string, input: { loggedAt: string; value: number }) {
+  const db = await getDatabase();
+  await db.runAsync('UPDATE body_measurements SET logged_at = ?, value = ? WHERE id = ?', input.loggedAt, input.value, id);
 }
 
 export async function deleteBodyMeasurement(id: string) {

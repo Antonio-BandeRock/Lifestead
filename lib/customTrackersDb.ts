@@ -114,6 +114,20 @@ export async function listTrackerEntriesSince(rangeStart: string): Promise<Track
   );
 }
 
+/** Corrects a logged entry from Edit in Signals > My Trackers. */
+export async function updateTrackerEntry(id: string, input: { value: number; loggedAt: string; notes: string | null }): Promise<void> {
+  const db = await getDatabase();
+  const notes = input.notes && input.notes.trim() ? input.notes.trim() : null;
+  await db.runAsync(
+    'UPDATE custom_tracker_entries SET value = ?, logged_at = ?, notes = ?, updated_at = ? WHERE id = ?',
+    input.value,
+    input.loggedAt,
+    notes,
+    new Date().toISOString(),
+    id,
+  );
+}
+
 export async function deleteTrackerEntry(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM custom_tracker_entries WHERE id = ?', id);

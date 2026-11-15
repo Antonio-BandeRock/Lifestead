@@ -51,6 +51,31 @@ export async function saveCycleDay(input: { day: string; flow: number | null; no
   );
 }
 
+/** Corrects a hand-logged day from Edit in Signals > Cycle. Moving it onto
+ *  a day that already has its own hand entry is refused with 'taken'. */
+export async function updateCycleDay(
+  id: string,
+  input: { day: string; flow: number | null; notes: string | null },
+): Promise<'saved' | 'taken'> {
+  const db = await getDatabase();
+  const other = await db.getFirstAsync<{ id: string }>(
+    "/* vault:tool */ SELECT id FROM cycle_days WHERE day = ? AND source = 'hand' AND id <> ?",
+    input.day,
+    id,
+  );
+  if (other) return 'taken';
+  const notes = input.notes && input.notes.trim() ? input.notes.trim() : null;
+  await db.runAsync(
+    'UPDATE cycle_days SET day = ?, flow = ?, notes = ?, updated_at = ? WHERE id = ?',
+    input.day,
+    input.flow,
+    notes,
+    new Date().toISOString(),
+    id,
+  );
+  return 'saved';
+}
+
 export async function deleteCycleDay(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM cycle_days WHERE id = ?', id);

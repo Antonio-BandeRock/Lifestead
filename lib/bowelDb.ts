@@ -1,7 +1,7 @@
 // Reading and writing bowel_movements (lib/db.ts), D10, 2026-09-30.
 // Signals > Bowel Movements writes here; Trends > Symptoms & Flares and
-// Pattern Finder read it through lib/bowel.ts. An entry is never edited:
-// a mistaken one is removed and logged again.
+// Pattern Finder read it through lib/bowel.ts. Edit in Signals corrects an
+// entry in place (updateBowelEntry).
 import { getDatabase } from './db';
 import type { BowelEntry, BristolType } from './bowel';
 import { readOrClosed } from './vaultReads';
@@ -47,6 +47,24 @@ export async function addBowelEntry(input: {
     input.blood,
     input.pain,
     note,
+  );
+}
+
+export async function updateBowelEntry(
+  id: string,
+  input: { occurredAt: string; bristolType: BristolType; urgency: number | null; blood: number | null; pain: number | null; note: string | null },
+): Promise<void> {
+  const db = await getDatabase();
+  const note = input.note && input.note.trim() ? input.note.trim() : null;
+  await db.runAsync(
+    'UPDATE bowel_movements SET occurred_at = ?, bristol_type = ?, urgency = ?, blood = ?, pain = ?, note = ? WHERE id = ?',
+    input.occurredAt,
+    input.bristolType,
+    input.urgency,
+    input.blood,
+    input.pain,
+    note,
+    id,
   );
 }
 

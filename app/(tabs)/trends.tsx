@@ -204,6 +204,7 @@ const YEAR_SQUARE_LENSES: Partial<Record<string, YearSquareSet>> = {
   symptoms: 'symptoms',
   keepingUp: 'keepingUp',
   trackers: 'trackers',
+  bloodPressure: 'bloodPressure',
 };
 
 type TrendsLens =

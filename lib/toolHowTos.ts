@@ -4298,7 +4298,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Finish or correct a flare',
       steps: [
         { say: 'Tap Edit on the flare.', mark: 'signals.editFirst', stay: true },
-        { say: 'Change what it was like or what was going on, then tap Save.' },
+        { say: 'The whole flare opens in the form. Change anything, then tap Save changes.' },
       ],
       forYou: 'A flare logged in a hurry can be filled in later, once you feel up to it.',
     },
@@ -4314,7 +4314,10 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     {
       key: 'remove',
       title: 'Remove a flare',
-      steps: [{ say: 'Tap Remove on the flare.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the flare.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'A flare logged by mistake comes out of every chart that read it.',
     },
   ],
@@ -4324,7 +4327,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Log a food reaction',
       steps: [
         { say: 'Tap + Log a food reaction.', mark: 'signals.add', stay: true },
-        { say: 'Type what you ate or drank, then say when it started and how bad it was.' },
+        { say: 'Type what you ate or drank, or tap one of the meals you logged, then say when it started and how bad it was.' },
         { say: 'If you want, pick what it was like and where on the body.' },
         { say: 'Tap Save reaction.', mark: 'signals.save' },
       ],
@@ -4335,7 +4338,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Finish or correct a reaction',
       steps: [
         { say: 'Tap Edit on the reaction.', mark: 'signals.editFirst', stay: true },
-        { say: 'Change what it was like, then tap Save.' },
+        { say: 'The whole reaction opens in the form. Change anything, then tap Save changes.' },
       ],
       forYou: 'Details you remember later can still be added to the same reaction.',
     },
@@ -4351,7 +4354,10 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     {
       key: 'remove',
       title: 'Remove a reaction',
-      steps: [{ say: 'Tap Remove on the reaction.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the reaction.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'A reaction logged by mistake is taken out of Trends and the reports.',
     },
   ],
@@ -4408,7 +4414,10 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     {
       key: 'remove',
       title: 'Remove a trial',
-      steps: [{ say: 'Tap Remove on the trial.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the trial.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'A trial started by mistake comes off the list.',
     },
   ],
@@ -4418,15 +4427,27 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Log exercise',
       steps: [
         { say: 'Tap + Log exercise.', mark: 'signals.add', stay: true },
-        { say: 'Say what you did. How long and how hard are there if you want them.' },
+        { say: 'Say what you did, or tap something you did before. How long, how hard and the time are there if you want them.' },
         { say: 'Tap Save.', mark: 'signals.save' },
       ],
       forYou: 'A quick note of what you did, read on Trends beside sleep, mood and flares.',
     },
     {
+      key: 'edit',
+      title: 'Correct an exercise entry',
+      steps: [
+        { say: 'Tap Edit on the exercise entry.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change what needs it, then tap Save changes.' },
+      ],
+      forYou: 'A wrong length or time is fixed without logging it again.',
+    },
+    {
       key: 'remove',
       title: 'Remove an exercise entry',
-      steps: [{ say: 'Tap Remove on the entry.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the entry.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'An entry logged twice comes out without a trace.',
     },
   ],
@@ -4442,9 +4463,21 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Readings kept with their time can go to your doctor in a report, in place of a scrap of paper.',
     },
     {
+      key: 'edit',
+      title: 'Correct a reading',
+      steps: [
+        { say: 'Tap Edit on the reading.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change the numbers or the time, then tap Save changes.' },
+      ],
+      forYou: 'A number typed wrong is fixed in Trends and the reports too.',
+    },
+    {
       key: 'remove',
       title: 'Remove a reading',
-      steps: [{ say: 'Tap Remove on the reading.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the reading.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'A reading typed wrong comes out of Trends and the reports.',
     },
   ],
@@ -4471,7 +4504,10 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     {
       key: 'remove',
       title: 'Remove a session',
-      steps: [{ say: 'Tap Remove on the session.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the session.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'A session that did not happen comes off the record.',
     },
   ],
@@ -4487,9 +4523,21 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Anything worth remembering has a place, with the day it happened.',
     },
     {
+      key: 'edit',
+      title: 'Correct a note',
+      steps: [
+        { say: 'Tap Edit on the note.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change the words, the scales or the time, then tap Save changes.' },
+      ],
+      forYou: 'A note can be added to after the moment has passed.',
+    },
+    {
       key: 'remove',
       title: 'Remove a note',
-      steps: [{ say: 'Tap Remove on the note.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the note.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'A note you no longer want is taken out.',
     },
   ],
@@ -4505,9 +4553,21 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Trends > Nights reads each night beside what you drank the evening before.',
     },
     {
+      key: 'edit',
+      title: 'Correct a night',
+      steps: [
+        { say: 'Tap Edit on the night.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change the count, the time you woke or the night, then tap Save changes.' },
+      ],
+      forYou: 'A night put on the wrong date is moved, unless that night already has an entry.',
+    },
+    {
       key: 'remove',
       title: 'Remove a night',
-      steps: [{ say: 'Tap Remove on the night.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the night.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'Logging the same night again replaces it, and Remove takes it out.',
     },
   ],
@@ -4523,9 +4583,21 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The types are kept day by day, which is what a clinician will ask about.',
     },
     {
+      key: 'edit',
+      title: 'Correct an entry',
+      steps: [
+        { say: 'Tap Edit on the entry.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change what needs it, then tap Save changes.' },
+      ],
+      forYou: 'A wrong type or time is fixed without logging it again.',
+    },
+    {
       key: 'remove',
       title: 'Remove an entry',
-      steps: [{ say: 'Tap Remove on the entry.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the entry.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'An entry logged by mistake comes out of Trends and the reports.',
     },
   ],
@@ -4580,9 +4652,21 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Once two cycles are logged, the average of past cycles is shown, and Pattern Finder shows the cycle day beside each flare.',
     },
     {
+      key: 'edit',
+      title: 'Correct a day',
+      steps: [
+        { say: 'Tap Edit on the day.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change how heavy it was, the day or the notes, then tap Save changes. A day from a device is changed on the device.' },
+      ],
+      forYou: 'A day put on the wrong date is moved, unless that day already has an entry.',
+    },
+    {
       key: 'remove',
       title: 'Remove a day',
-      steps: [{ say: 'Tap Remove on the day.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the day.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'A day logged by mistake comes out of the average.',
     },
   ],
@@ -4640,9 +4724,21 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'A tracker with entries moves to Past trackers, where what you logged stays readable.',
     },
     {
+      key: 'editEntry',
+      title: 'Correct an entry',
+      steps: [
+        { say: 'Tap Edit on the entry.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change the number, the time or the notes, then tap Save changes.' },
+      ],
+      forYou: 'A number typed wrong is fixed in the chart too.',
+    },
+    {
       key: 'removeEntry',
       title: 'Remove an entry',
-      steps: [{ say: 'Tap Remove on the entry.', mark: 'signals.removeFirst' }],
+      steps: [
+        { say: 'Tap Remove on the entry.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
       forYou: 'An entry typed wrong comes out of the chart.',
     },
   ],
