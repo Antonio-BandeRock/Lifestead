@@ -262,7 +262,12 @@ export type MonthPicture = {
   plannedIncome: number;
   plannedCommitted: number;
   plannedSetAside: number;
+  /** Every amount that came in this month: entries logged in Finances plus
+   *  what hobbies and interests brought in (2026-11-15: money an interest
+   *  makes is income, never a figure kept off to one side). */
   loggedIncome: number;
+  /** The part of loggedIncome that came from hobbies and interests. */
+  hobbyIncome: number;
   loggedSpend: number;
   tracked: TrackedSpending;
   // Everything the app can actually account for going out this month:
@@ -309,6 +314,9 @@ export function buildMonthPicture(
   if (hobbySpend > 0) {
     categoryTotals.set('hobbies', (categoryTotals.get('hobbies') ?? 0) + hobbySpend);
   }
+  // What an interest brought in is income like any other (2026-11-15).
+  const hobbyIncome = tracked.hobbyEarned ?? 0;
+  loggedIncome += hobbyIncome;
 
   return {
     month,
@@ -316,6 +324,7 @@ export function buildMonthPicture(
     plannedCommitted: summary.monthlyCommitted,
     plannedSetAside: summary.monthlySetAside,
     loggedIncome,
+    hobbyIncome,
     loggedSpend,
     tracked,
     knownSpendTotal: loggedSpend + tracked.grocerySpend + tracked.therapySpend + hobbySpend,

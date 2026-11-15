@@ -768,8 +768,8 @@ export function summarizeSupplementCosts(
 // ---------------------------------------------------------------------------
 
 /** Money spent or earned on something followed under Interests, recorded
- *  under Interests > Spending and Earning. Kept apart from Finances, so
- *  nothing here is counted twice. */
+ *  under Interests > Spending and Earning, and counted in Finances without
+ *  being entered there again. */
 export type HobbyCostRecord = {
   occurredOn: string;
   amount: number;
@@ -795,7 +795,7 @@ export type HobbyCostBand = {
  */
 export function summarizeHobbyCosts(months: YieldMonth[], records: HobbyCostRecord[]): HobbyCostBand {
   const note =
-    'Recorded under Interests, Spending and Earning, and kept apart from Finances, so nothing is counted twice. Interest paid on a loan or earned at a bank is in Finances, not here.';
+    'Recorded once under Interests, Spending and Earning, and counted in income and spending on Life > Finances without being entered again. Interest paid on a loan or earned at a bank is in Finances, not here.';
   const spent = records.filter((row) => row.direction === 'out' && usable(row.amount) > 0);
   const earned = records.filter((row) => row.direction === 'in' && usable(row.amount) > 0);
 

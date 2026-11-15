@@ -213,6 +213,13 @@ const NO_TRACKED = { grocerySpend: 0, groceryLinesWithoutPrice: 0, therapySpend:
   check('therapies too', p.byCategory.find((c) => c.category === 'therapies').monthly, 80);
   check('the largest category leads', p.byCategory[0].category, 'groceries');
   check('kitchen coverage stays a count', p.tracked.kitchenCoveredLines, 6);
+  // Money an interest brings in is income (2026-11-15), and what it spends is spending.
+  const withHobby = buildMonthPicture('2026-09', recurring, entries, { ...tracked, hobbySpend: 30, hobbyEarned: 120 });
+  check('hobby earnings are added to income', withHobby.loggedIncome, 320);
+  check('the hobby part of income is named', withHobby.hobbyIncome, 120);
+  near('hobby spending is added to spending', withHobby.knownSpendTotal, 380.9);
+  check('hobby spending reaches the breakdown', withHobby.byCategory.find((c) => c.category === 'hobbies').monthly, 30);
+  check('no hobby money adds nothing', p.hobbyIncome, 0);
 
   const text = describeMonthPicture(p);
   checkTrue('a partial total is called a floor', text.includes('floor rather than a total'));

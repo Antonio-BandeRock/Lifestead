@@ -1252,7 +1252,8 @@ export default function LifeScreen() {
           {tracked.grocerySpend > 0 ? renderStat('  from groceries', formatFinanceMoney(tracked.grocerySpend)) : null}
           {tracked.therapySpend > 0 ? renderStat('  from therapies', formatFinanceMoney(tracked.therapySpend)) : null}
           {(tracked.hobbySpend ?? 0) > 0 ? renderStat('  from hobbies and interests', formatFinanceMoney(tracked.hobbySpend ?? 0)) : null}
-          {picture.loggedIncome > 0 ? renderStat('Extra income logged', formatFinanceMoney(picture.loggedIncome)) : null}
+          {picture.loggedIncome > 0 ? renderStat('Income recorded', formatFinanceMoney(picture.loggedIncome)) : null}
+          {picture.hobbyIncome > 0 ? renderStat('  from hobbies and interests', formatFinanceMoney(picture.hobbyIncome)) : null}
           {picture.incompleteRecords > 0 ? (
             <Text style={styles.footnote}>
               {picture.incompleteRecords === 1
@@ -1924,7 +1925,7 @@ export default function LifeScreen() {
             {tracked.grocerySpend > 0 ? renderStat('Groceries', formatFinanceMoney(tracked.grocerySpend)) : null}
             {tracked.therapySpend > 0 ? renderStat('Hands-on therapies', formatFinanceMoney(tracked.therapySpend)) : null}
             {(tracked.hobbySpend ?? 0) > 0 ? renderStat('Hobbies and interests, spent', formatFinanceMoney(tracked.hobbySpend ?? 0)) : null}
-            {(tracked.hobbyEarned ?? 0) > 0 ? renderStat('Hobbies and interests, came in', formatFinanceMoney(tracked.hobbyEarned ?? 0)) : null}
+            {(tracked.hobbyEarned ?? 0) > 0 ? renderStat('Hobbies and interests, came in (counted in income)', formatFinanceMoney(tracked.hobbyEarned ?? 0)) : null}
             <Text style={styles.footnote}>
               Read from your grocery lists, therapy sessions and Interests, Spending and Earning rather than copied here, so a price corrected there is
               corrected everywhere. Do not enter these again by hand. Interest on a loan or at a bank is not part of hobbies and interests.

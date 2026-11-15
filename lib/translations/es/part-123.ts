@@ -546,4 +546,13 @@ export const PART: Readonly<Record<string, string>> = {
   "Show {next} more months of {count}": "Mostrar {next} meses más de {count}",
   "Show the last {count}": "Mostrar los últimos {count}",
   "Show {next} more of {count}": "Mostrar {next} más de {count}",
+  "Income recorded": "Ingresos registrados",
+  "  from hobbies and interests": "  de pasatiempos e intereses",
+  "from hobbies and interests": "de pasatiempos e intereses",
+  "Hobbies and interests, came in (counted in income)": "Pasatiempos e intereses, lo que entró (contado en los ingresos)",
+  "What you spend on your hobbies and interests, and anything they bring in, each on its day: a class, club dues, a stall fee, a sale, a commission. What comes in counts as income, and what goes out as spending, on Life > Finances, with nothing entered twice. Bank and loan interest belong in Finances.": "Lo que gastas en tus pasatiempos e intereses, y lo que te dejan, cada cosa en su día: una clase, la cuota de un club, el pago de un puesto, una venta, un encargo. Lo que entra cuenta como ingreso, y lo que sale como gasto, en Vida > Finanzas, sin anotar nada dos veces. Los intereses del banco y de los préstamos van en Finanzas.",
+  "What you spend on your hobbies and interests, and anything they bring in, each on its day: a class, club dues, a stall fee, a sale, a commission. What comes in counts as income, and what goes out as spending, on Life": "Lo que gastas en tus pasatiempos e intereses, y lo que te dejan, cada cosa en su día: una clase, la cuota de un club, el pago de un puesto, una venta, un encargo. Lo que entra cuenta como ingreso, y lo que sale como gasto, en Vida",
+  "Finances, with nothing entered twice. Bank and loan interest belong in Finances.": "Finanzas, sin anotar nada dos veces. Los intereses del banco y de los préstamos van en Finanzas.",
+  "Recorded once under Interests, Spending and Earning, and counted in income and spending on Life > Finances without being entered again. Interest paid on a loan or earned at a bank is in Finances, not here.": "Se anota una sola vez en Intereses, Gastos e ingresos, y cuenta en los ingresos y gastos de Vida > Finanzas sin anotarse otra vez. Los intereses que pagas por un préstamo o que te da el banco van en Finanzas, no aquí.",
+  "Spending and Earning": "Gastos e ingresos",
 };

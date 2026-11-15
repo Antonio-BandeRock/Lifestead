@@ -298,8 +298,26 @@ export function emergencyCardSection(cardText: string | null): ReportListSection
 
 export type MoneyEntryRow = { occurredOn: string; direction: 'income' | 'expense' | string; amount: number; category: string; description: string | null };
 
-export function moneyEntriesSection(entries: MoneyEntryRow[], start: string, end: string): ReportTableSection {
-  const rows = entries
+/**
+ * What hobbies and interests spent and brought in, as rows of Money in and
+ * out (2026-11-15: money an interest makes is income, so it is added in, never
+ * kept off to one side). Each line is entered once, under Interests.
+ */
+export function hobbyMoneyRows(entries: MoneyEntry[], interests: Interest[]): MoneyEntryRow[] {
+  const names = new Map(interests.map((interest) => [interest.id, interest.name]));
+  return entries
+    .filter((entry) => entry.amount > 0)
+    .map((entry) => ({
+      occurredOn: entry.onDay,
+      direction: entry.direction === 'in' ? 'income' : 'expense',
+      amount: entry.amount,
+      category: 'hobbies',
+      description: `${names.get(entry.interestId) ?? 'An interest no longer listed'}: ${entry.what}`,
+    }));
+}
+
+export function moneyEntriesSection(entries: MoneyEntryRow[], start: string, end: string, hobbyRows: MoneyEntryRow[] = []): ReportTableSection {
+  const rows = [...entries, ...hobbyRows]
     .filter((entry) => inRange(entry.occurredOn.slice(0, 10), start, end))
     .sort((a, b) => a.occurredOn.localeCompare(b.occurredOn));
   const incoming = rows.filter((entry) => entry.direction === 'income').reduce((sum, entry) => sum + entry.amount, 0);
@@ -309,7 +327,7 @@ export function moneyEntriesSection(entries: MoneyEntryRow[], start: string, end
     heading: 'Money in and out',
     note:
       rows.length > 0
-        ? `${count(rows.length, 'entry', 'entries')} in the range. In: ${formatFinanceMoney(incoming)}. Out: ${formatFinanceMoney(outgoing)}. Only money entered against a day is counted; repeating bills are not guessed into it.`
+        ? `${count(rows.length, 'entry', 'entries')} in the range. In: ${formatFinanceMoney(incoming)}. Out: ${formatFinanceMoney(outgoing)}. Only money entered against a day is counted; repeating bills are not guessed into it.${hobbyRows.some((row) => inRange(row.occurredOn.slice(0, 10), start, end)) ? ' What hobbies and interests spent and brought in is included, each line once.' : ''}`
         : undefined,
     columns: ['Date', 'In or out', 'Category', 'What', 'Amount'],
     rows: rows.map((entry) => [
@@ -542,8 +560,8 @@ export function hobbyMoneySection(entries: MoneyEntry[], interests: Interest[], 
     heading: 'Hobbies and interests',
     note:
       rows.length > 0
-        ? `${count(rows.length, 'entry', 'entries')} in the range. Spent: ${formatFinanceMoney(spent)}. Came in: ${formatFinanceMoney(earned)}. Recorded under Interests, Spending and Earning, apart from Finances, so nothing is counted twice. Interest paid on a loan or earned at a bank is in Finances, not here.`
-        : 'Recorded under Interests, Spending and Earning, apart from Finances. Interest paid on a loan or earned at a bank is in Finances, not here.',
+        ? `${count(rows.length, 'entry', 'entries')} in the range. Spent: ${formatFinanceMoney(spent)}. Came in: ${formatFinanceMoney(earned)}. Recorded under Interests, Spending and Earning and counted in income and spending on Life > Finances, never entered twice. Interest paid on a loan or earned at a bank is not part of this.`
+        : 'Recorded under Interests, Spending and Earning and counted in income and spending on Life > Finances. Interest paid on a loan or earned at a bank is not part of this.',
     columns: ['Interest', 'Spent', 'Came in', 'Entries'],
     rows: [...byInterest.entries()]
       .sort((a, b) => b[1].out - a[1].out || a[0].localeCompare(b[0]))

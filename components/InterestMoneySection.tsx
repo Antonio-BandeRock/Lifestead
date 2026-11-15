@@ -356,7 +356,7 @@ export function InterestMoneySection({ tabColor, onlyInterestId }: Props) {
   return (
     <View style={styles.section}>
       <Text style={styles.captionText}>
-        What you spend on your hobbies and interests, and anything they bring in, each on its day: a class, club dues, a stall fee, a sale, a commission. Bank and loan interest belong in Life, under Finances.
+        What you spend on your hobbies and interests, and anything they bring in, each on its day: a class, club dues, a stall fee, a sale, a commission. What comes in counts as income, and what goes out as spending, on Life {'>'} Finances, with nothing entered twice. Bank and loan interest belong in Finances.
       </Text>
 
       {form && !form.id ? (

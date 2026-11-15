@@ -82,6 +82,7 @@ import {
   medListSection,
   microbiomeSection,
   moneyEntriesSection,
+  hobbyMoneyRows,
   projectsSection,
   therapyResponseSection,
   therapySessionsSection,
@@ -897,7 +898,15 @@ function extraSectionLoaders(days: number): Record<ExtraSectionId, () => Promise
         return [emergencyCardSection(buildEmergencyCard({ profile, fromApp, contacts, today: end }))];
       }),
     'money-now': () => guarded('finances', 'Where money stands', () => insights('i-money', 'Where money stands')),
-    'money-entries': () => guarded('finances', 'Money in and out', async () => [moneyEntriesSection(await listEntries(), start, end)]),
+    'money-entries': () =>
+      guarded('finances', 'Money in and out', async () => {
+        const [entries, hobbyEntries, interests] = await Promise.all([
+          listEntries(),
+          listInterestMoney().catch(() => []),
+          listInterests().catch(() => []),
+        ]);
+        return [moneyEntriesSection(entries, start, end, hobbyMoneyRows(hobbyEntries, interests))];
+      }),
     'upkeep-standing': () =>
       guarded(null, 'Everything kept up, and when it is next due', async () => {
         const [items, places] = await Promise.all([listUpkeepItems(), listUpkeepPlaces()]);
