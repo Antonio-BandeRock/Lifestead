@@ -47,6 +47,7 @@ import { AppActionSheet } from '../../components/AppActionSheet';
 import { useInfoAlert } from '../../components/InfoAlert';
 import { YourStorySection, useYourStory } from '../../components/YourStorySection';
 import { TesterWelcome, TESTER_WELCOME_TITLE } from '../../components/TesterWelcome';
+import { testerChromeShown } from '../../lib/testerGraduation';
 import { WaitingAnswersList } from '../../components/WaitingAnswersList';
 import { nextLine, type StoryDestination } from '../../lib/yourStory';
 import { buildTabGuide, tabGuideLine } from '../../lib/yourStoryTabs';
@@ -4770,6 +4771,8 @@ export default function HomeScreen() {
   // The tester welcome, T5 of the tester plan. ALL_HOME_SECTION_KEYS holds
   // it only in the tester version, so this is never reached in any other.
   function renderTesterWelcome() {
+    // Gone once the third tester review is sent (lib/testerGraduation.ts).
+    if (!testerChromeShown()) return null;
     return renderBand(
       'testerWelcome',
       TESTER_WELCOME_TITLE,

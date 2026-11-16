@@ -285,6 +285,7 @@ import { VaultClosedBand } from '../components/VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { t, tl } from '../lib/i18n';
+import { noteLensUsed } from '../lib/lensUseDb';
 import { appLocale } from '@/lib/language';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
 
@@ -848,6 +849,8 @@ export default function ProfileScreen() {
     setCollapsedIconGroups(new Set(ALL_TAB_HUB_ICON_GROUP_KEYS));
     bringHeaderToTop(`group:${title}`);
   }
+  // Profile in the day-by-day record of what was opened (lib/lensUseDb.ts).
+  useEffect(() => noteLensUsed('/profile', ''), []);
   // A Your Story walk pointing at a card here unfolds its group, since a
   // folded group would hide the very header the walk is pointing at.
   useEffect(() => {

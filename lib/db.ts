@@ -10052,6 +10052,22 @@ async function runDatabaseInitialization() {
       );
     `);
 
+    // Which lenses were opened on which day on this device (2026-11-15,
+    // lib/lensUseDb.ts): the app's own record of how it has been used, read
+    // by the tester's 90-day review (lib/testerReview.ts) and kept for the
+    // person's history in every version. One row per lens per local day.
+    // Device-local (DEVICE_LOCAL_TABLES): opening a lens is not a change
+    // the other device needs to hear about.
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS lens_use_days (
+        tab TEXT NOT NULL,
+        lens TEXT NOT NULL,
+        day TEXT NOT NULL,
+        first_at TEXT NOT NULL,
+        PRIMARY KEY (tab, lens, day)
+      );
+    `);
+
     // Files kept with a record (2026-11-03, 1.0.80.2): a PDF, a document or
     // anything else attached to a Capture note. The file lives under
     // Paths.document/attachments with an encrypted copy in the Files folder

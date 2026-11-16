@@ -10,13 +10,16 @@
 // the last few release notes again, and a line appears when a new installer
 // is needed, since an update over the air cannot bring native changes.
 //
-// T12 added how long this device's access lasts, and Ask to Renew once
-// the end is two weeks away or less (lib/testerAccess.ts).
+// Since 2026-11-15 it says when the next of the three reviews is due, and
+// offers Start Your Review once it opens two weeks before
+// (components/TesterReview.tsx). After the third the card is gone with the
+// rest of the tester wording (lib/testerGraduation.ts).
 //
 // What Changed shows only once this device has been updated past the
 // version it started on, and reads only the versions since then: a fresh
 // install has nothing that changed for the person holding it.
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   Linking,
@@ -38,18 +41,16 @@ import {
 } from "../constants/releaseNotes";
 import { textShadow, typography } from "../constants/typography";
 import { APP_VERSION } from "../constants/version";
-import { isTesterBuild } from "../lib/appVariant";
 import { getFirstAppVersion } from "../lib/db";
 import { t } from "../lib/i18n";
-import { explainNotYet } from "../lib/notYet";
 import { PROBLEM_REPORT_ADDRESS } from "../lib/problemReport";
 import { openReportProblem } from "../lib/reportProblem";
-import { askForAccess, useTesterAccess } from "../lib/testerAccess";
-import { endDay } from "../lib/testerApproval";
+import { useTesterAccess } from "../lib/testerAccess";
+import { useTesterChrome, useTesterReview } from "../lib/testerGraduation";
+import { REVIEW_ROUNDS, reviewPhase } from "../lib/testerReview";
 import type { InstallerWaiting } from "../lib/testerInstaller";
 import { checkTesterInstaller } from "../lib/testerInstallerCheck";
 import { useInfoAlert } from "./InfoAlert";
-import { TesterCodeBox, TesterRequestCode } from "./TesterCodeBox";
 import { useWalkMark } from "./WalkMark";
 
 export const TESTER_WELCOME_TITLE = "Thank You for Testing Lifestead";
@@ -66,9 +67,11 @@ export function TesterWelcome({ showHeading = false }: Props) {
   const walkMark = useWalkMark();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [installer, setInstaller] = useState<InstallerWaiting | null>(null);
-  const tester = isTesterBuild();
+  const router = useRouter();
+  const tester = useTesterChrome();
   const access = useTesterAccess();
-  const [renewSent, setRenewSent] = useState<string | null>(null);
+  const progress = useTesterReview();
+  const [now] = useState(() => Date.now());
   const [firstVersion, setFirstVersion] = useState<string | null>(null);
 
   useEffect(() => {
@@ -116,76 +119,49 @@ export function TesterWelcome({ showHeading = false }: Props) {
 
   const updatedSinceInstall = !!firstVersion && firstVersion !== APP_VERSION;
   const okState = access.state.kind === "ok" ? access.state : null;
-  const askToRenew = async () => {
-    const name = access.name || okState?.approval.name || "";
-    if (!name) {
-      explainNotYet(
-        t(
-          "Your name is missing from this device, so the request would not say who it is from. Write to {address} instead.",
-          { address: PROBLEM_REPORT_ADDRESS },
-        ),
-      );
-      return;
-    }
-    const sent = await askForAccess(name, true);
-    setRenewSent(
-      sent === "opened"
-        ? t(
-            "Your email app has the request ready. Send it, and the reply carries an approval code to type below.",
-          )
-        : sent === "copied"
-          ? t(
-              "No email app opened, so the request is copied. Paste it into an email to {address}.",
-              { address: PROBLEM_REPORT_ADDRESS },
-            )
-          : t(
-              "The request could not be made. Write to {address} and ask for more time.",
-              { address: PROBLEM_REPORT_ADDRESS },
-            ),
-    );
-  };
+  const phase = okState ? reviewPhase(progress, okState.approval.issued, now) : null;
+  const dueDay = phase && phase.kind !== "graduated" ? new Date(phase.period.due).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : "";
 
   return (
     <View style={styles.body}>
       {showHeading ? (
         <Text style={styles.heading}>{TESTER_WELCOME_TITLE}</Text>
       ) : null}
-      {okState ? (
+      {phase && phase.kind !== "graduated" ? (
         <View style={styles.installer}>
           <Text style={styles.line}>
-            {okState.renewSoon
+            {phase.kind === "quiet"
               ? t(
-                  "Lifestead opens on this device until {day}, {count} days from now. Ask for more time now and nothing stops in between.",
-                  { day: endDay(okState.approval), count: okState.daysLeft },
+                  "Review {round} of {total} is due on {day}. It opens two weeks before and asks about the parts of the app you used.",
+                  { round: phase.round, total: REVIEW_ROUNDS, day: dueDay },
                 )
-              : t("Lifestead opens on this device until {day}.", {
-                  day: endDay(okState.approval),
-                })}
+              : phase.kind === "open"
+                ? t(
+                    "Review {round} of {total} is due on {day}, {count} days from now. You can start it now, and your answers are kept as you go.",
+                    { round: phase.round, total: REVIEW_ROUNDS, day: dueDay, count: phase.daysLeft },
+                  )
+                : t("Review {round} of {total} is due now.", {
+                    round: phase.round,
+                    total: REVIEW_ROUNDS,
+                  })}
           </Text>
-          {okState.renewSoon ? (
+          {phase.kind === "open" ? (
             <View style={styles.buttonRow}>
               <TouchableOpacity
-                ref={walkMark.ref('tester.renew')}
+                ref={walkMark.ref('tester.review')}
                 style={styles.primaryButton}
                 activeOpacity={0.8}
-                onPress={() => void askToRenew()}
+                onPress={() => router.push("/tester-review")}
                 accessibilityRole="button"
               >
                 <Ionicons
-                  name="time-outline"
+                  name="clipboard-outline"
                   size={18}
                   color={colors.textPrimary}
                 />
-                <Text style={styles.primaryButtonText}>Ask to Renew</Text>
+                <Text style={styles.primaryButtonText}>Start Your Review</Text>
               </TouchableOpacity>
             </View>
-          ) : null}
-          {renewSent ? <Text style={styles.caption}>{renewSent}</Text> : null}
-          {renewSent || access.requestCode ? (
-            <>
-              <TesterRequestCode />
-              <TesterCodeBox />
-            </>
           ) : null}
         </View>
       ) : null}
@@ -223,14 +199,15 @@ export function TesterWelcome({ showHeading = false }: Props) {
         always will.
       </Text>
       <Text style={styles.line}>
-        For now, each approval lasts 90 days. That way we hear from you at least
-        once every 90 days, until your feedback and everyone else&apos;s shows
-        the app working the way it should for everyone.
+        Every 90 days there is a short review: a 1 to 5 for how easy and how
+        useful each part you used is, a note by typing or the mic, and a list
+        of the parts you have not tried yet. Sending it starts the next 90
+        days.
       </Text>
       <Text style={styles.line}>
-        When testing is done, one last update turns this into a version that
-        never runs out. It stays fully functional and keeps every record you
-        have built up.
+        After the third review, Lifestead is yours and your partner&apos;s to use
+        free. The tester wording goes away, and everything you have put in
+        stays.
       </Text>
       <Text style={styles.line}>
         When something goes wrong, or you wish something worked differently, tap

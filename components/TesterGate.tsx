@@ -14,6 +14,12 @@
 // when the approval is for another device it says so. Nothing underneath is
 // touched: records stay where they are and open again once access is back.
 //
+// Since 2026-11-15 an approval no longer ends after 90 days (lasting() in
+// lib/testerAccess.ts). Instead, on the day a review comes due, the same
+// cover holds the review (components/TesterReview.tsx) until it is sent,
+// and once the third is sent the gate is gone for good
+// (lib/testerGraduation.ts).
+//
 // Drawn ahead of OverlayRoot and AppKeyboard in app/_layout.tsx. Its
 // elevation keeps the edge buttons under it, so the keyboard carries a
 // higher one (2000) to draw over its text boxes, and Report a Problem's
@@ -27,7 +33,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
-import { isTesterBuild } from '../lib/appVariant';
 import { t } from '../lib/i18n';
 import { explainNotYet } from '../lib/notYet';
 import { AGREEMENT_FOOTNOTE } from '../lib/agreement';
@@ -45,6 +50,8 @@ import {
   type AskResult,
 } from '../lib/testerAccess';
 import { endDay } from '../lib/testerApproval';
+import { useTesterChrome, useTesterReview } from '../lib/testerGraduation';
+import { reviewPhase } from '../lib/testerReview';
 import {
   TESTER_AGREEMENT_BUTTON,
   TESTER_AGREEMENT_INTRO,
@@ -55,9 +62,12 @@ import { AgreementPoints } from './AgreementPoints';
 import { AppTextInput } from './AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 import { TesterCodeBox, TesterRequestCode } from './TesterCodeBox';
+import { TesterReview } from './TesterReview';
 
 export function TesterGate() {
-  if (!isTesterBuild()) return null;
+  // Off in every other version, and for good once the third review is sent.
+  const shown = useTesterChrome();
+  if (!shown) return null;
   return <TesterGateInner />;
 }
 
@@ -75,13 +85,33 @@ function TesterGateInner() {
   const [message, setMessage] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [agreeing, setAgreeing] = useState(false);
+  const progress = useTesterReview();
+  // The day a review comes due is noticed within the hour, the way the
+  // approval watch rechecks.
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const timer = setInterval(() => setNow(Date.now()), 60 * 60 * 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => startTesterAccessWatch(), []);
   useEffect(() => {
     if (access.name && !name) setName(access.name);
   }, [access.name, name]);
 
-  if (testerDoorOpen(access)) return null;
+  const flagSide = hand === 'right' ? { paddingRight: REPORT_FLAG_ROOM } : { paddingLeft: REPORT_FLAG_ROOM };
+  const content = { paddingTop: insets.top + HOME_BAND_GAP, paddingBottom: insets.bottom + HOME_BAND_GAP * 2, ...flagSide };
+
+  if (testerDoorOpen(access)) {
+    const state = access.state;
+    if (state.kind !== 'ok' || reviewPhase(progress, state.approval.issued, now).kind !== 'due') return null;
+    // The day has come: the review covers the app until it is sent.
+    return (
+      <View style={styles.cover}>
+        <TesterReview approvedAt={state.approval.issued} name={access.name || state.approval.name} covered contentStyle={content} />
+      </View>
+    );
+  }
 
   async function ask(renewal: boolean) {
     if (!name.trim()) {
@@ -112,10 +142,6 @@ function TesterGateInner() {
     }
   }
 
-  // The Report a Problem flag sits against one edge at mid-height, over
-  // this screen, so the words keep out from under it on that side.
-  const flagSide = hand === 'right' ? { paddingRight: REPORT_FLAG_ROOM } : { paddingLeft: REPORT_FLAG_ROOM };
-  const content = { paddingTop: insets.top + HOME_BAND_GAP, paddingBottom: insets.bottom + HOME_BAND_GAP * 2, ...flagSide };
 
   // Until the stored access is read, a plain cover, so the app never shows
   // for a moment before the gate.

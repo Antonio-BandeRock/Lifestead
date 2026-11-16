@@ -12,7 +12,7 @@
 import { useMemo } from 'react';
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import { colors } from '../constants/colors';
-import { isTesterBuild } from '../lib/appVariant';
+import { useTesterChrome } from '../lib/testerGraduation';
 import { useTesterAccess } from '../lib/testerAccess';
 import { firstName } from '../lib/testerApproval';
 
@@ -20,7 +20,8 @@ const ROW_GAP = 120;
 const COLUMN_GAP = 170;
 
 export function TesterWatermark() {
-  if (!isTesterBuild()) return null;
+  const shown = useTesterChrome();
+  if (!shown) return null;
   return <TesterWatermarkInner />;
 }
 

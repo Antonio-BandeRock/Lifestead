@@ -354,7 +354,7 @@ export type ToolMark =
   | 'tester.report'
   | 'tester.whatChanged'
   | 'tester.installer'
-  | 'tester.renew'
+  | 'tester.review'
   | 'home.captureSay'
   | 'home.captureSort'
   | 'capture.readPage'
@@ -2561,16 +2561,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'What this version is, how to say what you found, and the version number to quote are always one look away.',
     },
     {
-      key: 'testerRenew',
-      title: 'Ask for more time on the test version',
+      key: 'testerReview',
+      title: 'Send your 90-day review',
       testerOnly: true,
       steps: [
-        { say: 'Open the band with the name of Thank You for Testing Lifestead. Its first line says the day Lifestead opens on this device until.', mark: 'homeBand.testerWelcome', stay: true },
-        { say: 'From two weeks before that day, Ask to Renew appears under it. Tap it, and your email app opens with the request ready.', mark: 'tester.renew' },
-        { say: 'Press Send in your email app. The request carries your name, a code for this device and which copy of the app is asking, nothing else.' },
-        { say: 'The reply carries an approval code. Copy it, or the whole email, press Paste in the box under Ask to Renew, then press Use This Code. The new day shows on the band.' },
+        { say: 'Open the band with the name of Thank You for Testing Lifestead. Its first line says which review is next and the day it is due.', mark: 'homeBand.testerWelcome', stay: true },
+        { say: 'From two weeks before that day, Start Your Review appears under it. Tap it to open the review.', mark: 'tester.review' },
+        { say: 'For each part of the app you used, pick 1 to 5 for Easy to use and for Useful to me, or tap Hardly used it. Type a note or tap the mic to say a problem or a suggestion.' },
+        { say: 'From the second review on, the changes made from what testers said come first. Say how each one works for you now.' },
+        { say: 'Read Not tried yet, then tap Send the Review. Your email app opens with the answers in it; press Send there, and the next 90 days start.' },
       ],
-      forYou: 'The test version keeps opening without a gap, and everything you have put in stays where it is.',
+      forYou: 'Each review shapes what gets fixed next, and after the third, Lifestead is yours and your partner’s to use free.',
     },
     {
       key: 'openBand',

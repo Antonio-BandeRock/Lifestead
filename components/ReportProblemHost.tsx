@@ -22,7 +22,7 @@ import { colors } from '../constants/colors';
 import { TAB_ROUTES } from '../constants/tabs';
 import { textShadow, typography } from '../constants/typography';
 import { APP_VERSION } from '../constants/version';
-import { isTesterBuild } from '../lib/appVariant';
+import { useTesterChrome } from '../lib/testerGraduation';
 import { clearCrashNote, readCrashNote } from '../lib/crashNote';
 import { useNavigationHand } from '../lib/navigationHand';
 import {
@@ -63,7 +63,7 @@ type Open = {
 type Done = 'opened' | 'openedNoPicture' | 'copied' | 'failed';
 
 export function ReportProblemHost() {
-  const on = isTesterBuild();
+  const on = useTesterChrome();
   const hand = useNavigationHand();
   const walkMark = useWalkMark();
   const edge = hand === 'right' ? styles.buttonRightEdge : null;

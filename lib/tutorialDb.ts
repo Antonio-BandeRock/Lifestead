@@ -16,7 +16,7 @@ import {
 } from './tutorialRun';
 import { isTourPath } from './yourStoryInterview';
 import { clearYourStoryAnswer, setYourStoryAnswer } from './yourStoryInterviewDb';
-import { isTesterBuild } from './appVariant';
+import { testerChromeShown } from './testerGraduation';
 
 export type TutorialState = {
   tabs: TabTutorial[];
@@ -44,7 +44,7 @@ export async function loadTutorialState(): Promise<TutorialState> {
       if (row.answered_on) doneOn.set(key, row.answered_on);
     }
   }
-  const tabs = buildTutorials(isTourPath(start) ? start : null, isTesterBuild());
+  const tabs = buildTutorials(isTourPath(start) ? start : null, testerChromeShown());
   const known = howToByKey(tabs);
   return { tabs, resume: runFromResume(resume, (key) => known.has(key)), doneKeys, doneOn };
 }

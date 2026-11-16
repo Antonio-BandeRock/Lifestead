@@ -33,7 +33,7 @@
 import { File, Paths } from 'expo-file-system';
 import type { GroundTheme } from '../constants/colors';
 import type { DigestCategoryKey } from './digest';
-import { isTesterBuild } from './appVariant';
+import { testerChromeShown } from './testerGraduation';
 import { getDatabase } from './db';
 import { followNewMenuOrder, groupHomeSectionKeysByTab } from './homeSections';
 import { setPlayfulWordingEnabled } from './playfulCopy';
@@ -558,7 +558,7 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
 // could drift out of sync with it.
 // The tester welcome is in the tester version's list and in no other.
 export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = DESIGNED_HOME_SECTION_KEYS.filter(
-  (key) => key !== 'testerWelcome' || isTesterBuild(),
+  (key) => key !== 'testerWelcome' || testerChromeShown(),
 );
 
 export const REORDERABLE_HOME_SECTION_KEYS: HomeSectionKey[] = ALL_HOME_SECTION_KEYS.filter((key) => key !== 'weather');

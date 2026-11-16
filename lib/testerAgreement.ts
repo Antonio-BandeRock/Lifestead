@@ -33,9 +33,9 @@ export const TESTER_AGREEMENT_POINTS: readonly AgreementPoint[] = [
       'Updates keep your records, and the app is built so that an update never removes any. Even so, make a backup now and then from Profile > Backup & Restore, so a lost or broken phone does not take your records with it.',
   },
   {
-    heading: 'Access lasts 90 days at a time',
+    heading: 'A short review every 90 days',
     body:
-      'Your approval runs for 90 days. Two weeks before it ends the app offers to ask for more time with one press. If it ends, your records stay where they are and open again once more time is approved.',
+      'Every 90 days the app asks for a short review of the parts you used: 1 to 5 for how easy and how useful each one is, and a note by typing or the mic. It opens two weeks early, and on its day it covers the app until it is sent; reminders and your emergency card keep working, and your records stay where they are. Sending it starts the next 90 days. After the third review, Lifestead is yours and your partner’s to use free.',
   },
   {
     heading: 'Please tell us what you find',

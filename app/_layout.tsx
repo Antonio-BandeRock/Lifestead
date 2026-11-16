@@ -911,6 +911,17 @@ function RootStack() {
           headerTintColor: colors.textPrimary,
         }}
       />
+      {/* 2026-11-15: the tester's review, from For Testers on Home once
+          it opens; on its day TesterGate shows it over the whole app. */}
+      <Stack.Screen
+        name="tester-review"
+        options={{
+          headerShown: true,
+          title: 'Tester Review',
+          headerStyle: { backgroundColor: colors.background },
+          headerTintColor: colors.textPrimary,
+        }}
+      />
       {/* A11, 2026-09-26: a medicine's label from openFDA, word for
           word, reached from a med on Life > My Meds. */}
       <Stack.Screen

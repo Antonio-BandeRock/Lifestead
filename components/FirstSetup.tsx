@@ -52,6 +52,7 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { isTesterBuild } from '../lib/appVariant';
+import { testerChromeShown } from '../lib/testerGraduation';
 import { showGuidedTour } from '../lib/guidedTourDb';
 import { testerDoorOpen, useTesterAccess } from '../lib/testerAccess';
 import { cardDoneOn, cardWaitingOn, setupCardByKey, viewSetupCard, type SetupCardView } from '../lib/setupCards';
@@ -726,7 +727,7 @@ export function FirstSetup() {
             {step === 'list' ? renderOnRecord() : null}
             {step === 'section' && section ? renderSection(section) : null}
             {step === 'closing' ? renderClosing() : null}
-            {isTesterBuild() && step === 'list' ? (
+            {testerChromeShown() && step === 'list' ? (
               <View style={styles.band}>
                 <TesterWelcome showHeading />
               </View>

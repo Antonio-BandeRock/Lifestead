@@ -51,7 +51,7 @@ import { showGuidedTour } from '../lib/guidedTourDb';
 import { currentGuideKey, guideCardLine, openGuideLabel, type GuideRecords, type GuideView } from '../lib/yourStoryGuides';
 import { SetupCardShelves } from './SetupCardShelves';
 import { TesterWelcome } from './TesterWelcome';
-import { isTesterBuild } from '../lib/appVariant';
+import { testerChromeShown } from '../lib/testerGraduation';
 import type { SetupCardView } from '../lib/setupCards';
 import {
   BEFORE_ANYTHING_CAPTION,
@@ -366,7 +366,7 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
         {/* The tester welcome, T5: in Getting Set Up as well as on Home.
             Draws nothing outside the tester version. After the setup
             steps (2026-10-31), so a new tester sees what to set up first. */}
-        {isTesterBuild() ? (
+        {testerChromeShown() ? (
           <View style={styles.sectionCard}>
             <TesterWelcome showHeading />
           </View>

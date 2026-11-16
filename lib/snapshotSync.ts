@@ -356,6 +356,9 @@ export const DEVICE_LOCAL_TABLES: readonly string[] = [
   // which leaves the cache first. Each device has its own files and its own
   // limit.
   'media_cache_use',
+  // Which lenses were opened on which day here (lib/lensUseDb.ts): how this
+  // device was used, read by the tester's review of this device.
+  'lens_use_days',
   // Which notification button presses this phone has already saved
   // (lib/reminderNotifications.ts), so a press seen twice, once by the
   // background task and again when the app opens, is saved once.

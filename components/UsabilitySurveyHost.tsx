@@ -24,6 +24,7 @@ import {
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { APP_VARIANT, isTesterBuild } from '../lib/appVariant';
+import { testerChromeShown } from '../lib/testerGraduation';
 import { t } from '../lib/i18n';
 import { explainNotYet } from '../lib/notYet';
 import { testerDoorOpen, useTesterAccess } from '../lib/testerAccess';
@@ -41,7 +42,7 @@ import {
 const SETTLE_MS = 20_000;
 
 export function UsabilitySurveyHost() {
-  if (!isTesterBuild() && APP_VARIANT !== 'dev') return null;
+  if (!testerChromeShown() && APP_VARIANT !== 'dev') return null;
   return <UsabilitySurveyInner />;
 }
 

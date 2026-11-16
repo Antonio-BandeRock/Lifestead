@@ -112,6 +112,17 @@ async function myTag(): Promise<string> {
   return tag;
 }
 
+/**
+ * Since 2026-11-15 an approval no longer ends: the tester's review every 90
+ * days (lib/testerReview.ts, lib/testerReviewState.ts) takes the place of
+ * access running out, by direct instruction. An approval still has to be
+ * signed and for this device; its end date is only kept for older copies of
+ * the app, which still read it.
+ */
+function lasting(read: Approval | null): Approval | null {
+  return read ? { ...read, expires: Number.MAX_SAFE_INTEGER } : null;
+}
+
 /** Works out the state again, and moves the latest time seen forward. */
 async function recompute() {
   const now = Date.now();
@@ -119,7 +130,7 @@ async function recompute() {
     latestSeen = now;
     await SecureStore.setItemAsync(LATEST_SEEN_KEY, String(latestSeen)).catch(() => {});
   }
-  publish({ state: approvalState(approval, await myTag(), now, latestSeen) });
+  publish({ state: approvalState(lasting(approval), await myTag(), now, latestSeen) });
 }
 
 export async function loadTesterAccess(): Promise<void> {
@@ -246,7 +257,7 @@ export type ActivateResult = 'ok' | 'notApproval' | 'wrongDevice' | 'expired' | 
 async function keepToken(token: string): Promise<ActivateResult> {
   const read = readApproval(token, TRUSTED_APPROVAL_KEYS);
   if (!read) return 'notApproval';
-  const state = approvalState(read, await myTag(), Date.now(), latestSeen);
+  const state = approvalState(lasting(read), await myTag(), Date.now(), latestSeen);
   if (state.kind === 'wrongDevice') return 'wrongDevice';
   if (state.kind === 'expired') return 'expired';
   const kept = laterApproval(approval, read);
@@ -323,8 +334,8 @@ export function activateResultText(result: ActivateResult): string {
 
 let watching = false;
 
-/** Checks again when the app comes back to the front, and every hour, so an
- *  approval ends at its end even with the app left open. */
+/** Checks again when the app comes back to the front, and every hour, so a
+ *  review comes due on its day even with the app left open. */
 export function startTesterAccessWatch(): () => void {
   if (watching) return () => {};
   watching = true;

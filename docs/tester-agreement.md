@@ -32,10 +32,13 @@ to try before anyone else can. A few things to know and agree to first.
    update never removes any. Even so, make a backup now and then from
    Profile > Backup & Restore, so a lost or broken phone does not take your
    records with it.
-5. Access lasts 90 days at a time. Your approval runs for 90 days. Two weeks
-   before it ends the app offers to ask for more time with one press. If it
-   ends, your records stay where they are and open again once more time is
-   approved.
+5. A short review every 90 days. Every 90 days the app asks for a short
+   review of the parts you used: 1 to 5 for how easy and how useful each one
+   is, and a note by typing or the mic. It opens two weeks early, and on its
+   day it covers the app until it is sent; reminders and your emergency card
+   keep working, and your records stay where they are. Sending it starts the
+   next 90 days. After the third review, Lifestead is yours and your
+   partner’s to use free.
 6. Please tell us what you find. Tap the flag at the edge of any screen, or
    press and hold any band. Say what went wrong, what was confusing, or what
    you wish it did, by typing or with the mic. If the app closed by itself,

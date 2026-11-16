@@ -48,6 +48,7 @@ import { useLanguage } from '../lib/language';
 import { t, translateIn } from '../lib/i18n';
 import { arrangeLensMenu } from '../lib/lensMenu';
 import { noteLensOpened, useRecentLenses } from '../lib/recentLenses';
+import { noteLensUsed } from '../lib/lensUseDb';
 import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { splitLabelEvenly } from '../lib/labelSplit';
 
@@ -682,6 +683,13 @@ export function LensHub<T extends string>({
   // -- shouldn't happen for a real tab, but cheaper than a crash if a
   // future page's title drifts out of sync.
   const tabRoute = TAB_ROUTES.find((route) => route.title === pageTitle);
+  // The app's day-by-day record of which lenses were opened (lib/lensUseDb.ts),
+  // read by the tester's review and kept for the person's history. A lens
+  // counts whether it was picked here or opened by a link.
+  const tabPath = typeof tabRoute?.path === 'string' ? tabRoute.path : undefined;
+  useEffect(() => {
+    if (tabPath && selected !== undefined && selected !== null) noteLensUsed(tabPath, String(selected));
+  }, [tabPath, selected]);
   // Every label may take a second line rather than being cut off, in every
   // language: Spanish since 2026-10-26, English too since 1.0.91.1, when
   // "New Foods & Experiments" was showing as "New Foods & Exp...". The card
