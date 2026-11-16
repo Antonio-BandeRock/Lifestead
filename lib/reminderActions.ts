@@ -75,6 +75,8 @@
 //     read with no way to go except coming back in 15 minutes (direct
 //     report, 2026-10-27, on Your Week).
 
+import type { MorningAfter } from './exertion';
+
 export type ReminderActionId =
   | 'snooze'
   | 'gotIt'
@@ -103,6 +105,11 @@ export type ReminderActionId =
   | 'energyLow'
   | 'energySome'
   | 'energyPlenty'
+  | 'afterBetter'
+  | 'afterSame'
+  | 'afterWorseOrCrashed'
+  | 'afterWorse'
+  | 'afterCrashed'
   | 'prepped'
   | 'sown'
   | 'vaultSetUp'
@@ -131,6 +138,8 @@ export type ReminderCategoryKey =
   | 'flareWorse'
   | 'morning'
   | 'energy'
+  | 'afterBigger'
+  | 'afterWorse'
   | 'cropPrep'
   | 'cropSow'
   | 'vaultOffer'
@@ -158,6 +167,8 @@ export const REMINDER_CATEGORY_IDS: Record<ReminderCategoryKey, string> = {
   flareWorse: 'inside-story-reminder-flare-worse',
   morning: 'inside-story-reminder-morning',
   energy: 'inside-story-reminder-energy',
+  afterBigger: 'inside-story-reminder-after-bigger',
+  afterWorse: 'inside-story-reminder-after-worse',
   cropPrep: 'inside-story-reminder-crop-prep',
   cropSow: 'inside-story-reminder-crop-sow',
   vaultOffer: 'inside-story-vault-offer',
@@ -178,6 +189,17 @@ export const MORNING_BUTTON_VALUES: Partial<Record<ReminderActionId, number>> = 
   energyLow: 2,
   energySome: 3,
   energyPlenty: 5,
+};
+
+// The answer each morning-after button saves (Q20, 1.0.91.8). Android shows
+// three buttons at most, so Worse and Crashed share one, which saves Worse at
+// once and asks which of the two, the way Severe or worse does for a flare.
+export const MORNING_AFTER_BUTTON_VALUES: Partial<Record<ReminderActionId, MorningAfter>> = {
+  afterBetter: 'better',
+  afterSame: 'same',
+  afterWorseOrCrashed: 'worse',
+  afterWorse: 'worse',
+  afterCrashed: 'crashed',
 };
 
 export const ALL_REMINDER_CATEGORY_KEYS = Object.keys(REMINDER_CATEGORY_IDS) as ReminderCategoryKey[];
@@ -243,6 +265,16 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
       return 'Some';
     case 'energyPlenty':
       return 'Plenty';
+    case 'afterBetter':
+      return 'Better';
+    case 'afterSame':
+      return 'Same';
+    case 'afterWorseOrCrashed':
+      return 'Worse or crashed';
+    case 'afterWorse':
+      return 'Worse';
+    case 'afterCrashed':
+      return 'Crashed';
     case 'prepped':
       return 'Prepped';
     case 'sown':
@@ -288,6 +320,8 @@ export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> =
   flareWorse: ['flareSevere', 'flareVerySevere'],
   morning: ['sleptPoorly', 'sleptOkay', 'sleptWell'],
   energy: ['energyLow', 'energySome', 'energyPlenty'],
+  afterBigger: ['afterBetter', 'afterSame', 'afterWorseOrCrashed'],
+  afterWorse: ['afterWorse', 'afterCrashed'],
   cropPrep: ['prepped', 'snooze'],
   cropSow: ['sown', 'snooze'],
   // The offer to set the vault up (lib/vault.ts, shouldOfferVault): three
@@ -455,7 +489,8 @@ export type ReminderActionPlan =
   | { write: 'flareNote' }
   | { write: 'nothing' }
   | { write: 'sleepQuality'; value: number }
-  | { write: 'morningEnergy'; value: number };
+  | { write: 'morningEnergy'; value: number }
+  | { write: 'afterBiggerDay'; value: MorningAfter; askWhichWorse: boolean };
 
 /**
  * What a pressed button does. Null for Snooze (handled on its own), for a
@@ -491,6 +526,10 @@ export function planReminderAction(kind: string, action: string): ReminderAction
   // The energy question is a morning reminder too, raised by the sleep
   // press with the energy buttons rather than planned on its own.
   const morningValue = MORNING_BUTTON_VALUES[action as ReminderActionId];
+  const afterValue = MORNING_AFTER_BUTTON_VALUES[action as ReminderActionId];
+  if (kind === 'morning' && afterValue !== undefined) {
+    return { write: 'afterBiggerDay', value: afterValue, askWhichWorse: action === 'afterWorseOrCrashed' };
+  }
   if (kind === 'morning' && morningValue !== undefined) {
     return action.startsWith('slept') ? { write: 'sleepQuality', value: morningValue } : { write: 'morningEnergy', value: morningValue };
   }
@@ -553,6 +592,12 @@ export function answerLine(kind: string, markable = true): string | null {
 // The question a sleep press brings up, answered with the energy buttons.
 export const MORNING_ENERGY_TITLE = 'How much energy do you have?';
 export const MORNING_ENERGY_BODY = 'Pick one here and it is saved with how you slept, or tap to add a note.';
+
+// The question after the energy answer on the morning after a bigger day
+// (Q20). The title is the same question the Home card and the check-in ask.
+export const MORNING_AFTER_BODY = 'Pick one here and it is saved with this morning. Trends > Pacing sets it beside yesterday.';
+export const MORNING_AFTER_WORSE_TITLE = 'Worse, or crashed?';
+export const MORNING_AFTER_WORSE_BODY = 'Saved as worse for now. Pick the one that fits.';
 
 // --- The two check-in reminders ---------------------------------------------
 

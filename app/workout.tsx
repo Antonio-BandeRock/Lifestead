@@ -24,6 +24,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, Vibration, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { NotesInput } from '../components/NotesInput';
+import { EffortPills } from '../components/EffortPills';
+import type { EffortLevel } from '../lib/exertion';
 import { useInfoAlert } from '../components/InfoAlert';
 import { useWalkMark } from '../components/WalkMark';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
@@ -141,6 +143,7 @@ export default function WorkoutPlayerScreen() {
   const [setTimerStartedAt, setSetTimerStartedAt] = useState<number | null>(null);
   const [now, setNow] = useState(() => Date.now());
   const [note, setNote] = useState('');
+  const [effort, setEffort] = useState<EffortLevel | null>(null);
   const [saving, setSaving] = useState(false);
   const [canSendHealth, setCanSendHealth] = useState(false);
   const [sendHealth, setSendHealth] = useState(false);
@@ -392,6 +395,7 @@ export default function WorkoutPlayerScreen() {
         sets: keptSets(sets, results),
         minutes: sessionMinutes(startedAt, finishedAt),
         intensity: workoutIntensity(exercises),
+        effort,
         notes: logNotes(comparisons, note),
         note: note.trim() || null,
       });
@@ -678,6 +682,11 @@ export default function WorkoutPlayerScreen() {
             </View>
             {phase === 'review' ? (
               <>
+                <View style={styles.card}>
+                  <Text style={styles.label}>How hard did it feel? (optional)</Text>
+                  <EffortPills value={effort} onChange={setEffort} />
+                  <Text style={styles.captionText}>{'Trends > Pacing reads it beside how the next days went.'}</Text>
+                </View>
                 <View style={styles.card}>
                   <Text style={styles.label}>A note about today (optional)</Text>
                   <NotesInput

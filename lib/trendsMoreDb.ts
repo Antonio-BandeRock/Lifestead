@@ -35,7 +35,8 @@ import { buildSinceLastVisitBand, buildSinceLastVisitView, type SinceLastVisitIn
 import { listWorkCheckins } from './workDb';
 import { parseKeptSets } from './workoutSession';
 import { getCheckinTagDefinition, getCustomCheckinTags } from './checkinTags';
-import { buildPacingView, PACING_TAG_CODES, pacingTodayLines, type PacingInputs, type PacingTodayLine } from './pacing';
+import { buildPacingView, PACING_TAG_CODES, pacingTodayLines, yesterdayBiggerReasons, type PacingInputs, type PacingTodayLine } from './pacing';
+import { asEffort, asMorningAfter, type BiggerDayReason, type MorningAfter } from './exertion';
 import { therapyTypeLabel } from './therapyTypes';
 import { buildCycleTrendsView, CYCLE_TRENDS_MIN_DAYS, type CycleTrendsInputs } from './cycleTrends';
 import { listAllCycleDays } from './cycleDb';
@@ -415,19 +416,26 @@ export async function getPacingHomeLines(today: string): Promise<PacingTodayLine
   return pacingTodayLines(await loadPacingInputs(rangeForDays(30, today), today));
 }
 
+// Q20: why yesterday was a bigger day, for the morning-after question on
+// Home, in the daily check-in and after the morning reminder. Empty when it
+// was not. The same thirty days the Home card reads.
+export async function getYesterdayBiggerReasons(today: string): Promise<BiggerDayReason[]> {
+  return yesterdayBiggerReasons(await loadPacingInputs(rangeForDays(30, today), today));
+}
+
 export async function loadPacingInputs(range: DayRange, today: string): Promise<PacingInputs> {
   const db = await getDatabase();
   const from = addDays(range.start, -1);
   const through = addDays(range.end, 2);
   const codes = pacingTagCodes();
-  const [stepRows, exerciseRows, therapyRows, tagRows] = await Promise.all([
+  const [stepRows, exerciseRows, therapyRows, tagRows, morningRows] = await Promise.all([
     db.getAllAsync<{ date: string; value: number }>(
       `SELECT date, step_count AS value FROM daily_step_counts WHERE date >= ? AND date <= ? ORDER BY date ASC`,
       range.start,
       range.end,
     ),
-    db.getAllAsync<{ loggedAt: string; name: string | null; minutes: number | null }>(
-      `SELECT logged_at AS loggedAt, exercise_type AS name, duration_minutes AS minutes
+    db.getAllAsync<{ loggedAt: string; name: string | null; minutes: number | null; effort: string | null }>(
+      `SELECT logged_at AS loggedAt, exercise_type AS name, duration_minutes AS minutes, effort
        FROM exercise_logs WHERE logged_at >= ? AND logged_at < ? ORDER BY logged_at ASC`,
       from,
       through,
@@ -447,18 +455,36 @@ export async function loadPacingInputs(range: DayRange, today: string): Promise<
       through,
       ...codes,
     ), []),
+    // The morning-after answers, on the morning sleep rows, reaching a day
+    // past the end so the last day's next morning is read.
+    readOrClosed(() => db.getAllAsync<{ loggedAt: string; answer: string | null }>(
+      `SELECT logged_at AS loggedAt, after_bigger_day AS answer
+       FROM wellbeing_checkins
+       WHERE checkin_type = 'sleep' AND after_bigger_day IS NOT NULL AND logged_at >= ? AND logged_at < ?
+       ORDER BY logged_at ASC`,
+      from,
+      addDays(through, 1),
+    ), []),
   ]);
+  const mornings: { date: string; answer: MorningAfter }[] = [];
+  for (const row of morningRows) {
+    const answer = asMorningAfter(row.answer);
+    // A morning row's stamp is local time already (localStamp), so its
+    // first ten characters are its day.
+    if (answer) mornings.push({ date: row.loggedAt.slice(0, 10), answer });
+  }
   return {
     range,
     today,
     steps: stepRows.filter((row) => typeof row.value === 'number'),
-    exercise: exerciseRows.map((row) => ({ date: localDay(row.loggedAt), name: row.name ?? 'Exercise', minutes: row.minutes })),
+    exercise: exerciseRows.map((row) => ({ date: localDay(row.loggedAt), name: row.name ?? 'Exercise', minutes: row.minutes, effort: asEffort(row.effort) })),
     therapy: therapyRows.map((row) => ({ date: localDay(row.performedAt), label: therapyTypeLabel(row.therapyType), minutes: row.minutes })),
     tagged: tagRows.map((row) => ({
       date: localDay(row.loggedAt),
       code: row.code,
       label: getCheckinTagDefinition(row.code)?.label ?? row.code,
     })),
+    mornings,
   };
 }
 

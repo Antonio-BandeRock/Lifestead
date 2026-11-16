@@ -196,6 +196,8 @@ import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY
 import { foodDisplayName } from '../../lib/ingredientShortName';
 import { saveOrSay } from '../../lib/saveProblem';
 import { ReadProblem } from '../../components/ReadProblem';
+import { EffortPills } from '../../components/EffortPills';
+import { asEffort, effortWords, type EffortLevel } from '../../lib/exertion';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -3014,6 +3016,7 @@ function ExerciseSection() {
   const [exerciseType, setExerciseType] = useState('');
   const [durationMinutes, setDurationMinutes] = useState('');
   const [intensity, setIntensity] = useState<'light' | 'moderate' | 'vigorous' | null>(null);
+  const [effort, setEffort] = useState<EffortLevel | null>(null);
   const [dateChoice, setDateChoice] = useState<DateChoice>('today');
   const [customDate, setCustomDate] = useState('');
   const [time, setTime] = useState<TimeOfDayInput>(() => splitTime24(nowTimeString24()));
@@ -3047,6 +3050,7 @@ function ExerciseSection() {
     setExerciseType('');
     setDurationMinutes('');
     setIntensity(null);
+    setEffort(null);
     setDateChoice('today');
     setCustomDate('');
     setTime(splitTime24(nowTimeString24()));
@@ -3059,6 +3063,7 @@ function ExerciseSection() {
     setExerciseType(log.exerciseType);
     setDurationMinutes(log.durationMinutes ? String(log.durationMinutes) : '');
     setIntensity(log.intensity === 'light' || log.intensity === 'moderate' || log.intensity === 'vigorous' ? log.intensity : null);
+    setEffort(asEffort(log.effort));
     setDateChoice(day.choice);
     setCustomDate(day.custom);
     setTime(splitTime24(stamp.slice(11, 16) || '00:00'));
@@ -3080,13 +3085,14 @@ function ExerciseSection() {
     const duration = Number.isFinite(minutes) && minutes > 0 ? minutes : null;
     const saved = await saveOrSay('The activity was not saved. Try again.', async () => {
       if (editingId) {
-        await updateExerciseLog(editingId, { loggedAt, exerciseType, durationMinutes: duration, intensity });
+        await updateExerciseLog(editingId, { loggedAt, exerciseType, durationMinutes: duration, intensity, effort });
       } else {
         await recordExercise({
           loggedAt,
           exerciseType,
           durationMinutes: duration ?? undefined,
           intensity: intensity ?? undefined,
+          effort,
         });
       }
       return true;
@@ -3163,6 +3169,8 @@ function ExerciseSection() {
               </TouchableOpacity>
             ))}
           </View>
+          <Text style={styles.label}>How hard did it feel? (optional)</Text>
+          <EffortPills value={effort} onChange={setEffort} firstRef={walkMark.ref('signals.effort')} />
           <Text style={styles.label}>When?</Text>
           <DateChoicePicker value={dateChoice} onChange={setDateChoice} customDate={customDate} onCustomDateChange={setCustomDate} />
           <Text style={styles.label}>About what time?</Text>
@@ -3194,6 +3202,7 @@ function ExerciseSection() {
                   {formatEntryDateTime(log.loggedAt)}
                   {log.durationMinutes ? ` · ${log.durationMinutes} min` : ''}
                   {log.intensity ? ` · ${tl(log.intensity)}` : ''}
+                  {asEffort(log.effort) ? ` · ${tl(effortWords(asEffort(log.effort)!))}` : ''}
                 </Text>
               </View>
               <View style={styles.rowActions}>

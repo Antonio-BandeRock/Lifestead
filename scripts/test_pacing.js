@@ -108,9 +108,60 @@ const lines2 = P.pacingTodayLines({ ...full, today: day(30), tagged: [...tagged,
 check(lines2.some((l) => l.key === 'yesterday'), 'yesterday tags read on Home');
 check(P.pacingTodayLines({ ...base, steps: steps.slice(0, 5) }).length === 0, 'Home silent without a usual range');
 
+// 7. How hard it felt and the morning after (Q20, 1.0.91.8).
+const X = load('lib/exertion.ts');
+check(X.EFFORT_LEVELS.map((l) => l.label).join('|') === 'Easy|Moderate|Hard|Very hard', 'the four effort words');
+check(X.MORNING_AFTER_LEVELS.map((l) => l.label).join('|') === 'Better|Same|Worse|Crashed', 'the four morning-after words');
+check(X.asEffort('very_hard') === 'very_hard' && X.asEffort('vigorous') === null && X.asEffort(null) === null, 'effort read back only from its four keys');
+check(X.asMorningAfter('crashed') === 'crashed' && X.asMorningAfter('fine') === null, 'morning-after read back only from its four keys');
+check(X.isHarderEffort('hard') && X.isHarderEffort('very_hard') && !X.isHarderEffort('moderate') && !X.isHarderEffort(null), 'hard and very hard are the harder efforts');
+check(X.effortWords('very_hard') === 'felt very hard', 'list row words');
+check(X.biggerDayReasonWords(['effort']) === 'Yesterday had an activity you rated hard.', 'one reason');
+check(X.biggerDayReasonWords(['effort', 'steps', 'minutes']) === 'Yesterday had an activity you rated hard, more steps than your usual and more exercise minutes than your usual.', 'three reasons');
+check(X.biggerDayReasonWords([]) === '', 'no reason, no words');
+
+// A day inside the usual steps becomes bigger when an activity on it felt hard.
+const rated = {
+  ...full,
+  exercise: [
+    ...exercise,
+    { date: day(15), name: 'Swim', minutes: 20, effort: 'hard' },
+    { date: day(15), name: 'Walk', minutes: 10, effort: 'easy' },
+    { date: day(17), name: 'Walk', minutes: 15, effort: 'moderate' },
+  ],
+  mornings: [
+    { date: day(16), answer: 'worse' },
+    { date: day(11), answer: 'crashed' },
+    { date: day(18), answer: 'same' },
+  ],
+};
+const ratedView = P.buildPacingView(rated);
+const ratedBigger = ratedView.bands.find((b) => b.id === 'biggerDays');
+check(ratedBigger.count === 2, `a hard effort makes a bigger day (${ratedBigger.count})`);
+const swim = ratedBigger.items.find((item) => item.key === day(15));
+check(swim && swim.title.includes('felt hard'), `the hardest effort is named (${swim && swim.title})`);
+check(swim && swim.caption.startsWith('Next morning: worse.'), `the next morning is read (${swim && swim.caption})`);
+const tenth = ratedBigger.items.find((item) => item.key === day(10));
+check(tenth && tenth.caption.startsWith('Next morning: crashed.'), 'a steps day carries its morning too');
+check(ratedBigger.lines.some((l) => l === 'You said how you were the next morning after 2 of them: 1 worse, 1 crashed.'), `morning count line (${ratedBigger.lines.join(' | ')})`);
+check(!ratedBigger.items.some((item) => item.key === day(17)), 'a moderate effort alone is not a bigger day');
+const typicalLines = ratedView.bands.find((b) => b.id === 'typical').lines;
+check(typicalLines.includes('How hard it felt, on 3 activities you rated: Easy 1, Moderate 1, Hard 1.'), `effort counts (${typicalLines.join(' | ')})`);
+check(!P.buildPacingView(full).bands.find((b) => b.id === 'typical').lines.some((l) => l.startsWith('How hard')), 'no effort line when nothing was rated');
+
+// A hard effort shows the band even with no usual range yet.
+const onlyEffort = P.buildPacingView({ ...base, exercise: [{ date: day(5), name: 'Hike', minutes: 90, effort: 'very_hard' }] });
+check(onlyEffort.bands.some((b) => b.id === 'biggerDays'), 'bigger days band with no usual but a hard effort');
+
+// Yesterday, for the morning question.
+check(JSON.stringify(P.yesterdayBiggerReasons({ ...rated, today: day(16) })) === '["effort"]', 'yesterday felt hard');
+check(JSON.stringify(P.yesterdayBiggerReasons({ ...full, today: day(11) })) === '["steps"]', 'yesterday past the usual steps');
+check(P.yesterdayBiggerReasons({ ...full, today: day(12) }).length === 0, 'an ordinary yesterday asks nothing');
+check(P.yesterdayBiggerReasons({ ...base, today: day(1) }).length === 0, 'no yesterday in range');
+
 // 6. Words.
-const sentences = [empty.empty, P.PACING_NO_LIMIT_NOTE, P.PACING_SIDE_BY_SIDE_NOTE, P.PACING_TODAY_CAPTION];
-for (const b of view.bands) {
+const sentences = [empty.empty, P.PACING_NO_LIMIT_NOTE, P.PACING_SIDE_BY_SIDE_NOTE, P.PACING_TODAY_CAPTION, X.EFFORT_QUESTION, X.MORNING_AFTER_QUESTION];
+for (const b of [...view.bands, ...ratedView.bands]) {
   sentences.push(b.title, ...b.lines, ...(b.notes || []));
   for (const row of b.rows || []) sentences.push(row.label, row.display);
   for (const item of b.items || []) sentences.push(item.title, item.caption || '');

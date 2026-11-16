@@ -1,3 +1,5 @@
+import { MORNING_AFTER_QUESTION } from './exertion';
+import { getYesterdayBiggerReasons } from './trendsMoreDb';
 import { formatAmount, stepSuffix } from './taper';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
@@ -29,6 +31,9 @@ import {
   localDay,
   MORNING_ENERGY_BODY,
   MORNING_ENERGY_TITLE,
+  MORNING_AFTER_BODY,
+  MORNING_AFTER_WORSE_BODY,
+  MORNING_AFTER_WORSE_TITLE,
   newFlareId,
   planAfterMealNudge,
   planDailyCheckins,
@@ -370,7 +375,12 @@ type ReminderPayload = {
   /** Which tab a tap opens. Absent on anything queued before 1.0.39.8, and
    *  read back as 'schedule', which is the only thing it could have been. */
   tab?: ReminderTab;
-  lens: ScheduleLens | GardenReminderLens | LifeReminderLens | SignalsReminderLens | 'reconcile' | 'walk' | 'sessions' | 'guide' | 'morningCheckin' | 'morningEnergy' | 'yourWeek';
+  lens: ScheduleLens | GardenReminderLens | LifeReminderLens | SignalsReminderLens | 'reconcile' | 'walk' | 'sessions' | 'guide' | 'morningCheckin' | 'morningEnergy' | 'morningAfter' | 'yourWeek';
+  /** The morning check-in only (Q20): whether the day before was a bigger
+   *  day as far as the records showed when it was queued, so the question
+   *  about it can follow the energy answer on a locked phone. Unlocked, the
+   *  records are read again at the press. */
+  askAfterBigger?: boolean;
   /** A Photo Series only: what the photo is of and its name, so a tap opens
    *  the camera on that owner without reading the database first. */
   ownerKind?: string;
@@ -1190,7 +1200,7 @@ export async function sendTestFlareQuestion(delaySeconds = 20): Promise<boolean>
 // energy question after a press (lib/reminderActions.ts). Until 1.0.58.1 it
 // had no buttons and a tap opened Home, where nothing asked anything (direct
 // report, 2026-10-01); a tap now opens the check-in on the sleep question.
-function buildMorningPlanned(fireAt: Date, now: Date): PlannedNotification {
+function buildMorningPlanned(fireAt: Date, now: Date, askAfterBigger = false): PlannedNotification {
   return {
     identifier: `${IDENTIFIER_PREFIX}morning:${localDateString(fireAt)}`,
     title: 'How did you sleep?',
@@ -1202,6 +1212,7 @@ function buildMorningPlanned(fireAt: Date, now: Date): PlannedNotification {
       fireAt: fireAt.toISOString(),
       tab: 'checkinFlow',
       lens: 'morningCheckin',
+      ...(askAfterBigger ? { askAfterBigger: true } : {}),
     },
   };
 }
@@ -1209,13 +1220,14 @@ function buildMorningPlanned(fireAt: Date, now: Date): PlannedNotification {
 // The energy question, shown at once after a sleep press. Shown rather than
 // queued, so a reconcile running at the same moment has nothing pending of
 // it to cancel.
-async function presentMorningEnergy(day: string): Promise<void> {
+async function presentMorningEnergy(day: string, askAfterBigger = false): Promise<void> {
   const payload: ReminderPayload = {
     kind: 'morning',
     scheduleItemId: day,
     fireAt: new Date().toISOString(),
     tab: 'checkinFlow',
     lens: 'morningEnergy',
+    ...(askAfterBigger ? { askAfterBigger: true } : {}),
   };
   await Notifications.scheduleNotificationAsync(inAppLanguage({
     identifier: `${IDENTIFIER_PREFIX}morningEnergy:${day}`,
@@ -1228,6 +1240,40 @@ async function presentMorningEnergy(day: string): Promise<void> {
     },
     trigger: { channelId: channelFor('morning') },
   }));
+}
+
+// The morning after a bigger day (Q20): how the person is, shown at once
+// after the energy answer the way the energy question follows the sleep
+// one. `whichWorse` is the second step, after Worse or crashed.
+async function presentMorningAfter(day: string, whichWorse: boolean): Promise<void> {
+  const payload: ReminderPayload = {
+    kind: 'morning',
+    scheduleItemId: day,
+    fireAt: new Date().toISOString(),
+    tab: 'checkinFlow',
+    lens: 'morningAfter',
+  };
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
+    identifier: `${IDENTIFIER_PREFIX}morningAfter:${day}`,
+    content: {
+      title: whichWorse ? MORNING_AFTER_WORSE_TITLE : MORNING_AFTER_QUESTION,
+      body: whichWorse ? MORNING_AFTER_WORSE_BODY : MORNING_AFTER_BODY,
+      data: { ...payload, ...androidGroupFor('morning') },
+      sound: false,
+      categoryIdentifier: whichWorse ? REMINDER_CATEGORY_IDS.afterWorse : REMINDER_CATEGORY_IDS.afterBigger,
+    },
+    trigger: { channelId: channelFor('morning') },
+  }));
+}
+
+// Whether the morning of `day` follows a bigger day, read from the records.
+// A failed read asks nothing rather than asking wrongly.
+async function followsBiggerDay(day: string): Promise<boolean> {
+  try {
+    return (await getYesterdayBiggerReasons(day)).length > 0;
+  } catch {
+    return false;
+  }
 }
 
 // A question about the flare Yes just saved, shown at once the way the
@@ -2186,8 +2232,16 @@ async function runSync(): Promise<ReminderSyncResult> {
   // once it has been answered.
   if (isReminderKindEnabled(preferences, 'morning')) {
     const answeredToday = !!checkinInputs.lastMorningAt && checkinInputs.lastMorningAt.slice(0, 10) === localDay(now);
-    planDailyCheckins(morningTimeOf(preferences), now, LOOKAHEAD_DAYS - 1, answeredToday).forEach((fireAt, index) => {
-      const planned = buildMorningPlanned(fireAt, now);
+    const mornings = planDailyCheckins(morningTimeOf(preferences), now, LOOKAHEAD_DAYS - 1, answeredToday);
+    // Whether each of the next two mornings follows a bigger day, from what
+    // is recorded so far; later ones are worked out at a later reconcile.
+    const biggerMornings = new Set<string>();
+    for (const fireAt of mornings.slice(0, 2)) {
+      const day = localDateString(fireAt);
+      if (await followsBiggerDay(day)) biggerMornings.add(day);
+    }
+    mornings.forEach((fireAt, index) => {
+      const planned = buildMorningPlanned(fireAt, now, biggerMornings.has(localDateString(fireAt)));
       (index === 0 ? first : followUps).set(planned.identifier, planned);
     });
   }
@@ -2911,7 +2965,11 @@ async function answerWhileLocked(response: Notifications.NotificationResponse): 
   if (!snooze && !plan) return;
   if (snooze) await snoozeReminder(response);
   else await clearAnsweredWhileLocked(request.identifier);
-  if (plan?.write === 'sleepQuality') await presentMorningEnergy(localDateString(pressedAt));
+  if (plan?.write === 'sleepQuality') await presentMorningEnergy(localDateString(pressedAt), !!data?.askAfterBigger);
+  // The morning after a bigger day: the question follows the energy answer,
+  // and Worse or crashed asks which of the two.
+  if (plan?.write === 'morningEnergy' && data?.askAfterBigger) await presentMorningAfter(localDateString(pressedAt), false);
+  if (plan?.write === 'afterBiggerDay' && plan.askWhichWorse) await presentMorningAfter(localDateString(pressedAt), true);
   // A routine walks on while locked: the next step comes up from what the
   // notification carries, and the step pressed is checked off at unlock.
   if (plan?.write === 'routineStep' && data) await presentRoutineStep(data, (data.stepIndex ?? 0) + 1, localDateString(pressedAt));
@@ -3111,7 +3169,27 @@ async function recordAnswer(
     await saveMorningCheckin({ existingId: saved?.id ?? null, sleepQuality, energy, notes: saved?.notes ?? '', at: now });
     // A press kept while locked asked the energy question when it was pressed.
     const answeredJustNow = Date.now() - now.getTime() < 60_000;
-    if (plan.write === 'sleepQuality' && energy === null && answeredJustNow) await presentMorningEnergy(today);
+    if (plan.write === 'sleepQuality' && energy === null && answeredJustNow) {
+      await presentMorningEnergy(today, await followsBiggerDay(today));
+    } else if (answeredJustNow && energy !== null && !saved?.afterBiggerDay && (await followsBiggerDay(today))) {
+      // Energy answered (or already answered when sleep was pressed): the
+      // morning after a bigger day asks how the person is.
+      await presentMorningAfter(today, false);
+    }
+    return;
+  }
+  if (plan.write === 'afterBiggerDay') {
+    const saved = await getMorningCheckin(now, true);
+    await saveMorningCheckin({
+      existingId: saved?.id ?? null,
+      sleepQuality: saved?.sleepQuality ?? null,
+      energy: saved?.energy ?? null,
+      notes: saved?.notes ?? '',
+      afterBiggerDay: plan.value,
+      at: now,
+    });
+    const answeredJustNow = Date.now() - now.getTime() < 60_000;
+    if (plan.askWhichWorse && answeredJustNow) await presentMorningAfter(today, true);
     return;
   }
   if (!id) return;

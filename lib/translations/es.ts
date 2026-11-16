@@ -547,6 +547,26 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'Your email app has the answers written in. Press send there and they reach the developer.': 'Tu app de correo ya tiene las respuestas escritas. Toca enviar ahí y le llegan al desarrollador.',
   'No email app opened, so the answers are copied. Paste them into an email to {address}.': 'No se abrió ninguna app de correo, así que las respuestas quedaron copiadas. Pégalas en un correo a {address}.',
   'The answers could not be sent or copied. They are still here, so try again in a moment.': 'No se pudieron enviar ni copiar las respuestas. Siguen aquí, así que inténtalo de nuevo en un momento.',
+  // Pacing's answer and effort words, read as values inside its sentences (Q20).
+  "better": "mejor",
+  "same": "igual",
+  "worse": "peor",
+  "crashed": "me desplomé",
+  "Crashed": "Me desplomé",
+  "felt easy": "se sintió fácil",
+  "felt moderate": "se sintió moderado",
+  "felt hard": "se sintió difícil",
+  "felt very hard": "se sintió muy difícil",
+  "Easy {count}": "Fácil {count}",
+  "Moderate {count}": "Moderado {count}",
+  "Hard {count}": "Difícil {count}",
+  "Very hard {count}": "Muy difícil {count}",
+  "{count} better": "{count} mejor",
+  "{count} same": "{count} igual",
+  "{count} worse": "{count} peor",
+  "{count} crashed": "{count} me desplomé",
+  "activity": "actividad",
+  "activities": "actividades",
 };
 
 export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };

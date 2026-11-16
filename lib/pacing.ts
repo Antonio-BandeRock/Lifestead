@@ -23,6 +23,16 @@
 import { addDays, shortDate } from './eatingVariety';
 import { emptyView, gapNote, plural, type ReadingBand, type ReadingRow, type ReadingView } from './readingBands';
 import { usualRange, type UsualRange } from './yourUsual';
+import {
+  EFFORT_LEVELS,
+  isHarderEffort,
+  MORNING_AFTER_LEVELS,
+  effortWords,
+  morningAfterLabel,
+  type BiggerDayReason,
+  type EffortLevel,
+  type MorningAfter,
+} from './exertion';
 
 export type PacingRange = { start: string; end: string };
 
@@ -54,11 +64,15 @@ export type PacingInputs = {
   steps: { date: string; value: number }[];
   // exercise_logs. A workout finished in the player writes one of these,
   // so its minutes are counted once. date is the local day.
-  exercise: { date: string; name: string; minutes: number | null }[];
+  // effort is how hard it felt (lib/exertion.ts), when the person said.
+  exercise: { date: string; name: string; minutes: number | null; effort?: EffortLevel | null }[];
   // therapy_sessions, with the session's label already looked up.
   therapy: { date: string; label: string; minutes: number | null }[];
   // Check-ins carrying one of the pacing tags, one row per tag.
   tagged: { date: string; code: string; label: string }[];
+  // The morning-after answers (Q20): date is the morning it was given, so
+  // the answer is about the day before.
+  mornings?: { date: string; answer: MorningAfter }[];
 };
 
 type DayFacts = {
@@ -68,6 +82,9 @@ type DayFacts = {
   exerciseCount: number;
   therapy: string[];
   tags: string[];
+  efforts: EffortLevel[];
+  // How the person said they were the morning after this day.
+  nextMorning: MorningAfter | null;
 };
 
 function eachDay(range: PacingRange): string[] {
@@ -91,7 +108,7 @@ function rangeWords(range: UsualRange, format: (value: number) => string): strin
 function factsByDay(input: PacingInputs): Map<string, DayFacts> {
   const days = new Map<string, DayFacts>();
   for (const date of eachDay(input.range)) {
-    days.set(date, { date, steps: null, minutes: null, exerciseCount: 0, therapy: [], tags: [] });
+    days.set(date, { date, steps: null, minutes: null, exerciseCount: 0, therapy: [], tags: [], efforts: [], nextMorning: null });
   }
   for (const row of input.steps) {
     const day = days.get(row.date);
@@ -101,6 +118,7 @@ function factsByDay(input: PacingInputs): Map<string, DayFacts> {
     const day = days.get(row.date);
     if (!day) continue;
     day.exerciseCount += 1;
+    if (row.effort) day.efforts.push(row.effort);
     if (row.minutes != null && Number.isFinite(row.minutes)) day.minutes = (day.minutes ?? 0) + row.minutes;
   }
   for (const row of input.therapy) {
@@ -110,6 +128,10 @@ function factsByDay(input: PacingInputs): Map<string, DayFacts> {
   for (const row of input.tagged) {
     const day = days.get(row.date);
     if (day && !day.tags.includes(row.label)) day.tags.push(row.label);
+  }
+  for (const row of input.mornings ?? []) {
+    const day = days.get(addDays(row.date, -1));
+    if (day) day.nextMorning = row.answer;
   }
   return days;
 }
@@ -130,11 +152,24 @@ export function typicalDay(input: Pick<PacingInputs, 'steps' | 'exercise'> & { r
   return { steps: usualRange(steps), minutes: usualRange([...perDay.values()]) };
 }
 
+// The hardest effort given that day, which is the one a pacing reader
+// needs to see.
+function hardestEffort(efforts: readonly EffortLevel[]): EffortLevel | null {
+  const rank = (effort: EffortLevel) => EFFORT_LEVELS.findIndex((level) => level.key === effort);
+  let hardest: EffortLevel | null = null;
+  for (const effort of efforts) {
+    if (hardest == null || rank(effort) > rank(hardest)) hardest = effort;
+  }
+  return hardest;
+}
+
 function dayWords(day: DayFacts): string {
   const parts: string[] = [];
   if (day.steps != null) parts.push(stepsWords(day.steps));
-  if (day.minutes != null) parts.push(`${minutesWords(day.minutes)} exercise`);
-  else if (day.exerciseCount > 0) parts.push(plural(day.exerciseCount, 'exercise entry', 'exercise entries'));
+  const hardest = hardestEffort(day.efforts);
+  const felt = hardest ? ` that ${effortWords(hardest)}` : '';
+  if (day.minutes != null) parts.push(`${minutesWords(day.minutes)} exercise${felt}`);
+  else if (day.exerciseCount > 0) parts.push(`${plural(day.exerciseCount, 'exercise entry', 'exercise entries')}${felt}`);
   if (day.therapy.length > 0) parts.push(day.therapy.join(' and '));
   if (day.tags.length > 0) parts.push(`tagged ${day.tags.join(', ').toLowerCase()}`);
   return parts.length > 0 ? parts.join(', ') : 'nothing recorded';
@@ -149,6 +184,31 @@ export const PACING_NO_LIMIT_NOTE =
 
 export const PACING_SIDE_BY_SIDE_NOTE =
   'These sit side by side and nothing here says one led to the other. A few weeks of one person can look like a pattern when it is not, and a tag only counts when it was put on a check-in.';
+
+// Why a day counts as bigger: past the top of the usual steps or minutes,
+// or an activity rated Hard or Very hard. An empty list means it does not.
+function biggerReasons(day: DayFacts, usual: { steps: UsualRange | null; minutes: UsualRange | null }): BiggerDayReason[] {
+  const reasons: BiggerDayReason[] = [];
+  if (day.efforts.some(isHarderEffort)) reasons.push('effort');
+  if (usual.steps != null && day.steps != null && day.steps > usual.steps.high) reasons.push('steps');
+  if (usual.minutes != null && day.minutes != null && day.minutes > usual.minutes.high) reasons.push('minutes');
+  return reasons;
+}
+
+/**
+ * Whether yesterday was a bigger day, for the morning-after question (Q20).
+ * The usual is read from the days before yesterday, so a big day does not
+ * stretch its own yardstick. Empty when it was not.
+ */
+export function yesterdayBiggerReasons(input: PacingInputs): BiggerDayReason[] {
+  const yesterdayDate = addDays(input.today, -1);
+  if (yesterdayDate < input.range.start) return [];
+  const days = factsByDay({ ...input, range: { start: input.range.start, end: yesterdayDate } });
+  const yesterday = days.get(yesterdayDate);
+  if (!yesterday) return [];
+  const usual = typicalDay({ ...input, range: { start: input.range.start, end: addDays(yesterdayDate, -1) } });
+  return biggerReasons(yesterday, usual);
+}
 
 export function buildPacingView(input: PacingInputs): ReadingView {
   const days = factsByDay(input);
@@ -179,6 +239,13 @@ export function buildPacingView(input: PacingInputs): ReadingView {
         ? `On days you logged exercise with minutes, it came to ${rangeWords(usual.minutes, minutesWords)}.`
         : `${plural(exerciseDays, 'day')} with exercise logged. A usual range for minutes needs at least 8 days with minutes given.`,
     );
+    const rated = all.flatMap((day) => day.efforts);
+    if (rated.length > 0) {
+      const counts = EFFORT_LEVELS.map((level) => ({ label: level.label, n: rated.filter((effort) => effort === level.key).length }))
+        .filter((entry) => entry.n > 0)
+        .map((entry) => `${entry.label} ${entry.n}`);
+      lines.push(`How hard it felt, on ${plural(rated.length, 'activity', 'activities')} you rated: ${counts.join(', ')}.`);
+    }
     if (therapyCount > 0) lines.push(`${plural(therapyCount, 'therapy session')} in this range.`);
     lines.push(`Overload or a crash was tagged on ${plural(taggedDays, 'day')} of ${all.length}.`);
     bands.push({ id: 'typical', title: 'Your typical day', icon: 'pulse-outline', lines, notes: [PACING_NO_LIMIT_NOTE] });
@@ -208,10 +275,9 @@ export function buildPacingView(input: PacingInputs): ReadingView {
   }
 
   // 3. Bigger days and the two days after, beside the rest.
-  if (usual.steps || usual.minutes) {
-    const bigger = (day: DayFacts) =>
-      (usual.steps != null && day.steps != null && day.steps > usual.steps.high) ||
-      (usual.minutes != null && day.minutes != null && day.minutes > usual.minutes.high);
+  const anyHarder = all.some((day) => day.efforts.some(isHarderEffort));
+  if (usual.steps || usual.minutes || anyHarder) {
+    const bigger = (day: DayFacts) => biggerReasons(day, usual).length > 0;
     const within = (day: DayFacts) =>
       !bigger(day) && (day.steps != null || day.minutes != null);
     const tagWithin = (day: DayFacts) => {
@@ -226,10 +292,20 @@ export function buildPacingView(input: PacingInputs): ReadingView {
     const otherDays = all.filter((day) => finished(day) && within(day));
     const biggerTagged = biggerDays.filter(tagWithin).length;
     const otherTagged = otherDays.filter(tagWithin).length;
+    const answered = biggerDays.filter((day) => day.nextMorning != null);
+    const answerCounts = MORNING_AFTER_LEVELS.map((level) => ({
+      label: level.label.toLowerCase(),
+      n: answered.filter((day) => day.nextMorning === level.key).length,
+    }))
+      .filter((entry) => entry.n > 0)
+      .map((entry) => `${entry.n} ${entry.label}`);
     const lines = [
       biggerDays.length === 0
-        ? 'No day in this range went past the top of your usual.'
-        : `${plural(biggerDays.length, 'day')} went past the top of your usual steps or exercise minutes. Overload or a crash was tagged that day or in the ${DAYS_AFTER} after on ${biggerTagged} of them.`,
+        ? 'No day in this range went past the top of your usual or had an activity you rated hard.'
+        : `${plural(biggerDays.length, 'day')} went past the top of your usual steps or exercise minutes, or had an activity you rated hard or very hard. Overload or a crash was tagged that day or in the ${DAYS_AFTER} after on ${biggerTagged} of them.`,
+      ...(answered.length > 0
+        ? [`You said how you were the next morning after ${answered.length} of them: ${answerCounts.join(', ')}.`]
+        : []),
       `On the ${plural(otherDays.length, 'other day')} with steps or minutes recorded, it was tagged that day or in the ${DAYS_AFTER} after on ${otherTagged}.`,
       `The last ${DAYS_AFTER} days of the range are left out, since the days after them have not all happened yet.`,
     ];
@@ -248,10 +324,11 @@ export function buildPacingView(input: PacingInputs): ReadingView {
             const later = days.get(addDays(day.date, offset));
             if (later && later.tags.length > 0) after.push(`${shortDate(later.date)}: ${later.tags.join(', ').toLowerCase()}`);
           }
+          const morning = day.nextMorning ? `Next morning: ${morningAfterLabel(day.nextMorning).toLowerCase()}. ` : '';
           return {
             key: day.date,
             title: `${shortDate(day.date)}, ${dayWords(day)}`,
-            caption: after.length > 0 ? `After: ${after.join('; ')}` : 'Nothing tagged in the two days after.',
+            caption: `${morning}${after.length > 0 ? `After: ${after.join('; ')}` : 'Nothing tagged in the two days after.'}`,
           };
         }),
       notes: [PACING_SIDE_BY_SIDE_NOTE],

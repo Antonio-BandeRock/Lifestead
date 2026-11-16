@@ -10,6 +10,7 @@ import { VAULT_TOOL_READ } from './vault';
 import { localStamp } from './dailyScales';
 import type { MorningInputs, MorningPoint } from './morningCheckin';
 import { readOrClosed } from './vaultReads';
+import { asMorningAfter, type MorningAfter } from './exertion';
 
 // How far back the usual range reaches. The range needs 8 earlier
 // readings, and four months holds far more than that for anyone who wears
@@ -65,6 +66,8 @@ export type MorningRecord = {
   sleepQuality: number | null;
   energy: number | null;
   notes: string | null;
+  // Q20: how the person was this morning after a bigger day yesterday.
+  afterBiggerDay: MorningAfter | null;
 };
 
 /**
@@ -74,8 +77,9 @@ export type MorningRecord = {
  */
 export async function getMorningCheckin(now = new Date(), forReminder = false): Promise<MorningRecord | null> {
   const db = await getDatabase();
-  return readOrClosed(() => db.getFirstAsync<MorningRecord>(
-    `${forReminder ? VAULT_TOOL_READ : ''} SELECT id, logged_at AS loggedAt, sleep_quality AS sleepQuality, energy, notes
+  const row = await readOrClosed(() => db.getFirstAsync<Omit<MorningRecord, 'afterBiggerDay'> & { afterBiggerDay: string | null }>(
+    `${forReminder ? VAULT_TOOL_READ : ''} SELECT id, logged_at AS loggedAt, sleep_quality AS sleepQuality, energy, notes,
+            after_bigger_day AS afterBiggerDay
        FROM wellbeing_checkins
       WHERE checkin_type = 'sleep' AND logged_at >= ? AND logged_at < ?
       ORDER BY logged_at DESC
@@ -83,6 +87,7 @@ export async function getMorningCheckin(now = new Date(), forReminder = false): 
     localDate(now),
     localDate(addDays(now, 1)),
   ), null);
+  return row ? { ...row, afterBiggerDay: asMorningAfter(row.afterBiggerDay) } : null;
 }
 
 export async function saveMorningCheckin(input: {
@@ -90,6 +95,11 @@ export async function saveMorningCheckin(input: {
   sleepQuality: number | null;
   energy: number | null;
   notes: string;
+  /**
+   * Q20, the morning after a bigger day. Left out, the answer already on
+   * the row stays; null clears it.
+   */
+  afterBiggerDay?: MorningAfter | null;
   /** When it was answered, for a reminder answered while locked; now otherwise. */
   at?: Date;
 }): Promise<void> {
@@ -98,12 +108,19 @@ export async function saveMorningCheckin(input: {
   const answeredAt = input.at ?? now;
   const stamp = now.toISOString();
   const notes = input.notes.trim() || null;
+  const keepAfter = input.afterBiggerDay === undefined;
+  const after = input.afterBiggerDay ?? null;
   if (input.existingId) {
     await db.runAsync(
-      `UPDATE wellbeing_checkins SET sleep_quality = ?, energy = ?, notes = ?, updated_at = ? WHERE id = ?`,
+      `UPDATE wellbeing_checkins
+          SET sleep_quality = ?, energy = ?, notes = ?,
+              after_bigger_day = CASE WHEN ? = 1 THEN after_bigger_day ELSE ? END, updated_at = ?
+        WHERE id = ?`,
       input.sleepQuality,
       input.energy,
       notes,
+      keepAfter ? 1 : 0,
+      after,
       stamp,
       input.existingId,
     );
@@ -117,24 +134,26 @@ export async function saveMorningCheckin(input: {
     await db.runAsync(
       `UPDATE wellbeing_checkins
           SET sleep_quality = COALESCE(?, sleep_quality), energy = COALESCE(?, energy),
-              notes = COALESCE(?, notes), updated_at = ?
+              notes = COALESCE(?, notes), after_bigger_day = COALESCE(?, after_bigger_day), updated_at = ?
         WHERE id = ?`,
       input.sleepQuality,
       input.energy,
       notes,
+      after,
       stamp,
       earlier.id,
     );
     return;
   }
   await db.runAsync(
-    `INSERT INTO wellbeing_checkins (id, logged_at, checkin_type, valence, notes, energy, sleep_quality, created_at, updated_at)
-     VALUES (?, ?, 'sleep', 'neutral', ?, ?, ?, ?, ?)`,
+    `INSERT INTO wellbeing_checkins (id, logged_at, checkin_type, valence, notes, energy, sleep_quality, after_bigger_day, created_at, updated_at)
+     VALUES (?, ?, 'sleep', 'neutral', ?, ?, ?, ?, ?, ?)`,
     `checkin_${Date.now()}`,
     localStamp(answeredAt),
     notes,
     input.energy,
     input.sleepQuality,
+    after,
     stamp,
     stamp,
   );

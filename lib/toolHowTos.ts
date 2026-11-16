@@ -381,6 +381,7 @@ export type ToolMark =
   | 'home.morningEnergy'
   | 'home.morningSave'
   | 'home.morningChange'
+  | 'home.morningAfter'
   | 'home.mealSay'
   | 'home.mealPhoto'
   | 'home.mealFind'
@@ -492,6 +493,7 @@ export type ToolMark =
   | 'signals.add'
   | 'signals.save'
   | 'signals.editFirst'
+  | 'signals.effort'
   | 'signals.photosFirst'
   | 'signals.removeFirst'
   | 'newFoods.addExperiment'
@@ -2871,6 +2873,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The morning keeps one answer, the one you last saved.',
     },
     {
+      key: 'morningAfter',
+      title: 'Say how you are after a bigger day',
+      steps: [
+        { say: 'Open the band with the name of Morning Check-In, on the Signals band.', mark: 'homeBand.morningCheckin', stay: true },
+        { say: 'When yesterday was a bigger day, the card asks how you are this morning. Tap Better, Same, Worse or Crashed.', mark: 'home.morningAfter', stay: true },
+        { say: 'Tap Save.', mark: 'home.morningSave' },
+      ],
+      forYou: 'A bigger day is one with an activity you rated Hard or Very hard, or more steps or exercise minutes than your usual. Trends > Pacing sets your answers beside those days, and nothing there says one caused the other. With the morning reminder on, the same question follows it on the locked phone.',
+    },
+    {
       key: 'mealPhoto',
       title: 'Photograph a meal now and log it later',
       steps: [
@@ -4620,6 +4632,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Save.', mark: 'signals.save' },
       ],
       forYou: 'A quick note of what you did, read on Trends beside sleep, mood and flares.',
+    },
+    {
+      key: 'effort',
+      title: 'Say how hard it felt',
+      steps: [
+        { say: 'Tap + Log exercise, or Edit on an entry already there.', mark: 'signals.add', stay: true },
+        { say: 'Under How hard did it feel?, tap Easy, Moderate, Hard or Very hard. Tap it again to take it back off.', mark: 'signals.effort', stay: true },
+        { say: 'Tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'The same walk can be easy one week and very hard the next. A day with an activity you rated Hard or Very hard counts as a bigger day, so the next morning the app asks how you are, and Trends > Pacing lays the two side by side.',
     },
     {
       key: 'edit',

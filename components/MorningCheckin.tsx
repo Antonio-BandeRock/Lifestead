@@ -21,6 +21,10 @@ import {
 import { getMorningCheckin, getMorningInputs, saveMorningCheckin, type MorningRecord } from '../lib/morningCheckinDb';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { NotesInput } from './NotesInput';
+import { MorningAfterQuestion } from './MorningAfterQuestion';
+import { getYesterdayBiggerReasons } from '../lib/trendsMoreDb';
+import { localToday } from '../lib/useBy';
+import { morningAfterLabel, type BiggerDayReason, type MorningAfter } from '../lib/exertion';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { tl } from '../lib/i18n';
@@ -37,10 +41,18 @@ export function MorningCheckin({ tabColor }: Props) {
   const [sleepQuality, setSleepQuality] = useState<number | null>(null);
   const [energy, setEnergy] = useState<number | null>(null);
   const [note, setNote] = useState('');
+  const [biggerReasons, setBiggerReasons] = useState<BiggerDayReason[]>([]);
+  const [afterBigger, setAfterBigger] = useState<MorningAfter | null>(null);
   const [saving, setSaving] = useState(false);
 
   const load = useCallback(async () => {
-    const [inputs, saved] = await Promise.all([getMorningInputs(), getMorningCheckin()]);
+    const [inputs, saved, reasons] = await Promise.all([
+      getMorningInputs(),
+      getMorningCheckin(),
+      getYesterdayBiggerReasons(localToday()).catch(() => [] as BiggerDayReason[]),
+    ]);
+    setBiggerReasons(reasons);
+    setAfterBigger(saved?.afterBiggerDay ?? null);
     setLines(morningLines(inputs));
     setRecord(saved);
     setSleepQuality(saved?.sleepQuality ?? null);
@@ -58,7 +70,13 @@ export function MorningCheckin({ tabColor }: Props) {
   async function save() {
     setSaving(true);
     try {
-      await saveMorningCheckin({ existingId: record?.id ?? null, sleepQuality, energy, notes: note });
+      await saveMorningCheckin({
+        existingId: record?.id ?? null,
+        sleepQuality,
+        energy,
+        notes: note,
+        ...(biggerReasons.length > 0 ? { afterBiggerDay: afterBigger } : {}),
+      });
       // This morning's reminder, if it has not fired yet, has nothing left to ask.
       void syncReminderNotifications();
       await load();
@@ -93,7 +111,7 @@ export function MorningCheckin({ tabColor }: Props) {
     );
   }
 
-  const answered = sleepQuality !== null || energy !== null || note.trim().length > 0;
+  const answered = sleepQuality !== null || energy !== null || note.trim().length > 0 || afterBigger !== null;
 
   return (
     <View style={styles.block}>
@@ -119,6 +137,11 @@ export function MorningCheckin({ tabColor }: Props) {
               energyWord: record.energy !== null && record.energy >= 1 && record.energy <= 5 ? ENERGY.words[record.energy - 1] : null,
             })}
           </Text>
+          {record.afterBiggerDay ? (
+            <Text style={styles.caption}>
+              {tl('After yesterday:')} {tl(morningAfterLabel(record.afterBiggerDay))}
+            </Text>
+          ) : null}
           {record.notes ? <Text style={styles.caption}>{record.notes}</Text> : null}
           <TouchableOpacity ref={walkMark.ref('home.morningChange')} onPress={() => setEditing(true)} hitSlop={8}>
             <Text style={[styles.link, { color: tabColor }]}>Change this morning&apos;s answer</Text>
@@ -130,6 +153,14 @@ export function MorningCheckin({ tabColor }: Props) {
           {renderPills(SLEEP_QUALITY_WORDS, sleepQuality, setSleepQuality, false, walkMark.ref('home.morningSleep'))}
           <Text style={styles.label}>{ENERGY.question}</Text>
           {renderPills(ENERGY.words, energy, setEnergy, true, walkMark.ref('home.morningEnergy'))}
+          <MorningAfterQuestion
+            reasons={biggerReasons}
+            value={afterBigger}
+            onChange={setAfterBigger}
+            labelStyle={styles.label}
+            captionStyle={styles.caption}
+            markRef={walkMark.ref('home.morningAfter')}
+          />
           <NotesInput
             style={styles.input}
             placeholder="Anything about the night (optional)"

@@ -722,7 +722,7 @@
 ### Q20. Exertion and how it landed
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Signals,Trends
 - **Answers:** Visible · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** An effort rating on each exercise or activity log, and a next-morning question after a bigger day (better, same, worse, crashed), both read by Trends > Pacing beside the crash tags. Partly built: Trends > Pacing (1.0.57.24) reads steps, exercise and the crash and overload tags. Not yet: an effort rating per log and the next-morning question.
+- **How:** An effort rating on each exercise or activity log, and a next-morning question after a bigger day (better, same, worse, crashed), both read by Trends > Pacing beside the crash tags. Built 1.0.91.8: How hard did it feel? (Easy, Moderate, Hard, Very hard) on every exercise log and finished workout; the morning after a Hard or Very hard day, or one past the top of the usual steps or minutes, Home's Morning Check-In, the daily check-in and the morning reminder (answerable on the locked phone) ask Better, Same, Worse or Crashed; Trends > Pacing counts both beside the crash and overload tags.
 
 ### Q24. The Diary
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** Signals,Life

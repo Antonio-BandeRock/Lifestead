@@ -15,6 +15,9 @@ import { DailyList } from '../components/DailyList';
 import { DailyScalesPicker } from '../components/DailyScalesPicker';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { NotesInput } from '../components/NotesInput';
+import { MorningAfterQuestion } from '../components/MorningAfterQuestion';
+import { getYesterdayBiggerReasons } from '../lib/trendsMoreDb';
+import { morningAfterLabel, type BiggerDayReason, type MorningAfter } from '../lib/exertion';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
@@ -77,6 +80,8 @@ export default function DailyCheckinScreen() {
   const [sleepQuality, setSleepQuality] = useState<number | null>(null);
   const [morningEnergy, setMorningEnergy] = useState<number | null>(null);
   const [morningNote, setMorningNote] = useState('');
+  const [biggerReasons, setBiggerReasons] = useState<BiggerDayReason[]>([]);
+  const [afterBigger, setAfterBigger] = useState<MorningAfter | null>(null);
 
   // Feeling.
   const [dailyList, setDailyList] = useState<string[]>([]);
@@ -112,12 +117,15 @@ export default function DailyCheckinScreen() {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
-      const [morning, feeling, list] = await Promise.all([
+      const [morning, feeling, list, reasons] = await Promise.all([
         getMorningCheckin(),
         getCheckinForDate(todayDate(), 'general'),
         getDailyList(),
+        getYesterdayBiggerReasons(todayDate()).catch(() => [] as BiggerDayReason[]),
       ]);
       if (cancelled) return;
+      setBiggerReasons(reasons);
+      setAfterBigger(morning?.afterBiggerDay ?? null);
       setMorningId(morning?.id ?? null);
       setSleepQuality(morning?.sleepQuality ?? null);
       setMorningEnergy(morning?.energy ?? null);
@@ -135,14 +143,20 @@ export default function DailyCheckinScreen() {
     };
   }, [vaultReads]);
 
-  const morningAnswered = sleepQuality !== null || morningEnergy !== null || morningNote.trim().length > 0;
+  const morningAnswered = sleepQuality !== null || morningEnergy !== null || morningNote.trim().length > 0 || afterBigger !== null;
   const feelingAnswered =
     feelingTouched && (feelingTags.length > 0 || hasAnyScale(feelingScales) || dailyList.some((code) => dailyRatings[code] !== undefined));
   const flareAnswered = hadFlare === true && flareSeverity !== null;
 
   async function saveMorning() {
     if (!morningAnswered) return;
-    await saveMorningCheckin({ existingId: morningId, sleepQuality, energy: morningEnergy, notes: morningNote });
+    await saveMorningCheckin({
+      existingId: morningId,
+      sleepQuality,
+      energy: morningEnergy,
+      notes: morningNote,
+      ...(biggerReasons.length > 0 ? { afterBiggerDay: afterBigger } : {}),
+    });
     const saved = await getMorningCheckin();
     setMorningId(saved?.id ?? morningId);
     void syncReminderNotifications();
@@ -153,6 +167,7 @@ export default function DailyCheckinScreen() {
         energyWord: morningEnergy !== null ? ENERGY.words[morningEnergy - 1] ?? null : null,
       }),
     ];
+    if (afterBigger) lines.push(`${tl('After yesterday:')} ${tl(morningAfterLabel(afterBigger))}`);
     if (morningNote.trim()) lines.push(morningNote.trim());
     setOutcomes((current) => ({ ...current, morning: { saved: true, lines } }));
   }
@@ -269,6 +284,13 @@ export default function DailyCheckinScreen() {
         {renderPills(SLEEP_QUALITY_WORDS, sleepQuality, setSleepQuality, false)}
         <Text style={styles.label}>{ENERGY.question}</Text>
         {renderPills(ENERGY.words, morningEnergy, setMorningEnergy, true)}
+        <MorningAfterQuestion
+          reasons={biggerReasons}
+          value={afterBigger}
+          onChange={setAfterBigger}
+          labelStyle={styles.label}
+          captionStyle={styles.caption}
+        />
         <NotesInput
           style={styles.input}
           placeholder="Anything about the night (optional)"

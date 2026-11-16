@@ -1,5 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 import { File } from 'expo-file-system';
+import type { EffortLevel } from './exertion';
 import { REFERENCE_DB_VERSION } from './referenceDbVersion';
 import { DEFAULT_FOOD_SOURCE, foodSourceRank, foodSourceRankSql, getPreferredFoodSource, isFoodSourceKey, isOutsidePreferredSource, setPreferredFoodSourceInMemory, type FoodSourceKey } from './foodSourcePreference';
 import { mergeNutrientsInOrder, orderEquivalentRows, rowKey, type EquivalentRow, type NutrientAmount } from './foodEquivalence';
@@ -10547,6 +10548,12 @@ async function runDatabaseInitialization() {
     if (!hasStepCountColumn) {
       await db.execAsync('ALTER TABLE exercise_logs ADD COLUMN step_count INTEGER;');
     }
+    // How hard it felt (Q20, 1.0.91.8): easy, moderate, hard or very_hard
+    // (lib/exertion.ts), beside intensity, which says what the activity
+    // was. Trends > Pacing reads it.
+    if (!exerciseLogColumns.some((column) => column.name === 'effort')) {
+      await db.execAsync('ALTER TABLE exercise_logs ADD COLUMN effort TEXT;');
+    }
 
     // meal_type (breakfast/lunch/dinner/salad/smoothie/snack, same
     // vocabulary as meals.meal_type) is its own column, separate from
@@ -10728,6 +10735,12 @@ async function runDatabaseInitialization() {
     const wellbeingCheckinColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(wellbeing_checkins)');
     if (!wellbeingCheckinColumns.some((column) => column.name === 'food_name')) {
       await db.execAsync('ALTER TABLE wellbeing_checkins ADD COLUMN food_name TEXT;');
+    }
+    // The morning after a bigger day (Q20, 1.0.91.8), on the morning's
+    // sleep row: better, same, worse or crashed (lib/exertion.ts). It is
+    // about the day before the row's date.
+    if (!wellbeingCheckinColumns.some((column) => column.name === 'after_bigger_day')) {
+      await db.execAsync('ALTER TABLE wellbeing_checkins ADD COLUMN after_bigger_day TEXT;');
     }
 
     // Real food identity + testing context on a food trial, 2026-08-14 --
@@ -24721,6 +24734,8 @@ export type ExerciseLog = {
   exerciseType: string;
   durationMinutes: number | null;
   intensity: string | null;
+  // How hard it felt (lib/exertion.ts), null when not given.
+  effort: string | null;
   // Only meaningful for step-based activities (walking, running, hiking);
   // null for anything else (weightlifting, yoga, ...). Feeds
   // lib/stepMath.ts's distance/calorie estimate when present.
@@ -24734,6 +24749,7 @@ export async function recordExercise(input: {
   exerciseType: string;
   durationMinutes?: number;
   intensity?: 'light' | 'moderate' | 'vigorous';
+  effort?: EffortLevel | null;
   stepCount?: number;
   notes?: string;
 }) {
@@ -24743,14 +24759,15 @@ export async function recordExercise(input: {
 
   await db.runAsync(
     `
-      INSERT INTO exercise_logs (id, logged_at, exercise_type, duration_minutes, intensity, step_count, notes, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO exercise_logs (id, logged_at, exercise_type, duration_minutes, intensity, effort, step_count, notes, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `,
     id,
     input.loggedAt,
     input.exerciseType.trim(),
     input.durationMinutes ?? null,
     input.intensity ?? null,
+    input.effort ?? null,
     input.stepCount ?? null,
     input.notes?.trim() || null,
     now,
@@ -24764,7 +24781,7 @@ export async function listExerciseLogs(limit = -1) {
   return db.getAllAsync<ExerciseLog>(
     `
       SELECT id, logged_at AS loggedAt, exercise_type AS exerciseType, duration_minutes AS durationMinutes,
-             intensity, step_count AS stepCount, notes, created_at AS createdAt
+             intensity, effort, step_count AS stepCount, notes, created_at AS createdAt
       FROM exercise_logs
       ORDER BY logged_at DESC
       LIMIT ?
@@ -24776,15 +24793,16 @@ export async function listExerciseLogs(limit = -1) {
 /** Corrects a logged activity from Edit in Signals > Exercise. */
 export async function updateExerciseLog(
   id: string,
-  input: { loggedAt: string; exerciseType: string; durationMinutes: number | null; intensity: 'light' | 'moderate' | 'vigorous' | null },
+  input: { loggedAt: string; exerciseType: string; durationMinutes: number | null; intensity: 'light' | 'moderate' | 'vigorous' | null; effort: EffortLevel | null },
 ) {
   const db = await getDatabase();
   await db.runAsync(
-    'UPDATE exercise_logs SET logged_at = ?, exercise_type = ?, duration_minutes = ?, intensity = ? WHERE id = ?',
+    'UPDATE exercise_logs SET logged_at = ?, exercise_type = ?, duration_minutes = ?, intensity = ?, effort = ? WHERE id = ?',
     input.loggedAt,
     input.exerciseType.trim(),
     input.durationMinutes,
     input.intensity,
+    input.effort,
     id,
   );
 }
@@ -25203,7 +25221,7 @@ export async function getExerciseAndMeasurementTimeline(days = 90) {
     db.getAllAsync<ExerciseLog>(
       `
         SELECT id, logged_at AS loggedAt, exercise_type AS exerciseType, duration_minutes AS durationMinutes,
-               intensity, step_count AS stepCount, notes, created_at AS createdAt
+               intensity, effort, step_count AS stepCount, notes, created_at AS createdAt
         FROM exercise_logs
         WHERE logged_at >= ?
         ORDER BY logged_at ASC

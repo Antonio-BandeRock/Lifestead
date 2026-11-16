@@ -12,6 +12,7 @@ import {
 } from './exerciseLibrary';
 import { parseKeptSets, type KeptSet } from './workoutSession';
 import { removePhotosOf } from './mediaDb';
+import type { EffortLevel } from './exertion';
 import {
   exerciseDraftToFields,
   planExerciseRemoval,
@@ -359,6 +360,8 @@ export async function saveWorkoutSession(input: {
   sets: KeptSet[];
   minutes: number;
   intensity: ExerciseIntensity;
+  /** How hard it felt (Q20), when the person said. */
+  effort?: EffortLevel | null;
   notes: string;
   note: string | null;
 }): Promise<{ id: string; logId: string }> {
@@ -367,6 +370,7 @@ export async function saveWorkoutSession(input: {
     exerciseType: input.workoutName,
     durationMinutes: input.minutes,
     intensity: input.intensity,
+    effort: input.effort ?? null,
     notes: input.notes,
   });
   const db = await getDatabase();

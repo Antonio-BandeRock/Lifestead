@@ -80,7 +80,7 @@ function check(label, ok) {
 // a question on a notification must be answerable on it).
 // Sets whose every button is an answer, so Snooze gives way: the flare
 // questions (1.0.67.1) are answered with Yes or No and then by tapping.
-const ALL_ANSWERS = ['morning', 'energy', 'vaultOffer', 'backupOffer', 'calendarOffer', 'kitchenLow', 'interestTimer', 'checkin', 'flareHowBad', 'flareWorse'];
+const ALL_ANSWERS = ['morning', 'energy', 'vaultOffer', 'backupOffer', 'calendarOffer', 'kitchenLow', 'interestTimer', 'checkin', 'flareHowBad', 'flareWorse', 'afterBigger', 'afterWorse'];
 for (const key of ALL_REMINDER_CATEGORY_KEYS) {
   const actions = CATEGORY_ACTIONS[key];
   check(`${key} has at most three buttons`, actions.length <= 3);
@@ -259,6 +259,24 @@ check('seven evenings from today', evening.length === 7 && evening[0].getDate() 
 check('today skipped once checked in', planDailyCheckins('20:00', now, 6, true)[0].getDate() === 27);
 check('a time already passed today starts tomorrow', planDailyCheckins('09:00', now, 6, false)[0].getDate() === 27);
 check('a bad time plans nothing', planDailyCheckins('25:00', now, 6, false).length === 0);
+
+// The morning after a bigger day (Q20): every button saves its word, Worse or
+// crashed saves Worse and asks which, and none of them answer anything else.
+const { MORNING_AFTER_LEVELS } = loadWithImports('lib/exertion.ts');
+const afterKeys = MORNING_AFTER_LEVELS.map((level) => level.key);
+for (const action of ['afterBetter', 'afterSame', 'afterWorseOrCrashed', 'afterWorse', 'afterCrashed']) {
+  const plan = planReminderAction('morning', action);
+  check(`${action} saves a morning-after answer`, !!plan && plan.write === 'afterBiggerDay' && afterKeys.includes(plan.value));
+  check(`${action} on a dose does nothing`, planReminderAction('dose', action) === null);
+}
+check('Worse or crashed saves worse and asks which', (() => {
+  const plan = planReminderAction('morning', 'afterWorseOrCrashed');
+  return plan.value === 'worse' && plan.askWhichWorse === true;
+})());
+check('Crashed saves crashed and asks nothing more', (() => {
+  const plan = planReminderAction('morning', 'afterCrashed');
+  return plan.value === 'crashed' && plan.askWhichWorse === false;
+})());
 
 if (failures) {
   console.error(`${failures} failure(s)`);

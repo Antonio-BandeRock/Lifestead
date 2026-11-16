@@ -417,7 +417,7 @@
     <h1>What is inside Lifestead, and how it is put together</h1>
     <p class="dek">Lifestead is an everything-about-a-person's-life app, tagline "Everything in your life has a place." It started with, and runs deepest on, food and autoimmune health: 19 tracked conditions, each a target for the same depth, alone or combined. It is also for somebody who needs an outside place to hold the details of daily living so they stop taking up room in their head, through Life, Schedules, reminders and capture. Garden, budget, family, interests, learning and the body are all in scope.</p>
     <p class="dek">Its job in food and health is finding the personal patterns between what someone eats and how their body responds, and doing that work for the person. Records stay on the person's devices, and no company server holds them.</p>
-    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-16 (1.0.91.7).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
+    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-16 (1.0.91.8).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
     <div class="stats">
       <div class="stat"><span class="n">16,140</span><span class="l">whole foods shown from the reference database</span></div>
       <div class="stat"><span class="n">10</span><span class="l">data sources (9 national tables plus a Derived set)</span></div>
@@ -491,12 +491,12 @@
         <li><strong>Your Day</strong>: The day ahead, which opens Schedules.</li>
         <li><strong>Today's Reminders</strong>: What is due to be reminded about today.</li>
         <li><strong>Symptom Check-In</strong>: The periodic assessment of how symptoms are going.</li>
-        <li><strong>Morning Check-In</strong>: Say how you slept. Your mornings sit beside your sleep readings, so Trends can lay them out over weeks.</li>
+        <li><strong>Morning Check-In</strong>: Say how you slept. Your mornings sit beside your sleep readings, so Trends can lay them out over weeks. The morning after a bigger day it also asks how you are: Better, Same, Worse or Crashed.</li>
         <li><strong>One Question at a Time</strong>: Each question has a page to itself, so there is only ever one thing to answer, and any of them can be skipped.</li>
         <li><strong>How You're Feeling</strong>: The worst flare or food reaction logged in the last two days, so one still going on is seen on the first screen.</li>
         <li><strong>Log a Flare</strong>: Signals opens, where a flare is logged with how bad it is and what it felt like.</li>
         <li><strong>Log Blood Pressure</strong>: The reading is saved for right now, beside the rest of your readings.</li>
-        <li><strong>Log Exercise</strong>: Exercise logged from Home, or planned exercise marked as done.</li>
+        <li><strong>Log Exercise</strong>: Exercise logged from Home, or planned exercise marked as done, with how hard it felt if you want to say: Easy, Moderate, Hard or Very hard.</li>
         <li><strong>Meals Logged Today</strong>: What has gone on today's record so far.</li>
         <li><strong>Since Your Last Meal</strong>: How long it has been since the last meal logged.</li>
         <li><strong>Worth a Look</strong>: Something worth opening, which leads to Insights.</li>
@@ -609,7 +609,7 @@
   <div class="tabcard" style="border-left-color: var(--life)">
       <div class="tabcard-head"><h3>Also here</h3><span class="status-pill status-built">Built</span></div>
       <ul class="lenslist">
-        <li><strong>Workouts</strong>: Build a workout, set its sets, reps, weight and rest, and do it. The session goes into your exercise log, which Movement and Trends read.</li>
+        <li><strong>Workouts</strong>: Build a workout, set its sets, reps, weight and rest, and do it. The session goes into your exercise log, with how hard it felt if you say, and Movement and Trends read it.</li>
         <li><strong>To Do List</strong>: One-off things to do, said the way you would say them: "call the dentist tomorrow at 3pm" keeps the day and the time, and the reminder comes at that time; with only a day it comes on that day. Steps under a task break it into smaller pieces, each ticked as it is done and put in order with the arrows, and Steps says how many are still to do; a task that repeats starts its steps fresh each time. Labels you choose, such as house or car, show on each task, and tapping one in the row above the list shows only the tasks that carry it.</li>
         <li><strong>Projects</strong>: Steps in order, with the first one not done shown as Next. A paused project sends no reminders, and a finished one keeps every step it took.</li>
         <li><strong>Did I Do It</strong>: One day looked back on, made only of what was checked off. Things done by themselves come first: what is on the Checklist outside any routine, and things on the To Do List marked done, each with its times. Each routine comes after, with every walk that day and the steps done on it listed under the walk, so a routine step is never listed among the things on their own. Earlier and Later move a day at a time, and nothing here changes a record.</li>
@@ -772,7 +772,7 @@
         <span class="chip">Nocturia</span>
       </div>
       <p><strong>Hands-On Therapies</strong> sits here because a session logged is something that has already happened. It logs a session of any of 13 therapy types across 4 categories, and it is deliberately its own record rather than a kind of treatment: a treatment describes a substance being taken now, with a dose and a frequency, while a session is an event on a date whose interesting question is what the days after it looked like. Trends' Therapy Response lens is the other half.</p>
-      <p>Every entry on Signals can be corrected with Edit, which opens the whole entry in its form, and Remove always asks before anything goes. A reaction can be tied to a meal you logged by tapping it, Exercise offers what you did before, and Blood Pressure and New Foods each show a year of squares. Long lists stop at a page and carry on with Show more.</p>
+      <p>Every entry on Signals can be corrected with Edit, which opens the whole entry in its form, and Remove always asks before anything goes. A reaction can be tied to a meal you logged by tapping it, Exercise offers what you did before and asks how hard it felt, and Blood Pressure and New Foods each show a year of squares. Long lists stop at a page and carry on with Show more.</p>
       <p><strong>Weight</strong> logs your weight whenever you weigh yourself, with the day and time, in the kg or lb Profile uses. Each one can be corrected or removed, Trends &gt; Weight draws them across the weeks, and Profile shows the latest one.</p>
     </div>
   <div class="tabcard" style="border-left-color: var(--signals)">
@@ -856,7 +856,7 @@
         <li><strong>What You Eat</strong>: How varied your eating has been, with a period with nothing logged drawn as a gap.</li>
         <li><strong>Movement</strong>: Steps and sleep over time, from what you entered or a connected device sent. Each chart carries your usual range.</li>
         <li><strong>Workouts</strong>: The workouts you logged in Life &gt; Movement, beside the days you planned.</li>
-        <li><strong>Pacing</strong>: How busier days sit beside the days that follow them. It counts and lays out, and leaves the reading to you.</li>
+        <li><strong>Pacing</strong>: How busier days sit beside the days that follow them. A bigger day is one past the top of your usual steps or exercise minutes, or with an activity you rated Hard or Very hard, and how you said you were the next morning sits beside it. It counts and lays out, and leaves the reading to you.</li>
         <li><strong>Cycle</strong>: What you logged lined up against the day of your cycle.</li>
         <li><strong>Keeping Up</strong>: A record of what you did, read from Life. Nothing here scores you.</li>
         <li><strong>Garden Yield</strong>: What the garden gave over time. Money on a harvest uses only prices you recorded and is called an avoided cost.</li>

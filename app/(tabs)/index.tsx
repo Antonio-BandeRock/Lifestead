@@ -253,6 +253,8 @@ import { countWaiting } from '../../lib/waitingAnswers';
 import { useBandFolds } from '../../hooks/useBandFolds';
 import { useWalkMark } from '../../components/WalkMark';
 import { ThumbRow } from '../../components/ThumbRow';
+import { EffortPills } from '../../components/EffortPills';
+import type { EffortLevel } from '../../lib/exertion';
 import { StandaloneKeyboard } from '../../components/StandaloneKeyboard';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
@@ -1475,6 +1477,7 @@ export default function HomeScreen() {
   const [exerciseType, setExerciseType] = useState('');
   const [exerciseDuration, setExerciseDuration] = useState('');
   const [exerciseIntensity, setExerciseIntensity] = useState<'light' | 'moderate' | 'vigorous' | null>(null);
+  const [exerciseEffort, setExerciseEffort] = useState<EffortLevel | null>(null);
   // Today's Check-In (see "Today's Check-In" render section below) --
   // false/[] until either the picker's own "Change" link is tapped, or the
   // first load finds no existing entry for today at all (see the effect
@@ -2370,6 +2373,7 @@ export default function HomeScreen() {
     setExerciseType('');
     setExerciseDuration('');
     setExerciseIntensity(null);
+    setExerciseEffort(null);
   }
 
   // Both of these are the "right now" fast path -- no date/time picking,
@@ -2405,6 +2409,7 @@ export default function HomeScreen() {
       exerciseType,
       durationMinutes: Number.isFinite(minutes) && minutes > 0 ? minutes : undefined,
       intensity: exerciseIntensity ?? undefined,
+      effort: exerciseEffort,
     });
     closeQuickLogModal();
   }
@@ -5552,6 +5557,8 @@ export default function HomeScreen() {
                       ))}
                     </View>
                   </View>
+                  <Text style={[styles.modalMeta, { marginTop: 12, marginBottom: 6 }]}>How hard did it feel? (optional)</Text>
+                  <EffortPills value={exerciseEffort} onChange={setExerciseEffort} />
                   <ThumbRow primary="last" style={styles.modalActions}>
                     <TouchableOpacity style={styles.secondaryButton} onPress={closeQuickLogModal}>
                       <Text style={styles.secondaryButtonText}>Cancel</Text>
