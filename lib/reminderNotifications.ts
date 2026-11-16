@@ -605,7 +605,35 @@ async function listTravelAdjustedCandidates(lookback: Date, horizon: Date, now: 
   return result;
 }
 
-function buildPlanned(candidate: TravelCandidate, now: Date): PlannedNotification | null {
+// Q11: what the meals around each dose today and tomorrow say about it, by
+// schedule row id, as the one line a dose reminder adds. Further days have
+// no meals logged yet, and a plan that far out is still moving, so they
+// keep the plain reminder. A day that cannot be read keeps it too.
+async function readDoseMealLines(candidates: TravelCandidate[], now: Date): Promise<Map<string, string>> {
+  const lines = new Map<string, string>();
+  const tomorrow = new Date(now);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const days = [localDateString(now), localDateString(tomorrow)].filter((day) =>
+    candidates.some((candidate) => reminderKindFor(candidate) === 'dose' && candidate.scheduledFor.slice(0, 10) === day),
+  );
+  for (const day of days) {
+    try {
+      const { getDayMealAndDoseTimeline } = await import('./db');
+      const { doseFoodNotes, doseReminderLine } = await import('./doseMealTiming');
+      const data = await getDayMealAndDoseTimeline(day);
+      if (data.meals.length === 0) continue;
+      for (const dose of data.doses) {
+        const line = doseReminderLine(doseFoodNotes(dose, data.meals, data.rules, data.nutrientNames));
+        if (line) lines.set(dose.id, line);
+      }
+    } catch (error) {
+      console.warn('[reminderNotifications] the meals around the doses could not be read', error);
+    }
+  }
+  return lines;
+}
+
+function buildPlanned(candidate: TravelCandidate, now: Date, mealLine?: string | null): PlannedNotification | null {
   const scheduledFor = parseLocalDateTime(candidate.scheduledFor);
   if (!scheduledFor) return null;
   // Every body says three things and nothing else (1.0.53.10, direct
@@ -732,10 +760,15 @@ function buildPlanned(candidate: TravelCandidate, now: Date): PlannedNotificatio
   }
 
   const dose = describeDose(candidate);
+  const lead = `${dose ? `${dose}, due` : 'Due'} ${due}${candidate.homeClock ? ` here, ${candidate.homeClock},` : ''} on your Meds schedule.`;
   return {
     identifier: `${IDENTIFIER_PREFIX}dose:${candidate.id}`,
     title: `Time for ${candidate.title}`,
-    body: saying(`${dose ? `${dose}, due` : 'Due'} ${due}${candidate.homeClock ? ` here, ${candidate.homeClock},` : ''} on your Meds schedule.`, 'dose'),
+    // Q11: with a meal near it to speak of, the stamp says the meals were
+    // read at that minute too, so a line naming breakfast says when.
+    body: mealLine
+      ? [lead, mealLine, answerLine('dose'), `Meals and schedule as of ${describeFreshness(now, scheduledFor)}.`].filter(Boolean).join(' ')
+      : saying(lead, 'dose'),
     fireAt: scheduledFor,
     payload: {
       kind: 'dose',
@@ -2014,6 +2047,7 @@ async function runSync(): Promise<ReminderSyncResult> {
   // appointment and the calendar can be read; a failed read keeps every
   // reminder.
   const calendarAlarms = await readCalendarAlarms(candidates, lookback, horizon);
+  const doseMealLines = isReminderKindEnabled(preferences, 'dose') ? await readDoseMealLines(candidates, now) : new Map<string, string>();
 
   const first = new Map<string, PlannedNotification>();
   const followUps = new Map<string, PlannedNotification>();
@@ -2021,7 +2055,7 @@ async function runSync(): Promise<ReminderSyncResult> {
   for (const candidate of candidates) {
     if (!isReminderKindEnabled(preferences, reminderKindFor(candidate))) continue;
     if (candidate.itemType === 'appointment' && leftToCalendar(candidate.linkedCalendarEventId ?? null, calendarAlarms)) continue;
-    const planned = buildPlanned(candidate, now);
+    const planned = buildPlanned(candidate, now, doseMealLines.get(candidate.id));
     if (!planned) continue;
     if (reminderKindFor(candidate) === 'hydration' && skipHydrationReminder(planned.fireAt, now, waterReached)) continue;
     if (planned.fireAt.getTime() > now.getTime()) first.set(planned.identifier, planned);

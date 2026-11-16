@@ -93,6 +93,11 @@ export type DoseFoodNote = {
   citation: string | null;
   mechanism: string | null;
   ruleId: string | null;
+  // Q11: the same note in a sentence or two short enough for a dose
+  // reminder, naming the meal and the time that clears it. Only a clash
+  // and a missing note carry one, since those are the two that change
+  // what somebody does at the moment the reminder goes off.
+  reminder?: string;
 };
 
 export type DoseGuidanceLine = { nutrientName: string; bestTaken: string; citation: string | null };
@@ -242,6 +247,7 @@ export function doseFoodNotes(
       const name = nutrientLabel(nutrientCode, nutrientNames);
       const hours = rule.minSeparationHours;
       notes.push({
+        reminder: clashReminder(closest.meal, doseMinutes, closest.amount, unitFor(nutrientCode), name, hours),
         kind: 'clash',
         headline: `Too close to ${closest.meal.title}`,
         detail:
@@ -285,6 +291,11 @@ export function doseFoodNotes(
         });
       } else if (!unresolvedInWindow) {
         notes.push({
+          // Said in a reminder only once a meal that day can be read, so a
+          // day with nothing planned or logged keeps the plain reminder.
+          ...(eaten.some((meal) => meal.nutrientsResolved)
+            ? { reminder: `Nothing with fat in it is planned or logged within ${FAT_WINDOW_HOURS} hours of this dose.` }
+            : {}),
           kind: 'missing',
           headline: 'Nothing with fat in it near this dose',
           detail:
@@ -314,6 +325,37 @@ export function doseFoodNotes(
 
   const order: Record<DoseFoodNote['kind'], number> = { clash: 0, missing: 1, unknown: 2, good: 3 };
   return notes.sort((a, b) => order[a.kind] - order[b.kind]);
+}
+
+// "Breakfast at 7:40 AM has about 320 mg of calcium. Taking this dose at
+// 11:40 AM or later leaves 4 hours after the meal." When the meal comes after the
+// dose, the later time is for the meal instead, since a dose already due
+// cannot move earlier. A time that would fall past midnight is left out
+// rather than naming tomorrow.
+function clashReminder(
+  meal: TimelineMeal,
+  doseMinutes: number,
+  amount: number,
+  unit: string,
+  nutrientName: string,
+  hours: number,
+): string {
+  const mealMinutes = minutesOfDay(meal.time);
+  const first = `${meal.title} at ${formatTime12(meal.time)} has about ${formatAmount(amount, unit)} of ${nutrientName.toLowerCase()}.`;
+  const gap = hours === 1 ? '1 hour' : `${hours} hours`;
+  const later = (mealMinutes <= doseMinutes ? mealMinutes : doseMinutes) + Math.round(hours * 60);
+  if (later >= 24 * 60) return first;
+  const at = formatTime12(`${String(Math.floor(later / 60)).padStart(2, '0')}:${String(later % 60).padStart(2, '0')}`);
+  return mealMinutes <= doseMinutes
+    ? `${first} Taking this dose at ${at} or later leaves ${gap} after the meal.`
+    : `${first} Eating it at ${at} or later leaves ${gap} after this dose.`;
+}
+
+// The line a dose reminder adds, from the notes doseFoodNotes gave it:
+// the worst one that has something to say at that moment, or null, which
+// keeps the plain reminder.
+export function doseReminderLine(notes: DoseFoodNote[]): string | null {
+  return notes.find((note) => note.reminder)?.reminder ?? null;
 }
 
 export function doseGuidance(

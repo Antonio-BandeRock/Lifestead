@@ -571,7 +571,7 @@
 ### Q62. Google Drive and iCloud Drive as the shared folder
 - **Ships by:** Android rebuild R1 · **Size:** M · **Tabs:** All
 - **Answers:** Obsidian Sync, Day One · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** The same snapshot sync and backup through Google Drive and iCloud Drive as through OneDrive, the person’s own storage, no company server. Partly built: Google Drive (lib/googleDrive.ts). Not yet: iCloud Drive.
+- **How:** The same snapshot sync and backup through Google Drive and iCloud Drive as through OneDrive, the person’s own storage, no company server. Partly built: Google Drive (lib/googleDrive.ts). iCloud Drive waits for the iPhone build (R2), by Tony's decision on 2026-11-16.
 
 ### Q63. A shared recipe readable without the app
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** All

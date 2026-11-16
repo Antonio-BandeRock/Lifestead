@@ -15999,6 +15999,7 @@ export async function createMeal(input: {
   );
 
   await insertMealItems(db, id, input.ingredients, now);
+  mealsChangedForReminders();
 
   return { id, name: input.name.trim(), mealType: input.mealType, eatenAt: input.eatenAt, notes: input.notes?.trim() || null, isImmediate: input.isImmediate };
 }
@@ -16055,6 +16056,7 @@ export async function replaceMealItems(mealId: string, ingredients: MealIngredie
 
   await db.runAsync('DELETE FROM meal_items WHERE meal_id = ?', mealId);
   await insertMealItems(db, mealId, ingredients, now);
+  mealsChangedForReminders();
 }
 
 // G9: marks a meal as eaten out, with where and how. Called after whichever
@@ -16104,6 +16106,18 @@ export async function deleteMeal(mealId: string) {
     await db.runAsync('UPDATE schedule_items SET leftover_of_meal = NULL, title = ?, updated_at = ? WHERE id = ?', titleWithoutLeftover(row.title), now, row.id);
   }
   await db.runAsync('DELETE FROM meals WHERE id = ?', mealId);
+  mealsChangedForReminders();
+}
+
+// Q11: a dose reminder names a meal near it that competes with it, so a
+// meal logged, changed or deleted has the pending reminders worked out
+// again. Imported when called, since lib/reminderNotifications.ts reads
+// this file. The reconcile shares one run among calls made close together,
+// so a run of meals settled at start costs one pass.
+function mealsChangedForReminders(): void {
+  void import('./reminderNotifications')
+    .then((module) => module.syncReminderNotifications())
+    .catch(() => undefined);
 }
 
 // Meal Builder's own layer, 2026-08-02 -- assembles a real meal (a normal
@@ -19645,6 +19659,7 @@ export async function markScheduledMealLogged(scheduleItemId: string, loggedMeal
     now,
     scheduleItemId,
   );
+  mealsChangedForReminders();
 }
 
 export async function setScheduledMealSkipped(id: string, skipped: boolean) {
@@ -19657,6 +19672,7 @@ export async function setScheduledMealSkipped(id: string, skipped: boolean) {
     now,
     id,
   );
+  mealsChangedForReminders();
 }
 
 // --- Reconciliation (1.0.39.15) --------------------------------------------
@@ -23446,6 +23462,50 @@ export async function getDayMealAndDoseTimeline(date: string): Promise<{
       // timeline says so instead of quietly clearing the dose beside it.
       nutrientsResolved: resolvedAny,
     });
+  }
+
+  // Q11: a meal logged without being planned sits beside the doses too, so
+  // a calcium-rich breakfast logged at 7:40 reaches the 8:00 dose. A logged
+  // meal a schedule row already points at is that row, read above. Today's
+  // Meals draws only its scheduled meals from this list, so these reach the
+  // dose notes and the Insights day without adding a band there.
+  const linkedMealIds = new Set(mealItems.map((item) => item.linkedMealId).filter((id): id is string => Boolean(id)));
+  const loggedMeals = (await listMealsForDate(date)).filter((meal) => !linkedMealIds.has(meal.id));
+  if (loggedMeals.length > 0) {
+    const loggedItems = await getMealItemsInWindow(`${date}T00:00`, `${date}T23:59:59`);
+    for (const meal of loggedMeals) {
+      const nutrients: Record<string, number> = {};
+      let resolvedAny = false;
+      for (const item of loggedItems) {
+        if (item.mealId !== meal.id) continue;
+        const totals = await resolveIngredientNutrientTotals(
+          {
+            foodId: item.foodId,
+            category: item.category,
+            rawAmount: item.servingSize ?? 0,
+            rawUnit: item.servingUnit ?? '',
+            quantityMultiplier: item.quantity,
+            dishServings: item.dishServings,
+            yourSharePercent: item.yourSharePercent,
+            note: item.notes,
+          },
+          caches,
+        );
+        if (!totals) continue;
+        resolvedAny = true;
+        addNutrientTotalsInto(nutrients, totals);
+      }
+      meals.push({
+        id: meal.id,
+        title: meal.name,
+        time: meal.eaten_at.slice(11, 16),
+        mealType: meal.meal_type,
+        status: 'logged',
+        nutrients,
+        nutrientsResolved: resolvedAny,
+      });
+    }
+    meals.sort((a, b) => a.time.localeCompare(b.time));
   }
 
   // A dose row left behind by a med since switched off is dropped, the way

@@ -1068,7 +1068,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Schedule it under the one you want.', mark: 'myMeds.schedule' },
         { say: 'Schedules opens on Meds. Set the times you take it there.' },
       ],
-      forYou: 'Reminders come at those times, and each dose is checked against the meals around it.',
+      forYou: 'Reminders come at those times. Each one reads the meals planned or logged around that dose, and when one clashes it names the meal and the time that clears it.',
     },
     {
       key: 'tracking',
@@ -4088,7 +4088,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap a dose in the day to open it.', mark: 'todaysMeals.doseBand' },
         { say: 'Read When this one is best taken, and tap a line to see why.' },
       ],
-      forYou: 'It checks the dose against the meals around it, so a clash with a food is seen before it happens.',
+      forYou: 'It checks the dose against the meals around it, so a clash with a food is seen before it happens. The reminder for that dose says the same thing on the phone.',
     },
     {
       key: 'marks',

@@ -28,6 +28,10 @@
 //     the window silences the missing note rather than guessing.
 //  7. The timeline interleaves meals and doses by time, a meal first at a
 //     shared minute, and the summary counts doses rather than notes.
+//  8. Q11: a dose reminder adds one line from the worst note: the meal, its
+//     amount and the time that clears it (the dose later when the meal came
+//     first, the meal later when it comes after), the missing-fat line only
+//     once a meal that day can be read, and nothing at all otherwise.
 //
 // Run with: node scripts/test_dose_meal_timing.js
 // Exits non-zero on any failure.
@@ -54,7 +58,7 @@ function loadModule(relPath, deps = {}) {
 const N = loadModule('lib/nutrientAnalysis.ts');
 const T = loadModule('lib/timeOfDay.ts');
 const D = loadModule('lib/doseMealTiming.ts', { './nutrientAnalysis': N, './timeOfDay': T });
-const { minutesOfDay, describeGap, doseMatchesSubject, doseFoodNotes, doseGuidance, buildDayTimeline, timelineSummary } = D;
+const { minutesOfDay, describeGap, doseMatchesSubject, doseFoodNotes, doseGuidance, buildDayTimeline, timelineSummary, doseReminderLine } = D;
 
 let failures = 0;
 let checks = 0;
@@ -365,6 +369,52 @@ check(
   '1 dose sits too close to a meal that competes with it.',
 );
 check('an empty day has nothing on it', buildDayTimeline([], [], [], [], {}).length, 0);
+
+
+// --- 8. The line a dose reminder adds (Q11) -----------------------------------
+
+const breakfastCalcium = meal({ time: '07:40', status: 'logged', nutrients: { calcium: 320 } });
+check(
+  'a calcium breakfast before levothyroxine names the meal and the later time',
+  doseReminderLine(doseFoodNotes(dose({ time: '08:00' }), [breakfastCalcium], [levoCalcium], names)),
+  'Breakfast at 7:40 AM has about 320 mg of calcium. Taking this dose at 11:40 AM or later leaves 4 hours after the meal.',
+);
+check(
+  'a meal coming after the dose moves the meal instead',
+  doseReminderLine(doseFoodNotes(dose({ time: '07:00' }), [meal({ time: '08:00', nutrients: { calcium: 320 } })], [levoCalcium], names)),
+  'Breakfast at 8:00 AM has about 320 mg of calcium. Eating it at 11:00 AM or later leaves 4 hours after this dose.',
+);
+check(
+  'a later time past midnight is left out',
+  doseReminderLine(doseFoodNotes(dose({ time: '22:00' }), [meal({ title: 'Dinner', time: '21:30', nutrients: { calcium: 320 } })], [levoCalcium], names)),
+  'Dinner at 9:30 PM has about 320 mg of calcium.',
+);
+check(
+  'nothing near the dose keeps the plain reminder',
+  doseReminderLine(doseFoodNotes(dose({ time: '08:00' }), [meal({ time: '13:00', nutrients: { calcium: 320 } })], [levoCalcium], names)),
+  null,
+);
+check(
+  'a trace amount keeps the plain reminder',
+  doseReminderLine(doseFoodNotes(dose({ time: '08:00' }), [meal({ time: '07:40', nutrients: { calcium: 20 } })], [levoCalcium], names)),
+  null,
+);
+const vitaminDDose = dose({ id: 'd9', time: '20:00', treatmentType: 'supplement', treatmentName: 'Vitamin D', genericName: null, nutrientCodes: ['vitamin_d'] });
+check(
+  'no fat near a fat-soluble dose is said once a meal that day can be read',
+  doseReminderLine(doseFoodNotes(vitaminDDose, [meal({ time: '07:30', nutrients: { fat_total: 12 } })], [vitaminDFat], names)),
+  'Nothing with fat in it is planned or logged within 2 hours of this dose.',
+);
+check(
+  'a day with no meals keeps the plain reminder for a fat-soluble dose',
+  doseReminderLine(doseFoodNotes(vitaminDDose, [], [vitaminDFat], names)),
+  null,
+);
+check(
+  'fat already there keeps the plain reminder',
+  doseReminderLine(doseFoodNotes(vitaminDDose, [meal({ time: '19:30', nutrients: { fat_total: 12 } })], [vitaminDFat], names)),
+  null,
+);
 
 console.log(`${checks} checks, ${failures} failures`);
 process.exit(failures === 0 ? 0 : 1);
