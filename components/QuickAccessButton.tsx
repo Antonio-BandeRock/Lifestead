@@ -43,10 +43,8 @@ import { setVisualPreferences } from '../lib/visualPreferences';
 import { sortByLabel } from '../lib/choiceOrder';
 import { useNavigationHand } from '../lib/navigationHand';
 import { openQuickAccessSheet } from '../lib/quickAccess';
-import { EDGE_TAB_HEIGHT, EdgeTab } from './EdgeTab';
+import { EDGE_SLOT_QUICK, EDGE_TAB_HEIGHT, EdgeTab, edgeTabAboveFooter } from './EdgeTab';
 import { EdgeTabMenu, type EdgeMenuChoice } from './EdgeTabMenu';
-
-const GAP_ABOVE_FOOTER = 8;
 
 export function QuickAccessButton() {
   const hand = useNavigationHand();
@@ -56,7 +54,7 @@ export function QuickAccessButton() {
   const { height: windowHeight } = useWindowDimensions();
   const prefs = useVisualPreferences();
   const [open, setOpen] = useState(false);
-  const bottom = footerHeight + GAP_ABOVE_FOOTER;
+  const bottom = footerHeight + edgeTabAboveFooter(EDGE_SLOT_QUICK);
   const menuBottom = bottom + EDGE_TAB_HEIGHT + 6;
   const maxHeight = Math.max(160, windowHeight - menuBottom - insets.top - 16);
   const lowStimulationOn = prefs.lowStimulation;

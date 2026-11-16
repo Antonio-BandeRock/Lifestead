@@ -27,6 +27,26 @@ import { ActiveRingCircle } from './ActiveRingCircle';
 export const EDGE_TAB_WELL = 32;
 const EDGE_TAB_MARGIN = 4;
 export const EDGE_TAB_HEIGHT = EDGE_TAB_WELL + EDGE_TAB_MARGIN * 2;
+// The thumb-side stack, counted in slots from the footer up, 8 apart.
+// Slot 0 is kept empty (direct instruction, 2026-11-16: "Move all 3 icons up
+// so the amount of space at the bottom of them will have enough room for one
+// more icon ... I don't want another one there, I just want the space").
+// From the bottom: Quick Access, flash cards and reading while shown, Voice
+// Control at the top ("Move the voice note icon on the left side to the top
+// of the 3 icons there"), and search near the thumb above whichever is top.
+const EDGE_TAB_GAP = 8;
+export const EDGE_SLOT_QUICK = 1;
+export const EDGE_SLOT_STUDY = 2;
+export function edgeSlotVoice(studyShown: boolean): number {
+  return studyShown ? EDGE_SLOT_STUDY + 1 : EDGE_SLOT_STUDY;
+}
+export function edgeSlotSearch(studyShown: boolean): number {
+  return edgeSlotVoice(studyShown) + 1;
+}
+// How far above the footer a tab in this slot sits.
+export function edgeTabAboveFooter(slot: number): number {
+  return EDGE_TAB_GAP + slot * (EDGE_TAB_HEIGHT + EDGE_TAB_GAP);
+}
 // Room from the screen edge to where the well starts, plus the well and the
 // margin past it, so the half circle's centre is the well's centre.
 const EDGE_TAB_LEAD = 6;

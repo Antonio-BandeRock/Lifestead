@@ -43,20 +43,18 @@ import { useLanguage } from '../lib/language';
 import { getNavigationHand, useNavigationHand } from '../lib/navigationHand';
 import { getVisualPreferences, isHomeSectionVisible, isShownOnHome, modalAnimationType, setVisualPreferences } from '../lib/visualPreferences';
 import { sortByLabel } from '../lib/choiceOrder';
-import { EDGE_TAB_HEIGHT, EdgeTab } from './EdgeTab';
-import { VOICE_CONTROL_ABOVE_FOOTER } from './VoiceControlButton';
+import { EDGE_SLOT_STUDY, EDGE_TAB_HEIGHT, EdgeTab, edgeTabAboveFooter } from './EdgeTab';
 import { EdgeTabMenu, type EdgeMenuChoice } from './EdgeTabMenu';
 import { LanguageBasicsList, loadLanguageSetsOnHome, type LanguageSetOnHome } from './LanguageBasicsHomeCard';
 import { cardHeightFor } from './LensHub';
 
-// Voice Control sits VOICE_CONTROL_ABOVE_FOOTER up and is EDGE_TAB_HEIGHT tall; this sits 8 above that.
-export const STUDY_ABOVE_FOOTER = VOICE_CONTROL_ABOVE_FOOTER + EDGE_TAB_HEIGHT + 8;
-const ABOVE_FOOTER = STUDY_ABOVE_FOOTER;
+// Between Quick Access and Voice Control (slots in components/EdgeTab.tsx).
+const ABOVE_FOOTER = edgeTabAboveFooter(EDGE_SLOT_STUDY);
 
 function whereItIs(side: 'left' | 'right'): string {
   return side === 'left'
-    ? t('Language Basics is in the menu of the button with the graduation cap icon at the left edge, just above Voice Control.')
-    : t('Language Basics is in the menu of the button with the graduation cap icon at the right edge, just above Voice Control.');
+    ? t('Language Basics is in the menu of the button with the graduation cap icon at the left edge, just below Voice Control.')
+    : t('Language Basics is in the menu of the button with the graduation cap icon at the right edge, just below Voice Control.');
 }
 
 

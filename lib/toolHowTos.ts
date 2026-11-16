@@ -2685,7 +2685,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'cardsAndReading',
       title: 'Open flash cards or the reading from any screen',
       steps: [
-        { say: 'Tap the tab with the graduation cap at the bottom edge of the screen on your thumb side, just above Voice Control.' },
+        { say: 'Tap the tab with the graduation cap at the bottom edge of the screen on your thumb side, just below Voice Control.' },
         { say: 'Under Flash Cards, tap Language Basics for the units you put on Home, Languages for every language set, or Flashcards for the ready-made decks and your own.' },
         { say: 'Under Reading Material, tap Conditions, Earth Matters, Health Literacy, Horticulture or Search Reading, or Library for the cards on Home while Home shows them.' },
       ],

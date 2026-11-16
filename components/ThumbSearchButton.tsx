@@ -17,15 +17,10 @@ import { isDesktopApp } from '../lib/desktop/bridge';
 import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { useNavigationHand } from '../lib/navigationHand';
 import { hasThumbSearch, openThumbSearch, subscribeThumbSearch } from '../lib/thumbSearch';
-import { EDGE_TAB_HEIGHT, EdgeTab } from './EdgeTab';
-import { VOICE_CONTROL_ABOVE_FOOTER } from './VoiceControlButton';
+import { EdgeTab, edgeSlotSearch, edgeTabAboveFooter } from './EdgeTab';
 
-// Voice Control sits VOICE_CONTROL_ABOVE_FOOTER up and is EDGE_TAB_HEIGHT tall,
-// and the flash cards and reading tab sits 8 above that while it is shown
-// (components/LanguageBasicsButton.tsx, 2026-11-12); this one sits 8 above
-// whichever is topmost, so it never moves the tabs under it.
-const ABOVE_VOICE = VOICE_CONTROL_ABOVE_FOOTER + EDGE_TAB_HEIGHT + 8;
-const ABOVE_STUDY = ABOVE_VOICE + EDGE_TAB_HEIGHT + 8;
+// One slot above the top of the thumb-side stack (slots in
+// components/EdgeTab.tsx), so it never moves the tabs under it.
 
 export function ThumbSearchButton() {
   const hand = useNavigationHand();
@@ -33,7 +28,7 @@ export function ThumbSearchButton() {
   const prefs = useVisualPreferences();
   const available = useSyncExternalStore(subscribeThumbSearch, hasThumbSearch, hasThumbSearch);
   if (!available || isDesktopApp()) return null;
-  const aboveFooter = prefs.studyButton !== false ? ABOVE_STUDY : ABOVE_VOICE;
+  const aboveFooter = edgeTabAboveFooter(edgeSlotSearch(prefs.studyButton !== false));
 
   return (
     <EdgeTab

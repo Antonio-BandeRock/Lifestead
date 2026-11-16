@@ -3,7 +3,7 @@
 // own quick access just above the quick access we have right now."
 //
 // The same EdgeTab shape as the quick-access tab (components/
-// QuickAccessButton.tsx), on the thumb side, stacked 8 above it. A tap opens
+// QuickAccessButton.tsx), on the thumb side, stacked at the top of the three (slots in EdgeTab.tsx). A tap opens
 // the Voice Control sheet that stays mounted at the root
 // (components/VoiceCommandSheet.tsx), the same way the menu choice did.
 // Search near the thumb (components/ThumbSearchButton.tsx) sits one slot
@@ -13,20 +13,21 @@ import { colors } from '../constants/colors';
 import { useFooterBandHeight } from '../constants/floatingButton';
 import { useNavigationHand } from '../lib/navigationHand';
 import { openQuickAccessSheet } from '../lib/quickAccess';
-import { EDGE_TAB_HEIGHT, EdgeTab } from './EdgeTab';
+import { useVisualPreferences } from '../hooks/useVisualPreferences';
+import { EdgeTab, edgeSlotVoice, edgeTabAboveFooter } from './EdgeTab';
 
-// The quick-access tab sits 8 above the footer and is EDGE_TAB_HEIGHT tall;
-// this one sits 8 above that.
-export const VOICE_CONTROL_ABOVE_FOOTER = 8 + EDGE_TAB_HEIGHT + 8;
+// Top of the thumb-side stack since 2026-11-16 (the slots are in
+// components/EdgeTab.tsx).
 
 export function VoiceControlButton() {
   const hand = useNavigationHand();
   const footerHeight = useFooterBandHeight();
+  const prefs = useVisualPreferences();
 
   return (
     <EdgeTab
       side={hand}
-      bottom={footerHeight + VOICE_CONTROL_ABOVE_FOOTER}
+      bottom={footerHeight + edgeTabAboveFooter(edgeSlotVoice(prefs.studyButton !== false))}
       hubKey="voice"
       onPress={() => openQuickAccessSheet('voiceCommand')}
       hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
