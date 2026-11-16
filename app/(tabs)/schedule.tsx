@@ -276,6 +276,9 @@ import { PageIdentityLabel } from '../../components/PageIdentityLabel';
 import { PopoverSelect } from '../../components/PopoverSelect';
 import { RecordPhotos } from '../../components/RecordPhotos';
 import { AttachedFiles } from '../../components/AttachedFiles';
+import { VisitQuestions } from '../../components/VisitQuestions';
+import { listVisitQuestions, moveUnaskedQuestions, removeQuestionsOf } from '../../lib/visitQuestionsDb';
+import { removalWords } from '../../lib/visitQuestions';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { WhyExplainer } from '../../components/WhyExplainer';
 import { RuleLabelQuote } from '../../components/RuleLabelQuote';
@@ -6574,23 +6577,54 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
     }
   }
 
-  function handleRemove(item: ScheduleItemRecord) {
-    const removeIt = (alsoRemoveFromCalendar: boolean) => {
+  async function handleRemove(item: ScheduleItemRecord) {
+    // Questions written for this visit (K4) are never lost quietly: the ones
+    // not asked yet can move to the next planned visit, or go with it.
+    let questions: Awaited<ReturnType<typeof listVisitQuestions>> = [];
+    try {
+      questions = await listVisitQuestions(item.id);
+    } catch (error) {
+      console.error('[Appointments] questions', error);
+    }
+    const nextVisit = appointments
+      .filter((other) => other.id !== item.id && other.status === 'planned' && other.scheduledFor >= item.scheduledFor)
+      .sort((a, b) => a.scheduledFor.localeCompare(b.scheduledFor))[0];
+    const nextForWords = nextVisit ? { title: nextVisit.title, day: nextVisit.scheduledFor.slice(0, 10) } : null;
+    const removal = removalWords(questions, nextForWords, t);
+    const questionWords = removal.message || null;
+
+    const removeIt = (alsoRemoveFromCalendar: boolean, moveQuestions: boolean) => {
       void saveOrSay('The appointment was not removed. Try again.', async () => {
         if (alsoRemoveFromCalendar && item.linkedDeviceCalendarEventId) {
           await deleteDeviceCalendarEvent(item.linkedDeviceCalendarEventId);
         }
+        if (moveQuestions && nextVisit) await moveUnaskedQuestions(item.id, nextVisit.id);
+        await removeQuestionsOf(item.id);
         await deleteScheduledMeal(item.id);
       }).then(() => load());
     };
 
+    if (removal.canMove && nextVisit) {
+      const calendarToo = Boolean(item.linkedDeviceCalendarEventId);
+      setRemovePrompt({
+        title: 'Remove this appointment?',
+        message: calendarToo ? `${questionWords} ${t('It is also on your phone calendar, and comes off there too.')}` : removal.message,
+        actions: [
+          { label: 'Move the questions, then remove', onPress: () => removeIt(calendarToo, true) },
+          { label: 'Remove it and its questions', destructive: true, onPress: () => removeIt(calendarToo, false) },
+          { label: 'Cancel', onPress: () => {} },
+        ],
+      });
+      return;
+    }
+
     if (item.linkedDeviceCalendarEventId) {
       setRemovePrompt({
         title: 'Remove this appointment?',
-        message: 'This appointment is also on your phone calendar.',
+        message: questionWords ? `${t('This appointment is also on your phone calendar.')} ${questionWords}` : 'This appointment is also on your phone calendar.',
         actions: [
-          { label: 'Remove here only', onPress: () => removeIt(false) },
-          { label: 'Remove from both', destructive: true, onPress: () => removeIt(true) },
+          { label: 'Remove here only', onPress: () => removeIt(false, false) },
+          { label: 'Remove from both', destructive: true, onPress: () => removeIt(true, false) },
           { label: 'Cancel', onPress: () => {} },
         ],
       });
@@ -6599,8 +6633,9 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
 
     setRemovePrompt({
       title: 'Remove this appointment?',
+      message: questionWords ?? undefined,
       actions: [
-        { label: 'Remove', destructive: true, onPress: () => removeIt(false) },
+        { label: 'Remove', destructive: true, onPress: () => removeIt(false, false) },
         { label: 'Cancel', onPress: () => {} },
       ],
     });
@@ -6954,6 +6989,19 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
                         ownerId={item.id}
                         tabColor={TAB_COLOR}
                         openerRef={item.id === firstPlannedAppointmentId ? walkMark.ref('appointments.files') : undefined}
+                      />
+                      <VisitQuestions
+                        appointment={{
+                          id: item.id,
+                          title: item.title,
+                          scheduledFor: item.scheduledFor,
+                          providerName: item.providerName ?? null,
+                          location: item.location ?? null,
+                          appointmentType: item.appointmentType ?? null,
+                          status: item.status ?? null,
+                        }}
+                        tabColor={TAB_COLOR}
+                        openerRef={item.id === firstPlannedAppointmentId ? walkMark.ref('appointments.questions') : undefined}
                       />
                     </View>
                   </View>

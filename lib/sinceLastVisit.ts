@@ -14,7 +14,7 @@ import { daysBetween, shortDate } from './eatingVariety';
 import { emptyView, plural, type ReadingBand, type ReadingItem, type ReadingView } from './readingBands';
 import { localDay } from './trendsMore';
 
-export type VisitRecord = { scheduledFor: string; title: string; providerName: string | null; appointmentType: string | null; status: string };
+export type VisitRecord = { id?: string; scheduledFor: string; title: string; providerName: string | null; appointmentType: string | null; status: string };
 export type VisitLab = { displayName: string; value: number; unit: string | null; low: number | null; high: number | null; testedAt: string };
 export type VisitFlare = { loggedAt: string; severity: number | null; notes: string | null };
 export type VisitTreatment = {

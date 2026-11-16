@@ -166,6 +166,7 @@ export type ToolMark =
   | 'capture.keepInLibrary'
   | 'capture.attachFile'
   | 'appointments.files'
+  | 'appointments.questions'
   | 'labs.files'
   | 'labs.history'
   | 'labs.change'
@@ -4344,8 +4345,9 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Tap Remove under it.', mark: 'appointments.remove' },
         { say: 'If it is on your phone calendar too, pick Remove here only or Remove from both.' },
+        { say: 'If it has questions not asked yet and another visit is planned, pick Move the questions, then remove, or Remove it and its questions.' },
       ],
-      forYou: 'It comes off the list and its reminder stops.',
+      forYou: 'It comes off the list and its reminder stops. Questions you moved wait on the next visit.',
     },
     {
       key: 'files',
@@ -4356,6 +4358,18 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: "Tap Attach a File and pick it: a referral, a visit summary or a form to bring." },
       ],
       forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
+    {
+      key: 'questions',
+      title: 'Write your questions for a visit',
+      steps: [
+        { say: 'Open the band called Appointments.', mark: 'appointments.listBand', stay: true },
+        { say: 'Tap Questions under the appointment.', mark: 'appointments.questions', stay: true },
+        { say: 'Type or say a question, then tap Add the question. Health notes from Capture come in with Add under From your health notes.' },
+        { say: 'Use the arrows to put the most important first. At the visit, tick each one as it is asked, and tap Write the answer for what you were told.' },
+        { say: 'Tap Print the page or Save as PDF to bring the questions on paper, with what was recorded since your last visit with that provider.' },
+      ],
+      forYou: 'Nothing gets forgotten in the room, and the answers stay with the visit. Insights > Before an Appointment shows the questions too.',
     },
   ],
   '/schedule#upkeep': [

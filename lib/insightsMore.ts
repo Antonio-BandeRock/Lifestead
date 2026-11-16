@@ -100,6 +100,8 @@ function timelineItems(entries: TimelineEntry[], nowMinutes: number): ReadingIte
 // ---------------------------------------------------------------------------
 
 export type TodayAppointment = {
+  /** Present where the read carries it; ties questions written for a visit (K4). */
+  id?: string;
   scheduledFor: string;
   title: string;
   providerName: string | null;
@@ -455,6 +457,8 @@ export type AppointmentInputs = {
     doseUnit: string | null;
   }[];
   healthNotes: { text: string; createdAt: string; status: string }[];
+  /** Questions written for a visit on Schedules > Appointments (K4). */
+  visitQuestions?: { appointmentId: string; text: string; asked: boolean }[];
 };
 
 // Two appointments belong to the same provider when the provider name
@@ -533,6 +537,23 @@ export function buildAppointmentView(input: AppointmentInputs): ReadingView {
     items: changes,
     notes: ['This lists what was recorded on Life > My Meds. Any change to a prescription is the prescriber’s to make.'],
   });
+
+  const written = next.id ? (input.visitQuestions ?? []).filter((question) => question.appointmentId === next.id) : [];
+  if (written.length > 0) {
+    const asked = written.filter((question) => question.asked).length;
+    bands.push({
+      id: 'visitQuestions',
+      title: 'Questions for this visit',
+      icon: 'list-outline',
+      count: written.length,
+      lines: [
+        asked > 0
+          ? `${plural(written.length, 'question')} written for this visit, ${asked} ticked as asked. Change them under the appointment on Schedules > Appointments.`
+          : `${plural(written.length, 'question')} written for this visit. Change them under the appointment on Schedules > Appointments.`,
+      ],
+      items: written.map((question, index) => ({ key: `vq-${index}`, title: question.text, caption: question.asked ? 'Asked' : 'Not asked yet' })),
+    });
+  }
 
   const questions = input.healthNotes.filter((note) => note.status !== 'done' && localDay(note.createdAt) > since);
   bands.push({

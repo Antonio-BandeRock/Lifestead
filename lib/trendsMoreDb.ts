@@ -121,11 +121,11 @@ export async function listScheduledDoses(range: DayRange): Promise<{ scheduledFo
 }
 
 export async function listAllAppointments(): Promise<
-  { scheduledFor: string; title: string; providerName: string | null; appointmentType: string | null; status: string }[]
+  { id: string; scheduledFor: string; title: string; providerName: string | null; appointmentType: string | null; status: string }[]
 > {
   const db = await getDatabase();
   return db.getAllAsync(
-    `SELECT scheduled_for AS scheduledFor, title, provider_name AS providerName,
+    `SELECT id, scheduled_for AS scheduledFor, title, provider_name AS providerName,
             appointment_type AS appointmentType, status
      FROM schedule_items WHERE item_type = 'appointment' ORDER BY scheduled_for ASC`,
   );

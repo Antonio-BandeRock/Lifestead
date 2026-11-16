@@ -11130,6 +11130,22 @@ async function runDatabaseInitialization() {
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
       CREATE INDEX IF NOT EXISTS idx_learn_reviews_deck ON learn_reviews(deck_id);
+      -- Questions for one visit (K4, 2026-11-16), in the person's words, in the
+      -- order they put them. asked is ticked at the visit and answer written
+      -- after. capture_note_id names the Capture note a question was brought in
+      -- from; the note itself is left as it was. lib/visitQuestionsDb.ts.
+      CREATE TABLE IF NOT EXISTS visit_questions (
+        id TEXT PRIMARY KEY NOT NULL,
+        appointment_id TEXT NOT NULL,
+        text TEXT NOT NULL,
+        position INTEGER NOT NULL DEFAULT 0,
+        asked INTEGER NOT NULL DEFAULT 0,
+        answer TEXT,
+        capture_note_id TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_visit_questions_appointment ON visit_questions(appointment_id);
     `);
     // Languages (2026-11-11): units studied together are kept as a group, so Home
     // can offer that group again in one tap. A JSON list of { units, order }.

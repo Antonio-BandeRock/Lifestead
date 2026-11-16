@@ -41,6 +41,7 @@ import { listAllAppointments, listBloodPressureReadings, loadVisitRecords, DOSE_
 import { convertToGrams, type MeasurementUnit } from './unitConversion';
 import { upkeepStanding } from './upkeep';
 import { listUpkeepItems } from './upkeepDb';
+import { listVisitQuestionsFor } from './visitQuestionsDb';
 import { readOrClosed } from './vaultReads';
 
 export type InsightsMoreLens = 'i-today' | 'i-signals' | 'i-appointment' | 'i-money' | 'i-kitchen' | 'i-garden';
@@ -102,8 +103,11 @@ async function listCheckinsAround(today: string): Promise<SignalCheckin[]> {
 
 async function loadAppointmentInputs(today: string) {
   const [records, notes] = await Promise.all([loadVisitRecords(today), listCaptureNotes(365)]);
+  const planned = records.appointments.filter((appointment) => appointment.status === 'planned').flatMap((appointment) => (appointment.id ? [appointment.id] : []));
+  const written = await listVisitQuestionsFor(planned);
   return {
     ...records,
+    visitQuestions: [...written.values()].flat().map((question) => ({ appointmentId: question.appointmentId, text: question.text, asked: question.asked })),
     healthNotes: notes
       .filter((note) => note.destination === 'health')
       .map((note) => ({ text: note.text, createdAt: note.createdAt, status: note.status })),

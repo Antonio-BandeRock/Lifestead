@@ -256,6 +256,8 @@ const AREAS: readonly Area[] = [
   { one: 'interest', many: 'interests', count: ['interests'], quiet: ['interest_stage_changes'] },
   { one: 'interest session', many: 'interest sessions', count: ['interest_sessions'], quiet: [] },
   { one: 'supply, collected thing or wish', many: 'supplies, collected things and wishes', count: ['interest_things'], quiet: [] },
+  // K4. A question written for a visit on Schedules > Appointments.
+  { one: 'question for a visit', many: 'questions for visits', count: ['visit_questions'], quiet: [] },
   { one: 'card answered', many: 'cards answered', count: ['learn_reviews'], quiet: [] },
   { one: 'deck you made', many: 'decks you made', count: ['learn_my_decks'], quiet: [] },
   { one: 'course you added', many: 'courses you added', count: ['learn_courses'], quiet: ['learn_course_state'] },

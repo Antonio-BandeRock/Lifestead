@@ -311,7 +311,7 @@
 ### K4. Visit prep: questions and one page for the appointment
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Reports,Insights,Schedules
 - **Answers:** Guava · **Theme:** Reports
-- **How:** visit_questions tied to an appointment, reorder and tick off, in the person's words. Widened 2026-10-06: Capture notes and P25's pharmacist questions can be sent here; what changed since the last visit (meds, supplements, labs, conditions, K1's window); one printed page and PDF per appointment with room for answers; answers recorded after against each question. Notion: https://app.notion.com/p/3f153652f27281aba8e2fdd40d683fb3 Partly built: Before an Appointment on Insights lists open questions from health notes, and Since Your Last Appointment (F19) counts what changed. Not yet: visit_questions tied to one appointment, reordered and ticked off.
+- **How:** visit_questions tied to an appointment, reorder and tick off, in the person's words. Widened 2026-10-06: Capture notes and P25's pharmacist questions can be sent here; what changed since the last visit (meds, supplements, labs, conditions, K1's window); one printed page and PDF per appointment with room for answers; answers recorded after against each question. Notion: https://app.notion.com/p/3f153652f27281aba8e2fdd40d683fb3 Built 1.0.91.6: Questions under each appointment on Schedules > Appointments (visit_questions, lib/visitQuestions.ts), reordered, ticked, answered, health notes brought in, removal moves the unasked ones to the next visit; one page to print or save as PDF with what was recorded since the last visit with that provider; listed on Insights > Before an Appointment. P25 pharmacist questions join once P25 is built.
 
 ### P1. The first week, for someone with no condition and no patience
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** Home,Profile
@@ -381,7 +381,7 @@
 ### P22. The kitchen goes down when a meal is saved
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Food,Life
 - **Answers:** (your question) · **Theme:** Brainstorm review 2026-10-06
-- **How:** Saving a meal offers to take what it used off Life > Kitchen, the way offerGardenUse does for the garden; only matching units are taken off and the rest said so; running low goes to the grocery list in one tap. Builds on H1 and H2. Notion: https://app.notion.com/p/3f153652f272814f94a7f6deb88695fe Partly built: lib/kitchenUsage.ts takes what a recipe used off the kitchen when it is made. Not yet: the offer when a meal is saved, and running low sent to the grocery list in one tap.
+- **How:** Saving a meal offers to take what it used off Life > Kitchen, the way offerGardenUse does for the garden; only matching units are taken off and the rest said so; running low goes to the grocery list in one tap. Builds on H1 and H2. Notion: https://app.notion.com/p/3f153652f272814f94a7f6deb88695fe Built 1.0.54.37 (the offer when a meal is saved, lib/onHand.ts) and 1.0.88.6 (running low to the grocery list in one tap, lib/kitchenLow.ts).
 
 ### P23. What can I make with what I have
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Food

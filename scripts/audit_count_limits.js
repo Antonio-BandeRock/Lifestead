@@ -63,6 +63,7 @@ const ALLOWED = {
   'components/MovementSection.tsx': { "listHealthRecords('exercise', 90)": 'Ninety days, a range of dates, not a count.' },
   'components/MySafeFoodsView.tsx': { 'listScheduledFoodNames(42)': 'Forty-two days ahead, a range of dates, not a count.' },
   'lib/insightsMoreDb.ts': { 'listCaptureNotes(365)': 'A year, a range of dates, not a count.' },
+  'lib/visitQuestionsDb.ts': { 'listCaptureNotes(365)': 'A year of health notes to offer, a range of dates, not a count.' },
   'lib/medicineLabel.ts': { 'limit=10': "Search results from the openFDA label service, not a person's records." },
   'app/profile.tsx': { 'listSymptomAssessments(1)': 'The newest one.' },
   'app/(tabs)/log.tsx': {
