@@ -811,5 +811,27 @@ check(!/\b(?:real|genuine|genuinely)\b/i.test(allText), 'no filler words in Your
 // "+ Add a Rule of Your Own" is a button on Insights, quoted as it reads.
 check(!/\bown\b/i.test(allText.replace(/on their own/g, '').replace(/Rule of Your Own/g, '')), 'no redundant own');
 
+// Setup turned off at start (lib/setupPause.ts, 2026-11-15). The share of
+// the app in use is said in one place only, the message answering the
+// person's own tap on Turn Setup Off (direct request); every other line
+// keeps the no-percentage rule.
+{
+  const pause = load('lib/setupPause.ts', {
+    react: { useSyncExternalStore: () => false },
+    './db': { getDatabase: async () => null },
+    './yourStoryDb': { loadYourStory: async () => null },
+  });
+  const allItems = { a: { state: 'done' }, b: { state: 'open' }, c: { state: 'setAside' }, d: { state: 'done' }, e: { state: 'reopened' }, f: { state: 'open' } };
+  same(pause.setupShare({ allItems }), { done: 2, total: 6, percent: 33 }, 'setup share counts only items with a record');
+  same(pause.setupShare({ allItems: {} }), { done: 0, total: 0, percent: 0 }, 'setup share with nothing listed');
+  check(pause.SETUP_PAUSED_MESSAGE.includes('{percent}%'), 'the turn-off message says the share');
+  for (const text of [pause.SETUP_PAUSE_LABEL, pause.SETUP_RESUME_LABEL, pause.SETUP_PAUSE_LINE, pause.SETUP_PAUSED_LINE, pause.SETUP_PAUSED_HEADING, pause.SETUP_PAUSED_MESSAGE_UNREAD]) {
+    check(!/%|percent/i.test(text), `setup pause text has no percentage: ${text}`);
+  }
+  for (const text of [pause.SETUP_PAUSE_LINE, pause.SETUP_PAUSED_LINE, pause.SETUP_PAUSED_MESSAGE, pause.SETUP_PAUSED_MESSAGE_UNREAD]) {
+    check(!/[–—]| -- |\b(real|genuinely?)\b|well done|great job/i.test(text), `setup pause text reads plainly: ${text}`);
+  }
+}
+
 console.log(`${checks - failures}/${checks} checks passed`);
 if (failures > 0) process.exit(1);

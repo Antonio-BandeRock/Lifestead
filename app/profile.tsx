@@ -1,5 +1,17 @@
 import { Ionicons } from '@expo/vector-icons';
 import { runSetupAgain, SETUP_RERUN_LABEL, SETUP_RERUN_LINE } from '../lib/setupFlow';
+import {
+  readSetupShare,
+  setSetupPaused,
+  SETUP_PAUSE_LABEL,
+  SETUP_PAUSE_LINE,
+  SETUP_PAUSED_HEADING,
+  SETUP_PAUSED_LINE,
+  SETUP_PAUSED_MESSAGE,
+  SETUP_PAUSED_MESSAGE_UNREAD,
+  SETUP_RESUME_LABEL,
+  useSetupPaused,
+} from '../lib/setupPause';
 import { TUTORIALS_OPEN_LABEL, TUTORIALS_PROFILE_LINE } from '../lib/tutorials';
 import * as Updates from 'expo-updates';
 import { restartApp } from '../lib/restartApp';
@@ -1521,6 +1533,35 @@ export default function ProfileScreen() {
   const [showBusy, hideBusy, busyOverlayElement] = useBusyOverlay();
   const [confirmBackup, confirmSheetElement] = useConfirmSheet();
   const [showBackupAlert, backupAlertElement] = useInfoAlert();
+
+  // Setup off at start, and back on (lib/setupPause.ts).
+  const setupPaused = useSetupPaused();
+  const turnSetupOff = useCallback(async () => {
+    try {
+      await setSetupPaused(true);
+    } catch (error) {
+      console.warn('Profile: could not turn setup off', error);
+      showBackupAlert(t('Setup is still on'), t('Setup could not be turned off just now, so it will still open when Lifestead starts. Try again in a moment.'));
+      return;
+    }
+    const share = await readSetupShare();
+    showBackupAlert(
+      t(SETUP_PAUSED_HEADING),
+      share
+        ? t(SETUP_PAUSED_MESSAGE, { percent: share.percent, done: share.done, total: share.total })
+        : t(SETUP_PAUSED_MESSAGE_UNREAD),
+    );
+  }, [showBackupAlert]);
+  const turnSetupBackOn = useCallback(async () => {
+    try {
+      await setSetupPaused(false);
+    } catch (error) {
+      console.warn('Profile: could not turn setup back on', error);
+      showBackupAlert(t('Setup is still off'), t('Setup could not be turned back on just now. Your place in it is kept, so try again in a moment.'));
+      return;
+    }
+    runSetupAgain();
+  }, [showBackupAlert]);
 
   // Ground color picker's handler, 2026-08-19, see the Ground color
   // sub-section's comment below for the full "why this needs a reload at
@@ -3412,6 +3453,13 @@ export default function ProfileScreen() {
         <Text style={styles.intro}>{SETUP_RERUN_LINE}</Text>
         <TouchableOpacity style={styles.checkinButton} onPress={runSetupAgain}>
           <Text style={styles.checkinButtonText}>{SETUP_RERUN_LABEL}</Text>
+        </TouchableOpacity>
+        {/* 2026-11-15, direct request: setup can be turned off so it stops
+            opening at start, held where it was until turned back on. The
+            message on turning it off says how much of the app is in use. */}
+        <Text style={styles.intro}>{setupPaused ? SETUP_PAUSED_LINE : SETUP_PAUSE_LINE}</Text>
+        <TouchableOpacity style={styles.checkinButton} onPress={setupPaused ? turnSetupBackOn : turnSetupOff}>
+          <Text style={styles.checkinButtonText}>{setupPaused ? SETUP_RESUME_LABEL : SETUP_PAUSE_LABEL}</Text>
         </TouchableOpacity>
         {/* 1.0.68.14: "they can go through any of the tutorials for any tab
             individually or in succession any time by selecting it in

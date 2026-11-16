@@ -53,6 +53,7 @@ import { nextLine, type StoryDestination } from '../../lib/yourStory';
 import { buildTabGuide, tabGuideLine } from '../../lib/yourStoryTabs';
 import { interviewLine } from '../../lib/yourStoryInterview';
 import { setupWaiting } from '../../lib/setupSections';
+import { useSetupPaused } from '../../lib/setupPause';
 import { ProgressRing } from '../../components/ProgressRing';
 
 import { useBackgroundBottomInset } from '../../components/ScreenBackground';
@@ -1428,6 +1429,9 @@ export default function HomeScreen() {
   // own data reloads (below), so a meal or a check-in logged right here
   // ticks its item without leaving the page.
   const [yourStory, reloadYourStory, yourStoryGuides, yourStoryInterview, yourStoryRecords] = useYourStory();
+  // Setup turned off from Profile keeps its Home band out of sight too, held
+  // where it was until it is turned back on (lib/setupPause.ts).
+  const setupPaused = useSetupPaused();
   // Not Tried Yet (lib/untriedLenses.ts), read again each time Home comes
   // back into view, so a lens leaves the list once something is recorded.
   const [untried, setUntried] = useState<UntriedByTab | null>(null);
@@ -4790,7 +4794,7 @@ export default function HomeScreen() {
   // the interview has been read nothing is drawn, so a finished setup never
   // flashes the band.
   function renderYourStory() {
-    if (!yourStoryInterview || !setupWaiting(yourStoryInterview)) return null;
+    if (!yourStoryInterview || setupPaused || !setupWaiting(yourStoryInterview)) return null;
     return renderBand(
       'yourStory',
       yourStory?.heading ?? 'Your Guide',

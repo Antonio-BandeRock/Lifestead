@@ -61,6 +61,7 @@ import { startTutorials } from '../lib/tutorialDb';
 import { SETUP_TUTORIALS_LABEL, SETUP_TUTORIALS_LINE } from '../lib/tutorials';
 import { GUIDES, type GuideRecords } from '../lib/yourStoryGuides';
 import { SETUP_AWAY_CAPTION, subscribeRunSetupAgain } from '../lib/setupFlow';
+import { getSetupPaused, useSetupPaused } from '../lib/setupPause';
 import {
   BEAT_LABELS,
   HEADING_TAKING_SHAPE,
@@ -218,7 +219,10 @@ export function FirstSetup() {
   const load = useCallback(async (): Promise<InterviewView | null> => {
     try {
       const everything = await loadYourStoryEverything(false);
-      const waiting = setupWaiting(everything.interview);
+      // Turned off from Profile: setup waits, kept where it was, until it
+      // is turned back on (lib/setupPause.ts).
+      const paused = await getSetupPaused();
+      const waiting = setupWaiting(everything.interview) && !paused;
       setInterview(everything.interview);
       setView(everything.view);
       setRecords(everything.records);
@@ -254,6 +258,18 @@ export function FirstSetup() {
       }),
     [load],
   );
+
+  // Turning setup off from Profile while a setup strip is showing closes
+  // it there and then; everything answered stays for when it comes back.
+  const setupPaused = useSetupPaused();
+  useEffect(() => {
+    if (!setupPaused) return;
+    reviewRef.current = false;
+    setStoryWalk(null);
+    setAwayCard(null);
+    setAwayQuestion(null);
+    setPhase((was) => (was === 'reading' ? was : 'closed'));
+  }, [setupPaused]);
 
   // While another screen is open, look for its record now and then, so
   // the strip can say Saved without the person coming back to check.
