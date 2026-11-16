@@ -366,6 +366,8 @@ export type ToolMark =
   | 'home.waitingOpen'
   | 'home.insideKnowledgeOpen'
   | 'home.interestTimerStop'
+  | 'home.bladderTrip'
+  | 'home.bladderBed'
   | 'home.languageBasicsOpen'
   | 'home.languageBasicsUnit'
   | 'home.languageBasicsGroup'
@@ -496,6 +498,17 @@ export type ToolMark =
   | 'signals.effort'
   | 'signals.photosFirst'
   | 'signals.removeFirst'
+  | 'signals.bladderStart'
+  | 'signals.bladderTrip'
+  | 'signals.bladderAmount'
+  | 'signals.bladderSave'
+  | 'signals.bladderLeak'
+  | 'signals.bladderBed'
+  | 'signals.bladderUp'
+  | 'signals.bladderEditFirst'
+  | 'signals.bladderRemoveFirst'
+  | 'signals.bladderFinish'
+  | 'signals.bladderRemoveDiary'
   | 'newFoods.addExperiment'
   | 'newFoods.addSeries'
   | 'newFoods.startSeries'
@@ -2813,6 +2826,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The time so far is kept as a session on Interests, Sessions, dated the day it started. The notification that stays up while a timer runs has Stop and Keep too, and it works on a locked phone. To throw the time away instead, tap Open Sessions.',
     },
     {
+      key: 'bladderDiaryHome',
+      title: 'Keep a bladder diary from Home',
+      steps: [
+        { say: 'Open the band with the name of Signals, then Bladder Diary. It shows only while a diary is open.', mark: 'homeBand.bladderDiary', stay: true },
+        { say: 'Tap Trip each time you go. It opens the form on Signals, Bladder, with the time already filled in.', mark: 'home.bladderTrip' },
+        { say: 'At night, tap Going to bed. It is saved at the time you tap it, and Up for the day works the same way in the morning.', mark: 'home.bladderBed' },
+      ],
+      forYou: 'Start a diary on Signals, Bladder. Leak opens the same form for a leak on its own. Everything saved here shows in the diary on Signals, Bladder, where any entry can be changed or removed.',
+    },
+    {
       key: 'insideKnowledge',
       title: 'See what you now know from Flashcards',
       steps: [
@@ -4783,6 +4806,80 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
   ],
   '/log#nocturia': [
+    {
+      key: 'diaryStart',
+      title: 'Start a three-day bladder diary',
+      steps: [
+        { say: 'Choose Today or Tomorrow under Start.' },
+        { say: 'Tap Start a three-day diary.', mark: 'signals.bladderStart' },
+      ],
+      forYou: 'For three days and the morning after, the buttons to log each trip stay at the top of Bladder and on Home.',
+    },
+    {
+      key: 'diaryTrip',
+      title: 'Log a trip to the toilet',
+      steps: [
+        { say: 'Tap Trip.', mark: 'signals.bladderTrip', stay: true },
+        { say: 'Type how much if you measured it. Leave it empty if you did not.', mark: 'signals.bladderAmount', stay: true },
+        { say: 'Choose how strong the urge was, and any leak before you got there, if you want to.' },
+        { say: 'Tap Save.', mark: 'signals.bladderSave' },
+      ],
+      forYou: 'The time is filled in as now. Change it if you are logging one from earlier.',
+    },
+    {
+      key: 'diaryLeak',
+      title: 'Log a leak',
+      steps: [
+        { say: 'Tap Leak.', mark: 'signals.bladderLeak', stay: true },
+        { say: 'Choose how much and how strong the urge was, if you want to, then tap Save.', mark: 'signals.bladderSave' },
+      ],
+      forYou: 'Leaks are counted by size for each day, beside the trips.',
+    },
+    {
+      key: 'diaryNight',
+      title: 'Mark going to bed and getting up',
+      steps: [
+        { say: 'Tap Going to bed when you settle down to sleep.', mark: 'signals.bladderBed' },
+        { say: 'Tap Up for the day when you get up for good in the morning.', mark: 'signals.bladderUp' },
+      ],
+      forYou: 'These two taps are what split each day from its night, so trips at night and the night share can be counted.',
+    },
+    {
+      key: 'diaryEdit',
+      title: 'Correct a diary entry',
+      steps: [
+        { say: 'Tap Edit beside the entry.', mark: 'signals.bladderEditFirst', stay: true },
+        { say: 'Change the time, the amount or anything else, then tap Save changes.', mark: 'signals.bladderSave' },
+      ],
+      forYou: 'A Going to bed or Up for the day tapped late can be moved to the right time here.',
+    },
+    {
+      key: 'diaryRemoveEntry',
+      title: 'Remove a diary entry',
+      steps: [
+        { say: 'Tap Remove beside the entry.', mark: 'signals.bladderRemoveFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
+      forYou: 'Only that one entry goes; the rest of the diary stays.',
+    },
+    {
+      key: 'diaryFinish',
+      title: 'Finish the diary',
+      steps: [
+        { say: 'Tap Finish the diary under the entries.', mark: 'signals.bladderFinish', stay: true },
+        { say: 'Tap Finish to confirm.' },
+      ],
+      forYou: 'A diary also finishes by itself after its last morning. Either way it stays on Bladder and in the For Your Doctor report.',
+    },
+    {
+      key: 'diaryRemove',
+      title: 'Remove a diary',
+      steps: [
+        { say: 'Tap Remove this diary under the entries.', mark: 'signals.bladderRemoveDiary', stay: true },
+        { say: 'Tap Remove to confirm.' },
+      ],
+      forYou: 'The diary and its entries go. Drinks you logged stay where they are.',
+    },
     {
       key: 'log',
       title: 'Log a night',

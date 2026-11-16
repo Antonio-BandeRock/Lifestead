@@ -240,6 +240,9 @@ const AREAS: readonly Area[] = [
   // My Crops, 2026-10-01. A step marked on a crop is part of the crop.
   { one: 'crop in My Crops', many: 'crops in My Crops', count: ['garden_crop_plans'], quiet: ['garden_crop_plan_steps'] },
   { one: 'night logged', many: 'nights logged', count: ['nocturia_nights'], quiet: [] },
+  // Q23: each tap in a bladder diary is the thing recorded; the diary
+  // itself only holds the days they belong to.
+  { one: 'bladder diary entry', many: 'bladder diary entries', count: ['bladder_entries'], quiet: ['bladder_diaries'] },
   { one: 'period day logged', many: 'period days logged', count: ['cycle_days'], quiet: [] },
   { one: 'bowel movement logged', many: 'bowel movements logged', count: ['bowel_movements'], quiet: [] },
   { one: 'microbiome test', many: 'microbiome tests', count: ['microbiome_tests'], quiet: ['microbiome_results'] },

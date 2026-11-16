@@ -38,6 +38,7 @@ export const MY_ITEM_KINDS: Record<MyItemsTab, MyItemKind[]> = {
     { id: 'therapies', label: 'Hands-On Therapy Sessions', table: 'therapy_sessions', lens: 'therapies' },
     { id: 'notes', label: 'Notes and Check-ins', table: 'wellbeing_checkins', where: "checkin_type IN ('general', 'stress', 'sleep', 'post_exercise')", lens: 'generalNote' },
     { id: 'nights', label: 'Nights', table: 'nocturia_nights', lens: 'nocturia' },
+    { id: 'bladderDiaries', label: 'Bladder Diaries', table: 'bladder_diaries', lens: 'nocturia' },
     { id: 'bowel', label: 'Bowel Movements', table: 'bowel_movements', lens: 'bowel' },
     { id: 'microbiome', label: 'Microbiome Tests', table: 'microbiome_tests', lens: 'microbiome' },
     { id: 'cycle', label: 'Cycle Days', table: 'cycle_days', lens: 'cycle' },

@@ -121,7 +121,7 @@ export const UNTRIED_LENSES: Record<UntriedTabPath, readonly UntriedLensDef[]> =
     { lens: 'exercise', used: [{ table: 'exercise_logs' }] },
     { lens: 'bloodPressure', used: [{ table: 'body_measurements', where: "measurement_type LIKE 'blood_pressure%'" }] },
     { lens: 'weight', used: [{ table: 'body_measurements', where: "measurement_type = 'weight'" }] },
-    { lens: 'nocturia', used: [{ table: 'nocturia_nights' }] },
+    { lens: 'nocturia', used: [{ table: 'nocturia_nights' }, { table: 'bladder_diaries' }] },
     { lens: 'bowel', used: [{ table: 'bowel_movements' }] },
     { lens: 'microbiome', used: [{ table: 'microbiome_tests' }] },
     { lens: 'cycle', used: [{ table: 'cycle_days' }] },

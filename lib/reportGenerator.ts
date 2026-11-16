@@ -93,6 +93,9 @@ import {
 import { listBloodPressureReadings } from './trendsMoreDb';
 import { listBowelEntriesBetween } from './bowelDb';
 import { getTherapyResponseInputs, listFoodAllergies, listTherapySessions, listTodaysMealsWithRecipes } from './db';
+import { DIARY_NOTE, REPORT_COLUMNS, reportRows, summariseDiary } from './bladderDiary';
+import { listBladderDiariesBetween, listBladderEntries, listDiaryDrinks } from './bladderDiaryDb';
+import { detectMeasurementSystemFromLocale } from './measurement';
 import { summarizeTherapyResponse, describeTherapyResponse } from './therapyResponse';
 import { therapyTypeLabel } from './therapyTypes';
 import { listCustomTrackers, listTrackerEntriesSince } from './customTrackersDb';
@@ -829,6 +832,24 @@ function extraSectionLoaders(days: number): Record<ExtraSectionId, () => Promise
       }),
     'bp-log': () => guarded('body', 'Every reading', async () => [bloodPressureLogSection(await listBloodPressureReadings(), start, end)]),
     bowel: () => guarded('symptoms', 'Bowel movements in brief', async () => bowelSections(await listBowelEntriesBetween(start, end), start, end)),
+    bladder: () =>
+      guarded('symptoms', 'Bladder diary', async () => {
+        const diaries = await listBladderDiariesBetween(start, end);
+        const system = (await getStoredMeasurementSystem()) ?? detectMeasurementSystemFromLocale();
+        const rows: string[][] = [];
+        for (const diary of diaries) {
+          const [entries, drinks] = await Promise.all([listBladderEntries(diary.id), listDiaryDrinks(diary)]);
+          rows.push(...reportRows(summariseDiary(diary, entries, drinks), system));
+        }
+        return [{
+          kind: 'table',
+          heading: 'Bladder diary',
+          note: DIARY_NOTE,
+          columns: [...REPORT_COLUMNS],
+          rows,
+          empty: 'No bladder diary was kept in this range.',
+        }];
+      }),
     microbiome: () =>
       guarded('labs', 'Microbiome tests', async () => {
         const { tests, results } = await listMicrobiomeTests();

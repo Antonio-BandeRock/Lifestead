@@ -398,6 +398,9 @@ export type HomeSectionKey =
   // A timer running on Interests > Sessions, 2026-11-15
   // (components/InterestTimerHomeCard.tsx). Drawn only while one runs.
   | 'interestTimer'
+  // The three-day bladder diary, Q23 (1.0.91.9;
+  // components/BladderDiaryHomeCard.tsx). Drawn only while a diary is open.
+  | 'bladderDiary'
   // Language basics, 2026-11-05: the units turned on under Interests > Languages,
   // in the order they should be learned (components/LanguageBasicsHomeCard.tsx).
   | 'languageBasics'
@@ -510,6 +513,7 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'logFlare',
   'logBloodPressure',
   'logExercise',
+  'bladderDiary',
   'untriedSignals',
   'tutorialsSignals',
   // Insights.
@@ -621,6 +625,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   tutorialsFood: 'Food Tutorials',
   tutorialsGarden: 'Garden Tutorials',
   interestTimer: 'Interest Timer Running',
+  bladderDiary: 'Bladder Diary',
   insideKnowledge: 'Inside Knowledge',
   languageBasics: 'Language Basics',
   tutorialsInterests: 'Interests Tutorials',

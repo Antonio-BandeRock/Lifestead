@@ -134,6 +134,40 @@ import {
   type StepKey,
 } from '../../lib/steppedReintroduction';
 import { deleteNocturiaNight, listNocturiaNights, saveNocturiaNight, updateNocturiaNight, type NocturiaNight } from '../../lib/nocturiaDb';
+import {
+  DIARY_NOTE,
+  LEAK_SIZES,
+  URGE_WORDS,
+  addDays,
+  amountUnit,
+  dayLines,
+  diaryDates,
+  diaryStage,
+  entryLine,
+  isDiaryOpen,
+  lastMorning,
+  parseAmount,
+  stageLine,
+  summariseDiary,
+  type BladderDiary,
+  type BladderEntry,
+  type BladderKind,
+  type DiaryDrink,
+  type DiaryStage,
+  type LeakSize,
+} from '../../lib/bladderDiary';
+import {
+  addBladderEntry,
+  deleteBladderDiary,
+  deleteBladderEntry,
+  endBladderDiary,
+  getLatestBladderDiary,
+  listBladderEntries,
+  listDiaryDrinks,
+  startBladderDiary,
+  updateBladderEntry,
+} from '../../lib/bladderDiaryDb';
+
 import { explainNotYet } from '../../lib/notYet';
 import { deleteCycleDay, listAllCycleDays, listCycleDays, saveCycleDay, updateCycleDay, type CycleDayRow } from '../../lib/cycleDb';
 import {
@@ -184,7 +218,7 @@ import {
   updateTrackerEntry,
 } from '../../lib/customTrackersDb';
 import { ThumbRow } from '../../components/ThumbRow';
-import { kgToLb, lbToKg } from '../../lib/measurement';
+import { detectMeasurementSystemFromLocale, kgToLb, lbToKg } from '../../lib/measurement';
 import { useConfirmSheet } from '../../components/ConfirmSheet';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultLensFrame } from '../../components/VaultLensFrame';
@@ -371,12 +405,12 @@ const LENSES: LensOption<Lens>[] = [
   },
   {
     key: 'nocturia',
-    label: 'Nocturia',
+    label: 'Bladder',
     icon: 'moon-outline',
     help: [
       {
-        heading: 'Nocturia',
-        body: 'How many times you got up in the night to urinate, written down the next morning, with the time you first woke if you remember it. Trends > Nights reads these beside what you drank in the evening before each one.',
+        heading: 'Bladder',
+        body: 'A three-day bladder diary: each trip to the toilet with how much if you measure it, how strong the urge was and any leak, and when you go to bed and get up, so day and night can be told apart. Drinks come from what you log on Food or Home. Below it, Nights keeps how many times you got up, written down the next morning, which Trends > Nights reads beside what you drank the evening before.',
       },
       LOG_PERSONAL_NOTES_HELP,
     ],
@@ -497,8 +531,8 @@ const LOG_HELP_SECTIONS: HelpSection[] = [
     body: 'For anything else worth remembering: a prescription change, how a supplement felt, a drink you had.',
   },
   {
-    heading: 'Nocturia',
-    body: 'Not built yet. Waking at night to urinate is a trackable symptom worth logging, added as a placeholder here, 2026-07-28, until logging (how many times, what time) gets designed and built.',
+    heading: 'Bladder',
+    body: 'A three-day bladder diary: each trip to the toilet with how much if you measure it, how strong the urge was and any leak, and when you go to bed and get up, so day and night can be told apart. Drinks come from what you log on Food or Home. Below it, Nights keeps how many times you got up, written down the next morning, which Trends > Nights reads beside what you drank the evening before.',
   },
   {
     heading: 'Bowel Movements',
@@ -3917,6 +3951,387 @@ function GeneralNoteLens() {
 // map, since that lens had nothing to read without it. A night is dated
 // by the evening it began, so the default is last night, and logging the
 // same night again replaces it (lib/nocturiaDb.ts).
+// The bladder diary (Q23, 1.0.91.9): three days during which each trip to
+// the toilet is logged with how much if measured, the urge and any leak,
+// and Going to bed and Up for the day mark the night. What it adds up to,
+// and every sentence about it, is in lib/bladderDiary.ts; drinks come from
+// the drinks already logged.
+type BladderForm = {
+  editingId: string | null;
+  kind: BladderKind;
+  dateChoice: DateChoice;
+  customDate: string;
+  time: TimeOfDayInput;
+  amount: string;
+  urgency: number | null;
+  leak: LeakSize | null;
+  note: string;
+};
+
+function nowTimeInput(): TimeOfDayInput {
+  return splitTime24(nowTimeString24());
+}
+
+function BladderDiaryPanel() {
+  const walkMark = useWalkMark();
+  const router = useRouter();
+  const { bladderLog } = useLocalSearchParams<{ bladderLog?: string }>();
+  const [diary, setDiary] = useState<BladderDiary | null>(null);
+  const [entries, setEntries] = useState<BladderEntry[]>([]);
+  const [drinks, setDrinks] = useState<DiaryDrink[]>([]);
+  const [system, setSystem] = useState<'metric' | 'imperial'>('metric');
+  const [loaded, setLoaded] = useState(false);
+  const [readFailed, setReadFailed] = useState(false);
+  const [startOn, setStartOn] = useState<'today' | 'tomorrow'>('today');
+  const [form, setForm] = useState<BladderForm | null>(null);
+  const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [confirm, confirmElement] = useConfirmSheet();
+
+  const load = useCallback(() => {
+    setReadFailed(false);
+    Promise.all([getLatestBladderDiary(), getStoredMeasurementSystem()])
+      .then(async ([latest, stored]) => {
+        setSystem(stored ?? detectMeasurementSystemFromLocale());
+        setDiary(latest);
+        if (latest) {
+          const [rows, drunk] = await Promise.all([listBladderEntries(latest.id), listDiaryDrinks(latest)]);
+          setEntries(rows);
+          setDrinks(drunk);
+        } else {
+          setEntries([]);
+          setDrinks([]);
+        }
+        setLoaded(true);
+      })
+      .catch((error) => {
+        console.warn('The bladder diary could not be read', error);
+        setReadFailed(true);
+      });
+  }, []);
+
+  useFocusEffect(useCallback(() => { load(); }, [load]));
+
+  const today = todayDateString();
+  const stage = diary ? diaryStage(diary, today) : null;
+  const open = diary ? isDiaryOpen(diary, today) : false;
+
+  function newForm(kind: BladderKind): BladderForm {
+    return { editingId: null, kind, dateChoice: 'today', customDate: '', time: nowTimeInput(), amount: '', urgency: null, leak: null, note: '' };
+  }
+
+  // Home's Bladder Diary band links here with the kind of entry to start.
+  useFocusEffect(useCallback(() => {
+    if (!open || (bladderLog !== 'void' && bladderLog !== 'leak')) return;
+    setForm(newForm(bladderLog));
+    router.setParams({ bladderLog: undefined });
+  }, [open, bladderLog, router]));
+
+  async function handleStart() {
+    const startedOn = startOn === 'today' ? today : addDays(today, 1);
+    const saved = await saveOrSay('The diary was not started. Try again.', async () => {
+      await startBladderDiary(startedOn);
+      return true;
+    });
+    if (saved) load();
+  }
+
+  /** Going to bed and Up for the day are saved with one tap, at now. */
+  async function logMark(kind: 'bed' | 'up') {
+    if (!diary) return;
+    const saved = await saveOrSay('That was not saved. Try again.', async () => {
+      await addBladderEntry(diary.id, { at: `${today}T${nowTimeString24()}`, kind, volumeMl: null, urgency: null, leak: null, note: null });
+      return true;
+    });
+    if (saved) load();
+  }
+
+  function startEdit(entry: BladderEntry) {
+    const day = dateChoiceFor(entry.at.slice(0, 10));
+    setForm({
+      editingId: entry.id,
+      kind: entry.kind,
+      dateChoice: day.choice,
+      customDate: day.custom,
+      time: splitTime24(entry.at.slice(11, 16)),
+      amount: entry.volumeMl != null ? String(system === 'imperial' ? Math.round((entry.volumeMl / 29.5735) * 10) / 10 : entry.volumeMl) : '',
+      urgency: entry.urgency,
+      leak: entry.leak,
+      note: entry.note ?? '',
+    });
+  }
+
+  async function handleSave() {
+    if (!diary || !form) return;
+    const at = resolveDateTime(form.dateChoice, form.customDate, form.time);
+    if (!at) {
+      showInfoAlert('Almost there', 'Enter the time, and a valid date if you chose Custom date.');
+      return;
+    }
+    const measuring = form.kind === 'void' || form.kind === 'leak';
+    const amount = measuring && form.kind === 'void' ? parseAmount(form.amount, system) : { ok: true as const, ml: null };
+    if (!amount.ok) {
+      showInfoAlert('Almost there', amount.why);
+      return;
+    }
+    const input = {
+      at,
+      kind: form.kind,
+      volumeMl: amount.ml,
+      urgency: measuring ? form.urgency : null,
+      leak: measuring ? form.leak : null,
+      note: form.note,
+    };
+    const editingId = form.editingId;
+    const saved = await saveOrSay('That was not saved. Try again.', async () => {
+      if (editingId) await updateBladderEntry(editingId, input);
+      else await addBladderEntry(diary.id, input);
+      return true;
+    });
+    if (!saved) return;
+    setForm(null);
+    load();
+  }
+
+  async function handleRemoveEntry(id: string) {
+    const ok = await confirm({ title: 'Remove this entry?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    if (!ok) return;
+    const removed = await saveOrSay('The entry was not removed. Try again.', async () => {
+      await deleteBladderEntry(id);
+      return true;
+    });
+    if (!removed) return;
+    if (form?.editingId === id) setForm(null);
+    load();
+  }
+
+  async function handleFinish() {
+    if (!diary) return;
+    const early = stage?.stage === 'day' || stage?.stage === 'before';
+    const ok = await confirm({
+      title: early ? 'Finish the diary now?' : 'Finish the diary?',
+      message: early
+        ? 'Everything logged so far stays, and the days not yet reached are left out.'
+        : 'Everything logged stays, and the diary is kept below for your doctor report.',
+      confirmLabel: 'Finish',
+    });
+    if (!ok) return;
+    const saved = await saveOrSay('The diary was not finished. Try again.', async () => {
+      await endBladderDiary(diary.id, today);
+      return true;
+    });
+    if (saved) load();
+  }
+
+  async function handleRemoveDiary() {
+    if (!diary) return;
+    const ok = await confirm({
+      title: 'Remove this diary?',
+      message: `This removes the diary and every entry in it (${entries.length}). Drinks you logged stay where they are. This cannot be undone.`,
+      confirmLabel: 'Remove',
+      destructive: true,
+    });
+    if (!ok) return;
+    const removed = await saveOrSay('The diary was not removed. Try again.', async () => {
+      await deleteBladderDiary(diary.id);
+      return true;
+    });
+    if (removed) load();
+  }
+
+  if (readFailed) {
+    return <ReadProblem message="Your bladder diary could not be read just now. Nothing you recorded is lost." onTryAgain={load} />;
+  }
+  if (!loaded) return null;
+
+  const days = diary ? summariseDiary(diary, entries, drinks) : [];
+  const firstEntry = entries[0];
+  const lastMorningDate = diary ? lastMorning(diary) : null;
+  const entryDates = diary ? [...diaryDates(diary), lastMorningDate as string] : [];
+
+  function renderForm() {
+    if (!form) return null;
+    const title = form.kind === 'void' ? 'Trip' : form.kind === 'leak' ? 'Leak' : form.kind === 'bed' ? 'Going to bed' : 'Up for the day';
+    return (
+      <View style={styles.formCard}>
+        <Text style={styles.rowTitle}>{form.editingId ? `Change: ${t(title)}` : title}</Text>
+        <Text style={styles.label}>Time</Text>
+        <TimePicker value={form.time} onChange={(time) => setForm({ ...form, time })} />
+        <DateChoicePicker
+          value={form.dateChoice}
+          onChange={(dateChoice) => setForm({ ...form, dateChoice })}
+          customDate={form.customDate}
+          onCustomDateChange={(customDate) => setForm({ ...form, customDate })}
+        />
+        {form.kind === 'void' ? (
+          <>
+            <Text style={styles.label}>{t('How much, in {unit} (optional)', { unit: amountUnit(system) })}</Text>
+            <AppTextInput
+              ref={walkMark.ref('signals.bladderAmount')}
+              style={[styles.input, styles.amountInput]}
+              placeholder={system === 'imperial' ? '10' : '300'}
+              keyboardType="decimal-pad"
+              maxLength={6}
+              value={form.amount}
+              onChangeText={(amount) => setForm({ ...form, amount })}
+            />
+            <Text style={styles.helperText}>A measuring jug or a hat that sits in the toilet makes this easy. Leave it empty if you did not measure.</Text>
+          </>
+        ) : null}
+        {form.kind === 'void' || form.kind === 'leak' ? (
+          <>
+            <Text style={styles.label}>How strong was the urge? (optional)</Text>
+            <View style={styles.pillRow}>
+              {URGE_WORDS.map((word, index) => (
+                <TouchableOpacity
+                  key={word}
+                  style={[styles.pill, form.urgency === index && styles.pillActive]}
+                  accessibilityState={{ selected: form.urgency === index }}
+                  onPress={() => setForm({ ...form, urgency: form.urgency === index ? null : index })}
+                >
+                  <Text style={[styles.pillText, form.urgency === index && styles.pillTextActive]}>{word}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={styles.label}>{form.kind === 'void' ? 'Any leak before you got there? (optional)' : 'How much? (optional)'}</Text>
+            <View style={styles.pillRow}>
+              {LEAK_SIZES.map((size) => (
+                <TouchableOpacity
+                  key={size.key}
+                  style={[styles.pill, form.leak === size.key && styles.pillActive]}
+                  accessibilityState={{ selected: form.leak === size.key }}
+                  onPress={() => setForm({ ...form, leak: form.leak === size.key ? null : size.key })}
+                >
+                  <Text style={[styles.pillText, form.leak === size.key && styles.pillTextActive]}>{size.label}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </>
+        ) : null}
+        <Text style={styles.label}>Note (optional)</Text>
+        <NotesInput style={styles.input} placeholder="Anything worth remembering" value={form.note} onChangeText={(note) => setForm({ ...form, note })} />
+        <ThumbRow primary="last" style={styles.formActions}>
+          <TouchableOpacity style={styles.secondaryButton} onPress={() => setForm(null)}>
+            <Text style={styles.secondaryButtonText}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity ref={walkMark.ref('signals.bladderSave')} style={styles.primaryButton} onPress={handleSave}>
+            <Text style={styles.primaryButtonText}>{form.editingId ? 'Save changes' : 'Save'}</Text>
+          </TouchableOpacity>
+        </ThumbRow>
+      </View>
+    );
+  }
+
+  return (
+    <>
+      {infoAlertElement}
+      {confirmElement}
+      {!diary || !open ? (
+        <View style={styles.formCard}>
+          <Text style={styles.rowTitle}>Three-day bladder diary</Text>
+          <Text style={styles.helperText}>
+            For three days, tap each time you go, with how much if you measure it, and tap when you go to bed and get up. It is what a continence clinic or urologist usually asks you to bring.
+          </Text>
+          <Text style={styles.label}>Start</Text>
+          <View style={styles.pillRow}>
+            {(['today', 'tomorrow'] as const).map((choice) => (
+              <TouchableOpacity
+                key={choice}
+                style={[styles.pill, startOn === choice && styles.pillActive]}
+                accessibilityState={{ selected: startOn === choice }}
+                onPress={() => setStartOn(choice)}
+              >
+                <Text style={[styles.pillText, startOn === choice && styles.pillTextActive]}>{choice === 'today' ? 'Today' : 'Tomorrow'}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <ThumbRow primary="last" style={styles.formActions}>
+            <TouchableOpacity ref={walkMark.ref('signals.bladderStart')} style={styles.primaryButton} onPress={handleStart}>
+              <Text style={styles.primaryButtonText}>Start a three-day diary</Text>
+            </TouchableOpacity>
+          </ThumbRow>
+        </View>
+      ) : (
+        <View style={styles.formCard}>
+          <Text style={styles.rowTitle}>{t('Bladder diary: {stage}', { stage: stageLine(stage as DiaryStage, t) })}</Text>
+          {stage?.stage === 'before' ? (
+            <Text style={styles.helperText}>{t('It starts on {date}. Nothing to log until then.', { date: formatEntryDate(diary.startedOn) })}</Text>
+          ) : (
+            <>
+              <Text style={styles.helperText}>Tap as it happens. Trip and Leak open a short form; Going to bed and Up for the day are saved at once.</Text>
+              <View style={styles.pillRow}>
+                <TouchableOpacity ref={walkMark.ref('signals.bladderTrip')} style={styles.primaryButton} onPress={() => setForm(newForm('void'))}>
+                  <Text style={styles.primaryButtonText}>Trip</Text>
+                </TouchableOpacity>
+                <TouchableOpacity ref={walkMark.ref('signals.bladderLeak')} style={styles.secondaryButton} onPress={() => setForm(newForm('leak'))}>
+                  <Text style={styles.secondaryButtonText}>Leak</Text>
+                </TouchableOpacity>
+                <TouchableOpacity ref={walkMark.ref('signals.bladderBed')} style={styles.secondaryButton} onPress={() => logMark('bed')}>
+                  <Text style={styles.secondaryButtonText}>Going to bed</Text>
+                </TouchableOpacity>
+                <TouchableOpacity ref={walkMark.ref('signals.bladderUp')} style={styles.secondaryButton} onPress={() => logMark('up')}>
+                  <Text style={styles.secondaryButtonText}>Up for the day</Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
+        </View>
+      )}
+
+      {renderForm()}
+
+      {diary && (entries.length > 0 || open) ? (
+        <View style={styles.table}>
+          <View style={styles.tableHeading}>
+            <Text style={styles.rowTitle}>
+              {open ? 'This diary' : t('Your last diary, from {date}', { date: formatEntryDate(diary.startedOn) })}
+            </Text>
+            <Text style={styles.rowMeta}>{DIARY_NOTE}</Text>
+          </View>
+          {entryDates.map((date) => {
+            const dayEntries = entries.filter((entry) => entry.at.slice(0, 10) === date);
+            const summary = days.find((d) => d.date === date);
+            if (dayEntries.length === 0 && !summary) return null;
+            if (dayEntries.length === 0 && summary && summary.trips === 0 && summary.drinks === 0) return null;
+            return (
+              <View key={date} style={styles.row}>
+                <Text style={styles.rowTitle}>
+                  {date === lastMorningDate ? t('Last morning, {date}', { date: formatEntryDate(date) }) : formatEntryDate(date)}
+                </Text>
+                {summary ? dayLines(summary, system, t).map((line) => (
+                  <Text key={line} style={styles.rowMeta}>{line}</Text>
+                )) : null}
+                {dayEntries.map((entry) => (
+                  <View key={entry.id} style={styles.bladderEntryRow}>
+                    <Text style={[styles.rowMeta, styles.bladderEntryText]}>
+                      {`${formatTime12(entry.at.slice(11, 16))}  ${entryLine(entry, system, t)}${entry.note ? ` · ${entry.note}` : ''}`}
+                    </Text>
+                    <TouchableOpacity ref={entry === firstEntry ? walkMark.ref('signals.bladderEditFirst') : undefined} onPress={() => startEdit(entry)}>
+                      <Text style={styles.actionText}>Edit</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity ref={entry === firstEntry ? walkMark.ref('signals.bladderRemoveFirst') : undefined} onPress={() => handleRemoveEntry(entry.id)}>
+                      <Text style={styles.actionTextRemove}>Remove</Text>
+                    </TouchableOpacity>
+                  </View>
+                ))}
+              </View>
+            );
+          })}
+          <View style={[styles.row, styles.rowActions]}>
+            {open ? (
+              <TouchableOpacity ref={walkMark.ref('signals.bladderFinish')} onPress={handleFinish}>
+                <Text style={styles.actionText}>Finish the diary</Text>
+              </TouchableOpacity>
+            ) : null}
+            <TouchableOpacity ref={walkMark.ref('signals.bladderRemoveDiary')} onPress={handleRemoveDiary}>
+              <Text style={styles.actionTextRemove}>Remove this diary</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : null}
+    </>
+  );
+}
+
 function NocturiaLens() {
   const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
@@ -4015,6 +4430,11 @@ function NocturiaLens() {
       {infoAlertElement}
       {confirmElement}
       <View style={styles.sectionColumn}>
+        <BladderDiaryPanel />
+        <View style={styles.groupHeadingChip}>
+          <Text style={styles.rowTitle}>Nights</Text>
+          <Text style={styles.rowMeta}>How many times you got up, written down the next morning.</Text>
+        </View>
         {!formOpen ? (
           <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
             <Text style={styles.addButtonText}>+ Log a night</Text>
@@ -5236,6 +5656,9 @@ const styles = StyleSheet.create({
   noteLabelRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   timeRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   timeInput: { width: 56, textAlign: 'center' },
+  amountInput: { width: 110 },
+  bladderEntryRow: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 6 },
+  bladderEntryText: { flex: 1, marginTop: 0 },
   timeSeparator: { ...typography.label, color: TAB_COLOR,
 
     ...textShadow,

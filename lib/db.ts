@@ -8479,6 +8479,36 @@ async function runDatabaseInitialization() {
       );
       CREATE INDEX IF NOT EXISTS idx_nocturia_nights_night_of ON nocturia_nights(night_of);
 
+      -- The bladder diary (Q23, 1.0.91.9): a stretch of days, three by
+      -- default, started on Signals > Bladder. ended_on is set when it is
+      -- finished or stopped early. Each entry is one tap: kind 'void' (a
+      -- trip), 'leak', 'bed' (Going to bed) or 'up' (Up for the day), at a
+      -- local 'YYYY-MM-DDTHH:mm'. volume_ml is stored in mL whatever the
+      -- person typed it in; urgency is 0 to 4; leak is drops, small or
+      -- large. Worked out by lib/bladderDiary.ts.
+      CREATE TABLE IF NOT EXISTS bladder_diaries (
+        id TEXT PRIMARY KEY,
+        started_on TEXT NOT NULL,
+        days INTEGER NOT NULL DEFAULT 3,
+        ended_on TEXT,
+        notes TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE TABLE IF NOT EXISTS bladder_entries (
+        id TEXT PRIMARY KEY,
+        diary_id TEXT NOT NULL,
+        at TEXT NOT NULL,
+        kind TEXT NOT NULL,
+        volume_ml REAL,
+        urgency INTEGER,
+        leak TEXT,
+        note TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_bladder_entries_diary ON bladder_entries(diary_id, at);
+
       -- Period days (E1, 2026-09-26): one row a day per source, written by
       -- hand in Signals > Cycle ('hand') or brought in from a watch or
       -- phone ('device'), so both share one record. flow is 1 spotting,

@@ -1279,7 +1279,7 @@
 ### Q23. A three-day bladder diary
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Signals,Reports
 - **Answers:** Bladder Journal, U-Night · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** An optional mode for the clinical three days: each void with volume and urgency, leaks, fluid in drawn from what is already logged, the night share worked out, and a page in the doctor report. Partly built: nocturia nights on Signals and Trends > Nights (1.0.52.7). Not yet: the three-day diary with volume, urgency and leaks, and its report page.
+- **How:** An optional mode for the clinical three days: each void with volume and urgency, leaks, fluid in drawn from what is already logged, the night share worked out, and a page in the doctor report. Built 1.0.91.9: Signals > Bladder (was Nocturia) keeps a three-day diary started today or tomorrow: each trip with an optional amount in mL or fl oz, the urge and any leak, a leak on its own, and Going to bed and Up for the day to split day from night; each 24 hours counted the way a continence clinic counts it (trips by day and night, largest amount, night share, leaks), drinks read from what is logged; a Home band while a diary is open; a Bladder diary table in For Your Doctor; Your Life in Squares shows each entry.
 
 ### Q26. What each lab marker means
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Insights,Life

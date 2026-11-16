@@ -24,6 +24,7 @@ import { TodayPicks } from '../../components/TodayPicks';
 import { DaysUntilSection } from '../../components/DaysUntilSection';
 import { InsideKnowledgeCard } from '../../components/InsideKnowledgeCard';
 import { InterestTimerHomeCard, useRunningInterestTimer } from '../../components/InterestTimerHomeCard';
+import { BladderDiaryHomeCard, useOpenBladderDiary } from '../../components/BladderDiaryHomeCard';
 import { LanguageBasicsHomeCard } from '../../components/LanguageBasicsHomeCard';
 import { StartWorkoutCard } from '../../components/StartWorkoutCard';
 import { DailyScalesPicker } from '../../components/DailyScalesPicker';
@@ -957,6 +958,7 @@ const HOME_LENS_DESTINATIONS: Partial<
   logFlare: { label: 'Log a Flare', icon: 'flame', color: colors.tabBioCompass, href: { pathname: '/log', params: { openSignalsLens: 'flares' } } as Href },
   logBloodPressure: { label: 'Log Blood Pressure', icon: 'heart-circle', color: colors.tabBioCompass, open: 'bp' },
   logExercise: { label: 'Log Exercise', icon: 'walk', color: colors.tabBioCompass, open: 'exercise' },
+  bladderDiary: { label: 'Bladder Diary', icon: 'water-outline', color: colors.tabBioCompass, href: { pathname: '/log', params: { openSignalsLens: 'nocturia' } } as Href },
   // What it tells you.
   sinceLastMeal: {
     label: 'Since Your Last Meal',
@@ -1140,6 +1142,7 @@ const HOME_LENS_ORDER: HomeSectionKey[] = [
   'logFlare',
   'logBloodPressure',
   'logExercise',
+  'bladderDiary',
   'mealsLoggedToday',
   'sinceLastMeal',
   'worthALook',
@@ -1347,6 +1350,7 @@ export default function HomeScreen() {
   const visualPrefs = useVisualPreferences();
   const waiting = useWaitingReminders();
   const interestTimer = useRunningInterestTimer();
+  const bladderDiary = useOpenBladderDiary();
   // Which of Home's per-tab groups are open, kept under "homeTab:/food"
   // and the rest (see HOME_TAB_GROUP_BAND_KEY_PREFIX). A group is a band
   // like any other, so it remembers its fold the same way.
@@ -1594,6 +1598,7 @@ export default function HomeScreen() {
   function homeSectionHasContent(key: HomeSectionKey) {
     if (key === 'sharedFolderSetup') return sharedFolderReady === false;
     if (key === 'interestTimer') return Boolean(interestTimer.timer);
+    if (key === 'bladderDiary') return Boolean(bladderDiary.open);
     if (key === 'weekTrend') return Boolean(weekTrend);
     if (key === 'outsideUsual') return (data?.outsideUsual.length ?? 0) > 0;
     if (key === 'pacingToday') return (data?.pacingToday.length ?? 0) > 0;
@@ -1619,7 +1624,7 @@ export default function HomeScreen() {
     // homeSectionHasContent is rebuilt every render and reads exactly the
     // two values listed here, so those are the dependencies that matter.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [visualPrefs, sharedFolderReady, weekTrend, data, interestTimer.timer],
+    [visualPrefs, sharedFolderReady, weekTrend, data, interestTimer.timer, bladderDiary.open],
   );
 
   const userConditionCodesRef = useRef(userConditionCodes);
@@ -4907,6 +4912,22 @@ export default function HomeScreen() {
     );
   }
 
+  // Q23, 1.0.91.9: the bladder diary while one is open, so the three days
+  // are kept from the first screen. Drawn only while a diary is open.
+  function renderBladderDiary() {
+    if (!isHomeSectionVisible(visualPrefs, 'bladderDiary')) return null;
+    const open = bladderDiary.open;
+    if (!open) return null;
+    return renderBand(
+      'bladderDiary',
+      'Bladder Diary',
+      <View style={styles.bandBody}>
+        <BladderDiaryHomeCard key={open.diary.id} open={open} onChanged={bladderDiary.reload} />
+      </View>,
+      { icon: 'water-outline' },
+    );
+  }
+
   // Inside Knowledge, 2026-10-31: Interests > Learn on Home. Things you now
   // know and which decks have cards back, never a share of answers.
   function renderInsideKnowledge() {
@@ -5107,6 +5128,8 @@ export default function HomeScreen() {
         return renderDaysUntil();
       case 'logHarvest':
         return renderLogHarvest();
+      case 'bladderDiary':
+        return renderBladderDiary();
       case 'interestTimer':
         return renderInterestTimer();
       case 'insideKnowledge':
@@ -5313,7 +5336,9 @@ export default function HomeScreen() {
               restingCaption={(key) =>
                 key === 'interestTimer' && !interestTimer.timer
                     ? 'No timer running now. Shows here while one runs on Interests, Sessions.'
-                    : null
+                    : key === 'bladderDiary' && !bladderDiary.open
+                      ? 'No bladder diary open. Shows here while one runs on Signals, Bladder.'
+                      : null
               }
               openFor={arrangeOpenKey}
               onReveal={(y) => scrollRef.current?.scrollTo({ y: Math.max(0, y - 12), animated: false })}

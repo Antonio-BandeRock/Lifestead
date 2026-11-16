@@ -77,6 +77,7 @@ export type ExtraSectionId =
   | 'lab-history'
   | 'bp-log'
   | 'bowel'
+  | 'bladder'
   | 'microbiome'
   | 'cycle'
   | 'body-signals'
@@ -153,7 +154,7 @@ export const REPORT_KINDS: ReportKindDef[] = [
     ],
     help: 'Built for an appointment, opening with an at a glance page: what was recorded since the last appointment with anybody, the next visit and what changed since the last one with the same provider, symptoms and flares, what Pattern Finder noticed and any food experiments, blood pressure, doses as scheduled and as marked with how many days each was due and marked, active meds and supplements with the interaction notes that touch them and how each works, weight, resting heart rate and heart rate variability against your usual range, bowel movements, nights up, the cycle, body signals, hands-on therapy sessions and how the days after them went, the trackers you made, personal rules, the most recent labs and every lab result in the range. Food detail is left to the Nutritionist report.',
     core: ['glance', 'conditions', 'symptoms', 'noticed', 'meds', 'body', 'heart', 'rules', 'labs'],
-    extras: ['since-visit', 'appointments', 'blood-pressure', 'doses', 'interactions', 'symptom-photos', 'bowel', 'nights', 'cycle', 'body-signals', 'therapy', 'therapy-response', 'trackers', 'lab-history'],
+    extras: ['since-visit', 'appointments', 'blood-pressure', 'doses', 'interactions', 'symptom-photos', 'bowel', 'bladder', 'nights', 'cycle', 'body-signals', 'therapy', 'therapy-response', 'trackers', 'lab-history'],
   },
   {
     key: 'r-nutrition',
@@ -451,6 +452,7 @@ export const SECTION_LABELS: Record<ReportSectionId, string> = {
   'lab-history': 'Every lab result in the range',
   'bp-log': 'Every blood pressure reading',
   bowel: 'Bowel movements',
+  bladder: 'Bladder diary',
   microbiome: 'Microbiome tests',
   cycle: 'Cycle',
   'body-signals': 'Body signals',
