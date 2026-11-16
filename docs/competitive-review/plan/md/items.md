@@ -707,7 +707,7 @@
 ### Q12. Days left that follow the real schedule
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Schedules
 - **Answers:** MyTherapy, Medisafe · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Supply runs down by the dose timeline itself (taper steps, every-other-week, weekly, monthly) rather than a daily average, and the refill ask lands on the Today timeline far enough ahead to call the pharmacy, with the pharmacy one tap away (A6). Partly built: supply counted by daily use (lib/medSupply.ts) with a running-low reminder. Not yet: run-down by taper steps and weekly or monthly schedules.
+- **How:** Supply runs down by the dose timeline itself (taper steps, every-other-week, weekly, monthly) rather than a daily average, and the refill ask lands on the Today timeline far enough ahead to call the pharmacy, with the pharmacy one tap away (A6). Built 1.0.91.5.
 
 ### Q15. A visual day
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Schedules,Home

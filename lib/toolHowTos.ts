@@ -1071,6 +1071,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Reminders come at those times. Each one reads the meals planned or logged around that dose, and when one clashes it names the meal and the time that clears it.',
     },
     {
+      key: 'count',
+      title: 'Know when one will run out',
+      steps: [
+        { say: 'Find it in the list and tap Details under it.', mark: 'myMeds.details' },
+        { say: 'Under On hand, tap Count what is on hand.' },
+        { say: 'Type how many there are now, what they are (tablets, capsules, ml) and how many one dose uses, then tap Save the count.' },
+      ],
+      forYou: 'Each dose you mark taken comes off the count. The days left follow the doses on your schedule, weekly, monthly or a taper step by step, and a reminder comes before it runs out.',
+    },
+    {
       key: 'tracking',
       title: 'Stop tracking one without removing it',
       steps: [

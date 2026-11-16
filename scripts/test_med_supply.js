@@ -9,6 +9,11 @@
 //     weeks of marks, and with neither the sentence says how many are left
 //     without inventing a number of days.
 //  2. The refill reminder lands the lead days before the run-out day.
+//  2b. Q12: with the schedule known, the doses ahead are walked one at a
+//     time, so a monthly or weekly dose and the steps of a taper run down
+//     at the pace written; a taper step in mg turns into tablets through the
+//     dose on the med, and when it cannot the sentence says so; a supply that
+//     outlasts the schedule says it covers it, with no run-out day.
 //  3. A phone number keeps a leading plus and its digits and nothing else.
 //  4. Dose days are counted by day, with no share and no verdict.
 //  5. The Medical ID lines, the wallet card and the lock-screen notice
@@ -98,6 +103,61 @@ check('run out remind today', out.remindOn, '2026-09-26');
 check('refill line', M.describeRefillDue('Levothyroxine', r), 'Levothyroxine: about 24 days left. Time to ask for more.');
 check('refill line, one day', M.describeRefillDue('X', { ...r, daysLeft: 1 }), 'X: about 1 day left. Time to ask for more.');
 check('refill line, none', M.describeRefillDue('X', out), 'X: none left by the doses marked. Time to ask for more.');
+
+// --- 2b. The doses ahead (Q12) ---------------------------------------------------
+const ahead = (doses, extra = {}) => ({ doses, through: '2027-09-27', ends: false, tapered: false, unconverted: null, ...extra });
+const series = (from, n, every, units = 1) => Array.from({ length: n }, (_, i) => ({ date: M.addDays(from, i * every), units }));
+
+// Monthly: 3 left, a dose on the 1st of each month. The week ahead holds no
+// dose at all, which the old average read as no pace.
+const monthlyDoses = ['2026-10-01', '2026-11-01', '2026-12-01', '2027-01-01', '2027-02-01'].map((date) => ({ date, units: 1 }));
+const monthly = M.readSupply({ ...base, onHand: 9, takenSinceCount: 6, dueNext7Days: 0, schedule: ahead(monthlyDoses) });
+check('monthly runs out on the first dose not covered', monthly.runsOutOn, '2027-01-01');
+check('monthly days left', monthly.daysLeft, 97);
+check('monthly reminder lead', monthly.remindOn, '2026-12-25');
+has('monthly sentence', monthly.sentence, 'Following each dose on the schedule, it runs out around Jan 1');
+
+// Weekly: two a week for 24 tablets lasts twelve weeks.
+const weekly = M.readSupply({ ...base, schedule: ahead([...series('2026-09-28', 30, 7), ...series('2026-10-01', 30, 7)].sort((a, b) => a.date.localeCompare(b.date))) });
+check('weekly run-out', weekly.runsOutOn, '2026-12-21');
+
+// Daily read dose by dose agrees with the old average.
+const daily = M.readSupply({ ...base, schedule: ahead(series('2026-09-26', 400, 1)) });
+check('daily agrees with the average', [daily.daysLeft, daily.runsOutOn], [24, '2026-10-20']);
+
+// A taper in mg against a count of 5 mg tablets: the med's dose is 20 mg = 4 tablets.
+const taperSteps = [
+  { startDate: '2026-09-26', endDate: '2026-09-30', amount: 20, unit: 'mg' },
+  { startDate: '2026-10-01', endDate: '2026-10-05', amount: 10, unit: 'mg' },
+  { startDate: '2026-10-06', endDate: '2026-10-10', amount: 5, unit: 'mg' },
+];
+const med = { perDose: 4, unit: 'tablets', medAmount: 20, medUnit: 'mg', steps: taperSteps };
+check('step 1 in tablets', M.unitsForDose('2026-09-27', med).units, 4);
+check('step 2 in tablets', M.unitsForDose('2026-10-02', med).units, 2);
+check('step 3 in tablets', M.unitsForDose('2026-10-08', med).units, 1);
+check('after the taper the dose on the med', M.unitsForDose('2026-10-11', med), { units: 4, tapered: false, converted: true, stepUnit: null });
+check('a count kept in mg uses the step', M.unitsForDose('2026-10-02', { ...med, unit: 'mg' }).units, 10);
+check('no dose on the med cannot convert', M.unitsForDose('2026-10-02', { ...med, medAmount: null }).converted, false);
+
+const taperDoses = series('2026-09-26', 15, 1).map((d) => ({ date: d.date, units: M.unitsForDose(d.date, med).units }));
+// 20 + 10 + 5 tablets over the taper; 34 on hand runs out on its last day.
+const taper = M.readSupply({ ...base, onHand: 34, takenSinceCount: 0, perDose: 4, schedule: ahead(taperDoses, { tapered: true, ends: true }) });
+check('taper run-out', taper.runsOutOn, '2026-10-10');
+has('taper sentence', taper.sentence, 'at the amount for its taper step');
+const taperEnough = M.readSupply({ ...base, onHand: 40, takenSinceCount: 0, perDose: 4, schedule: ahead(taperDoses, { tapered: true, ends: true }) });
+check('covered taper has no run-out', [taperEnough.runsOutOn, taperEnough.daysLeft, taperEnough.remindOn], [null, null, null]);
+has('covered taper sentence', taperEnough.sentence, 'That covers every dose on the schedule, through the last one on Oct 10.');
+check('covered short', taperEnough.short, '40 tablets left, enough for the schedule');
+
+const unconv = M.readSupply({ ...base, schedule: ahead(series('2026-09-26', 10, 1), { tapered: true, unconverted: { stepUnit: 'mg' } }) });
+has('unconverted sentence', unconv.sentence, "The taper's steps are in mg, so each dose is counted as 1 tablets.");
+lacks('unconverted pace', unconv.sentence, 'taper step,');
+
+// Less left than the next dose: not enough, said that way.
+const short = M.readSupply({ ...base, onHand: 3, takenSinceCount: 0, perDose: 4, schedule: ahead(series('2026-09-26', 5, 1, 4)) });
+check('not enough for the next dose', [short.daysLeft, short.short], [0, 'Not enough for the next dose (3 tablets)']);
+check('refill line, not enough', M.describeRefillDue('X', short), 'X: not enough left for the next dose. Time to ask for more.');
+check('no doses ahead falls back to the average', M.readSupply({ ...base, schedule: ahead([]) }).daysLeft, 24);
 check('refill line, no pace', M.describeRefillDue('X', noPace), 'X: time to ask for more.');
 check('month edge', M.addDays('2026-01-31', 1), '2026-02-01');
 check('short date', M.shortDate('2026-03-05'), 'Mar 5');
@@ -182,7 +242,7 @@ has('where ios', E.medicalIdWhere('ios'), 'Show When Locked');
 has('warning', E.LOCK_SCREEN_WARNING, 'without unlocking');
 
 // --- 6. Words --------------------------------------------------------------------
-const words = [r.sentence, noPace.sentence, out.sentence, days, html, notice.body, E.LOCK_SCREEN_WARNING,
+const words = [r.sentence, noPace.sentence, out.sentence, monthly.sentence, taper.sentence, taperEnough.sentence, unconv.sentence, short.sentence, days, html, notice.body, E.LOCK_SCREEN_WARNING,
   E.medicalIdWhere('android'), E.medicalIdWhere('ios'), E.medicalIdWhere('other')].join(' ');
 for (const bad of ['great job', 'well done', 'streak', 'score', 'you should stop', ' — ', ' – ', ' -- ', 'genuinely']) {
   lacks('words', words.toLowerCase(), bad);

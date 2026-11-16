@@ -3,7 +3,16 @@
 // lib/medSupply.ts.
 
 import { getDatabase } from './db';
-import { addDays, readSupply, type SupplyReading } from './medSupply';
+import {
+  addDays,
+  readSupply,
+  unitsForDose,
+  type DoseAhead,
+  type ScheduleAhead,
+  type SupplyReading,
+  type SupplyStep,
+} from './medSupply';
+import { occurrencesOf, weekdaysFromColumn, type RepeatConfig, type RepeatEndType } from './repeatRule';
 
 export type TreatmentDetails = {
   treatmentId: string;
@@ -142,6 +151,102 @@ async function countDoses(treatmentId: string, where: string, ...args: string[])
   return row?.n ?? 0;
 }
 
+// How far ahead the doses are walked: a year covers any count kept on hand.
+const AHEAD_DAYS = 366;
+
+type SeriesRow = {
+  repeat_type: string;
+  repeat_end_type: string | null;
+  repeat_count: number | null;
+  repeat_until: string | null;
+  repeat_interval: number | null;
+  repeat_weekdays: string | null;
+  repeat_start: string | null;
+  first_scheduled_for: string;
+  latest_scheduled_for: string;
+};
+
+/**
+ * Every dose of one med from now on (Q12): the schedule's rows as they stand,
+ * then each series carried on by its repeat rule past the rows laid out so
+ * far, each at the amount its day's taper step sets. Null when the med has
+ * nothing on the schedule ahead, so the reading falls back to recent marks.
+ */
+async function readScheduleAhead(details: TreatmentDetails, today: string, now: string): Promise<ScheduleAhead | null> {
+  const db = await getDatabase();
+  const through = addDays(today, AHEAD_DAYS);
+  const [rows, series, steps, med] = await Promise.all([
+    db.getAllAsync<{ scheduled_for: string }>(
+      `SELECT scheduled_for FROM schedule_items
+       WHERE linked_treatment_id = ? AND scheduled_for >= ? AND substr(scheduled_for, 1, 10) <= ?
+         AND status NOT IN ('skipped', 'cancelled', 'logged', 'partial', 'replaced')`,
+      details.treatmentId,
+      now,
+      through,
+    ),
+    db.getAllAsync<SeriesRow>(
+      `SELECT repeat_type, repeat_end_type, repeat_count, repeat_until, repeat_interval, repeat_weekdays, repeat_start,
+              MIN(scheduled_for) AS first_scheduled_for, MAX(scheduled_for) AS latest_scheduled_for
+       FROM schedule_items
+       WHERE linked_treatment_id = ? AND repeat_type IS NOT NULL AND repeat_type <> 'none' AND repeat_group_id IS NOT NULL
+       GROUP BY repeat_group_id`,
+      details.treatmentId,
+    ),
+    db.getAllAsync<{ start_date: string; end_date: string; dose_amount: number; dose_unit: string | null }>(
+      'SELECT start_date, end_date, dose_amount, dose_unit FROM treatment_taper_steps WHERE treatment_id = ? ORDER BY start_date',
+      details.treatmentId,
+    ),
+    db.getFirstAsync<{ dose_amount: number | null; dose_unit: string | null }>(
+      'SELECT dose_amount, dose_unit FROM treatments WHERE id = ?',
+      details.treatmentId,
+    ),
+  ]);
+
+  const dates: string[] = rows.map((row) => row.scheduled_for.slice(0, 10));
+  let ends = true;
+  for (const group of series) {
+    const rule: RepeatConfig = {
+      type: group.repeat_type as RepeatConfig['type'],
+      endType: (group.repeat_end_type as RepeatEndType | null) ?? 'indefinite',
+      count: group.repeat_count ?? undefined,
+      until: group.repeat_until ?? undefined,
+      interval: group.repeat_interval ?? undefined,
+      weekdays: weekdaysFromColumn(group.repeat_weekdays),
+    };
+    const anchor = group.repeat_start ?? group.first_scheduled_for.slice(0, 10);
+    const latest = group.latest_scheduled_for.slice(0, 10);
+    const after = latest > today ? latest : addDays(today, -1);
+    for (const next of occurrencesOf(anchor, rule, { after, through })) {
+      if (next.date <= through && next.date >= today) dates.push(next.date);
+    }
+    if (occurrencesOf(anchor, rule, { after: through, through: addDays(through, AHEAD_DAYS) }).length > 0) ends = false;
+  }
+  if (dates.length === 0) return null;
+  dates.sort();
+
+  const supplySteps: SupplyStep[] = steps.map((step) => ({
+    startDate: step.start_date,
+    endDate: step.end_date,
+    amount: step.dose_amount,
+    unit: step.dose_unit,
+  }));
+  let tapered = false;
+  let unconverted: { stepUnit: string } | null = null;
+  const doses: DoseAhead[] = dates.map((date) => {
+    const dose = unitsForDose(date, {
+      perDose: details.supplyPerDose,
+      unit: details.supplyUnit,
+      medAmount: med?.dose_amount ?? null,
+      medUnit: med?.dose_unit ?? null,
+      steps: supplySteps,
+    });
+    if (dose.tapered) tapered = true;
+    if (!dose.converted && !unconverted) unconverted = { stepUnit: dose.stepUnit ?? 'another unit' };
+    return { date, units: dose.units };
+  });
+  return { doses, through, ends, tapered, unconverted };
+}
+
 /** What is left of one med, worked out from its count and its marks. */
 export async function readTreatmentSupply(details: TreatmentDetails, today = localToday()): Promise<SupplyReading> {
   const now = localNow();
@@ -162,6 +267,7 @@ export async function readTreatmentSupply(details: TreatmentDetails, today = loc
         ),
       ])
     : [0, 0, 0];
+  const schedule = details.supplyCountedAt ? await readScheduleAhead(details, today, now) : null;
   return readSupply({
     onHand: details.supplyOnHand,
     unit: details.supplyUnit,
@@ -172,6 +278,7 @@ export async function readTreatmentSupply(details: TreatmentDetails, today = loc
     takenPast14Days,
     today,
     leadDays: details.refillLeadDays,
+    schedule,
   });
 }
 
