@@ -177,7 +177,11 @@ export function HomeArrangeList({
       orderIndex,
       members: homeGroupMembers(group)
         .map((key, memberIndex) => ({ key, memberIndex }))
-        .filter(({ key }) => hasContent(key)),
+        // For Testers and Your Guide are left off the list, 2026-11-16,
+        // direct instruction: "All the For Testers, and the Your Guide to be
+        // hidden." Neither can be turned off (HOME_SECTIONS_ALWAYS_SHOWN),
+        // so a row for either only took room; each keeps its place on Home.
+        .filter(({ key }) => hasContent(key) && !HOME_SECTIONS_ALWAYS_SHOWN.has(key)),
     }))
     .filter((entry) => entry.members.length > 0);
   const [openGroupId, setOpenGroupId] = useState<string | null>(() => {

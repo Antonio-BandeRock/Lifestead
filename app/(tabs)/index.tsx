@@ -5301,10 +5301,12 @@ export default function HomeScreen() {
                 })
               }
               hasContent={homeSectionHasContent}
+              // Waiting for an Answer shows its name and nothing more here,
+              // 2026-11-16, direct instruction: "only shows Waiting for an
+              // Answer in the header band and not the additional 'Nothing is
+              // waiting now...' stuff".
               restingCaption={(key) =>
-                key === 'waitingAnswers' && waiting.groups && countWaiting(waiting.groups) === 0
-                  ? 'Nothing waiting now. Shows here when a reminder needs an answer.'
-                  : key === 'interestTimer' && !interestTimer.timer
+                key === 'interestTimer' && !interestTimer.timer
                     ? 'No timer running now. Shows here while one runs on Interests, Sessions.'
                     : null
               }
