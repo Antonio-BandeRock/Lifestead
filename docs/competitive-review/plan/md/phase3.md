@@ -46,37 +46,37 @@
 ### C20. One read a day, in order for the person
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Life,Home
 - **Answers:** Noom · **Theme:** Capture, reminders and the second audience
-- **How:** A picker over the reading corpus by condition and healing stage, remembered so it moves forward, shown as the first Something to Read card.
+- **How:** A picker over the reading corpus by condition and healing stage, remembered so it moves forward, shown as the first Something to Read card. Built 1.0.57.14.
 
 ### C22. Ask a question of your records
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Home
 - **Answers:** Apple Health · **Theme:** Capture, reminders and the second audience
-- **How:** Rule-based routing to Pattern Finder, Trends and search. A model behind it is item Z3.
+- **How:** Rule-based routing to Pattern Finder, Trends and search. A model behind it is item Z3. Built 1.0.57.15.
 
 ### D8. One-flow daily check-in
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Home
 - **Answers:** Bearable · **Theme:** Check-ins and signals
-- **How:** Check-in, feeling and flare forms stepped through as one sequence ending on a summary.
+- **How:** Check-in, feeling and flare forms stepped through as one sequence ending on a summary. Built 1.0.57.16.
 
 ### D10. Bowel log with the Bristol scale
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Signals,Trends
 - **Answers:** Cara Care · **Theme:** Check-ins and signals
-- **How:** bowel_movements (append-only, local-day rule), pictured types 1 to 7, urgency, blood, pain; a Trends band; a Pattern Finder outcome.
+- **How:** bowel_movements (append-only, local-day rule), pictured types 1 to 7, urgency, blood, pain; a Trends band; a Pattern Finder outcome. Built 1.0.57.17.
 
 ### D11. Body map
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Signals,Trends
 - **Answers:** Guava · **Theme:** Check-ins and signals
-- **How:** A tappable SVG outline front and back, checkin_body_regions, and a Trends band of regions.
+- **How:** A tappable SVG outline front and back, checkin_body_regions, and a Trends band of regions. Built 1.0.57.19.
 
 ### D12. Photos of a symptom over time
 - **Ships by:** Over the air (JS) · **Size:** S-M · **Tabs:** Signals
 - **Answers:** Guava, Cara Care, Bearable · **Theme:** Check-ins and signals
-- **How:** checkin_photos through X1; kept out of anything that travels between people unless named in the allowlist.
+- **How:** checkin_photos through X1; kept out of anything that travels between people unless named in the allowlist. Built 1.0.57.20.
 
 ### D13. Standard questionnaires
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Signals
 - **Answers:** CareClinic · **Theme:** Check-ins and signals
-- **How:** PHQ-9 and GAD-7 (free to use), fatigue and pain scales after a licence check each, in the assessment framework, shown as each scale's published bands with talk-to-your-clinician wording. Clinical-claims audit.
+- **How:** PHQ-9 and GAD-7 (free to use), fatigue and pain scales after a licence check each, in the assessment framework, shown as each scale's published bands with talk-to-your-clinician wording. Clinical-claims audit. Built 1.0.57.21.
 
 ### D16. Pacing view as a record
 - **Ships by:** Over the air (JS) · **Size:** M-L · **Tabs:** Trends,Home
@@ -101,47 +101,47 @@
 ### F5. Experiments beyond food
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Signals
 - **Answers:** Bearable, Exist · **Theme:** Patterns and Trends
-- **How:** subject_kind on food_trials: a bedtime, a supplement, a walk.
+- **How:** subject_kind on food_trials: a bedtime, a supplement, a walk. Built 1.0.58.4.
 
 ### F6. An elimination series
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Signals
 - **Answers:** Cara Care · **Theme:** Patterns and Trends
-- **How:** Queues the next trial when one ends; keeps the one-run limit sentence.
+- **How:** Queues the next trial when one ends; keeps the one-run limit sentence. Built 1.0.58.5.
 
 ### F7. Stepped reintroduction
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Signals
 - **Answers:** Monash FODMAP · **Theme:** Patterns and Trends
-- **How:** Small, medium, large, then a washout, each step read on its own.
+- **How:** Small, medium, large, then a washout, each step read on its own. Built 1.0.58.6.
 
 ### F8. Glucose as an experiment measure
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Signals
 - **Answers:** Levels · **Theme:** Patterns and Trends
-- **How:** After F10.
+- **How:** After F10. Built 1.0.58.8.
 
 ### F10. Glucose around each meal
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Insights,Trends
 - **Answers:** Levels, Cronometer · **Theme:** Patterns and Trends
-- **How:** Pure lib/mealGlucose.ts: rise and time back to the pre-meal level, on Signals Today and a Trends history. "Rose by", never "spiked because of".
+- **How:** Pure lib/mealGlucose.ts: rise and time back to the pre-meal level, on Signals Today and a Trends history. "Rose by", never "spiked because of". Built 1.0.58.7.
 
 ### F15. A year in squares
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Trends,Signals
 - **Answers:** Daylio · **Theme:** Patterns and Trends
-- **How:** components/CalendarHeatStrip.tsx; an unlogged day is an empty outline, never the lowest colour. Then a small add per lens.
+- **How:** components/CalendarHeatStrip.tsx; an unlogged day is an empty outline, never the lowest colour. Then a small add per lens. Built 1.0.58.9.
 
 ### F16. Compare any two series
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Trends,Food,Insights
 - **Answers:** Cronometer · **Theme:** Patterns and Trends
-- **How:** Nutrient, weight, lab, steps, sleep, symptom severity on one date axis, each on its own scale, with a caption that moving together is not causing.
+- **How:** Nutrient, weight, lab, steps, sleep, symptom severity on one date axis, each on its own scale, with a caption that moving together is not causing. Built 1.0.58.10.
 
 ### F18. Tags as marks under a chart
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Trends
 - **Answers:** Oura · **Theme:** Patterns and Trends
-- **How:** After F15 or D2.
+- **How:** After F15 or D2. Built 1.0.58.13.
 
 ### F20. Tags against the next night's sleep and heart rate
 - **Ships by:** Over the air (JS) · **Size:** S-M · **Tabs:** Trends
 - **Answers:** Oura · **Theme:** Patterns and Trends
-- **How:** With counts and the usual range.
+- **How:** With counts and the usual range. Built 1.0.58.14.
 
 ### G2. Recipe from a cookbook photo
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Food
@@ -151,27 +151,27 @@
 ### G9. Log a restaurant or takeaway meal
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Food
 - **Answers:** MyFitnessPal · **Theme:** Food, scanning and Insights
-- **How:** source restaurant with an estimate flag; a stand-in recipe or ticked ingredients. A chain menu database is Z7.
+- **How:** source restaurant with an estimate flag; a stand-in recipe or ticked ingredients. A chain menu database is Z7. Built 1.0.59.1.
 
 ### G13. Calcium, iron and zinc absorption estimate
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Insights
 - **Answers:** Cronometer · **Theme:** Food, scanning and Insights
-- **How:** Oxalate and phytate already in the DB; cited coefficients; labelled an estimate with its tier.
+- **How:** Oxalate and phytate already in the DB; cited coefficients; labelled an estimate with its tier. Built 1.0.54.9.
 
 ### G18. Every ingredient checked, with a named reason
 - **Ships by:** Over the air (JS) · **Size:** M-L · **Tabs:** Food,Insights
 - **Answers:** Fig · **Theme:** Food, scanning and Insights
-- **How:** lib/ingredientFlags.ts: additives, FODMAP ingredients, histamine liberators, gluten grains, per-diet lists and an uncertain class. Allergen-aware wording (item 26). Citations are the work.
+- **How:** lib/ingredientFlags.ts: additives, FODMAP ingredients, histamine liberators, gluten grains, per-diet lists and an uncertain class. Allergen-aware wording (item 26). Citations are the work. Built 1.0.54.16.
 
 ### G19. More restrictions to choose
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Food,Profile
 - **Answers:** Fig · **Theme:** Food, scanning and Insights
-- **How:** Histamine, salicylate, sulfite, alpha-gal, nightshade, lectin, each mapped to DB properties or G18.
+- **How:** Histamine, salicylate, sulfite, alpha-gal, nightshade, lectin, each mapped to DB properties or G18. Built 1.0.54.18.
 
 ### G22. A home recipe or whole food in place of a packaged one
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Food,Insights
 - **Answers:** Yuka · **Theme:** Food, scanning and Insights
-- **How:** From the scan result, recipes and reference foods in the same category that score clean.
+- **How:** From the scan result, recipes and reference foods in the same category that score clean. Built 1.0.59.2.
 
 ### G23. Amount-aware cautions
 - **Ships by:** Live database, needs owner yes · **Size:** L · **Tabs:** Food
@@ -181,92 +181,92 @@
 ### G27. Menu scan, limited
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Food
 - **Answers:** Heali · **Theme:** Food, scanning and Insights
-- **How:** OCR finds ingredient words and runs condition matching. A model version is Z3.
+- **How:** OCR finds ingredient words and runs condition matching. A model version is Z3. Built 1.0.59.3.
 
 ### G28. Labs without typing
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Insights,Signals,Reports
 - **Answers:** Levels, Guava, Guava Reports · **Theme:** Food, scanning and Insights
-- **How:** A photo of the sheet through the ML Kit OCR already in the build (no rebuild), a pasted table or CSV, and a whole-panel form; every value confirmed before saving.
+- **How:** A photo of the sheet through the ML Kit OCR already in the build (no rebuild), a pasted table or CSV, and a whole-panel form; every value confirmed before saving. Built 1.0.59.4.
 
 ### G30. Microbiome test as a typed record
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Signals
 - **Answers:** ZOE · **Theme:** Food, scanning and Insights
-- **How:** A lab-style record for a test the person bought.
+- **How:** A lab-style record for a test the person bought. Built 1.0.59.5.
 
 ### G32. Today grouped by body system or by condition
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Home
 - **Answers:** Cronometer · **Theme:** Food, scanning and Insights
-- **How:** A fold inside Fuel Gauges; says what is counted, never "too low".
+- **How:** A fold inside Fuel Gauges; says what is counted, never "too low". Built 1.0.59.6.
 
 ### G36. Hydration per drink and a goal that moves
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Schedules
 - **Answers:** Waterllama · **Theme:** Food, scanning and Insights
-- **How:** A cited hydration index per drink (Rule Engine steps 1 to 3), activity from Health Connect now, heat once F22 exists.
+- **How:** A cited hydration index per drink (Rule Engine steps 1 to 3), activity from Health Connect now, heat once F22 exists. Built 1.0.54.31.
 
 ### G37. Optional calorie and macro band in the generator
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Schedules
 - **Answers:** Eat This Much · **Theme:** Food, scanning and Insights
-- **How:** Offered, never default; careful for IBD and celiac where under-eating is the risk.
+- **How:** Offered, never default; careful for IBD and celiac where under-eating is the risk. Built 1.0.54.32.
 
 ### G38. A budget ceiling from the person's recorded prices
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Schedules
 - **Answers:** Eat This Much · **Theme:** Food, scanning and Insights
-- **How:** Only where prices exist; never guessed.
+- **How:** Only where prices exist; never guessed. Built 1.0.54.33.
 
 ### H3. Leftovers and batch cooking
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Schedules
 - **Answers:** Eat This Much · **Theme:** Meal planning
-- **How:** "Makes N, eat again at" links later slots to the same meal; ties to open item 18.
+- **How:** "Makes N, eat again at" links later slots to the same meal; ties to open item 18. Built 1.0.54.34 and 1.0.54.35.
 
 ### H6. Save a week and reuse it
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Schedules
 - **Answers:** Plan to Eat · **Theme:** Meal planning
-- **How:** saved_plans by day offset.
+- **How:** saved_plans by day offset. Built 1.0.54.36.
 
 ### H9. Shared household meal calendar
 - **Ships by:** Over the air (JS) · **Size:** M-L · **Tabs:** Schedules
 - **Answers:** Plan to Eat · **Theme:** Meal planning
-- **How:** The schedule area for meals only in the peer allowlist.
+- **How:** The schedule area for meals only in the peer allowlist. Built 1.0.54.38.
 
 ### H11. Build the Exercise lens
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Schedules
 - **Answers:** CareClinic · **Theme:** Meal planning
-- **How:** Uses A1 repeats and Health Connect workouts.
+- **How:** Uses A1 repeats and Health Connect workouts. Built 1.0.55.1 to 1.0.55.4.
 
 ### I1. Care cadence per crop
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Garden
 - **Answers:** Planta · **Theme:** Garden
-- **How:** A cited lib/cropCare.ts offering a repeating task series.
+- **How:** A cited lib/cropCare.ts offering a repeating task series. Built 1.0.59.7.
 
 ### I5. Sowing calendar and expected dates
 - **Ships by:** Over the air (JS) · **Size:** M-L · **Tabs:** Garden
 - **Answers:** Seedtime, From Seed to Spoon · **Theme:** Garden
-- **How:** A cited lib/sowingWindows.ts (weeks from frost, days to sprout and to harvest) filling expected dates and two Days Until counters.
+- **How:** A cited lib/sowingWindows.ts (weeks from frost, days to sprout and to harvest) filling expected dates and two Days Until counters. Built 1.0.55.20.
 
 ### I7. Companion planting
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Garden
 - **Answers:** Seedtime · **Theme:** Garden
-- **How:** lib/companionPairs.ts with evidence tiers; a caption, never a block.
+- **How:** lib/companionPairs.ts with evidence tiers; a caption, never a block. Built 1.0.59.8.
 
 ### I8. Bed layout drawn to scale
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** Garden
 - **Answers:** Seedtime, GrowVeg · **Theme:** Garden
-- **How:** Width and length on areas, grid position on plantings, an SVG editor.
+- **How:** Width and length on areas, grid position on plantings, an SVG editor. Built 1.0.59.9.
 
 ### I9. Seed inventory
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Garden
 - **Answers:** Seedtime · **Theme:** Garden
-- **How:** garden_seeds with packet date; a planting draws down a packet.
+- **How:** garden_seeds with packet date; a planting draws down a packet. Built 1.0.59.10.
 
 ### I11. Pests and beneficial insects
 - **Ships by:** Reading content · **Size:** M · **Tabs:** Garden
 - **Answers:** GrowVeg · **Theme:** Garden
-- **How:** A Horticulture subgroup, following the reading pattern rules.
+- **How:** A Horticulture subgroup, following the reading pattern rules. Built 1.0.59.11.
 
 ### I13. Photos on plantings, areas, harvests and piles
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Garden
 - **Answers:** Gardenize · **Theme:** Garden
-- **How:** garden_photos through X1.
+- **How:** garden_photos through X1. Built 1.0.59.13.
 
 ### I16. What to grow for my conditions
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Garden
@@ -276,7 +276,7 @@
 ### I20. Read an Ecowitt gateway on the home network
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Garden
 - **Answers:** Ecowitt · **Theme:** Garden
-- **How:** Polling by IP (zeroconf and cleartext LAN already in the build) while the app is open.
+- **How:** Polling by IP (zeroconf and cleartext LAN already in the build) while the app is open. Built 1.0.55.36.
 
 ### I26. What is wrong with a plant, crop by crop
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Garden
@@ -311,7 +311,7 @@
 ### K4. Visit prep: questions and one page for the appointment
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Reports,Insights,Schedules
 - **Answers:** Guava · **Theme:** Reports
-- **How:** visit_questions tied to an appointment, reorder and tick off, in the person's words. Widened 2026-10-06: Capture notes and P25's pharmacist questions can be sent here; what changed since the last visit (meds, supplements, labs, conditions, K1's window); one printed page and PDF per appointment with room for answers; answers recorded after against each question. Notion: https://app.notion.com/p/3f153652f27281aba8e2fdd40d683fb3
+- **How:** visit_questions tied to an appointment, reorder and tick off, in the person's words. Widened 2026-10-06: Capture notes and P25's pharmacist questions can be sent here; what changed since the last visit (meds, supplements, labs, conditions, K1's window); one printed page and PDF per appointment with room for answers; answers recorded after against each question. Notion: https://app.notion.com/p/3f153652f27281aba8e2fdd40d683fb3 Partly built: Before an Appointment on Insights lists open questions from health notes, and Since Your Last Appointment (F19) counts what changed. Not yet: visit_questions tied to one appointment, reordered and ticked off.
 
 ### P1. The first week, for someone with no condition and no patience
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** Home,Profile
@@ -341,7 +341,7 @@
 ### P12. Sharing between two people past the shopping list
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** Food,Schedules,Life
 - **Answers:** AnyList, Paprika · **Theme:** Brainstorm review 2026-10-06
-- **How:** Extend the allowlist in lib/peerRelationships.ts area by area (meal plan, schedule) with a per-category choice screen (meals and shopping shared by default; symptoms, labs and notes private; medications chosen at setup), carried by the relay (M1). Household read-only seats follow. The Partner tier's main reason to pay. Notion: https://app.notion.com/p/3f153652f272811db0d1ecb5862b72c0
+- **How:** Extend the allowlist in lib/peerRelationships.ts area by area (meal plan, schedule) with a per-category choice screen (meals and shopping shared by default; symptoms, labs and notes private; medications chosen at setup), carried by the relay (M1). Household read-only seats follow. The Partner tier's main reason to pay. Notion: https://app.notion.com/p/3f153652f272811db0d1ecb5862b72c0 Built: partner links 1.0.34.30, then a switch per area for what each partner shares (meds, emergency card, appointments, finances, conditions) 1.0.80.3; lib/peerRelationships.ts.
 
 ### P15. Conversions: the kitchen
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Life,Food
@@ -381,7 +381,7 @@
 ### P22. The kitchen goes down when a meal is saved
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Food,Life
 - **Answers:** (your question) · **Theme:** Brainstorm review 2026-10-06
-- **How:** Saving a meal offers to take what it used off Life > Kitchen, the way offerGardenUse does for the garden; only matching units are taken off and the rest said so; running low goes to the grocery list in one tap. Builds on H1 and H2. Notion: https://app.notion.com/p/3f153652f272814f94a7f6deb88695fe
+- **How:** Saving a meal offers to take what it used off Life > Kitchen, the way offerGardenUse does for the garden; only matching units are taken off and the rest said so; running low goes to the grocery list in one tap. Builds on H1 and H2. Notion: https://app.notion.com/p/3f153652f272814f94a7f6deb88695fe Partly built: lib/kitchenUsage.ts takes what a recipe used off the kitchen when it is made. Not yet: the offer when a meal is saved, and running low sent to the grocery list in one tap.
 
 ### P23. What can I make with what I have
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Food
@@ -446,7 +446,7 @@
 ### Q14. Travel noticed when the zone changes
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Schedules
 - **Answers:** Medisafe · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** When the phone changes time zone, ask once per med whether to keep home time or shift, offer a stepped shift over a few days for a dose whose timing matters, and move the meal timing checks with it.
+- **How:** When the phone changes time zone, ask once per med whether to keep home time or shift, offer a stepped shift over a few days for a dose whose timing matters, and move the meal timing checks with it. Partly built: travel time to appointments (lib/travelTime.ts). Not yet: noticing a time zone change and shifting dose times.
 
 ### Q16. Upkeep by place, by who, and fitted to the day
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Life,Schedules
@@ -471,12 +471,12 @@
 ### Q22. Calm for each condition, and where to go further
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Signals,Life
 - **Answers:** Nerva, Calm · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Scripts for flare nights, pain and waiting for results written per condition, the trial-backed programmes (gut-directed hypnotherapy, CBT for IBS) named with how to reach them in the condition reading, and the person’s own recordings played once R1 carries expo-audio.
+- **How:** Scripts for flare nights, pain and waiting for results written per condition, the trial-backed programmes (gut-directed hypnotherapy, CBT for IBS) named with how to reach them in the condition reading, and the person’s own recordings played once R1 carries expo-audio. Partly built: Calm (D15) with a breathing pacer and spoken scripts (lib/calm.ts). Not yet: scripts written per condition, and the trial-backed programmes named in each condition reading.
 
 ### Q23. A three-day bladder diary
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Signals,Reports
 - **Answers:** Bladder Journal, U-Night · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** An optional mode for the clinical three days: each void with volume and urgency, leaks, fluid in drawn from what is already logged, the night share worked out, and a page in the doctor report.
+- **How:** An optional mode for the clinical three days: each void with volume and urgency, leaks, fluid in drawn from what is already logged, the night share worked out, and a page in the doctor report. Partly built: nocturia nights on Signals and Trends > Nights (1.0.52.7). Not yet: the three-day diary with volume, urgency and leaks, and its report page.
 
 ### Q26. What each lab marker means
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Insights,Life
@@ -531,7 +531,7 @@
 ### Q47. To-Do projects
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Life
 - **Answers:** Todoist, Things · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Projects that hold to-dos, sub-steps under a to-do, a waiting-on state with who and since when, labels and a filter by label, a project finished kept as history; no points, no streaks, no overdue count shown in red.
+- **How:** Projects that hold to-dos, sub-steps under a to-do, a waiting-on state with who and since when, labels and a filter by label, a project finished kept as history; no points, no streaks, no overdue count shown in red. Partly built: steps that wait on someone, a parking lot and finished projects kept as history are in Projects (lib/projects.ts); to-dos are in lib/todos.ts. Not yet: sub-steps under a to-do, labels and a filter by label.
 
 ### Q48. Insurance claims and appeal deadlines
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Life,Reports
@@ -571,7 +571,7 @@
 ### Q62. Google Drive and iCloud Drive as the shared folder
 - **Ships by:** Android rebuild R1 · **Size:** M · **Tabs:** All
 - **Answers:** Obsidian Sync, Day One · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** The same snapshot sync and backup through Google Drive and iCloud Drive as through OneDrive, the person’s own storage, no company server.
+- **How:** The same snapshot sync and backup through Google Drive and iCloud Drive as through OneDrive, the person’s own storage, no company server. Partly built: Google Drive (lib/googleDrive.ts). Not yet: iCloud Drive.
 
 ### Q63. A shared recipe readable without the app
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** All
@@ -581,7 +581,7 @@
 ### Q64. Reports saved to a remembered folder
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Reports
 - **Answers:** Obsidian · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Save to a folder chosen once and remembered, beside the share sheet, in PDF and open formats.
+- **How:** Save to a folder chosen once and remembered, beside the share sheet, in PDF and open formats. Partly built: a folder on the phone can be the shared folder (lib/phoneFolder.ts, 2026-11-03). Not yet: reports saved to a remembered folder.
 
 ### U8. An identification is a suggestion
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Garden

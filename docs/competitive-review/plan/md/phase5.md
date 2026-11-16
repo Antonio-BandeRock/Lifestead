@@ -1,17 +1,17 @@
 ### A14. Recalls matched to My Meds and scanned foods
 - **Ships by:** Cloudflare Worker · **Size:** M · **Tabs:** Insights,Life,Food
 - **Answers:** Drugs.com · **Theme:** Medication logistics
-- **How:** External data item 27: the Worker pre-fetches FDA recall feeds as one bundle and the phone matches names locally, so the med list never leaves it.
+- **How:** External data item 27: the Worker pre-fetches FDA recall feeds as one bundle and the phone matches names locally, so the med list never leaves it. Built 1.0.59.14.
 
 ### C21. Try-before-install page
 - **Ships by:** Cloudflare Worker · **Size:** S · **Tabs:** none
 - **Answers:** Noom · **Theme:** Capture, reminders and the second audience
-- **How:** A page on inside-story-site describing the app by audience. Collects nothing.
+- **How:** A page on inside-story-site describing the app by audience. Collects nothing. Built on 2026-10-02 (aa69ba90).
 
 ### F22. Weather beside symptoms
 - **Ships by:** Cloudflare Worker · **Size:** M · **Tabs:** Signals,Trends
 - **Answers:** Flaredown · **Theme:** Patterns and Trends
-- **How:** daily_weather from the Worker bundle with a coarsened location (item 27), listed beside flares in lib/patternContext.ts. A typed city ships over the air; automatic location needs expo-location in R1.
+- **How:** daily_weather from the Worker bundle with a coarsened location (item 27), listed beside flares in lib/patternContext.ts. A typed city ships over the air; automatic location needs expo-location in R1. Built 1.0.58.15.
 
 ### I24. What plant is this
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Garden
@@ -26,7 +26,7 @@
 ### M1. Content-blind push relay
 - **Ships by:** Relay (Worker plus push) · **Size:** L · **Tabs:** all
 - **Answers:** Medisafe, AnyList, CareClinic · **Theme:** Servers and relay
-- **How:** The Worker plus FCM, carrying a wake-up and sealed bytes only. Unlocks A16 on time, J12 instantly, and O3. Remote push setup rides in R1.
+- **How:** The Worker plus FCM, carrying a wake-up and sealed bytes only. Unlocks A16 on time, J12 instantly, and O3. Remote push setup rides in R1. Built 1.0.62.2.
 
 ### Q58. A life’s Inside Story, first edition
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** All

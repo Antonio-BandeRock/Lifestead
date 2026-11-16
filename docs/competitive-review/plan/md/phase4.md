@@ -1,22 +1,22 @@
 ### C11. Share into Lifestead from any app
 - **Ships by:** Android rebuild R1 · **Size:** M · **Tabs:** Life,Home,Food
 - **Answers:** Todoist, Samsung Food, Plan to Eat · **Theme:** Capture, reminders and the second audience
-- **How:** A SEND intent filter for text, links and images. A link to a recipe goes to the importer (G1); anything else lands in Capture.
+- **How:** A SEND intent filter for text, links and images. A link to a recipe goes to the importer (G1); anything else lands in Capture. Built in the R1 rebuild (1.0.59.15): components/ShareIntentHandler.tsx.
 
 ### C12. App icon shortcuts and a quick settings tile
 - **Ships by:** Android rebuild R1 · **Size:** S-M · **Tabs:** Home
 - **Answers:** Todoist · **Theme:** Capture, reminders and the second audience
-- **How:** expo-quick-actions plus a tile config plugin: Capture, Did I take it, Where is it.
+- **How:** expo-quick-actions plus a tile config plugin: Capture, Did I take it, Where is it. Built in the R1 rebuild (1.0.59.15): lib/quickActions.ts.
 
 ### D15. Relaxation and gut-directed audio
 - **Ships by:** Android rebuild R1 · **Size:** M · **Tabs:** Signals
 - **Answers:** Cara Care · **Theme:** Check-ins and signals
-- **How:** Pacer and spoken scripts shipped OTA in 1.0.57.22 (Signals > Calm). Recordings come in OTA since 1.0.57.23: kept in the Recordings folder in the shared folder, played in the app on the computer and opened in another app on the phone. Left for R1: expo-audio so the phone plays them in the app, and expo-keep-awake so the pacer can keep the screen on. No music or recordings ship with the app.
+- **How:** Pacer and spoken scripts shipped OTA in 1.0.57.22 (Signals > Calm). Recordings come in OTA since 1.0.57.23: kept in the Recordings folder in the shared folder, played in the app on the computer and opened in another app on the phone. Left for R1: expo-audio so the phone plays them in the app, and expo-keep-awake so the pacer can keep the screen on. No music or recordings ship with the app. Built 1.0.57.22 (Calm on Signals); expo-audio and expo-keep-awake arrived with R1.
 
 ### G3. Mark up any web page as a recipe
 - **Ships by:** Android rebuild R1 · **Size:** L · **Tabs:** Food
 - **Answers:** Paprika · **Theme:** Food, scanning and Insights
-- **How:** react-native-webview, for sites with no structured data.
+- **How:** react-native-webview, for sites with no structured data. Built 1.0.59.15.
 
 ### G24. Photo gives a first guess at ingredients, on the phone
 - **Ships by:** Android rebuild R1 · **Size:** L · **Tabs:** Food
@@ -26,32 +26,32 @@
 ### I22. Receive the gateway's pushes
 - **Ships by:** Android rebuild R1 · **Size:** M-L · **Tabs:** Garden
 - **Answers:** Ecowitt · **Theme:** Garden
-- **How:** A small HTTP listener native module. Polling covers it until then.
+- **How:** A small HTTP listener native module. Polling covers it until then. Built 1.0.55.38.
 
 ### L2. Android home screen widgets
 - **Ships by:** Android rebuild R1 · **Size:** L · **Tabs:** Home,Life,Schedules
 - **Answers:** Tiimo, AnyList, Todoist, Waterllama, Medisafe, Cronometer · **Theme:** Phones, widgets and devices
-- **How:** react-native-android-widget: next thing, next dose, Capture, grocery list, Fuel Gauges, current routine step, one-tap glass. A "hide health details on widgets" switch, since a locked phone shows them.
+- **How:** react-native-android-widget: next thing, next dose, Capture, grocery list, Fuel Gauges, current routine step, one-tap glass. A "hide health details on widgets" switch, since a locked phone shows them. Built in the R1 rebuild (1.0.59.15): lib/widgets/LifesteadWidget.tsx.
 
 ### L4. Breathing rate and body temperature
 - **Ships by:** Android rebuild R1 · **Size:** S · **Tabs:** Trends,Signals
 - **Answers:** Oura · **Theme:** Phones, widgets and devices
-- **How:** Two more Health Connect permissions.
+- **How:** Two more Health Connect permissions. Built in the R1 rebuild (1.0.59.15): respiratory rate and body temperature in lib/healthConnect.ts.
 
 ### L5. Camera originals to the gallery, and Wi-Fi only photos
 - **Ships by:** Android rebuild R1 · **Size:** S · **Tabs:** all
 - **Answers:** (your question) · **Theme:** Phones, widgets and devices
-- **How:** expo-media-library saves the full camera picture, with its details, to the phone's gallery while the app keeps its two small sizes (X1, 1.0.53.7). expo-network tells Wi-Fi from mobile data, so "Send and fetch shared photos on Wi-Fi only" holds on the phone; until then lib/photoNative.ts reports unknown and photos go either way.
+- **How:** expo-media-library saves the full camera picture, with its details, to the phone's gallery while the app keeps its two small sizes (X1, 1.0.53.7). expo-network tells Wi-Fi from mobile data, so "Send and fetch shared photos on Wi-Fi only" holds on the phone; until then lib/photoNative.ts reports unknown and photos go either way. Built in the R1 rebuild (1.0.59.15): gallery save in lib/photoNative.ts, Wi-Fi only photos in lib/peerPhotos.ts.
 
 ### O1. Phone contacts inside the app
 - **Ships by:** Android rebuild R1 · **Size:** S-M · **Tabs:** Life
 - **Answers:** (your question) · **Theme:** Talking to people
-- **How:** expo-contacts: pick a contact for Emergency, a prescriber, a pharmacy, the family roster or a caregiver invite. Read on the phone, nothing copied out.
+- **How:** expo-contacts: pick a contact for Emergency, a prescriber, a pharmacy, the family roster or a caregiver invite. Read on the phone, nothing copied out. Built in the R1 rebuild (1.0.59.15): lib/contactPick.ts.
 
 ### O2. Text or call from inside the app
 - **Ships by:** Android rebuild R1 · **Size:** S · **Tabs:** Life
 - **Answers:** (your question) · **Theme:** Talking to people
-- **How:** expo-sms opens the phone's texting app with the message filled in; calling already works through Linking.
+- **How:** expo-sms opens the phone's texting app with the message filled in; calling already works through Linking. Built in the R1 rebuild (1.0.59.15): lib/phoneReach.ts.
 
 ### P30. A child's records handed over at adulthood
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Profile,Life
@@ -111,32 +111,32 @@
 ### Q65. The Interests tab
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** Interests
 - **Answers:** Notion, Strava · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Following and practising as two stages of one record: sessions, gear, costs, people and places, nothing pushed toward earning, no diagnosis needed to start.
+- **How:** Following and practising as two stages of one record: sessions, gear, costs, people and places, nothing pushed toward earning, no diagnosis needed to start. Built: the Interests tab, stage 1 1.0.77.11.
 
 ### Q66. Projects across the app
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** All
 - **Answers:** Todoist, Notion · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** A project that reads records from any tab (a garden bed, a kitchen job, a trip), on top of To-Do projects.
+- **How:** A project that reads records from any tab (a garden bed, a kitchen job, a trip), on top of To-Do projects. Built: app-wide Projects, lib/projects.ts (2026-10-30).
 
 ### Q67. Making It Pay
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Interests
 - **Answers:** SCORE, SBA · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Self-employment reading and a viability worksheet from the interest’s own costs and time; never advises starting a business or quitting a job.
+- **How:** Self-employment reading and a viability worksheet from the interest’s own costs and time; never advises starting a business or quitting a job. Built: Making It Pay, lib/couldThisPay.ts.
 
 ### Q68. Learn: ready-made decks on Free
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Interests
 - **Answers:** Anki, Quizlet · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Decks on the 19 conditions, food and the reading, mostly critical-thinking questions, spaced repetition, printable, no points or pushed percentages.
+- **How:** Decks on the 19 conditions, food and the reading, mostly critical-thinking questions, spaced repetition, printable, no points or pushed percentages. Built: ready-made Learn decks (lib/learnDecks.ts).
 
 ### Q69. Learn: decks from a table and from records
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Interests
 - **Answers:** Quizlet, Anki · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Paid: decks imported from a table or made from the person’s own records, which no free tool can make.
+- **How:** Paid: decks imported from a table or made from the person’s own records, which no free tool can make. Built: decks from a table and from records (lib/learnImport.ts, lib/learnRecordDecks.ts).
 
 ### Q70. Inside Knowledge on Home
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Home
 - **Answers:** Duolingo · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** A Home card counting what a person has come to know, a count that only grows, percentages behind a link they open.
+- **How:** A Home card counting what a person has come to know, a count that only grows, percentages behind a link they open. Built: Inside Knowledge on Home (lib/insideKnowledge.ts).
 
 ### Q71. Household seats
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** All
@@ -146,4 +146,4 @@
 ### Q72. The Partner tier
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** All
 - **Answers:** Apple Health Sharing, AnyList · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Two full accounts, meals and shopping shared, a per-category choice of the rest, ended cleanly.
+- **How:** Two full accounts, meals and shopping shared, a per-category choice of the rest, ended cleanly. Built as partner links (1.0.34.30) with a choice per area (1.0.80.3). Billing for two waits on store setup.
