@@ -13,6 +13,11 @@
 // word on this screen calls it late, missed or failed. The grouping, every
 // caption and every sentence said back are in lib/todos.ts, checked by
 // scripts/test_todos.js.
+//
+// Q47: a to-do can hold steps (components/TodoSteps.tsx) and carry labels
+// of the person's own. Label pills above the list filter it to one label,
+// and a to-do added while a label is chosen carries that label. The rules
+// are lib/todoExtras.ts, checked by scripts/test_todo_extras.js.
 
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useMemo, useState } from 'react';
@@ -34,7 +39,21 @@ import {
   type TodoArea,
   type TodoDoingKind,
 } from '../lib/todos';
-import { addTodo, answerTodo, deleteTodo, listTodos, reopenTodo, updateTodo } from '../lib/todosDb';
+import {
+  addTodo,
+  answerTodo,
+  deleteTodo,
+  listAllTodoLabels,
+  listLabelsFor,
+  listStepsFor,
+  listTodos,
+  reopenTodo,
+  setTodoLabels,
+  updateTodo,
+} from '../lib/todosDb';
+import { emptyLabelWords, labelWordsOf, labelsInUse, readLabelWords, sortedLabels, todoHasLabel, type TodoStep } from '../lib/todoExtras';
+import { t } from '../lib/i18n';
+import { TodoSteps } from './TodoSteps';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { describeRepeat } from '../lib/repeatRule';
 import { formatTime12 } from '../lib/timeOfDay';
@@ -42,7 +61,7 @@ import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
 import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
 import { ReadProblem } from './ReadProblem';
 import { saveOrSay } from '../lib/saveProblem';
 
@@ -67,6 +86,7 @@ type Editing = {
   notes: string;
   area: TodoArea;
   when: string;
+  labels: string;
 };
 
 /** The When field's starting words for a to-do being changed. */
@@ -90,11 +110,21 @@ export function TodoSection({ tabColor, scope }: Props) {
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
   const [readFailed, setReadFailed] = useState(false);
+  const [stepsByTodo, setStepsByTodo] = useState<Map<string, TodoStep[]>>(new Map());
+  const [labelsByTodo, setLabelsByTodo] = useState<Map<string, string[]>>(new Map());
+  const [allLabels, setAllLabels] = useState<string[]>([]);
+  const [chosenLabel, setChosenLabel] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setReadFailed(false);
     try {
-      setTodos(await listTodos(scope));
+      const list = await listTodos(scope);
+      const ids = list.map((todo) => todo.id);
+      const [steps, labels, everyLabel] = await Promise.all([listStepsFor(ids), listLabelsFor(ids), listAllTodoLabels()]);
+      setTodos(list);
+      setStepsByTodo(steps);
+      setLabelsByTodo(labels);
+      setAllLabels(everyLabel);
     } catch (error) {
       console.warn('[TodoSection] could not read', error);
       setReadFailed(true);
@@ -109,7 +139,11 @@ export function TodoSection({ tabColor, scope }: Props) {
 
   const today = todayLocal();
   const reading = useMemo(() => (words.trim() ? readTodoWords(words, new Date()) : null), [words]);
-  const groups = groupTodos(todos, today);
+  const labelChoices = labelsInUse(labelsByTodo);
+  // A chosen label that no longer appears on any to-do lets the filter go.
+  const activeLabel = chosenLabel && labelChoices.some((label) => label.toLocaleLowerCase() === chosenLabel.toLocaleLowerCase()) ? chosenLabel : null;
+  const shown = todos.filter((todo) => todoHasLabel(labelsByTodo.get(todo.id), activeLabel));
+  const groups = groupTodos(shown, today);
   const openCount = todos.filter((todo) => !todo.doneAt).length;
   // The first open to-do carries the tutorial rings for the row buttons
   // (lib/toolHowTos.ts).
@@ -127,7 +161,11 @@ export function TodoSection({ tabColor, scope }: Props) {
     const dueOn = ignoreDay ? null : reading.dueOn;
     const dueTime = ignoreDay ? null : reading.dueTime;
     const repeat = ignoreDay ? null : reading.repeat;
-    const added = await saveOrSay('The task was not added. Try again.', async () => { await addTodo({ title: reading.title, area: scope === 'work' ? 'work' : area, dueOn, dueTime, repeat }); return true; });
+    const added = await saveOrSay('The task was not added. Try again.', async () => {
+      const id = await addTodo({ title: reading.title, area: scope === 'work' ? 'work' : area, dueOn, dueTime, repeat });
+      if (activeLabel) await setTodoLabels(id, [activeLabel]);
+      return true;
+    });
     if (!added) return;
     setWords('');
     setIgnoreDay(false);
@@ -149,7 +187,7 @@ export function TodoSection({ tabColor, scope }: Props) {
   function askRemove(todo: Todo) {
     setConfirm({
       title: `Remove ${todo.title}?`,
-      message: 'It comes off the list, with the record of each time it was done. To keep the record, mark it done or let it go instead.',
+      message: 'It comes off the list, with its steps, its labels and the record of each time it was done. To keep the record, mark it done or let it go instead.',
       actions: [
         {
           label: 'Remove',
@@ -169,7 +207,7 @@ export function TodoSection({ tabColor, scope }: Props) {
 
   function startEdit(todo: Todo) {
     setEditError(null);
-    setEditing({ id: todo.id, title: todo.title, notes: todo.notes ?? '', area: todo.area, when: whenWordsOf(todo, today) });
+    setEditing({ id: todo.id, title: todo.title, notes: todo.notes ?? '', area: todo.area, when: whenWordsOf(todo, today), labels: labelWordsOf(labelsByTodo.get(todo.id) ?? []) });
   }
 
   async function saveEdit() {
@@ -184,7 +222,11 @@ export function TodoSection({ tabColor, scope }: Props) {
       setEditError('The day could not be read. Try "tomorrow", "tomorrow at 3pm", "15 October" or "every Monday", or leave it empty for no day.');
       return;
     }
-    const changed = await saveOrSay('The task was not changed. Try again.', async () => { await updateTodo(editing.id, { title, notes: editing.notes, area: editing.area, dueOn: when.dueOn, dueTime: when.dueTime, repeat: when.repeat }); return true; });
+    const changed = await saveOrSay('The task was not changed. Try again.', async () => {
+      await updateTodo(editing.id, { title, notes: editing.notes, area: editing.area, dueOn: when.dueOn, dueTime: when.dueTime, repeat: when.repeat });
+      await setTodoLabels(editing.id, readLabelWords(editing.labels, allLabels));
+      return true;
+    });
     if (!changed) return;
     setEditing(null);
     await afterChange(`${title}: changed, ${describeTodoWhen(when.dueOn, when.repeat, today, when.dueTime).toLowerCase()}.`);
@@ -234,6 +276,12 @@ export function TodoSection({ tabColor, scope }: Props) {
           placeholder="Notes (optional)"
           multiline
         />
+        <AppTextInput
+          style={styles.textInput}
+          value={editing.labels}
+          onChangeText={(labels) => setEditing({ ...editing, labels })}
+          placeholder={t('Labels, with commas between: house, car')}
+        />
         {scope === 'everything' ? renderAreaPills(editing.area, (value) => setEditing({ ...editing, area: value })) : null}
         {editError ? <Text style={styles.errorText}>{editError}</Text> : null}
         <ThumbRow primary="first" style={styles.actionRow}>
@@ -252,6 +300,7 @@ export function TodoSection({ tabColor, scope }: Props) {
     const closed = Boolean(todo.doneAt);
     const caption = describeTodoCaption(todo, today);
     const where = scope === 'everything' && todo.area === 'work' ? 'Work' : null;
+    const labels = sortedLabels(labelsByTodo.get(todo.id) ?? []);
     return (
       <View key={todo.id} style={styles.todoBlock}>
         <View style={styles.itemRow}>
@@ -269,8 +318,31 @@ export function TodoSection({ tabColor, scope }: Props) {
             <Text style={[styles.bodyText, closed ? styles.doneText : null]}>{todo.title}</Text>
             {caption || where ? <Text style={styles.captionText}>{[where, caption].filter(Boolean).join(' · ')}</Text> : null}
             {todo.notes && !closed ? <Text style={styles.captionText} numberOfLines={2}>{todo.notes}</Text> : null}
+            {labels.length > 0 ? (
+              <View style={styles.pillRow}>
+                {labels.map((label) => (
+                  <TouchableOpacity
+                    key={label}
+                    style={styles.labelChip}
+                    onPress={() => setChosenLabel(label)}
+                    accessibilityRole="button"
+                    accessibilityHint={t('Show only the tasks with this label')}
+                  >
+                    <Text style={styles.pillText}>{label}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            ) : null}
           </View>
         </View>
+        <TodoSteps
+          todoId={todo.id}
+          steps={stepsByTodo.get(todo.id) ?? []}
+          tabColor={tabColor}
+          closed={closed}
+          onChanged={load}
+          openerRef={todo.id === firstOpenId ? walkMark.ref('todo.steps') : undefined}
+        />
         {editing?.id === todo.id ? (
           renderEditForm()
         ) : (
@@ -331,6 +403,38 @@ export function TodoSection({ tabColor, scope }: Props) {
       ) : null}
       {saidBack ? <Text style={styles.captionText}>{saidBack}</Text> : null}
 
+      {labelChoices.length > 0 ? (
+        <View ref={walkMark.ref('todo.labels')} collapsable={false} style={styles.pillRow}>
+          <TouchableOpacity
+            style={[styles.pill, activeLabel === null && styles.pillActive]}
+            onPress={() => setChosenLabel(null)}
+            accessibilityRole="button"
+            accessibilityState={{ selected: activeLabel === null }}
+          >
+            <Text style={[styles.pillText, activeLabel === null ? styles.pillTextOn : null]}>{t('Every label')}</Text>
+          </TouchableOpacity>
+          {labelChoices.map((label) => {
+            const on = activeLabel !== null && activeLabel.toLocaleLowerCase() === label.toLocaleLowerCase();
+            return (
+              <TouchableOpacity
+                key={label}
+                style={[styles.pill, on && styles.pillActive]}
+                onPress={() => setChosenLabel(on ? null : label)}
+                accessibilityRole="button"
+                accessibilityState={{ selected: on }}
+              >
+                <Text style={[styles.pillText, on ? styles.pillTextOn : null]}>{label}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      ) : null}
+      {activeLabel ? (
+        <Text style={styles.captionText}>
+          {shown.length === 0 ? emptyLabelWords(activeLabel, t) : t('Showing the tasks labelled {label}. A task added now carries it too.', { label: activeLabel })}
+        </Text>
+      ) : null}
+
       {todos.length === 0 ? (
         <Text style={styles.captionText}>
           {scope === 'work'
@@ -387,6 +491,7 @@ const styles = StyleSheet.create({
   linkRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 16, paddingLeft: 34 },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   pill: { ...PILL },
+  labelChip: { ...PILL_SMALL, alignSelf: 'flex-start' },
   pillText: { ...PILL_TEXT },
   pillTextOn: { ...PILL_ON_TEXT },
   textInput: {

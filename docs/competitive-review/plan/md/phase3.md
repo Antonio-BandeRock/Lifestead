@@ -531,7 +531,7 @@
 ### Q47. To-Do projects
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Life
 - **Answers:** Todoist, Things · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Projects that hold to-dos, sub-steps under a to-do, a waiting-on state with who and since when, labels and a filter by label, a project finished kept as history; no points, no streaks, no overdue count shown in red. Partly built: steps that wait on someone, a parking lot and finished projects kept as history are in Projects (lib/projects.ts); to-dos are in lib/todos.ts. Not yet: sub-steps under a to-do, labels and a filter by label.
+- **How:** Projects that hold to-dos, sub-steps under a to-do, a waiting-on state with who and since when, labels and a filter by label, a project finished kept as history; no points, no streaks, no overdue count shown in red. Built 1.0.91.7: steps that wait on someone, a parking lot and finished projects kept as history are in Projects (lib/projects.ts); steps under a to-do, ticked and put in order, starting fresh when a repeating one comes back, and labels of the person's choosing with a filter by label on Life > To Do List (lib/todoExtras.ts, todo_steps and todo_labels, scripts/test_todo_extras.js).
 
 ### Q48. Insurance claims and appeal deadlines
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Life,Reports

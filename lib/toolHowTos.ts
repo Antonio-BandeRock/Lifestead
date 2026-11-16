@@ -61,6 +61,8 @@ export type ToolMark =
   | 'todo.remove'
   | 'todo.add'
   | 'todo.showDone'
+  | 'todo.steps'
+  | 'todo.labels'
   | 'project.new'
   | 'project.save'
   | 'project.open'
@@ -3888,11 +3890,31 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Nothing done is lost, and a task marked done by mistake goes back on the list.',
     },
     {
+      key: 'steps',
+      title: 'Break a task into steps',
+      steps: [
+        { say: 'Tap Steps under the task.', mark: 'todo.steps', stay: true },
+        { say: 'Type or say a step, then tap Add the step. Add as many as it takes.' },
+        { say: 'Tick each step as you do it. Use the arrows to change the order, or tap a step to change its words.' },
+      ],
+      forYou: 'A big task becomes the next small thing to do, and Steps says how many are still to do. One that repeats starts its steps fresh each time it comes back.',
+    },
+    {
+      key: 'labels',
+      title: 'Label tasks and see one label at a time',
+      steps: [
+        { say: 'Tap Change under a task.', mark: 'todo.change', stay: true },
+        { say: 'Type any labels you like in Labels, with commas between: house, car. Tap Save.' },
+        { say: 'Tap a label in the row above the list to see only the tasks that carry it. Every label shows them all again.', mark: 'todo.labels' },
+      ],
+      forYou: 'Everything for the house, or everything for one person, in one look. A task added while a label is chosen carries that label too.',
+    },
+    {
       key: 'remove',
       title: 'Remove a task',
       steps: [
         { say: 'Tap Remove under it.', mark: 'todo.remove' },
-        { say: 'Tap Remove again to say yes. The record of each time it was done goes too, so mark it done or let it go if you want to keep that.' },
+        { say: 'Tap Remove again to say yes. Its steps, its labels and the record of each time it was done go too, so mark it done or let it go if you want to keep that record.' },
       ],
       forYou: 'The list holds only what you still mean to do.',
     },

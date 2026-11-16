@@ -11146,6 +11146,30 @@ async function runDatabaseInitialization() {
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
       CREATE INDEX IF NOT EXISTS idx_visit_questions_appointment ON visit_questions(appointment_id);
+      -- Steps under a to-do (Q47, 2026-11-16), in the order the person put
+      -- them. done_at is when one was ticked; a repeating to-do clears its
+      -- ticks when it moves on to its next day. Removed with its to-do.
+      -- lib/todoExtras.ts and lib/todosDb.ts.
+      CREATE TABLE IF NOT EXISTS todo_steps (
+        id TEXT PRIMARY KEY NOT NULL,
+        todo_id TEXT NOT NULL,
+        text TEXT NOT NULL,
+        position INTEGER NOT NULL DEFAULT 0,
+        done_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_todo_steps_todo ON todo_steps(todo_id);
+      -- Labels on to-dos (Q47), the person's own words with no fixed list.
+      -- One row per label on a to-do; removed with its to-do.
+      CREATE TABLE IF NOT EXISTS todo_labels (
+        id TEXT PRIMARY KEY NOT NULL,
+        todo_id TEXT NOT NULL,
+        label TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_todo_labels_todo ON todo_labels(todo_id);
     `);
     // Languages (2026-11-11): units studied together are kept as a group, so Home
     // can offer that group again in one tap. A JSON list of { units, order }.
