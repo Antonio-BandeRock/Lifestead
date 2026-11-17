@@ -11412,6 +11412,11 @@ async function runDatabaseInitialization() {
       if (!columns.some((existing) => existing.name === 'left_out')) {
         await db.execAsync('ALTER TABLE report_history ADD COLUMN left_out TEXT;');
       }
+      // Q64 (1.0.91.11): the folder a Save to a folder copy went into, by
+      // name or path; NULL on every other way out.
+      if (!columns.some((existing) => existing.name === 'saved_to')) {
+        await db.execAsync('ALTER TABLE report_history ADD COLUMN saved_to TEXT;');
+      }
     }
     // A counter in hours and minutes (voice step 3, 1.0.66.21): the moments it
     // starts and ends, as ISO strings. NULL on a whole-day counter, which every earlier

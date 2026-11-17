@@ -242,6 +242,9 @@ export const CHANGE_BASELINE_META_KEY = 'sync_change_baseline';
 export const DEVICE_LOCAL_META_KEYS: readonly string[] = [
   // Whether a language's voice is installed is a fact about one device, so a note that one was missing stays on it.
   'learn_voice_told',
+  // Q64: the folder Save to a folder writes reports into, and which files it writes, are this device's.
+  'report_save_folder',
+  'report_save_formats',
   'onedrive_folder',
   'sync_folder_uri',
   'reference_db_version',

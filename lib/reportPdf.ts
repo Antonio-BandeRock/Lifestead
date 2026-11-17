@@ -59,7 +59,7 @@ export type ReportPdfResult =
   | { status: 'cancelled' }
   | { status: 'failed'; message: string };
 
-function fileStamp(doc: ReportDocument): string {
+export function fileStamp(doc: ReportDocument): string {
   // "lifestead-report-2026-09-14-30d.pdf": the day it was generated
   // and the window, so two exports of the same range on different days
   // do not overwrite each other in someone's Downloads.
@@ -68,6 +68,31 @@ function fileStamp(doc: ReportDocument): string {
 
 export async function exportReportAsPdf(doc: ReportDocument): Promise<ReportPdfResult> {
   return exportHtmlAsPdf(renderReportHtml(doc), fileStamp(doc), 'Share report');
+}
+
+/** A page of HTML made into a PDF file in this device's cache, with no
+ *  share step, for Save to a folder (Q64) to copy where it was asked to go.
+ *  On a computer the hidden print window lays it out (K11); on a phone
+ *  expo-print does. */
+export async function makePdfFile(html: string): Promise<{ ok: true; uri: string } | { ok: false; message: string }> {
+  if (isDesktopApp()) {
+    const print = getDesktopBridge().print;
+    if (!print) return { ok: false, message: OLD_INSTALLER };
+    try {
+      return { ok: true, uri: await print.toPdf(html, 'lifestead-report-to-folder') };
+    } catch (error) {
+      console.error('[reportPdf] Failed to lay the page out as a PDF on the desktop', error);
+      return { ok: false, message: 'The PDF could not be put together on this computer.' };
+    }
+  }
+  try {
+    const Print = await import('expo-print');
+    const printed = await Print.printToFileAsync({ html, base64: false });
+    return { ok: true, uri: printed.uri };
+  } catch (error) {
+    console.error('[reportPdf] Failed to render the page to a PDF', error);
+    return { ok: false, message: 'The PDF could not be put together on this device.' };
+  }
 }
 
 /** Any page of HTML to a PDF under a readable name, handed to the share

@@ -716,6 +716,8 @@ export type ToolMark =
   | 'reports.again'
   | 'reports.csv'
   | 'reports.custom'
+  | 'reports.folder'
+  | 'reports.folderChange'
   | 'reports.gardenCsv'
   | 'reports.pdf'
   | 'reports.print'
@@ -1003,6 +1005,16 @@ function reportHowTos(o: { name: string; holds: string; rangeNote?: string; more
       title: 'Save the report as a spreadsheet',
       steps: [{ say: 'Under Save as a Spreadsheet, tap Whole report or one of its tables.', mark: 'reports.csv' }],
       forYou: 'Each file opens in any spreadsheet app, so the figures can be sorted and added up.',
+    },
+    {
+      key: 'folder',
+      title: 'Save the report to a folder',
+      steps: [
+        { say: 'Under Save to a folder, tick the kinds of file to save: PDF, Plain text, Spreadsheet.' },
+        { say: 'Tap Save to a folder. The first time, choose Reports in the shared folder or Pick a folder.', mark: 'reports.folder' },
+        { say: 'Tap Change folder to save to a different one from then on.', mark: 'reports.folderChange' },
+      ],
+      forYou: 'The folder and the kinds of file are remembered on this device, so every later save is one tap. Files in the shared folder are ordinary files, not encrypted the way the sync copies are.',
     },
     {
       key: 'history',

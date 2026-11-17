@@ -70,7 +70,7 @@ export const MAILBOX_FOLDER_NAME = 'Mailbox';
 export const BACKUPS_FOLDER_NAME = 'Backups';
 
 /** Every folder the app keeps under the shared folder. */
-export type ChildFolder = 'mailbox' | 'backups' | 'photos' | 'recordings' | 'files';
+export type ChildFolder = 'mailbox' | 'backups' | 'photos' | 'recordings' | 'files' | 'reports';
 
 /**
  * Resolved children, kept only for the life of this app run.
@@ -227,6 +227,12 @@ async function resolveChild(
 /** Where every mailbox lives, made inside the shared folder if it is missing. */
 export async function getMailboxFolder(): Promise<GraphResult<DriveItemRef>> {
   return resolveChild('mailbox', MAILBOX_FOLDER_NAME) as Promise<GraphResult<DriveItemRef>>;
+}
+
+/** Where Save to a folder writes reports when the person chose the shared
+ *  folder (Q64), made only then, never at setup. */
+export async function getReportsFolder(): Promise<GraphResult<DriveItemRef>> {
+  return resolveChild('reports', 'Reports') as Promise<GraphResult<DriveItemRef>>;
 }
 
 /** Where backups are written, made inside the shared folder if it is missing. */

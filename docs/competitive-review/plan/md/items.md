@@ -1384,7 +1384,7 @@
 ### Q64. Reports saved to a remembered folder
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Reports
 - **Answers:** Obsidian · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Save to a folder chosen once and remembered, beside the share sheet, in PDF and open formats. Partly built: a folder on the phone can be the shared folder (lib/phoneFolder.ts, 2026-11-03). Not yet: reports saved to a remembered folder.
+- **How:** Save to a folder chosen once and remembered, beside the share sheet, in PDF and open formats. Built 1.0.91.11: Save to a folder on every report, the first save offering Reports in the shared folder or any picked folder, remembered on the device with the kinds of file (PDF, plain text, spreadsheet); Report history names the folder (lib/reportFolder.ts, lib/reportFolderDb.ts, components/ReportFolderSave.tsx).
 
 ### U8. An identification is a suggestion
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Garden

@@ -13,7 +13,7 @@
 // components/ReportHistoryBand.tsx shows it, and
 // scripts/test_report_history.js checks this without a phone.
 
-export type ReportSentHow = 'text' | 'pdf' | 'csv' | 'print';
+export type ReportSentHow = 'text' | 'pdf' | 'csv' | 'print' | 'folder';
 
 /** The range choices on the Reports tab, stored as text. */
 export type ReportRangeKey = '7' | '30' | '90' | '6m' | '1y' | 'visit' | 'custom';
@@ -30,6 +30,9 @@ export type ReportHistoryEntry = {
   forWhom: string | null;
   /** Section ids left out of this copy (K10); empty when it carried all. */
   leftOut: string[];
+  /** Q64: the folder a Save to a folder copy went into, as its name or
+   *  path; null on every other way out. */
+  savedTo?: string | null;
   /** ISO timestamp the report went out. */
   madeAt: string;
 };
@@ -53,6 +56,7 @@ const HOW_WORDS: Record<ReportSentHow, string> = {
   pdf: 'shared as a PDF',
   csv: 'saved as a spreadsheet',
   print: 'printed',
+  folder: 'saved to a folder',
 };
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -64,7 +68,7 @@ export function isRangeKey(value: string): value is ReportRangeKey {
 }
 
 export function isSentHow(value: string): value is ReportSentHow {
-  return value === 'text' || value === 'pdf' || value === 'csv' || value === 'print';
+  return value === 'text' || value === 'pdf' || value === 'csv' || value === 'print' || value === 'folder';
 }
 
 /** "2026-08-31 to 2026-09-29", the report's rangeLabel, as its two dates. */
@@ -101,8 +105,8 @@ export function historyTitle(entry: Pick<ReportHistoryEntry, 'rangeStart' | 'ran
 }
 
 /** "Shared as a PDF on Sep 29, 2026, for Dr. Ruiz, 2 sections left out" */
-export function historyCaption(entry: Pick<ReportHistoryEntry, 'how' | 'madeAt' | 'forWhom'> & { leftOut?: readonly string[] }): string {
-  const how = HOW_WORDS[entry.how];
+export function historyCaption(entry: Pick<ReportHistoryEntry, 'how' | 'madeAt' | 'forWhom'> & { leftOut?: readonly string[]; savedTo?: string | null }): string {
+  const how = entry.how === 'folder' && entry.savedTo ? `saved to ${entry.savedTo}` : HOW_WORDS[entry.how];
   const said = `${how.charAt(0).toUpperCase()}${how.slice(1)} on ${shortDate(localDayOf(entry.madeAt))}`;
   const withName = entry.forWhom ? `${said}, for ${entry.forWhom}` : said;
   const count = entry.leftOut?.length ?? 0;

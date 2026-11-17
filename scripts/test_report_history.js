@@ -100,7 +100,10 @@ same(
 
 // Keys
 same(['7', '30', '90', '6m', '1y', 'visit', 'custom', '14'].map(H.isRangeKey), [true, true, true, true, true, true, true, false], 'range keys');
-same(['text', 'pdf', 'csv', 'print', 'docx'].map(H.isSentHow), [true, true, true, true, false], 'ways a report goes out');
+same(['text', 'pdf', 'csv', 'print', 'folder', 'docx'].map(H.isSentHow), [true, true, true, true, true, false], 'ways a report goes out');
+// Q64: a copy saved to a folder names the folder.
+same(H.historyCaption({ ...entry, how: 'folder', forWhom: null, savedTo: 'Apps / Lifestead / Reports' }), 'Saved to Apps / Lifestead / Reports on Sep 29, 2026', 'a folder copy names its folder');
+same(H.historyCaption({ ...entry, how: 'folder', forWhom: null }), 'Saved to a folder on Sep 29, 2026', 'a folder copy with no name kept still reads');
 // K11: a printed copy is its own line in the history.
 same(H.historyCaption({ ...entry, how: 'print', forWhom: null }).startsWith('Printed on '), true, 'a printed copy reads as printed');
 

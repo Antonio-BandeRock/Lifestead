@@ -8,6 +8,7 @@ import { GatedTabContent } from '../../components/GatedTabContent';
 import { GardenCsvButtons } from '../../components/GardenCsvButtons';
 import { useInfoAlert } from '../../components/InfoAlert';
 import { ReportCsvButtons } from '../../components/ReportCsvButtons';
+import { ReportFolderSave } from '../../components/ReportFolderSave';
 import { ReportHistoryBand } from '../../components/ReportHistoryBand';
 import { ReportSectionChooser } from '../../components/ReportSectionChooser';
 import { YourStoryMissingLine } from '../../components/YourStoryMissingLine';
@@ -56,11 +57,15 @@ const REPORTS_HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Privacy',
-    body: 'This generates entirely on your device, the same as the rest of this app. Nothing is sent anywhere unless you tap Share and choose where it goes yourself.',
+    body: 'This generates entirely on your device, the same as the rest of this app. Nothing is sent anywhere unless you tap Share or Save to a folder and choose where it goes yourself.',
   },
   {
-    heading: 'Four ways to hand it over',
-    body: 'Share as PDF lays the same summary out on a page, with each section as a table or a list, for handing over or attaching to a message. Print sends that same page straight to a printer, with no file to share first; on a phone the print options also offer saving it as a PDF. Share as text sends it as plain words, which pastes into any message or note. Save as a Spreadsheet makes CSV files for Excel, Google Sheets or any program that reads them: each table on its own, or the whole report in one file. All four are built on the device from the same data, and Report history keeps each one, a printed copy included.',
+    heading: 'Five ways to hand it over',
+    body: 'Share as PDF lays the same summary out on a page, with each section as a table or a list, for handing over or attaching to a message. Print sends that same page straight to a printer, with no file to share first; on a phone the print options also offer saving it as a PDF. Share as text sends it as plain words, which pastes into any message or note. Save to a folder writes the report into a folder you choose once, as a PDF, plain text and, if you tick it, a spreadsheet, with no share sheet each time. Save as a Spreadsheet makes CSV files for Excel, Google Sheets or any program that reads them: each table on its own, or the whole report in one file. All five are built on the device from the same data, and Report history keeps each one, a printed copy and the folder a copy went into included.',
+  },
+  {
+    heading: 'Save to a folder',
+    body: 'The first save asks where: Reports in the shared folder, if one is set up, or any folder you pick. The folder and the kinds of file are remembered on this device, so every later save is one tap, and Change folder picks another. A copy in the shared folder is an ordinary file, not encrypted the way the sync copies are, so anyone who can open that folder can read it. Nothing goes anywhere you did not choose.',
   },
   {
     heading: 'Choosing the sections',
@@ -283,10 +288,10 @@ export default function ReportsScreen() {
     });
   }
 
-  function noteSent(how: ReportSentHow) {
+  function noteSent(how: ReportSentHow, savedTo?: string) {
     void markYourStorySeen('report');
     if (!report) return;
-    recordReportSent({ kind: lens, rangeKey: String(range) as ReportHistoryEntry['rangeKey'], rangeLabel: report.rangeLabel, days: report.days, how, leftOut })
+    recordReportSent({ kind: lens, rangeKey: String(range) as ReportHistoryEntry['rangeKey'], rangeLabel: report.rangeLabel, days: report.days, how, leftOut, savedTo: savedTo ?? null })
       .then((id) => {
         if (!id) return;
         setAskForId(id);
@@ -557,6 +562,15 @@ export default function ReportsScreen() {
                 <TouchableOpacity ref={walkMark.ref('reports.text')} style={styles.shareButtonSecondary} onPress={handleShareText}>
                   <Text style={styles.shareButtonSecondaryText}>Share as text</Text>
                 </TouchableOpacity>
+              </View>
+            ) : null}
+
+            {/* Q64, 1.0.91.11: the report saved into a folder chosen once and
+                remembered on this device, as a PDF and open formats. */}
+            {report && reportText && !loading ? (
+              <View style={band.box}>
+                <Text style={styles.customLabel}>Save to a folder</Text>
+                <ReportFolderSave report={report} kindLabel={activeLensLabel ?? 'report'} onSaved={(savedTo) => noteSent('folder', savedTo)} />
               </View>
             ) : null}
 

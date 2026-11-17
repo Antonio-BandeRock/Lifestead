@@ -24,6 +24,7 @@ type Row = {
   how: string;
   for_whom: string | null;
   left_out: string | null;
+  saved_to: string | null;
   made_at: string;
 };
 
@@ -39,6 +40,7 @@ function toEntry(row: Row): ReportHistoryEntry | null {
     how: row.how,
     forWhom: row.for_whom,
     leftOut: parseLeftOutColumn(row.left_out),
+    savedTo: row.saved_to,
     madeAt: row.made_at,
   };
 }
@@ -47,7 +49,7 @@ function toEntry(row: Row): ReportHistoryEntry | null {
 export async function listReportHistory(limit = -1): Promise<ReportHistoryEntry[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<Row>(
-    'SELECT id, kind, range_key, range_start, range_end, days, how, for_whom, left_out, made_at FROM report_history ORDER BY made_at DESC LIMIT ?',
+    'SELECT id, kind, range_key, range_start, range_end, days, how, for_whom, left_out, saved_to, made_at FROM report_history ORDER BY made_at DESC LIMIT ?',
     limit,
   );
   return rows.map(toEntry).filter((entry): entry is ReportHistoryEntry => entry !== null);
@@ -63,6 +65,8 @@ export async function recordReportSent(input: {
   how: ReportSentHow;
   /** Section ids left out of this copy (K10). */
   leftOut?: readonly string[];
+  /** Q64: the folder a Save to a folder copy went into. */
+  savedTo?: string | null;
 }): Promise<string | null> {
   const range = rangeFromLabel(input.rangeLabel);
   if (!range) return null;
@@ -71,16 +75,16 @@ export async function recordReportSent(input: {
   const leftOut = [...(input.leftOut ?? [])];
   const candidate = { kind: input.kind, rangeStart: range.start, rangeEnd: range.end, how: input.how, madeAt, leftOut };
   const latest = await db.getFirstAsync<Row>(
-    'SELECT id, kind, range_key, range_start, range_end, days, how, for_whom, left_out, made_at FROM report_history WHERE kind = ? AND how = ? ORDER BY made_at DESC LIMIT 1',
+    'SELECT id, kind, range_key, range_start, range_end, days, how, for_whom, left_out, saved_to, made_at FROM report_history WHERE kind = ? AND how = ? ORDER BY made_at DESC LIMIT 1',
     input.kind,
     input.how,
   );
   const earlier = latest ? toEntry(latest) : null;
-  if (earlier && isSameSending(earlier, candidate)) return earlier.id;
+  if (earlier && isSameSending(earlier, candidate) && (earlier.savedTo ?? null) === (input.savedTo ?? null)) return earlier.id;
   const id = `report_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   await db.runAsync(
-    `INSERT INTO report_history (id, kind, range_key, range_start, range_end, days, how, for_whom, left_out, made_at, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?)`,
+    `INSERT INTO report_history (id, kind, range_key, range_start, range_end, days, how, for_whom, left_out, saved_to, made_at, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, ?)`,
     id,
     input.kind,
     input.rangeKey,
@@ -89,6 +93,7 @@ export async function recordReportSent(input: {
     input.days,
     input.how,
     leftOut.length > 0 ? JSON.stringify(leftOut) : null,
+    input.savedTo ?? null,
     madeAt,
     madeAt,
     madeAt,
