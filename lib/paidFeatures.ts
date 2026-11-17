@@ -205,17 +205,66 @@ export function paidWallWords(paid: PaidLens): { title: string; message: string;
 }
 
 // Paid functions inside a lens that is itself Free, keyed by a name the
-// screen reads. Each says why through explainNotYet rather than a wall,
-// since the rest of the lens stays open.
-export const PAID_FUNCTIONS: Record<string, PaidLens> = {
+// screen reads. Each says why through explainNotYet or a caption rather
+// than a wall, since the rest of the lens stays open. `line` is the whole
+// sentence shown, and says what stays open on Free.
+//
+// Read from the board on 2026-11-16 (P27, the remainder). Three more of the
+// board's paid functions need no entry because the lens they live in is
+// already walled: Make this a rule (tr-rule) sits in Pattern Finder, and
+// the family roster (l-family) sits in Life > Conditions and reaches the
+// meal plan only through Schedules > Meal Plan. Refill reminders, tapering
+// doses and injection sites stay Free: the board puts refills on the Free
+// side, and Tony pinned the other two Free as safety inputs.
+export type PaidFunction = PaidLens & { line: string };
+
+export const PAID_FUNCTIONS = {
   learnMake: {
     board: 'int-learn-make',
     gives: 'making decks of your own, with every kind of card',
     plan: 'Individual',
+    line: 'Making decks is part of Individual. The ready-made decks and the decks from your records stay open on Free, and decks you made before stay open to study.',
   },
-};
+  forYou: {
+    board: 'food-foryou',
+    gives: 'what each food means for every condition you track',
+    plan: 'Individual',
+    line: 'What a food means for each of your conditions is part of Individual. Allergy, diet and food you avoid are checked here on Free.',
+  },
+  depth: {
+    board: 'food-depth',
+    gives: 'how a dish scores for each of your conditions and your healing stage',
+    plan: 'Individual',
+    line: 'How a dish scores for each of your conditions, and what to know for your healing stage, is part of Individual. The nutrients stay open on Free, and the dish saves the same way.',
+  },
+  gardenUse: {
+    board: 'food-gardenuse',
+    gives: 'taking what a meal used off what your garden has on hand',
+    plan: 'Individual',
+    line: 'This meal used something your garden has on hand. Taking it off the harvest for you is part of Individual. The meal is saved, and the harvest is as you left it.',
+  },
+  sync: {
+    board: 'x-sync',
+    gives: 'keeping your devices in step through your shared folder',
+    plan: 'Individual',
+    line: 'Keeping your devices in step is part of Individual. Backing up to the shared folder and saving a copy stay open on Free.',
+  },
+  squaresHome: {
+    board: 'home-squares',
+    gives: 'your life drawn as squares, one per day',
+    plan: 'Individual',
+    line: 'Your Life in Squares is part of Individual: every record you keep, drawn as one square per day. Your records are all kept, and show here as soon as the plan is on.',
+  },
+} as const satisfies Record<string, PaidFunction>;
+
+export type PaidFunctionName = keyof typeof PAID_FUNCTIONS;
+
+/** The sentence a screen shows for a paid function on Free. */
+export function paidFunctionLine(name: PaidFunctionName): string {
+  return PAID_FUNCTIONS[name].line;
+}
 
 /** True when this function waits for a plan on the tier given. */
-export function isFunctionWalled(tier: Tier, name: keyof typeof PAID_FUNCTIONS): boolean {
+export function isFunctionWalled(tier: Tier, name: PaidFunctionName): boolean {
   return tier === 'free' && PAID_FUNCTIONS[name] !== undefined;
 }

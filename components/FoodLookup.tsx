@@ -72,6 +72,8 @@ import { VoiceInputButton } from './VoiceInputButton';
 import { useNavigationHand } from '../lib/navigationHand';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
+import { useTier } from '../lib/entitlement';
+import { isFunctionWalled, paidFunctionLine } from '../lib/paidFeatures';
 import { foodDisplayName } from '../lib/ingredientShortName';
 
 const NUTRIENT_GROUP_LABELS: Record<string, string> = {
@@ -809,6 +811,11 @@ export function FoodLookup({
   // G15: the card leads with one phrase; the rows behind it open on a tap
   // and close again whenever a different food is looked up.
   const [personalDetailOpen, setPersonalDetailOpen] = useState(false);
+  // P27: on Free the For You card checks allergies, diet and food avoided
+  // (safety stays Free) and says the condition reading is part of
+  // Individual, rather than hiding the card.
+  const tier = useTier();
+  const forYouWalled = isFunctionWalled(tier, 'forYou');
   const router = useRouter();
   useEffect(() => {
     if (people.length === 0 || resolvedFoodId === null || !resolvedSource) {
@@ -2064,7 +2071,7 @@ export function FoodLookup({
                   const line = oneWordFor(
                     person,
                     {
-                      trackedConditions: person.profile.trackedConditions,
+                      trackedConditions: forYouWalled ? [] : person.profile.trackedConditions,
                       safeForConditions: evaluation.safeForConditions,
                       conditionCautions: evaluation.conditionCautions,
                       dietViolations: evaluation.dietViolations,
@@ -2089,6 +2096,7 @@ export function FoodLookup({
                   );
                 })}
                 <Text style={styles.personalCautionNote}>{HOUSEHOLD_FIT_CAPTION} Tap a name for the reasons.</Text>
+                {forYouWalled ? <Text style={styles.personalCautionNote}>{paidFunctionLine('forYou')}</Text> : null}
               </>
             ) : personalEvaluation && activePerson ? (
               <>
@@ -2096,7 +2104,7 @@ export function FoodLookup({
                 const oneWord = oneWordFor(
                   activePerson,
                   {
-                    trackedConditions: activePerson.profile.trackedConditions,
+                    trackedConditions: forYouWalled ? [] : activePerson.profile.trackedConditions,
                     safeForConditions: personalEvaluation.safeForConditions,
                     conditionCautions: personalEvaluation.conditionCautions,
                     dietViolations: personalEvaluation.dietViolations,
@@ -2154,7 +2162,10 @@ export function FoodLookup({
                   </TouchableOpacity>
                 );
               })}
-              {(personalDetailOpen ? activePerson.profile.trackedConditions : []).map((condition) => {
+              {personalDetailOpen && forYouWalled && activePerson.profile.trackedConditions.length > 0 ? (
+                <Text style={styles.personalCautionNote}>{paidFunctionLine('forYou')}</Text>
+              ) : null}
+              {(personalDetailOpen && !forYouWalled ? activePerson.profile.trackedConditions : []).map((condition) => {
                 const verdict = verdictFor(condition.code, personalEvaluation.safeForConditions, personalEvaluation.conditionCautions);
                 const caution = personalEvaluation.conditionCautions[condition.code];
                 return (

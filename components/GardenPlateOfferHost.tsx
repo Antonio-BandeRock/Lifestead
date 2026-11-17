@@ -24,6 +24,10 @@
 // Every row starts ticked and can be unticked. A tomato in the fridge and a
 // tomato from the shop look the same to the app, so the person settles it, and
 // nothing comes off a picking that fed nobody.
+//
+// P27 (2026-11-16): taking a meal off the harvest is part of Individual. On
+// Free the garden rows still show, start unticked, and a tap on one says
+// which plan does it; the kitchen rows work the same on both.
 import { useCallback, useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
@@ -36,6 +40,9 @@ import { describePantryAction, describePantryOffer, type PantryOffer } from '../
 import { getPantryOffersForMeal, keepPantryUses } from '../lib/onHandDb';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { getTier, useTier } from '../lib/entitlement';
+import { isFunctionWalled, paidFunctionLine } from '../lib/paidFeatures';
+import { explainNotYet } from '../lib/notYet';
 
 type Open = {
   mealId: string;
@@ -51,6 +58,7 @@ export function GardenPlateOfferHost() {
   const [chosenPantry, setChosenPantry] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState<string | null>(null);
+  const gardenWalled = isFunctionWalled(useTier(), 'gardenUse');
 
   const start = useCallback((mealId: string) => {
     // Nothing is awaited by the caller: the meal screen has already moved on,
@@ -61,7 +69,7 @@ export function GardenPlateOfferHost() {
         const pantry = await getPantryOffersForMeal(mealId, found.offers);
         if (found.offers.length === 0 && pantry.length === 0) return;
         setOpen({ ...found, pantry });
-        setChosen(found.offers.map((offer) => offer.harvestId));
+        setChosen(isFunctionWalled(getTier(), 'gardenUse') ? [] : found.offers.map((offer) => offer.harvestId));
         setChosenPantry(pantry.filter((offer) => offer.takeable && offer.ticked).map((offer) => offer.key));
         setSaving(false);
         setSaved(null);
@@ -86,6 +94,10 @@ export function GardenPlateOfferHost() {
   }
 
   function toggle(harvestId: string) {
+    if (gardenWalled) {
+      explainNotYet(paidFunctionLine('gardenUse'));
+      return;
+    }
     setChosen((current) =>
       current.includes(harvestId) ? current.filter((id) => id !== harvestId) : [...current, harvestId],
     );
@@ -123,7 +135,9 @@ export function GardenPlateOfferHost() {
           </>
         ) : (
           <>
-            {open.offers.length > 0 ? <Text style={styles.headline}>{describePlateOffer(open.offers)}</Text> : null}
+            {open.offers.length > 0 ? (
+              <Text style={styles.headline}>{gardenWalled ? paidFunctionLine('gardenUse') : describePlateOffer(open.offers)}</Text>
+            ) : null}
             {open.pantry.length > 0 ? <Text style={styles.headline}>{describePantryOffer(open.pantry)}</Text> : null}
             <ScrollView style={styles.rows} contentContainerStyle={styles.rowsContent}>
               {open.offers.map((offer) => {

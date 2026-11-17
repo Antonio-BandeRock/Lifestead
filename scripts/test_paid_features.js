@@ -94,7 +94,43 @@ const wallText = source.slice(source.indexOf('export function paidWallWords'));
 if (/[–—]| -- /.test(wallText)) fail('the wall words use a dash');
 if (/\b(real|genuine|genuinely)\b/i.test(wallText)) fail('the wall words use a banned word');
 
+// 4. Paid functions inside a Free lens (P27, 2026-11-16). Every one is read
+//    by a screen through isFunctionWalled, names its plan, and keeps the
+//    house style. Refill reminders, tapering doses and injection sites stay
+//    Free (the board, and Tony's pins), and the two paid functions with no
+//    entry rely on the lens they sit in being walled.
+const fnSource = source.slice(source.indexOf('export const PAID_FUNCTIONS'));
+const fnNames = [...fnSource.matchAll(/^  ([a-zA-Z]+): \{$/gm)].map((match) => match[1]);
+if (fnNames.length < 6) fail(`only ${fnNames.length} paid functions read; the table shape may have changed`);
+const screenFiles = [];
+function walk(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === 'node_modules' || entry.name.startsWith('.')) continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) walk(full);
+    else if (/\.tsx?$/.test(entry.name)) screenFiles.push(fs.readFileSync(full, 'utf8'));
+  }
+}
+walk(path.join(root, 'app'));
+walk(path.join(root, 'components'));
+const screens = screenFiles.join('\n');
+for (const name of fnNames) {
+  if (!new RegExp(`isFunctionWalled\\((?:[^()]|\\([^()]*\\))*'${name}'\\)`).test(screens)) {
+    fail(`paid function '${name}' is not gated on any screen`);
+  }
+}
+for (const [, line] of fnSource.matchAll(/line: '([^']+)'/g)) {
+  if (!/Individual/.test(line)) fail(`a paid function line does not name its plan: ${line}`);
+  if (/[–—]| -- | - /.test(line)) fail(`a paid function line uses a dash: ${line}`);
+  if (/\b(real|genuine|genuinely)\b/i.test(line)) fail(`a paid function line uses a banned word: ${line}`);
+}
+for (const board of ['sch-refill', 'sch-taper', 'sch-inject']) {
+  if (source.includes(`board: '${board}'`)) fail(`${board} must stay Free`);
+}
+if (!table.Trends || !table.Trends.patterns) fail('Make this a rule relies on Pattern Finder being walled');
+if (!table.Life || !table.Life.conditions) fail('the family roster relies on Life > Conditions being walled');
+
 if (count < 40) fail(`only ${count} paid lenses read; the table shape may have changed`);
 
-console.log(failures === 0 ? `ok, ${count} paid lenses checked` : `${failures} failure(s)`);
+console.log(failures === 0 ? `ok, ${count} paid lenses and ${fnNames.length} paid functions checked` : `${failures} failure(s)`);
 process.exit(failures === 0 ? 0 : 1);

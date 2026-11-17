@@ -27,6 +27,8 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
+import { useTier } from '../lib/entitlement';
+import { isFunctionWalled, paidFunctionLine } from '../lib/paidFeatures';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, HomeSectionBand, homeBandStyle } from './HomeSectionBand';
 import { textShadow, typography } from '../constants/typography';
 import type { DimensionSeverity } from '../lib/recipeDepth';
@@ -126,6 +128,10 @@ export function RecipeDepthReport({
   const [conditionsOpen, setConditionsOpen] = useState(true);
   const [stageOpen, setStageOpen] = useState(true);
   const [basisOpen, setBasisOpen] = useState(true);
+  // P27: on Free the nutrients and the basis stay, and the conditions band
+  // says the scoring is part of Individual. Every builder renders this one
+  // component, so the gate lives here once.
+  const walled = isFunctionWalled(useTier(), 'depth');
   return (
     <View style={styles.column}>
       <View style={[styles.headingBox, { borderColor: tabColor }]}>
@@ -156,7 +162,8 @@ export function RecipeDepthReport({
           expanded={conditionsOpen}
           onToggle={() => setConditionsOpen((open) => !open)}
         >
-          {trackedConditions.map((condition) => {
+          {walled ? <Text style={styles.bodyText}>{paidFunctionLine('depth')}</Text> : null}
+          {(walled ? [] : trackedConditions).map((condition) => {
             const verdict = verdictFor(condition.code, safeForConditions, conditionCautions);
             const data = dimensionBreakdown[condition.code] ?? [];
             const stage = declaredStages[condition.code];
@@ -204,7 +211,7 @@ export function RecipeDepthReport({
           (matching declaredStages' own presence, not stageNotes' own),
           same "always confirm, never just go quiet" rule the verdict
           pill and dimension chart above already follow. */}
-      {Object.keys(declaredStages).length > 0 ? (
+      {!walled && Object.keys(declaredStages).length > 0 ? (
         <HomeSectionBand
           title="Worth Knowing for Your Healing Stage"
           icon="leaf-outline"

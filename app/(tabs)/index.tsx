@@ -263,6 +263,8 @@ import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { t, tl } from '../../lib/i18n';
 import { explainNotYet } from '../../lib/notYet';
+import { isFunctionWalled, paidFunctionLine } from '../../lib/paidFeatures';
+import { useTier } from '../../lib/entitlement';
 import { appLocale } from '@/lib/language';
 import { BringToTopProvider, useBringToTopHost } from '../../components/BringToTop';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
@@ -1324,6 +1326,7 @@ const HOME_HELP_SECTIONS: HelpSection[] = [
 
 export default function HomeScreen() {
   useRegisterScreenHelp('Home', HOME_HELP_SECTIONS, '/');
+  const squaresWalled = isFunctionWalled(useTier(), 'squaresHome');
   // The outline on a button a Your Story walk line names (components/WalkMark.ts).
   const walkMark = useWalkMark();
   const router = useRouter();
@@ -4437,7 +4440,9 @@ export default function HomeScreen() {
       'lifeSquares',
       'Your Life in Squares',
       <View style={styles.bandBody}>
-        <LifeInSquares startAt="today" />
+        {/* P27: part of Individual. On Free the band stays and says so, and
+            nothing recorded is touched. */}
+        {squaresWalled ? <Text style={styles.bandCaption}>{paidFunctionLine('squaresHome')}</Text> : <LifeInSquares startAt="today" />}
       </View>,
     );
   }

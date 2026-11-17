@@ -59,6 +59,8 @@ import type { DriveItemRef } from '../lib/oneDriveGraph';
 import { downloadText, listFiles, uploadText } from '../lib/oneDriveGraph';
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { explainNotYet } from '../lib/notYet';
+import { isFunctionWalled, paidFunctionLine } from '../lib/paidFeatures';
+import { useTier } from '../lib/entitlement';
 import { VoiceControlSetting } from '../components/VoiceControlSetting';
 import { AppLockSettings } from '../components/AppLockSettings';
 import { describeSyncStatus, EMPTY_SYNC_STATE, type SnapshotRecord, type SnapshotSyncState } from '../lib/snapshotSync';
@@ -788,6 +790,7 @@ async function noteSharedBackups(names: readonly string[]): Promise<void> {
 }
 
 export default function ProfileScreen() {
+  const syncWalled = isFunctionWalled(useTier(), 'sync');
   // The outline on a button a Your Story walk line names (components/WalkMark.ts).
   const walkMark = useWalkMark();
   const router = useRouter();
@@ -1848,6 +1851,9 @@ export default function ProfileScreen() {
 
   async function handleTurnOnSync() {
     if (syncBusy) return;
+    // P27: turning sync on is part of Individual. Sync already on keeps
+    // running, and backups stay Free.
+    if (syncWalled) return explainNotYet(paidFunctionLine('sync'));
     if (!backupFolder) return explainNotYet('Choose your shared folder first, in step 1 above, so both devices have somewhere to meet.');
     if (!(await confirmItsYou('Before syncing begins'))) return;
     const password = await promptPassword(
@@ -5927,7 +5933,10 @@ export default function ProfileScreen() {
                   <Text style={styles.derivedText}>
                     {photoSyncSentence(getPhotoSyncStatus(), syncState.enabled, otherDeviceKind)}
                   </Text>
+                  {syncWalled && !syncState.enabled ? <Text style={styles.derivedText}>{paidFunctionLine('sync')}</Text> : null}
                 </>
+              ) : syncWalled ? (
+                <Text style={styles.derivedText}>{paidFunctionLine('sync')}</Text>
               ) : (
                 <Text style={styles.derivedText}>
                   {otherDeviceKind === 'phone'
