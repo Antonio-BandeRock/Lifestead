@@ -311,6 +311,10 @@ export type DesktopVersionPreview = {
   label: string;
   /** The entitlement it runs at, set by the version and not by Profile. */
   tier: 'free' | 'paid';
+  /** 'example' fills the copy with the made-up person on its first open
+   *  (components/TestDataFiller.tsx); 'fresh' leaves it empty. Missing on
+   *  an installer built before 1.0.91.14. */
+  start?: 'fresh' | 'example';
   /** The app version this build carries, 1.0.68.9 and so on. */
   revision: string | null;
   /** The revision its records were started on. */

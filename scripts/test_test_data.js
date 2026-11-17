@@ -1,10 +1,10 @@
-// Checks the desktop's Test data copy after it has filled itself
+// Checks the desktop's Individual copy (the made-up person, P34) after it has filled itself
 // (lib/testDataGenerator.ts): every table a person writes to has rows, so
 // testing, reports and the tutorial screenshots have something to show.
 //
 //   node scripts/test_test_data.js [path to a copy] [--counts]
 //
-// Open the Test data version once first (from the versions window), let it
+// Open the Individual version once first (from the versions window), let it
 // fill and reload, then run this. It reads the copy and never writes.
 //
 // A table left empty on purpose goes in EXPECTED_EMPTY with its reason.
@@ -77,16 +77,16 @@ const EXPECTED_EMPTY = {
 
 const appData = process.env.APPDATA || path.join(require('os').homedir(), 'AppData', 'Roaming');
 const fileArg = process.argv.slice(2).find((arg) => !arg.startsWith('--'));
-const file = fileArg || path.join(appData, 'lifestead-versions', 'test-data', 'SQLite', 'inside_story.db');
+const file = fileArg || path.join(appData, 'lifestead-versions', 'individual', 'SQLite', 'inside_story.db');
 if (!fs.existsSync(file)) {
-  console.log(`No Test data copy at ${file}. Open the Test data version once, let it fill, then run this again.`);
+  console.log(`No Individual copy at ${file}. Open the Individual version once, let it fill, then run this again.`);
   process.exit(1);
 }
 
 const db = new DatabaseSync(file, { readOnly: true });
 const filled = db.prepare("SELECT value FROM app_meta WHERE key = 'test_data_filled'").get();
 if (!filled) {
-  console.log('The Test data copy has not finished filling. Open it and wait for the reload.');
+  console.log('The Individual copy has not finished filling. Open it and wait for the reload.');
   process.exit(1);
 }
 

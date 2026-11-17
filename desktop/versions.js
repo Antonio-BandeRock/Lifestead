@@ -28,7 +28,17 @@ const STARTED_FILE = 'version-started.json';
 
 // The versions, in the order the picker lists them. `tier` is the
 // entitlement the copy runs at (lib/entitlement.ts). `start` is what the
-// copy opens on: 'fresh' is the first run anybody gets, with nothing in it.
+// copy opens on: 'fresh' is the first run anybody gets, with nothing in it,
+// and 'example' fills itself the first time it opens, and again after Start
+// Fresh, with the made-up person from lib/testDataGenerator.ts
+// (components/TestDataFiller.tsx), five months behind and one month ahead.
+//
+// Free and Individual both start from the same made-up person (P34 step 2,
+// 1.0.91.14, Tony's choice on 2026-11-16), so the same life is seen on each
+// side of the plan. The separate Test data version this replaced was that
+// same person on Individual; its folder, if one was started, is left where
+// it is and no longer listed.
+//
 // A version whose `missing` is set has nothing built yet that would make it
 // differ from another, so the picker says what is missing and does not open
 // a copy that would only pretend to be it.
@@ -37,24 +47,15 @@ const VERSIONS = [
     key: 'free',
     label: 'Free',
     tier: 'free',
-    start: 'fresh',
-    about: 'Everything on the Free side of the board. Paid lenses show their key and the page saying what the plan gives.',
+    start: 'example',
+    about: "A made-up person with Hashimoto's, prostate problems, autism and ADHD, five months of records behind today and a month planned ahead, seen on Free. Paid lenses show the page saying what the plan gives, and paid parts of a Free lens say which plan includes them.",
   },
   {
     key: 'individual',
     label: 'Individual',
     tier: 'paid',
-    start: 'fresh',
-    about: 'Everything Free has, with every paid lens open.',
-  },
-  {
-    // Fills itself on first open (lib/testDataGenerator.ts), and again after
-    // Start Fresh, with the same five months behind and one month ahead.
-    key: 'test-data',
-    label: 'Test data',
-    tier: 'paid',
-    start: 'fresh',
-    about: 'A made-up person with Hashimoto\'s, prostate problems, autism and ADHD: five months of records behind today and a month planned ahead, for testing and screenshots.',
+    start: 'example',
+    about: 'The same made-up person and records as Free, with every paid lens open. Also the copy for testing and screenshots.',
   },
   {
     key: 'first-run-condition',
@@ -168,6 +169,7 @@ function currentFor(appDataPath, version, currentRevision) {
     key: version.key,
     label: version.label,
     tier: version.tier,
+    start: version.start,
     revision: currentRevision,
     startedRevision: started ? started.revision : currentRevision,
   };

@@ -1,5 +1,6 @@
-// The desktop's Test data version (desktop/versions.js) fills itself the
-// first time it opens, and again after Start Fresh, from
+// The desktop's Free and Individual versions (desktop/versions.js, start
+// 'example') fill themselves the first time they open, and again after
+// Start Fresh, from
 // lib/testDataGenerator.ts. While it fills, this covers the whole window
 // with what it is writing; when it is done it reloads the window, so every
 // screen that read the empty database on the way in reads the records now.
@@ -12,11 +13,12 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { isDesktopApp, versionPreview } from '../lib/desktop/bridge';
+import { t } from '../lib/i18n';
 import { fillTestData, isTestDataFilled, TEST_DATA_FUTURE_DAYS, TEST_DATA_PAST_DAYS } from '../lib/testDataGenerator';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 
 function isTestDataVersion(): boolean {
-  return isDesktopApp() && versionPreview()?.key === 'test-data';
+  return isDesktopApp() && versionPreview()?.start === 'example';
 }
 
 type State =
@@ -60,7 +62,12 @@ export function TestDataFiller() {
           A made-up person, {TEST_DATA_PAST_DAYS} days behind today and {TEST_DATA_FUTURE_DAYS} ahead. This takes a few minutes, and the window reloads by itself when it is done.
         </Text>
         {state.kind === 'failed' ? (
-          <Text style={styles.problem}>It stopped partway: {state.message} Close this window, then press Start Fresh beside Test data in the versions window to wipe this copy and try again.</Text>
+          <Text style={styles.problem}>
+            {t('It stopped partway: {message} Close this window, then press Start Fresh beside {version} in the versions window to wipe this copy and try again.', {
+              message: state.message,
+              version: versionPreview()?.label ?? '',
+            })}
+          </Text>
         ) : (
           <View style={styles.row}>
             <ActivityIndicator color={colors.primary} />
