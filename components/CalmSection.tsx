@@ -12,7 +12,7 @@
 // Leaving the lens stops the pacer and the voice, through the focus effect,
 // so nothing keeps talking from a screen nobody is looking at.
 import * as Haptics from 'expo-haptics';
-import { useFocusEffect } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import * as Speech from 'expo-speech';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -24,10 +24,14 @@ import {
   BUILT_IN_PATTERNS,
   BUILT_IN_SCRIPTS,
   circleTarget,
+  CONDITION_LINES_CAPTION,
+  CONDITION_PROGRAM_ENTRY,
   CUE_CHOICES,
   DEFAULT_VOICE,
   DIZZY_NOTE,
   fieldsFromPattern,
+  GO_FURTHER_INTRO,
+  NO_CONDITION_LINES_CAPTION,
   NO_VOICE_LINE,
   OWN_SCRIPT_HINT,
   ownPatternProblem,
@@ -47,6 +51,7 @@ import {
   sessionFinished,
   speechRate,
   VOICE_PACES,
+  withConditionLines,
   type BreathPattern,
   type CalmOwn,
   type CueChoice,
@@ -57,6 +62,10 @@ import {
 } from '../lib/calm';
 import { getCalmOwn, getVoiceChoice, saveCalmOwn, saveVoiceChoice } from '../lib/calmDb';
 import { sortByLabel } from '../lib/choiceOrder';
+import { getUserConditions } from '../lib/db';
+import { findDigestEntryById } from '../lib/digest';
+import { routeForDigestEntry } from '../lib/digestNavigation';
+import { t } from '../lib/i18n';
 import { AppTextInput } from './AppTextInput';
 import { useConfirmSheet } from './ConfirmSheet';
 import { PopoverSelect } from './PopoverSelect';
@@ -397,8 +406,27 @@ function SpokenRelaxation({
   const run = useRef(0);
   const pauseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const script = scripts.find((s) => s.id === scriptId) ?? BUILT_IN_SCRIPTS[0];
+  // The person's conditions in Profile, so the shared flare, pain and waiting
+  // scripts can each take a line for them (Q22). Read again on every visit.
+  const [conditionCodes, setConditionCodes] = useState<string[]>([]);
+  useFocusEffect(
+    useCallback(() => {
+      let live = true;
+      getUserConditions()
+        .then((codes) => { if (live) setConditionCodes(codes); })
+        .catch(() => {});
+      return () => { live = false; };
+    }, []),
+  );
+  const router = useRouter();
+
+  const picked = scripts.find((s) => s.id === scriptId) ?? BUILT_IN_SCRIPTS[0];
+  const { script, names: conditionNames } = useMemo(() => withConditionLines(picked, conditionCodes), [picked, conditionCodes]);
   const playing = lineIndex != null;
+  const goFurther = conditionCodes
+    .filter((code, index) => conditionCodes.indexOf(code) === index && CONDITION_PROGRAM_ENTRY[code])
+    .map((code) => findDigestEntryById(CONDITION_PROGRAM_ENTRY[code]))
+    .filter((entry): entry is NonNullable<typeof entry> => !!entry);
 
   const stop = useCallback(() => {
     run.current += 1;
@@ -422,7 +450,7 @@ function SpokenRelaxation({
       if (token !== run.current) return;
       pauseTimer.current = setTimeout(() => sayLine(target, index + 1, token), line.pause * 1000);
     };
-    Speech.speak(line.say, { ...speakOptions(voice), onDone: next, onError: next });
+    Speech.speak(t(line.say), { ...speakOptions(voice), onDone: next, onError: next });
   }
 
   function play() {
@@ -491,6 +519,13 @@ function SpokenRelaxation({
         <PopoverSelect options={scriptOptions} selected={script.id} onSelect={pickScript} tabColor={tabColor} />
         <Text style={styles.caption}>{`${script.about} ${aboutMinutesLine(script)}.`}</Text>
         {script.note ? <Text style={[styles.caption, styles.muted]}>{script.note}</Text> : null}
+        {script.moment ? (
+          <Text style={[styles.caption, styles.muted]}>
+            {conditionNames.length > 0
+              ? t(CONDITION_LINES_CAPTION, { names: conditionNames.map((name) => t(name)).join(', ') })
+              : NO_CONDITION_LINES_CAPTION}
+          </Text>
+        ) : null}
         {script.own ? (
           <View style={styles.linkRow}>
             <TouchableOpacity
@@ -570,6 +605,17 @@ function SpokenRelaxation({
             <Text style={styles.primaryButtonText}>{playing ? 'Stop' : 'Play'}</Text>
           </TouchableOpacity>
         </View>
+        {goFurther.length > 0 ? (
+          <View ref={walkMark.ref('calm.goFurther')} style={styles.goFurther}>
+            <Text style={styles.label}>Where to go further</Text>
+            <Text style={[styles.caption, styles.muted]}>{GO_FURTHER_INTRO}</Text>
+            {goFurther.map((entry) => (
+              <TouchableOpacity key={entry.id} onPress={() => router.push(routeForDigestEntry(entry.id))}>
+                <Text style={[styles.link, { color: tabColor }]}>{'title' in entry ? entry.title : ''}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ) : null}
       </View>
     </TabBand>
   );
@@ -611,5 +657,6 @@ const styles = StyleSheet.create({
   circleArea: { height: 200, alignItems: 'center', justifyContent: 'center', marginTop: 8 },
   circle: { width: 190, height: 190, borderRadius: 95, opacity: 0.55 },
   phase: { ...typography.sectionTitle, color: colors.textPrimary, textAlign: 'center', ...noShadow },
+  goFurther: { gap: 6, marginTop: 4 },
   nowSaying: { gap: 4, padding: 10, borderRadius: 10, backgroundColor: colors.surfaceMuted },
 });

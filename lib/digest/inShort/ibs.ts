@@ -45,4 +45,5 @@ export const LINES: Readonly<Record<string, string>> = {
   'ibs-fermented-drinks': 'Honey-sweetened tonics and dairy drinks can both bother IBS. Honey has fructans and dairy has lactose, two kinds of FODMAP.',
   'ibs-circadian-motility-disruption': 'The gut moves more by day and less at night. Night shift work is linked to far more IBS-like symptoms.',
   'complementary-ibs-acupuncture': 'No trial found acupuncture better than fake acupuncture for IBS. Pooling the trials did not change that.',
+  'ibs-therapy-programs-how-to-reach': "Hypnotherapy for the gut and talking therapy both help IBS in trials. A doctor can refer you, or a directory can help you find one.",
 };

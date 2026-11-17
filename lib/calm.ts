@@ -335,12 +335,25 @@ export type RelaxScript = {
   note?: string;
   lines: ScriptLine[];
   own?: boolean;
+  /** Which moment a shared script is for, so a condition's line can join it. */
+  moment?: CalmMoment;
+  /** Where the condition lines go in, as a line index. */
+  conditionAt?: number;
 };
+
+/** The three shared scripts that take a line for each of the person's conditions (Q22). */
+export type CalmMoment = 'flare' | 'pain' | 'waiting';
 
 const l = (say: string, pause = 4): ScriptLine => ({ say, pause });
 
 export const BELLY_SCRIPT_NOTE =
   'This is a relaxation script that brings attention to the belly. It is not gut-directed hypnotherapy, which is given by a trained therapist or a structured programme and has trial evidence for irritable bowel syndrome. Your clinician can say whether that would suit you.';
+
+export const FLARE_SCRIPT_NOTE =
+  'If this feels different from your usual flares, or anything frightens you, stop the script and call for help. The script says this too.';
+
+export const PAIN_SCRIPT_NOTE =
+  'For pain you already know. Pain that is new, sudden, severe or unlike your usual is for a clinician or emergency help, not a script.';
 
 export const MUSCLE_SCRIPT_NOTE =
   'Tense each part gently, never hard, and leave out any part that is painful, injured or recently operated on. Just let that part rest while the others take their turn.';
@@ -487,7 +500,230 @@ export const BUILT_IN_SCRIPTS: RelaxScript[] = [
       l('Nothing more is needed tonight.', 1),
     ],
   },
+  {
+    id: 'flareNight',
+    name: 'A flare night',
+    about: 'For a night when a condition is flaring and rest is hard to find.',
+    note: FLARE_SCRIPT_NOTE,
+    moment: 'flare',
+    conditionAt: 6,
+    lines: [
+      l('Find the most comfortable position you can, even if it is not very comfortable.', 5),
+      l('If this feels different from your usual flares, or something frightens you, it is all right to stop here and call for help.', 4),
+      l('Otherwise, there is nothing you need to fix right now.', 5),
+      l('Breathe in slowly.', 5),
+      l('And let it out, a little longer.', 7),
+      l('This is a hard night, and you only have to get through this part of it.', 8),
+      l('Let whatever aches be there, and let the rest of your body soften around it.', 12),
+      l('You do not have to sleep. Resting still counts.', 10),
+      l('Each breath out a little slower than the one before.', 12),
+      l('If a worry comes, let it wait for the morning, when it can be looked at in daylight.', 12),
+      l('Let your face soften. Let your hands open.', 12),
+      l('Rest here, breathing.', 20),
+      l('Stay as long as you like.', 1),
+    ],
+  },
+  {
+    id: 'whenItHurts',
+    name: 'When it hurts',
+    about: 'For pain that is already there, to loosen what holds on around it.',
+    note: PAIN_SCRIPT_NOTE,
+    moment: 'pain',
+    conditionAt: 7,
+    lines: [
+      l('Find the position that hurts least, and let yourself stay in it.', 5),
+      l('Breathe in slowly.', 5),
+      l('And out, long and slow.', 7),
+      l('Notice where the pain is. You do not have to look at it closely, just know where it is.', 8),
+      l('Now notice a place that does not hurt. A hand, a foot, an ear.', 8),
+      l('Let your attention rest there for a few breaths.', 12),
+      l('Pain often brings tight muscles around it. Let them loosen a little, only as much as they want to.', 12),
+      l('Breathe out, and let your shoulders drop.', 8),
+      l('Breathe out, and let your jaw loosen.', 8),
+      l('The pain may still be there. You can let it be there, and still rest.', 12),
+      l('Rest here, breathing slowly.', 20),
+      l('When you are ready, come back slowly.', 2),
+    ],
+  },
+  {
+    id: 'waitingResults',
+    name: 'Waiting for results',
+    about: 'For the days between a test and its answer.',
+    moment: 'waiting',
+    conditionAt: 7,
+    lines: [
+      l('Sit or lie however is comfortable.', 4),
+      l('Breathe in slowly.', 5),
+      l('And out.', 6),
+      l('Waiting is hard. Not knowing takes up a lot of room in the mind.', 8),
+      l('For these few minutes, the waiting can sit on a shelf. It will still be there afterwards, and you can pick it up again then.', 10),
+      l('Notice the floor or the chair under you.', 8),
+      l('Notice the sounds in the room, near and far.', 10),
+      l('A result is information. Whatever it says, it is read beside everything else about you, and the next step is taken from there.', 10),
+      l('You do not have to plan for every answer tonight.', 10),
+      l('Breathe in. And out, slowly.', 12),
+      l('Rest here.', 20),
+      l('When you are ready, come back slowly.', 2),
+    ],
+  },
 ];
+
+// ---------------------------------------------------------------------------
+// A line for each condition the person tracks (Q22)
+// ---------------------------------------------------------------------------
+//
+// Keyed by the condition codes in Profile (lib/conditionCodeMap.ts). Each
+// line is comfort for that moment and nothing more: no cause, no medicine,
+// and never a word on whether something is urgent. A moment a condition
+// has no fitting line for is left out rather than filled. Chest pain is the
+// reason heart disease has no pain or flare line.
+
+export type ConditionCalmLines = { name: string } & Partial<Record<CalmMoment, string>>;
+
+const THYROID_WAITING = 'Thyroid results are read beside the ones before them, and beside how you have been.';
+const A1C_WAITING = 'An HbA1c is an average over months. It is information for the next step, not a mark against you.';
+
+export const CONDITION_CALM_LINES: Readonly<Record<string, ConditionCalmLines>> = {
+  cardiovascular_disease: {
+    name: 'Cardiovascular disease',
+    waiting: 'Heart results are read together, beside how you have been. One number is one part of the picture.',
+  },
+  celiac: {
+    name: 'Celiac disease',
+    flare: 'If your belly is upset tonight, rest your hands on it and let the breath go there, slow and soft.',
+    waiting: 'Results are read beside how you have been eating and feeling. One number is not the whole story.',
+  },
+  chronic_kidney_disease: {
+    name: 'Chronic kidney disease',
+    flare: 'If you feel worn out tonight, let the tiredness be here. It does not need a reason.',
+    waiting: 'Kidney results are read across several tests over time, not from one alone.',
+  },
+  fatty_liver_disease: {
+    name: 'Fatty liver disease',
+    waiting: 'Liver results are read across several tests over time, not from one alone.',
+  },
+  gout: {
+    name: 'Gout',
+    flare: 'If a joint is hot and swollen, let it rest on a pillow with nothing pressing on it.',
+    pain: 'Let the rest of your body loosen around the sore joint, so only that one place is holding on.',
+  },
+  graves: {
+    name: "Graves' disease",
+    flare: 'If your heart feels fast, there is no need to slow it by force. Just let each breath out be long.',
+    waiting: THYROID_WAITING,
+  },
+  hashimotos: {
+    name: "Hashimoto's",
+    flare: 'If tiredness is heavy tonight, let it be heavy. Resting is allowed.',
+    waiting: THYROID_WAITING,
+  },
+  ibd: {
+    name: "Crohn's or colitis",
+    flare: 'If your gut is sore and unsettled tonight, keep what you need close by, and be still in between.',
+    pain: 'Let your belly soften around the sore place, as much as it wants to and no more.',
+    waiting: 'Scope and stool results are read together with how you have been. One result is one moment.',
+  },
+  ibs: {
+    name: 'IBS',
+    flare: 'If your belly is cramping tonight, rest your hands there and let the breath go slow and low.',
+    pain: 'Let your belly soften around the cramp. There is no need to push it away.',
+  },
+  lupus: {
+    name: 'Lupus',
+    flare: 'If you ache and feel worn out tonight, let rest be the only thing you do.',
+    pain: 'Let each sore place be held by something soft, a pillow or the bed.',
+    waiting: 'Blood and urine results are read together, beside how you have been.',
+  },
+  migraine: {
+    name: 'Migraine',
+    flare: 'If light or sound is too much, close your eyes and turn the volume down low. The words will wait.',
+    pain: 'If your head is pounding, let your jaw unclench, your forehead smooth and your shoulders drop.',
+  },
+  multiple_sclerosis: {
+    name: 'Multiple sclerosis',
+    flare: 'If your body feels heavy or tingling, let the bed or the chair do all the holding.',
+    pain: 'If a limb aches or tingles, let it rest wherever is easiest, and breathe around it.',
+    waiting: 'Scan results are read beside how you have been, and beside the scans before them.',
+  },
+  pcos: {
+    name: 'PCOS',
+    pain: 'If your pelvis aches, a warm cloth there may be comfortable while you breathe.',
+    waiting: 'Hormone results are read beside your cycle and how you have been. One result is one moment.',
+  },
+  prostate_health: {
+    name: 'Prostate health',
+    waiting: 'A PSA result is read beside the ones before it and beside how you have been.',
+  },
+  psoriasis: {
+    name: 'Psoriasis',
+    flare: 'If your skin is itching or sore, find one place on your skin that feels calm, and let your attention rest there.',
+  },
+  rheumatoid_arthritis: {
+    name: 'Rheumatoid arthritis',
+    flare: 'If your joints are hot or stiff, let them rest in whatever position is easiest. Nothing needs to move right now.',
+    pain: 'Let the muscles around a sore joint loosen, even a little, so they are not holding on as well.',
+    waiting: 'Blood results are one piece of a larger picture, read beside how your joints have been.',
+  },
+  sjogrens: {
+    name: "Sjögren's",
+    flare: 'If your eyes or mouth feel dry, a sip of water is fine at any point. Then come back to the breath.',
+  },
+  type_1_diabetes: {
+    name: 'Type 1 diabetes',
+    flare: 'If your numbers have been hard to steer today, that is tiring. Set it down for these few minutes.',
+    waiting: A1C_WAITING,
+  },
+  type_2_diabetes: {
+    name: 'Type 2 diabetes',
+    waiting: A1C_WAITING,
+  },
+};
+
+/** The pause after a condition line, long enough to rest on it. */
+export const CONDITION_LINE_PAUSE = 10;
+
+/**
+ * A shared script with a line for each of the person's conditions that has
+ * one for its moment, in the order the conditions were added, and the names
+ * of those conditions for the caption. Any other script comes back as it is.
+ */
+export function withConditionLines(script: RelaxScript, conditionCodes: readonly string[]): { script: RelaxScript; names: string[] } {
+  if (!script.moment) return { script, names: [] };
+  const moment = script.moment;
+  const picked = conditionCodes
+    .filter((code, index) => conditionCodes.indexOf(code) === index)
+    .map((code) => CONDITION_CALM_LINES[code])
+    .filter((each): each is ConditionCalmLines => !!each && !!each[moment]);
+  if (picked.length === 0) return { script, names: [] };
+  const at = Math.min(script.conditionAt ?? script.lines.length, script.lines.length);
+  const added: ScriptLine[] = picked.map((each) => ({ say: each[moment] as string, pause: CONDITION_LINE_PAUSE }));
+  return {
+    script: { ...script, lines: [...script.lines.slice(0, at), ...added, ...script.lines.slice(at)] },
+    names: picked.map((each) => each.name),
+  };
+}
+
+/** The caption under a shared script that took condition lines. */
+export const CONDITION_LINES_CAPTION = 'With a line for each condition in your Profile that has one: {names}.';
+
+/** For a shared script when the person has no conditions in Profile. */
+export const NO_CONDITION_LINES_CAPTION =
+  'Each condition added in Profile brings a line to this script.';
+
+// Where to go further: the reading entry naming the trial-backed programs for
+// a condition and how to reach them. Only conditions with such programs.
+export const CONDITION_PROGRAM_ENTRY: Readonly<Record<string, string>> = {
+  cardiovascular_disease: 'cvd-rehab-therapy-programs-how-to-reach',
+  ibd: 'ibd-therapy-programs-how-to-reach',
+  ibs: 'ibs-therapy-programs-how-to-reach',
+  migraine: 'migraine-relaxation-therapy-how-to-reach',
+  multiple_sclerosis: 'ms-fatigue-therapy-course-how-to-reach',
+  rheumatoid_arthritis: 'ra-fatigue-therapy-programs-how-to-reach',
+  type_1_diabetes: 'type1-education-course-treatment-how-to-reach',
+};
+
+export const GO_FURTHER_INTRO =
+  'Programs with trial support, given by trained people, and how to reach them:';
 
 /** A rough time to say a script aloud, from its words and its pauses. */
 export function scriptSeconds(script: RelaxScript, wordsPerSecond = 2.2): number {

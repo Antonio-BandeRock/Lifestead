@@ -9,6 +9,9 @@
 // 6. What is kept round-trips and ignores what it does not know.
 // 7. The voice choice stays on the device (DEVICE_LOCAL_META_KEYS).
 // 8. No word in the module judges, scores or claims to treat.
+// 9. The three shared scripts take a line for each condition (Q22): the
+//    flare script carries its safety line, every code is a real condition,
+//    and every program link points at a reading entry that exists.
 //
 // Exits non-zero on any failure.
 
@@ -98,7 +101,7 @@ check(C.ownScriptProblem('Mine', 'x', []) === null, 'a good script');
 
 // Built-ins.
 const ids = C.BUILT_IN_SCRIPTS.map((s) => s.id);
-check(new Set(ids).size === ids.length && ids.length === 6, 'six built-in scripts, unique ids');
+check(new Set(ids).size === ids.length && ids.length === 9, 'nine built-in scripts, unique ids');
 check(C.BUILT_IN_SCRIPTS.every((s) => s.lines.length > 5 && s.lines.every((l) => l.say.trim() && l.pause >= 0)), 'every line has words');
 check(C.BUILT_IN_SCRIPTS.find((s) => s.id === 'belly').note.includes('not gut-directed hypnotherapy'), 'belly script says what it is not');
 check(C.BUILT_IN_SCRIPTS.every((s) => /^About \d+ minutes?$/.test(C.aboutMinutesLine(s))), 'about minutes line');
@@ -123,11 +126,44 @@ check(!localBlock.includes(`'${C.CALM_OWN_META_KEY}'`), 'calm_own travels betwee
 
 // 8. Words.
 const code = source.replace(/^\s*\/\/.*$/gm, '').replace(/\/\*\*[\s\S]*?\*\//g, '');
-const scan = code.replace(/None of these treats a condition/g, '');
+const scan = code
+  .replace(/None of these treats a condition/g, '')
+  .replace(/\bhealth\b/gi, '')
+  .replace(/'[a-z0-9-]+-how-to-reach'/g, '');
 for (const word of ['better', 'worse', 'improv', 'cure', 'heal', 'treat', 'streak', 'score', 'well done', 'great job', 'should\\b']) {
   check(!new RegExp('\\b' + word, 'i').test(scan), 'no "' + word + '" in the module');
 }
 check(!/[–—]/.test(source), 'no long dashes');
+
+// 9. Lines for each condition.
+const codeMap = fs.readFileSync(path.join(__dirname, '..', 'lib', 'conditionCodeMap.ts'), 'utf8');
+const realCodes = [...codeMap.slice(0, codeMap.indexOf('};')).matchAll(/^\s+(\w+):\s+'/gm)].map((m) => m[1]);
+check(realCodes.length === 19, 'nineteen condition codes read');
+check(Object.keys(C.CONDITION_CALM_LINES).every((c) => realCodes.includes(c)), 'every calm line keyed by a real code');
+check(realCodes.every((c) => C.CONDITION_CALM_LINES[c]), 'every condition has an entry');
+check(Object.keys(C.CONDITION_PROGRAM_ENTRY).every((c) => realCodes.includes(c)), 'every program link keyed by a real code');
+check(!C.CONDITION_CALM_LINES.cardiovascular_disease.pain && !C.CONDITION_CALM_LINES.cardiovascular_disease.flare, 'nothing soothes chest pain');
+const flare = C.BUILT_IN_SCRIPTS.find((s) => s.id === 'flareNight');
+const pain = C.BUILT_IN_SCRIPTS.find((s) => s.id === 'whenItHurts');
+const waiting = C.BUILT_IN_SCRIPTS.find((s) => s.id === 'waitingResults');
+check(flare && pain && waiting, 'three shared scripts');
+check(flare.lines.slice(0, 3).some((x) => /call for help/.test(x.say)), 'flare script says when to stop and call, early');
+check(/new, sudden, severe/.test(pain.note), 'pain script note names pain that is not for a script');
+const plain = C.withConditionLines(C.BUILT_IN_SCRIPTS[0], ['ibs']);
+check(plain.script === C.BUILT_IN_SCRIPTS[0] && plain.names.length === 0, 'other scripts come back as they are');
+const none = C.withConditionLines(flare, []);
+check(none.script === flare && none.names.length === 0, 'no conditions, no change');
+const two = C.withConditionLines(flare, ['ibs', 'prostate_health', 'ibs', 'rheumatoid_arthritis']);
+check(two.names.join('|') === 'IBS|Rheumatoid arthritis', 'only conditions with a flare line, once each, in order');
+check(two.script.lines.length === flare.lines.length + 2, 'two lines added');
+check(two.script.lines[flare.conditionAt].say === C.CONDITION_CALM_LINES.ibs.flare, 'added where the script says');
+check(two.script.lines[flare.conditionAt].pause === C.CONDITION_LINE_PAUSE, 'with a pause to rest on it');
+check(flare.lines.length === 13, 'the shared script itself is untouched');
+const w = C.withConditionLines(waiting, ['type_1_diabetes', 'type_2_diabetes']);
+check(w.script.lines.filter((x) => x.say === w.script.lines[waiting.conditionAt].say).length === 2, 'a shared line is said once per condition');
+const digestDir = path.join(__dirname, '..', 'lib', 'digest');
+const digestText = fs.readdirSync(digestDir).filter((n) => n.endsWith('.ts')).map((n) => fs.readFileSync(path.join(digestDir, n), 'utf8')).join(' ');
+for (const id of Object.values(C.CONDITION_PROGRAM_ENTRY)) check(digestText.includes(`id: '${id}'`), 'program entry ' + id + ' exists');
 
 console.log(`${checks - failures}/${checks} calm checks passed`);
 if (failures > 0) process.exit(1);

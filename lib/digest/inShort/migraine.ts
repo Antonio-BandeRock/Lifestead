@@ -48,4 +48,5 @@ export const LINES: Readonly<Record<string, string>> = {
   'migraine-histamine-dao-deficiency': 'In a study of 198 people, 87% of those with migraine had trouble breaking down histamine from food. Only 44% of those without migraine did.',
   'complementary-migraine-acupuncture': 'A large review found acupuncture at least halved headaches in 50% of people. Fake acupuncture did so in 41%, a small gap.',
   'complementary-migraine-spinal-manipulation': 'In one trial, spine manipulation helped headaches. A fake version helped just as much, so the effect may not come from the method.',
+  'migraine-relaxation-therapy-how-to-reach': "Learning to relax, and talk therapy, can mean fewer migraine days for some people. Ask your doctor where to get them.",
 };

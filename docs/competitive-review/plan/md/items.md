@@ -1274,7 +1274,7 @@
 ### Q22. Calm for each condition, and where to go further
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Signals,Life
 - **Answers:** Nerva, Calm · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Scripts for flare nights, pain and waiting for results written per condition, the trial-backed programmes (gut-directed hypnotherapy, CBT for IBS) named with how to reach them in the condition reading, and the person’s own recordings played once R1 carries expo-audio. Partly built: Calm (D15) with a breathing pacer and spoken scripts (lib/calm.ts). Not yet: scripts written per condition, and the trial-backed programmes named in each condition reading.
+- **How:** Scripts for flare nights, pain and waiting for results written per condition, the trial-backed programmes (gut-directed hypnotherapy, CBT for IBS) named with how to reach them in the condition reading, and the person’s own recordings played once R1 carries expo-audio. Built 1.0.91.12: three shared scripts on Signals > Calm (A flare night, When it hurts, Waiting for results), each taking a line for every condition in Profile that has one for that moment (CONDITION_CALM_LINES, withConditionLines in lib/calm.ts); Where to go further links seven new condition readings naming the trial-backed programmes and how to reach them (IBS hypnotherapy and CBT, IBD therapy, RA fatigue group, MS fatigue course, type 1 structured education, migraine relaxation and biofeedback, cardiac rehab). The person's own recordings still wait on R1.
 
 ### Q23. A three-day bladder diary
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Signals,Reports

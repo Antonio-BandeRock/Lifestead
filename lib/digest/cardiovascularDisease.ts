@@ -762,4 +762,18 @@ export const CARDIOVASCULAR_DISEASE_ENTRIES: DigestEntry[] = [
       'protein-sulfur-amino-acid-restriction-trial',
     ],
   },
+  // Q22 (1.0.91.12): where to go further, named with how to reach it.
+  {
+    id: 'cvd-rehab-therapy-programs-how-to-reach',
+    category: 'cardiovascularDisease',
+    title: "Reaching Cardiac Rehabilitation",
+    teaser: "Exercise-based cardiac rehab lowers the chance of dying from heart disease. Many people who qualify are never referred, so it is worth asking.",
+    summary:
+      "Cardiac rehabilitation is a supervised program of exercise, education and support after a heart attack, a stent, bypass surgery, heart failure and some other heart conditions. A 2021 Cochrane review of exercise-based cardiac rehabilitation found it lowered the risk of dying from cardiovascular causes by about 42% compared with no rehabilitation, though it made little difference to deaths from all causes over the trials' length.\n\nMany people who would qualify are never referred, and many who start do not finish, often because of travel, work or not knowing it exists.\n\nHow to reach it:\n\n1. Ask your cardiologist, the hospital team or your family doctor for a referral. You can ask even if it was not mentioned when you left hospital, and even some time afterwards.\n2. Ask whether a home-based or online version is available if getting to a centre is hard. Many services now offer one.\n3. If a program is full or far away, ask to be put on the list anyway and told when a place opens.\n\nThe team running the program sets the exercise to suit your heart and your other conditions.",
+    citations: [
+      { source: "Dibben et al., Exercise-based cardiac rehabilitation for coronary heart disease, Cochrane Database of Systematic Reviews 2021, CD001800", url: "https://eprints.soton.ac.uk/498821/1/Dibben_et_al-2021-Cochrane_Database_of_Systematic_Reviews.pdf" },
+    ],
+    overallTier: 'strong',
+    relatedIds: ['cvd-cardiac-rehabilitation-underused', 'cvd-cardiac-rehab-real-barriers-completion'],
+  },
 ];

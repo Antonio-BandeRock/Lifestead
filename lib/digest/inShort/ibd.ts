@@ -98,4 +98,5 @@ export const LINES: Readonly<Record<string, string>> = {
     'In a German trial, acupuncture calmed IBD more than fake acupuncture did. A 2022 trial also checked signs of swelling, but there are few trials.',
   'ibd-autism-crossover':
     'Autistic people had IBD more often in pooled data on 11 million people. IBD is rare, so the added risk is small, and this is a link, not a cause.',
+  'ibd-therapy-programs-how-to-reach': "Talking therapy can help how life with IBD feels for a while. Trials did not find it changes the disease.",
 };

@@ -106,4 +106,5 @@ export const LINES: Readonly<Record<string, string>> = {
     'A 2007 study said one neck adjustment by a chiropractor dropped blood pressure 17 points. A 2016 repeat study found no effect.',
   'cvd-protein-source-diet-mortality':
     'In studies of over a million people, protein from plants went with fewer heart deaths, and animal protein with more. These are links, not proof.',
+  'cvd-rehab-therapy-programs-how-to-reach': "Cardiac rehab lowers the chance of dying from heart disease. Many people never get sent to it, so ask your heart doctor.",
 };

@@ -523,6 +523,7 @@ export type ToolMark =
   | 'calm.start'
   | 'calm.readAloud'
   | 'calm.play'
+  | 'calm.goFurther'
   | 'microbiome.form'
   | 'microbiome.photo'
   | 'microbiome.readLines'
@@ -5050,6 +5051,25 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Play.', mark: 'calm.play' },
       ],
       forYou: 'The voice already on your phone reads it, including scripts you write.',
+    },
+    {
+      key: 'flare',
+      title: 'Hear a script for a flare, pain or waiting',
+      steps: [
+        { say: 'Open Relaxation Read Aloud.', mark: 'calm.readAloud', stay: true },
+        { say: 'Pick A flare night, When it hurts, or Waiting for results.' },
+        { say: 'Tap Play. A line for each of your conditions in Profile is read in the middle.', mark: 'calm.play' },
+      ],
+      forYou: 'The flare script says when to stop and call for help instead.',
+    },
+    {
+      key: 'further',
+      title: 'Find a program to go further',
+      steps: [
+        { say: 'Open Relaxation Read Aloud.', mark: 'calm.readAloud', stay: true },
+        { say: 'Under Where to go further, tap a program to read what it is and how to reach it.', mark: 'calm.goFurther' },
+      ],
+      forYou: 'Shown for conditions in your Profile that have a program with trial support.',
     },
   ],
   '/log#trackers': [

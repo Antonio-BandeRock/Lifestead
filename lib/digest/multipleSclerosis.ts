@@ -641,4 +641,18 @@ export const MULTIPLE_SCLEROSIS_ENTRIES: DigestEntry[] = [
       'handson-safety-and-what-to-ask',
     ],
   },
+  // Q22 (1.0.91.12): where to go further, named with how to reach it.
+  {
+    id: 'ms-fatigue-therapy-course-how-to-reach',
+    category: 'multipleSclerosis',
+    title: "A Fatigue Management Course for MS, and How to Reach One",
+    teaser: "Six group sessions on pacing and energy use reduced MS fatigue in a trial, with the effect still there a year later.",
+    summary:
+      "Fatigue is the most common symptom of multiple sclerosis and often the one that limits a day most. FACETS, a randomized trial published in the Journal of Neurology, Neurosurgery & Psychiatry in 2013, tested a six-session group program on managing fatigue, run by MS health professionals. It combined energy pacing with ideas from cognitive behavioural therapy. Among 164 people randomized, those in the program reported less severe fatigue and more confidence in handling it than those receiving usual care, and the gains held at a year.\n\nThe course teaches skills, such as planning the day around energy, resting before running out, and noticing thoughts that make fatigue harder to bear. It sits beside whatever your MS team prescribes, not in place of it.\n\nHow to reach one: ask your MS nurse or neurology team whether they run a fatigue management course. MS charities in several countries offer group or online versions. An occupational therapist can teach energy management one to one where no group is running.",
+    citations: [
+      { source: "Thomas et al., A randomised controlled trial of a group-based fatigue management programme for people with multiple sclerosis (FACETS), J Neurol Neurosurg Psychiatry 2013;84(10):1092-1099", url: "https://jnnp.bmj.com/content/84/10/1092.info" },
+    ],
+    overallTier: 'moderate',
+    relatedIds: ['ms-exercise-fatigue-real-evidence', 'ms-overview'],
+  },
 ];

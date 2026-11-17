@@ -45,4 +45,5 @@ export const LINES: Readonly<Record<string, string>> = {
   'type1-dawn-phenomenon': 'About half of people with type 1 need more insulin between about 5 and 8 in the morning. A body clock causes it, not food eaten overnight.',
   'complementary-type1-massage-insulin-absorption': 'Rubbing a spot where insulin was just injected makes it absorb faster. In one study, sugar was 8.3% lower half an hour later.',
   'type1-adhd-crossover': 'Children with both type 1 and ADHD had an HbA1c of 8.1% against 7.4% with type 1 alone. Results differ across studies.',
+  'type1-education-course-treatment-how-to-reach': "A five-day course on matching insulin to meals helped adults with type 1 diabetes. Ask your diabetes team about one.",
 };

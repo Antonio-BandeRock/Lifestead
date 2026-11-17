@@ -614,4 +614,19 @@ export const IBS_ENTRIES: DigestEntry[] = [
       'handson-tracking-whether-it-works',
     ],
   },
+  // Q22 (1.0.91.12): where to go further, named with how to reach it.
+  {
+    id: 'ibs-therapy-programs-how-to-reach',
+    category: 'ibs',
+    title: "Reaching Gut-Directed Hypnotherapy or CBT for IBS",
+    teaser: "Both have trial support for IBS. They are given by trained therapists or structured programs, and the way in is usually a referral.",
+    summary:
+      "Two brain-gut therapies have the most trial support for IBS: gut-directed hypnotherapy and cognitive behavioural therapy (CBT). A 2020 network meta-analysis in Gut pooled 41 randomized trials with 4,072 people and found both, along with CBT given with less therapist contact, eased overall IBS symptoms more than the control treatments they were compared with. The same authors judged most trials at high risk of bias, mostly because a talking therapy cannot be hidden from the people receiving it, so the size of the benefit is probably overstated. Both are still among the better-supported options for IBS.\n\nThese are structured therapies, not general relaxation, and the relaxation scripts in this app are not either of them. The usual ways in:\n\n1. Ask your doctor or gastroenterologist for a referral to a GI psychologist or a gut-directed hypnotherapy service. Some hospital gastroenterology departments run their own.\n2. The Rome Foundation keeps a directory of psychologists trained in brain-gut therapies at romegipsych.org, searchable by location and by whether they see people online.\n3. Structured programs delivered by app or online, built on the same scripts used in the trials, are an option where no therapist is within reach. Ask your clinician which ones they trust.\n\nA course is usually 6 to 12 sessions. Your clinician can also say whether IBS is the right label for what you have before you start one, since some symptoms need other tests first.",
+    citations: [
+      { source: "Black et al., Efficacy of psychological therapies for irritable bowel syndrome: systematic review and network meta-analysis, Gut 2020;69:1441-1451", url: "https://gut.bmj.com/content/gutjnl/69/8/1441.full.pdf" },
+      { source: "Rome Foundation GI Psychology directory", url: "https://romegipsych.org/" },
+    ],
+    overallTier: 'moderate',
+    relatedIds: ['ibs-gut-directed-hypnotherapy', 'ibs-cbt-brain-gut-therapy', 'ibs-red-flags-workup'],
+  },
 ];

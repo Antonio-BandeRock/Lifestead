@@ -106,4 +106,5 @@ export const LINES: Readonly<Record<string, string>> = {
     'Adding acupuncture to usual RA care lowered disease scores in one review. The trials were small and uneven, so this is not settled.',
   'ra-pregnancy-offspring-neurodevelopment':
     "One study linked a mother's RA found before the birth to a higher chance of autism in the child. RA found after the birth showed no link.",
+  'ra-fatigue-therapy-programs-how-to-reach': "A group course for tiredness in RA helped people cope better with fatigue, and it still helped two years later. Ask your rheumatology team about one.",
 };

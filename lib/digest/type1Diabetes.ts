@@ -617,4 +617,18 @@ export const TYPE_1_DIABETES_ENTRIES: DigestEntry[] = [
       'chrono-insulin-sensitivity-diurnal-rhythm',
     ],
   },
+  // Q22 (1.0.91.12): where to go further, named with how to reach it.
+  {
+    id: 'type1-education-course-treatment-how-to-reach',
+    category: 'type1Diabetes',
+    title: "Structured Education Courses for Type 1 Diabetes, and How to Reach One",
+    teaser: "A week-long course teaching adults to match insulin to what they eat lowered HbA1c and widened what people felt free to eat.",
+    summary:
+      "DAFNE (Dose Adjustment For Normal Eating) is a structured course for adults with type 1 diabetes, taught in a small group over five days. It teaches carbohydrate counting and how to adjust insulin to the meal in front of you, rather than fitting meals around a fixed dose. In the randomized trial published in the BMJ in 2002, 169 adults took part. Six months later, average HbA1c was 8.4% in those who had done the course and 9.4% in those still waiting for it, and the course group reported more freedom in what they ate and a better quality of life.\n\nThe course is run by diabetes specialist nurses and dietitians, and everything it teaches is worked out with your diabetes team. Similar courses go by other names in other countries.\n\nHow to reach one: ask your diabetes team about structured education. In the UK, DAFNE is offered through many hospital diabetes services. Elsewhere, ask about a carbohydrate counting or flexible insulin course for adults. A diabetes educator can often teach the same skills one to one if no group course runs near you.",
+    citations: [
+      { source: "DAFNE Study Group, Training in flexible, intensive insulin management to enable dietary freedom in people with type 1 diabetes: dose adjustment for normal eating (DAFNE) randomised controlled trial, BMJ 2002;325:746-749", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC128375/" },
+    ],
+    overallTier: 'strong',
+    relatedIds: ['type1-carb-counting-accuracy', 'type1-overview'],
+  },
 ];

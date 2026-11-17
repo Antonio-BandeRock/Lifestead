@@ -47,4 +47,5 @@ export const LINES: Readonly<Record<string, string>> = {
   'complementary-ms-massage-pain-fatigue': 'In one small trial, massage eased MS pain and helped balance and walking more than an exercise program. The trials so far are small.',
   'complementary-ms-acupuncture-fatigue': 'A 2024 review found MS fatigue improved after acupuncture. Its authors said the studies behind it carry a high risk of bias.',
   'ms-pregnancy-offspring-neurodevelopment': 'A study asked if children of mothers with MS more often have problems with how the brain develops. It found they do not.',
+  'ms-fatigue-therapy-course-how-to-reach': "A six-week group class on how to use your energy left people with MS less tired. It still helped a year later.",
 };

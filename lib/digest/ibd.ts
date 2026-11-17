@@ -637,4 +637,19 @@ export const IBD_ENTRIES: DigestEntry[] = [
       'ibd-overview',
     ],
   },
+  // Q22 (1.0.91.12): where to go further, named with how to reach it.
+  {
+    id: 'ibd-therapy-programs-how-to-reach',
+    category: 'ibd',
+    title: "Psychological Therapy for Crohn's and Colitis, and How to Reach It",
+    teaser: "It can ease how life with IBD feels for a while. Trials have not shown it changes the disease itself.",
+    summary:
+      "Psychological therapies, mostly cognitive behavioural therapy (CBT), have been tested in people with Crohn's disease and ulcerative colitis. A 2017 systematic review in Lancet Gastroenterology & Hepatology found no effect on relapse and small, short-lived gains in quality of life from CBT. An update in 2023 by the same group found short-term benefits for low mood, worry and quality of life, and none on disease activity, with every trial judged at high risk of bias. So, in short: it may help how living with IBD feels, for a time, and it is not a way to calm the disease.\n\nThat is still worth having. If the strain of IBD is weighing on you, the usual ways in:\n\n1. Ask your IBD nurse or gastroenterologist. Many IBD services have a psychologist attached, or can refer to one who knows the condition.\n2. Patient charities for Crohn's and colitis in many countries list counselling or support services that understand the condition.\n3. Your family doctor can refer you to a general talking therapy service if neither of those is available.",
+    citations: [
+      { source: "Gracie et al., Efficacy of psychological therapies in inflammatory bowel disease: a systematic review and meta-analysis, Lancet Gastroenterol Hepatol 2017", url: "https://eprints.whiterose.ac.uk/113223/" },
+      { source: "Riggott et al., Efficacy of psychological therapies in people with inflammatory bowel disease: an updated systematic review and meta-analysis, 2023", url: "https://eprints.whiterose.ac.uk/202882/" },
+    ],
+    overallTier: 'weak',
+    relatedIds: ['ibd-overview', 'ibd-fodmap-remission-symptoms'],
+  },
 ];

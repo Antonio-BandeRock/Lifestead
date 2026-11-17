@@ -713,4 +713,19 @@ export const RHEUMATOID_ARTHRITIS_ENTRIES: DigestEntry[] = [
       'handson-tracking-whether-it-works',
     ],
   },
+  // Q22 (1.0.91.12): where to go further, named with how to reach it.
+  {
+    id: 'ra-fatigue-therapy-programs-how-to-reach',
+    category: 'rheumatoidArthritis',
+    title: "A Group Fatigue Program for Rheumatoid Arthritis, and How to Reach One",
+    teaser: "Seven group sessions run by rheumatology nurses and therapists eased the impact of fatigue, and the effect lasted two years.",
+    summary:
+      "Fatigue is one of the hardest parts of rheumatoid arthritis to live with, and one of the least addressed. The RAFT trial, published in Annals of the Rheumatic Diseases in 2019, tested a group program based on cognitive behavioural therapy, run by rheumatology nurses and occupational therapists after a short training. People met in small groups for six weekly sessions and a seventh a few weeks later. Compared with a fatigue booklet and a single short talk, the program reduced how much fatigue got in the way of daily life, and the difference was still there two years on.\n\nThe program works on the habits around fatigue: pacing, sleep, stress, and the thoughts that make a tiring day feel worse. It does not replace anything your rheumatology team gives you.\n\nHow to reach one: ask your rheumatology nurse or team whether they run a fatigue management group or know of one nearby. Where none exists, an occupational therapist who works with arthritis can often teach the same skills one to one, and arthritis charities in many countries run self-management courses.",
+    citations: [
+      { source: "Hewlett et al., Reducing arthritis fatigue impact: two-year randomised controlled trial of cognitive behavioural approaches by rheumatology teams (RAFT), Ann Rheum Dis 2019;78(4):465-472", url: "https://doi.org/10.1136/annrheumdis-2018-214469" },
+      { source: "RAFT qualitative study of what participants took from the program", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6755488/" },
+    ],
+    overallTier: 'strong',
+    relatedIds: ['ra-overview', 'ra-treat-to-target-remission'],
+  },
 ];

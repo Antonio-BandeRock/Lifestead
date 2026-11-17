@@ -637,4 +637,19 @@ export const MIGRAINE_ENTRIES: DigestEntry[] = [
       'handson-safety-and-what-to-ask',
     ],
   },
+  // Q22 (1.0.91.12): where to go further, named with how to reach it.
+  {
+    id: 'migraine-relaxation-therapy-how-to-reach',
+    category: 'migraine',
+    title: "Relaxation Training, Biofeedback and CBT for Migraine, and How to Reach Them",
+    teaser: "Guidelines rate these as preventive options, used beside medicine or in place of it when medicine is not suitable. Some of the evidence is older and debated.",
+    summary:
+      "The US Headache Consortium guidelines gave relaxation training, thermal biofeedback combined with relaxation, EMG biofeedback and cognitive behavioural therapy their highest grade as options for preventing migraine. Across the trials reviewed, these methods cut headache activity by roughly 32 to 49 percent. Many of those trials are old and small, and later reviewers have questioned how strong the biofeedback evidence is, so the most that can be said is that they help some people, and nobody can promise how much.\n\nThey are often used alongside preventive medicine, or when medicine does not suit someone, for example during pregnancy. Whether they suit you, and how they fit with anything you take, is a question for your doctor.\n\nHow to reach them: ask your doctor or headache clinic for a referral to a psychologist who works with headache, or to a biofeedback service. Some headache centres run their own. The relaxation scripts in this app are general relaxation, not the structured training these trials used, though practising relaxation regularly is part of what that training teaches.",
+    citations: [
+      { source: "Behavioral treatment of migraine, review of the evidence and US Headache Consortium grades, Cleve Clin J Med 2010;77(Suppl 3):S72", url: "https://www.ccjm.org/content/77/7_suppl_3/S72.full.pdf" },
+      { source: "Mind-body therapies for headache, American Family Physician 2007", url: "https://www.aafp.org/pubs/afp/issues/2007/1115/p1518.html" },
+    ],
+    overallTier: 'moderate',
+    relatedIds: ['migraine-overview', 'migraine-sleep-bidirectional'],
+  },
 ];
