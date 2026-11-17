@@ -109,8 +109,9 @@ import { listExercisePlans, listPlanMarks } from './exercisePlanDb';
 import { listWorkouts } from './workoutsDb';
 import { planTitle, reminderBody, reminderMoments, reminderTitle, type ExercisePlan } from './exercisePlan';
 import { formatTime12 } from './timeOfDay';
-import { currentZone, homeDoseHere, homeTimeWords, parseTravelMode } from './travelTime';
-import { getHomeZone } from './travelTimeDb';
+import { answerTravel, currentZone, doseWallHere, homeTimeWords, markAsked, nextToAsk, parseTravelMode, shouldAskTravel, travelQuestionText, tripOf, withoutAnswers } from './travelTime';
+import { TRAVEL_QUESTION_PREFIX, noticeTravelNow, readTravelNotice, travelQuestionIdentifier, writeTravelNotice } from './travelNotice';
+import { getHomeZone, listUnchosenDoseTreatments, saveTravelMode } from './travelTimeDb';
 import { PEER_DOSE_PREFIX } from './doseWatch';
 import { RECALL_NOTIFICATION_PREFIX } from './recalls';
 import { quietDecision, SNOOZE_MINUTES } from './quietHours';
@@ -600,15 +601,21 @@ async function listTravelAdjustedCandidates(lookback: Date, horizon: Date, now: 
     getHomeZone().catch(() => null),
   ]);
   const here = currentZone();
+  // Q14: a med set to move a step each day moves along the trip this phone
+  // is on; the line under it names the home clock the same way.
+  const context = { homeZone, here, trip: tripOf(noticeTravelNow(now)) };
   const from = localDateTimeString(lookback);
   const lastDay = localDateString(horizon);
   const result: TravelCandidate[] = [];
   for (const candidate of raw) {
-    const moved = candidate.travelMode
-      ? homeDoseHere(candidate.scheduledFor, parseTravelMode(candidate.travelMode), homeZone, here, now.getTime())
-      : null;
+    const mode = parseTravelMode(candidate.travelMode);
+    const moved = candidate.travelMode ? doseWallHere(candidate.scheduledFor, mode, context, now.getTime()) : null;
     const next: TravelCandidate =
-      moved && homeZone ? { ...candidate, scheduledFor: moved, homeClock: homeTimeWords(candidate.scheduledFor, homeZone) } : candidate;
+      moved && homeZone && mode === 'home'
+        ? { ...candidate, scheduledFor: moved, homeClock: homeTimeWords(candidate.scheduledFor, homeZone) }
+        : moved
+          ? { ...candidate, scheduledFor: moved }
+          : candidate;
     if (next.scheduledFor < from || next.scheduledFor.slice(0, 10) > lastDay) continue;
     result.push(next);
   }
@@ -1480,6 +1487,67 @@ async function offerKitchenLowIfDue(now: Date, enabled: boolean): Promise<void> 
   }
 }
 
+// Q14: the phone has moved to a new time zone away from home, and a med with
+// dose reminders has no travel choice saved. Asked one med at a time with
+// the three choices as buttons, so it is answered on the locked phone; the
+// next med is asked once that one is answered or swiped away. Marked asked
+// before it is shown, like the offers above, and asked again on the next
+// trip only if still no choice was saved.
+async function offerTravelIfDue(now: Date, enabled: boolean): Promise<void> {
+  if (!enabled || Platform.OS === 'web' || isLockedNow()) return;
+  const noticed = noticeTravelNow(now);
+  const homeZone = await getHomeZone().catch(() => null);
+  const zone = noticed.zone;
+  if (!zone || !shouldAskTravel(noticed, homeZone, now.getTime())) return;
+  const shown = await Notifications.getPresentedNotificationsAsync().catch(() => []);
+  if (shown.some((item) => item.request.identifier.startsWith(TRAVEL_QUESTION_PREFIX))) return;
+  const unchosen = await listUnchosenDoseTreatments(localDateTimeString(now));
+  const nextId = nextToAsk(noticed, unchosen.map((item) => item.id));
+  if (!nextId) return;
+  const med = unchosen.find((item) => item.id === nextId);
+  const state = markAsked(noticed, nextId);
+  writeTravelNotice(state);
+  const words = travelQuestionText(zone, med?.name ?? '', reminderDetailHidden());
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
+    identifier: travelQuestionIdentifier(nextId),
+    content: {
+      title: t(words.title.en, words.title.values),
+      body: t(words.body.en, words.body.values),
+      data: { tab: 'travel', treatmentId: nextId },
+      sound: false,
+      categoryIdentifier: REMINDER_CATEGORY_IDS.travel,
+    },
+    trigger: { channelId: ANDROID_DATED_CHANNEL_ID },
+  }));
+}
+
+// Travel answers pressed on a locked phone, written once the records can be
+// opened. Each is taken out of the file as it is saved.
+let writingTravelAnswers = false;
+export async function writeWaitingTravelAnswers(): Promise<boolean> {
+  if (writingTravelAnswers || Platform.OS === 'web' || isLockedNow()) return false;
+  const state = readTravelNotice();
+  const waiting = state ? Object.entries(state.answers) : [];
+  if (!state || waiting.length === 0) return false;
+  writingTravelAnswers = true;
+  const written: string[] = [];
+  try {
+    for (const [treatmentId, mode] of waiting) {
+      try {
+        await saveTravelMode(treatmentId, mode);
+        written.push(treatmentId);
+      } catch (error) {
+        console.error('[reminderNotifications] a travel choice was not saved', error);
+      }
+    }
+  } finally {
+    const latest = readTravelNotice() ?? state;
+    writeTravelNotice(withoutAnswers(latest, written));
+    writingTravelAnswers = false;
+  }
+  return written.length > 0;
+}
+
 // The notification that stays up while a timer runs on Interests > Sessions
 // (lib/interestTimerNotice.ts). Posted when the timer starts and again
 // whenever the app finds one running without it (after a restart of the
@@ -2047,6 +2115,12 @@ async function runSync(): Promise<ReminderSyncResult> {
     .then((prefs) => offerKitchenLowIfDue(now, isReminderKindEnabled(prefs, 'kitchenLow')))
     .catch((error) => console.warn('[reminderNotifications] the kitchen could not be checked for low food', error));
   void addWaitingKitchenFoods().catch((error) => console.error('[reminderNotifications] low foods not added', error));
+  // Q14: travel answers from a locked phone are saved before the doses are
+  // worked out below, so a choice made on the plane moves tonight's reminder.
+  await writeWaitingTravelAnswers().catch((error) => console.error('[reminderNotifications] travel choices not saved', error));
+  await getReminderPreferences()
+    .then((prefs) => offerTravelIfDue(now, isReminderKindEnabled(prefs, 'dose')))
+    .catch((error) => console.warn('[reminderNotifications] the travel question could not be checked', error));
   void stopWaitingInterestTimers()
     .then(() => ensureInterestTimerNotice())
     .catch((error) => console.error('[reminderNotifications] timer stops not written', error));
@@ -2472,6 +2546,7 @@ export type ReminderTapTarget =
   | { pathname: '/schedule'; params: { openScheduleLens: 'appointments'; importCalendarEvent: string; importCalendarAt: string } }
   | { pathname: '/garden'; params: { openGardenLens: GardenReminderLens } }
   | { pathname: '/life'; params: { openLifeLens: LifeReminderLens } }
+  | { pathname: '/life'; params: { openLifeLens: 'myMeds'; focusTreatmentId?: string } }
   | { pathname: '/routine'; params: { id: string } }
   | { pathname: '/interests'; params: { openInterestsLens: 'sessions' | 'learn' } }
   | { pathname: '/workout'; params: { id: string; planId: string; on: string } }
@@ -2521,6 +2596,12 @@ export function resolveReminderTap(response: Notifications.NotificationResponse 
   // Something running low, tapped rather than answered, opens the Kitchen,
   // where its mark and Add to list sit.
   if (request?.identifier?.startsWith(KITCHEN_LOW_PREFIX)) return { pathname: '/life', params: { openLifeLens: 'kitchen' } };
+  // The travel question, tapped rather than answered, opens the med on My
+  // Meds, where When you travel holds the same three choices.
+  if (request?.identifier?.startsWith(TRAVEL_QUESTION_PREFIX)) {
+    const treatmentId = request.identifier.slice(TRAVEL_QUESTION_PREFIX.length);
+    return { pathname: '/life', params: treatmentId ? { openLifeLens: 'myMeds', focusTreatmentId: treatmentId } : { openLifeLens: 'myMeds' } };
+  }
   // A running timer, tapped, opens Sessions, where it can be stopped with a
   // note or thrown away.
   if (request?.identifier?.startsWith(INTEREST_TIMER_PREFIX)) return { pathname: '/interests', params: { openInterestsLens: 'sessions' } };
@@ -2685,6 +2766,18 @@ async function answerPress(response: Notifications.NotificationResponse): Promis
     const markId = typeof data.markId === 'string' ? data.markId : '';
     writeKitchenLowState(answerKitchenLowOffer(readKitchenLowState(), response.actionIdentifier, markId, Date.now()));
     await addWaitingKitchenFoods().catch((error) => console.error('[reminderNotifications] low foods not added', error));
+    return;
+  }
+  // Q14: a travel choice, answered into the plain file and saved once the
+  // records can be opened; the reconcile it asks for moves the reminders
+  // and asks about the next med.
+  if (request.identifier.startsWith(TRAVEL_QUESTION_PREFIX)) {
+    await Notifications.dismissNotificationAsync(request.identifier).catch(() => undefined);
+    const data = (request.content.data ?? {}) as { treatmentId?: unknown };
+    const treatmentId = typeof data.treatmentId === 'string' ? data.treatmentId : '';
+    const state = readTravelNotice();
+    if (state) writeTravelNotice(answerTravel(state, response.actionIdentifier, treatmentId));
+    if (!isLockedNow()) void syncReminderNotifications();
     return;
   }
   // Stop and Keep on a running timer, kept in a plain file with the moment

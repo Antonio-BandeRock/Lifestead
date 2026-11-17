@@ -1099,6 +1099,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Each dose you mark taken comes off the count. The days left follow the doses on your schedule, weekly, monthly or a taper step by step, and a reminder comes before it runs out.',
     },
     {
+      key: 'travel',
+      title: 'Choose when its reminder rings while you travel',
+      steps: [
+        { say: 'Find it in the list and tap Details under it.', mark: 'myMeds.details' },
+        { say: 'Under When you travel, tap Move to local time, Keep home time or Move a step each day.' },
+        { say: 'Or wait: the first time the phone is on a new time zone away from home, a notification asks about each med with no choice yet, and you answer it with one tap on the locked phone.' },
+      ],
+      forYou: 'Only the reminder moves, never the dose. A step each day moves the reminder up to 2 hours a day until it matches the local clock, and Schedules > Meds and Today\'s Meals show each dose at the hour it rings where you are.',
+    },
+    {
       key: 'tracking',
       title: 'Stop tracking one without removing it',
       steps: [

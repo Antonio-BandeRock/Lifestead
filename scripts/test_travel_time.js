@@ -78,8 +78,63 @@ check('away line none', T.awayLine(MX, LA, 0).includes('Every med here moves to 
 check('away line one', T.awayLine(MX, LA, 1).includes('1 med keeps home time'));
 check('away line many', T.awayLine(MX, LA, 3).includes('3 meds keep home time'));
 
+// Q14: a step each day
+check('parse step', T.parseTravelMode('step') === 'step');
+check('three choices', T.TRAVEL_MODES.map((x) => x.mode).join() === 'local,home,step');
+check('step arrival day rings at the old moment', T.stepDoseHere('2026-10-02T07:00', MX, LA, '2026-10-02') === '2026-10-02T06:00');
+check('step one hour is done the next day', T.stepDoseHere('2026-10-03T07:00', MX, LA, '2026-10-02') === null);
+check('step to Tokyo goes the shorter way', T.stepDoseHere('2026-10-02T07:00', MX, TOKYO, '2026-10-02') === '2026-10-01T22:00');
+check('step to Tokyo moves 2 hours a day', T.stepDoseHere('2026-10-03T07:00', MX, TOKYO, '2026-10-02') === '2026-10-03T00:00');
+check('step to Tokyo reaches local time', T.stepDoseHere('2026-10-07T07:00', MX, TOKYO, '2026-10-02') === null);
+check('step home from Tokyo starts at the old moment', T.stepDoseHere('2026-10-10T07:00', TOKYO, MX, '2026-10-10') === '2026-10-10T16:00');
+check('step home from Tokyo moves the next day', T.stepDoseHere('2026-10-11T07:00', TOKYO, MX, '2026-10-10') === '2026-10-11T14:00');
+check('step a smaller step', T.stepDoseHere('2026-10-03T07:00', MX, TOKYO, '2026-10-02', 60) === '2026-10-02T23:00');
+check('step without a trip stays', T.stepDoseHere('2026-10-02T07:00', null, LA, '2026-10-02') === null);
+check('step same zone stays', T.stepDoseHere('2026-10-02T07:00', MX, MX, '2026-10-02') === null);
+check('step same clock stays', T.stepDoseHere('2026-10-02T07:00', MX, 'America/Monterrey', '2026-10-02') === null);
+check('a dose before the trip is at the old moment', T.stepDoseHere('2026-10-01T07:00', MX, LA, '2026-10-02') === '2026-10-01T06:00');
+const trip = { from: MX, since: '2026-10-02' };
+check('one reader: home', T.doseWallHere('2026-10-02T07:00', 'home', { homeZone: MX, here: LA, trip }, now) === '2026-10-02T06:00');
+check('one reader: step', T.doseWallHere('2026-10-02T07:00', 'step', { homeZone: MX, here: LA, trip }, now) === '2026-10-02T06:00');
+check('one reader: step with no trip', T.doseWallHere('2026-10-02T07:00', 'step', { homeZone: MX, here: LA, trip: null }, now) === null);
+check('one reader: local', T.doseWallHere('2026-10-02T07:00', 'local', { homeZone: MX, here: LA, trip }, now) === null);
+
+// Q14: noticing the move
+const first = T.noticeZone(null, MX, now, '2026-10-01');
+check('first look is no trip', first.zone === MX && first.from === null && T.tripOf(first) === null);
+check('same clock is no trip', T.noticeZone(first, 'America/Monterrey', now, '2026-10-02') === first);
+const away = T.noticeZone(first, LA, now, '2026-10-02');
+check('a new clock starts a trip today', away.zone === LA && away.from === MX && away.since === '2026-10-02');
+check('trip of a trip', JSON.stringify(T.tripOf(away)) === JSON.stringify({ from: MX, since: '2026-10-02' }));
+check('ask on the way out', T.shouldAskTravel(away, MX, now));
+const back = T.noticeZone(away, MX, now, '2026-10-09');
+check('coming home steps back from the away zone', back.from === LA && back.since === '2026-10-09');
+check('never asked on the way home', !T.shouldAskTravel(back, MX, now));
+check('first look never asks', !T.shouldAskTravel(first, MX, now));
+check('next to ask', T.nextToAsk(away, ['a', 'b']) === 'a');
+const askedA = T.markAsked(away, 'a');
+check('asked once', T.nextToAsk(askedA, ['a', 'b']) === 'b' && T.markAsked(askedA, 'a') === askedA);
+const answered = T.answerTravel(askedA, 'travelStep', 'b');
+check('an answer is kept', answered.answers.b === 'step' && answered.asked.includes('b') && T.nextToAsk(answered, ['a', 'b']) === null);
+check('an unknown button keeps nothing', T.answerTravel(askedA, 'snooze', 'b') === askedA);
+check('each button its choice', T.answerTravel(away, 'travelHome', 'x').answers.x === 'home' && T.answerTravel(away, 'travelLocal', 'x').answers.x === 'local');
+check('written answers leave', Object.keys(T.withoutAnswers(answered, ['b']).answers).length === 0);
+check('a new trip asks afresh', T.noticeZone(answered, TOKYO, now, '2026-10-05').asked.length === 0);
+check('a new trip keeps unwritten answers', T.noticeZone(answered, TOKYO, now, '2026-10-05').answers.b === 'step');
+const round = T.parseTravelNotice(JSON.stringify(answered));
+check('the file reads back', JSON.stringify(round) === JSON.stringify(answered));
+check('a broken file reads as nothing', T.parseTravelNotice('{') === null && T.parseTravelNotice('') === null && T.parseTravelNotice('{"zone":1}') === null);
+const q = T.travelQuestionText(LA, 'Levothyroxine', false);
+check('question names the zone and the med', q.title.values.zone === 'Los Angeles' && q.body.values.med === 'Levothyroxine');
+const qh = T.travelQuestionText(LA, 'Levothyroxine', true);
+check('hidden question names no med', !JSON.stringify(qh).includes('Levothyroxine'));
+check('question never changes a dose', /never the dose/.test(q.body.en) && /never the dose/.test(qh.body.en));
+check('away line with a stepped med', T.awayLine(MX, LA, 1, 2).includes('1 med keeps home time, and 2 meds move a step each day'));
+check('away line stepped only', T.awayLine(MX, LA, 0, 1).includes('1 med moves a step each day'));
+
 // Wording
-const all = [T.TRAVEL_LEAD, ...T.TRAVEL_MODES.flatMap((x) => [x.label, x.detail]), T.modeLine('home', MX), T.modeLine('local', MX), T.modeLine('home', null),
+const all = [T.TRAVEL_LEAD, ...T.TRAVEL_MODES.flatMap((x) => [x.label, x.detail]), T.modeLine('home', MX), T.modeLine('local', MX), T.modeLine('home', null), T.modeLine('step', MX), T.awayLine(MX, LA, 1, 2),
+  T.travelQuestionText(LA, 'X', false).body.en, T.travelQuestionText(LA, 'X', true).body.en, T.travelQuestionText(LA, 'X', true).title.en,
   T.awayLine(MX, LA, 0), T.awayLine(MX, LA, 2), T.homeTimeWords('2026-10-02T07:00', MX)].join('\n');
 check('names the prescriber', /prescriber/.test(T.TRAVEL_LEAD));
 check('never changes a dose', /never changes a dose/.test(T.TRAVEL_LEAD));

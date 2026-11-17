@@ -123,7 +123,10 @@ export type ReminderActionId =
   | 'calendarStop'
   | 'kitchenAdd'
   | 'kitchenNotYet'
-  | 'timerStop';
+  | 'timerStop'
+  | 'travelHome'
+  | 'travelLocal'
+  | 'travelStep';
 
 export type ReminderCategoryKey =
   | 'plain'
@@ -146,7 +149,8 @@ export type ReminderCategoryKey =
   | 'backupOffer'
   | 'calendarOffer'
   | 'kitchenLow'
-  | 'interestTimer';
+  | 'interestTimer'
+  | 'travel';
 
 // 'plain' keeps the identifier the single category always had, so a
 // reminder already queued is still correct and is left alone by the
@@ -176,6 +180,7 @@ export const REMINDER_CATEGORY_IDS: Record<ReminderCategoryKey, string> = {
   calendarOffer: 'inside-story-calendar-offer',
   kitchenLow: 'inside-story-kitchen-low',
   interestTimer: 'inside-story-interest-timer',
+  travel: 'inside-story-travel',
 };
 
 // The 1 to 5 value each morning button saves. Each title is that value's
@@ -301,6 +306,12 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
       return 'Not yet';
     case 'timerStop':
       return 'Stop and Keep';
+    case 'travelHome':
+      return 'Keep home time';
+    case 'travelLocal':
+      return 'Local time';
+    case 'travelStep':
+      return 'A step a day';
   }
 }
 
@@ -343,6 +354,9 @@ export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> =
   // Stop and Keep only: throwing the time away stays on the lens, where it
   // can be seen first.
   interestTimer: ['timerStop'],
+  // Q14: the phone is on a new time zone and a med has no choice saved for
+  // travel (lib/travelTime.ts). The three choices are the three answers.
+  travel: ['travelHome', 'travelLocal', 'travelStep'],
 };
 
 /**

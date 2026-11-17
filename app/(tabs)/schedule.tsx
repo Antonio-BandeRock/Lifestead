@@ -299,7 +299,8 @@ import { stepOn, taperDoseLine, taperLastDay, taperRepeatNote, type TaperStep } 
 import { listTaperSteps } from '../../lib/taperDb';
 import { defaultRotation, isInjected, matchInjectable, nextSite, siteChoices, type InjectionSite, type SiteUse } from '../../lib/injectionSites';
 import { listInjectionSettings, listSiteHistory, localStamp, recordSite, type InjectionSetting } from '../../lib/injectionSitesDb';
-import { awayLine, currentZone, hereCaption, homeDoseHere, isAway, zoneName, type TravelMode } from '../../lib/travelTime';
+import { awayLine, currentZone, doseWallHere, hereCaption, isAway, tripOf, zoneName, type TravelMode, type TravelTrip } from '../../lib/travelTime';
+import { noticeTravelNow } from '../../lib/travelNotice';
 import { getHomeZone, listTravelModes, setHomeZoneToHere } from '../../lib/travelTimeDb';
 import { DOSE_WATCH_LIMIT, lastUpdateLine, watchRowLine } from '../../lib/doseWatch';
 import { getDoseWatchAlertsOn, listDoseWatch, setDoseWatchAlertsOn, type WatchedPerson } from '../../lib/peerDosesDb';
@@ -5639,6 +5640,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
   const [sitesByTreatment, setSitesByTreatment] = useState<Map<string, SiteUse[]>>(new Map());
   const [travelByTreatment, setTravelByTreatment] = useState<Map<string, TravelMode>>(new Map());
   const [homeZone, setHomeZone] = useState<string | null>(null);
+  const [trip, setTrip] = useState<TravelTrip | null>(null);
   // A16: the doses other people let this phone watch, and whether this
   // phone raises an alert when one goes unmarked.
   const [watched, setWatched] = useState<WatchedPerson[]>([]);
@@ -5677,6 +5679,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
         setReminderPermissionGranted(reminderGranted);
         setTravelByTreatment(travel);
         setHomeZone(home);
+        setTrip(tripOf(noticeTravelNow()));
         setTapersByTreatment(tapers);
         setInjectionByTreatment(injection);
         setSitesByTreatment(sites);
@@ -5817,15 +5820,19 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
 
   // A7: while away from home, a dose kept on home time says when that is on
   // this phone's clock. The row's own time stays the home time it was set at.
+  // Q14: a dose moving a step each day says the same, away or on the way
+  // back, until it reaches the local clock.
   const hereZone = currentZone();
   const away = isAway(homeZone, hereZone, Date.now());
   function travelCaption(dose: ScheduleItemRecord): string {
-    if (!away || !dose.linkedTreatmentId) return '';
+    if (!dose.linkedTreatmentId) return '';
     const mode = travelByTreatment.get(dose.linkedTreatmentId) ?? 'local';
-    const here = homeDoseHere(dose.scheduledFor, mode, homeZone, hereZone, Date.now());
-    return here ? ` · home time${hereCaption(dose.scheduledFor, here)}` : '';
+    const here = doseWallHere(dose.scheduledFor, mode, { homeZone, here: hereZone, trip }, Date.now());
+    if (!here) return '';
+    return mode === 'step' ? ` · a step a day${hereCaption(dose.scheduledFor, here)}` : ` · home time${hereCaption(dose.scheduledFor, here)}`;
   }
   const homeTimeMeds = treatments.filter((treatment) => travelByTreatment.get(treatment.id) === 'home').length;
+  const stepMeds = treatments.filter((treatment) => travelByTreatment.get(treatment.id) === 'step').length;
 
   function askHomeZone() {
     if (!homeZone || !hereZone) return;
@@ -6089,7 +6096,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
           <HomeSectionBand
             kind="action"
             title={`Away from home: ${zoneName(hereZone)} time`}
-            caption={awayLine(homeZone, hereZone, homeTimeMeds)}
+            caption={awayLine(homeZone, hereZone, homeTimeMeds, stepMeds)}
             icon="airplane-outline"
             color={TAB_COLOR}
             onPress={askHomeZone}

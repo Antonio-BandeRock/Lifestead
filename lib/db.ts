@@ -23458,7 +23458,16 @@ export async function getDayMealAndDoseTimeline(date: string): Promise<{
   nutrientNames: Record<string, string>;
 }> {
   const db = await getDatabase();
-  const [mealItems, doseItems, rules, timings, tracked] = await Promise.all([
+  // Q14: a med kept on home time or moving a step each day rings at another
+  // hour while away, and a dose can land on the day before or after the one
+  // it is stored on, so the doses are read a day either side and moved
+  // before the day is picked out. At home nothing moves.
+  const shiftDay = (days: number) => {
+    const day = new Date(`${date}T12:00:00`);
+    day.setDate(day.getDate() + days);
+    return `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`;
+  };
+  const [mealItems, doseItemsAround, rules, timings, tracked] = await Promise.all([
     listScheduledMealsForDate(date),
     db.getAllAsync<ScheduleItemRecord>(
       `
@@ -23466,16 +23475,20 @@ export async function getDayMealAndDoseTimeline(date: string): Promise<{
         FROM schedule_items
         WHERE item_type IN (${MED_DOSE_ITEM_TYPES.map(() => '?').join(', ')})
           AND linked_treatment_id IS NOT NULL
-          AND substr(scheduled_for, 1, 10) = ?
+          AND substr(scheduled_for, 1, 10) BETWEEN ? AND ?
         ORDER BY scheduled_for ASC
       `,
       ...MED_DOSE_ITEM_TYPES,
-      date,
+      shiftDay(-1),
+      shiftDay(1),
     ),
     listInteractionRules(),
     listNutrientTiming(),
     listTrackedNutrients(),
   ]);
+  const doseItems = (await doseTimesHere(doseItemsAround))
+    .filter((item) => item.scheduledFor.slice(0, 10) === date)
+    .sort((a, b) => a.scheduledFor.localeCompare(b.scheduledFor));
 
   const nutrientNames: Record<string, string> = {};
   for (const nutrient of tracked) nutrientNames[nutrient.code] = nutrient.displayName;
@@ -23631,6 +23644,31 @@ export async function getDayMealAndDoseTimeline(date: string): Promise<{
   }
 
   return { meals, doses, rules, timings, nutrientNames };
+}
+
+// Q14: dose rows with each time moved onto this phone's clock for its med's
+// travel choice (lib/travelTime.ts doseWallHere), the same move the
+// reminders make. A row that does not move comes back as it was; anything
+// that cannot be read leaves every row where it is.
+export async function doseTimesHere<T extends { scheduledFor: string; linkedTreatmentId: string | null }>(items: T[]): Promise<T[]> {
+  if (items.length === 0) return items;
+  try {
+    const { currentZone, doseWallHere } = await import('./travelTime');
+    const { getHomeZone, listTravelModes } = await import('./travelTimeDb');
+    const { currentTrip } = await import('./travelNotice');
+    const modes = await listTravelModes();
+    if (modes.size === 0) return items;
+    const context = { homeZone: await getHomeZone(), here: currentZone(), trip: currentTrip() };
+    const nowMs = Date.now();
+    return items.map((item) => {
+      const mode = item.linkedTreatmentId ? modes.get(item.linkedTreatmentId) : undefined;
+      const moved = mode ? doseWallHere(item.scheduledFor, mode, context, nowMs) : null;
+      return moved ? { ...item, scheduledFor: moved } : item;
+    });
+  } catch (error) {
+    console.warn('[db] dose times could not be moved for travel', error);
+    return items;
+  }
 }
 
 // What one dose of a med amounts to, in the words its kind uses: a

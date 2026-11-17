@@ -446,7 +446,7 @@
 ### Q14. Travel noticed when the zone changes
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Schedules
 - **Answers:** Medisafe · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** When the phone changes time zone, ask once per med whether to keep home time or shift, offer a stepped shift over a few days for a dose whose timing matters, and move the meal timing checks with it. Partly built: travel time to appointments (lib/travelTime.ts). Not yet: noticing a time zone change and shifting dose times.
+- **How:** When the phone changes time zone, ask once per med whether to keep home time or shift, offer a stepped shift over a few days for a dose whose timing matters, and move the meal timing checks with it. Built 1.0.91.10: a new time zone away from home asks about each med with no choice, one at a time, on the locked phone (Keep home time, Local time, A step a day); a step each day moves the reminder up to 2 hours a day to the local clock; Schedules > Meds, Today's Meals and the meal checks read each dose at its hour here (lib/travelTime.ts, lib/travelNotice.ts).
 
 ### Q16. Upkeep by place, by who, and fitted to the day
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Life,Schedules

@@ -48,6 +48,26 @@ export async function getHomeZone(): Promise<string | null> {
   return here;
 }
 
+// Q14: the meds with dose reminders still to come and no travel choice
+// saved, which is what the travel question asks about, in the order they
+// next come due.
+export async function listUnchosenDoseTreatments(fromLocalDateTime: string): Promise<{ id: string; name: string }[]> {
+  const db = await getDatabase();
+  return db.getAllAsync<{ id: string; name: string }>(
+    `SELECT t.id AS id, t.name AS name, MIN(s.scheduled_for) AS nextDose
+     FROM schedule_items s
+     JOIN treatments t ON t.id = s.linked_treatment_id
+     WHERE s.status = 'planned'
+       AND s.item_type IN ('supplement', 'prescription', 'otc')
+       AND s.scheduled_for >= ?
+       AND t.active = 1
+       AND NOT EXISTS (SELECT 1 FROM treatment_time_mode tm WHERE tm.treatment_id = t.id)
+     GROUP BY t.id, t.name
+     ORDER BY nextDose ASC`,
+    fromLocalDateTime,
+  );
+}
+
 // "Make this my home": moving house, or the zone first taken was not home.
 export async function setHomeZoneToHere(): Promise<string | null> {
   const here = currentZone();
