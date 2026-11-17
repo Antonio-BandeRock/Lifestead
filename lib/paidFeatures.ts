@@ -9,6 +9,12 @@
 // read on 2026-10-09 with the split at left 3.6, right 2.05. When the board
 // moves, this table moves with it; nothing else in the app decides.
 //
+// A DRAFT since 2026-11-16, by Tony's decision: nothing is placed Free or
+// paid until the app is done. Add nothing new here. A new feature gets a
+// line in docs/feature-groups.md instead, and the line is drawn over those
+// groups at the end. What is here stays switched on in Dev's Free mode so
+// there is something to look at.
+//
 // Three things never enter this table, checked by scripts/test_paid_features.js:
 // safety (P28: the emergency card, My Meds and its interactions, the timing
 // warnings, allergy cautions), what safety reads (the med list, dose
