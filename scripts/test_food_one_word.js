@@ -26,6 +26,7 @@ function loadModule(relPath) {
   });
   const module = { exports: {} };
   new Function('exports', 'module', 'require', outputText)(module.exports, module, (name) => {
+    if (name === './lactose') return loadModule('lib/lactose.ts');
     throw new Error(`unexpected import ${name}`);
   });
   return module.exports;
@@ -53,6 +54,13 @@ const cases = [
   ['one condition', { ...base, trackedConditions: [IBS], safeForConditions: ['IBS'] }, { phrase: 'Fits IBS', tone: 'fits' }],
   ['diet only', { ...base, trackedConditions: [], safeForConditions: [] }, { phrase: 'Fits your eating style', tone: 'fits' }],
   ['allergy wins', { ...base, allergyMatch: 'peanut', dietViolations: ['Vegan'] }, { phrase: 'Contains one of your allergies', tone: 'stop' }],
+  // Lactose intolerance cautions, never stops by itself (2026-11-18).
+  ['lactose cautions', { ...base, allergyMatch: 'Lactose intolerance' }, { phrase: 'Carries lactose', tone: 'caution' }],
+  [
+    'lactose beside a caution',
+    { ...base, allergyMatch: 'lactose', safeForConditions: ['HASH'], conditionCautions: { IBS: { severity: 'yellow', note: 'x' } } },
+    { phrase: 'Carries lactose and one caution', tone: 'caution' },
+  ],
   [
     'one yellow caution',
     { ...base, safeForConditions: ['HASH'], conditionCautions: { IBS: { severity: 'yellow', note: 'x' } } },

@@ -12,5 +12,12 @@ export const PART: Readonly<Record<string, string>> = {
  "Done adding": "Ya terminé",
  "Saved. Add the next one here the same way, and tap Done adding when that is everything.": "Guardado. Agrega el siguiente aquí igual y toca Ya terminé cuando esté todo.",
  "Move these boxes to the bottom": "Mover estos cuadros abajo",
- "Move these boxes to the top": "Mover estos cuadros arriba"
+ "Move these boxes to the top": "Mover estos cuadros arriba",
+ "This carries lactose, and lactose intolerance is on your food allergies list. It is not an allergy, and many people with it handle a small amount.": "Esto lleva lactosa, y la intolerancia a la lactosa está en tu lista de alergias a alimentos. No es una alergia, y muchas personas con ella toleran una cantidad pequeña.",
+ "Carries lactose, and lactose intolerance is on {owner} food allergy list.": "Lleva lactosa, y la intolerancia a la lactosa está en la lista de alergias a alimentos de {owner}.",
+ "Contains {name}, which is on {owner} food allergy list.": "Contiene {name}, que está en la lista de alergias a alimentos de {owner}.",
+ "Lactose intolerance": "Intolerancia a la lactosa",
+ "Carries lactose": "Lleva lactosa",
+ "Lactose, in your allergies list": "Lactosa, en tu lista de alergias",
+ "You listed lactose intolerance in Profile > Food Allergies, and this ingredient carries lactose. Butter, ghee and aged hard cheese carry very little and are not marked. This check matches words, so the package itself is the last word.": "Anotaste intolerancia a la lactosa en Perfil > Alergias a alimentos, y este ingrediente lleva lactosa. La mantequilla, el ghee y los quesos duros añejos llevan muy poca y no se marcan. Esta revisión compara palabras, así que el empaque tiene la última palabra."
 };

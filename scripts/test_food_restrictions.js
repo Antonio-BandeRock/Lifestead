@@ -21,12 +21,17 @@ const r = transpile('lib/foodRestrictions.ts', () => {
 const fodmap = transpile('lib/fodmapLabel.ts', () => {
   throw new Error('fodmapLabel.ts must import nothing');
 });
+const lactose = transpile('lib/lactose.ts', () => {
+  throw new Error('lactose.ts must import nothing');
+});
 const flags = transpile('lib/ingredientFlags.ts', (name) => {
   if (name === './fodmapLabel') return fodmap;
+  if (name === './lactose') return lactose;
   if (name === './foodRestrictions') return r;
   throw new Error(`ingredientFlags.ts imported ${name}`);
 });
 const oneWord = transpile('lib/foodOneWord.ts', (name) => {
+  if (name === './lactose') return lactose;
   throw new Error(`foodOneWord.ts imported ${name}`);
 });
 

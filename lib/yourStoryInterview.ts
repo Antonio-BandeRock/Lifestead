@@ -271,7 +271,9 @@ export const NEEDS_FROM_YOU: string[] = [
 
 // The allergens most food labels are required to name, the same list
 // Profile offers.
-export const COMMON_ALLERGENS = ['Eggs', 'Fish', 'Milk', 'Peanuts', 'Sesame', 'Shellfish', 'Soybeans', 'Tree Nuts', 'Wheat'];
+// Lactose intolerance sits with the allergens (Tony, 2026-11-18), matched
+// by what carries lactose (lib/lactose.ts), never as an allergy.
+export const COMMON_ALLERGENS = ['Eggs', 'Fish', 'Lactose intolerance', 'Milk', 'Peanuts', 'Sesame', 'Shellfish', 'Soybeans', 'Tree Nuts', 'Wheat'];
 
 // EATING STYLES. The tags are RECIPE_DIET_TAGS; each line is short on
 // purpose, and the full reading is the entry named in readId.

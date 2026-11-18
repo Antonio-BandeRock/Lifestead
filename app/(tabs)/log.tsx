@@ -225,6 +225,7 @@ import { VaultLensFrame } from '../../components/VaultLensFrame';
 import { useWalkMark } from '../../components/WalkMark';
 import type { VaultCategory } from '../../lib/vault';
 import { t, tl } from '../../lib/i18n';
+import { allergyMatchIn, isLactoseEntry } from '../../lib/lactose';
 import { appLocale } from '@/lib/language';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
@@ -1930,9 +1931,8 @@ function NewFoodsLens({
   // Best-effort only -- allergies are free text (lib/db.ts's own
   // user_food_allergies table), not linked to a real food row, so this is
   // a real, worth-having safety nudge, not a guaranteed-precise match.
-  const allergyMatch = pickedFood
-    ? foodAllergies.find((name) => pickedFood.baseName.toLowerCase().includes(name.toLowerCase()))
-    : foodAllergies.find((name) => foodName.toLowerCase().includes(name.toLowerCase()));
+  // Lactose intolerance matches by what carries lactose (lib/lactose.ts).
+  const allergyMatch = allergyMatchIn(pickedFood ? pickedFood.baseName : foodName, foodAllergies);
 
   function resetForm() {
     setFoodName('');
@@ -2581,7 +2581,12 @@ function NewFoodsLens({
               from that link, not just the name.
             </Text>
           ) : null}
-          {allergyMatch ? (
+          {allergyMatch && isLactoseEntry(allergyMatch) ? (
+            <Text style={[styles.helperText, styles.flaggedText]}>
+              This carries lactose, and lactose intolerance is on your food allergies list. It is not an allergy, and many
+              people with it handle a small amount.
+            </Text>
+          ) : allergyMatch ? (
             <Text style={[styles.helperText, styles.flaggedText]}>
               This may match your declared allergy to {allergyMatch}. This is for testing a sensitivity or bringing a food back, not for allergies. Talk to a doctor
               before testing a food you are allergic to.

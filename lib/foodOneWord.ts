@@ -11,6 +11,8 @@
 // the person. Pure, with no React and no database, so
 // scripts/test_food_one_word.js checks it without a phone.
 
+import { isLactoseEntry } from './lactose';
+
 export type FoodOneWordTone = 'fits' | 'caution' | 'stop';
 
 export type FoodOneWordInput = {
@@ -43,7 +45,10 @@ function joinParts(parts: string[]): string {
 
 export function foodOneWord(input: FoodOneWordInput): FoodOneWord {
   const owner = input.owner ?? 'your';
-  if (input.allergyMatch) return { phrase: `Contains one of ${owner} allergies`, tone: 'stop' };
+  // Lactose intolerance is on the allergies list but is not an allergy, so
+  // it cautions beside everything else instead of stopping (2026-11-18).
+  const lactose = !!input.allergyMatch && isLactoseEntry(input.allergyMatch);
+  if (input.allergyMatch && !lactose) return { phrase: `Contains one of ${owner} allergies`, tone: 'stop' };
   const restrictionHits = input.restrictionHits ?? [];
   const allergyRestriction = restrictionHits.find((hit) => hit.weight === 'allergy' && hit.strength !== 'maybe');
   if (allergyRestriction) return { phrase: `On ${owner} ${allergyRestriction.label} list`, tone: 'stop' };
@@ -58,6 +63,7 @@ export function foodOneWord(input: FoodOneWordInput): FoodOneWord {
   const anyRed = cautions.some((condition) => input.conditionCautions[condition.code].severity === 'red');
 
   const parts: string[] = [];
+  if (lactose) parts.push('Carries lactose');
   if (notSuited.length === 1) parts.push(`Not suited to ${notSuited[0].name}`);
   else if (notSuited.length > 1) parts.push(`Not suited to ${countWord(notSuited.length).toLowerCase()} of ${owner} conditions`);
   if (cautions.length > 0) parts.push(`${countWord(cautions.length)} caution${cautions.length === 1 ? '' : 's'}`);

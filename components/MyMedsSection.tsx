@@ -66,7 +66,16 @@ import { useCategoryClosed } from '../lib/vaultSession';
 import { explainNotYet } from '../lib/notYet';
 import { matchSupplementForm, readSpokenSupplementLabel } from '../lib/spokenSupplement';
 import { t, tl } from '../lib/i18n';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import {
+  BUTTON_PRIMARY,
+  BUTTON_PRIMARY_TEXT,
+  BUTTON_SECONDARY,
+  BUTTON_SECONDARY_TEXT,
+  PILL,
+  PILL_ON,
+  PILL_ON_TEXT,
+  PILL_TEXT,
+} from '../constants/buttons';
 import { ReadProblem } from './ReadProblem';
 import { saveOrSay } from '../lib/saveProblem';
 
@@ -338,6 +347,52 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   function openAddMed(category: 'prescription' | 'otc') {
     setMedForm(blankMedForm(category));
     setAddMode(category);
+  }
+  // Switching kind while adding (Tony, 2026-11-18): Setup's walk rings
+  // + Prescription, and once a form was open the other kinds and Look up a
+  // label were gone until it was cancelled. The switch at the top of a new
+  // entry's form changes kind in place; prescription and OTC keep what was
+  // typed, since they share one form.
+  function switchAddKind(kind: MyMedsCategory) {
+    if (kind === addMode) return;
+    if (kind === 'supplement') {
+      openAddSupplement();
+      return;
+    }
+    if (addMode === 'prescription' || addMode === 'otc') {
+      setMedForm((form) => ({ ...form, category: kind }));
+      setAddMode(kind);
+      return;
+    }
+    openAddMed(kind);
+  }
+  function renderKindSwitch(current: MyMedsCategory) {
+    const kinds: { key: MyMedsCategory; label: string }[] = [
+      { key: 'prescription', label: 'Prescription' },
+      { key: 'otc', label: 'OTC drug' },
+      { key: 'supplement', label: 'Supplement' },
+    ];
+    return (
+      <View style={styles.kindSwitchRow}>
+        {kinds.map((kind) => {
+          const on = kind.key === current;
+          return (
+            <TouchableOpacity
+              key={kind.key}
+              style={on ? [PILL, PILL_ON] : PILL}
+              onPress={() => switchAddKind(kind.key)}
+              accessibilityRole="button"
+              accessibilityState={{ selected: on }}
+            >
+              <Text style={on ? PILL_ON_TEXT : PILL_TEXT}>{kind.label}</Text>
+            </TouchableOpacity>
+          );
+        })}
+        <TouchableOpacity style={PILL} onPress={() => router.push('/medicine-label')} accessibilityRole="button">
+          <Text style={PILL_TEXT}>Look up a label</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
   function closeAddForm() {
     setAddMode(null);
@@ -865,6 +920,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
             </View>
           ) : addMode === 'supplement' ? (
             <View style={styles.formCard}>
+              {supplementForm.editingId ? null : renderKindSwitch('supplement')}
               <Text style={styles.label}>Name</Text>
               <AppTextInput
                 onVoiceResult={(text) => setSupplementForm((current) => ({ ...current, name: text }))}
@@ -995,6 +1051,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
             </View>
           ) : (
             <View style={styles.formCard}>
+              {medForm.editingId ? null : renderKindSwitch(medForm.category)}
               <Text style={styles.label}>{medForm.category === 'prescription' ? 'Prescription' : 'OTC drug'}</Text>
 
               {!medForm.manualEntry ? (
@@ -1268,6 +1325,7 @@ function makeStyles(tabColor: string, calm: boolean = false) {
     label: { ...typography.label, color: tabColor, marginBottom: 6, marginTop: 10, ...textShadow },
     labelRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
     myMedsAddRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
+    kindSwitchRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap', marginBottom: 4 },
     myMedsDetail: {
       marginTop: 10,
       paddingTop: 10,

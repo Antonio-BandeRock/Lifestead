@@ -72,6 +72,7 @@ import { VoiceInputButton } from './VoiceInputButton';
 import { useNavigationHand } from '../lib/navigationHand';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
+import { isLactoseEntry } from '../lib/lactose';
 import { useTier } from '../lib/entitlement';
 import { isFunctionWalled, paidFunctionLine } from '../lib/paidFeatures';
 import { foodDisplayName } from '../lib/ingredientShortName';
@@ -2066,7 +2067,14 @@ export function FoodLookup({
               {personalDetailOpen && personalEvaluation.allergyMatch ? (
                 <View style={[styles.personalWarningRow, { backgroundColor: colors.statusRedBg }]}>
                   <Text style={[styles.personalWarningText, { color: colors.danger }]}>
-                    Contains {personalEvaluation.allergyMatch}, which is on {possessiveFor(activePerson)} food allergy list.
+                    {isLactoseEntry(personalEvaluation.allergyMatch)
+                      ? t('Carries lactose, and lactose intolerance is on {owner} food allergy list.', {
+                          owner: possessiveFor(activePerson),
+                        })
+                      : t('Contains {name}, which is on {owner} food allergy list.', {
+                          name: personalEvaluation.allergyMatch,
+                          owner: possessiveFor(activePerson),
+                        })}
                   </Text>
                 </View>
               ) : null}

@@ -41,6 +41,7 @@ import {
 import { computeDietTags, computeRecipeDepth, type RecipeDepthResult } from './recipeDepth';
 import { RECIPE_DIET_TAGS, recipeMatchesDietPreference, type RecipeDietTag } from './digest/types';
 import { YOU_ID, type HouseholdPerson } from './householdFit';
+import { allergyMatchIn } from './lactose';
 import { knownRestrictions, LECTIN_SUB_CRITERION, restrictionHitsForFood, type FoodRestrictionKey, type RestrictionHit } from './foodRestrictions';
 
 export type TrackedConditionRef = { code: string; name: string };
@@ -93,8 +94,9 @@ function toSingleIngredient(foodId: number, source: string, category: string, ba
 // already-shipped matching rule app/(tabs)/log.tsx's own allergyMatch
 // already uses (a plain substring check), reused here rather than
 // invented a second way to answer the same question.
+// Lactose intolerance matches by what carries lactose (lib/lactose.ts).
 export function foodMatchesAllergy(baseName: string, foodAllergies: string[]): string | null {
-  return foodAllergies.find((name) => baseName.toLowerCase().includes(name.toLowerCase())) ?? null;
+  return allergyMatchIn(baseName, foodAllergies);
 }
 
 // Whether one food, on its own, would satisfy every one of the person's

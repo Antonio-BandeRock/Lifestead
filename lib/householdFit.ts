@@ -30,6 +30,7 @@ import {
   type RecipeDietTag,
 } from "./digest/types";
 import type { PersonalizationProfile } from "./foodPersonalization";
+import { allergyMatchIn } from "./lactose";
 
 export type HouseholdPerson = {
   /** 'you' for the person holding the phone, otherwise the family member's id. */
@@ -124,7 +125,6 @@ export function recipeFitFor(
 ): HouseholdLine {
   const profile = person.profile;
   const text = card.ingredients.map((line) => line.text).join(", ");
-  const lower = text.toLowerCase();
   const conditionsChecked = card.safeForConditions !== undefined;
   const dietChecked = card.dietTags !== undefined && card.dietTags.length > 0;
   const trackedConditions = conditionsChecked ? profile.trackedConditions : [];
@@ -133,10 +133,7 @@ export function recipeFitFor(
         (preference) => !recipeMatchesDietPreference(card.dietTags, preference),
       )
     : [];
-  const allergyMatch =
-    profile.foodAllergies.find(
-      (name) => name.trim() && lower.includes(name.trim().toLowerCase()),
-    ) ?? null;
+  const allergyMatch = allergyMatchIn(text, profile.foodAllergies);
   const restrictionHits = restrictionHitsInText(text, profile.foodRestrictions);
   const oneWord = oneWordFor(
     person,

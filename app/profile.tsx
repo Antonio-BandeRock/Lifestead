@@ -613,7 +613,7 @@ const WEIGHT_LB_OPTIONS = Array.from({ length: 485 }, (_, i) => String(66 + i));
 // explicitly requested for every pill row on this screen. Was originally
 // in FDA major-allergen disclosure order, re-sorted here since display
 // order, not the underlying list, is what was actually asked for.
-const COMMON_ALLERGENS = ['Eggs', 'Fish', 'Milk', 'Peanuts', 'Sesame', 'Shellfish', 'Soybeans', 'Tree Nuts', 'Wheat'];
+const COMMON_ALLERGENS = ['Eggs', 'Fish', 'Lactose intolerance', 'Milk', 'Peanuts', 'Sesame', 'Shellfish', 'Soybeans', 'Tree Nuts', 'Wheat'];
 
 // Meal/eating-window times: hour stays plain ("1".."12", matching
 // buildTime24's expected shape); minute is zero-padded ("00".."59") to

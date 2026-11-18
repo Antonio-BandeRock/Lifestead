@@ -50,6 +50,7 @@
 import { findFodmapIngredients, FODMAP_LABEL_CONDITIONS } from './fodmapLabel';
 import { restrictionHitsInText, type FoodRestrictionKey } from './foodRestrictions';
 import type { RecipeDietTag } from './digest/types';
+import { findLactose, isLactoseEntry, LACTOSE_READING_ID } from './lactose';
 
 export type IngredientReasonKind =
   | 'allergy'
@@ -500,6 +501,22 @@ function checkOne(item: SplitIngredient, settings: IngredientCheckSettings): Ing
         readingId: 'label-allergen-statements',
       });
     }
+  }
+  // Lactose intolerance (2026-11-18) is on the allergies list but is not an
+  // allergy: matched by what carries lactose, said as an intolerance.
+  for (const declared of settings.allergies) {
+    if (!isLactoseEntry(declared)) continue;
+    coveredAllergies.add(declared.trim().toLowerCase());
+    const hit = findLactose(text);
+    if (!hit) continue;
+    add('allergy:lactose', {
+      kind: 'allergy',
+      label: 'Lactose, in your allergies list',
+      matched: hit,
+      why: 'You listed lactose intolerance in Profile > Food Allergies, and this ingredient carries lactose. Butter, ghee and aged hard cheese carry very little and are not marked. This check matches words, so the package itself is the last word.',
+      tone: 'yours',
+      readingId: LACTOSE_READING_ID,
+    });
   }
   for (const declared of settings.allergies) {
     const word = declared.trim();
