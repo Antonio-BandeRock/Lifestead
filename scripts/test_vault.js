@@ -329,7 +329,7 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
     check('a meal brings no offer', V.firstRecordOfferFor('INSERT INTO meals (id) VALUES (?)', false, asked) === null);
     check('an update brings no offer', V.firstRecordOfferFor('UPDATE treatments SET name = ?', false, asked) === null);
     check('a table named inside a string is not an insert', V.firstRecordOfferFor("INSERT INTO meals (note) VALUES ('INSERT INTO treatments')", false, asked) === null);
-    check('nothing before setup has asked', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, V.EMPTY_VAULT_SETTINGS) === null);
+    check('offered before setup has asked too', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, V.EMPTY_VAULT_SETTINGS) === 'health');
     check('nothing after Don’t Ask Again', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, { ...asked, stopOffering: true }) === null);
     check('health is offered once', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, { ...asked, firstOffered: { health: true, money: false } }) === null);
     check('money is still offered after health was', V.firstRecordOfferFor('INSERT INTO finance_entries (id) VALUES (?)', false, { ...asked, firstOffered: { health: true, money: false } }) === 'money');

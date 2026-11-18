@@ -5,8 +5,8 @@
 // turned them on."
 //
 // lib/databaseActivity.ts tells lib/vaultState.ts about every write that
-// went through; the first one adding a health or money row, once setup has
-// put the question, is held there until this sheet shows it. Mounted once at
+// went through; the first one adding a health or money row, whether or not
+// setup has reached its security question, is held there until this sheet shows it. Mounted once at
 // the app root, the GardenPlateOfferHost shape, so it comes up over whichever
 // screen did the saving. Which rows count and when is in lib/vault.ts
 // (firstRecordOfferFor), with its tests in scripts/test_vault.js.

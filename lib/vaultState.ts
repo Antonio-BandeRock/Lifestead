@@ -123,7 +123,7 @@ export function vaultRefusalNow(sql: string): VaultClosedError | null {
 
 // The offer at the first protected record. lib/databaseActivity.ts calls
 // noteVaultRecordWritten after every write that went through; the first one
-// adding a health or money row, once setup has asked, holds the offer here
+// adding a health or money row holds the offer here
 // until components/VaultFirstRecordOfferHost.tsx shows it.
 
 let pendingOffer: VaultGroup | null = null;

@@ -508,10 +508,12 @@ export function shouldOfferVault(
 // moment they enter any data that should be protected", and "The offer should
 // only come if they haven't already turned them on." Made in the app, right
 // after the save, once for the first health record and once for the first
-// money record. Only after setup has put the question (so the medicines and
-// conditions typed in during setup never set it off), never while that
-// group's records are already closed behind a code, and never after Don't
-// Ask Again. The monthly notification above stays as the fallback.
+// money record, never while that group's records are already closed behind
+// a code, and never after Don't Ask Again. It comes even when setup has not
+// reached its security question yet (Tony, 2026-11-18: "Lisa saved a
+// supplement and it didn't ask her to setup the code for security"); that
+// question is the last one in setup, after medicines are typed in. The
+// monthly notification above stays as the fallback.
 
 export type VaultGroup = 'health' | 'money';
 
@@ -536,7 +538,7 @@ export function vaultGroupGuarded(group: VaultGroup, appLockOn: boolean, setting
 
 /** The group to make the offer for after this statement ran, or null for no offer. */
 export function firstRecordOfferFor(sql: string, appLockOn: boolean, settings: VaultSettings): VaultGroup | null {
-  if (settings.stopOffering || !settings.setupAsked) return null;
+  if (settings.stopOffering) return null;
   const category = vaultCategoryInserted(sql);
   if (!category) return null;
   const group = VAULT_CATEGORY_GROUP[category];
