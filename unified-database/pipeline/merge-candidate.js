@@ -31,7 +31,9 @@ const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const LIVE = path.resolve(__dirname, '..', '..', 'assets', 'data', 'foods_reference.db');
+// Since the swap (2026-11-17) the app's file IS a built candidate, so a rebuild starts from the copy kept from before it; BUILD_FROM names another.
+const PRE_SWAP = 'C:/Users/TonyR/OneDrive/Desktop/AppProject/_backups/reference-dbs/foods_reference.pre-unified-2026-11-17.db';
+const LIVE = process.env.BUILD_FROM || (fs.existsSync(PRE_SWAP) ? PRE_SWAP : path.resolve(__dirname, '..', '..', 'assets', 'data', 'foods_reference.db'));
 const UNI = path.resolve(__dirname, '..', 'unified_foods.sqlite');
 const OUT_DIR = path.resolve(__dirname, '..', 'candidate');
 const OUT = path.join(OUT_DIR, 'foods_reference_candidate.db');

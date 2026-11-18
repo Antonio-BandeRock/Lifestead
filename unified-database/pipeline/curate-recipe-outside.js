@@ -12,8 +12,9 @@ module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   // On the list, under this name or another one.
   put(listed('Baking soda'), 'baking soda');
   put(listed('Salt'), 'coarse salt for the crust, peeled away with the skin and not eaten');
-  // The eggs simmer in the tea and the leaves are thrown away, so nothing of them is eaten.
-  put(aid('Steeped for colour and flavour, then thrown away'), 'loose black tea leaves');
+  // The eggs simmer in the tea and the leaves are thrown away. The owner counts them as the tea they are (2026-11-18), not as a brewing aid.
+  put(listed('Black tea'), 'loose black tea leaves');
+  put(listed('Chicken bouillon powder'), 'chicken bouillon powder', 'chicken bouillon powder (hạt nêm)');
 
   // A listed food does the job, and the wording of the recipe changes.
   put(swap('Veal foot', 'A calf foot for a cow foot'), 'cow foot');
@@ -58,7 +59,7 @@ module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   put(aid('Sets, cures or firms a food'), 'cutter phosphate (sausage binding salt)', 'cure #2 (curing salt with nitrite and nitrate)', 'alum (phèn chua)');
   put(named(G.FERMENT), 'nuruk (korean wheat fermentation starter)', 'plain kombucha, finished first ferment', 'red yeast rice powder', 'tai pla (fermented fish innards)');
   put(named(G.SAUCES), 'sriracha', 'coconut aminos', 'minced crab in spice (gia vị nấu riêu cua)', 'char siu seasoning mix (gia vị xá xíu)');
-  put(named(G.PANTRY), 'liquid smoke', 'almond extract', 'pandan extract', 'chicken bouillon powder', 'chicken bouillon powder (hạt nêm)', 'coconut soda', 'dried ram (ram khô) for cao lầu', 'chinese five-spice powder');
+  put(named(G.PANTRY), 'liquid smoke', 'almond extract', 'pandan extract', 'coconut soda', 'dried ram (ram khô) for cao lầu', 'chinese five-spice powder');
   put(single('Anise seed, though the taste differs'), 'ground star anise');
   put(single('Whole cane sugar'), 'coconut palm sugar');
   put(single(), 'dried dandelion root', 'asafoetida (hing)', 'dried hop pellets', 'sumac', 'mauby (mabí) bark, dried', 'achiote (annatto) powder', 'annatto oil (dầu điều)', 'lemon balm (zitronenmelisse)', 'mung bean starch', 'sand ginger', 'licorice root', 'dried rose buds, ground', 'fresh green peppercorns');

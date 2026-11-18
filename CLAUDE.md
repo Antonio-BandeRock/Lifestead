@@ -271,9 +271,9 @@ Implementation: `lib/healingStage.ts`, `lib/healingStageAdvisory.ts`, `lib/condi
 
 **Why:** the current reference DB came from a one-time filter script with no testable rules. The pipeline rebuilds it reproducibly, discarding nothing, with a versioned rule engine and human review through a published audit tool.
 
-**Status (drifts, so verify via `sqlite3.exe unified_foods.sqlite`):** 9 sources ingested, 2,496 foods shown, every one scored (`score-unscored.js` for the 150 the workbook never scored, each in `score_origin`), brewed drinks shown (`curate-brewed-drinks.js`). [Report and open questions](https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1).
+**Status (drifts, so verify via `sqlite3.exe unified_foods.sqlite`):** 9 sources ingested, 2,520 foods shown (made foods and protein powders added 2026-11-18, `curate-made-foods.js`), every one scored (`score-unscored.js` for the 150 the workbook never scored, each in `score_origin`), brewed drinks shown (`curate-brewed-drinks.js`). [Report and open questions](https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1).
 
-**Phases:** 1 to 7 done. Open: the owner's questions in the README's 2026-11-17 entry (hidden made products, Physalis and Groundcherries, protein powders).
+**Phases:** 1 to 7 done, and the owner's questions answered and built 2026-11-18. Open: whether citrus juice poured off with soaking water counts as eaten (README).
 
 **If picking this up fresh:** read `unified-database/README.md` in full first.
 
@@ -295,11 +295,11 @@ Each item's full wording is in the archive; rows live in the Project Tracker.
 2. **On-device walkthrough of the personal rules feature.**
 3. **Ingredient-rotation feature:** permanent against rotating ingredients in smoothies and salads. Unbuilt, no schema.
 4. **Cloud sync, multi-device, and the Partner/Household/Guardian/Caregiver tier model**, still architecture-only. The local encrypted backup and restore (2026-08-16) and device-to-device recipe sharing (2026-08-15/16) are different, narrower features and did not become this.
-6. **A home category for protein and meal-replacement powders** and, 7, **juice and fruit-drink powders**: neither belongs in `Brewing`; no decision yet.
+6. **Protein powders sit under Supplement Powders** (owner, 2026-11-18). 7. **Juice and fruit-drink powders**: no home decided yet; not `Brewing`.
 8. **Sticky group headers spot-check** on the largest categories (Veg, Mixed, Meat).
 9. **A "home brew" ingredient-based path for beer, wine and spirits**, closer to Fermentation Builder than to barcodes. No design work.
 10. **The synthetic "Choline Bitartrate (Supplement Powder)" food row**: proposed, deliberately not added.
-11. **The owner's questions on the unified database's curation report**, the next step on that track (see its section above).
+11. **CLOSED 2026-11-18**: the owner's questions on the curation report, answered and built.
 12. **6-Week Meal Plan on-device walkthrough**; whether to extend past 6 weeks has not been asked.
 13. **Subtopic-sectioning the 19 condition pages' topics**: pull per-topic counts before designing any split.
 14. **Wiring conditions, allergies and diet through every tool:** still open for Today's Advisories, and whether builders' embedded `FoodLookup` gains the For You card (ask first).

@@ -19,7 +19,16 @@ the swap is kept as
 `_backups/reference-dbs/foods_reference.pre-unified-2026-11-17.db`, and
 `verify-candidate.js` compares against it.
 
-## Status: swapped in, 2026-11-17
+## Status: swapped in, 2026-11-17; made foods added 2026-11-18
+
+Tony's answers to the questions left after the swap (2026-11-18), built by `curate-made-foods.js` and 22 lines of `data/categories.json`, then swapped in the same way (`REFERENCE_DB_VERSION` 20261118120000):
+
+- **Made foods go on the list**: white, whole-wheat, French and rye bread, pita and whole-wheat pita, corn, flour and whole-wheat tortillas (Grain); seitan (Grain); chicken, beef and fish stock and chicken and beef bouillon powder (Pantry Staples); mayonnaise and prepared mustard (Sauces & Condiments); curry powder (Herbs); soy milk, fortified soy milk, almond milk and oat drink (Beverages, Dairy & Blended). One food each, USDA first, the same food from other tables hidden behind it. Brands stay hidden.
+- **Protein powders sit under Supplement Powders**: whey protein powder, whey protein isolate, soy protein powder and hemp protein powder.
+- **Physalis, Groundcherry and Cape gooseberry are one food**, Cape gooseberries (USDA); its `score-like.json` line for the Swedish Physalis is gone.
+- **A stock is its own food in a recipe.** Chicken bone stock had pointed at Chicken back, beef stock at Beef and fish stock at Cod; each now points at its stock. The pilsner lines stay on Beer, and Cha Ye Dan's tea leaves count as Black tea rather than a brewing aid.
+- **Counts**: 2,520 shown foods, 158 category moves; Baked, CommercialPremade and Mixed have no shown food left. `verify-candidate.js`: 31 of 31. Spanish names in `foods-023.ts`.
+- **Still open**: the lemon and lime juice poured off with soaking water and the orange peel strained out are counted as not eaten; asked Tony to confirm.
 
 Tony's instruction for the swap: merge each pair, every food that belongs on the list is on it, and every shown food is scored. What changed before the copy went live:
 
@@ -30,7 +39,7 @@ Tony's instruction for the swap: merge each pair, every food that belongs on the
 - **Counts of the build**: 2,496 shown foods, 26,749 live foods kept, 5,964 added, 201,233 nutrient values gained, 821 recipe names pointed, 15,594 recipe lines renamed, 136 category moves. `verify-candidate.js`: 31 of 31 checks pass.
 - **Spanish names** for every shown food are in `lib/translations/es/foods-022.ts`.
 
-Waiting on Tony: whether hidden made products (seitan, bouillon, curry powder, mayonnaise, mustard, soy milk, breads) belong on the list, Physalis and Groundcherries as one food, a home for protein powders, and a few equivalences named in the session report.
+The questions this list waited on were answered on 2026-11-18 (above).
 
 ## Status: every shown food in the group a person would look for it in, 2026-11-11
 

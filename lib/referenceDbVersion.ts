@@ -212,4 +212,9 @@
 // the unified English name, its original kept in name_local, and the 150
 // shown foods the workbook never scored are scored by
 // unified-database/pipeline/score-unscored.js, each in score_origin.
-export const REFERENCE_DB_VERSION = "20261117230000";
+// BUMPED again 2026-11-18: breads, tortillas, seitan, stocks, bouillon,
+// curry powder, mayonnaise, prepared mustard and plant milks are shown;
+// protein powders sit under Supplement Powders; Physalis and Groundcherry
+// are one food, Cape gooseberries; and a recipe's stock is the stock,
+// never the meat or fish it was simmered from. A stale copy lacks them.
+export const REFERENCE_DB_VERSION = "20261118120000";

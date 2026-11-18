@@ -158,6 +158,31 @@
     "Marsala": ["Alcohol", "Wine & Champagne"],
     "Cooking wine": ["Alcohol", "Wine & Champagne"],
 
-    "Vendace roe": ["Meat", "Fish & Seafood"]
+    "Vendace roe": ["Meat", "Fish & Seafood"],
+    "White bread": "Grain",
+    "Whole-wheat bread": "Grain",
+    "French bread": "Grain",
+    "Rye bread": "Grain",
+    "Pita bread": "Grain",
+    "Whole-wheat pita": "Grain",
+    "Corn tortillas": "Grain",
+    "Flour tortillas": "Grain",
+    "Whole-wheat tortillas": "Grain",
+    "Seitan": "Grain",
+
+    "Chicken stock": "PantryStaples",
+    "Beef stock": "PantryStaples",
+    "Fish stock": "PantryStaples",
+    "Chicken bouillon powder": "PantryStaples",
+    "Beef bouillon powder": "PantryStaples",
+
+    "Mayonnaise": "SaucesCondiments",
+    "Prepared mustard": "SaucesCondiments",
+    "Oat drink": ["Bev", "Dairy & Blended"],
+
+    "Whey protein powder": "SupplementPowder",
+    "Whey protein isolate": "SupplementPowder",
+    "Soy protein powder": "SupplementPowder",
+    "Hemp protein powder": "SupplementPowder"
   }
 }

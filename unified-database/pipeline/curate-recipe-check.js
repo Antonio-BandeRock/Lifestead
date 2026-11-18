@@ -13,7 +13,9 @@ const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const LIVE = path.resolve(__dirname, '..', '..', 'assets', 'data', 'foods_reference.db');
+// Since the swap (2026-11-17) the app's file IS a built candidate, so a rebuild starts from the copy kept from before it; BUILD_FROM names another.
+const PRE_SWAP = 'C:/Users/TonyR/OneDrive/Desktop/AppProject/_backups/reference-dbs/foods_reference.pre-unified-2026-11-17.db';
+const LIVE = process.env.BUILD_FROM || (fs.existsSync(PRE_SWAP) ? PRE_SWAP : path.resolve(__dirname, '..', '..', 'assets', 'data', 'foods_reference.db'));
 const UNI = path.resolve(__dirname, '..', 'unified_foods.sqlite');
 const q = (db, s) => JSON.parse(execFileSync('sqlite3', ['-readonly', '-json', db, s], { maxBuffer: 2e9 }).toString() || '[]');
 
@@ -32,8 +34,6 @@ const missing = (group, stand) => ({ kind: 'missing', group, stand });
 const aid = (note) => ({ kind: 'aid', note });
 
 const SEED_OIL = 'A listed oil in place of corn or sunflower oil; cold-pressed canola also works';
-const BREAD = 'Flour, yeast, water and salt';
-const MUSTARD = 'Mustard seeds or powder, vinegar, water and salt';
 const HAND = {
   // The word match picked the wrong listing.
   // Goji is sold dried; the list shows no fresh goji, and the live row was dried.
@@ -158,8 +158,10 @@ const HAND = {
   Sitronskall: listed('Lemon peel'),
   'Fish, common Japanese conger': listed('Conger eel'),
   'Sweetcorn, baby, canned, drained': swap('Baby corn', 'fresh for canned'),
-  // The live recipes count fish bones simmered in water as this row; the list holds the fish, not the stock.
-  'Soup, stock, fish, home-prepared': swap('Cod', 'Bones and heads of the listed fish, simmered in water'),
+  // Stocks are on the list since 2026-11-18 (owner): a stock is its own food, never the meat or fish it was simmered from.
+  'Soup, stock, fish, home-prepared': listed('Fish stock'),
+  'Soup, stock, beef, home-prepared': listed('Beef stock'),
+  'Soup stock, chicken bone stock': listed('Chicken stock'),
   'Glukosesirup': missing(PANTRY, 'Cane syrup'),
   'Potash (99 % potassium carbonate, E 501)': missing(PANTRY, 'Baking soda'),
   // Names the live recipes use again after the 2026-11-10 pass, placed 2026-11-11. The made-first ones name the app's recipe for them.
@@ -167,10 +169,11 @@ const HAND = {
   'Red, Pinot Noir': listed('Red wine'),
   'Broad, Fresh Bean': listed('Fava beans'),
   'Bass Fish': listed('Sea bass'),
-  'Pain pita': home(BREAD),
-  'Mustard medium hot': home(MUSTARD, 'Mittelscharfer Senf (Medium Hot Mustard)'),
-  'Mustard hot': home(MUSTARD, 'Moutarde de Dijon (Dijon Mustard)'),
-  Moutarde: home(MUSTARD, 'Moutarde de Dijon (Dijon Mustard)'),
+  // Made foods the owner put on the list on 2026-11-18: breads, mustard, oat drink.
+  'Pain pita': listed('Pita bread'),
+  'Mustard medium hot': listed('Prepared mustard'),
+  'Mustard hot': listed('Prepared mustard'),
+  Moutarde: listed('Prepared mustard'),
   'Spices, chili powder': home('Ground chili pepper, cumin, oregano and garlic'),
   'Bread crumbs, dry, grated, plain': home('Dried bread, ground', 'Pan Molido (Dry Breadcrumbs)'),
   'Herbes de Provence, séchées': home('A mix of listed dried herbs', 'Herbes de Provence'),
@@ -186,10 +189,10 @@ const HAND = {
   'Pork meat, tendon free, visible fat content max. 5 % (S II)': listed('Pork leg'),
   'Pickles, cucumber, dill or kosher dill': listed('Pickled cucumbers'),
   "Jus d'orange, maison": listed('Orange juice'),
-  'Bread, white wheat': home(BREAD),
-  'Wheat baguette': home(BREAD, 'Baguette'),
+  'Bread, white wheat': listed('White bread'),
+  'Wheat baguette': listed('French bread'),
   'Kidney beans, mature seeds, "Koshi-an" (strained sweet bean paste)': home('Beans cooked with sugar and strained', 'Dou Sha (Sweet Red Bean Paste)'),
-  'Oat drink unsweetened': home('Oats blended with water and strained'),
+  'Oat drink unsweetened': listed('Oat drink'),
   'Sugared Cranberries Dried': home('Cranberries dried with a little sugar'),
   'Monosodium glutamate': named(PANTRY),
   'Chocolate white': named(PANTRY),
