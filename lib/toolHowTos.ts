@@ -1050,7 +1050,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Tap + Supplement.', mark: 'myMeds.supplement' },
         { say: 'Type its name.' },
-        { say: 'Tap + Add ingredient for each nutrient on its label, and fill in the amount of each.', mark: 'myMeds.ingredient', stay: true },
+        { say: 'Under Dose, type how many you take in a whole day and what one is, such as 2 and capsule.' },
+        { say: 'Tap + Add ingredient for each nutrient on its label, and fill in what one capsule holds. If the label serving is 2 capsules, halve each amount.', mark: 'myMeds.ingredient', stay: true },
         { say: 'Tap Add supplement.', mark: 'myMeds.saveSupplement' },
       ],
       forYou: 'What it supplies is counted beside what your food supplies, so you can see which of the two met a target.',

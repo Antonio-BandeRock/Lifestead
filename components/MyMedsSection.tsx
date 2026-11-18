@@ -942,6 +942,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
             <View style={styles.formCard}>
               {supplementForm.editingId ? null : renderKindSwitch('supplement')}
               <Text style={styles.label}>Name</Text>
+              <Text style={styles.fieldHint}>What you call it. The name on the bottle works, or just the main nutrient.</Text>
               <AppTextInput
                 onVoiceResult={(text) => setSupplementForm((current) => ({ ...current, name: text }))}
                 micColor={tabColor}
@@ -952,6 +953,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
               />
 
               <Text style={styles.label}>Dose</Text>
+              <Text style={styles.fieldHint}>
+                How many you take in a whole day, and what one of them is. One capsule in the morning and one at night is 2 capsules. Half a tablet is 0.5.
+              </Text>
               <View style={styles.timeRow}>
                 <AppTextInput
                   style={[styles.input, styles.timeInput]}
@@ -970,6 +974,12 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
               </View>
 
               <Text style={styles.label}>Ingredients (per single dose)</Text>
+              <Text style={styles.fieldHint}>
+                What one capsule, tablet or scoop holds. Many labels list a serving of 2 or more: if the label says &quot;Serving size: 2 capsules&quot;, divide each amount by 2.
+              </Text>
+              <Text style={styles.fieldHint}>
+                The quick way: read the Supplement Facts panel out loud or type it here, then tap Fill Ingredients From This and check each row it fills in. Or add each one yourself with + Add ingredient.
+              </Text>
               <AppTextInput
                 onVoiceResult={(text, isFinal) => {
                   setLabelText(text);
@@ -1048,11 +1058,17 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                   </View>
                 );
               })}
+              {supplementForm.ingredients.length > 0 ? (
+                <Text style={styles.fieldHint}>
+                  For each row: pick the nutrient, type the amount, and pick the unit the label uses (mg, mcg, IU). Where a second picker appears, the label often names the form, such as &quot;as glycinate&quot;.
+                </Text>
+              ) : null}
               <TouchableOpacity ref={walkMark.ref('myMeds.ingredient')} onPress={addIngredientRow} style={[styles.secondaryButton, walkMark('myMeds.ingredient')]}>
                 <Text style={styles.secondaryButtonText}>+ Add ingredient</Text>
               </TouchableOpacity>
 
               <Text style={styles.label}>Notes (optional)</Text>
+              <Text style={styles.fieldHint}>Anything worth remembering about it. When you take it is set after saving, with Schedule it.</Text>
               <NotesInput
                 micColor={tabColor}
                 style={styles.input}
@@ -1320,6 +1336,8 @@ function makeStyles(tabColor: string, calm: boolean = false) {
       padding: HOME_BAND_CONTENT_PADDING,
     },
     helperText: { ...typography.caption, color: tabColor, marginTop: 4, marginBottom: 8, ...textShadow },
+    // What a field is asking for, under its label (Tony, 2026-11-18).
+    fieldHint: { ...typography.caption, color: colors.textSecondary, marginBottom: 6, ...textShadow },
     ingredientAmountInput: { flex: 1, minWidth: 64 },
     ingredientFormRow: { marginBottom: 4 },
     ingredientNutrientCol: { flex: 2 },
