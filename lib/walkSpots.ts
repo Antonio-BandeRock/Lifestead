@@ -210,3 +210,66 @@ export const SHOW_ME_LABEL = 'Show me';
 export const SHOW_ME_BELOW = 'It is further down this screen. Scroll down to the button with the ring round it.';
 export const SHOW_ME_ABOVE = 'It is further up this screen. Scroll up to the button with the ring round it.';
 export const SHOW_ME_MISSING = 'It is not on this screen yet. Do the line above first, and it appears.';
+
+// Bringing the section a line is about up under the line (1.0.93.2).
+// Direct request, 2026-11-18, going through Home's tour: "when it gets to
+// Today it just has the tour information without the app having moved to
+// that area of the home band. Make sure they all bring the section they are
+// talking about to the top just under the description." A phone never
+// scrolled to the ringed spot; only a computer did, and only on Show me.
+//
+// A screen that scrolls registers here through useBringToTopHost
+// (components/BringToTop.tsx): its frame, which already starts below the
+// guide strips, and the same bring-to-top its folds use. When a line names
+// a spot, the spot is brought to the top of the frame it is drawn in, once
+// per line, so the person can still scroll about while it waits.
+
+export type WalkScroller = { frame: () => SpotNode | null; bring: (node: SpotNode) => void };
+
+const scrollers = new Set<WalkScroller>();
+
+export function registerWalkScroller(scroller: WalkScroller): () => void {
+  scrollers.add(scroller);
+  return () => {
+    scrollers.delete(scroller);
+  };
+}
+
+/**
+ * Which frame a spot is drawn in: one drawn at a size and across the spot's
+ * middle. Among those that also hold its top, the smallest, so a list
+ * inside a page wins over the page; with none holding its top (the spot is
+ * scrolled away above or below), the largest, the page itself.
+ */
+export function pickFrame(spot: SpotRect, frames: (SpotRect | null)[]): number {
+  const middle = spot.x + spot.width / 2;
+  let inside = -1;
+  let insideArea = Infinity;
+  let widest = -1;
+  let widestArea = -1;
+  frames.forEach((frame, index) => {
+    if (!frame || middle < frame.x || middle > frame.x + frame.width) return;
+    const area = frame.width * frame.height;
+    if (spot.y >= frame.y && spot.y < frame.y + frame.height && area < insideArea) {
+      inside = index;
+      insideArea = area;
+    }
+    if (area > widestArea) {
+      widest = index;
+      widestArea = area;
+    }
+  });
+  return inside >= 0 ? inside : widest;
+}
+
+/** Brings a spot to the top of the scrolling frame it is in. False when no frame holds it. */
+export async function bringSpotToTop(node: SpotNode): Promise<boolean> {
+  const spot = await measureOne(node);
+  if (!spot) return false;
+  const list = [...scrollers];
+  const frames = await Promise.all(list.map((scroller) => measureNode(scroller.frame())));
+  const at = pickFrame(spot, frames);
+  if (at < 0) return false;
+  list[at].bring(node);
+  return true;
+}

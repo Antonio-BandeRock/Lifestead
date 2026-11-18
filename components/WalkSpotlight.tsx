@@ -25,6 +25,7 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { getWalkMark, subscribeWalkMark, type WalkMark } from '../lib/storyWalk';
 import {
+  bringSpotToTop,
   measureNode,
   measureSpot,
   reportTap,
@@ -89,11 +90,19 @@ export function WalkSpotlight() {
       return;
     }
     let live = true;
+    // The section a line is about comes up under the line once, as soon as
+    // it is drawn (1.0.93.2). Once only, so a person scrolling while the line
+    // waits is not pulled back. The footer's buttons never scroll.
+    let brought = FOOTER_MARKS.includes(mark);
     const look = async () => {
       const origin = await layerOrigin();
       if (!origin) return;
       const found = await measureSpot(mark, heightRef.current, origin);
       if (!live) return;
+      if (!brought && found.node) {
+        brought = true;
+        void bringSpotToTop(found.node);
+      }
       const shown = found.where === 'here' ? found.rect : null;
       setRect((was) => (sameRect(was, shown) ? was : shown));
       setActiveSpot(mark, shown);

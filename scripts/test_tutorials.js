@@ -165,6 +165,14 @@ same(spots.spotWhere({ ...rect, y: 900 }, 800), 'below', 'below the screen');
 same(spots.spotWhere({ ...rect, y: -60 }, 800), 'above', 'above the screen');
 same(spots.spotWhere(null, 800), 'missing', 'not drawn');
 same(spots.pickSpot([{ ...rect, y: 900 }, rect, null], 800), 1, 'the copy on screen is the one pointed at');
+// A line brings its section up under it: the frame it is drawn in (1.0.93.2).
+const page = { x: 0, y: 120, width: 400, height: 700 };
+const inner = { x: 0, y: 300, width: 400, height: 200 };
+const otherTab = { x: 400, y: 120, width: 400, height: 700 };
+same(spots.pickFrame({ x: 20, y: 1500, width: 360, height: 40 }, [page, null]), 0, 'a section scrolled below is brought up in the page');
+same(spots.pickFrame({ x: 20, y: 350, width: 360, height: 40 }, [page, inner]), 1, 'a list inside the page wins for a spot it holds');
+same(spots.pickFrame({ x: 20, y: 1500, width: 360, height: 40 }, [page, inner]), 0, 'the page wins for a spot neither holds');
+same(spots.pickFrame({ x: 20, y: 400, width: 360, height: 40 }, [otherTab]), -1, 'a frame off to the side never scrolls');
 same(spots.pickSpot([{ ...rect, y: 1500 }, { ...rect, y: 900 }], 800), 1, 'otherwise the nearest');
 same(spots.pickSpot([null, null], 800), -1, 'none drawn, none picked');
 check(spots.spotHit(rect, 140, 220), 'a tap inside lands');

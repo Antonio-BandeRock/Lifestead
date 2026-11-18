@@ -9,8 +9,9 @@
 // and the scrolling frame are both measured in the window after the fold
 // has redrawn, and the difference is added to how far the page is scrolled
 // now, the same arithmetic as bringHeaderToTop in app/profile.tsx.
-import { createContext, useCallback, useContext, useMemo, useRef, type ReactNode, type RefObject } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, type ReactNode, type RefObject } from 'react';
 import type { NativeScrollEvent, NativeSyntheticEvent, ScrollView, View } from 'react-native';
+import { registerWalkScroller, type SpotNode } from '../lib/walkSpots';
 
 type BringToTop = (header: View | null) => void;
 
@@ -46,6 +47,16 @@ export function useBringToTopHost(scrollRef: RefObject<ScrollView | null>, frame
       }, 120);
     },
     [scrollRef, frameRef],
+  );
+  // A walk line brings the section it is about to the top the same way
+  // (lib/walkSpots.ts, 1.0.93.2).
+  useEffect(
+    () =>
+      registerWalkScroller({
+        frame: () => frameRef.current as unknown as SpotNode | null,
+        bring: (node) => bringToTop(node as unknown as View),
+      }),
+    [bringToTop, frameRef],
   );
   return useMemo(() => ({ bringToTop, onScroll }), [bringToTop, onScroll]);
 }
