@@ -10,8 +10,16 @@ const fs = require('fs');
 
 const src = fs.readFileSync(path.join(__dirname, '..', 'lib', 'taper.ts'), 'utf8');
 const js = ts.transpileModule(src, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
+// taper.ts reads amounts through lib/doseAmount.ts, so that file loads the same way.
+function loadTs(file) {
+  const out = ts.transpileModule(fs.readFileSync(path.join(__dirname, '..', 'lib', file), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
+  const mod = { exports: {} };
+  new Function('module', 'exports', 'require', out)(mod, mod.exports, require);
+  return mod.exports;
+}
+const doseAmount = loadTs('doseAmount.ts');
 const m = { exports: {} };
-new Function('module', 'exports', 'require', js)(m, m.exports, require);
+new Function('module', 'exports', 'require', js)(m, m.exports, (name) => (name === './doseAmount' ? doseAmount : require(name)));
 const T = m.exports;
 
 let pass = 0;

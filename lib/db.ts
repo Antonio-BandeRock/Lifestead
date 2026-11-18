@@ -4731,6 +4731,10 @@ export type CommonMedication = {
   evidenceStrength: string;
   citation: string | null;
   notes: string | null;
+  /** Brand names sold in Mexico, when a Mexican source confirmed them (2026-11-18). */
+  brandNamesMexico: string | null;
+  /** What the Mexican packs are and who makes them, in plain words. */
+  mexicoNotes: string | null;
 };
 
 function mapCommonMedicationRow(row: {
@@ -4747,6 +4751,8 @@ function mapCommonMedicationRow(row: {
   evidence_strength: string;
   citation: string | null;
   notes: string | null;
+  brand_names_mexico: string | null;
+  mexico_notes: string | null;
 }): CommonMedication {
   return {
     id: row.id,
@@ -4762,11 +4768,13 @@ function mapCommonMedicationRow(row: {
     evidenceStrength: row.evidence_strength,
     citation: row.citation,
     notes: row.notes,
+    brandNamesMexico: row.brand_names_mexico ?? null,
+    mexicoNotes: row.mexico_notes ?? null,
   };
 }
 
 const COMMON_MEDICATION_COLUMNS =
-  'id, generic_name, common_brand_names, drug_class, treatment_type, common_use, thyroid_relevant_notes, timing_guidance, key_interactions, common_side_effects, evidence_strength, citation, notes';
+  'id, generic_name, common_brand_names, drug_class, treatment_type, common_use, thyroid_relevant_notes, timing_guidance, key_interactions, common_side_effects, evidence_strength, citation, notes, brand_names_mexico, mexico_notes';
 
 export async function listCommonMedications(): Promise<CommonMedication[]> {
   const db = await getReferenceDatabase();
@@ -4779,7 +4787,8 @@ export async function listCommonMedications(): Promise<CommonMedication[]> {
 // Matches against generic_name OR common_brand_names, so searching "Advil"
 // finds ibuprofen just as well as searching "ibuprofen" itself -- the
 // common real-world case, since most people know a medication by its
-// brand name first.
+// brand name first. The Mexican brand names match too, so "Eutirox" finds
+// levothyroxine.
 export async function searchCommonMedications(query: string): Promise<CommonMedication[]> {
   const trimmed = query.trim();
   if (!trimmed) return [];
@@ -4790,8 +4799,10 @@ export async function searchCommonMedications(query: string): Promise<CommonMedi
       SELECT ${COMMON_MEDICATION_COLUMNS}
       FROM common_medications
       WHERE generic_name LIKE ? COLLATE NOCASE OR common_brand_names LIKE ? COLLATE NOCASE
+        OR brand_names_mexico LIKE ? COLLATE NOCASE
       ORDER BY generic_name
     `,
+    needle,
     needle,
     needle,
   );

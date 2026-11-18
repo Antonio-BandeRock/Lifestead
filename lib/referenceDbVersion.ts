@@ -217,4 +217,7 @@
 // protein powders sit under Supplement Powders; Physalis and Groundcherry
 // are one food, Cape gooseberries; and a recipe's stock is the stock,
 // never the meat or fish it was simmered from. A stale copy lacks them.
-export const REFERENCE_DB_VERSION = "20261118120000";
+// BUMPED again 2026-11-18: the medicine list carries the brand names sold
+// in Mexico (brand_names_mexico, mexico_notes) and has progesterone
+// (scripts/add_mexican_medicine_brands.js). A stale copy lacks the columns.
+export const REFERENCE_DB_VERSION = "20261118180000";

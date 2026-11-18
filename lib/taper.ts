@@ -1,3 +1,4 @@
+import { parseDoseAmount } from './doseAmount';
 // A stepped dose on a med, the way a prescriber writes a taper (A2 of the
 // competitive build plan, 2026-09-29): 40 mg for five days, then 30 mg for
 // five days, then 20 mg, and so on. Prednisone tapers after an RA, IBD or
@@ -75,10 +76,9 @@ export function formatAmount(amount: number, unit: string | null): string {
 }
 
 function parseAmount(text: string): number | null {
-  const trimmed = text.trim().replace(',', '.');
-  if (!trimmed) return null;
-  const value = Number(trimmed);
-  return Number.isFinite(value) ? value : null;
+  // A half or a quarter tablet, however it is written (lib/doseAmount.ts).
+  const value = parseDoseAmount(text);
+  return value === null || Number.isNaN(value) ? null : value;
 }
 
 /**

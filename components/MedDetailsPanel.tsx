@@ -21,6 +21,7 @@ import { textNumber } from '../lib/phoneReach';
 import { CAN_PICK_CONTACTS, pickContact } from '../lib/contactPick';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { parseDoseAmount } from '../lib/doseAmount';
 
 type Props = {
   treatmentId: string;
@@ -36,12 +37,8 @@ function numberText(value: number | null | undefined): string {
   return value === null || value === undefined ? '' : String(value);
 }
 
-function parseAmount(text: string): number | null {
-  const trimmed = text.trim().replace(',', '.');
-  if (!trimmed) return null;
-  const value = Number(trimmed);
-  return Number.isFinite(value) && value >= 0 ? value : NaN;
-}
+// Half and quarter pills are typed however a person writes them (lib/doseAmount.ts).
+const parseAmount = parseDoseAmount;
 
 export function MedDetailsPanel({ treatmentId, treatmentName, details, reading, tabColor, onSaved, onProblem }: Props) {
   const styles = makeStyles(tabColor);

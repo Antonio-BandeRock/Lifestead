@@ -359,6 +359,7 @@ import { appLocale } from '@/lib/language';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
+import { doseWithUnit } from '../../lib/doseAmount';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -5921,7 +5922,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
       return [`${taperDoseLine(taperToday)} today`, treatment.frequency].filter(Boolean).join(', ');
     }
     if (treatment.treatmentType === 'supplement') {
-      return `${treatment.unitsPerDay} ${treatment.servingUnitLabel}${Number(treatment.unitsPerDay) === 1 ? '' : 's'}/day`;
+      return `${doseWithUnit(Number(treatment.unitsPerDay), treatment.servingUnitLabel ?? '')}/day`;
     }
     return (
       [treatment.doseAmount ? `${treatment.doseAmount}${treatment.doseUnit ?? ''}` : null, treatment.frequency].filter(Boolean).join(', ') ||

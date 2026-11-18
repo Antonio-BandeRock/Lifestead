@@ -186,6 +186,7 @@ import { APP_VERSION } from '../constants/version';
 import { File, Paths } from 'expo-file-system';
 import { inAppLanguage, queuedEnglish } from './notificationWords';
 import { t, tl } from './i18n';
+import { formatDoseAmount } from './doseAmount';
 
 // The group fields with the summary's link in this version's scheme
 // (lib/appVariant.ts), so a tap on the group opens this app and not
@@ -558,7 +559,7 @@ function describeDose(candidate: ReminderCandidate): string | null {
     return `${candidate.doseAmount} ${candidate.doseUnit}`;
   }
   if (candidate.unitsPerDay != null && candidate.servingUnitLabel) {
-    return `${candidate.unitsPerDay} ${candidate.servingUnitLabel}`;
+    return `${formatDoseAmount(candidate.unitsPerDay)} ${candidate.servingUnitLabel}`;
   }
   return null;
 }

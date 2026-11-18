@@ -269,6 +269,7 @@ import { appLocale } from '@/lib/language';
 import { BringToTopProvider, useBringToTopHost } from '../../components/BringToTop';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
+import { formatDoseAmount } from '../../lib/doseAmount';
 
 // What Home shows that the vault can hold: check-ins and flares, the
 // morning readings, the week, pacing and the assessment banner.
@@ -1214,7 +1215,7 @@ function describeReminderDose(reminder: TodaysReminder): string | null {
     return `${reminder.doseAmount} ${reminder.doseUnit}`;
   }
   if (reminder.unitsPerDay != null && reminder.servingUnitLabel) {
-    return `${reminder.unitsPerDay} ${reminder.servingUnitLabel}`;
+    return `${formatDoseAmount(reminder.unitsPerDay)} ${reminder.servingUnitLabel}`;
   }
   return null;
 }

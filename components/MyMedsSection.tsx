@@ -78,6 +78,7 @@ import {
 } from '../constants/buttons';
 import { ReadProblem } from './ReadProblem';
 import { saveOrSay } from '../lib/saveProblem';
+import { doseWithUnit, formatDoseAmount, parseDoseAmount } from '../lib/doseAmount';
 
 // My Meds, the registry of everything a person takes: prescriptions, OTC
 // drugs and supplements, each with its dose, form, timing rules, interactions
@@ -100,6 +101,17 @@ import { saveOrSay } from '../lib/saveProblem';
 // Every band here folds, the same rule Schedules and Food follow, with the
 // open state remembered per band through useBandFolds. The band itself is
 // TabBand, shared with every other Life lens since 2026-09-19.
+
+// The researched list's picker line: the generic name, the brand names, and
+// the names sold in Mexico, so a search for Eutirox or Triyotex finds the
+// medicine (Tony, 2026-11-18).
+function medOptionLabel(med: CommonMedication): string {
+  const brands = [med.commonBrandNames, med.brandNamesMexico ? t('in Mexico {brands}', { brands: med.brandNamesMexico }) : null]
+    .filter(Boolean)
+    .join('; ');
+  return brands ? `${med.genericName} (${brands})` : med.genericName;
+}
+
 function todayDateString(): string {
   const now = new Date();
   const pad = (n: number) => String(n).padStart(2, '0');
@@ -546,9 +558,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       showInfoAlert('Almost there', "Enter the supplement's name.");
       return;
     }
-    const unitsPerDay = Number(supplementForm.unitsPerDay);
-    if (!unitsPerDay || unitsPerDay <= 0) {
-      showInfoAlert('Almost there', 'Enter how many are taken per day (e.g. 1 or 2).');
+    const unitsPerDay = parseDoseAmount(supplementForm.unitsPerDay);
+    if (unitsPerDay === null || Number.isNaN(unitsPerDay) || unitsPerDay <= 0) {
+      showInfoAlert('Almost there', 'Enter how many are taken per day, such as 1, 2, 0.5 for half or 0.25 for a quarter.');
       return;
     }
     if (!supplementForm.servingUnitLabel.trim()) {
@@ -611,10 +623,15 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       showInfoAlert('Almost there', 'Enter a name for this medication.');
       return;
     }
+    const doseAmount = parseDoseAmount(medForm.doseAmount);
+    if (doseAmount !== null && Number.isNaN(doseAmount)) {
+      showInfoAlert('Almost there', 'Enter the dose as a number, such as 75, 2.5, or 0.5 for half a tablet.');
+      return;
+    }
     const input = {
       name: medForm.name,
       genericName: medForm.genericName || undefined,
-      doseAmount: medForm.doseAmount ? Number(medForm.doseAmount) : undefined,
+      doseAmount: doseAmount ?? undefined,
       doseUnit: medForm.doseUnit || undefined,
       frequency: medForm.frequency || undefined,
       notes: medForm.notes || undefined,
@@ -671,7 +688,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       commonMedications
         .filter((med) => med.treatmentType === medForm.category)
         .map((med) => ({
-          label: med.commonBrandNames ? `${med.genericName} (${med.commonBrandNames})` : med.genericName,
+          label: medOptionLabel(med),
           value: med.id,
         })),
     [commonMedications, medForm.category],
@@ -736,7 +753,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
           const matchedMed = treatment.genericName ? commonMedications.find((med) => med.id === treatment.genericName) : null;
           const taperSteps = tapersByTreatment.get(treatment.id) ?? [];
           const taperToday = stepOn(taperSteps, todayDateString());
-          const ownDose = treatment.doseAmount ? `${treatment.doseAmount}${treatment.doseUnit ? ' ' + treatment.doseUnit : ''}` : null;
+          const ownDose = treatment.doseAmount ? `${formatDoseAmount(treatment.doseAmount)}${treatment.doseUnit ? ' ' + treatment.doseUnit : ''}` : null;
 
           return (
             <View key={treatment.id} style={styles.row}>
@@ -744,9 +761,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                 <Text style={styles.rowTitle}>{treatment.name}</Text>
                 <Text style={styles.rowMeta}>
                   {treatment.treatmentType === 'supplement'
-                    ? `${treatment.unitsPerDay} ${treatment.servingUnitLabel}${Number(treatment.unitsPerDay) === 1 ? '' : 's'}/day`
+                    ? `${doseWithUnit(Number(treatment.unitsPerDay), treatment.servingUnitLabel ?? '')}/day`
                     : [
-                        taperToday ? `${taperDoseLine(taperToday)} today` : treatment.doseAmount ? `${treatment.doseAmount}${treatment.doseUnit ?? ''}` : null,
+                        taperToday ? `${taperDoseLine(taperToday)} today` : treatment.doseAmount ? `${formatDoseAmount(treatment.doseAmount)}${treatment.doseUnit ?? ''}` : null,
                         treatment.frequency,
                       ]
                         .filter(Boolean)
@@ -803,6 +820,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                         <>
                           <Text style={styles.myMedsResearchLabel}>{matchedMed.drugClass}</Text>
                           <Text style={styles.helperText}>{matchedMed.commonUse}</Text>
+                          {matchedMed.brandNamesMexico ? (
+                            <Text style={styles.helperText}>{t('In Mexico: {brands}', { brands: matchedMed.brandNamesMexico })}{matchedMed.mexicoNotes ? ' ' + tl(matchedMed.mexicoNotes) : ''}</Text>
+                          ) : null}
                           {matchedMed.thyroidRelevantNotes ? (
                             <Text style={styles.helperText}>{matchedMed.thyroidRelevantNotes}</Text>
                           ) : null}
@@ -935,7 +955,8 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
               <View style={styles.timeRow}>
                 <AppTextInput
                   style={[styles.input, styles.timeInput]}
-                  keyboardType="number-pad"
+                  keyboardType="decimal-pad"
+                  placeholder="1, or 0.5"
                   value={supplementForm.unitsPerDay}
                   onChangeText={(text) => setSupplementForm((current) => ({ ...current, unitsPerDay: text }))}
                 />
@@ -1085,6 +1106,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                     {selectedCommonMed.drugClass} · {EVIDENCE_TIER_LABEL[selectedCommonMed.evidenceStrength] ?? selectedCommonMed.evidenceStrength}
                   </Text>
                   <Text style={styles.helperText}>{selectedCommonMed.commonUse}</Text>
+                  {selectedCommonMed.brandNamesMexico ? (
+                    <Text style={styles.helperText}>{t('In Mexico: {brands}', { brands: selectedCommonMed.brandNamesMexico })}{selectedCommonMed.mexicoNotes ? ' ' + tl(selectedCommonMed.mexicoNotes) : ''}</Text>
+                  ) : null}
                   {selectedCommonMed.thyroidRelevantNotes ? (
                     <Text style={styles.helperText}>{selectedCommonMed.thyroidRelevantNotes}</Text>
                   ) : null}

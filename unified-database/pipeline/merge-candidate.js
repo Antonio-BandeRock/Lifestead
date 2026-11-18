@@ -499,6 +499,9 @@ const equivalenceAdded = q(OUT, 'select count(*) n from food_equivalence')[0].n 
 
 // 10. Scores for every shown food the workbook never scored (score-unscored.js).
 const scoring = require('./score-unscored.js').scoreUnscored(OUT);
+
+// 11. Mexican brand names on the medicine list, and progesterone (scripts/add_mexican_medicine_brands.js).
+require('../../scripts/add_mexican_medicine_brands.js').applyMexicanMedicines(OUT);
 execFileSync('sqlite3', [OUT], { input: `INSERT INTO candidate_build VALUES ('foods_scored_here', '${scoring.foods}');
 VACUUM;`, maxBuffer: 2e9 });
 

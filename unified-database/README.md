@@ -21,6 +21,8 @@ the swap is kept as
 
 ## Status: swapped in, 2026-11-17; made foods added 2026-11-18
 
+**Medicine list, 2026-11-18 (`REFERENCE_DB_VERSION` 20261118180000).** `common_medications` gains `brand_names_mexico`, `mexico_notes` and `mexico_source` (URLs, never shown), filled for 29 medicines from PLM, Vademécum México, Farmacias Benavides and COFEPRIS alerts, and a cited progesterone row. Step 11 of `merge-candidate.js` calls `scripts/add_mexican_medicine_brands.js`, so a rebuilt candidate carries them. Medicines with no confirmed Mexican source stay NULL.
+
 Tony's answers to the questions left after the swap (2026-11-18), built by `curate-made-foods.js` and 22 lines of `data/categories.json`, then swapped in the same way (`REFERENCE_DB_VERSION` 20261118120000):
 
 - **Made foods go on the list**: white, whole-wheat, French and rye bread, pita and whole-wheat pita, corn, flour and whole-wheat tortillas (Grain); seitan (Grain); chicken, beef and fish stock and chicken and beef bouillon powder (Pantry Staples); mayonnaise and prepared mustard (Sauces & Condiments); curry powder (Herbs); soy milk, fortified soy milk, almond milk and oat drink (Beverages, Dairy & Blended). One food each, USDA first, the same food from other tables hidden behind it. Brands stay hidden.
