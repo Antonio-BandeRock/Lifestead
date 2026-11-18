@@ -220,6 +220,7 @@ export const SETUP_FINISH_LATER_LINE = 'Goes on to Home now. Setup comes back th
 export const SETUP_RETURN_LABEL = 'Back to Setup';
 export const SETUP_AWAY_SAVED_CARD = 'Saved. Add more here if you like, then tap Continue Setup.';
 export const SETUP_CONTINUE_LABEL = 'Continue Setup';
+export const SETUP_AWAY_KEEP_ADDING = 'Saved. Add the next one here the same way, and tap Done adding when that is everything.';
 export const SETUP_DONE_HEADING = 'Setup is done';
 export const SETUP_DONE_LINE =
   'A strip at the top of the screen now names one thing to do at a time, in the order that makes the app useful soonest, with Go there to take you to it. Hide it whenever you like; Your Guide on Home brings it back.';

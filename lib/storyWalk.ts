@@ -179,6 +179,21 @@ export const WALK_STORY_LABEL = 'Your Guide';
 export const WALK_WAITING_LINE = 'Once it is saved, this finishes by itself.';
 export const WALK_NO_RECORD_LINE = 'That is all there is to this one.';
 export const WALK_SAVED_LINE = 'It is on record now.';
+
+// Steps that are a list (2026-11-18, direct report: after the first medicine
+// setup gave no way to add a second). Once the first is saved the walk keeps
+// saying how to add the next, and setup's strip waits for Done adding.
+export const KEEPS_ADDING: Readonly<Record<string, string>> = {
+  meds: 'The first one is on record. Add the next the same way, with + Prescription, + OTC drug or + Supplement, until every one you take is here.',
+  bills: 'The first one is on record. Add the next bill the same way, until every one that comes each month is here.',
+};
+export const DONE_ADDING_LABEL = 'Done adding';
+
+/** The keep-adding line for a guide step key ("item:meds") or item ("meds"). */
+export function keepsAddingLine(key: string | null | undefined): string | null {
+  if (!key) return null;
+  return KEEPS_ADDING[key.startsWith('item:') ? key.slice(5) : key] ?? null;
+}
 export const WALK_CAPTION = 'Walking through';
 export const WALK_SHRINK_LABEL = 'Make this smaller';
 export const WALK_GROW_LABEL = 'Show all of this';

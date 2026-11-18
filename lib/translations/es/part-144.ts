@@ -6,5 +6,9 @@ export const PART: Readonly<Record<string, string>> = {
  "Shrimp Paste": "Pasta de camarón",
  "Beef bonemeat": "Carne con hueso de res",
  "Pork bonemeat": "Carne con hueso de cerdo",
- "NULL AS category": "NULL AS category"
+ "NULL AS category": "NULL AS category",
+ "The first one is on record. Add the next the same way, with + Prescription, + OTC drug or + Supplement, until every one you take is here.": "El primero ya quedó registrado. Agrega el siguiente igual, con + Receta médica, + Medicamento de venta libre o + Suplemento, hasta que esté todo lo que tomas.",
+ "The first one is on record. Add the next bill the same way, until every one that comes each month is here.": "La primera ya quedó registrada. Agrega la siguiente cuenta igual, hasta que estén todas las que llegan cada mes.",
+ "Done adding": "Ya terminé",
+ "Saved. Add the next one here the same way, and tap Done adding when that is everything.": "Guardado. Agrega el siguiente aquí igual y toca Ya terminé cuando esté todo."
 };

@@ -56,7 +56,7 @@ import { testerChromeShown } from '../lib/testerGraduation';
 import { showGuidedTour } from '../lib/guidedTourDb';
 import { testerDoorOpen, useTesterAccess } from '../lib/testerAccess';
 import { cardDoneOn, cardWaitingOn, setupCardByKey, viewSetupCard, type SetupCardView } from '../lib/setupCards';
-import { setStoryWalk, startStoryWalk } from '../lib/storyWalk';
+import { DONE_ADDING_LABEL, keepsAddingLine, setStoryWalk, startStoryWalk } from '../lib/storyWalk';
 import { startTutorials } from '../lib/tutorialDb';
 import { SETUP_TUTORIALS_LABEL, SETUP_TUTORIALS_LINE } from '../lib/tutorials';
 import { GUIDES, type GuideRecords } from '../lib/yourStoryGuides';
@@ -117,6 +117,7 @@ import { explainNotYet } from '../lib/notYet';
 import { t } from '../lib/i18n';
 import { TAB_ROUTES } from '../constants/tabs';
 import {
+  SETUP_AWAY_KEEP_ADDING,
   SETUP_AWAY_SAVED_CARD,
   SETUP_CONTINUE_LABEL,
   SETUP_DONE_HEADING,
@@ -430,17 +431,20 @@ export function FirstSetup() {
     const saved = awayCard
       ? !!view && !!cardDoneOn(awayCard.def, view, records)
       : !!awayQuestion && !!interview.questions.find((question) => question.key === awayQuestion)?.answered;
+    // A list (medicines, bills) stays open after the first one is saved,
+    // and the button says Done adding (2026-11-18).
+    const list = !!keepsAddingLine(awayCard?.def.item ?? awayQuestion);
     return (
       <GuideStripAnchor slot="setup" style={styles.awayAnchor}>
         <View style={[styles.awayStrip, walking && styles.awayStripSmall]}>
           {walking ? null : <Text style={styles.caption}>{SETUP_AWAY_CAPTION}</Text>}
           {awayCard && !walking ? <Text style={styles.awayTitle}>{awayCard.def.title}</Text> : null}
-          {saved ? <Text style={styles.caption}>{SETUP_AWAY_SAVED_CARD}</Text> : null}
+          {saved && !(list && walking) ? <Text style={styles.caption}>{list ? SETUP_AWAY_KEEP_ADDING : SETUP_AWAY_SAVED_CARD}</Text> : null}
           <View style={styles.awayButtons}>
             {walking ? <Text style={styles.caption}>{SETUP_AWAY_CAPTION}</Text> : null}
             <TouchableOpacity style={styles.awayButton} accessibilityRole="button" onPress={comeBack}>
               <Ionicons name="arrow-back" size={16} color={colors.textOnButton} />
-              <Text style={styles.awayButtonText}>{saved ? SETUP_CONTINUE_LABEL : SETUP_RETURN_LABEL}</Text>
+              <Text style={styles.awayButtonText}>{saved ? (list ? DONE_ADDING_LABEL : SETUP_CONTINUE_LABEL) : SETUP_RETURN_LABEL}</Text>
             </TouchableOpacity>
           </View>
         </View>

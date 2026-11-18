@@ -26,6 +26,7 @@ import {
   WALK_STORY_LABEL,
   WALK_WAITING_LINE,
   canStepBack,
+  keepsAddingLine,
   getStoryWalk,
   tapMovesOn,
   setStoryWalk,
@@ -156,7 +157,10 @@ export function StoryWalkHost() {
 
   let say: string;
   let after: string | null = null;
-  if (saved) {
+  const more = saved ? keepsAddingLine(entry.key) : null;
+  if (more) {
+    say = more;
+  } else if (saved) {
     say = WALK_SAVED_LINE;
     after = entry.leadsTo ?? entry.forYou;
   } else if (step) {
