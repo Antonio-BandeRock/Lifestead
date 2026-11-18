@@ -51,7 +51,7 @@ import {
   howToByKey,
 } from '../lib/tutorials';
 import { SHOW_ME_LABEL, requestShowMe, subscribeSpotTapped } from '../lib/walkSpots';
-import { GuideStripAnchor } from './GuideRoom';
+import { GuideEdgeButton, GuideStripAnchor } from './GuideRoom';
 import { WalkButton } from './StoryWalkHost';
 import { testerChromeShown } from '../lib/testerGraduation';
 
@@ -77,7 +77,7 @@ export function TutorialHost() {
   const run = useTutorialRun();
   const pathname = usePathname();
   const screen = useReportedScreen();
-  const [small, setSmall] = useState(false);
+  const [open, setOpen] = useState(false);
   // The keys and lines are the same whichever tab comes first, so one
   // lookup serves every run.
   const byKey = useMemo(() => howToByKey(buildTutorials(null, testerChromeShown())), []);
@@ -101,7 +101,7 @@ export function TutorialHost() {
   const finished = !!run && runFinished(run);
 
   useEffect(() => {
-    setSmall(false);
+    setOpen(false);
   }, [key]);
 
   // Where a run stops is kept, so Profile can carry on from there.
@@ -164,27 +164,27 @@ export function TutorialHost() {
   return (
     <GuideStripAnchor slot="tutorial" style={styles.anchor}>
       <View style={styles.strip} accessibilityLiveRegion="polite">
-        {small || !found ? null : (
+        {open && found ? (
           <Text style={styles.caption} numberOfLines={2}>
             {TUTORIAL_CAPTION}, {where}: {found.howTo.title}
           </Text>
-        )}
+        ) : null}
         <View style={styles.sayRow}>
           <Ionicons name={finished ? 'checkmark-circle' : 'school-outline'} size={18} color={colors.primary} style={textShadow} />
-          <Text style={styles.say} numberOfLines={small ? 2 : undefined}>
+          <Text style={styles.say}>
             {say}
           </Text>
+          <GuideEdgeButton />
           <TouchableOpacity
-            onPress={() => setSmall((value) => !value)}
+            onPress={() => setOpen((value) => !value)}
             accessibilityRole="button"
-            accessibilityLabel={small ? WALK_GROW_LABEL : WALK_SHRINK_LABEL}
+            accessibilityLabel={open ? WALK_SHRINK_LABEL : WALK_GROW_LABEL}
             hitSlop={10}
           >
-            <Ionicons name={small ? 'chevron-down' : 'chevron-up'} size={18} color={colors.primary} style={textShadow} />
+            <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={18} color={colors.primary} style={textShadow} />
           </TouchableOpacity>
         </View>
-        {small ? null : (
-          <View style={styles.actions}>
+        <View style={styles.actions}>
             {finished ? (
               <WalkButton icon="close" label={TUTORIAL_CLOSE_LABEL} onPress={close} />
             ) : (
@@ -198,8 +198,7 @@ export function TutorialHost() {
                 <WalkButton icon="close" label={TUTORIAL_STOP_LABEL} onPress={stop} />
               </>
             )}
-          </View>
-        )}
+        </View>
       </View>
     </GuideStripAnchor>
   );

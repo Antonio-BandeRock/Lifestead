@@ -75,6 +75,28 @@ room.reportGuideHeight('tour', 0);
 
 check('order is fixed', room.GUIDE_SLOT_ORDER.join(','), 'walk,tutorial,tour,setup,return');
 
+// At the bottom edge the order turns over, so the first strip sits nearest
+// the footer and the others stack above it (2026-11-18).
+room.reportGuideHeight('walk', 50);
+room.reportGuideHeight('setup', 80);
+check('top: walk first', room.guideSlotOffset('walk', undefined, 'top'), 0);
+check('bottom: setup nearest the edge', room.guideSlotOffset('setup', undefined, 'bottom'), 0);
+check('bottom: walk above setup', room.guideSlotOffset('walk', undefined, 'bottom'), 80 + GUIDE_GAP);
+check('edge starts at the top', room.guideEdge(), 'top');
+room.setGuideEdge('bottom');
+check('edge moves to the bottom', room.guideEdge(), 'bottom');
+check('default offset follows the edge', room.guideSlotOffset('setup'), 0);
+room.setGuideEdge('top');
+room.reportGuideHeight('walk', 0);
+room.reportGuideHeight('setup', 0);
+
+check('typing keeps the strips at the top', room.effectiveGuideEdge('bottom', true), 'top');
+check('chosen edge when not typing', room.effectiveGuideEdge('bottom', false), 'bottom');
+check('short drag stays', room.edgeAfterDrag('top', 40), 'top');
+check('long drag down moves to the bottom', room.edgeAfterDrag('top', 90), 'bottom');
+check('drag down at the bottom stays', room.edgeAfterDrag('bottom', 90), 'bottom');
+check('long drag up moves to the top', room.edgeAfterDrag('bottom', -90), 'top');
+
 if (failures > 0) {
   console.log(`${failures} check(s) failed.`);
   process.exit(1);

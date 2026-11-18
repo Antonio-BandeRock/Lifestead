@@ -50,6 +50,37 @@ export function guideRoomTop(): number {
   return top;
 }
 
+// Which edge the strips sit at (2026-11-18, direct report: "The tour info
+// boxes are getting in the way"). The person drags a strip, or taps its swap
+// button, to the top or the bottom (lib/guideEdge.ts keeps the choice), and
+// the strips go back to the top by themselves while a keyboard is open, so
+// they never sit over what is being typed. At the bottom they stack upward
+// from just above the footer, and the screen gives up room at its bottom.
+export type GuideEdge = 'top' | 'bottom';
+let edge: GuideEdge = 'top';
+
+export function setGuideEdge(next: GuideEdge): void {
+  if (next === edge) return;
+  edge = next;
+  changed();
+}
+
+export function guideEdge(): GuideEdge {
+  return edge;
+}
+
+/** The edge to use: the chosen one, or the top while a keyboard is open. */
+export function effectiveGuideEdge(chosen: GuideEdge, keyboardOpen: boolean): GuideEdge {
+  return keyboardOpen ? 'top' : chosen;
+}
+
+/** Whether a drag of dy (down is positive) moves the strips to the other edge. */
+export function edgeAfterDrag(at: GuideEdge, dy: number, threshold = 60): GuideEdge {
+  if (at === 'top' && dy > threshold) return 'bottom';
+  if (at === 'bottom' && dy < -threshold) return 'top';
+  return at;
+}
+
 export function reportGuideHeight(slot: GuideSlot, height: number): void {
   const next = height > 0 ? Math.ceil(height) : 0;
   if ((heights.get(slot) ?? 0) === next) return;
@@ -70,10 +101,16 @@ export function guideRoomVersion(): number {
   return version;
 }
 
-/** How far below the first strip's top this slot's strip starts. */
-export function guideSlotOffset(slot: GuideSlot, from: ReadonlyMap<GuideSlot, number> = heights): number {
+/** How far this slot's strip sits from the edge's first strip: below it at
+ * the top, above it at the bottom, keeping the same order on the screen. */
+export function guideSlotOffset(
+  slot: GuideSlot,
+  from: ReadonlyMap<GuideSlot, number> = heights,
+  at: GuideEdge = edge,
+): number {
   let offset = 0;
-  for (const each of GUIDE_SLOT_ORDER) {
+  const order = at === 'bottom' ? [...GUIDE_SLOT_ORDER].reverse() : GUIDE_SLOT_ORDER;
+  for (const each of order) {
     if (each === slot) return offset;
     const height = from.get(each) ?? 0;
     if (height > 0) offset += height + GUIDE_GAP;

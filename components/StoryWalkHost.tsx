@@ -43,7 +43,7 @@ import {
 import { currentTellClaudeScreen, subscribeTellClaudeScreen, type TellClaudeScreen } from '../lib/tellClaude';
 import { SHOW_ME_LABEL, requestShowMe, subscribeSpotTapped } from '../lib/walkSpots';
 import { loadYourStoryWithGuides } from '../lib/yourStoryDb';
-import { GuideStripAnchor } from './GuideRoom';
+import { GuideEdgeButton, GuideStripAnchor } from './GuideRoom';
 
 // How often the record is looked for while a walk waits on it.
 const RECORD_CHECK_MS = 6000;
@@ -79,9 +79,10 @@ export function StoryWalkHost() {
   const screen = useReportedScreen();
   const router = useRouter();
   const [saved, setSaved] = useState(false);
-  // Folded to its one line, so whatever sits at the top of the screen can
-  // be reached; the line itself still changes as the person moves.
-  const [small, setSmall] = useState(false);
+  // Opens folded (2026-11-18): the line to act on and the buttons, with the
+  // chevron opening the rest, so the strip takes as little of the screen as
+  // it can.
+  const [open, setOpen] = useState(false);
 
   const entry = walk ? walkEntry(walk) : null;
   const steps = useMemo(() => (entry ? walkSteps(entry) : []), [entry]);
@@ -89,7 +90,7 @@ export function StoryWalkHost() {
 
   useEffect(() => {
     setSaved(false);
-    setSmall(false);
+    setOpen(false);
   }, [walkKey]);
 
   // The walk finishes when the record appears, looked for on every move and
@@ -176,11 +177,11 @@ export function StoryWalkHost() {
     // never covers anything somebody has to read or press (1.0.74.10).
     <GuideStripAnchor slot="walk" style={styles.anchor}>
       <View style={styles.strip} accessibilityLiveRegion="polite">
-        {small ? null : (
+        {open ? (
           <Text style={styles.caption} numberOfLines={2}>
             {WALK_CAPTION}: {entry.doThis}
           </Text>
-        )}
+        ) : null}
         <View style={styles.sayRow}>
           {arrow ? (
             <Ionicons
@@ -197,21 +198,21 @@ export function StoryWalkHost() {
               style={textShadow}
             />
           )}
-          <Text style={styles.say} numberOfLines={small ? 2 : undefined}>
+          <Text style={styles.say}>
             {say}
           </Text>
+          <GuideEdgeButton />
           <TouchableOpacity
-            onPress={() => setSmall((value) => !value)}
+            onPress={() => setOpen((value) => !value)}
             accessibilityRole="button"
-            accessibilityLabel={small ? WALK_GROW_LABEL : WALK_SHRINK_LABEL}
+            accessibilityLabel={open ? WALK_SHRINK_LABEL : WALK_GROW_LABEL}
             hitSlop={10}
           >
-            <Ionicons name={small ? 'chevron-down' : 'chevron-up'} size={18} color={colors.primary} style={textShadow} />
+            <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={18} color={colors.primary} style={textShadow} />
           </TouchableOpacity>
         </View>
-        {after && !small ? <Text style={styles.after}>{after}</Text> : null}
-        {small ? null : (
-          <View style={styles.actions}>
+        {after && open ? <Text style={styles.after}>{after}</Text> : null}
+        <View style={styles.actions}>
             {!saved && step && canStepBack(steps, at) ? (
               <WalkButton icon="arrow-back" label={WALK_BACK_LABEL} onPress={() => setStoryWalk(walkBack(walk, at))} />
             ) : null}
@@ -225,8 +226,7 @@ export function StoryWalkHost() {
             {mark ? <WalkButton icon="hand-left-outline" label={SHOW_ME_LABEL} onPress={requestShowMe} /> : null}
             <WalkButton icon="compass-outline" label={WALK_STORY_LABEL} onPress={toStory} />
             <WalkButton icon="close" label={finished ? WALK_CLOSE_LABEL : WALK_STOP_LABEL} onPress={stop} />
-          </View>
-        )}
+        </View>
       </View>
     </GuideStripAnchor>
   );

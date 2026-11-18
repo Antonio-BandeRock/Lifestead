@@ -12,7 +12,7 @@ import { ActiveInputProvider } from '../components/ActiveInputContext';
 import { AppLockGate } from '../components/AppLockGate';
 import { AppKeyboard } from '../components/AppKeyboard';
 import { isDesktopApp } from '../lib/desktop/bridge';
-import { GuideRoomView, useGuideRoomHeight } from '../components/GuideRoom';
+import { GuideEdgeSync, GuideRoomView, useGuideRoomPadding } from '../components/GuideRoom';
 import { KeyboardLiftProvider, KeyboardLiftReleaser, KeyboardLiftView } from '../components/KeyboardLift';
 import { DatabaseSetupScreen } from '../components/DatabaseSetupScreen';
 import { FirstLaunchAgreement } from '../components/FirstLaunchAgreement';
@@ -652,6 +652,7 @@ function UnlockedApp() {
               <StoryReturnHost />
               {/* Walk me through it (1.0.51.10): the strip that stays on
                   top of every screen while one guide step is being done. */}
+              <GuideEdgeSync />
               <StoryWalkHost />
               {/* Tutorials (1.0.68.14): a lens at a time, every tab in turn,
                   lib/tutorialRun.ts. */}
@@ -734,12 +735,12 @@ function UnlockedApp() {
 // (1.0.75.5, components/GuideRoom.tsx). A component of its own so a strip
 // changing height redraws the Stack and not everything around it.
 function RootStack() {
-  const guideRoomPadding = useGuideRoomHeight();
+  const guideRoomPadding = useGuideRoomPadding();
   return (
     <Stack
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: colors.background, paddingTop: guideRoomPadding },
+        contentStyle: { backgroundColor: colors.background, ...guideRoomPadding },
         headerTitle: (props) => <TranslatedHeaderTitle {...props} />,
       }}
     >

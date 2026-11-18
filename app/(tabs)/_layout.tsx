@@ -7,7 +7,7 @@ import { QuickActionRouter } from '../../components/QuickActionRouter';
 import { ShareIntentHandler } from '../../components/ShareIntentHandler';
 import { ScreenBackground } from '../../components/ScreenBackground';
 import { ScreenHeader, useScreenHeaderHeight } from '../../components/ScreenHeader';
-import { useGuideRoomHeight, useGuideStripsBelow } from '../../components/GuideRoom';
+import { useGuideRoomPadding, useGuideStripsBelow } from '../../components/GuideRoom';
 import { TabHub } from '../../components/TabHub';
 
 // headerShown: false everywhere here -- <ScreenHeader/> below (rendered
@@ -76,7 +76,7 @@ export default function TabLayout() {
   // Profile, has no header, so the strips go back to the top there.
   const focused = useIsFocused();
   const headerHeight = useScreenHeaderHeight();
-  const guideRoom = useGuideRoomHeight();
+  const guideRoom = useGuideRoomPadding();
   useGuideStripsBelow(headerHeight, focused);
   // 2026-08-21: a real, direct report traced the shared background here
   // (specifically its own footer divider line) visibly showing through
@@ -110,7 +110,10 @@ export default function TabLayout() {
               // current @react-navigation/bottom-tabs prop for this (see
               // this file's own git history for why `sceneContainerStyle`,
               // an older/nonexistent prop name, silently did nothing).
-              sceneStyle: { backgroundColor: 'transparent', paddingTop: focused ? guideRoom : 0 },
+              sceneStyle: {
+                backgroundColor: 'transparent',
+                ...(focused ? guideRoom : { paddingTop: 0, paddingBottom: 0 }),
+              },
             }}
           >
             {/* 2026-07-26: Home is now the literal "index" file (formerly

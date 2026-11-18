@@ -24,7 +24,7 @@ import { hideGuidedTour, passTourStop } from '../lib/guidedTourDb';
 import { WALK_GROW_LABEL, WALK_SAVED_LINE, WALK_SHRINK_LABEL } from '../lib/storyWalk';
 import type { StoryDestination } from '../lib/yourStory';
 import { loadYourStoryEverything } from '../lib/yourStoryInterviewDb';
-import { GuideStripAnchor } from './GuideRoom';
+import { GuideEdgeButton, GuideStripAnchor } from './GuideRoom';
 import { useStoryWalk } from './StoryWalkHost';
 
 // How often the record is looked for while a stop waits on it.
@@ -46,7 +46,9 @@ export function GuidedTourHost() {
   const pathname = usePathname();
   const router = useRouter();
   const [stop, setStop] = useState<TourStop | null>(null);
-  const [small, setSmall] = useState(false);
+  // Opens folded (2026-11-18): the stop and its buttons; the chevron opens
+  // the caption and what was just saved, and Why opens the reason.
+  const [open, setOpen] = useState(false);
   const [whyOpen, setWhyOpen] = useState(false);
   // The stop that just went on record, said once above the next one so the
   // strip never changes under somebody without saying why.
@@ -91,30 +93,30 @@ export function GuidedTourHost() {
   return (
     <GuideStripAnchor slot="tour" style={styles.anchor}>
       <View style={styles.strip} accessibilityLiveRegion="polite">
-        {justSaved && !small ? (
+        {justSaved && open ? (
           <View style={styles.sayRow}>
             <Ionicons name="checkmark-circle" size={16} color={colors.primary} style={textShadow} />
             <Text style={styles.caption}>{`${WALK_SAVED_LINE} ${justSaved}`}</Text>
           </View>
         ) : null}
-        {small ? null : <Text style={styles.caption}>{TOUR_CAPTION}</Text>}
+        {open ? <Text style={styles.caption}>{TOUR_CAPTION}</Text> : null}
         <View style={styles.sayRow}>
           <Ionicons name="footsteps-outline" size={18} color={colors.primary} style={textShadow} />
-          <Text style={styles.say} numberOfLines={small ? 2 : undefined}>
+          <Text style={styles.say}>
             {stop.doThis}
           </Text>
+          <GuideEdgeButton />
           <TouchableOpacity
-            onPress={() => setSmall((value) => !value)}
+            onPress={() => setOpen((value) => !value)}
             accessibilityRole="button"
-            accessibilityLabel={small ? WALK_GROW_LABEL : WALK_SHRINK_LABEL}
+            accessibilityLabel={open ? WALK_SHRINK_LABEL : WALK_GROW_LABEL}
             hitSlop={10}
           >
-            <Ionicons name={small ? 'chevron-down' : 'chevron-up'} size={18} color={colors.primary} style={textShadow} />
+            <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={18} color={colors.primary} style={textShadow} />
           </TouchableOpacity>
         </View>
-        {whyOpen && !small ? <Text style={styles.after}>{stop.why}</Text> : null}
-        {small ? null : (
-          <View style={styles.actions}>
+        {whyOpen ? <Text style={styles.after}>{stop.why}</Text> : null}
+        <View style={styles.actions}>
             <TourButton
               icon="arrow-forward"
               label={TOUR_GO_LABEL}
@@ -127,8 +129,7 @@ export function GuidedTourHost() {
             <TourButton icon="help-circle-outline" label={TOUR_WHY_LABEL} onPress={() => setWhyOpen((value) => !value)} />
             {stop.hasRecord ? <TourButton icon="play-skip-forward-outline" label={TOUR_PASS_LABEL} onPress={pass} /> : null}
             <TourButton icon="close" label={TOUR_HIDE_LABEL} onPress={() => void hideGuidedTour()} />
-          </View>
-        )}
+        </View>
       </View>
     </GuideStripAnchor>
   );
