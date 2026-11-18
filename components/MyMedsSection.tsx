@@ -170,12 +170,19 @@ type MyMedsSupplementFormState = {
   name: string;
   unitsPerDay: string;
   servingUnitLabel: string;
+  /**
+   * How many units the label's amounts are for ("Serving size: 2 capsules").
+   * The amounts are typed as printed and divided by this on save, since what
+   * is stored is per one unit. A saved supplement reopens at 1, because its
+   * stored amounts are already per one.
+   */
+  servingSize: string;
   notes: string;
   ingredients: MedIngredientRow[];
 };
 
 function blankMyMedsSupplementForm(): MyMedsSupplementFormState {
-  return { editingId: null, name: '', unitsPerDay: '1', servingUnitLabel: '', notes: '', ingredients: [blankMedIngredientRow()] };
+  return { editingId: null, name: '', unitsPerDay: '1', servingUnitLabel: '', servingSize: '1', notes: '', ingredients: [blankMedIngredientRow()] };
 }
 
 type MedFormState = {
@@ -424,6 +431,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
         name: treatment.name,
         unitsPerDay: String(treatment.unitsPerDay ?? 1),
         servingUnitLabel: treatment.servingUnitLabel ?? '',
+        servingSize: '1',
         notes: treatment.notes ?? '',
         ingredients: ingredients.length
           ? ingredients.map((ingredient) => ({
@@ -573,10 +581,18 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       return;
     }
 
+    // The amounts are copied from the label as printed; a label whose serving
+    // is 2 capsules gives what 2 hold, so each is divided down to one.
+    const servingSize = parseDoseAmount(supplementForm.servingSize) ?? 1;
+    if (Number.isNaN(servingSize) || servingSize <= 0) {
+      showInfoAlert('Almost there', 'Enter the serving size from the label, such as 1 or 2. Leave it at 1 if the label does not say.');
+      return;
+    }
+
     const ingredients: SupplementIngredientInput[] = validIngredients.map((row) => ({
       nutrientCode: row.nutrientCode,
       supplementForm: row.supplementForm || undefined,
-      amountPerUnit: Number(row.amount),
+      amountPerUnit: Number(String(row.amount).replace(',', '.')) / servingSize,
       unit: row.unit,
     }));
 
@@ -973,10 +989,25 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                 <Text style={styles.timeSeparator}>/ day</Text>
               </View>
 
-              <Text style={styles.label}>Ingredients (per single dose)</Text>
+              <Text style={styles.label}>Serving size on the label</Text>
               <Text style={styles.fieldHint}>
-                What one capsule, tablet or scoop holds. Many labels list a serving of 2 or more: if the label says &quot;Serving size: 2 capsules&quot;, divide each amount by 2.
+                Many labels give their amounts for 2 or more at once, written as &quot;Serving size: 2 capsules&quot;. Put that number here and copy the amounts exactly as printed: they are divided down to one when saved. Leave it at 1 if the label does not say.
               </Text>
+              <View style={styles.timeRow}>
+                <AppTextInput
+                  style={[styles.input, styles.timeInput]}
+                  keyboardType="decimal-pad"
+                  placeholder="1"
+                  value={supplementForm.servingSize}
+                  onChangeText={(text) => setSupplementForm((current) => ({ ...current, servingSize: text }))}
+                />
+                {supplementForm.servingUnitLabel.trim() ? (
+                  <Text style={styles.timeSeparator}>{supplementForm.servingUnitLabel.trim()}</Text>
+                ) : null}
+              </View>
+
+              <Text style={styles.label}>Ingredients</Text>
+              <Text style={styles.fieldHint}>The amounts on the label, for the serving size above.</Text>
               <Text style={styles.fieldHint}>
                 The quick way: read the Supplement Facts panel out loud or type it here, then tap Fill Ingredients From This and check each row it fills in. Or add each one yourself with + Add ingredient.
               </Text>
