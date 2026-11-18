@@ -49,6 +49,7 @@ const EXPECTED_EMPTY = {
   photo_series: 'needs photos',
   meal_photo_drafts: 'needs a photo',
   medicine_labels: 'needs a photo of a label',
+  med_barcodes: 'needs a barcode scan',
   pending_barcode_scans: 'needs a barcode scan',
   scanned_products: 'needs a barcode scan',
   scanned_product_nutrients: 'needs a barcode scan',

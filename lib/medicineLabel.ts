@@ -469,3 +469,53 @@ export function versionCheckMessage(saved: LabelDocument, current: LabelDocument
   if (saved.version === current.version) return `Your kept copy is still the current version (version ${saved.version}).`;
   return `openFDA has version ${current.version}, effective ${readableDate(current.effective)}. Your kept copy is version ${saved.version}. Nothing changes unless you replace it.`;
 }
+
+// Codes from outside the U.S. drug system (2026-11-18). A Mexican bottle,
+// like most of the world's, carries a retail barcode (EAN-13, UPC-A or
+// EAN-8, or a GTIN inside a DataMatrix). openFDA holds none of them, so the
+// screen asks the Open Facts databases instead, and the person can tie the
+// code to one of their meds so a second scan names it.
+
+/** The digits of a retail barcode worth sending to Open Food Facts, or null. */
+export function retailCodeOf(reading: CodeReading): string | null {
+  if (reading.kind === 'ndc') return null;
+  const d = reading.shown.trim();
+  if (!/^\d+$/.test(d)) return null;
+  if (![8, 12, 13, 14].includes(d.length)) return null;
+  return normalRetailDigits(d);
+}
+
+function normalRetailDigits(d: string): string {
+  let out = d;
+  if (out.length === 14 && out.startsWith('0')) out = out.slice(1);
+  if (out.length === 13 && out.startsWith('0')) out = out.slice(1);
+  return out;
+}
+
+/** How a code is kept in med_barcodes, so a scan and a typed code match. */
+export function codeKey(reading: CodeReading): string | null {
+  if (reading.kind === 'ndc') {
+    const digits = reading.shown.replace(/\D/g, '');
+    return digits ? `ndc:${digits}` : null;
+  }
+  const retail = retailCodeOf(reading);
+  if (retail) return retail;
+  const text = reading.shown.trim();
+  return text || null;
+}
+
+export function rememberedMedMessage(name: string): string {
+  return `This is the bottle you keep as ${name} in My Meds.`;
+}
+
+export const OPEN_FACTS_CAVEAT =
+  'The people who use these databases typed this in from the package; the maker did not, and nobody checks it against the bottle. Read the label you hold before relying on any amount here.';
+
+export function openFactsNotFoundMessage(reading: Exclude<CodeReading, { kind: 'ndc' }>, retail: string): string {
+  const where = reading.kind === 'not_us' && reading.issuedIn ? `a retail code issued in ${reading.issuedIn}` : 'a retail code';
+  return `This is ${where}, not a U.S. drug code, so openFDA has no label for it. Open Food Facts, Open Products Facts and Open Beauty Facts have no entry for ${retail} either. Nothing else is shown in its place. In My Meds you can photograph the label, and its ingredients are read from the photo.`;
+}
+
+export function openFactsUnreachableMessage(): string {
+  return 'Could not reach Open Food Facts, so nothing was looked up for this code. Check the connection and try again.';
+}

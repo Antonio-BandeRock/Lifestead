@@ -155,7 +155,7 @@ export const VAULT_TABLES: Record<VaultCategory, readonly string[]> = {
   work: ['work_checkins'],
   experiments: ['personal_rules', 'food_trials', 'food_trial_task_links', 'trial_series', 'trial_series_items', 'trial_steps'],
   familyHealth: ['family_member_conditions'],
-  medications: ['treatments', 'dose_sites', 'medicine_labels'],
+  medications: ['treatments', 'dose_sites', 'medicine_labels', 'med_barcodes'],
   conditions: ['user_conditions', 'user_food_allergies'],
   appointments: [],
   medicalBills: ['finance_medical_bills'],

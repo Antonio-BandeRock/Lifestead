@@ -49,6 +49,13 @@ import {
   markSentence,
   readableDate,
   notADrugCodeMessage,
+  codeKey,
+  retailCodeOf,
+  rememberedMedMessage,
+  OPEN_FACTS_CAVEAT,
+  openFactsNotFoundMessage,
+  openFactsUnreachableMessage,
+  type CodeReading,
   notFoundMessage,
   pickPrompt,
   readScannedCode,
@@ -66,6 +73,18 @@ import { t } from '../lib/i18n';
 import { leaveLabelRuleDraft } from '../lib/labelRuleDraft';
 import { labelSentenceForRule } from '../lib/ruleLabelSentences';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { PopoverSelect } from '../components/PopoverSelect';
+import { listAllActiveTreatments } from '../lib/db';
+import { findMedByCode, rememberMedCode } from '../lib/medBarcodesDb';
+import {
+  labelTextFromProduct,
+  lookUpMedicineProduct,
+  productBasisNote,
+  productRetrievalStatement,
+  type MedicineProduct,
+} from '../lib/medicineProduct';
+import { leaveSupplementDraft } from '../lib/supplementDraft';
+import { useCategoryClosed } from '../lib/vaultSession';
 
 const TAB = colors.tabLife;
 
@@ -105,6 +124,16 @@ export default function MedicineLabelScreen() {
   // sat below the code and name boxes, at the foot of the screen, out of
   // sight (Tony, 2026-11-18: a Mexican supplement's barcode).
   const [askedFrom, setAskedFrom] = useState<'scan' | 'typed'>('typed');
+  // A retail barcode from outside the U.S. drug system, looked up in the
+  // Open Facts databases, and the bottle code a med is kept with.
+  const [asking, setAsking] = useState('openFDA');
+  const [product, setProduct] = useState<{ item: MedicineProduct; retrievedAt: string } | null>(null);
+  const [askedCode, setAskedCode] = useState<string | null>(null);
+  const [bottleOf, setBottleOf] = useState<{ treatmentId: string; name: string } | null>(null);
+  const [meds, setMeds] = useState<{ label: string; value: string }[]>([]);
+  const [medForCode, setMedForCode] = useState<string | null>(null);
+  const [codeNote, setCodeNote] = useState<string | null>(null);
+  const medsClosed = useCategoryClosed('medications');
   const [shown, setShown] = useState<Shown | null>(null);
   const [saved, setSaved] = useState<SavedLabel | null>(null);
   const [savedNote, setSavedNote] = useState<string | null>(null);
@@ -211,23 +240,90 @@ export default function MedicineLabelScreen() {
     }
   }, []);
 
-  function lookUpCode() {
-    if (!codeText.trim()) return explainNotYet('Type the code from the box or the pharmacy label first.');
-    setAskedFrom('typed');
-    const reading = readTypedCode(codeText);
-    if (reading.kind !== 'ndc') {
-      setFound(null);
-      setShown(null);
+  // A code that is not a U.S. drug code: a retail barcode is asked of the
+  // Open Facts databases; anything else gets the sentence saying what it is.
+  const runProductLookup = useCallback(async (reading: Exclude<CodeReading, { kind: 'ndc' }>) => {
+    setFound(null);
+    setShown(null);
+    setMessage(null);
+    setProduct(null);
+    const retail = retailCodeOf(reading);
+    if (!retail) {
       setMessage(notADrugCodeMessage(reading));
       return;
     }
-    runLookup({ kind: 'code', reading });
+    setAsking('Open Food Facts');
+    setBusy(true);
+    try {
+      const item = await lookUpMedicineProduct(retail);
+      if (item) setProduct({ item, retrievedAt: new Date().toISOString() });
+      else setMessage(openFactsNotFoundMessage(reading, retail));
+    } catch {
+      setMessage(openFactsUnreachableMessage());
+    } finally {
+      setBusy(false);
+      setAsking('openFDA');
+    }
+  }, []);
+
+  // Every code asked about: is it a bottle already kept with a med? Not
+  // read while the vault holds meds closed, so a scan never names one.
+  const askAboutCode = useCallback(
+    (reading: CodeReading) => {
+      const key = codeKey(reading);
+      setAskedCode(key);
+      setBottleOf(null);
+      setCodeNote(null);
+      setProduct(null);
+      if (key && !medsClosed) findMedByCode(key).then(setBottleOf).catch(() => setBottleOf(null));
+      if (reading.kind === 'ndc') runLookup({ kind: 'code', reading });
+      else runProductLookup(reading);
+    },
+    [medsClosed, runLookup, runProductLookup],
+  );
+
+  function lookUpCode() {
+    if (!codeText.trim()) return explainNotYet('Type the code from the box or the pharmacy label first.');
+    setAskedFrom('typed');
+    askAboutCode(readTypedCode(codeText));
   }
 
   function searchName() {
     if (!nameText.trim()) return explainNotYet("Type the medicine's brand or generic name first.");
     setAskedFrom('typed');
+    setAskedCode(null);
+    setBottleOf(null);
+    setProduct(null);
     runLookup({ kind: 'name', name: nameText });
+  }
+
+  // Meds to tie a bottle to, read when a code has been asked about and the
+  // screen was not opened from one med.
+  useEffect(() => {
+    if (!askedCode || treatmentId || medsClosed) return;
+    listAllActiveTreatments()
+      .then((rows) => setMeds(rows.map((r) => ({ label: r.name, value: r.id })).sort((a, b) => a.label.localeCompare(b.label))))
+      .catch(() => setMeds([]));
+  }, [askedCode, treatmentId, medsClosed]);
+
+  async function rememberBottle() {
+    if (!askedCode) return;
+    const id = treatmentId ?? medForCode;
+    if (!id) return explainNotYet('Pick which of your meds this bottle is first.');
+    const name = treatmentId ? treatmentName : (meds.find((m) => m.value === id)?.label ?? '');
+    await rememberMedCode(askedCode, id);
+    setBottleOf({ treatmentId: id, name });
+    setCodeNote(t('Kept. Scanning this bottle again names {name}.', { name }));
+  }
+
+  function startSupplement() {
+    if (!product) return;
+    leaveSupplementDraft({
+      name: product.item.brand ? `${product.item.name} (${product.item.brand})` : product.item.name,
+      labelText: labelTextFromProduct(product.item),
+      code: askedCode,
+    });
+    router.navigate({ pathname: '/life', params: { openLifeLens: 'myMeds' } });
   }
 
   const handleScan = useCallback(
@@ -237,16 +333,10 @@ export default function MedicineLabelScreen() {
       setMode('find');
       setAskedFrom('scan');
       const reading = readScannedCode(result.data);
-      if (reading.kind !== 'ndc') {
-        setFound(null);
-        setShown(null);
-        setMessage(notADrugCodeMessage(reading));
-        return;
-      }
-      setCodeText(reading.shown);
-      runLookup({ kind: 'code', reading });
+      if (reading.kind === 'ndc' || retailCodeOf(reading)) setCodeText(reading.shown);
+      askAboutCode(reading);
     },
-    [runLookup],
+    [askAboutCode],
   );
 
   function startScanning() {
@@ -554,7 +644,14 @@ export default function MedicineLabelScreen() {
     <>
       {busy ? (
         <View style={styles.card}>
-          <Text style={styles.body}>Asking openFDA…</Text>
+          <Text style={styles.body}>{t('Asking {source}…', { source: asking })}</Text>
+        </View>
+      ) : null}
+
+      {bottleOf && !medsClosed ? (
+        <View style={styles.card}>
+          <Text style={styles.strong}>{rememberedMedMessage(bottleOf.name)}</Text>
+          {codeNote ? <Text style={styles.caption}>{codeNote}</Text> : null}
         </View>
       ) : null}
 
@@ -579,6 +676,62 @@ export default function MedicineLabelScreen() {
           ))}
         </View>
       ) : null}
+
+      {product ? (
+        <View style={styles.card}>
+          <Text style={styles.title}>{product.item.name}</Text>
+          {product.item.brand ? <Text style={styles.caption}>{t('Brand: {brand}', { brand: product.item.brand })}</Text> : null}
+          {product.item.amounts.length ? (
+            <>
+              <Text style={styles.label}>{productBasisNote(product.item)}</Text>
+              {product.item.amounts.map((a) => (
+                <View key={a.key} style={styles.amountRow}>
+                  <Text style={styles.pickName}>{a.label}</Text>
+                  <Text style={styles.strong}>{a.shown}</Text>
+                </View>
+              ))}
+            </>
+          ) : (
+            <Text style={styles.body}>No amounts were typed in for it.</Text>
+          )}
+          {product.item.ingredients ? (
+            <>
+              <Text style={styles.label}>Ingredients</Text>
+              <Text style={styles.body}>{product.item.ingredients}</Text>
+            </>
+          ) : null}
+          <Text style={styles.caption}>{OPEN_FACTS_CAVEAT}</Text>
+          <Text style={styles.caption}>{productRetrievalStatement(product.item, product.retrievedAt)}</Text>
+          {!treatmentId && !bottleOf ? (
+            <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={startSupplement}>
+              <Text style={styles.secondaryButtonText}>Start a Supplement From This</Text>
+            </TouchableOpacity>
+          ) : null}
+        </View>
+      ) : null}
+
+      {askedCode && !busy && !bottleOf && !medsClosed && (treatmentId || meds.length > 0) ? (
+        <View style={styles.card}>
+          <Text style={styles.body}>
+            {treatmentId
+              ? t('Keep this code with {name}, and scanning this bottle again names it.', { name: treatmentName || t('this med') })
+              : 'Keep this code with one of your meds, and scanning this bottle again names it.'}
+          </Text>
+          {treatmentId ? null : (
+            <PopoverSelect
+              options={meds}
+              selected={medForCode}
+              onSelect={setMedForCode}
+              tabColor={TAB}
+              placeholder={t('Which of my meds it is')}
+              searchable={meds.length > 8}
+            />
+          )}
+          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={rememberBottle}>
+            <Text style={styles.secondaryButtonText}>Remember This Bottle</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </>
   );
 
@@ -588,7 +741,8 @@ export default function MedicineLabelScreen() {
         <Text style={styles.title}>{treatmentName ? `The label for ${treatmentName}` : 'Look up a medicine label'}</Text>
         <Text style={styles.body}>
           Scan the barcode on the box, type the code printed on it (the NDC, 10 or 11 digits), or search by name. The code or
-          the name is sent to openFDA, the U.S. Food and Drug Administration&apos;s public data service, and nothing else is.
+          the name is sent to openFDA, the U.S. Food and Drug Administration&apos;s public data service, and nothing else is. A
+          barcode from a bottle bought outside the United States is sent to Open Food Facts instead.
         </Text>
         <Text style={styles.caption}>{LABEL_SOURCE_NOTE}</Text>
         {saved ? (
@@ -686,6 +840,7 @@ const styles = StyleSheet.create({
   },
   pickText: { flex: 1, gap: 2 },
   pickName: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  amountRow: { flexDirection: 'row', justifyContent: 'space-between', gap: 10 },
   primaryButton: {
     ...BUTTON_PRIMARY,
     flexDirection: 'row',

@@ -9337,6 +9337,19 @@ async function runDatabaseInitialization() {
         updated_at TEXT NOT NULL
       );
 
+      -- The barcode on a bottle, remembered with the med it is (Tony,
+      -- 2026-11-18, Mexican supplements): scanning the same bottle again on
+      -- the label screen names the med. code is the digits as
+      -- lib/medicineLabel.ts codeKey spells them, so a 12-digit UPC and the
+      -- same code read as 13 digits are one row. No foreign key:
+      -- deleteTreatment removes the rows itself.
+      CREATE TABLE IF NOT EXISTS med_barcodes (
+        code TEXT PRIMARY KEY,
+        treatment_id TEXT NOT NULL,
+        added_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_med_barcodes_treatment ON med_barcodes(treatment_id);
+
       -- D3, Phase 2: symptoms the person names, offered beside the built-in
       -- tags in lib/checkinTags.ts under the code 'custom:' || id. Removing
       -- one that a check-in used sets retired_at, so the old check-in still
@@ -21920,6 +21933,7 @@ export async function deleteTreatment(treatmentId: string) {
   await db.runAsync('DELETE FROM dose_sites WHERE treatment_id = ?', treatmentId);
   await db.runAsync('DELETE FROM treatment_time_mode WHERE treatment_id = ?', treatmentId);
   await db.runAsync('DELETE FROM medicine_labels WHERE treatment_id = ?', treatmentId);
+  await db.runAsync('DELETE FROM med_barcodes WHERE treatment_id = ?', treatmentId);
   await db.runAsync('DELETE FROM treatments WHERE id = ?', treatmentId);
   await (await import('./mediaDb')).removePhotosOf('treatment', treatmentId);
 }

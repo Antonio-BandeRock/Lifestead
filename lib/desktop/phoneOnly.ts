@@ -33,6 +33,7 @@ export type PhoneOnlyFeature =
   | 'readPrice'
   | 'readMenu'
   | 'readLabSheet'
+  | 'readSupplementLabel'
   | 'healthConnect'
   | 'wifiSync'
   | 'scanPairingCode'
@@ -65,6 +66,8 @@ const MESSAGES: Record<PhoneOnlyFeature, string> = {
     "Reading a menu from a photo is done on the phone, which reads the words on the device itself. On this computer, type or paste what the menu says into the box below and each dish is checked the same way.",
   readLabSheet:
     'Reading a lab sheet from a photo is done on the phone, which reads the words on the device itself. On this computer, paste the results from a patient portal or a CSV into the box below, or fill in a whole panel.',
+  readSupplementLabel:
+    'Reading a supplement label from a photo is done on the phone, which reads the words on the device itself. On this computer, type what the label lists into the box below and tap Fill Ingredients From This.',
   healthConnect:
     'Steps, sleep and the rest come from Health Connect on an Android phone, and this computer has nothing to read them from. Connect from Lifestead on your phone.',
   wifiSync:
@@ -91,6 +94,7 @@ const PLAYFUL_TAILS: Record<PhoneOnlyFeature, PlayfulKey> = {
   readPrice: 'phoneOnlyCamera',
   readMenu: 'phoneOnlyCamera',
   readLabSheet: 'phoneOnlyCamera',
+  readSupplementLabel: 'phoneOnlyCamera',
   scanPairingCode: 'phoneOnlyCamera',
   scanMedicineCode: 'phoneOnlyCamera',
   scanHouseholdCode: 'phoneOnlyCamera',

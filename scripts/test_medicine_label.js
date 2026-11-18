@@ -189,5 +189,22 @@ check('empty text has no sentences', M.labelSentences('\n\n'), []);
 check('a quoted sentence is marked where it is', M.markSentence('A. B c. D.', 'B c.'), { before: 'A. ', sentence: 'B c.', after: ' D.' });
 check('a sentence no longer there is not marked', M.markSentence('A. B c.', 'B d.'), null);
 
+// ---- Retail codes from outside the U.S. (2026-11-18).
+check('a Mexican EAN-13 is sent as it is', M.retailCodeOf(M.readScannedCode('7501008491966')), '7501008491966');
+check('a GTIN-14 with a leading zero drops to 13', M.retailCodeOf(M.readScannedCode('(01)07501008491966')), '7501008491966');
+check('a UPC-A outside number system 3 is a retail code', M.retailCodeOf(M.readScannedCode('012345678905')), '012345678905');
+check('an EAN-8 is a retail code', M.retailCodeOf(M.readScannedCode('96385074')), '96385074');
+check('a U.S. drug code is not sent to Open Food Facts', M.retailCodeOf(M.readScannedCode('300450449108')), null);
+check('a pharmacy number is not a retail code', M.retailCodeOf(M.readScannedCode('RX-1')), null);
+check('an NDC scanned and typed keep the same key', M.codeKey(M.readScannedCode('300450449108')), M.codeKey(M.readTypedCode('0045-0449-10')));
+check('a retail code keeps its digits as its key', M.codeKey(M.readScannedCode('7501008491966')), '7501008491966');
+check('the same bottle in a DataMatrix keeps the same key', M.codeKey(M.readScannedCode('(01)07501008491966')), '7501008491966');
+check('nothing typed has no key', M.codeKey(M.readTypedCode('')), null);
+check('a remembered bottle is named', M.rememberedMedMessage('Vitamin D3'), 'This is the bottle you keep as Vitamin D3 in My Meds.');
+const nf = M.openFactsNotFoundMessage(M.readScannedCode('7501008491966'), '7501008491966');
+check('the not-found answer names all three databases', ['Open Food Facts', 'Open Products Facts', 'Open Beauty Facts'].every((w) => nf.includes(w)), true);
+check('the not-found answer says nothing is shown instead', nf.includes('Nothing else is shown in its place.'), true);
+check('the people-entered caveat says the maker did not type it', M.OPEN_FACTS_CAVEAT.includes('the maker did not'), true);
+
 console.log(`${total - failures} of ${total} passed`);
 if (failures > 0) process.exit(1);

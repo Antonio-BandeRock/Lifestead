@@ -108,6 +108,66 @@ const FILLER = new Set([
 
 const UNIT_PATTERN = /(\d+(?:\.\d+)?)\s*(mg|mcg|g|iu)\b/g;
 
+// A Spanish label (Mexico's "Cada tableta contiene", or a photo of one) is
+// read by turning its words into the English ones the table above knows,
+// after accents are taken off. Phrases go first, so "acido folico" becomes
+// "folic acid" before "acido" alone could be read. "Citrato de magnesio" is
+// turned around to "magnesio citrato" first, so the form follows the
+// nutrient the way it does in English.
+const SPANISH_PHRASES: [RegExp, string][] = (
+  [
+    ['unidades internacionales', 'iu'],
+    ['acido folico', 'folic acid'],
+    ['acido ascorbico', 'ascorbic acid'],
+    ['acido pantotenico', 'pantothenic acid'],
+    ['acido nicotinico', 'nicotinic acid'],
+    ['beta caroteno', 'beta carotene'],
+    ['betacaroteno', 'beta carotene'],
+    ['fibra dietetica', 'dietary fiber'],
+    ['hidratos de carbono', 'carbohydrate'],
+    ['grasa total', 'total fat'],
+    ['grasas totales', 'total fat'],
+    ['azucares totales', 'total sugars'],
+    ['fumarato ferroso', 'ferrous fumarate'],
+    ['sulfato ferroso', 'ferrous sulfate'],
+    ['gluconato ferroso', 'ferrous gluconate'],
+    ['bisglicinato ferroso', 'ferrous bisglycinate'],
+    ['oxido cuprico', 'cupric oxide'],
+  ] as [string, string][]
+).map(([phrase, english]) => [new RegExp(`\\b${phrase}\\b`, 'g'), english]);
+
+const SPANISH_WORDS: Record<string, string> = {
+  vitamina: 'vitamin', hierro: 'iron', calcio: 'calcium', magnesio: 'magnesium', manganeso: 'manganese',
+  fosforo: 'phosphorus', fosfato: 'phosphate', potasio: 'potassium', sodio: 'sodium', sal: 'salt', cobre: 'copper',
+  yodo: 'iodine', yoduro: 'iodide', selenio: 'selenium', cinc: 'zinc', colina: 'choline', tiamina: 'thiamine',
+  riboflavina: 'riboflavin', niacina: 'niacin', niacinamida: 'niacinamide', nicotinamida: 'nicotinamide',
+  pantotenato: 'pantothenate', piridoxina: 'pyridoxine', piridoxal: 'pyridoxal', biotina: 'biotin', folato: 'folate',
+  metilfolato: 'methylfolate', cobalamina: 'cobalamin', cianocobalamina: 'cyanocobalamin',
+  metilcobalamina: 'methylcobalamin', hidroxocobalamina: 'hydroxocobalamin', adenosilcobalamina: 'adenosylcobalamin',
+  colecalciferol: 'cholecalciferol', tocoferol: 'tocopherol', tocoferilo: 'tocopheryl', filoquinona: 'phylloquinone',
+  menaquinona: 'menaquinone', retinilo: 'retinyl', ascorbato: 'ascorbate', selenometionina: 'selenomethionine',
+  selenito: 'selenite', glicina: 'glycine', cafeina: 'caffeine', licopeno: 'lycopene', proteina: 'protein',
+  proteinas: 'protein', fibra: 'fiber', carbohidrato: 'carbohydrate', carbohidratos: 'carbohydrates', azucar: 'sugar',
+  azucares: 'sugars', grasa: 'fat', grasas: 'fat', citrato: 'citrate', glicinato: 'glycinate',
+  bisglicinato: 'bisglycinate', picolinato: 'picolinate', gluconato: 'gluconate', oxido: 'oxide',
+  carbonato: 'carbonate', malato: 'malate', treonato: 'threonate', sulfato: 'sulfate', fumarato: 'fumarate',
+  quelato: 'chelate', cloruro: 'chloride', clorhidrato: 'hcl', mononitrato: 'mononitrate', bitartrato: 'bitartrate',
+  acetato: 'acetate', palmitato: 'palmitate', ferroso: 'ferrous', como: 'as', y: 'and', mas: 'plus', de: 'of',
+  miligramos: 'mg', miligramo: 'mg', microgramos: 'mcg', microgramo: 'mcg', gramos: 'g', gramo: 'g',
+  porcion: 'serving', tableta: 'tablet', tabletas: 'tablets', capsula: 'capsule', capsulas: 'capsules', cada: 'each',
+  por: 'per',
+};
+
+const SALT_FIRST =
+  /\b(\w+(?:ato|ito|uro|ido))\s+de\s+(calcio|magnesio|cinc|zinc|hierro|potasio|sodio|cobre|manganeso|selenio|colina|tiamina|piridoxina|retinilo|tocoferol|tocoferilo)\b/g;
+
+function fromSpanish(text: string): string {
+  let out = text.normalize('NFD').replace(/[̀-ͯ]/g, '');
+  out = out.replace(SALT_FIRST, '$2 $1');
+  for (const [pattern, english] of SPANISH_PHRASES) out = out.replace(pattern, english);
+  return out.replace(/[a-z]+/g, (word) => SPANISH_WORDS[word] ?? word);
+}
+
 /** Lowercases and spells every unit one way, so the reading below has one
  *  shape to deal with. Exported for the test. */
 export function normalizeSpokenLabel(text: string): string {
@@ -115,6 +175,13 @@ export function normalizeSpokenLabel(text: string): string {
   s = s.replace(/[µμ]g\b/g, 'mcg');
   // Thousands separators before any splitting on commas: "1,000 IU".
   s = s.replace(/(\d),(\d{3})\b/g, '$1$2');
+  // A Spanish decimal comma: "2,5 mg".
+  s = s.replace(/(\d),(\d{1,2})(?!\d)/g, '$1.$2');
+  // "U.I." is the Spanish IU.
+  s = s.replace(/\bu\.?\s?i\.?(?=\s|$)/g, 'iu');
+  // Dotted leaders between a name and its amount on a printed table.
+  s = s.replace(/\.{2,}|…/g, ' ');
+  s = fromSpanish(s);
   s = s.replace(/(\d)\s+point\s+(\d)/g, '$1.$2');
   // A percent of daily value is not an amount of the nutrient.
   s = s.replace(/\d+(?:\.\d+)?\s*(?:%|percent)/g, ' ');

@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
+import * as ImagePicker from 'expo-image-picker';
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from './AppTextInput';
 import { NotesInput } from './NotesInput';
@@ -64,6 +65,8 @@ import { ThumbRow } from './ThumbRow';
 import { VaultClosedBand } from './VaultClosedBand';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { explainNotYet } from '../lib/notYet';
+import { recognizeTextFromImage } from '../lib/ocr';
+import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
 import { matchSupplementForm, readSpokenSupplementLabel } from '../lib/spokenSupplement';
 import { t, tl } from '../lib/i18n';
 import {
@@ -80,6 +83,8 @@ import { ReadProblem } from './ReadProblem';
 import { SupplyCountForm } from './SupplyCountForm';
 import { declineBottle, getSharingPartner, joinBottle, listBottlesToAnswer, type SharedBottleRow } from '../lib/sharedSupplyDb';
 import { saveOrSay } from '../lib/saveProblem';
+import { rememberMedCode } from '../lib/medBarcodesDb';
+import { takeSupplementDraft, type SupplementDraft } from '../lib/supplementDraft';
 import { doseWithUnit, formatDoseAmount, parseDoseAmount } from '../lib/doseAmount';
 
 // My Meds, the registry of everything a person takes: prescriptions, OTC
@@ -257,7 +262,11 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   const [addMode, setAddMode] = useState<MyMedsCategory | null>(null);
   const [supplementForm, setSupplementForm] = useState<MyMedsSupplementFormState>(blankMyMedsSupplementForm());
   const [labelText, setLabelText] = useState('');
+  const [supplementDraft, setSupplementDraft] = useState<SupplementDraft | null>(null);
+  // The bottle code to keep with the supplement once it is saved.
+  const pendingCode = useRef<string | null>(null);
   const [labelNote, setLabelNote] = useState<string | null>(null);
+  const [readingLabel, setReadingLabel] = useState(false);
   const [medForm, setMedForm] = useState<MedFormState>(blankMedForm('prescription'));
   const [expandedId, setExpandedId] = useState<string | null>(null);
   // The row whose Tracking button opened the count, and the one just saved,
@@ -347,8 +356,27 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   useFocusEffect(
     useCallback(() => {
       load();
+      // A bottle looked up on the medicine label screen, to start a
+      // supplement from (2026-11-18). Filled in once the nutrient list has
+      // loaded, since the label text is read against it.
+      const draft = takeSupplementDraft();
+      if (draft) setSupplementDraft(draft);
     }, [load]),
   );
+
+  useEffect(() => {
+    if (!supplementDraft || nutrients.length === 0) return;
+    const draft = supplementDraft;
+    setSupplementDraft(null);
+    openAddSupplement();
+    pendingCode.current = draft.code;
+    setSupplementForm((current) => ({ ...current, name: draft.name }));
+    if (draft.labelText.trim()) {
+      setLabelText(draft.labelText);
+      void fillFromLabel(draft.labelText);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supplementDraft, nutrients]);
 
   // Every med ever added, active or not, since 2026-09-13: this is the one
   // place a med is defined now (the Supplements and Prescriptions lenses on
@@ -440,6 +468,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
     setLabelNote(null);
     setMedForm(blankMedForm('prescription'));
     setPendingBottleId(null);
+    pendingCode.current = null;
   }
 
   // Editing came here on 2026-09-13 from the Supplements and Prescriptions
@@ -506,6 +535,43 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       ...current,
       ingredients: current.ingredients.map((row) => (row.key === key ? { ...row, ...update } : row)),
     }));
+  }
+
+  // A photo of the label, read on the phone. Its words go into the box (a
+  // second photo adds to the first, for a label that wraps around the
+  // bottle) and only the new photo's words are read into rows, so the rows
+  // the first photo filled are not added twice. Spanish labels read too.
+  async function readLabelPhoto(from: 'camera' | 'library') {
+    if (announcePhoneOnly(showInfoAlert, 'readSupplementLabel')) return;
+    setReadingLabel(true);
+    try {
+      if (from === 'camera') {
+        const permission = await ImagePicker.requestCameraPermissionsAsync();
+        if (!permission.granted) {
+          showInfoAlert('Camera access needed', 'Lifestead needs your camera to read the label. You can still say or type what it lists.');
+          return;
+        }
+      }
+      const shot =
+        from === 'camera'
+          ? await ImagePicker.launchCameraAsync({ quality: 0.8 })
+          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8 });
+      if (shot.canceled || shot.assets.length === 0) return;
+      const text = await recognizeTextFromImage(shot.assets[0].uri);
+      if (!text) {
+        showInfoAlert('Could not read the label', 'No words came off that photo. Try again closer and flatter, in good light, or say or type what it lists.');
+        return;
+      }
+      setLabelText((current) => (current.trim() ? `${current.trim()}
+
+${text}` : text));
+      await fillFromLabel(text);
+    } catch (error) {
+      console.error('[MyMedsSection] Failed to read the label photo', error);
+      showInfoAlert('Could not read the label', 'Something went wrong reading that photo. You can say or type what the label lists instead.');
+    } finally {
+      setReadingLabel(false);
+    }
   }
 
   // The label said or typed, read into rows added below any already filled.
@@ -636,6 +702,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
           notes: supplementForm.notes,
         });
         await takeFromPendingBottle(id);
+        if (pendingCode.current) await rememberMedCode(pendingCode.current, id);
         setJustSaved({ id, name: supplementForm.name.trim(), unit: supplementForm.servingUnitLabel.trim() || null });
       }
       closeAddForm();
@@ -926,8 +993,25 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
             <Text style={styles.label}>Ingredients</Text>
             <Text style={styles.fieldHint}>The amounts on the label, for the serving size above.</Text>
             <Text style={styles.fieldHint}>
-              The quick way: read the Supplement Facts panel out loud or type it here, then tap Fill Ingredients From This and check each row it fills in. Or add each one yourself with + Add ingredient.
+              The quick way: photograph the Supplement Facts panel, or read it out loud or type it here and tap Fill Ingredients From This. Then check each row it fills in. Labels in Spanish read too. Or add each one yourself with + Add ingredient.
             </Text>
+            <View style={styles.labelPhotoRow}>
+              <TouchableOpacity
+                ref={walkMark.ref('myMeds.labelPhoto')}
+                onPress={() => void readLabelPhoto('camera')}
+                disabled={readingLabel}
+                style={[styles.secondaryButton, styles.labelPhotoButton, readingLabel ? styles.busy : null]}
+              >
+                <Text style={styles.secondaryButtonText}>{readingLabel ? 'Reading the Label' : 'Photograph the Label'}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => void readLabelPhoto('library')}
+                disabled={readingLabel}
+                style={[styles.secondaryButton, styles.labelPhotoButton, readingLabel ? styles.busy : null]}
+              >
+                <Text style={styles.secondaryButtonText}>Use a Photo You Have</Text>
+              </TouchableOpacity>
+            </View>
             <AppTextInput
               onVoiceResult={(text, isFinal) => {
                 setLabelText(text);
@@ -1625,6 +1709,9 @@ function makeStyles(tabColor: string, calm: boolean = false) {
     rowTextCol: { flex: 1 },
     rowTitle: { ...typography.label, color: tabColor, ...textShadow },
     secondaryButton: { ...BUTTON_SECONDARY },
+    labelPhotoRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+    labelPhotoButton: { flexGrow: 1 },
+    busy: { opacity: 0.5 },
     secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
     supplementRowActions: { flexDirection: 'row', gap: 16, marginTop: 10 },
     table: { gap: bandGap },

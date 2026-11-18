@@ -38,6 +38,7 @@ export type ToolMark =
   | 'myMeds.supplement'
   | 'myMeds.ingredient'
   | 'myMeds.saveSupplement'
+  | 'myMeds.labelPhoto'
   | 'myMeds.label'
   | 'myMeds.tracking'
   | 'myMeds.details'
@@ -1058,6 +1059,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'What it supplies is counted beside what your food supplies, so you can see which of the two met a target.',
     },
     {
+      key: 'supplementPhoto',
+      title: 'Fill a supplement from a photo of its label',
+      steps: [
+        { say: 'Tap + Supplement and type its name.', mark: 'myMeds.supplement' },
+        { say: 'Tap Photograph the Label and take a photo of the table on the bottle, or tap Use a Photo You Have.', mark: 'myMeds.labelPhoto' },
+        { say: 'The words read from the photo go in the box, and each nutrient it understood becomes an ingredient. Check every amount against the bottle, then tap Add supplement.', mark: 'myMeds.saveSupplement' },
+      ],
+      forYou: 'A label in English or Spanish is read on the phone itself; the photo is not sent anywhere.',
+    },
+    {
       key: 'label',
       title: 'Look up the label of a medicine',
       steps: [
@@ -1065,6 +1076,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Scan the barcode on the box, type the code from the pharmacy label, or type the name of the medicine.' },
       ],
       forYou: 'You can read the printed label of a medicine without the box in your hand.',
+    },
+    {
+      key: 'bottleFromElsewhere',
+      title: 'Look up a bottle bought outside the United States',
+      steps: [
+        { say: 'Tap Look up a label.', mark: 'myMeds.label' },
+        { say: 'Scan its barcode. A code that is not a U.S. drug code is looked up in Open Food Facts and its two sister databases, and what people there typed in from the package is shown.' },
+        { say: 'Tap Start a Supplement From This to open a new supplement with its name and amounts filled in, or pick which of your meds it is and tap Remember This Bottle.' },
+      ],
+      forYou: 'The next time you scan that bottle, the screen names the med it is.',
     },
     {
       key: 'ruleFromLabel',

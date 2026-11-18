@@ -115,6 +115,29 @@ check('form k2 alone is two', s.matchSupplementForm('k2', kForms), null);
 check('form methylfolate', s.matchSupplementForm('methylfolate', folateForms), 'L-methylfolate (5-MTHF)');
 check('form unknown', s.matchSupplementForm('hydroxocobalamin', ['Methylcobalamin', 'Cyanocobalamin']), null);
 
+
+// A Mexican label, typed, spoken or read from a photo (1.0.93.18).
+check('es multivitamin', rows('Cada tableta contiene: Vitamina D3 25 µg, Ácido fólico 400 µg, Hierro (como fumarato ferroso) 18 mg, Citrato de magnesio 100 mg, Zinc 11 mg'), [
+  ['vitamin_d', 25, 'mcg', 'd3'],
+  ['folate_b9', 400, 'mcg', 'folic acid'],
+  ['iron', 18, 'mg', 'ferrous fumarate'],
+  ['magnesium', 100, 'mg', 'citrate'],
+  ['zinc', 11, 'mg', null],
+]);
+check('es decimal comma and UI', rows('Vitamina B6 (clorhidrato de piridoxina) 2,5 mg; Vitamina D 1000 U.I.'), [
+  ['vitamin_b6', 2.5, 'mg', null],
+  ['vitamin_d', 1000, 'IU', null],
+]);
+check('es spoken units', rows('selenio 55 microgramos como selenometionina y yoduro de potasio 150 microgramos'), [
+  ['selenium', 55, 'mcg', 'selenomethionine'],
+  ['iodine', 150, 'mcg', 'potassium iodide'],
+]);
+check('es printed table leaders', rows('Vitamina C ........ 60 mg\nCalcio ....... 200 mg'), [
+  ['vitamin_c', 60, 'mg', null],
+  ['calcium', 200, 'mg', null],
+]);
+check('es b12 form', rows('Vitamina B12 (metilcobalamina) 500 µg'), [['vitamin_b12', 500, 'mcg', 'methylcobalamin']]);
+
 if (failures) {
   console.log(`\n${failures} failed`);
   process.exit(1);
