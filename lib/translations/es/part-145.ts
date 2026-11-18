@@ -55,5 +55,25 @@ export const PART: Readonly<Record<string, string>> = {
  "The amounts on the label, for the serving size above.": "Las cantidades de la etiqueta, para la porción de arriba.",
  "Enter the serving size from the label, such as 1 or 2. Leave it at 1 if the label does not say.": "Escribe la porción de la etiqueta, como 1 o 2. Déjala en 1 si la etiqueta no lo dice.",
  "Under Serving size on the label, type the serving its amounts are for, such as 2 when it says 2 capsules.": "En Porción de la etiqueta, escribe para cuántas son sus cantidades, como 2 cuando dice 2 cápsulas.",
- "Tap + Add ingredient for each nutrient on its label, and copy its amount exactly as printed.": "Toca + Agregar ingrediente por cada nutriente de su etiqueta, y copia su cantidad tal como viene impresa."
+ "Tap + Add ingredient for each nutrient on its label, and copy its amount exactly as printed.": "Toca + Agregar ingrediente por cada nutriente de su etiqueta, y copia su cantidad tal como viene impresa.",
+ "Pause it": "Pausarlo",
+ "· Paused, so it is left out of nutrient totals and timing warnings": "· En pausa, así que no cuenta en los totales de nutrientes ni en los avisos de horario",
+ "How many do you have right now": "Cuántos tienes ahorita",
+ "Tell me when this many days are left": "Avísame cuando falten estos días",
+ "Each dose you mark taken comes off the count, and a reminder comes that many days before they run out.": "Cada dosis que marcas como tomada se descuenta, y te llega un recordatorio esos días antes de que se acaben.",
+ "Type how many you have right now, or tap {button}.": "Escribe cuántos tienes ahorita, o toca {button}.",
+ "Put it on the schedule?": "¿Lo pongo en el horario?",
+ "Set the times for {name} on Schedules > Meds, so it shows with everything else for the day and each dose you mark taken comes off the count.": "Pon las horas de {name} en Horarios > Medicinas, para que aparezca con todo lo demás del día y cada dosis que marques como tomada se descuente.",
+ "Tracking: {left}": "Contando: {left}",
+ "Track how many": "Contar cuántos hay",
+ "How many {name} do you have?": "¿Cuántos {name} tienes?",
+ "How many {name} do you have right now?": "¿Cuántos {name} tienes ahorita?",
+ "Saved. Count them once and the app keeps track as you mark doses taken, and tells you before they run low.": "Guardado. Cuéntalos una vez y la app lleva la cuenta conforme marcas dosis tomadas, y te avisa antes de que se acaben.",
+ "Pause one without removing it": "Pausar uno sin quitarlo",
+ "Tap Track how many under it. Once counted, the same button shows how many are left.": "Toca Contar cuántos hay debajo. Ya contado, el mismo botón muestra cuántos quedan.",
+ "Type how many there are now, what they are (tablets, capsules, ml), how many one dose uses and how many days ahead to be told, then tap Save the count.": "Escribe cuántos hay ahorita, qué son (tabletas, cápsulas, ml), cuántos usa una dosis y con cuántos días de anticipación quieres el aviso, y toca Guardar la cuenta.",
+ "A new one asks this by itself the moment it is saved, then asks whether to put it on the schedule.": "Uno nuevo lo pregunta solo en cuanto se guarda, y luego pregunta si lo pones en el horario.",
+ "Tap Pause it. Its row says it is paused and left out of nutrient totals and timing warnings.": "Toca Pausarlo. Su fila dice que está en pausa y que no cuenta en los totales de nutrientes ni en los avisos de horario.",
+ "Tap Start again under it when you take it again.": "Toca Empezar de nuevo debajo cuando lo vuelvas a tomar.",
+ "Tap Remove again to say yes. This cannot be undone, so use Pause it if you may take it again.": "Toca Quitar otra vez para decir que sí. No se puede deshacer, así que usa Pausarlo si puedes volver a tomarlo."
 };

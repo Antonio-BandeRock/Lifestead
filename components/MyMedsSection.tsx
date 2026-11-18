@@ -77,6 +77,7 @@ import {
   PILL_TEXT,
 } from '../constants/buttons';
 import { ReadProblem } from './ReadProblem';
+import { SupplyCountForm } from './SupplyCountForm';
 import { saveOrSay } from '../lib/saveProblem';
 import { doseWithUnit, formatDoseAmount, parseDoseAmount } from '../lib/doseAmount';
 
@@ -258,6 +259,13 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   const [labelNote, setLabelNote] = useState<string | null>(null);
   const [medForm, setMedForm] = useState<MedFormState>(blankMedForm('prescription'));
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  // The row whose Tracking button opened the count, and the one just saved,
+  // which is asked how many there are and then whether to schedule it
+  // (Tony, 2026-11-18: "The count should always be asked when the new
+  // supplement is saved. Then it should be asked if they want to schedule
+  // this supplement or pharmaceutical.").
+  const [countingId, setCountingId] = useState<string | null>(null);
+  const [justSaved, setJustSaved] = useState<{ id: string; name: string; unit: string | null } | null>(null);
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [confirmSheet, confirmSheetElement] = useConfirmSheet();
   // The med list is never refused at the database, since the timing
@@ -607,13 +615,14 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
           notes: supplementForm.notes,
         });
       } else {
-        await createSupplementTreatment({
+        const id = await createSupplementTreatment({
           name: supplementForm.name,
           unitsPerDay,
           servingUnitLabel: supplementForm.servingUnitLabel,
           ingredients,
           notes: supplementForm.notes,
         });
+        setJustSaved({ id, name: supplementForm.name.trim(), unit: supplementForm.servingUnitLabel.trim() || null });
       }
       closeAddForm();
       load();
@@ -660,10 +669,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
         } else {
           await updateOtcTreatment(medForm.editingId, input);
         }
-      } else if (medForm.category === 'prescription') {
-        await createPrescriptionTreatment(input);
       } else {
-        await createOtcTreatment(input);
+        const id = medForm.category === 'prescription' ? await createPrescriptionTreatment(input) : await createOtcTreatment(input);
+        setJustSaved({ id, name: medForm.name.trim(), unit: null });
       }
       closeAddForm();
       load();
@@ -683,6 +691,19 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
     if (!ok) return;
     if (!(await saveOrSay('It was not removed. Try again.', async () => { await deleteTreatment(treatment.id); return true; }))) return;
     load();
+  }
+
+  // After the count for a new one is saved or put off: whether to schedule it.
+  async function finishJustSaved(saved: { id: string; name: string }) {
+    setJustSaved(null);
+    load();
+    const schedule = await confirmSheet({
+      title: 'Put it on the schedule?',
+      message: t('Set the times for {name} on Schedules > Meds, so it shows with everything else for the day and each dose you mark taken comes off the count.', { name: saved.name }),
+      confirmLabel: 'Schedule It',
+      cancelLabel: 'Not Now',
+    });
+    if (schedule) router.push({ pathname: '/schedule', params: { openScheduleLens: 'meds', scheduleTreatmentId: saved.id } });
   }
 
   async function handleToggleActive(treatment: TreatmentRecord) {
@@ -916,6 +937,18 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
             />
   
             <ThumbRow primary="last" style={styles.formActions}>
+              {supplementForm.editingId && treatments.find((item) => item.id === supplementForm.editingId)?.active ? (
+                <TouchableOpacity
+                  style={styles.secondaryButton}
+                  onPress={() => {
+                    const editing = treatments.find((item) => item.id === supplementForm.editingId);
+                    closeAddForm();
+                    if (editing) void handleToggleActive(editing);
+                  }}
+                >
+                  <Text style={styles.secondaryButtonText}>Pause it</Text>
+                </TouchableOpacity>
+              ) : null}
               <TouchableOpacity style={styles.secondaryButton} onPress={closeAddForm}>
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
@@ -1040,6 +1073,18 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
             />
   
             <ThumbRow primary="last" style={styles.formActions}>
+              {medForm.editingId && treatments.find((item) => item.id === medForm.editingId)?.active ? (
+                <TouchableOpacity
+                  style={styles.secondaryButton}
+                  onPress={() => {
+                    const editing = treatments.find((item) => item.id === medForm.editingId);
+                    closeAddForm();
+                    if (editing) void handleToggleActive(editing);
+                  }}
+                >
+                  <Text style={styles.secondaryButtonText}>Pause it</Text>
+                </TouchableOpacity>
+              ) : null}
               <TouchableOpacity style={styles.secondaryButton} onPress={closeAddForm}>
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
@@ -1083,7 +1128,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                       ]
                         .filter(Boolean)
                         .join(', ') || 'No dose details entered'}
-                  {treatment.active ? '' : ' · Not tracking'}
+                  {treatment.active ? '' : ` ${t('· Paused, so it is left out of nutrient totals and timing warnings')}`}
                 </Text>
                 {supplyByTreatment.get(treatment.id)?.short ? (
                   <Text style={styles.rowMeta}>{supplyByTreatment.get(treatment.id)?.short}</Text>
@@ -1101,9 +1146,18 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
               </TouchableOpacity>
 
               <View style={styles.supplementRowActions}>
-                <TouchableOpacity ref={treatment.id === firstShownId ? walkMark.ref('myMeds.tracking') : undefined} style={walkMark('myMeds.tracking')} onPress={() => handleToggleActive(treatment)}>
-                  <Text style={treatment.active ? styles.actionTextPrimary : styles.actionText}>
-                    {treatment.active ? 'Tracking' : 'Not tracking'}
+                {treatment.active ? null : (
+                  <TouchableOpacity onPress={() => handleToggleActive(treatment)}>
+                    <Text style={styles.actionTextPrimary}>Start again</Text>
+                  </TouchableOpacity>
+                )}
+                <TouchableOpacity
+                  ref={treatment.id === firstShownId ? walkMark.ref('myMeds.tracking') : undefined}
+                  style={walkMark('myMeds.tracking')}
+                  onPress={() => setCountingId(countingId === treatment.id ? null : treatment.id)}
+                >
+                  <Text style={supplyByTreatment.get(treatment.id)?.short ? styles.actionTextPrimary : styles.actionText}>
+                    {supplyByTreatment.get(treatment.id)?.short ? t('Tracking: {left}', { left: supplyByTreatment.get(treatment.id)?.short ?? '' }) : 'Track how many'}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity ref={treatment.id === firstShownId ? walkMark.ref('myMeds.details') : undefined} style={walkMark('myMeds.details')} onPress={() => setExpandedId(isExpanded ? null : treatment.id)}>
@@ -1119,6 +1173,25 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                   <Text style={styles.actionTextRemove}>Remove</Text>
                 </TouchableOpacity>
               </View>
+
+              {countingId === treatment.id ? (
+                <View style={styles.myMedsDetail}>
+                  <Text style={styles.label}>{t('How many {name} do you have?', { name: treatment.name })}</Text>
+                  <Text style={styles.fieldHint}>{supplyByTreatment.get(treatment.id)?.sentence ?? ''}</Text>
+                  <SupplyCountForm
+                    treatmentId={treatment.id}
+                    details={detailsByTreatment.get(treatment.id)}
+                    reading={supplyByTreatment.get(treatment.id)}
+                    defaultUnit={treatment.servingUnitLabel}
+                    tabColor={tabColor}
+                    onDone={(saved) => {
+                      setCountingId(null);
+                      if (saved) load();
+                    }}
+                    onProblem={showInfoAlert}
+                  />
+                </View>
+              ) : null}
 
               {isExpanded ? (
                 <View style={styles.myMedsDetail}>
@@ -1239,7 +1312,24 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
         <ReadProblem message="Your medicines and supplements could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
       ) : (
         <>
-          {addMode === null ? (
+          {justSaved && addMode === null ? (
+            <View style={styles.formCard}>
+              <Text style={styles.label}>{t('How many {name} do you have right now?', { name: justSaved.name })}</Text>
+              <Text style={styles.fieldHint}>
+                Saved. Count them once and the app keeps track as you mark doses taken, and tells you before they run low.
+              </Text>
+              <SupplyCountForm
+                treatmentId={justSaved.id}
+                details={detailsByTreatment.get(justSaved.id)}
+                reading={undefined}
+                defaultUnit={justSaved.unit}
+                tabColor={tabColor}
+                cancelLabel="Not now"
+                onDone={() => void finishJustSaved(justSaved)}
+                onProblem={showInfoAlert}
+              />
+            </View>
+          ) : addMode === null ? (
             <View style={styles.myMedsAddRow}>
               <TouchableOpacity ref={walkMark.ref('myMeds.add')} style={[styles.addButton, walkMark('myMeds.add')]} onPress={() => openAddMed('prescription')}>
                 <Text style={styles.addButtonText}>+ Prescription</Text>

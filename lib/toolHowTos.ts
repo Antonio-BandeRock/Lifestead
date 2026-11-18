@@ -1107,9 +1107,9 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'count',
       title: 'Know when one will run out',
       steps: [
-        { say: 'Find it in the list and tap Details under it.', mark: 'myMeds.details' },
-        { say: 'Under On hand, tap Count what is on hand.' },
-        { say: 'Type how many there are now, what they are (tablets, capsules, ml) and how many one dose uses, then tap Save the count.' },
+        { say: 'Tap Track how many under it. Once counted, the same button shows how many are left.', mark: 'myMeds.tracking' },
+        { say: 'Type how many there are now, what they are (tablets, capsules, ml), how many one dose uses and how many days ahead to be told, then tap Save the count.' },
+        { say: 'A new one asks this by itself the moment it is saved, then asks whether to put it on the schedule.' },
       ],
       forYou: 'Each dose you mark taken comes off the count. The days left follow the doses on your schedule, weekly, monthly or a taper step by step, and a reminder comes before it runs out.',
     },
@@ -1125,10 +1125,11 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     {
       key: 'tracking',
-      title: 'Stop tracking one without removing it',
+      title: 'Pause one without removing it',
       steps: [
-        { say: 'Tap Tracking under it. It changes to Not tracking.', mark: 'myMeds.tracking' },
-        { say: 'Tap Not tracking to start tracking it again.' },
+        { say: 'Tap Edit under it.', mark: 'myMeds.edit', stay: true },
+        { say: 'Tap Pause it. Its row says it is paused and left out of nutrient totals and timing warnings.' },
+        { say: 'Tap Start again under it when you take it again.' },
       ],
       forYou: 'It stays on the list with everything recorded about it, ready for the next time you take it.',
     },
@@ -1137,7 +1138,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Remove one for good',
       steps: [
         { say: 'Tap Remove under it.', mark: 'myMeds.remove' },
-        { say: 'Tap Remove again to say yes. This cannot be undone, so use Not tracking if you may take it again.' },
+        { say: 'Tap Remove again to say yes. This cannot be undone, so use Pause it if you may take it again.' },
       ],
       forYou: 'Your list holds only what you take, or have taken and may take again.',
     },

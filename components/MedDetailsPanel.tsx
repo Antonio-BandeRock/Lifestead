@@ -15,13 +15,13 @@ import { RecordPhotos } from './RecordPhotos';
 import { AttachedFiles } from './AttachedFiles';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
-import { saveTreatmentContacts, saveTreatmentSupply, type TreatmentDetails } from '../lib/medDetailsDb';
+import { saveTreatmentContacts, type TreatmentDetails } from '../lib/medDetailsDb';
+import { SupplyCountForm } from './SupplyCountForm';
 import { dialable, type SupplyReading } from '../lib/medSupply';
 import { textNumber } from '../lib/phoneReach';
 import { CAN_PICK_CONTACTS, pickContact } from '../lib/contactPick';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
-import { parseDoseAmount } from '../lib/doseAmount';
 
 type Props = {
   treatmentId: string;
@@ -33,58 +33,21 @@ type Props = {
   onProblem: (title: string, message: string) => void;
 };
 
-function numberText(value: number | null | undefined): string {
-  return value === null || value === undefined ? '' : String(value);
-}
-
-// Half and quarter pills are typed however a person writes them (lib/doseAmount.ts).
-const parseAmount = parseDoseAmount;
-
 export function MedDetailsPanel({ treatmentId, treatmentName, details, reading, tabColor, onSaved, onProblem }: Props) {
   const styles = makeStyles(tabColor);
   const [editingSupply, setEditingSupply] = useState(false);
   const [editingContacts, setEditingContacts] = useState(false);
-  const [onHand, setOnHand] = useState('');
-  const [unit, setUnit] = useState('');
-  const [perDose, setPerDose] = useState('1');
-  const [leadDays, setLeadDays] = useState('7');
   const [pharmacyName, setPharmacyName] = useState('');
   const [pharmacyPhone, setPharmacyPhone] = useState('');
   const [prescriberName, setPrescriberName] = useState('');
   const [prescriberPhone, setPrescriberPhone] = useState('');
 
   useEffect(() => {
-    setOnHand(reading?.remaining !== null && reading?.remaining !== undefined ? numberText(reading.remaining) : '');
-    setUnit(details?.supplyUnit ?? '');
-    setPerDose(numberText(details?.supplyPerDose ?? 1));
-    setLeadDays(numberText(details?.refillLeadDays ?? 7));
     setPharmacyName(details?.pharmacyName ?? '');
     setPharmacyPhone(details?.pharmacyPhone ?? '');
     setPrescriberName(details?.prescriberName ?? '');
     setPrescriberPhone(details?.prescriberPhone ?? '');
   }, [details, reading]);
-
-  async function saveSupply(clear = false) {
-    const count = clear ? null : parseAmount(onHand);
-    const each = parseAmount(perDose);
-    const lead = parseAmount(leadDays);
-    if (Number.isNaN(count) || Number.isNaN(each) || Number.isNaN(lead)) {
-      onProblem('Almost there', 'Use numbers for how many are on hand, how many one dose uses, and the days ahead.');
-      return;
-    }
-    try {
-      await saveTreatmentSupply(treatmentId, {
-        onHand: count,
-        unit: unit || null,
-        perDose: each && each > 0 ? each : 1,
-        leadDays: lead ?? 7,
-      });
-      setEditingSupply(false);
-      onSaved();
-    } catch (error) {
-      onProblem('Could not save', error instanceof Error ? error.message : String(error));
-    }
-  }
 
   async function saveContacts() {
     try {
@@ -164,51 +127,17 @@ export function MedDetailsPanel({ treatmentId, treatmentName, details, reading, 
             'How many are on hand has not been counted. Count it once and the app keeps track from the doses you mark taken.'}
         </Text>
         {editingSupply ? (
-          <>
-            <Text style={styles.label}>How many are there now</Text>
-            <View style={styles.inlineRow}>
-              <AppTextInput
-                style={[styles.input, styles.numberInput]}
-                keyboardType="decimal-pad"
-                value={onHand}
-                onChangeText={setOnHand}
-                placeholder="30"
-              />
-              <AppTextInput
-                style={[styles.input, styles.flexInput]}
-                value={unit}
-                onChangeText={setUnit}
-                placeholder="tablets, capsules, ml"
-              />
-            </View>
-            <Text style={styles.label}>How many one dose uses</Text>
-            <AppTextInput
-              style={[styles.input, styles.numberInput]}
-              keyboardType="decimal-pad"
-              value={perDose}
-              onChangeText={setPerDose}
-            />
-            <Text style={styles.label}>Remind me this many days before it runs out</Text>
-            <AppTextInput
-              style={[styles.input, styles.numberInput]}
-              keyboardType="number-pad"
-              value={leadDays}
-              onChangeText={setLeadDays}
-            />
-            <View style={styles.actions}>
-              {details?.supplyCountedAt ? (
-                <TouchableOpacity style={styles.secondaryButton} onPress={() => saveSupply(true)}>
-                  <Text style={styles.secondaryButtonText}>Stop counting</Text>
-                </TouchableOpacity>
-              ) : null}
-              <TouchableOpacity style={styles.secondaryButton} onPress={() => setEditingSupply(false)}>
-                <Text style={styles.secondaryButtonText}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.primaryButton} onPress={() => saveSupply()}>
-                <Text style={styles.primaryButtonText}>Save the count</Text>
-              </TouchableOpacity>
-            </View>
-          </>
+          <SupplyCountForm
+            treatmentId={treatmentId}
+            details={details}
+            reading={reading}
+            tabColor={tabColor}
+            onDone={(saved) => {
+              setEditingSupply(false);
+              if (saved) onSaved();
+            }}
+            onProblem={onProblem}
+          />
         ) : (
           <TouchableOpacity onPress={() => setEditingSupply(true)}>
             <Text style={styles.actionText}>{details?.supplyCountedAt ? 'Count again' : 'Count what is on hand'}</Text>
