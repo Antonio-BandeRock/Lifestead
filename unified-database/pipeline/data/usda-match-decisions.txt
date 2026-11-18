@@ -800,3 +800,7 @@ H 24874 Store-bought beef jerky, hidden by Tony's choice
 H 36672 Store-bought beef jerky, hidden by Tony's choice
 H 8874 Store-bought farina, hidden by Tony's choice
 H 11132 Store-bought farina, hidden by Tony's choice
+
+# Near duplicates, merged by the owner 2026-11-17
+L 30021 6467
+L 1251 30073

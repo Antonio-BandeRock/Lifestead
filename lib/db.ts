@@ -1,6 +1,7 @@
 import * as SQLite from 'expo-sqlite';
 import { File } from 'expo-file-system';
 import type { EffortLevel } from './exertion';
+import { buildFoodRenames, FOOD_NAMES_MOVED_KEY, moveFoodNames, type ReferenceNameRow } from './foodNameRenames';
 import { REFERENCE_DB_VERSION } from './referenceDbVersion';
 import { DEFAULT_FOOD_SOURCE, foodSourceRank, foodSourceRankSql, getPreferredFoodSource, isFoodSourceKey, isOutsidePreferredSource, setPreferredFoodSourceInMemory, type FoodSourceKey } from './foodSourcePreference';
 import { mergeNutrientsInOrder, orderEquivalentRows, rowKey, type EquivalentRow, type NutrientAmount } from './foodEquivalence';
@@ -630,7 +631,34 @@ export async function getReferenceDatabase() {
         );
       }
 
-      return SQLite.openDatabaseAsync(REFERENCE_DB_NAME);
+      const referenceDb = await SQLite.openDatabaseAsync(REFERENCE_DB_NAME);
+
+      // Records that hold a food only by its name follow the food to its
+      // new name, once per reference version (lib/foodNameRenames.ts).
+      const movedRow = await mainDb.getFirstAsync<{ value: string }>(
+        'SELECT value FROM app_meta WHERE key = ?',
+        FOOD_NAMES_MOVED_KEY,
+      );
+      if (movedRow?.value !== REFERENCE_DB_VERSION) {
+        try {
+          const nameRows = await referenceDb.getAllAsync<ReferenceNameRow>(
+            'SELECT category, base_name, hidden, listing_name, original_category, original_base_name FROM foods',
+          );
+          await moveFoodNames(mainDb, buildFoodRenames(nameRows));
+          await mainDb.runAsync(
+            `INSERT INTO app_meta (key, value, updated_at) VALUES (?, ?, ?)
+             ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at`,
+            FOOD_NAMES_MOVED_KEY,
+            REFERENCE_DB_VERSION,
+            new Date().toISOString(),
+          );
+        } catch (error) {
+          // Tried again on the next launch; the foods themselves still load.
+          console.warn('Moving food names to the new reference database did not finish', error);
+        }
+      }
+
+      return referenceDb;
     })();
   }
 
@@ -666,7 +694,7 @@ const CATEGORIES_HIDDEN_FROM_BROWSING = new Set(['CommercialPremade', 'Baked']);
 export async function getReferenceCategories() {
   const db = await getReferenceDatabase();
   const rows = await db.getAllAsync<{ category: string }>(
-    'SELECT DISTINCT category FROM foods ORDER BY category',
+    'SELECT DISTINCT category FROM foods WHERE hidden = 0 ORDER BY category',
   );
   return rows.map((row) => row.category).filter((category) => !CATEGORIES_HIDDEN_FROM_BROWSING.has(category));
 }
@@ -690,7 +718,7 @@ export async function getReferenceCategories() {
 // client-side against that one Set. Matched by base_name (what a person
 // actually sees in the food pickers), case-sensitively -- these names are
 // hand-typed to match the reference database exactly, the same discipline
-// already used for ALCOHOL_HIDDEN_BASE_NAMES/BEV_JUICE_ALLOWED_NAMES above.
+// already used for ALCOHOL_HIDDEN_BASE_NAMES above.
 export async function getVisibleFoodBaseNames(names: string[]): Promise<Set<string>> {
   if (names.length === 0) return new Set();
   const db = await getReferenceDatabase();
@@ -773,7 +801,7 @@ async function hasUsdaCoverage(category: string): Promise<boolean> {
 async function resolveEffectiveUsdaOnly(category: string, subcategory: string | null, usdaOnly: boolean): Promise<boolean> {
   if (!usdaOnly) return false;
   // A real bug found 2026-08-02, reported directly as "I 19 jucies listed"
-  // right after BEV_JUICE_ALLOWED_NAMES shipped (see its own comment) --
+  // right after the old juice allow-list shipped (removed 2026-11-17) --
   // Bev has plenty of real USDA coverage, so the usdaOnly default here
   // stayed true and silently crushed the curated 103-entry cross-source
   // allowlist down to just its 19 USDA-sourced rows, hiding all 84 real,
@@ -1025,201 +1053,6 @@ const ALCOHOL_HIDDEN_BASE_NAMES = new Set([
   'Distilled alcoholic beverage, whisky',
 ]);
 
-// Reported directly by the user, 2026-08-02: "look in the Juices of
-// Beverages and eliminate name branded and from concentrate from view...
-// If it isn't just juice from a whole food fruit, it shouldn't be viewed
-// in this list." An allowlist, not a denylist -- deliberately the more
-// conservative choice given how emphatic the ask was ("just juice from a
-// whole food fruit"), and given the category's own real scale (389 rows):
-// a denylist trusts every future addition to be automatically fine, an
-// allowlist doesn't. Built by hand-reviewing all 389 rows, not guessed --
-// removed brand names (OCEAN SPRAY, V8 SPLASH, BOLTHOUSE FARMS, NAKED
-// JUICE, ODWALLA, MOTTS, CONCORD, REAL LEMON), anything "from concentrate"
-// or "chilled," anything fortified/with an addition (added vitamin C,
-// ascorbic acid, calcium, sugar, salt -- but NOT the "without added X"/"no
-// salt added" negations, which are exactly the plain versions worth
-// keeping), every blend of 2+ fruits/vegetables, every "juice drink"/
-// "cocktail"/"nectar"/"cordial"/"spritzer"/"fruit juice beverage" (none of
-// these are pure juice), Japan_MEXT's own "reconstituted"/"X% fruit juice
-// beverage" dilution tiers (kept their own "straight fruit juice" -- their
-// term for undiluted, unblended, 100% juice), canned-fruit-preserved-in-
-// juice products (the fruit itself, not a juice beverage), and "Kale
-// juice, powder" (a dehydrated powder, not juice).
-//
-// Trimmed a second time, 2026-08-02, same day, to one row per real
-// fruit/variety: "There should just be one of each type of fruit juice,
-// not several variations of the same fruit juice." The first pass above
-// still left several near-duplicate rows per fruit selectable (a plain
-// "Apple juice" alongside a "canned or bottled, without added vitamin C"
-// variant, five different sources' own "Orange juice" row, etc.) --
-// real cross-source diversity, but not a real CHOICE, since none of the
-// duplicates represent a genuinely different product. Kept exactly one
-// representative row per plain fruit (preferring USDA when it's on file,
-// else whichever single source has it), EXCEPT where multiple rows
-// represent a real, commonly-recognized named variety rather than just a
-// processing difference -- confirmed directly with the person before
-// building this, since it's a real judgment call either way: Red/White
-// Grape, Pink/White Grapefruit, Navel/Valencia Orange, and Purple/Yellow
-// Passion Fruit all stay as their own separate entries. Also merged two
-// pairs that turned out to be the same real thing under different names,
-// not real varieties: "Sour cherry" (Germany_BLS) into "Tart cherry"
-// (USDA) -- the same species (Prunus cerasus) under its European vs.
-// American common name -- and "Mandarin juice"/"Tangerine (mandarin)
-// juice" into plain "Tangerine juice," since mandarin/tangerine are used
-// interchangeably by most people and neither this database nor common
-// usage draws a clean line between them the way Navel/Valencia orange
-// does. "Satsuma mandarin juice" (Germany_BLS, a non-Japanese-sourced row
-// that would have sat confusingly close to the Japanese Satsuma entries
-// below) was dropped outright in favor of the already-kept Japan_MEXT
-// "Satsuma mandarins, straight fruit juice" -- same real product, and
-// Satsuma is a genuinely Japanese place name, so keeping it under the
-// Japanese header rather than duplicated outside it reads more honestly.
-//
-// Four Japan_MEXT rows that are NOT Japanese-named fruits (Seminole is a
-// Florida-bred tangelo; sour/bitter orange and navel orange are both
-// globally common terms) stay in this list as their own plain entries
-// rather than joining the Japanese-cultivar group in
-// components/FoodLookup.tsx's own JUICE_JAPAN_DISPLAY_LABELS -- they just
-// happen to be Japan_MEXT-exclusive in this database's own source
-// coverage, which isn't the same thing as the fruit itself being
-// Japanese. Each was given a real, clean base_name via
-// scripts/build_food_reference_db.py's own JUICE_CLEAN_RENAMES/
-// NAME_CATEGORY_OVERRIDES (Seminole, Sour Orange, Navel Orange, Valencia
-// Orange) so they read the same as every other plain fruit here, not with
-// their original clunky "Oranges, navel, juice sacs" phrasing.
-//
-// A real complication found while building the original list, not
-// assumed away: many rows share one base_name despite being nutritionally
-// different (e.g. all 7 of USDA's "Apple juice" rows -- with/without
-// added ascorbic acid, canned/frozen-concentrate -- collapse to base_name
-// "Apple juice," 3 of them even sharing prep_method "Canned" too) -- a
-// base_name-only filter couldn't separate the one plain row from the
-// other 6. Filtered by the full `name` column instead, checked below in
-// buildScopeClause, which is precise regardless of what base_name/
-// prep_method a row happens to share with something that should be
-// hidden.
-const BEV_JUICE_ALLOWED_NAMES = new Set([
-  // Plain fruits/vegetables -- one representative row each.
-  'Acerola juice, raw',
-  'Apple juice, canned or bottled, unsweetened, without added ascorbic acid',
-  'Apricot juice',
-  'Beetroot juice',
-  'Black currant juice',
-  'Blackberry juice, canned',
-  'Blueberry juice',
-  'Cape gooseberry juice',
-  'Carrot juice, canned',
-  'Celeriac juice',
-  'Cherry juice, tart',
-  'Clementine juice',
-  // Coconut water: was deliberately kept as a mature/young pair (see this
-  // const's own comment above) since young coconut water is a real,
-  // separately marketed product -- reversed 2026-08-02, explicit direct
-  // request ("we only need one coconut water not two"). Young/immature
-  // kept as the one entry: it's what "coconut water" means as a plain
-  // beverage in virtually every commercial/common usage (Vita Coco etc.);
-  // mature coconut water is the less common of the two in practice, more
-  // associated with coconut milk/meat production than a drink on its own.
-  'Coconut, fresh, young or immature, water or juice',
-  'Cucumber juice',
-  'Elderberry juice',
-  'Honeydew melon juice',
-  'Kiwi fruit juice',
-  'Lemon juice, raw',
-  'Lime juice, raw',
-  'Lingonberry juice',
-  'Lychee juice',
-  'Mango juice',
-  'Mangosteen juice',
-  'Mulberry juice',
-  'Onion juice',
-  "Orange juice, raw (Includes foods for USDA's Food Distribution Program)",
-  'Passion fruit juice',
-  'Pear juice',
-  'Persimmon juice',
-  'Plum juice',
-  'Pomegranate juice, bottled',
-  'Pomelo juice',
-  'Prune juice, canned',
-  'Quince juice',
-  'Raspberry juice',
-  'Red currant juice',
-  'Rhubarb juice',
-  'Sauerkraut juice',
-  'Sea buckthorn berry juice',
-  'Sloe fruit juice',
-  'Spinach juice',
-  'Strawberry juice',
-  'Sweet cherry juice',
-  'Tangerine juice, raw',
-  'Tomato juice, canned, without salt added',
-  'Cranberry juice, unsweetened',
-  // Real, commonly-recognized named varieties -- kept separate rather
-  // than collapsed into their plain fruit's single entry.
-  'Grape red juice',
-  'Grape white juice',
-  'Grapefruit juice, pink, raw',
-  'Grapefruit juice, white, raw',
-  'Passion-fruit juice, purple, raw',
-  'Passion-fruit juice, yellow, raw',
-  // Japan_MEXT-exclusive but NOT Japanese-named fruits -- see this
-  // const's own comment above for why these stay outside the Japanese
-  // group.
-  'Oranges, navel, juice sacs, raw',
-  'Oranges, Valencia, straight fruit juice',
-  'Citrus, Seminole, juice sacs, raw',
-  'Citrus, sour oranges, juice, fresh',
-  // Genuinely Japanese-named citrus cultivars -- grouped under their own
-  // "Japanese" header, see components/FoodLookup.tsx's
-  // JUICE_JAPAN_DISPLAY_LABELS.
-  'Citrus, "Harumi", juice sacs, raw',
-  'Citrus, "Hassaku", juice sacs, raw',
-  'Citrus, "Hyuga-natsu", juice sacs, raw',
-  'Citrus, "Iyo", juice sacs',
-  'Citrus, "Kabosu", juice, fresh',
-  'Citrus, "Kawachi-bankan", juice sacs, raw',
-  'Citrus, "Kiyomi", juice sacs, raw',
-  'Citrus, "Natsudaidai", juice sacs, raw',
-  'Citrus, "Sanbokan", juice sacs, raw',
-  'Citrus, "Setoka", juice sacs, raw',
-  'Citrus, "Shiikuwasha", juice, fresh',
-  'Citrus, "Shiranuhi", juice sacs, raw',
-  'Citrus, "Sudachi", juice, fresh',
-  'Citrus, "Yuzu", juice, fresh',
-  'Oranges, Fukuhara-orange, juice sacs, raw',
-  'Satsuma mandarins, juice sacs, early ripening type, raw',
-  'Satsuma mandarins, juice sacs, normal ripening type, raw',
-  'Satsuma mandarins, straight fruit juice',
-  // 18 real, verified France_Ciqual entries added 2026-08-11, the same
-  // real translation pass that discovered ~30 genuinely alcoholic
-  // beverages sitting in Bev instead of Alcohol (see ALCOHOL_HIDDEN_
-  // BASE_NAMES' own comment above for that separate finding). Each one
-  // is real, unblended, not-from-concentrate, not-fortified juice --
-  // "pur jus" (pure juice), "frais" (fresh), or "maison" (homemade) in
-  // the original French -- matching this allowlist's own already-
-  // established criteria exactly. Concentrate/blend/nectar/fortified/
-  // salted-tomato-juice rows from the same France_Ciqual batch were
-  // deliberately NOT added here, staying in subcategory 'Other' instead.
-  'Carrot Juice, Pure Juice',
-  'Lemon Juice, Homemade',
-  'Orange Juice, Homemade',
-  'Grape Juice, Pure Juice',
-  'Pomegranate Juice, Pure Juice',
-  'Mango Juice, Fresh',
-  'Passion Fruit Juice, Fresh',
-  'Grapefruit Juice, Homemade',
-  'Grapefruit Juice, Pure Juice',
-  'Lemon Juice, Pure Juice',
-  'Lime Juice, Homemade',
-  'Lime Juice, Pure Juice',
-  'Clementine or Mandarin Juice, Pure Juice',
-  'Pomegranate Juice, Fresh',
-  'Orange Juice, Pure Juice',
-  'Pineapple Juice, Pure Juice',
-  'Apple Juice, Pure Juice',
-  'Blood Orange Juice, Pure Juice',
-]);
-
 function buildScopeClause(category: string, subcategory: string | null, usdaOnly: boolean) {
   const params: (string | number)[] = [category];
   // 'hidden' column, 2026-08-04 -- see scripts/build_food_reference_db.py's
@@ -1296,10 +1129,9 @@ function buildScopeClause(category: string, subcategory: string | null, usdaOnly
     params.push(...ALCOHOL_HIDDEN_BASE_NAMES);
   }
 
-  if (category === 'Bev' && subcategory === 'Juice') {
-    clause += ` AND name IN (${Array.from(BEV_JUICE_ALLOWED_NAMES).map(() => '?').join(', ')})`;
-    params.push(...BEV_JUICE_ALLOWED_NAMES);
-  }
+  // Which juices show is the unified database's curation now (2026-11-17):
+  // every juice that is not one plain pressed juice is hidden there, so the
+  // old list of full source names is gone.
 
   return { clause, params };
 }
@@ -2481,12 +2313,27 @@ export async function curatedRecipeContainsSweetenerIngredient(curatedRecipeId: 
 // curated recipes was pulled by direct query and individually
 // classified by hand (lib/dailyMealPlan.ts's own FISH_SEAFOOD_BASE_NAMES/
 // RED_MEAT_BASE_NAMES), not guessed or trusted from this one column.
+// Recipe lines that name a food but are not a serving of it: a stock, a
+// paste, the bones. Since the unified database (2026-11-17) these carry the
+// plain name of the food they came from ("Soup, stock, beef" lists as Beef,
+// "Shrimp Paste" as Shrimp), so a count of fish or red meat meals leaves
+// them out by the name the recipe line was written with.
+const NOT_A_SERVING_LINES = [
+  'Soup, stock, beef, home-prepared',
+  'Soup, stock, fish, home-prepared',
+  'Shrimp Paste',
+  'Beef bonemeat',
+  'Pork bonemeat',
+  'pork bones',
+];
+const NOT_A_SERVING_SQL = `AND COALESCE(original_base_name, '') NOT IN (${NOT_A_SERVING_LINES.map((n) => `'${n.replace(/'/g, "''")}'`).join(', ')})`;
+
 export async function curatedRecipeContainsAnyIngredient(curatedRecipeId: string, category: string, baseNames: string[]): Promise<boolean> {
   if (baseNames.length === 0) return false;
   const db = await getReferenceDatabase();
   const placeholders = baseNames.map(() => '?').join(', ');
   const row = await db.getFirstAsync<{ count: number }>(
-    `SELECT COUNT(*) AS count FROM curated_recipe_ingredients WHERE recipe_id = ? AND category = ? AND base_name IN (${placeholders})`,
+    `SELECT COUNT(*) AS count FROM curated_recipe_ingredients WHERE recipe_id = ? AND category = ? AND base_name IN (${placeholders}) ${NOT_A_SERVING_SQL}`,
     curatedRecipeId,
     category,
     ...baseNames,
@@ -2525,7 +2372,7 @@ export async function getCuratedRecipeIdsContainingIngredient(recipeIds: string[
   const namePlaceholders = baseNames.map(() => '?').join(', ');
   const rows = await db.getAllAsync<{ recipe_id: string }>(
     `SELECT DISTINCT recipe_id FROM curated_recipe_ingredients
-     WHERE recipe_id IN (${recipePlaceholders}) AND category = ? AND base_name IN (${namePlaceholders})`,
+     WHERE recipe_id IN (${recipePlaceholders}) AND category = ? AND base_name IN (${namePlaceholders}) ${NOT_A_SERVING_SQL}`,
     ...recipeIds,
     category,
     ...baseNames,

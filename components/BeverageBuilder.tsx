@@ -125,6 +125,14 @@ import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY
 // cocktail, so it stays pre-resolved; every real subcategory choice
 // within it, or within any other now-multi-category subtype, is left for
 // the person to actually pick).
+// 2026-11-17, the unified database: tea and coffee are kept as what is
+// bought (Black tea, Green tea, Matcha, Tea leaves, Ground coffee) in
+// Brewing, and the brewed cups, sports drinks and protein shakes are
+// hidden, so Tea and Coffee here point at Brewing. Prune and blood orange
+// juice sit in Bev > Other. Protein & Meal Replacement and
+// SupplementPowder stay listed for when protein powders get a home (an
+// open question); a subcategory with nothing shown is left out of the
+// picker by FoodLookup itself.
 const BEVERAGE_SUBTYPE_CONFIG: Record<
   BeverageSubtypeKey,
   {
@@ -135,23 +143,23 @@ const BEVERAGE_SUBTYPE_CONFIG: Record<
   }
 > = {
   cocktailsMixology: {
-    allowedCategories: ['Alcohol', 'Bev', 'Fruit', 'Herbs', 'PantryStaples', 'SaucesCondiments', 'Sweets'],
+    allowedCategories: ['Alcohol', 'Bev', 'Brewing', 'Fruit', 'Herbs', 'PantryStaples', 'SaucesCondiments', 'Sweets'],
     allowedSubcategories: {
       Alcohol: ['Spirits & Liqueurs', 'Wine & Champagne', 'Other'],
-      Bev: ['Water', 'Juice', 'Tea', 'Coffee', 'Sports & Energy Drinks'],
+      Bev: ['Water', 'Juice', 'Other'],
     },
     initialCategory: 'Alcohol',
     initialSubcategory: null,
   },
   infusionsBrews: {
     allowedCategories: ['Bev', 'Brewing', 'Dairy', 'NutSeed'],
-    allowedSubcategories: { Bev: ['Tea', 'Coffee', 'Water'] },
+    allowedSubcategories: { Bev: ['Water'] },
     initialCategory: '',
     initialSubcategory: null,
   },
   juicesNectars: {
     allowedCategories: ['Bev', 'Fruit', 'Veg'],
-    allowedSubcategories: { Bev: ['Juice', 'Water'] },
+    allowedSubcategories: { Bev: ['Juice', 'Water', 'Other'] },
     initialCategory: '',
     initialSubcategory: null,
   },

@@ -2,7 +2,7 @@
 
 > **STOP AND READ FIRST: this project has TWO separate SQLite databases. Before touching either one, especially for any bulk edit or translation work, confirm which one is meant.**
 > 1. `assets/data/foods_reference.db` is the LIVE database the shipped app reads from. Any edit here goes live immediately and forces a slow re-import on the user's own phone.
-> 2. `unified-database/unified_foods.sqlite` is the separate, newer successor project (see its own section below). Not wired into the app at all.
+> 2. `unified-database/unified_foods.sqlite` is the source pipeline. Since 2026-11-17 its built candidate (`unified-database/candidate/foods_reference_candidate.db`) is what was copied over the live file; the app never reads `unified_foods.sqlite` itself. A change made in the pipeline reaches the app only by rebuilding the candidate, running `verify-candidate.js` and copying it over, with a `REFERENCE_DB_VERSION` bump.
 >
 > A session once spent hours hand-translating the LIVE database while the user believed the *unified* one was being worked on, costing roughly 8 hours in one day. Whenever the user says "the new database," "the other database," "the 2nd database," or asks for translation or bulk-edit work without naming a file, **stop and ask which one** before proceeding.
 
@@ -127,7 +127,6 @@ These are behavior-changing and apply to every session:
 - **Bump the version by running `node scripts/bump_version.js`, once per distinct request the user provides, not once per file changed** (direct instruction, 2026-08-23). Format `1.0.DAY.UPDATE`: **DAY is which day of work, so it increments the moment the calendar date changes and UPDATE goes back to 1** (direct correction, 2026-09-22). Nobody edits the four files by hand. `node scripts/bump_version.js --check` exits 1 when the day is stale and belongs in the same pass as `tsc`, the audits and the push. Treat the bump like git push and the Notion sync: part of finishing work, not a separate ask.
 - **Metro staleness:** check whether the dev server is serving stale code before re-guessing the code (memory key `feedback_metro_staleness`). Note the 2026-08-02 counter-case: staleness can also live inside React itself, for example `useRef(fn).current` freezing a callback at first render so Fast Refresh silently ignores every later edit.
 - **Neither SQLite database is in git, and neither goes back in** (2026-09-21: every commit uploaded a whole object GitHub keeps for good, and the account hit 90% of its LFS storage). Both paths are in `.gitignore`, `.gitattributes` keeps its LFS lines, and EAS still uploads both. **Run `node scripts/backup_reference_dbs.js` whenever either database changes, as part of finishing the work.** It copies them to `C:\Users\TonyR\OneDrive\Desktop\AppProject\_backups\reference-dbs\`, which is also where a fresh clone gets them.
-- **Do not hand-translate remaining untranslated France_Ciqual, Norway, or Sweden rows in `foods_reference.db`.** The unified database already has them fully translated via a tested pipeline, and the owner's call is to hold until Phase 5 (merge) and Phase 7 (swap) below are done. Roughly 1,400 France_Ciqual rows already translated by hand stay live in the meantime.
 - **Anything new added to the Digest follows the same structural pattern as everything already there, checked in the same pass that adds it.** Direct instruction, 2026-08-29: "Make sure that anything new added anywhere to the Digest follows the same pattern as all of the others from now on." Concretely, when adding entries to any category:
   1. **Never leave a shelf covering more than one subject undivided.** Past roughly 12 entries it needs named subgroups (`CONDITION_TOPIC_SUBGROUPS`, for every category), designed from the entry titles, with every id verified.
   2. **Never let a heading repeat the header above it.** Handled generally now by `shelfHeadingLabel`'s own `currentHeaderTitle` check, so a new category or a deeper drill-down inherits it automatically. Do not reintroduce a per-call-site workaround.
@@ -268,13 +267,13 @@ Implementation: `lib/healingStage.ts`, `lib/healingStageAdvisory.ts`, `lib/condi
 
 ## The Unified Whole-Foods Database
 
-`unified-database/` is a separate SQLite database (`unified_foods.sqlite`, ~115MB) and Node.js pipeline started 2026-08-10, built to become a richer, fully-auditable successor to `assets/data/foods_reference.db`. **Not merged, not wired to the app in any way.** `lib/db.ts` never reads from it and no screen touches it, so it is safe to iterate on indefinitely with zero risk to the live app.
+`unified-database/` is the SQLite database (`unified_foods.sqlite`, ~115MB) and Node.js pipeline started 2026-08-10. **Swapped in 2026-11-17 (phase 7):** `merge-candidate.js` builds the candidate, `verify-candidate.js` checks it (31 checks, against the pre-swap copy `_backups/reference-dbs/foods_reference.pre-unified-2026-11-17.db`), and the candidate became `assets/data/foods_reference.db`. Every live food kept its id, nutrients and scores; records kept by an old name move through `lib/foodNameRenames.ts`.
 
 **Why:** the current reference DB came from a one-time filter script with no testable rules. The pipeline rebuilds it reproducibly, discarding nothing, with a versioned rule engine and human review through a published audit tool.
 
-**Status (drifts, so verify via `sqlite3.exe unified_foods.sqlite`):** 9 sources ingested. Curation restarted 2026-11-06 into `food_curation`: 2,296 foods shown, 6,690 held to compare, 23,721 hidden; all 1,460 recipes can be made from the list or keep a name it lacks. [Report and open questions](https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1).
+**Status (drifts, so verify via `sqlite3.exe unified_foods.sqlite`):** 9 sources ingested, 2,496 foods shown, every one scored (`score-unscored.js` for the 150 the workbook never scored, each in `score_origin`), brewed drinks shown (`curate-brewed-drinks.js`). [Report and open questions](https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1).
 
-**Phases:** 1 and 2 done. **3 and 4 have a first pass; the owner's questions in the report are the next step.** 5 (merge curated data), 6 (integrity verification) and 7 (atomic swap, gated on `REFERENCE_DB_VERSION`) not started. Nothing here is urgent.
+**Phases:** 1 to 7 done. Open: the owner's questions in the README's 2026-11-17 entry (hidden made products, Physalis and Groundcherries, protein powders).
 
 **If picking this up fresh:** read `unified-database/README.md` in full first.
 

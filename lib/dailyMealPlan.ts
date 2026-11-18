@@ -574,43 +574,32 @@ function carbCeilingForLevel(level: CarbLevel): number | null {
 // within a generated range), the natural unit "twice a week" already
 // means.
 //
-// Base-name lists verified the same way BREAKFAST_ELIGIBLE_RECIPE_IDS
-// was: every one of the 24 real, distinct 'Meat'-category base_names
-// actually used anywhere across all 300 curated recipes was pulled by
-// direct query and classified by hand, not guessed. The reference
-// database's own `foods.subcategory` column was checked first and
-// rejected for this: real salmon rows carry subcategory 'Meat &
-// Poultry', not 'Fish & Seafood', a genuine, confirmed data-quality
-// inconsistency that would have silently missed this app's own most
-// commonly used fish.
+// Base-name lists checked by hand against every 'Meat' line in the curated
+// recipes, not guessed and not read off foods.subcategory (which once put
+// salmon under Meat & Poultry). Rebuilt 2026-11-17 for the unified database's
+// plain names; stocks, pastes and bones are left out in lib/db.ts.
 const FISH_SEAFOOD_BASE_NAMES = [
-  'Cod Fish',
-  'Crab Crustaceans',
-  'Halibut Fish (Raw)',
-  'Mackerel Fish',
-  'Mussel Mollusks',
-  'Salmon Fillet (Raw)',
-  'Sardine Fish',
-  'Scallop Mollusks',
-  'Shrimp Crustaceans',
-  'Sole fillet',
-  'Trout Fish',
-  'Tuna Fish',
+  'Anchovy', 'Carp', 'Catfish', 'Clam', 'Cod', 'Conger eel', 'Crab', 'Crayfish', 'Cuttlefish',
+  'Dried shrimp', 'Dried smelt', 'Dried squid', 'Ganzuke', 'Halibut', 'Herring', 'Japanese scallop',
+  'Lobster', 'Mackerel', 'Matjes herring', 'Monkfish', 'Mullet', 'Mussel', 'Octopus', 'Pike', 'Plaice',
+  'Pollock', 'Redfish', 'Rockfish', 'Salmon', 'Salt cod', 'Sardine', 'Scallop', 'Sea bass', 'Shrimp',
+  'Skate', 'Snapper', 'Sole', 'Squid', 'Stockfish', 'Swordfish', 'Tilapia', 'Trout', 'Tuna',
 ];
 
-// WCRF's own definition of red meat -- "all types of muscle meat from a
-// mammal: beef, veal, pork, lamb, mutton, horse, and goat" -- checked
-// directly against this app's own real 24-item ingredient list, not
-// assumed. Poultry (chicken, turkey, duck) is excluded, matching that
-// same definition.
+// WCRF's definition of red meat, "all types of muscle meat from a mammal:
+// beef, veal, pork, lamb, mutton, horse, and goat", plus the processed meat
+// the same advice names. Fat, blood, skin and offal are left out: they are
+// not the muscle the advice counts. Rebuilt 2026-11-17 against every Meat
+// line in the curated recipes after the unified database gave each food a
+// plain name; the earlier list of 24 raw cuts covered 300 recipes only.
 const RED_MEAT_BASE_NAMES = [
-  'Beef Top Sirloin (Raw)',
-  'Bison Top Sirloin (Raw)',
-  'Lamb Chop (Raw)',
-  'Lamb Fillet (Raw)',
-  'Pork Chop (Raw)',
-  'Pork Fillet / Tenderloin (Raw)',
-  'Pork Loin (Raw)',
+  'Bacon', 'Beef', 'Beef brisket', 'Beef chuck', 'Beef chuck roast', 'Beef eye of round', 'Beef flank',
+  'Beef oxtail', 'Beef rib steak', 'Beef ribeye', 'Beef round', 'Beef shank', 'Beef skirt steak',
+  'Beef stew meat', 'Beef strip steak', 'Beef tenderloin', 'Beef top sirloin', 'Bison sirloin', 'Bratwurst',
+  'Corned beef', 'Goat meat', 'Ground beef', 'Ground bison', 'Ground pork', 'Ground veal', 'Ham', 'Hot dog',
+  'Kasseler', 'Lamb', 'Lamb chops', 'Lamb leg', 'Lamb loin', 'Lamb shoulder', 'Mortadella', 'Pork',
+  'Pork back ribs', 'Pork belly', 'Pork loin', 'Pork ribs', 'Pork shank', 'Pork shoulder', 'Pork steak',
+  'Pork tenderloin', 'Salami', 'Veal', 'Veal breast', 'Veal chop', 'Veal leg', 'Veal shank',
 ];
 
 export type FrequencyRule = {

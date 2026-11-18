@@ -5,7 +5,9 @@ const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const LIVE = path.resolve(__dirname, '..', '..', 'assets', 'data', 'foods_reference.db').replace(/\\/g, '/');
+// Since the swap (2026-11-17) the app's file IS the candidate, so the comparison is with the copy kept from before it; VERIFY_LIVE names another.
+const PRE_SWAP = 'C:/Users/TonyR/OneDrive/Desktop/AppProject/_backups/reference-dbs/foods_reference.pre-unified-2026-11-17.db';
+const LIVE = (process.env.VERIFY_LIVE || (fs.existsSync(PRE_SWAP) ? PRE_SWAP : path.resolve(__dirname, '..', '..', 'assets', 'data', 'foods_reference.db'))).replace(/\\/g, '/');
 const UNI = path.resolve(__dirname, '..', 'unified_foods.sqlite').replace(/\\/g, '/');
 const CAND = path.resolve(__dirname, '..', 'candidate', 'foods_reference_candidate.db');
 if (!fs.existsSync(CAND)) throw new Error('no candidate; run merge-candidate.js first');
@@ -28,21 +30,29 @@ check('every score row belongs to a food', one('select count(*) from food_scores
 const liveFoods = one('select count(*) from L.foods');
 // A renamed food keeps what it was called in original_base_name and original_short_name, and a hidden one moved with its name keeps its category in original_category.
 const wasShort = `case when f.original_base_name is not null then f.original_short_name else f.short_name end`;
-check('every live food is still there, same id, source, code, names (as they were before the short names) and category', one(`select count(*) from L.foods l left join foods f using(food_id, source)
-  where f.food_id is null or f.source_code is not l.source_code or f.name is not l.name or f.name_local is not l.name_local or ${wasShort} is not l.short_name
+// A live food still named in its table's language may take the unified English name, keeping the original in name_local.
+check('every live food is still there, same id, source, code, names (as they were before the short names, or the unified English name with the original kept) and category', one(`select count(*) from L.foods l left join foods f using(food_id, source)
+  where f.food_id is null or f.source_code is not l.source_code or not ((f.name is l.name and f.name_local is l.name_local)
+    or (f.name_local is coalesce(l.name_local, l.name) and exists (select 1 from U.raw_foods r where r.raw_id=f.unified_raw_id and r.name_original=l.name and r.name_english=f.name))) or ${wasShort} is not l.short_name
   or coalesce(f.original_base_name, f.base_name) is not l.base_name or f.prep_method is not l.prep_method or coalesce(f.original_category, f.category) is not l.category
   or (f.subcategory is not l.subcategory and f.category is coalesce(f.original_category, f.category))`) === 0, `${liveFoods} live foods (a subcategory changes only with a group move)`);
 check('every live nutrient value is still there, unchanged', one(`select count(*) from (select food_id, source, nutrient_code, amount_per_100g from L.food_nutrients
   except select food_id, source, nutrient_code, amount_per_100g from food_nutrients)`) === 0);
 const REPOINTED = { food_aliases: 'food_category', food_purchase_forms: 'category', food_volume_weights: 'category', food_unit_weights: null };
-const tables = q(`select name from L.sqlite_master where type='table' and name not in ('foods','food_nutrients','curated_recipe_ingredients','curated_recipe_unlisted_ingredients',${Object.keys(REPOINTED).map((t) => `'${t}'`).join(',')}) order by name`).map((r) => r.name);
+const tables = q(`select name from L.sqlite_master where type='table' and name not in ('foods','food_nutrients','food_scores','curated_recipe_ingredients','curated_recipe_unlisted_ingredients','food_equivalence',${Object.keys(REPOINTED).map((t) => `'${t}'`).join(',')}) order by name`).map((r) => r.name);
 // The three tables that name foods: the same rows, each either untouched or pointed somewhere new with its old target kept.
 for (const [t, cat] of Object.entries(REPOINTED)) {
   const cols = q(`select name from pragma_table_info('${t}', 'L')`).map((r) => r.name);
   const was = cols.map((c) => (c === 'base_name' ? 'coalesce(original_base_name, base_name)' : c === cat ? `coalesce(original_category, ${cat})` : `"${c}"`)).join(', ');
   const plain = cols.map((c) => `"${c}"`).join(', ');
-  const restored = one(`select count(*) from L."${t}"`) === one(`select count(*) from main."${t}"`)
-    && one(`select count(*) from (select ${plain} from L."${t}" except select ${was} from main."${t}")`) === 0;
+  // A purchase form pointed at a food that already had one was the same form twice, and merge-candidate.js drops it.
+  // A volume weight left on a name nothing carries any more is dropped, and one whose food was renamed is copied to it.
+  // A few unit weights are added, each cited, for recipe lines counted in pieces that had none.
+  const built = (key) => Number(one(`select value from candidate_build where key='${key}'`) || 0);
+  const dropped = t === 'food_purchase_forms' ? built('purchase_forms_dropped') : t === 'food_volume_weights' ? built('volume_weights_dropped') : 0;
+  const copied = t === 'food_volume_weights' ? built('volume_weights_copied') + built('volume_weights_added') : t === 'food_unit_weights' ? built('unit_weights_added') : 0;
+  const restored = one(`select count(*) from L."${t}"`) === one(`select count(*) from main."${t}"`) + dropped - copied
+    && one(`select count(*) from (select ${plain} from L."${t}" except select ${was} from main."${t}")`) === dropped;
   const moved = one(`select count(*) from main."${t}" where original_base_name is not null`);
   const orphan = (db, f) => one(`select count(*) from ${db}."${t}" x where not exists (select 1 from ${f}.foods f where f.hidden=0 and f.base_name=x.base_name collate nocase${cat ? ` and f.category=x.${cat}` : ''})`);
   const liveOrphans = orphan('L', 'L');
@@ -51,6 +61,15 @@ for (const [t, cat] of Object.entries(REPOINTED)) {
   const left = q(`select x.base_name b from main."${t}" x where not exists (select 1 from foods f where f.hidden=0 and f.base_name=x.base_name collate nocase${cat ? ` and f.category=x.${cat}` : ''})
     and exists (select 1 from L."${t}" y join L.foods f on f.hidden=0 and f.base_name=y.base_name collate nocase${cat ? ` and f.category=y.${cat}` : ''} where y.rowid=x.rowid)`);
   note(`${t}: rows naming no shown food`, `live ${liveOrphans}, candidate ${candOrphans}${left.length ? `; newly: ${left.slice(0, 8).map((l) => l.b).join('; ')}` : ''}`);
+}
+// food_equivalence keeps every live row unchanged and gains one row for each new food (merge-candidate.js step 9d).
+{
+  const t = 'food_equivalence';
+  const cols = q(`select name from pragma_table_info('${t}', 'L')`).map((r) => `"${r.name}"`).join(', ');
+  const kept = one(`select count(*) from (select ${cols} from L."${t}" except select ${cols} from main."${t}")`) === 0;
+  const added = one(`select count(*) from main."${t}"`) - one(`select count(*) from L."${t}"`);
+  const everyFood = one(`select count(*) from foods f where not exists (select 1 from ${t} e where e.food_id=f.food_id and e.source=f.source)`) === 0;
+  check('food_equivalence: every live row unchanged, and every food has a row', kept && everyFood && added === Number(one("select value from candidate_build where key='equivalence_rows_added'") || 0), `${added} added`);
 }
 const changedTables = [];
 for (const t of tables) {
@@ -159,9 +178,17 @@ note('unit weights for a food no longer shown', `${weightsLost.length} of ${one(
 const formsLost = q(`select base_name, category from food_purchase_forms p where not exists (select 1 from foods f where f.hidden=0 and f.base_name=p.base_name collate nocase and f.category=p.category)`);
 note('purchase forms for a food no longer shown', `${formsLost.length} of ${one('select count(*) from food_purchase_forms')}: ${formsLost.slice(0, 6).map((w) => w.base_name).join('; ')}`);
 
-// G. Scores.
-const unscored = q(`select case when food_id>=1000000 then 'new' else 'live' end k, count(*) n from foods f where hidden=0 and not exists (select 1 from food_scores s where s.food_id=f.food_id and s.source=f.source) group by 1`);
-note('shown foods with no scores', unscored.map((u) => `${u.n} ${u.k === 'new' ? 'new to the app' : 'already in the app'}`).join(', ') || 'none');
+// G. Scores. The live ones are untouched; every score added by score-unscored.js says where it came from.
+check('every live score is still there, unchanged', one('select count(*) from (select food_id, source, sub_criterion_id, tier from L.food_scores except select food_id, source, sub_criterion_id, tier from food_scores)') === 0);
+// EXCEPT over the three key columns: the same question as two correlated NOT EXISTS, which took hours here.
+check('every score added has its origin in score_origin', one(`select count(*) from (select food_id, source, sub_criterion_id from food_scores
+  except select food_id, source, sub_criterion_id from L.food_scores except select food_id, source, sub_criterion_id from score_origin)`) === 0,
+  `${one('select count(distinct food_id||source) from score_origin')} foods scored here`);
+const partScored = q(`select f.base_name, count(s.sub_criterion_id) n from foods f left join food_scores s on s.food_id=f.food_id and s.source=f.source and s.sub_criterion_id<>25
+  where f.hidden=0 group by f.food_id, f.source having count(s.sub_criterion_id) < (select count(*) from sub_criteria where id<>25)`);
+check('every shown food is scored on every sub-criterion (Goitrogenic Load only where it applies)', partScored.length === 0, partScored.slice(0, 8).map((p) => `${p.base_name} ${p.n}`).join('; ') || undefined);
+const how = q('select how, count(*) n from score_origin group by how order by n desc');
+note('how the added scores were found', how.map((h) => `${h.how} ${h.n}`).join(', ') || 'none');
 const unscoredRecipe = one(`select count(distinct r.base_name||'|'||r.category) from curated_recipe_ingredients r where ${resolves} and not exists (select 1 from foods f join food_scores s using(food_id, source) where f.hidden=0 and f.category=r.category and f.base_name=r.base_name collate nocase)`);
 note('recipe ingredients whose shown food has no scores', unscoredRecipe);
 

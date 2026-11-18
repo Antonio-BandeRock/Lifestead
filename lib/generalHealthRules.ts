@@ -238,7 +238,7 @@ function isTanninBeverage(food: GeneralHealthResolvedFood): boolean {
   if (food.category === 'Bev' && (food.subcategory === 'Coffee' || food.subcategory === 'Tea')) return true;
   if (food.category === 'Brewing') {
     const lower = food.baseName.toLowerCase();
-    return lower.includes('coffee') || lower.includes('café') || lower.includes('tea') || lower.includes('thé');
+    return lower.includes('coffee') || lower.includes('café') || lower.includes('tea') || lower.includes('thé') || lower.includes('matcha');
   }
   return false;
 }

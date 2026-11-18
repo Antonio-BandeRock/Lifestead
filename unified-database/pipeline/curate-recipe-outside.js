@@ -12,7 +12,8 @@ module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   // On the list, under this name or another one.
   put(listed('Baking soda'), 'baking soda');
   put(listed('Salt'), 'coarse salt for the crust, peeled away with the skin and not eaten');
-  put(listed('Black tea'), 'loose black tea leaves');
+  // The eggs simmer in the tea and the leaves are thrown away, so nothing of them is eaten.
+  put(aid('Steeped for colour and flavour, then thrown away'), 'loose black tea leaves');
 
   // A listed food does the job, and the wording of the recipe changes.
   put(swap('Veal foot', 'A calf foot for a cow foot'), 'cow foot');

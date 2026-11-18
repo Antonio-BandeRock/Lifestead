@@ -248,6 +248,8 @@ export const DEVICE_LOCAL_META_KEYS: readonly string[] = [
   'onedrive_folder',
   'sync_folder_uri',
   'reference_db_version',
+  // Which reference database this device's records were last moved to (lib/foodNameRenames.ts).
+  'food_names_moved_for',
   'health_connect_enabled',
   'health_connect_last_sync',
   'mailbox_folder_name',

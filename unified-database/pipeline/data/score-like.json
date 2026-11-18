@@ -1,0 +1,18 @@
+{
+  "_note": "Foods score-unscored.js would otherwise score from a poor nearest neighbour, named by hand to score like a close kept food (2026-11-17). Key: source|base name of the food being scored. Value: [source, full name] of a scored food. Rules (carbs, protein, sodium, selenium, iodine) still come from the food's own nutrients, and oxalate is still never copied from anything but the same food.",
+  "like": {
+    "Norway_Matvaretabellen|Aronia": ["USDA", "Blueberries, raw"],
+    "Norway_Matvaretabellen|Pollack": ["USDA", "Fish, pollock, Atlantic, raw"],
+    "Norway_Matvaretabellen|Whole wheat noodles": ["USDA", "Pasta, whole grain, 51% whole wheat, remaining unenriched semolina, dry"],
+    "Norway_Matvaretabellen|Paneer": ["USDA", "Cheese, fresh, queso fresco"],
+    "Norway_Matvaretabellen|Periwinkle": ["USDA", "Mollusks, whelk, unspecified, raw"],
+    "Norway_Matvaretabellen|Skate": ["Japan_MEXT", "Fish, ray, raw"],
+    "Sweden_Livsmedelsverket|Salad cheese": ["USDA", "Cheese, feta"],
+    "Sweden_Livsmedelsverket|Gilthead bream": ["Japan_MEXT", "Fish, sea bream, red sea bream, wild, raw"],
+    "Sweden_Livsmedelsverket|Lutefisk": ["USDA", "Fish, cod, Atlantic, raw"],
+    "Sweden_Livsmedelsverket|Pork skin": ["USDA", "Pork, fresh, backfat, raw"],
+    "Sweden_Livsmedelsverket|Pickled cucumbers": ["Germany_BLS", "Gherkin lactic acid fermented, drained"],
+    "Sweden_Livsmedelsverket|Physalis": ["USDA", "Groundcherries, (cape-gooseberries or poha), raw"],
+    "Sweden_Livsmedelsverket|Aloe vera juice": ["Japan_MEXT", "Aloe, leaves, raw"]
+  }
+}

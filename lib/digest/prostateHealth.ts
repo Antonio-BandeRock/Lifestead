@@ -113,7 +113,7 @@ export const PROSTATE_HEALTH_ENTRIES: DigestEntry[] = [
     ],
     overallTier: 'strong',
     relatedIds: ['prostate-lycopene-tomatoes', 'prostate-lycopene-bph-clinical-trial', 'prostate-cruciferous-sulforaphane'],
-    relatedFoodNames: ['Tomato', 'Tomato products', 'Tomato sauce', 'Tomato powder', 'Red Tomato', 'Watermelon', 'Common Guava', 'Papaya', 'Grapefruit'],
+    relatedFoodNames: ['Tomato', 'Tomato paste', 'Tomato powder', 'Watermelon', 'Guava', 'Papaya', 'Grapefruit'],
     chart: {
       title: 'Lycopene Content of Foods (micrograms per 100g)',
       unit: 'µg',

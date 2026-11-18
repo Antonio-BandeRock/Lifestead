@@ -289,49 +289,44 @@ async function computeStageNotes(
 // preview builds it from ingredient.resolved.baseName, not a display
 // summary string), the same convention this reuses.
 
-const RED_MEATS = new Set([
-  'Beef Top Sirloin (Raw)',
-  'Bison Top Sirloin (Raw)',
-  'Lamb Chop (Raw)',
-  'Lamb Fillet (Raw)',
-  'Pork Chop (Raw)',
-  'Pork Fillet / Tenderloin (Raw)',
-  'Pork Loin (Raw)',
-]);
+// Rebuilt 2026-11-17 for the unified database, whose foods carry plain
+// names ("Chickpeas", "Beef top sirloin") in place of the source tables'
+// names. Each rule now reads the name by pattern, so every shown food is
+// covered and not only the 300 recipes the old lists were drawn from.
 
-const GLUTEN_INGREDIENTS = new Set([
-  'Bröd fullkorn vete råg fibrer ca 6%',
-  'Tortilla, wraps/burrito, hvetemel',
-  'Bulgur',
-  'Couscous (durum wheat)',
-  'Meat substitute containing gluten (seitan)',
-  'Spelt Grains',
-  'Soy sauce made from soy and wheat (shoyu)',
-  'Wheat flour, white, tortilla mix, enriched',
-  'Whole-Grain Wheat Flour',
-]);
+// WCRF's red meat: muscle meat from a mammal, and the processed meats made
+// from it. Fat and offal from those animals count too, since a dish using
+// them is not the poultry-or-fish-only dish flexitarian means. Game and
+// sea mammals (rabbit, seal, whale) are mammals too.
+const RED_MEAT_PATTERN =
+  /\b(beef|beefalo|bison|buffalo|wagyu|veal|lamb|mutton|pork|inobuta|goat|venison|deer|elk|moose|caribou|reindeer|muskox|antelope|kangaroo|camel|horse(?! mackerel)|boar|rabbit|hare|squirrel|muskrat|beaver|bear|seal|walrus|whale|beluga|narwhal|bowhead|sea lion|muktuk|bacon|ham|prosciutto|pancetta|salami|pepperoni|chorizo|mortadella|bologna|bresaola|capicola|coppa|pastrami|kasseler|eisbein|bratwurst|knackwurst|kielbasa|mettwurst|hot dog|sausage|salt pork|tallow|lard|fatback)\b/i;
 
-const PROTEIN_LEGUMES = new Set([
-  'MORI-NU, Tofu, silken, firm',
-  'Tofu',
-  'Tempeh',
-  'Black Beans',
-  'Chickpea',
-  'Chickpeas (garbanzo beans, bengal gram)',
-  'Kidney Beans',
-  'Lentil, green, hulled, dry',
-  'Lentil, red, hulled, dry',
-  'Lima Bean',
-  'Pinto Beans',
-  'White Beans',
-  'Edamame',
-]);
+// Wheat and its relatives (spelt, durum, einkorn, emmer, khorasan), rye,
+// barley and triticale, and what is made from them. Oats count as gluten
+// free by the usual labelling convention; buckwheat is not wheat, and
+// anything named gluten-free is left out. Soy sauce is brewed with wheat;
+// tamari is the wheat-free one.
+const GLUTEN_PATTERN =
+  /\b(wheat|spelt|durum|einkorn|emmer|khorasan|frik|bulgur|couscous|rye|barley|triticale|seitan|udon|somen|wonton|graham|malt)\b|^(semolina|pasta|dried pasta|fresh pasta|fresh egg pasta|egg noodles|white flour|bread flour|cake flour|pastry flour|enriched white flour|high-protein white flour|enriched high-protein white flour|soy sauce)$/i;
 
-const HIGH_PROTEIN_DAIRY = new Set(['Yogurt, Greek, plain, lowfat', 'Cottage Cheese', 'Cheddar', 'Feta', 'Parmesan']);
-const NIGHTSHADES = new Set(['Tomato', 'Potato', 'Eggplant', 'Red Bell Pepper', 'Yellow Bell Pepper']);
-const NIGHTSHADE_SPICES = new Set(['Paprika']);
-const REFINED_SUGAR = new Set(['Sugar (Cane / Granulated)']);
-const COMMERCIAL_CONDIMENTS = new Set(['Dressing, mayonnaise, whole egg type']);
+// Beans, peas, lentils and the soy foods, eaten as the protein of a dish.
+const PROTEIN_LEGUME_PATTERN = /\b(tofu|koyadofu|tempeh|natto|yuba|beans|chickpeas|lentils|peas|soybeans|lupin|edamame)\b/i;
+
+// Strained yogurt, cottage cheese, quark, skyr and cheese, apart from the
+// soft spreading cheeses (cream cheese, mascarpone) that carry little protein.
+const HIGH_PROTEIN_DAIRY_PATTERN = /\b(greek yogurt|cottage cheese|quark|skyr|paneer|cheese|cheddar|emmental|parmesan|gruyere|halloumi|queso)\b/i;
+const LOW_PROTEIN_CHEESE_PATTERN = /cream cheese|mascarpone|creme cherie/i;
+
+// Tomatoes, white potatoes, eggplant, tomatillos, and the capsicum peppers
+// (bell, chili, paprika, cayenne), plus goji. Sweet potato is not a
+// nightshade, and black, white and sansho pepper come from other plants.
+const NIGHTSHADE_PATTERN =
+  /\b(tomato|tomatoes|tomatillo|potato|potatoes|eggplant|bell pepper|chili|chile|hot peppers|banana pepper|hungarian pepper|serrano pepper|shishito|pasilla|paprika|cayenne|goji)\b/i;
+const NOT_NIGHTSHADE_PATTERN = /sweet potato|tomato seed oil/i;
+
+// Sugar refined from cane or beet. Honey, maple and whole cane sugar stay
+// allowed, the usual Paleo reading.
+const REFINED_SUGARS = new Set(['White sugar', 'Brown sugar', 'Powdered sugar', 'Raw sugar', 'Rock sugar', 'Vanilla sugar']);
 
 function hasCategory(ingredients: MealIngredientInput[], category: string): boolean {
   return ingredients.some((ingredient) => ingredient.category === category);
@@ -346,7 +341,25 @@ function hasAnyFromSet(ingredients: MealIngredientInput[], names: Set<string>): 
   return ingredients.some((ingredient) => names.has(ingredient.foodName));
 }
 function hasRedMeat(ingredients: MealIngredientInput[]): boolean {
-  return ingredients.some((ingredient) => ingredient.category === 'Meat' && RED_MEATS.has(ingredient.foodName));
+  return ingredients.some(
+    (ingredient) => (ingredient.category === 'Meat' || ingredient.category === 'Fats') && RED_MEAT_PATTERN.test(ingredient.foodName),
+  );
+}
+function hasGluten(ingredients: MealIngredientInput[]): boolean {
+  return ingredients.some((ingredient) => !/gluten-free/i.test(ingredient.foodName) && GLUTEN_PATTERN.test(ingredient.foodName));
+}
+function hasProteinLegume(ingredients: MealIngredientInput[]): boolean {
+  return ingredients.some(
+    (ingredient) => (ingredient.category === 'Legume' || ingredient.foodName === 'Edamame' || ingredient.foodName === 'Frozen edamame') && PROTEIN_LEGUME_PATTERN.test(ingredient.foodName),
+  );
+}
+function hasHighProteinDairy(ingredients: MealIngredientInput[]): boolean {
+  return ingredients.some(
+    (ingredient) => ingredient.category === 'Dairy' && HIGH_PROTEIN_DAIRY_PATTERN.test(ingredient.foodName) && !LOW_PROTEIN_CHEESE_PATTERN.test(ingredient.foodName),
+  );
+}
+function hasNightshade(ingredients: MealIngredientInput[]): boolean {
+  return ingredients.some((ingredient) => NIGHTSHADE_PATTERN.test(ingredient.foodName) && !NOT_NIGHTSHADE_PATTERN.test(ingredient.foodName));
 }
 
 // Exported, 2026-08-26 -- lib/foodPersonalization.ts reuses this exact
@@ -371,12 +384,12 @@ export function computeDietTags(ingredients: MealIngredientInput[]): RecipeDietT
     tags.push('Plant-Based/Flexitarian');
   }
 
-  const hasOliveOil = hasIngredient(ingredients, 'Fats', 'Olive Oil (Extra Virgin)');
+  const hasOliveOil = hasIngredient(ingredients, 'Fats', 'Olive oil');
   if (hasOliveOil && !hasRedMeat(ingredients)) {
     tags.push('Mediterranean');
   }
 
-  if (!hasAnyFromSet(ingredients, GLUTEN_INGREDIENTS)) {
+  if (!hasGluten(ingredients)) {
     tags.push('Gluten-Free');
   }
 
@@ -387,21 +400,17 @@ export function computeDietTags(ingredients: MealIngredientInput[]): RecipeDietT
   const hasGrain = hasCategory(ingredients, 'Grain');
   const hasLegume = hasCategory(ingredients, 'Legume');
   const hasBaked = hasCategory(ingredients, 'Baked');
-  const hasRefinedSugar = hasAnyFromSet(ingredients, REFINED_SUGAR);
-  const hasCommercialCondiment = hasAnyFromSet(ingredients, COMMERCIAL_CONDIMENTS);
-  const hasGrainProduct = hasGrain || hasBaked || hasAnyFromSet(ingredients, GLUTEN_INGREDIENTS);
-  const isPaleo = !hasGrainProduct && !hasLegume && !hasDairy && !hasRefinedSugar && !hasCommercialCondiment;
+  const hasRefinedSugar = hasAnyFromSet(ingredients, REFINED_SUGARS);
+  const hasGrainProduct = hasGrain || hasBaked || hasCategory(ingredients, 'PastaNoodles') || hasGluten(ingredients);
+  const isPaleo = !hasGrainProduct && !hasLegume && !hasDairy && !hasRefinedSugar;
   if (isPaleo) tags.push('Paleo');
 
   if (isPaleo) {
     const hasNutSeed = hasCategory(ingredients, 'NutSeed');
-    const hasNightshade = hasAnyFromSet(ingredients, NIGHTSHADES) || hasAnyFromSet(ingredients, NIGHTSHADE_SPICES);
-    if (!hasEgg && !hasNutSeed && !hasNightshade) tags.push('AIP');
+    if (!hasEgg && !hasNutSeed && !hasNightshade(ingredients)) tags.push('AIP');
   }
 
-  const hasProteinLegume = hasAnyFromSet(ingredients, PROTEIN_LEGUMES);
-  const hasHighProteinDairy = hasAnyFromSet(ingredients, HIGH_PROTEIN_DAIRY);
-  if (hasMeat || hasProteinLegume || hasEgg || hasHighProteinDairy) tags.push('High-Protein');
+  if (hasMeat || hasProteinLegume(ingredients) || hasEgg || hasHighProteinDairy(ingredients)) tags.push('High-Protein');
 
   return tags;
 }

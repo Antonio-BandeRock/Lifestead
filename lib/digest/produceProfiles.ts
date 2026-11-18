@@ -78,7 +78,7 @@ export const PRODUCE_PROFILES_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'moderate',
-    relatedFoodNames: ['Blueberry'],
+    relatedFoodNames: ['Blueberries'],
   },
   {
     id: 'produce-citrus',
@@ -175,7 +175,7 @@ export const PRODUCE_PROFILES_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'strong',
-    relatedFoodNames: ['Broccoli Sprouts (Raw)', 'Broccoli'],
+    relatedFoodNames: ['Broccoli sprouts', 'Broccoli'],
     relatedIds: ['produce-cruciferous', 'prostate-cruciferous-sulforaphane',  'produce-mustard-powder-myrosinase-restoration'],
   },
   {
@@ -208,7 +208,7 @@ export const PRODUCE_PROFILES_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'moderate',
-    relatedFoodNames: ['Broccoli', 'Spices, mustard seed, ground'],
+    relatedFoodNames: ['Broccoli', 'Mustard seeds'],
     relatedIds: ['produce-broccoli-sprouts-sulforaphane', 'produce-cruciferous', ],
   },
   {
@@ -224,7 +224,7 @@ export const PRODUCE_PROFILES_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'moderate',
-    relatedFoodNames: ['Garlic', 'Garlic Bulb', 'Onion'],
+    relatedFoodNames: ['Garlic', 'Onion'],
     relatedIds: ['problem-garlic-onion'],
   },
   {
@@ -297,7 +297,7 @@ export const PRODUCE_PROFILES_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'strong',
-    relatedFoodNames: ['Chickpeas (garbanzo beans, bengal gram)'],
+    relatedFoodNames: ['Chickpeas'],
     relatedIds: ['glossary-scfa', 'glossary-treg', 'mentalhealth-gut-scfa-mood-mechanism', 'carbfiber-intake-gap', 'cvd-legumes-cruciferous-sex-specific-young-adults'],
   },
   {
@@ -330,7 +330,7 @@ export const PRODUCE_PROFILES_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'strong',
-    relatedFoodNames: ['Walnut'],
+    relatedFoodNames: ['Walnuts'],
     relatedIds: ['omega36-overview'],
   },
   {
@@ -379,7 +379,7 @@ export const PRODUCE_PROFILES_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'moderate',
-    relatedFoodNames: ['Flaxseed Seeds', 'Seed, linseed or flaxseed'],
+    relatedFoodNames: ['Flaxseed'],
     relatedIds: ['choline-overview', 'produce-chia-seeds'],
   },
   {

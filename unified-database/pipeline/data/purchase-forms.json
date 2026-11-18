@@ -1,0 +1,25 @@
+{
+  "_note": "Purchase forms whose food became a hidden duplicate when one shown entry took its place, pointed at that shown food by hand (owner, 2026-11-17). Key: old category|old base name. Value: [shown category, shown base name]. merge-candidate.js refuses a target no shown food carries.",
+  "moves": {
+    "Bev|Limes, juice, fresh": ["Bev", "Lime juice"],
+    "Grain|Quinoa, uncooked": ["Grain", "Quinoa"],
+    "Grain|Spelt Grains": ["Grain", "Spelt"],
+    "Herbs|Cinnamon, dried, ground": ["Herbs", "Cinnamon"],
+    "Herbs|Vinegar, balsamic": ["SaucesCondiments", "Balsamic vinegar"],
+    "Meat|Chicken, broiler, breast, skinless, boneless, meat": ["Meat", "Skinless chicken breast"],
+    "Meat|Lamb Chop (Raw)": ["Meat", "Lamb chops"],
+    "Meat|Lamb Fillet (Raw)": ["Meat", "Lamb tenderloin"],
+    "Meat|Pork Chop (Raw)": ["Meat", "Pork loin"],
+    "Meat|Pork Fillet / Tenderloin (Raw)": ["Meat", "Pork tenderloin"],
+    "Meat|Sardine Fish": ["Meat", "Sardine"],
+    "Meat|Sole fillet": ["Meat", "Sole"],
+    "Meat|Turkey Breast (Raw)": ["Meat", "Turkey breast"],
+    "NutSeed|Flax seeds": ["NutSeed", "Flaxseed"],
+    "Sweets|Honeydew honey (Forest Honey)": ["Sweets", "Honey"],
+    "Sweets|Maple Syrups": ["Sweets", "Maple syrup"],
+    "Veg|Beetroot": ["Veg", "Beets"],
+    "Veg|Coriander (cilantro)": ["Herbs", "Cilantro"],
+    "Veg|Ginger, peeled, fresh": ["Veg", "Ginger"],
+    "Veg|Zucchini, green skin, fresh, unpeeled": ["Veg", "Zucchini"]
+  }
+}

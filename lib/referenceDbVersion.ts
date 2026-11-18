@@ -201,4 +201,15 @@
 // pasta by their dry rows, moves White Corn to Sweet Corn with a per-ear
 // weight, and moves the misspelled whole-chicken base to the whole-bird one.
 // A stale copy has the old amounts.
-export const REFERENCE_DB_VERSION = "20261111233000";
+// BUMPED again 2026-11-17: the unified database swapped in (phase 7).
+// Every live food keeps its id, nutrients and scores; foods are shown
+// under their unified listing names, near-duplicates are hidden behind
+// the one food they resolve to, new whole foods from nine sources are
+// added, and lib/foodNameRenames.ts moves records kept by name. A stale
+// copy has the old names. Brewed coffee and teas are shown, one food per
+// drink, and every new food has a food_equivalence row. A live food named
+// in its table's language (French, Norwegian, Swedish and so on) carries
+// the unified English name, its original kept in name_local, and the 150
+// shown foods the workbook never scored are scored by
+// unified-database/pipeline/score-unscored.js, each in score_origin.
+export const REFERENCE_DB_VERSION = "20261117230000";

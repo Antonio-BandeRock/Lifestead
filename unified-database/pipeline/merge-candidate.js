@@ -24,7 +24,9 @@
 //      name, recipe lines, aliases, weights, purchase forms and hidden rows move to one of them (data/short-names.json),
 //      and base_name_renames records each old name and where it went.
 //   node merge-candidate.js <recipe_check.json> [renames.txt] writes the shared names and their choices to renames.txt.
-// No score is made up: a food the live database never scored has none, and verify-candidate.js counts them.
+//   8. Categories (data/categories.json). 9. Purchase forms pointed by hand (data/purchase-forms.json).
+//   10. Every shown food the workbook never scored is scored by score-unscored.js, which records where each score came
+//       from in score_origin; the live scores are never changed, and verify-candidate.js checks both.
 const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -108,11 +110,15 @@ const sql = ['PRAGMA foreign_keys=OFF;', 'BEGIN;'];
 for (const col of ['unified_raw_id INTEGER', 'curation_status TEXT', 'listing_name TEXT', 'food_type TEXT', 'caution TEXT']) sql.push(`ALTER TABLE foods ADD COLUMN ${col};`);
 
 const foodOfRaw = new Map();
+let namesTranslated = 0;
 for (const f of live) {
   const r = pairOf.get(`${f.food_id}|${f.source}`);
   if (!r) { sql.push(`UPDATE foods SET curation_status='derived' WHERE food_id=${f.food_id} AND source=${esc(f.source)};`); continue; }
   foodOfRaw.set(r.raw_id, { food_id: f.food_id, source: f.source, base_name: f.base_name, category: f.category });
   sql.push(`UPDATE foods SET unified_raw_id=${r.raw_id}, curation_status=${esc(r.status)}, listing_name=${esc(r.listing_name)}, food_type=${esc(r.food_type)}, caution=${esc(r.caution)}, hidden=${r.status === 'show' ? 0 : 1} WHERE food_id=${f.food_id} AND source=${esc(f.source)};`);
+  // A live food still named in its table's language takes the unified English name; the original moves to name_local.
+  // Records find a food by id or base_name, never by name, so nothing a person kept moves.
+  if (r.en && f.name === r.orig && r.en !== r.orig) { sql.push(`UPDATE foods SET name=${esc(r.en)}, name_local=coalesce(name_local, ${esc(r.orig)}) WHERE food_id=${f.food_id} AND source=${esc(f.source)};`); namesTranslated += 1; }
 }
 
 let nextId = FIRST_NEW_ID;
@@ -148,26 +154,49 @@ sql.push('ALTER TABLE curated_recipe_ingredients ADD COLUMN placement TEXT;');
 sql.push('ALTER TABLE curated_recipe_ingredients ADD COLUMN placement_note TEXT;');
 let pointed = 0;
 let moved = 0;
+// Each line is placed by its own row, chosen before any line is renamed: a line set to one food's old name must not be
+// caught again by a later placement for that name. The listing it was placed on is kept in placed_listing, so the
+// renaming in step 7 cannot send it on to another food that shared the old name ('Prune (dried plum)' was placed on
+// Prunes, whose old name was Plum, and the default for Plum is fresh plums).
+sql.push('CREATE TABLE placed_listing (rid INTEGER PRIMARY KEY, listing TEXT NOT NULL);');
+const placedNames = [];
 for (const p of placements) {
   const kind = p.kind;
   const target = kind === 'listed' || kind === 'swap' ? shownByListing.get(p.to) : null;
   if ((kind === 'listed' || kind === 'swap') && !target) throw new Error(`no shown food carries ${p.to}`);
+  if (!p.outside) placedNames.push({ p, target, kind });
+}
+sql.push('CREATE TEMP TABLE line_name AS SELECT rowid rid, base_name name FROM curated_recipe_ingredients;');
+for (const { p, target, kind } of placedNames) {
   const note = p.note || p.how || p.stand || null;
-  if (!p.outside) {
-    if (target) {
-      sql.push(`UPDATE curated_recipe_ingredients SET original_base_name=base_name, original_category=category, base_name=${esc(target.base_name)}, category=${esc(target.category)}, placement=${esc(kind)}, placement_note=${esc(note)} WHERE base_name=${esc(p.name)};`);
-      pointed += 1;
-    } else {
-      sql.push(`UPDATE curated_recipe_ingredients SET placement=${esc(kind)}, placement_note=${esc(note)} WHERE base_name=${esc(p.name)};`);
-    }
-  } else if (target) {
-    // The recipe check reads unlisted names lower case and trimmed.
-    const match = `lower(trim(name))=${esc(p.name)}`;
-    sql.push(`INSERT INTO curated_recipe_ingredients (recipe_id, category, base_name, quantity, unit, cut_prep, cooking_method, prep_note, sort_order, from_component, original_base_name, original_category, placement, placement_note)
-      SELECT recipe_id, ${esc(target.category)}, ${esc(target.base_name)}, quantity, unit, cut_prep, NULL, prep_note, sort_order, from_component, name, NULL, ${esc(kind)}, ${esc(note)} FROM curated_recipe_unlisted_ingredients WHERE ${match};`);
-    sql.push(`DELETE FROM curated_recipe_unlisted_ingredients WHERE ${match};`);
-    moved += 1;
+  const rows = `rowid IN (SELECT rid FROM line_name WHERE name=${esc(p.name)})`;
+  if (target) {
+    // A placement found by the bare name ('Orange') leaves a line in another group that has a food of that name (an
+    // orange juice line in Bev) to follow its own food.
+    const own = p.by === 'name'
+      ? ` AND NOT (category<>${esc(target.category)} AND EXISTS (SELECT 1 FROM foods f WHERE f.category=curated_recipe_ingredients.category AND f.base_name=curated_recipe_ingredients.base_name AND f.hidden=0))`
+      : '';
+    sql.push(`INSERT OR IGNORE INTO placed_listing SELECT rowid, ${esc(p.to)} FROM curated_recipe_ingredients WHERE ${rows}${own};`);
+    sql.push(`UPDATE curated_recipe_ingredients SET original_base_name=base_name, original_category=category, base_name=${esc(target.base_name)}, category=${esc(target.category)}, placement=${esc(kind)}, placement_note=${esc(note)} WHERE ${rows}${own};`);
+    if (own) sql.push(`UPDATE curated_recipe_ingredients SET placement=${esc(kind)}, placement_note=${esc(note)} WHERE ${rows} AND placement IS NULL;`);
+    pointed += 1;
+  } else {
+    sql.push(`UPDATE curated_recipe_ingredients SET placement=${esc(kind)}, placement_note=${esc(note)} WHERE ${rows};`);
   }
+}
+for (const p of placements) {
+  if (!p.outside) continue;
+  const kind = p.kind;
+  const target = kind === 'listed' || kind === 'swap' ? shownByListing.get(p.to) : null;
+  if (!target) continue;
+  const note = p.note || p.how || p.stand || null;
+  // The recipe check reads unlisted names lower case and trimmed.
+  const match = `lower(trim(name))=${esc(p.name)}`;
+  sql.push(`INSERT INTO curated_recipe_ingredients (recipe_id, category, base_name, quantity, unit, cut_prep, cooking_method, prep_note, sort_order, from_component, original_base_name, original_category, placement, placement_note)
+    SELECT recipe_id, ${esc(target.category)}, ${esc(target.base_name)}, quantity, unit, cut_prep, NULL, prep_note, sort_order, from_component, name, NULL, ${esc(kind)}, ${esc(note)} FROM curated_recipe_unlisted_ingredients WHERE ${match};`);
+  sql.push(`INSERT OR IGNORE INTO placed_listing SELECT rowid, ${esc(p.to)} FROM curated_recipe_ingredients WHERE original_category IS NULL AND original_base_name IN (SELECT name FROM curated_recipe_unlisted_ingredients WHERE ${match}) AND rowid NOT IN (SELECT rid FROM line_name);`);
+  sql.push(`DELETE FROM curated_recipe_unlisted_ingredients WHERE ${match};`);
+  moved += 1;
 }
 
 // Aliases, unit weights and purchase forms name a food by base name. One that names a food the list now hides, where no
@@ -236,7 +265,11 @@ for (const [k, g] of groups) {
   let toCat = g.category;
   if (SN.defaults[k]) {
     to = SN.defaults[k]; how = 'chosen'; usedDefaults.add(k);
-    if (!g.names.has(to)) throw new Error(`short-names.json: ${to} is not a shown food named ${k}`);
+    if (!g.names.has(to)) { // a default may name a food the old one was merged into, in its own group
+      const cats = shownCats.get(to);
+      if (!cats) throw new Error(`short-names.json: ${to} is not a shown food`);
+      if (!cats.has(g.category)) { if (cats.size !== 1) throw new Error(`short-names.json: ${to} is shown in several groups`); [toCat] = cats; }
+    }
   } else if (named) { to = named; how = g.names.has(named) ? 'same name' : 'now named so'; } else if (fresh.length === 1) { [to] = fresh; how = 'the fresh one'; if (!shownCats.get(to).has(g.category)) [toCat] = shownCats.get(to); } else if (names.length === 1) { [to] = names; how = 'only'; } else {
     const same = names.filter((n) => n.toLowerCase() === g.old.toLowerCase());
     const plain = names.filter((n) => !FORM.test(n));
@@ -249,7 +282,9 @@ const renameOf = new Map(renames.map((r) => [`${r.old}|${r.category}`, r]));
 const shownAt = new Set(q(OUT, `select listing_name||'|'||category k from foods where hidden=0 and listing_name is not null`).map((r) => r.k));
 for (const l of [...SN.lines, ...SN.unitWeights]) {
   const cat = l.from.includes('|') ? l.from.split('|')[1] : groups.get([...groups.keys()].find((k) => k.startsWith(`${l.from}|`)))?.category;
-  if (!shownAt.has(`${l.to}|${cat}`)) throw new Error(`short-names.json: no shown food ${l.to} in ${cat}`);
+  // A unit weight is matched by name alone, so its food may sit in any group.
+  const found = cat ? shownAt.has(`${l.to}|${cat}`) : [...shownAt].some((k) => k.startsWith(`${l.to}|`));
+  if (!found) throw new Error(`short-names.json: no shown food ${l.to} in ${cat}`);
 }
 
 const s7 = ['PRAGMA foreign_keys=OFF;', 'BEGIN;'];
@@ -270,12 +305,18 @@ s7.push(`UPDATE foods SET original_base_name=base_name, original_short_name=shor
 const rules = SN.lines.map((l) => ({ ...l, re: new RegExp(l.match, 'i'), fields: (l.fields || 'cut,note,recipe').split(',') }));
 let linesRenamed = 0;
 let linesByWords = 0;
-for (const line of q(OUT, `select r.rowid id, r.base_name b, r.category c, r.cut_prep cut, r.prep_note note, c.name recipe
-  from curated_recipe_ingredients r join curated_recipes c on c.id=r.recipe_id`)) {
+// Where the recipe lines naming each food went, so a unit weight can follow them.
+const lineWentTo = new Map();
+for (const line of q(OUT, `select r.rowid id, r.base_name b, r.original_base_name ob, r.category c, r.cut_prep cut, r.prep_note note, c.name recipe, p.listing placed
+  from curated_recipe_ingredients r join curated_recipes c on c.id=r.recipe_id left join placed_listing p on p.rid=r.rowid`)) {
   const k = `${line.b}|${line.c}`;
+  // The line's own words first, then the food it was placed on, then the default.
   const rule = rules.find((l) => l.from === k && l.fields.some((f) => l.re.test(line[f] || '')));
-  const to = rule ? rule.to : renameOf.get(k)?.to;
-  const toCat = rule ? line.c : renameOf.get(k)?.toCat;
+  const to = rule ? rule.to : line.placed ?? renameOf.get(k)?.to;
+  const toCat = rule || line.placed ? line.c : renameOf.get(k)?.toCat;
+  const was = line.ob ?? line.b;
+  if (!lineWentTo.has(was)) lineWentTo.set(was, new Set());
+  lineWentTo.get(was).add(to || line.b);
   if (!to || (to === line.b && toCat === line.c)) continue;
   s7.push(`UPDATE curated_recipe_ingredients SET original_base_name=coalesce(original_base_name, base_name), original_category=coalesce(original_category, category), base_name=${esc(to)}, category=${esc(toCat)} WHERE rowid=${line.id};`);
   linesRenamed += 1;
@@ -292,11 +333,17 @@ for (const [t, cat] of [['food_aliases', 'food_category'], ['food_purchase_forms
 const byName = new Map();
 for (const r of renames) { if (!byName.has(r.old)) byName.set(r.old, new Set()); byName.get(r.old).add(r.to); }
 let weightsRenamed = 0;
-for (const w of q(OUT, `select id, base_name b, unit_label u from food_unit_weights`)) {
+// A name a shown food still carries keeps its weight: Veg|Onion stays Onion when only Bev|Onion became Onion juice.
+const stillShown = new Set(q(OUT, 'select distinct coalesce(listing_name, base_name) n from foods where hidden=0').map((r) => r.n));
+for (const w of q(OUT, `select id, base_name b, original_base_name ob, unit_label u from food_unit_weights`)) {
   const rule = SN.unitWeights.find((l) => l.from === w.b && new RegExp(l.unit, 'i').test(w.u));
-  const tos = byName.get(w.b);
-  const to = rule ? rule.to : tos && tos.size === 1 ? [...tos][0] : null;
-  if (!to) continue;
+  const tos = stillShown.has(w.b) ? null : byName.get(w.b);
+  // The recipe lines that named it come first: a weight per prune belongs where the prune lines went, even when the
+  // listing repoint above had sent it to Plum. A weight on its own still-shown name stays.
+  const was = w.ob ?? w.b;
+  const went = !w.ob && stillShown.has(w.b) ? null : [...(lineWentTo.get(was) || [])].filter((n) => n !== was && stillShown.has(n));
+  const to = rule ? rule.to : went && went.length === 1 ? went[0] : tos && tos.size === 1 ? [...tos][0] : null;
+  if (!to || to === w.b) continue;
   s7.push(`UPDATE food_unit_weights SET original_base_name=coalesce(original_base_name, base_name), base_name=${esc(to)} WHERE id=${w.id};`);
   weightsRenamed += 1;
 }
@@ -325,6 +372,7 @@ for (const [l, spec] of Object.entries(CAT.moves)) {
   categoryMoves += 1;
 }
 
+s7.push('DROP TABLE placed_listing;');
 s7.push(`CREATE TABLE candidate_build (key TEXT PRIMARY KEY, value TEXT);`);
 const build = { built_at: new Date().toISOString(), live_foods: live.length, added_foods: added, nutrients_gained: gained, recipe_names_pointed: pointed, unlisted_names_moved: moved,
   names_renamed: renames.length, category_moves: categoryMoves, recipe_lines_renamed: linesRenamed, recipe_lines_by_their_words: linesByWords, unit_weights_renamed: weightsRenamed };
@@ -332,8 +380,129 @@ for (const [k, v] of Object.entries(build)) s7.push(`INSERT INTO candidate_build
 s7.push('COMMIT;', 'VACUUM;');
 execFileSync('sqlite3', [OUT], { input: s7.join('\n'), maxBuffer: 2e9 });
 
+// 9. Purchase forms still naming a hidden duplicate, pointed by hand at the shown food that took its place
+// (data/purchase-forms.json). Where that food already has a form of its own, the old row was the same thing twice and
+// is dropped, since a food has one purchase form.
+const s9 = ['BEGIN;'];
+const PF = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'purchase-forms.json'), 'utf8'));
+const shownBaseAt = new Set(q(OUT, 'select base_name||\'|\'||category k from foods where hidden=0').map((r) => r.k));
+const formAt = new Set(q(OUT, 'select category||\'|\'||base_name k from food_purchase_forms').map((r) => r.k));
+let formsMoved = 0;
+let formsDropped = 0;
+for (const [from, [toCat, to]] of Object.entries(PF.moves)) {
+  if (!formAt.has(from)) throw new Error(`purchase-forms.json: no purchase form ${from}`);
+  if (!shownBaseAt.has(`${to}|${toCat}`)) throw new Error(`purchase-forms.json: no shown food ${to} in ${toCat}`);
+  const [fc, ...rest] = from.split('|');
+  const fb = rest.join('|');
+  const where = `category=${esc(fc)} AND base_name=${esc(fb)}`;
+  if (formAt.has(`${toCat}|${to}`)) { s9.push(`DELETE FROM food_purchase_forms WHERE ${where};`); formsDropped += 1; continue; }
+  s9.push(`UPDATE food_purchase_forms SET original_base_name=coalesce(original_base_name, base_name), original_category=coalesce(original_category, category), base_name=${esc(to)}, category=${esc(toCat)} WHERE ${where};`);
+  formAt.add(`${toCat}|${to}`);
+  formsMoved += 1;
+}
+
+s9.push(`INSERT INTO candidate_build VALUES ('purchase_forms_moved', '${formsMoved}');`, `INSERT INTO candidate_build VALUES ('purchase_forms_dropped', '${formsDropped}');`, 'COMMIT;');
+execFileSync('sqlite3', [OUT], { input: s9.join('\n'), maxBuffer: 2e9 });
+
+// 9b. Volume weights still naming a hidden row. Each is copied to the shown food that row now lists under, and to every
+// shown food the recipe lines that named it were placed on, where that food has no weight of its own, so a tablespoon of
+// white sugar or fish sauce still turns into grams. A weight measured on a brewed drink is never given to the dry leaf,
+// ground coffee or fruit it was made from. A row naming no food at all
+// lost its move to a weight already there for the same food, so it goes.
+const vwSql = ['BEGIN;'];
+const shownKey = new Set(q(OUT, "select category||'|'||base_name k from foods where hidden=0").map((r) => r.k));
+const anyKey = new Set(q(OUT, "select category||'|'||base_name k from foods").map((r) => r.k));
+const vwAt = new Set(q(OUT, "select category||'|'||base_name k from food_volume_weights").map((r) => r.k));
+const hiddenListingAt = new Map();
+for (const r of q(OUT, "select category c, base_name b, listing_name l, original_category oc, original_base_name ob from foods where hidden=1 and listing_name is not null")) {
+  for (const k of [`${r.c}|${r.b}`, r.ob ? `${r.oc || r.c}|${r.ob}` : null]) if (k) { if (!hiddenListingAt.has(k)) hiddenListingAt.set(k, new Set()); hiddenListingAt.get(k).add(r.l); }
+}
+const linesWentTo = new Map();
+for (const r of q(OUT, "select distinct original_category oc, original_base_name ob, category c, base_name b from curated_recipe_ingredients where original_base_name is not null and original_category is not null")) {
+  const k = `${r.oc}|${r.ob}`;
+  if (!linesWentTo.has(k)) linesWentTo.set(k, new Set());
+  linesWentTo.get(k).add(`${r.c}|${r.b}`);
+}
+const shownCatsOf = new Map();
+for (const k of shownKey) { const [c, ...b] = k.split('|'); const n = b.join('|'); if (!shownCatsOf.has(n)) shownCatsOf.set(n, new Set()); shownCatsOf.get(n).add(c); }
+let weightsCopied = 0;
+let weightsDropped = 0;
+for (const w of q(OUT, 'select category c, base_name b, original_category oc, original_base_name ob from food_volume_weights')) {
+  const k = `${w.c}|${w.b}`;
+  const targets = new Set();
+  for (const l of shownKey.has(k) ? [] : hiddenListingAt.get(k) || []) {
+    const cats = shownCatsOf.get(l);
+    if (!cats) continue;
+    targets.add(`${cats.has(w.c) ? w.c : cats.size === 1 ? [...cats][0] : ''}|${l}`);
+  }
+  if (!anyKey.has(k)) { vwSql.push(`DELETE FROM food_volume_weights WHERE category=${esc(w.c)} AND base_name=${esc(w.b)};`); weightsDropped += 1; continue; }
+  for (const key of [k, w.ob ? `${w.oc || w.c}|${w.ob}` : null]) for (const t of linesWentTo.get(key) || []) if (shownKey.has(t)) targets.add(t);
+  // A drink's weight per ml says nothing about the leaf, grounds or fruit it was brewed from.
+  if (/brewed|tea|coffee/i.test(w.b)) continue;
+  for (const t of targets) {
+  const [tc, ...tb] = t.split('|');
+  const to = tb.join('|');
+  if (!tc || vwAt.has(t)) continue;
+  vwSql.push(`INSERT INTO food_volume_weights (category, base_name, grams_per_ml, measure, fdc_id, ndb, fdc_description, stand_in, citation, original_base_name, original_category)
+    SELECT ${esc(tc)}, ${esc(to)}, grams_per_ml, measure, fdc_id, ndb, fdc_description, stand_in, citation, coalesce(original_base_name, base_name), coalesce(original_category, category)
+    FROM food_volume_weights WHERE category=${esc(w.c)} AND base_name=${esc(w.b)};`);
+  vwAt.add(t);
+  weightsCopied += 1;
+  }
+}
+vwSql.push(`INSERT INTO candidate_build VALUES ('volume_weights_copied', '${weightsCopied}');`, `INSERT INTO candidate_build VALUES ('volume_weights_dropped', '${weightsDropped}');`, 'COMMIT;');
+execFileSync('sqlite3', [OUT], { input: vwSql.join('\n'), maxBuffer: 2e9 });
+
+// 9c. Weights for a piece of a food that recipe lines count in pieces and that had none, because those lines sat in the
+// unlisted table until the recipe check placed them (tarragon sprigs, a cow foot). Each carries its citation.
+const uwSql = ['BEGIN;'];
+let unitWeightsAdded = 0;
+for (const a of SN.addUnitWeights || []) {
+  if (!q(OUT, `select 1 from foods where hidden=0 and base_name=${esc(a.base_name)} limit 1`).length) throw new Error(`short-names.json addUnitWeights: no shown food ${a.base_name}`);
+  uwSql.push(`INSERT INTO food_unit_weights (base_name, unit_label, grams_per_unit, citation, notes) SELECT ${esc(a.base_name)}, ${esc(a.unit_label)}, ${a.grams_per_unit}, ${esc(a.citation)}, ${esc(a.notes || null)}
+    WHERE NOT EXISTS (SELECT 1 FROM food_unit_weights WHERE base_name=${esc(a.base_name)} AND unit_label=${esc(a.unit_label)});`);
+  unitWeightsAdded += 1;
+}
+let volumeWeightsAdded = 0;
+for (const a of SN.addVolumeWeights || []) {
+  if (!q(OUT, `select 1 from foods where hidden=0 and category=${esc(a.category)} and base_name=${esc(a.base_name)} limit 1`).length) {
+    throw new Error(`short-names.json addVolumeWeights: no shown food ${a.category}|${a.base_name}`);
+  }
+  if (q(OUT, `select 1 from food_volume_weights where category=${esc(a.category)} and base_name=${esc(a.base_name)}`).length) continue;
+  uwSql.push(`INSERT INTO food_volume_weights (category, base_name, grams_per_ml, measure, ndb, fdc_description, citation)
+    VALUES (${esc(a.category)}, ${esc(a.base_name)}, ${a.grams_per_ml}, ${esc(a.measure)}, ${esc(a.ndb)}, ${esc(a.fdc_description)}, ${esc(a.citation)});`);
+  volumeWeightsAdded += 1;
+}
+uwSql.push(`INSERT INTO candidate_build VALUES ('volume_weights_added', '${volumeWeightsAdded}');`);
+uwSql.push(`INSERT INTO candidate_build VALUES ('unit_weights_added', '${unitWeightsAdded}');`, 'COMMIT;');
+execFileSync('sqlite3', [OUT], { input: uwSql.join('\n'), maxBuffer: 2e9 });
+
+// 9d. Equivalence groups (scripts/add_food_equivalence.js) for the foods the live file never had. The live groups stay as
+// they were: rebuilding them from the new names would split rows a reviewer matched by hand. A new food the curation
+// lists under a shown food joins that food's group, the same food in another table; any other new food takes its own
+// key, category|name|preparation, the way add_food_equivalence.js makes one.
+const ownKey = (a) => `${a}.category||'|'||lower(${a}.base_name)||'|'||lower(coalesce(${a}.prep_method,''))`;
+const noGroup = `NOT EXISTS (SELECT 1 FROM food_equivalence x WHERE x.food_id=f.food_id AND x.source=f.source)`;
+const before = q(OUT, 'select count(*) n from food_equivalence')[0].n;
+execFileSync('sqlite3', [OUT], { input: [
+  'BEGIN;',
+  `INSERT INTO food_equivalence (food_id, source, group_key, matched) SELECT f.food_id, f.source, ${ownKey('f')}, 0 FROM foods f WHERE f.hidden=0 AND ${noGroup};`,
+  `CREATE TEMP TABLE eq_new AS SELECT f.food_id, f.source, f.category cat, f.listing_name listing, ${ownKey('f')} own FROM foods f WHERE ${noGroup};`,
+  `CREATE TEMP TABLE eq_target AS SELECT n.food_id, n.source, n.own, e.group_key gk, ROW_NUMBER() OVER (PARTITION BY n.food_id, n.source ORDER BY e.group_key IS NULL, s.category=n.cat DESC, s.source='USDA' DESC) rk FROM eq_new n LEFT JOIN foods s ON s.hidden=0 AND s.base_name=n.listing LEFT JOIN food_equivalence e ON e.food_id=s.food_id AND e.source=s.source;`,
+  `INSERT INTO food_equivalence (food_id, source, group_key, matched) SELECT food_id, source, coalesce(gk, own), 0 FROM eq_target WHERE rk=1;`,
+  `INSERT INTO candidate_build VALUES ('equivalence_rows_added', CAST((SELECT count(*) FROM food_equivalence) - ${before} AS TEXT));`,
+  'COMMIT;',
+].join('\n'), maxBuffer: 2e9 });
+const equivalenceAdded = q(OUT, 'select count(*) n from food_equivalence')[0].n - before;
+
+// 10. Scores for every shown food the workbook never scored (score-unscored.js).
+const scoring = require('./score-unscored.js').scoreUnscored(OUT);
+execFileSync('sqlite3', [OUT], { input: `INSERT INTO candidate_build VALUES ('foods_scored_here', '${scoring.foods}');
+VACUUM;`, maxBuffer: 2e9 });
+
 const how = {};
 for (const r of renames) how[r.how] = (how[r.how] || 0) + 1;
 console.log(JSON.stringify({ out: OUT, liveFoods: live.length, paired: paired.size, added, nutrientsGained: gained, recipeNamesPointed: pointed, unlistedNamesMoved: moved,
-  namesRenamed: renames.length, renamedBy: how, categoryMoves, recipeLinesRenamed: linesRenamed, recipeLinesByTheirWords: linesByWords, unitWeightsRenamed: weightsRenamed }));
+  namesRenamed: renames.length, renamedBy: how, categoryMoves, recipeLinesRenamed: linesRenamed, recipeLinesByTheirWords: linesByWords, unitWeightsRenamed: weightsRenamed,
+  purchaseFormsMoved: formsMoved, purchaseFormsDropped: formsDropped, volumeWeightsCopied: weightsCopied, volumeWeightsDropped: weightsDropped, unitWeightsAdded, volumeWeightsAdded, equivalenceAdded, namesTranslated, scoring }));
 if (process.argv[3]) fs.writeFileSync(process.argv[3], renames.filter((r) => r.names.length > 1).map((r) => `${r.old} (${r.category}) -> ${r.to} [${r.how}] of ${r.names.join(' / ')}`).join('\n'));

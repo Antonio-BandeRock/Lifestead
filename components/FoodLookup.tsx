@@ -450,85 +450,18 @@ export function sourceLabel(source: string): string {
   return SOURCE_DISPLAY_LABELS[source] ?? source;
 }
 
-// Reported directly by the user, 2026-08-02, while reviewing Bev's own
-// Juice subcategory: Japan_MEXT's citrus cultivar names ("Harumi,"
-// "Kabosu," "Yuzu," etc.) and its "juice sacs"/"straight fruit juice" fruit
-// entries read as unfamiliar and visually noisy (the quotation marks
-// specifically) sitting in an otherwise plain alphabetical list -- "We
-// could separate them into their own group to identify them as Japanese
-// and then remove the quotations." Passed to buildFoodNameGroups as a
-// forced (source-based) group, see that function's own comment for why
-// this needed a different mechanism than its normal name-pattern grouping.
-//
-// Keyed by BASE_NAME, not the full `name` column -- a real bug in the
-// first version of this dict, caught 2026-08-02 when the person reported
-// the quotes were still showing after a full dev-server restart ruled out
-// a caching explanation. searchReferenceFoodNames() (lib/db.ts) returns
-// `base_name`, not `name` -- the two differ for most of these rows
-// (base_name has its prep-method clause like ", raw"/", fresh" already
-// split off, and any trailing space trimmed), so a dict keyed by `name`
-// never actually matched anything reaching this component; every entry
-// silently fell through to the normal, unstripped candidate-key path.
-// Confirmed by direct query against the rebuilt database that all 32 of
-// these base_names are still exclusively Japan_MEXT-sourced (one row
-// each, no other source shares any of them) before rekeying. Deliberately
-// excludes "Carrot, regular (European type), juice, canned" and
-// "Tomatoes, canned products, juice, without salt" -- confirmed by direct
-// query both merge into a base_name ("Carrot juice"/"Tomato juice") that
-// USDA/Canada_CNF/Germany_BLS ALSO contribute rows to, so the visible
-// entry isn't exclusively Japanese and labeling it that way would
-// misrepresent what it actually resolves to.
-//
-// Values are the display label shown under the "Japanese" header --
-// follow-up request the same day: "If it's under the Juice header, we
-// shouldn't need the word juice in the name. Let's just have the name of
-// the fruit listed." Hand-curated rather than stripped generically, since
-// a few names carry a real, meaningful qualifier beyond just "juice" that
-// has to survive (Satsuma mandarin's three ripening-stage rows).
-//
-// Narrowed a second time the same day, per direct correction: "I was
-// thinking that the Japanese fruit juices listed would just be those that
-// have a Japanese name. All others outside of those that match a USDA or
-// other English entry should be used." The first version forced every
-// Japan_MEXT-EXCLUSIVE row into this group, which is a different thing
-// from a row actually being a distinctively Japanese fruit -- Apple,
-// Grape, Grapefruit, Lemon, Lime, Passion Fruit, Pineapple, Navel Orange,
-// and Valencia Orange only ended up Japan_MEXT-exclusive in THIS
-// database's own source coverage, not because the fruit itself is
-// Japanese; grouping them as "Japanese" read as a confusing, unexplained
-// duplicate of the same common fruit name (worse once `juice` was added to
-// GROUP_STOPWORDS above, since those same common names then also started
-// surfacing normally, unlabeled, right alongside their "Japanese" copy).
-// "Seminole" was cut for the same reason -- a Florida-bred tangelo named
-// for the Seminole people, not a Japanese cultivar; it only had a row here
-// because Japan_MEXT happened to be the one source measuring it. Genuinely
-// Japanese-named citrus cultivars (Harumi, Hassaku, Hyuga-natsu, Iyo,
-// Kabosu, Kawachi-bankan, Kiyomi, Natsudaidai, Sanbokan, Setoka,
-// Shiikuwasha, Shiranuhi, Sudachi, Yuzu, Fukuhara, Satsuma) stay -- these
-// are the names an English speaker wouldn't otherwise recognize as "just
-// an orange," which is the real thing "has a Japanese name" is pointing
-// at. The removed entries aren't dropped from the Juice list itself, only
-// from this forced group -- they fall back to the same plain
-// browsing/candidate-grouping every other juice already gets.
+// The juices with a Japanese name sit under their own "Japanese" heading
+// in Bev > Juice, shown by the fruit's name alone because the heading
+// already says juice (direct requests, 2026-08-02). Only fruit an English
+// speaker would not recognise belongs here; a common fruit measured only
+// by Japan's tables browses like any other juice. Since the unified
+// database (2026-11-17), the citrus eaten as fruit (Hassaku, Iyo, Setoka
+// and the rest) lives in Fruit, so the four pressed for juice are left.
 const JUICE_JAPAN_DISPLAY_LABELS: Record<string, string> = {
-  'Citrus, "Harumi", juice sacs': 'Harumi',
-  'Citrus, "Hassaku", juice sacs': 'Hassaku',
-  'Citrus, "Hyuga-natsu", juice sacs': 'Hyuga-natsu',
-  'Citrus, "Iyo", juice sacs': 'Iyo',
-  'Citrus, "Kabosu", juice, fresh': 'Kabosu',
-  'Citrus, "Kawachi-bankan", juice sacs': 'Kawachi-bankan',
-  'Citrus, "Kiyomi", juice sacs': 'Kiyomi',
-  'Citrus, "Natsudaidai", juice sacs': 'Natsudaidai',
-  'Citrus, "Sanbokan", juice sacs': 'Sanbokan',
-  'Citrus, "Setoka", juice sacs': 'Setoka',
-  'Citrus, "Shiikuwasha", juice, fresh': 'Shiikuwasha',
-  'Citrus, "Shiranuhi", juice sacs': 'Shiranuhi',
-  'Citrus, "Sudachi", juice, fresh': 'Sudachi',
-  'Citrus, "Yuzu", juice, fresh': 'Yuzu',
-  'Oranges, Fukuhara-orange, juice sacs': 'Fukuhara Orange',
-  'Satsuma mandarins, juice sacs, early ripening type': 'Satsuma Mandarin, Early Ripening',
-  'Satsuma mandarins, juice sacs, normal ripening type': 'Satsuma Mandarin, Normal Ripening',
-  'Satsuma mandarins, straight fruit juice': 'Satsuma Mandarin',
+  'Kabosu juice': 'Kabosu',
+  'Shiikuwasha juice': 'Shiikuwasha',
+  'Sudachi juice': 'Sudachi',
+  'Yuzu juice': 'Yuzu',
 };
 
 function buildJuiceForcedGroups(

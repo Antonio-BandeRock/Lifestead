@@ -11,9 +11,26 @@ current app database already carries (D1-D6/condition scores, aliases,
 interaction rules, everything) to become a real, verified, drop-in
 replacement.
 
-**Nothing in this directory is wired to the live app.** `lib/db.ts`
-never reads from `unified_foods.sqlite`. No app screen changes. That's
-deliberate — see "Safety" below.
+**Since 2026-11-17 the candidate built here IS the live app's file.**
+`merge-candidate.js` writes `candidate/foods_reference_candidate.db`,
+which was copied over `assets/data/foods_reference.db` (phase 7). The app
+still never reads `unified_foods.sqlite` itself. The file from before
+the swap is kept as
+`_backups/reference-dbs/foods_reference.pre-unified-2026-11-17.db`, and
+`verify-candidate.js` compares against it.
+
+## Status: swapped in, 2026-11-17
+
+Tony's instruction for the swap: merge each pair, every food that belongs on the list is on it, and every shown food is scored. What changed before the copy went live:
+
+- **Brewed drinks** (`curate-brewed-drinks.js`). The earlier passes hid every brewed coffee and tea, so a cup of coffee could only be logged as grounds. One brewed food is now shown per everyday drink, USDA first, the German table only where USDA has none (peppermint, rooibos, mate); the same drink from other tables is hidden and points at the shown one.
+- **Every food has an equivalence row** (merge step 9d): 5,964 rows added, one for each food new to the live file.
+- **Live foods named in their table's language take the unified English name** (1,971 renamed, the original kept in `name_local`), and `lib/foodNameRenames.ts` moves records kept by the old name (`scripts/test_food_name_renames.js`).
+- **150 shown foods the workbook never scored are scored** (`score-unscored.js`): same food first, then the workbook's own thresholds for the nutrient-ruled sub-criteria, then the nearest scored food in the category. Oxalate is never guessed. Every score written has a `score_origin` row.
+- **Counts of the build**: 2,496 shown foods, 26,749 live foods kept, 5,964 added, 201,233 nutrient values gained, 821 recipe names pointed, 15,594 recipe lines renamed, 136 category moves. `verify-candidate.js`: 31 of 31 checks pass.
+- **Spanish names** for every shown food are in `lib/translations/es/foods-022.ts`.
+
+Waiting on Tony: whether hidden made products (seitan, bouillon, curry powder, mayonnaise, mustard, soy milk, breads) belong on the list, Physalis and Groundcherries as one food, a home for protein powders, and a few equivalences named in the session report.
 
 ## Status: every shown food in the group a person would look for it in, 2026-11-11
 

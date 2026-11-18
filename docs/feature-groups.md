@@ -53,6 +53,7 @@ What is in food and what a person has eaten, apart from any condition.
 - Food > Meal Builder and the builders, Fermentation Builder, My Recipes, Import Recipe
 - Schedules > Hydration
 - Food first, supplements for the gap (on every nutrient reading)
+- The whole-foods list every food picker reads, one food per name with near-duplicates folded in, and records kept by name following a food to its new name
 
 ## Planning food for me
 

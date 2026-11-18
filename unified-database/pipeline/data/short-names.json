@@ -54,30 +54,169 @@
     "Pollock Fish|Meat": "Pollock",
     "Veal Ribs (Raw)|Meat": "Veal rib",
     "Salmon Fish (Smoked)|Meat": "Smoked salmon",
-    "Chicken, roasting|Meat": "Skinless chicken light meat"
+    "Chicken, roasting|Meat": "Skinless chicken light meat",
+    "Button mushroom|Mushroom": "Mushrooms"
   },
   "lines": [
-    { "from": "Chicken, broilers or fryers|Meat", "match": "backs|necks|carcass", "to": "Chicken back" },
-    { "from": "Chicken, broilers or fryers|Meat", "match": "wings|tips discarded", "to": "Chicken wing" },
-    { "from": "Chicken, broilers or fryers|Meat", "match": "drumstick", "to": "Chicken drumstick" },
-    { "from": "Chicken, broilers or fryers|Meat", "match": "thigh", "to": "Chicken thigh" },
-    { "from": "Chicken, broilers or fryers|Meat", "match": "\\blegs?\\b|leg quarters", "to": "Chicken leg" },
-    { "from": "Chicken, broilers or fryers|Meat", "match": "breast", "fields": "cut", "to": "Chicken breast" },
-    { "from": "Pork, variety meats and by-products|Meat", "match": "casing|hog intestine|kg of filling", "to": "Pork intestine" },
-    { "from": "Pork, variety meats and by-products|Meat", "match": "^Buche", "fields": "recipe", "to": "Pork stomach" },
-    { "from": "Pork, variety meats and by-products|Meat", "match": "^Griebenschmalz", "fields": "recipe", "to": "Pork leaf fat" },
-    { "from": "Pork, variety meats and by-products|Meat", "match": "^Guo Qiao Mi Xian", "fields": "recipe", "to": "Pork kidney" },
-    { "from": "Beef, variety meats and by-products|Meat", "match": "Lengua", "fields": "recipe", "to": "Beef tongue" },
-    { "from": "Beef, variety meats and by-products|Meat", "match": "Sesos", "fields": "recipe", "to": "Beef brain" },
-    { "from": "Beef, variety meats and by-products|Meat", "match": "Menudo|Trippa", "fields": "recipe", "to": "Beef tripe" },
-    { "from": "Tomato products|Veg", "match": "passata", "fields": "cut", "to": "Tomato puree" },
-    { "from": "Pepper, hot chili|Veg", "match": "long green|green chil|green pepper|hot green", "to": "Green chili peppers" },
-    { "from": "Pork Loin (Raw)|Meat", "match": "tenderloin", "fields": "cut,recipe", "to": "Pork tenderloin" },
-    { "from": "Whole Turkey (Raw)|Meat", "match": "Turkey Breast", "fields": "recipe", "to": "Turkey breast" },
-    { "from": "Squash, winter|Veg", "match": "butternut", "to": "Butternut squash" },
-    { "from": "Cod Fish|Meat", "match": "soaked", "fields": "cut,note", "to": "Salt cod" }
+    {
+      "from": "Chicken, broilers or fryers|Meat",
+      "match": "backs|necks|carcass",
+      "to": "Chicken back"
+    },
+    {
+      "from": "Chicken, broilers or fryers|Meat",
+      "match": "wings|tips discarded",
+      "to": "Chicken wing"
+    },
+    {
+      "from": "Chicken, broilers or fryers|Meat",
+      "match": "drumstick",
+      "to": "Chicken drumstick"
+    },
+    {
+      "from": "Chicken, broilers or fryers|Meat",
+      "match": "thigh",
+      "to": "Chicken thigh"
+    },
+    {
+      "from": "Chicken, broilers or fryers|Meat",
+      "match": "\\blegs?\\b|leg quarters",
+      "to": "Chicken leg"
+    },
+    {
+      "from": "Chicken, broilers or fryers|Meat",
+      "match": "breast",
+      "fields": "cut",
+      "to": "Chicken breast"
+    },
+    {
+      "from": "Pork, variety meats and by-products|Meat",
+      "match": "casing|hog intestine|kg of filling",
+      "to": "Pork intestine"
+    },
+    {
+      "from": "Pork, variety meats and by-products|Meat",
+      "match": "^Buche",
+      "fields": "recipe",
+      "to": "Pork stomach"
+    },
+    {
+      "from": "Pork, variety meats and by-products|Meat",
+      "match": "^Griebenschmalz",
+      "fields": "recipe",
+      "to": "Pork leaf fat"
+    },
+    {
+      "from": "Pork, variety meats and by-products|Meat",
+      "match": "^Guo Qiao Mi Xian",
+      "fields": "recipe",
+      "to": "Pork kidney"
+    },
+    {
+      "from": "Beef, variety meats and by-products|Meat",
+      "match": "Lengua",
+      "fields": "recipe",
+      "to": "Beef tongue"
+    },
+    {
+      "from": "Beef, variety meats and by-products|Meat",
+      "match": "Sesos",
+      "fields": "recipe",
+      "to": "Beef brain"
+    },
+    {
+      "from": "Beef, variety meats and by-products|Meat",
+      "match": "Menudo|Trippa",
+      "fields": "recipe",
+      "to": "Beef tripe"
+    },
+    {
+      "from": "Tomato products|Veg",
+      "match": "passata",
+      "fields": "cut",
+      "to": "Tomato puree"
+    },
+    {
+      "from": "Pepper, hot chili|Veg",
+      "match": "long green|green chil|green pepper|hot green",
+      "to": "Green chili peppers"
+    },
+    {
+      "from": "Pork Loin (Raw)|Meat",
+      "match": "tenderloin",
+      "fields": "cut,recipe",
+      "to": "Pork tenderloin"
+    },
+    {
+      "from": "Whole Turkey (Raw)|Meat",
+      "match": "Turkey Breast",
+      "fields": "recipe",
+      "to": "Turkey breast"
+    },
+    {
+      "from": "Squash, winter|Veg",
+      "match": "butternut",
+      "to": "Butternut squash"
+    },
+    {
+      "from": "Cod Fish|Meat",
+      "match": "soaked",
+      "fields": "cut,note",
+      "to": "Salt cod"
+    }
   ],
   "unitWeights": [
-    { "from": "Chicken, broilers or fryers", "unit": "drumstick", "to": "Chicken drumstick" }
+    {
+      "from": "Chicken, broilers or fryers",
+      "unit": "drumstick",
+      "to": "Chicken drumstick"
+    },
+    {
+      "from": "Apples",
+      "unit": "apple",
+      "to": "Apple"
+    },
+    {
+      "from": "Oranges",
+      "unit": "orange",
+      "to": "Orange"
+    },
+    {
+      "from": "Pears",
+      "unit": "pear",
+      "to": "Pear"
+    },
+    {
+      "from": "Clementine",
+      "unit": "fruit",
+      "to": "Clementines"
+    }
+  ],
+  "addUnitWeights": [
+    {
+      "base_name": "Tarragon",
+      "unit_label": "sprig",
+      "grams_per_unit": 1,
+      "citation": "USDA FoodData Central, SR Legacy, FDC 170416 (NDB 11297), \"Parsley, fresh\": 10 sprigs = 10 g (parsley stands in; USDA has no tarragon sprig)",
+      "notes": "stand-in"
+    },
+    {
+      "base_name": "Veal foot",
+      "unit_label": "foot",
+      "grams_per_unit": 1000,
+      "citation": "No USDA portion for a beef or calf foot; a whole cow foot as sold for menudo is about 1 kg (2 lb) in butcher and recipe listings, so this is an estimate",
+      "notes": "stand-in, estimate"
+    }
+  ],
+  "addVolumeWeights": [
+    {
+      "category": "Dairy",
+      "base_name": "Sweetened condensed milk",
+      "grams_per_ml": 1.2934,
+      "measure": "1 cup = 306 g",
+      "ndb": "01095",
+      "fdc_description": "Milk, canned, condensed, sweetened",
+      "citation": "USDA FoodData Central, SR Legacy (NDB 01095), \"Milk, canned, condensed, sweetened\": 1 cup = 306 g"
+    }
   ]
 }
