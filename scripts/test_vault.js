@@ -175,6 +175,12 @@ check('a lock file from before the vault reads as vault off', !S.isVaultOn());
 
 setLock({ ...baseLock, vault: true });
 S.refreshVaultOn();
+// Switched on in the open app, it starts open (Tony, 2026-11-18), and
+// closes like any other time once the app is put away.
+check('just switched on, the vault starts open', S.isVaultOn() && !S.isVaultClosed());
+S.setVaultOpen(false);
+S.refreshVaultOn();
+check('a refresh while on does not open it', S.isVaultClosed());
 check('lock on, vault on', S.isVaultOn() && S.isVaultClosed());
 check('closed refuses a vault read', S.vaultRefusalNow(read) instanceof V.VaultClosedError);
 let heard = 0;

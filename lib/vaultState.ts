@@ -72,8 +72,16 @@ export function chosenVaultCategories(): VaultCategory[] {
 }
 
 export function refreshVault(): void {
+  const wasGuarding = snapshot === null ? null : snapshot.guarding;
   snapshot = null;
   if (!current().guarding) vaultOpen = false;
+  // Just set up, by the person, in the open app (setup's security question,
+  // the offer at a first record, Profile, or App Lock switched on): the vault
+  // starts open and closes the next time the app is put away. Closing it at
+  // once hid what they had just entered (Tony, 2026-11-18: Autism and ADHD
+  // looked unaccepted in setup, and two new supplements were missing from
+  // My Meds).
+  else if (wasGuarding === false) vaultOpen = true;
   notify();
 }
 

@@ -106,7 +106,8 @@ import { setVisualPreferences } from '../lib/visualPreferences';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_DIVIDER_COLOR, homeBandStyle } from './HomeSectionBand';
 import { PopoverSelect } from './PopoverSelect';
 import { VAULT_DEFAULT_CATEGORIES } from '../lib/vault';
-import { answerVaultSetupNotNow, setVaultCategories } from '../lib/vaultSession';
+import { answerVaultSetupNotNow, setVaultCategories, useCategoryClosed } from '../lib/vaultSession';
+import { VaultClosedBand } from './VaultClosedBand';
 
 type Props = {
   mode: 'card' | 'page' | 'setup';
@@ -169,6 +170,16 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
   // Change. Null means the next unanswered one.
   const [holding, setHolding] = useState<string | null>(null);
   const playful = usePlayfulWording();
+  // The neurodivergent profile is a vault record, so while the vault is
+  // closed it cannot be read back and every choice would look untaken
+  // (Tony, 2026-11-18). The question says so and opens the vault in place,
+  // and the answers are read again once it opens.
+  const neuroClosed = useCategoryClosed('neuro');
+  const neuroWasClosed = useRef(neuroClosed);
+  useEffect(() => {
+    if (neuroWasClosed.current && !neuroClosed) onChanged();
+    neuroWasClosed.current = neuroClosed;
+  }, [neuroClosed, onChanged]);
   const [allergyText, setAllergyText] = useState('');
   const [sex, setSex] = useState<'male' | 'female' | null>(null);
   const [year, setYear] = useState<string | null>(null);
@@ -312,6 +323,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
           </>
         );
       case 'neuro':
+        if (neuroClosed) return <VaultClosedBand inline color={colors.primary} categories={['neuro']} />;
         return (
           <>
             {panel(
