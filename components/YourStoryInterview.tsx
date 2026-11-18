@@ -105,7 +105,10 @@ import { wording } from '../lib/playfulCopy';
 import { setVisualPreferences } from '../lib/visualPreferences';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_DIVIDER_COLOR, homeBandStyle } from './HomeSectionBand';
 import { PopoverSelect } from './PopoverSelect';
-import { VAULT_DEFAULT_CATEGORIES } from '../lib/vault';
+import { VAULT_DEFAULT_CATEGORIES, VaultClosedError } from '../lib/vault';
+import { SessionReadOnlyError } from '../lib/databaseActivity';
+import { explainNotYet } from '../lib/notYet';
+import { t } from '../lib/i18n';
 import { answerVaultSetupNotNow, setVaultCategories, useCategoryClosed } from '../lib/vaultSession';
 import { VaultClosedBand } from './VaultClosedBand';
 
@@ -159,6 +162,14 @@ const appLockProfileRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
   params: { section: 'applock' },
 };
 const appLockSetupRoute: Exclude<StoryDestination, { kind: 'beats' }> = { kind: 'route', pathname: '/app-lock-setup' };
+// Why an answer did not save. The vault and the session lock refuse with a
+// sentence of their own; anything else is named plainly with its reason.
+function answerFailedSentence(error: unknown): string {
+  if (error instanceof VaultClosedError || error instanceof SessionReadOnlyError) return t(error.message);
+  const reason = error instanceof Error && error.message ? error.message : String(error);
+  return t('That answer was not saved. The reason given: {reason}', { reason });
+}
+
 const myMedsRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
   kind: 'route',
   pathname: '/life',
@@ -180,6 +191,12 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
     if (neuroWasClosed.current && !neuroClosed) onChanged();
     neuroWasClosed.current = neuroClosed;
   }, [neuroClosed, onChanged]);
+  // What was just tapped, shown at once while the answers are read back, so
+  // a choice never looks untaken in between (Tony, 2026-11-18). Cleared
+  // whenever the read-back arrives.
+  const [neuroTapped, setNeuroTapped] = useState<string[] | null>(null);
+  const neuroFacts = interview?.facts.neuro;
+  useEffect(() => setNeuroTapped(null), [neuroFacts]);
   const [allergyText, setAllergyText] = useState('');
   const [sex, setSex] = useState<'male' | 'female' | null>(null);
   const [year, setYear] = useState<string | null>(null);
@@ -235,7 +252,13 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
       try {
         await work();
       } catch (error) {
+        // A choice that did not save says so and why, never nothing (Tony,
+        // 2026-11-18: Autism, ADHD and Dyslexia did nothing when tapped in
+        // setup, and the reason was swallowed here).
         console.warn('Your Story interview answer failed', error);
+        explainNotYet(answerFailedSentence(error));
+        onChanged();
+        return false;
       }
       if (keepOpen === null && openKeyRef.current) {
         setJustAnswered(openKeyRef.current);
@@ -243,6 +266,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
       }
       setHolding(keepOpen);
       onChanged();
+      return true;
     },
     [onChanged, onAnswered],
   );
@@ -250,6 +274,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
   if (!interview) return null;
   if ((mode === 'card' || mode === 'setup') && !open) return null;
   const facts = interview.facts;
+  const neuroNow = neuroTapped ?? facts.neuro;
 
   // One choice in a pressed-in well, the quick access menu's look, with a
   // caption under the name when the choice needs one.
@@ -328,11 +353,19 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
           <>
             {panel(
               ALL_NEURO_PROFILE_KEYS.map((profileKey: NeuroProfileKey) => {
-                const on = facts.neuro.includes(profileKey);
+                const chosen = neuroNow;
+                const on = chosen.includes(profileKey);
                 return well(
                   NEURO_PROFILE_LABELS[profileKey],
                   on,
-                  () => void act(() => (on ? removeNeuroProfile(profileKey) : addNeuroProfile(profileKey)), key),
+                  () => {
+                    setNeuroTapped(on ? chosen.filter((k) => k !== profileKey) : [...chosen, profileKey]);
+                    void act(() => (on ? removeNeuroProfile(profileKey) : addNeuroProfile(profileKey)), key).then(
+                      (saved) => {
+                        if (!saved) setNeuroTapped(null);
+                      },
+                    );
+                  },
                   profileKey,
                   NEURO_PROFILE_CAPTIONS[profileKey],
                 );
@@ -343,7 +376,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
                 start they have a neurodivergent mind, we can offer to be more
                 direct, without the playful stuff." Offered, never switched
                 silently; Profile > Playful Wording changes it later. */}
-            {facts.neuro.length > 0 ? (
+            {neuroNow.length > 0 ? (
               <>
                 <Text style={styles.caption}>{wording('plainWordingOffer', playful)}</Text>
                 {panel([
@@ -353,10 +386,10 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
               </>
             ) : null}
             <View style={styles.links}>
-              {facts.neuro.length > 0
-                ? link(DONE_LABEL, () => finishMulti(question, facts.neuro.length))
+              {neuroNow.length > 0
+                ? link(DONE_LABEL, () => finishMulti(question, neuroNow.length))
                 : link(NONE_OF_THESE_LABEL, () => finishMulti(question, 0))}
-              {facts.neuro.length > 0 ? link(OPEN_PROFILE_LABEL, () => go(profileRoute)) : null}
+              {neuroNow.length > 0 ? link(OPEN_PROFILE_LABEL, () => go(profileRoute)) : null}
             </View>
           </>
         );

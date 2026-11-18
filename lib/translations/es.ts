@@ -547,6 +547,7 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'Your email app has the answers written in. Press send there and they reach the developer.': 'Tu app de correo ya tiene las respuestas escritas. Toca enviar ahí y le llegan al desarrollador.',
   'No email app opened, so the answers are copied. Paste them into an email to {address}.': 'No se abrió ninguna app de correo, así que las respuestas quedaron copiadas. Pégalas en un correo a {address}.',
   'The answers could not be sent or copied. They are still here, so try again in a moment.': 'No se pudieron enviar ni copiar las respuestas. Siguen aquí, así que inténtalo de nuevo en un momento.',
+  'That answer was not saved. The reason given: {reason}': 'Esa respuesta no se guardó. El motivo: {reason}',
   // Pacing's answer and effort words, read as values inside its sentences (Q20).
   "better": "mejor",
   "same": "igual",
