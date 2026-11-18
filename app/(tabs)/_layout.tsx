@@ -112,7 +112,7 @@ export default function TabLayout() {
               // an older/nonexistent prop name, silently did nothing).
               sceneStyle: {
                 backgroundColor: 'transparent',
-                ...(focused ? guideRoom : { paddingTop: 0, paddingBottom: 0 }),
+                ...(focused ? guideRoom : { paddingTop: 0 }),
               },
             }}
           >

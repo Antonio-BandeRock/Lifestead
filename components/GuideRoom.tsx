@@ -139,20 +139,23 @@ export function GuideEdgeButton({ style }: { style?: StyleProp<ViewStyle> }) {
 
 /**
  * The padding a screen takes for the strips: at its top when they sit at
- * the top, and at its bottom, with the footer under them, when they sit at
- * the bottom. Nothing on the screen is ever under a strip either way.
+ * the top, and none when they sit at the bottom.
+ *
+ * THE FOOTER NEVER MOVES (Tony, 2026-11-18: "The footer is NEVER to be
+ * moved like that again for any screen."). 1.0.93.4 padded the screen at
+ * its bottom for strips sitting there, and since the description box and
+ * the lens buttons are drawn inside the screen, both rode up off the
+ * footer band. So a screen is never padded at its bottom for anything:
+ * strips at the bottom sit above the footer over the content, and every
+ * scrolling screen already runs out a full window past its last line
+ * (useFloatingButtonScrollPadding), so nothing stays under one.
+ * scripts/test_guide_room.js fails if a bottom padding comes back here or
+ * in either navigator's screen style.
  */
-export function useGuideRoomPadding(): { paddingTop: number; paddingBottom: number } {
+export function useGuideRoomPadding(): { paddingTop: number } {
   const room = useGuideRoomHeight();
   const edge = useGuideEdge();
-  const footer = useFooterBandHeight();
-  return useMemo(
-    () =>
-      edge === 'bottom'
-        ? { paddingTop: 0, paddingBottom: room > 0 ? room + footer : 0 }
-        : { paddingTop: room, paddingBottom: 0 },
-    [edge, room, footer],
-  );
+  return useMemo(() => ({ paddingTop: edge === 'bottom' ? 0 : room }), [edge, room]);
 }
 
 /**

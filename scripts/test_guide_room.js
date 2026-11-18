@@ -97,6 +97,28 @@ check('long drag down moves to the bottom', room.edgeAfterDrag('top', 90), 'bott
 check('drag down at the bottom stays', room.edgeAfterDrag('bottom', 90), 'bottom');
 check('long drag up moves to the top', room.edgeAfterDrag('bottom', -90), 'top');
 
+// The footer never moves (Tony, 2026-11-18: "The footer is NEVER to be
+// moved like that again for any screen."). The description box and the
+// lens buttons are drawn inside each screen, so a bottom padding on a
+// screen lifts them off the footer band. Neither navigator's screen style
+// nor the guide room padding may carry one.
+{
+  const fs = require('fs');
+  const path = require('path');
+  const root = path.join(__dirname, '..');
+  const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+  const guideRoomSource = read('components/GuideRoom.tsx');
+  const paddingHook = guideRoomSource.slice(guideRoomSource.indexOf('export function useGuideRoomPadding'));
+  const hookBody = paddingHook.slice(0, paddingHook.indexOf('\n}\n'));
+  check('guide room padding never pads a screen bottom', /paddingBottom/.test(hookBody), false);
+  const tabsLayout = read('app/(tabs)/_layout.tsx');
+  const sceneStyle = tabsLayout.slice(tabsLayout.indexOf('sceneStyle'), tabsLayout.indexOf('sceneStyle') + 400);
+  check('tab screens never padded at the bottom', /paddingBottom|marginBottom/.test(sceneStyle), false);
+  const rootLayout = read('app/_layout.tsx');
+  const contentStyleLine = rootLayout.split('\n').find((line) => line.includes('contentStyle:')) || '';
+  check('stack screens never padded at the bottom', /paddingBottom|marginBottom/.test(contentStyleLine), false);
+}
+
 if (failures > 0) {
   console.log(`${failures} check(s) failed.`);
   process.exit(1);
