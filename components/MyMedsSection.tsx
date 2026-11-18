@@ -752,6 +752,305 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
     );
   }
 
+  // The form for adding or editing a med. Adding draws it at the top of
+  // the lens; Edit draws it right under the row being edited (Tony,
+  // 2026-11-18: once a supplement was made, Edit seemed to do nothing,
+  // because the form opened at the top of the lens, off the screen).
+  // The record Edit was pressed on, whose form draws under its own row.
+  const editingRowId = addMode === null ? null : addMode === 'supplement' ? supplementForm.editingId : medForm.editingId;
+
+  function renderForm(inline: boolean) {
+    if (addMode === null) return null;
+    return addMode === 'supplement' ? (
+          <View style={[styles.formCard, inline ? styles.formInline : null]}>
+            {supplementForm.editingId ? null : renderKindSwitch('supplement')}
+            <Text style={styles.label}>Name</Text>
+            <Text style={styles.fieldHint}>What you call it. The name on the bottle works, or just the main nutrient.</Text>
+            <AppTextInput
+              onVoiceResult={(text) => setSupplementForm((current) => ({ ...current, name: text }))}
+              micColor={tabColor}
+              style={styles.input}
+              placeholder="e.g. Daily Multivitamin, or just Magnesium"
+              value={supplementForm.name}
+              onChangeText={(text) => setSupplementForm((current) => ({ ...current, name: text }))}
+            />
+  
+            <Text style={styles.label}>Dose</Text>
+            <Text style={styles.fieldHint}>
+              How many you take in a whole day, and what one of them is. One capsule in the morning and one at night is 2 capsules. Half a tablet is 0.5.
+            </Text>
+            <View style={styles.timeRow}>
+              <AppTextInput
+                style={[styles.input, styles.timeInput]}
+                keyboardType="decimal-pad"
+                placeholder="1, or 0.5"
+                value={supplementForm.unitsPerDay}
+                onChangeText={(text) => setSupplementForm((current) => ({ ...current, unitsPerDay: text }))}
+              />
+              <AppTextInput
+                style={[styles.input, styles.doseUnitInput]}
+                placeholder="capsule, tablet, scoop, powder…"
+                value={supplementForm.servingUnitLabel}
+                onChangeText={(text) => setSupplementForm((current) => ({ ...current, servingUnitLabel: text }))}
+              />
+              <Text style={styles.timeSeparator}>/ day</Text>
+            </View>
+  
+            <Text style={styles.label}>Serving size on the label</Text>
+            <Text style={styles.fieldHint}>
+              Many labels give their amounts for 2 or more at once, written as &quot;Serving size: 2 capsules&quot;. Put that number here and copy the amounts exactly as printed: they are divided down to one when saved. Leave it at 1 if the label does not say.
+            </Text>
+            <View style={styles.timeRow}>
+              <AppTextInput
+                style={[styles.input, styles.timeInput]}
+                keyboardType="decimal-pad"
+                placeholder="1"
+                value={supplementForm.servingSize}
+                onChangeText={(text) => setSupplementForm((current) => ({ ...current, servingSize: text }))}
+              />
+              {supplementForm.servingUnitLabel.trim() ? (
+                <Text style={styles.timeSeparator}>{supplementForm.servingUnitLabel.trim()}</Text>
+              ) : null}
+            </View>
+  
+            <Text style={styles.label}>Ingredients</Text>
+            <Text style={styles.fieldHint}>The amounts on the label, for the serving size above.</Text>
+            <Text style={styles.fieldHint}>
+              The quick way: read the Supplement Facts panel out loud or type it here, then tap Fill Ingredients From This and check each row it fills in. Or add each one yourself with + Add ingredient.
+            </Text>
+            <AppTextInput
+              onVoiceResult={(text, isFinal) => {
+                setLabelText(text);
+                if (isFinal) void fillFromLabel(text);
+              }}
+              micColor={tabColor}
+              style={styles.input}
+              multiline
+              placeholder="Say or type the label: vitamin D 25 mcg, zinc 11 mg, B12 500 mcg as methylcobalamin"
+              value={labelText}
+              onChangeText={setLabelText}
+            />
+            <TouchableOpacity onPress={() => void fillFromLabel(labelText)} style={styles.secondaryButton}>
+              <Text style={styles.secondaryButtonText}>Fill Ingredients From This</Text>
+            </TouchableOpacity>
+            {labelNote ? <Text style={styles.helperText}>{labelNote}</Text> : null}
+            {supplementForm.ingredients.map((row) => {
+              const forms = formsByNutrient[row.nutrientCode] ?? [];
+              const formOptions: DropdownOption[] = forms.map((form) => ({ label: form.formName, value: form.formName }));
+              return (
+                <View key={row.key}>
+                  <View style={styles.ingredientRow}>
+                    <View style={styles.ingredientNutrientCol}>
+                      {/* colors.tabFood, not this lens's own TAB_COLOR (tabSchedules) --
+                          2026-08-08, explicitly requested to match "the same color as
+                          those on the Side Dish Builder," which passes this same
+                          constant as its own tabColor. All four PopoverSelect fields
+                          in this lens share it, for one consistent picker color. */}
+                      <PopoverSelect
+                        selected={row.nutrientCode || null}
+                        options={nutrientOptions}
+                        onSelect={(value) => {
+                          updateIngredientRow(row.key, { nutrientCode: value, supplementForm: '' });
+                          ensureNutrientDataLoaded(value);
+                        }}
+                        placeholder="Nutrient"
+                        tabColor={colors.tabFood}
+                        width={220}
+                        searchable
+                        searchPlaceholder="Search nutrients…"
+                      />
+                    </View>
+                    <AppTextInput
+                      style={[styles.input, styles.ingredientAmountInput]}
+                      placeholder="Amount"
+                      keyboardType="decimal-pad"
+                      value={row.amount}
+                      onChangeText={(text) => updateIngredientRow(row.key, { amount: text })}
+                    />
+                    <View style={styles.ingredientUnitCol}>
+                      <PopoverSelect
+                        selected={row.unit || null}
+                        options={SUPPLEMENT_UNIT_OPTIONS}
+                        onSelect={(value) => updateIngredientRow(row.key, { unit: value })}
+                        tabColor={colors.tabFood}
+                        minWidth={64}
+                      />
+                    </View>
+                    <TouchableOpacity onPress={() => removeIngredientRow(row.key)} style={styles.ingredientRemove}>
+                      <Text style={styles.actionTextRemove}>✕</Text>
+                    </TouchableOpacity>
+                  </View>
+                  {row.nutrientCode && formOptions.length > 0 ? (
+                    <View style={styles.ingredientFormRow}>
+                      <PopoverSelect
+                        selected={row.supplementForm || null}
+                        options={formOptions}
+                        onSelect={(value) => updateIngredientRow(row.key, { supplementForm: value })}
+                        placeholder="Which form? (optional, but changes absorption)"
+                        tabColor={colors.tabFood}
+                        width={240}
+                      />
+                    </View>
+                  ) : null}
+                  {row.nutrientCode ? renderNutrientResearchCard(row.nutrientCode, row.supplementForm) : null}
+                </View>
+              );
+            })}
+            {supplementForm.ingredients.length > 0 ? (
+              <Text style={styles.fieldHint}>
+                For each row: pick the nutrient, type the amount, and pick the unit the label uses (mg, mcg, IU). Where a second picker appears, the label often names the form, such as &quot;as glycinate&quot;.
+              </Text>
+            ) : null}
+            <TouchableOpacity ref={walkMark.ref('myMeds.ingredient')} onPress={addIngredientRow} style={[styles.secondaryButton, walkMark('myMeds.ingredient')]}>
+              <Text style={styles.secondaryButtonText}>+ Add ingredient</Text>
+            </TouchableOpacity>
+  
+            <Text style={styles.label}>Notes (optional)</Text>
+            <Text style={styles.fieldHint}>Anything worth remembering about it. When you take it is set after saving, with Schedule it.</Text>
+            <NotesInput
+              micColor={tabColor}
+              style={styles.input}
+              placeholder="e.g. take with food"
+              value={supplementForm.notes}
+              onChangeText={(text) => setSupplementForm((current) => ({ ...current, notes: text }))}
+            />
+  
+            <ThumbRow primary="last" style={styles.formActions}>
+              <TouchableOpacity style={styles.secondaryButton} onPress={closeAddForm}>
+                <Text style={styles.secondaryButtonText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity ref={walkMark.ref('myMeds.saveSupplement')} style={[styles.primaryButton, walkMark('myMeds.saveSupplement')]} onPress={handleSaveSupplement}>
+                <Text style={styles.primaryButtonText}>{supplementForm.editingId ? 'Save changes' : 'Add supplement'}</Text>
+              </TouchableOpacity>
+            </ThumbRow>
+          </View>
+        ) : (
+          <View style={[styles.formCard, inline ? styles.formInline : null]}>
+            {medForm.editingId ? null : renderKindSwitch(medForm.category)}
+            <Text style={styles.label}>{medForm.category === 'prescription' ? 'Prescription' : 'OTC drug'}</Text>
+  
+            {!medForm.manualEntry ? (
+              <>
+                <PopoverSelect
+                  selected={medForm.commonMedId || null}
+                  options={commonMedOptionsForCategory}
+                  onSelect={(value) => {
+                    const med = commonMedications.find((candidate) => candidate.id === value);
+                    if (med) selectCommonMed(med);
+                  }}
+                  placeholder="Search this app's researched list…"
+                  tabColor={colors.tabFood}
+                  width={260}
+                  searchable
+                  searchPlaceholder="e.g. levothyroxine, metformin, ibuprofen…"
+                />
+                <TouchableOpacity onPress={() => setMedForm((current) => ({ ...current, manualEntry: true }))}>
+                  <Text style={styles.actionTextPrimary}>Not in the list? Enter it myself</Text>
+                </TouchableOpacity>
+              </>
+            ) : (
+              <TouchableOpacity onPress={() => setMedForm((current) => ({ ...current, manualEntry: false, commonMedId: '' }))}>
+                <Text style={styles.actionTextPrimary}>Search the researched list instead</Text>
+              </TouchableOpacity>
+            )}
+  
+            {selectedCommonMed ? (
+              <View style={styles.myMedsResearchCard}>
+                <Text style={styles.myMedsResearchLabel}>
+                  {selectedCommonMed.drugClass} · {EVIDENCE_TIER_LABEL[selectedCommonMed.evidenceStrength] ?? selectedCommonMed.evidenceStrength}
+                </Text>
+                <Text style={styles.helperText}>{selectedCommonMed.commonUse}</Text>
+                {selectedCommonMed.brandNamesMexico ? (
+                  <Text style={styles.helperText}>{t('In Mexico: {brands}', { brands: selectedCommonMed.brandNamesMexico })}{selectedCommonMed.mexicoNotes ? ' ' + tl(selectedCommonMed.mexicoNotes) : ''}</Text>
+                ) : null}
+                {selectedCommonMed.thyroidRelevantNotes ? (
+                  <Text style={styles.helperText}>{selectedCommonMed.thyroidRelevantNotes}</Text>
+                ) : null}
+                {selectedCommonMed.timingGuidance ? (
+                  <Text style={styles.helperText}>Timing: {selectedCommonMed.timingGuidance}</Text>
+                ) : null}
+                {selectedCommonMed.keyInteractions ? (
+                  <Text style={styles.helperText}>Key interactions: {selectedCommonMed.keyInteractions}</Text>
+                ) : null}
+              </View>
+            ) : medForm.manualEntry ? (
+              <Text style={styles.helperText}>
+                Not in this app&apos;s researched list yet, but you can still track it with the details you know. The app cannot look this up online yet.
+              </Text>
+            ) : null}
+  
+            <Text style={styles.label}>Name</Text>
+            <AppTextInput
+              onVoiceResult={(text) => setMedForm((current) => ({ ...current, name: text }))}
+              micColor={tabColor}
+              style={styles.input}
+              placeholder="e.g. Synthroid 75mcg"
+              value={medForm.name}
+              onChangeText={(text) => setMedForm((current) => ({ ...current, name: text }))}
+            />
+  
+            {medForm.manualEntry ? (
+              <>
+                <Text style={styles.label}>Generic name (optional, helps check interactions)</Text>
+                <AppTextInput
+                  onVoiceResult={(text) => setMedForm((current) => ({ ...current, genericName: text }))}
+                  micColor={tabColor}
+                  style={styles.input}
+                  placeholder="e.g. levothyroxine"
+                  value={medForm.genericName}
+                  onChangeText={(text) => setMedForm((current) => ({ ...current, genericName: text }))}
+                />
+              </>
+            ) : null}
+  
+            <Text style={styles.label}>Dose</Text>
+            <View style={styles.timeRow}>
+              <AppTextInput
+                style={[styles.input, styles.timeInput]}
+                placeholder="75"
+                keyboardType="decimal-pad"
+                value={medForm.doseAmount}
+                onChangeText={(text) => setMedForm((current) => ({ ...current, doseAmount: text }))}
+              />
+              <AppTextInput
+                style={[styles.input, styles.doseUnitInput]}
+                placeholder="mcg, mg…"
+                value={medForm.doseUnit}
+                onChangeText={(text) => setMedForm((current) => ({ ...current, doseUnit: text }))}
+              />
+            </View>
+  
+            <Text style={styles.label}>Frequency (optional)</Text>
+            <AppTextInput
+              onVoiceResult={(text) => setMedForm((current) => ({ ...current, frequency: text }))}
+              micColor={tabColor}
+              style={styles.input}
+              placeholder="e.g. once daily"
+              value={medForm.frequency}
+              onChangeText={(text) => setMedForm((current) => ({ ...current, frequency: text }))}
+            />
+  
+            <Text style={styles.label}>Notes (optional)</Text>
+            <NotesInput
+              micColor={tabColor}
+              style={styles.input}
+              placeholder="e.g. prescribed by Dr. …"
+              value={medForm.notes}
+              onChangeText={(text) => setMedForm((current) => ({ ...current, notes: text }))}
+            />
+  
+            <ThumbRow primary="last" style={styles.formActions}>
+              <TouchableOpacity style={styles.secondaryButton} onPress={closeAddForm}>
+                <Text style={styles.secondaryButtonText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.primaryButton} onPress={handleSaveMed}>
+                <Text style={styles.primaryButtonText}>{medForm.editingId ? 'Save changes' : medForm.category === 'prescription' ? 'Add prescription' : 'Add OTC drug'}</Text>
+              </TouchableOpacity>
+            </ThumbRow>
+          </View>
+    );
+  }
+
   // The first row on screen carries the tutorial rings for the row buttons
   // (lib/toolHowTos.ts), the way the first garden area does.
   const firstShownId = (['prescription', 'otc', 'supplement'] as const)
@@ -921,6 +1220,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                   />
                 </View>
               ) : null}
+              {editingRowId === treatment.id ? renderForm(true) : null}
             </View>
           );
         })}
@@ -954,293 +1254,8 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                 <Text style={styles.addButtonText}>Look up a label</Text>
               </TouchableOpacity>
             </View>
-          ) : addMode === 'supplement' ? (
-            <View style={styles.formCard}>
-              {supplementForm.editingId ? null : renderKindSwitch('supplement')}
-              <Text style={styles.label}>Name</Text>
-              <Text style={styles.fieldHint}>What you call it. The name on the bottle works, or just the main nutrient.</Text>
-              <AppTextInput
-                onVoiceResult={(text) => setSupplementForm((current) => ({ ...current, name: text }))}
-                micColor={tabColor}
-                style={styles.input}
-                placeholder="e.g. Daily Multivitamin, or just Magnesium"
-                value={supplementForm.name}
-                onChangeText={(text) => setSupplementForm((current) => ({ ...current, name: text }))}
-              />
-
-              <Text style={styles.label}>Dose</Text>
-              <Text style={styles.fieldHint}>
-                How many you take in a whole day, and what one of them is. One capsule in the morning and one at night is 2 capsules. Half a tablet is 0.5.
-              </Text>
-              <View style={styles.timeRow}>
-                <AppTextInput
-                  style={[styles.input, styles.timeInput]}
-                  keyboardType="decimal-pad"
-                  placeholder="1, or 0.5"
-                  value={supplementForm.unitsPerDay}
-                  onChangeText={(text) => setSupplementForm((current) => ({ ...current, unitsPerDay: text }))}
-                />
-                <AppTextInput
-                  style={[styles.input, styles.doseUnitInput]}
-                  placeholder="capsule, tablet, scoop, powder…"
-                  value={supplementForm.servingUnitLabel}
-                  onChangeText={(text) => setSupplementForm((current) => ({ ...current, servingUnitLabel: text }))}
-                />
-                <Text style={styles.timeSeparator}>/ day</Text>
-              </View>
-
-              <Text style={styles.label}>Serving size on the label</Text>
-              <Text style={styles.fieldHint}>
-                Many labels give their amounts for 2 or more at once, written as &quot;Serving size: 2 capsules&quot;. Put that number here and copy the amounts exactly as printed: they are divided down to one when saved. Leave it at 1 if the label does not say.
-              </Text>
-              <View style={styles.timeRow}>
-                <AppTextInput
-                  style={[styles.input, styles.timeInput]}
-                  keyboardType="decimal-pad"
-                  placeholder="1"
-                  value={supplementForm.servingSize}
-                  onChangeText={(text) => setSupplementForm((current) => ({ ...current, servingSize: text }))}
-                />
-                {supplementForm.servingUnitLabel.trim() ? (
-                  <Text style={styles.timeSeparator}>{supplementForm.servingUnitLabel.trim()}</Text>
-                ) : null}
-              </View>
-
-              <Text style={styles.label}>Ingredients</Text>
-              <Text style={styles.fieldHint}>The amounts on the label, for the serving size above.</Text>
-              <Text style={styles.fieldHint}>
-                The quick way: read the Supplement Facts panel out loud or type it here, then tap Fill Ingredients From This and check each row it fills in. Or add each one yourself with + Add ingredient.
-              </Text>
-              <AppTextInput
-                onVoiceResult={(text, isFinal) => {
-                  setLabelText(text);
-                  if (isFinal) void fillFromLabel(text);
-                }}
-                micColor={tabColor}
-                style={styles.input}
-                multiline
-                placeholder="Say or type the label: vitamin D 25 mcg, zinc 11 mg, B12 500 mcg as methylcobalamin"
-                value={labelText}
-                onChangeText={setLabelText}
-              />
-              <TouchableOpacity onPress={() => void fillFromLabel(labelText)} style={styles.secondaryButton}>
-                <Text style={styles.secondaryButtonText}>Fill Ingredients From This</Text>
-              </TouchableOpacity>
-              {labelNote ? <Text style={styles.helperText}>{labelNote}</Text> : null}
-              {supplementForm.ingredients.map((row) => {
-                const forms = formsByNutrient[row.nutrientCode] ?? [];
-                const formOptions: DropdownOption[] = forms.map((form) => ({ label: form.formName, value: form.formName }));
-                return (
-                  <View key={row.key}>
-                    <View style={styles.ingredientRow}>
-                      <View style={styles.ingredientNutrientCol}>
-                        {/* colors.tabFood, not this lens's own TAB_COLOR (tabSchedules) --
-                            2026-08-08, explicitly requested to match "the same color as
-                            those on the Side Dish Builder," which passes this same
-                            constant as its own tabColor. All four PopoverSelect fields
-                            in this lens share it, for one consistent picker color. */}
-                        <PopoverSelect
-                          selected={row.nutrientCode || null}
-                          options={nutrientOptions}
-                          onSelect={(value) => {
-                            updateIngredientRow(row.key, { nutrientCode: value, supplementForm: '' });
-                            ensureNutrientDataLoaded(value);
-                          }}
-                          placeholder="Nutrient"
-                          tabColor={colors.tabFood}
-                          width={220}
-                          searchable
-                          searchPlaceholder="Search nutrients…"
-                        />
-                      </View>
-                      <AppTextInput
-                        style={[styles.input, styles.ingredientAmountInput]}
-                        placeholder="Amount"
-                        keyboardType="decimal-pad"
-                        value={row.amount}
-                        onChangeText={(text) => updateIngredientRow(row.key, { amount: text })}
-                      />
-                      <View style={styles.ingredientUnitCol}>
-                        <PopoverSelect
-                          selected={row.unit || null}
-                          options={SUPPLEMENT_UNIT_OPTIONS}
-                          onSelect={(value) => updateIngredientRow(row.key, { unit: value })}
-                          tabColor={colors.tabFood}
-                          minWidth={64}
-                        />
-                      </View>
-                      <TouchableOpacity onPress={() => removeIngredientRow(row.key)} style={styles.ingredientRemove}>
-                        <Text style={styles.actionTextRemove}>✕</Text>
-                      </TouchableOpacity>
-                    </View>
-                    {row.nutrientCode && formOptions.length > 0 ? (
-                      <View style={styles.ingredientFormRow}>
-                        <PopoverSelect
-                          selected={row.supplementForm || null}
-                          options={formOptions}
-                          onSelect={(value) => updateIngredientRow(row.key, { supplementForm: value })}
-                          placeholder="Which form? (optional, but changes absorption)"
-                          tabColor={colors.tabFood}
-                          width={240}
-                        />
-                      </View>
-                    ) : null}
-                    {row.nutrientCode ? renderNutrientResearchCard(row.nutrientCode, row.supplementForm) : null}
-                  </View>
-                );
-              })}
-              {supplementForm.ingredients.length > 0 ? (
-                <Text style={styles.fieldHint}>
-                  For each row: pick the nutrient, type the amount, and pick the unit the label uses (mg, mcg, IU). Where a second picker appears, the label often names the form, such as &quot;as glycinate&quot;.
-                </Text>
-              ) : null}
-              <TouchableOpacity ref={walkMark.ref('myMeds.ingredient')} onPress={addIngredientRow} style={[styles.secondaryButton, walkMark('myMeds.ingredient')]}>
-                <Text style={styles.secondaryButtonText}>+ Add ingredient</Text>
-              </TouchableOpacity>
-
-              <Text style={styles.label}>Notes (optional)</Text>
-              <Text style={styles.fieldHint}>Anything worth remembering about it. When you take it is set after saving, with Schedule it.</Text>
-              <NotesInput
-                micColor={tabColor}
-                style={styles.input}
-                placeholder="e.g. take with food"
-                value={supplementForm.notes}
-                onChangeText={(text) => setSupplementForm((current) => ({ ...current, notes: text }))}
-              />
-
-              <ThumbRow primary="last" style={styles.formActions}>
-                <TouchableOpacity style={styles.secondaryButton} onPress={closeAddForm}>
-                  <Text style={styles.secondaryButtonText}>Cancel</Text>
-                </TouchableOpacity>
-                <TouchableOpacity ref={walkMark.ref('myMeds.saveSupplement')} style={[styles.primaryButton, walkMark('myMeds.saveSupplement')]} onPress={handleSaveSupplement}>
-                  <Text style={styles.primaryButtonText}>Add supplement</Text>
-                </TouchableOpacity>
-              </ThumbRow>
-            </View>
-          ) : (
-            <View style={styles.formCard}>
-              {medForm.editingId ? null : renderKindSwitch(medForm.category)}
-              <Text style={styles.label}>{medForm.category === 'prescription' ? 'Prescription' : 'OTC drug'}</Text>
-
-              {!medForm.manualEntry ? (
-                <>
-                  <PopoverSelect
-                    selected={medForm.commonMedId || null}
-                    options={commonMedOptionsForCategory}
-                    onSelect={(value) => {
-                      const med = commonMedications.find((candidate) => candidate.id === value);
-                      if (med) selectCommonMed(med);
-                    }}
-                    placeholder="Search this app's researched list…"
-                    tabColor={colors.tabFood}
-                    width={260}
-                    searchable
-                    searchPlaceholder="e.g. levothyroxine, metformin, ibuprofen…"
-                  />
-                  <TouchableOpacity onPress={() => setMedForm((current) => ({ ...current, manualEntry: true }))}>
-                    <Text style={styles.actionTextPrimary}>Not in the list? Enter it myself</Text>
-                  </TouchableOpacity>
-                </>
-              ) : (
-                <TouchableOpacity onPress={() => setMedForm((current) => ({ ...current, manualEntry: false, commonMedId: '' }))}>
-                  <Text style={styles.actionTextPrimary}>Search the researched list instead</Text>
-                </TouchableOpacity>
-              )}
-
-              {selectedCommonMed ? (
-                <View style={styles.myMedsResearchCard}>
-                  <Text style={styles.myMedsResearchLabel}>
-                    {selectedCommonMed.drugClass} · {EVIDENCE_TIER_LABEL[selectedCommonMed.evidenceStrength] ?? selectedCommonMed.evidenceStrength}
-                  </Text>
-                  <Text style={styles.helperText}>{selectedCommonMed.commonUse}</Text>
-                  {selectedCommonMed.brandNamesMexico ? (
-                    <Text style={styles.helperText}>{t('In Mexico: {brands}', { brands: selectedCommonMed.brandNamesMexico })}{selectedCommonMed.mexicoNotes ? ' ' + tl(selectedCommonMed.mexicoNotes) : ''}</Text>
-                  ) : null}
-                  {selectedCommonMed.thyroidRelevantNotes ? (
-                    <Text style={styles.helperText}>{selectedCommonMed.thyroidRelevantNotes}</Text>
-                  ) : null}
-                  {selectedCommonMed.timingGuidance ? (
-                    <Text style={styles.helperText}>Timing: {selectedCommonMed.timingGuidance}</Text>
-                  ) : null}
-                  {selectedCommonMed.keyInteractions ? (
-                    <Text style={styles.helperText}>Key interactions: {selectedCommonMed.keyInteractions}</Text>
-                  ) : null}
-                </View>
-              ) : medForm.manualEntry ? (
-                <Text style={styles.helperText}>
-                  Not in this app&apos;s researched list yet, but you can still track it with the details you know. The app cannot look this up online yet.
-                </Text>
-              ) : null}
-
-              <Text style={styles.label}>Name</Text>
-              <AppTextInput
-                onVoiceResult={(text) => setMedForm((current) => ({ ...current, name: text }))}
-                micColor={tabColor}
-                style={styles.input}
-                placeholder="e.g. Synthroid 75mcg"
-                value={medForm.name}
-                onChangeText={(text) => setMedForm((current) => ({ ...current, name: text }))}
-              />
-
-              {medForm.manualEntry ? (
-                <>
-                  <Text style={styles.label}>Generic name (optional, helps check interactions)</Text>
-                  <AppTextInput
-                    onVoiceResult={(text) => setMedForm((current) => ({ ...current, genericName: text }))}
-                    micColor={tabColor}
-                    style={styles.input}
-                    placeholder="e.g. levothyroxine"
-                    value={medForm.genericName}
-                    onChangeText={(text) => setMedForm((current) => ({ ...current, genericName: text }))}
-                  />
-                </>
-              ) : null}
-
-              <Text style={styles.label}>Dose</Text>
-              <View style={styles.timeRow}>
-                <AppTextInput
-                  style={[styles.input, styles.timeInput]}
-                  placeholder="75"
-                  keyboardType="decimal-pad"
-                  value={medForm.doseAmount}
-                  onChangeText={(text) => setMedForm((current) => ({ ...current, doseAmount: text }))}
-                />
-                <AppTextInput
-                  style={[styles.input, styles.doseUnitInput]}
-                  placeholder="mcg, mg…"
-                  value={medForm.doseUnit}
-                  onChangeText={(text) => setMedForm((current) => ({ ...current, doseUnit: text }))}
-                />
-              </View>
-
-              <Text style={styles.label}>Frequency (optional)</Text>
-              <AppTextInput
-                onVoiceResult={(text) => setMedForm((current) => ({ ...current, frequency: text }))}
-                micColor={tabColor}
-                style={styles.input}
-                placeholder="e.g. once daily"
-                value={medForm.frequency}
-                onChangeText={(text) => setMedForm((current) => ({ ...current, frequency: text }))}
-              />
-
-              <Text style={styles.label}>Notes (optional)</Text>
-              <NotesInput
-                micColor={tabColor}
-                style={styles.input}
-                placeholder="e.g. prescribed by Dr. …"
-                value={medForm.notes}
-                onChangeText={(text) => setMedForm((current) => ({ ...current, notes: text }))}
-              />
-
-              <ThumbRow primary="last" style={styles.formActions}>
-                <TouchableOpacity style={styles.secondaryButton} onPress={closeAddForm}>
-                  <Text style={styles.secondaryButtonText}>Cancel</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.primaryButton} onPress={handleSaveMed}>
-                  <Text style={styles.primaryButtonText}>{medForm.category === 'prescription' ? 'Add prescription' : 'Add OTC drug'}</Text>
-                </TouchableOpacity>
-              </ThumbRow>
-            </View>
+          ) : editingRowId ? null : (
+            renderForm(false)
           )}
 
           {interactionWarnings.length > 0 ? (
@@ -1366,6 +1381,8 @@ function makeStyles(tabColor: string, calm: boolean = false) {
       borderColor: tabColor,
       padding: HOME_BAND_CONTENT_PADDING,
     },
+    // Under the row being edited, inside that row.
+    formInline: { marginTop: 10 },
     helperText: { ...typography.caption, color: tabColor, marginTop: 4, marginBottom: 8, ...textShadow },
     // What a field is asking for, under its label (Tony, 2026-11-18).
     fieldHint: { ...typography.caption, color: colors.textSecondary, marginBottom: 6, ...textShadow },
