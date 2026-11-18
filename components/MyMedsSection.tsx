@@ -78,6 +78,7 @@ import {
 } from '../constants/buttons';
 import { ReadProblem } from './ReadProblem';
 import { SupplyCountForm } from './SupplyCountForm';
+import { declineBottle, getSharingPartner, joinBottle, listBottlesToAnswer, type SharedBottleRow } from '../lib/sharedSupplyDb';
 import { saveOrSay } from '../lib/saveProblem';
 import { doseWithUnit, formatDoseAmount, parseDoseAmount } from '../lib/doseAmount';
 
@@ -266,6 +267,14 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   // this supplement or pharmaceutical.").
   const [countingId, setCountingId] = useState<string | null>(null);
   const [justSaved, setJustSaved] = useState<{ id: string; name: string; unit: string | null } | null>(null);
+  // Bottles a partner shared that this person has not answered yet
+  // (lib/sharedSupply.ts): which of their meds takes from it, a new one
+  // added for it, or not theirs. pendingBottleId is the bottle a new med
+  // being added will take from once saved.
+  const [bottlesToAnswer, setBottlesToAnswer] = useState<SharedBottleRow[]>([]);
+  const [sharingPartnerName, setSharingPartnerName] = useState<string | null>(null);
+  const [bottleChoice, setBottleChoice] = useState<Record<string, string>>({});
+  const [pendingBottleId, setPendingBottleId] = useState<string | null>(null);
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [confirmSheet, confirmSheetElement] = useConfirmSheet();
   // The med list is never refused at the database, since the timing
@@ -324,6 +333,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
           supplementTreatments.map(async (treatment) => [treatment.id, await getTreatmentNutrients(treatment.id)] as const),
         );
         setIngredientsByTreatment(Object.fromEntries(entries));
+        const [toAnswer, partner] = await Promise.all([listBottlesToAnswer(), getSharingPartner()]);
+        setBottlesToAnswer(toAnswer);
+        setSharingPartnerName(partner?.name ?? null);
       })
       .catch((error) => {
         console.warn('[MyMedsSection] read failed', error);
@@ -427,6 +439,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
     setLabelText('');
     setLabelNote(null);
     setMedForm(blankMedForm('prescription'));
+    setPendingBottleId(null);
   }
 
   // Editing came here on 2026-09-13 from the Supplements and Prescriptions
@@ -622,6 +635,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
           ingredients,
           notes: supplementForm.notes,
         });
+        await takeFromPendingBottle(id);
         setJustSaved({ id, name: supplementForm.name.trim(), unit: supplementForm.servingUnitLabel.trim() || null });
       }
       closeAddForm();
@@ -671,6 +685,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
         }
       } else {
         const id = medForm.category === 'prescription' ? await createPrescriptionTreatment(input) : await createOtcTreatment(input);
+        await takeFromPendingBottle(id);
         setJustSaved({ id, name: medForm.name.trim(), unit: null });
       }
       closeAddForm();
@@ -691,6 +706,80 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
     if (!ok) return;
     if (!(await saveOrSay('It was not removed. Try again.', async () => { await deleteTreatment(treatment.id); return true; }))) return;
     load();
+  }
+
+  // A new med added for a bottle the partner shared takes from it at once,
+  // before its count is asked, so the count form opens on the shared bottle.
+  async function takeFromPendingBottle(treatmentId: string) {
+    if (!pendingBottleId) return;
+    const supplyId = pendingBottleId;
+    setPendingBottleId(null);
+    try {
+      await joinBottle(supplyId, treatmentId);
+    } catch (error) {
+      console.warn('[MyMedsSection] could not join the shared bottle', error);
+    }
+  }
+
+  async function answerBottle(bottle: SharedBottleRow, answer: 'join' | 'add' | 'decline') {
+    if (answer === 'join') {
+      const treatmentId = bottleChoice[bottle.id];
+      if (!treatmentId) {
+        explainNotYet('Pick which of your meds takes from this bottle first.');
+        return;
+      }
+      if (!(await saveOrSay('It was not saved. Try again.', async () => { await joinBottle(bottle.id, treatmentId); return true; }))) return;
+      load();
+      setCountingId(treatmentId);
+      return;
+    }
+    if (answer === 'add') {
+      openAddSupplement();
+      setSupplementForm((current) => ({ ...current, name: bottle.name }));
+      setPendingBottleId(bottle.id);
+      return;
+    }
+    if (!(await saveOrSay('It was not saved. Try again.', async () => { await declineBottle(bottle.id); return true; }))) return;
+    load();
+  }
+
+  function renderBottlesToAnswer() {
+    if (bottlesToAnswer.length === 0 || medsClosed) return null;
+    const mine: DropdownOption[] = treatments
+      .filter((item) => item.active)
+      .map((item) => ({ label: item.name, value: item.id }));
+    const who = sharingPartnerName ?? 'Your partner';
+    return bottlesToAnswer.map((bottle) => (
+      <View key={bottle.id} style={styles.formCard}>
+        <Text style={styles.label}>{t('{name} shares a bottle of {med} with you.', { name: who, med: bottle.name })}</Text>
+        <Text style={styles.fieldHint}>
+          Say which of your meds takes from it, and both of your doses come off one count, so it says when the bottle gets low on both phones.
+        </Text>
+        {mine.length > 0 ? (
+          <PopoverSelect
+            selected={bottleChoice[bottle.id] ?? null}
+            options={mine}
+            onSelect={(value) => setBottleChoice((current) => ({ ...current, [bottle.id]: value }))}
+            placeholder="Which of my meds it is"
+            tabColor={tabColor}
+            searchable={mine.length > 8}
+          />
+        ) : null}
+        <ThumbRow primary="last" style={styles.formActions}>
+          <TouchableOpacity style={styles.secondaryButton} onPress={() => void answerBottle(bottle, 'decline')}>
+            <Text style={styles.secondaryButtonText}>Not mine</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.secondaryButton} onPress={() => void answerBottle(bottle, 'add')}>
+            <Text style={styles.secondaryButtonText}>Add it to my meds</Text>
+          </TouchableOpacity>
+          {mine.length > 0 ? (
+            <TouchableOpacity style={styles.primaryButton} onPress={() => void answerBottle(bottle, 'join')}>
+              <Text style={styles.primaryButtonText}>It is this one</Text>
+            </TouchableOpacity>
+          ) : null}
+        </ThumbRow>
+      </View>
+    ));
   }
 
   // After the count for a new one is saved or put off: whether to schedule it.
@@ -1180,6 +1269,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                   <Text style={styles.fieldHint}>{supplyByTreatment.get(treatment.id)?.sentence ?? ''}</Text>
                   <SupplyCountForm
                     treatmentId={treatment.id}
+                    name={treatment.name}
                     details={detailsByTreatment.get(treatment.id)}
                     reading={supplyByTreatment.get(treatment.id)}
                     defaultUnit={treatment.servingUnitLabel}
@@ -1312,6 +1402,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
         <ReadProblem message="Your medicines and supplements could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
       ) : (
         <>
+          {renderBottlesToAnswer()}
           {justSaved && addMode === null ? (
             <View style={styles.formCard}>
               <Text style={styles.label}>{t('How many {name} do you have right now?', { name: justSaved.name })}</Text>
@@ -1320,8 +1411,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
               </Text>
               <SupplyCountForm
                 treatmentId={justSaved.id}
+                name={justSaved.name}
                 details={detailsByTreatment.get(justSaved.id)}
-                reading={undefined}
+                reading={supplyByTreatment.get(justSaved.id)}
                 defaultUnit={justSaved.unit}
                 tabColor={tabColor}
                 cancelLabel="Not now"

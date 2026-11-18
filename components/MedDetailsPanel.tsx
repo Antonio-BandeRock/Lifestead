@@ -129,6 +129,7 @@ export function MedDetailsPanel({ treatmentId, treatmentName, details, reading, 
         {editingSupply ? (
           <SupplyCountForm
             treatmentId={treatmentId}
+            name={treatmentName}
             details={details}
             reading={reading}
             tabColor={tabColor}

@@ -262,6 +262,10 @@ const PEER_WORDS: Record<string, { one: string; many: string; counts: boolean }>
   // A doing is when a chore was done, which the chore's own line already
   // says, so it is not counted as a thing of its own.
   upkeep_doings: { one: 'time a chore was done', many: 'times a chore was done', counts: false },
+  shared_supplies: { one: 'shared bottle', many: 'shared bottles', counts: true },
+  // A line of use is how much one person took from a bottle, which the
+  // bottle's own count already says, so it is not counted on its own.
+  shared_supply_use: { one: 'count of doses from a shared bottle', many: 'counts of doses from a shared bottle', counts: false },
 };
 
 export function wordsForPeerTable(table: string): { one: string; many: string; counts: boolean } | null {

@@ -111,7 +111,7 @@ for (const area of rel.PEER_AREAS) {
 check(rel.tableNamesThatCross('partner', ALL).includes('grocery_lists'), 'with shopping on, a partner shares the list');
 same(
   rel.tableNamesThatCross('partner', { ...ALL, shopping: false }),
-  ['grocery_lists', 'grocery_list_items', 'household_meal_calendar', 'upkeep_items', 'upkeep_doings'],
+  ['grocery_lists', 'grocery_list_items', 'household_meal_calendar', 'upkeep_items', 'upkeep_doings', 'shared_supplies', 'shared_supply_use'],
   'shopping is household, so an old switch left off still shares the list (1.0.80.2)',
 );
 check(
@@ -205,6 +205,17 @@ for (const role of ['partner', 'child', 'caregiver']) {
   check(chores.every((entry) => typeof entry.where === 'string' && entry.where.includes('household = 1')), 'and only the ones marked as the household\'s');
 }
 same(rel.tablesThatCross('recipe', ALL).length, 0, 'a recipe link carries no chores');
+
+// A shared bottle (2026-11-18) crosses between partners only, whatever the
+// switches say, and never through a table that holds a med's details.
+for (const grants of GRANT_SETS) {
+  const partner = rel.tableNamesThatCross('partner', grants);
+  check(partner.includes('shared_supplies') && partner.includes('shared_supply_use'), 'a partner shares a bottle at ' + JSON.stringify(grants));
+  for (const role of ['recipe', 'child', 'caregiver']) {
+    check(!rel.tableNamesThatCross(role, grants).some((table) => table.startsWith('shared_supply')), 'a ' + role + ' link shares no bottle');
+  }
+}
+check(!rel.tableNamesThatCross('partner', ALL).includes('shared_supply_links'), 'which of your meds takes from a bottle stays with you');
 
 console.log((failures === 0 ? 'PASS' : 'FAIL') + ': ' + (checks - failures) + '/' + checks + ' checks');
 process.exit(failures === 0 ? 0 : 1);

@@ -1114,6 +1114,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Each dose you mark taken comes off the count. The days left follow the doses on your schedule, weekly, monthly or a taper step by step, and a reminder comes before it runs out.',
     },
     {
+      key: 'sharedBottle',
+      title: 'Share a bottle with your partner',
+      steps: [
+        { say: 'Tap Track how many under the one you both take from.', mark: 'myMeds.tracking' },
+        { say: "Tap Shared with and your partner's name, type how many are in the bottle and how much of it one of your doses uses (half a tablet is 0.5), then tap Save the count." },
+        { say: "On your partner's phone My Meds asks which of their meds takes from it. They pick it, add it, or tap Not mine." },
+        { say: 'To end it, tap Track how many again and then Stop sharing. Each of you goes back to a separate count.' },
+      ],
+      forYou: "One tablet split between two of you once a day comes off the count once. Both phones show the tablets left and days left at both of your paces, and both get the reminder before it runs low. Only the bottle's name, its count and how much each of you takes from it crosses between the phones.",
+    },
+    {
       key: 'travel',
       title: 'Choose when its reminder rings while you travel',
       steps: [

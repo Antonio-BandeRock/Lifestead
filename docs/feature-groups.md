@@ -126,6 +126,7 @@ Everything that joins one person's copy to another copy, theirs or someone else'
 
 - Sync between a person's own devices
 - Partner link (two paid copies kept in step)
+- A shared bottle: one count two partners take from, in Life > My Meds
 - Household seats, Guardian children, Caregiver (not built)
 - Sharing recipes and favourites as .is files, Connections
 - The desktop app

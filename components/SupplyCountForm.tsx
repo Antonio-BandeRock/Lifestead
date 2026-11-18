@@ -11,19 +11,43 @@
 // The count is taken once and drawn down by the doses marked taken; the
 // arithmetic and every sentence are in lib/medSupply.ts, and the reminder
 // before it runs out comes from lib/reminderSources.ts.
+//
+// A bottle shared with a partner (lib/sharedSupply.ts): with a partner
+// connected, the form offers "Shared with" them. Once shared, the count is
+// the whole bottle, both people's doses come off it, and the amount one dose
+// uses is this person's share of a tablet (half a tablet is 0.5).
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from './AppTextInput';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import {
+  BUTTON_PRIMARY,
+  BUTTON_PRIMARY_TEXT,
+  BUTTON_SECONDARY,
+  BUTTON_SECONDARY_TEXT,
+  PILL,
+  PILL_ON,
+  PILL_ON_TEXT,
+  PILL_TEXT,
+} from '../constants/buttons';
 import { saveTreatmentSupply, type TreatmentDetails } from '../lib/medDetailsDb';
 import type { SupplyReading } from '../lib/medSupply';
 import { parseDoseAmount } from '../lib/doseAmount';
 import { t } from '../lib/i18n';
+import {
+  bottleForTreatment,
+  getSharingPartner,
+  saveBottleCount,
+  shareBottle,
+  stopSharingBottle,
+  type SharedBottleRow,
+} from '../lib/sharedSupplyDb';
 
 type Props = {
   treatmentId: string;
+  /** The med's name, which a shared bottle carries to the partner's phone. */
+  name?: string;
   details: TreatmentDetails | undefined;
   reading: SupplyReading | undefined;
   /** What one is called, used when nothing has been counted yet (capsule, tablet). */
@@ -39,13 +63,33 @@ function numberText(value: number | null | undefined): string {
   return value === null || value === undefined ? '' : String(value);
 }
 
-export function SupplyCountForm({ treatmentId, details, reading, defaultUnit, tabColor, cancelLabel = 'Cancel', onDone, onProblem }: Props) {
+export function SupplyCountForm({ treatmentId, name, details, reading, defaultUnit, tabColor, cancelLabel = 'Cancel', onDone, onProblem }: Props) {
   const styles = makeStyles(tabColor);
   const [onHand, setOnHand] = useState('');
   const [unit, setUnit] = useState('');
   const [perDose, setPerDose] = useState('1');
   const [leadDays, setLeadDays] = useState('7');
   const [saving, setSaving] = useState(false);
+  const [partnerName, setPartnerName] = useState<string | null>(null);
+  const [bottle, setBottle] = useState<SharedBottleRow | null>(null);
+  const [share, setShare] = useState(false);
+
+  useEffect(() => {
+    let live = true;
+    void (async () => {
+      const [partner, found] = await Promise.all([getSharingPartner(), bottleForTreatment(treatmentId).catch(() => null)]);
+      if (!live) return;
+      setPartnerName(partner?.name ?? null);
+      setBottle(found);
+      if (found) {
+        if (found.unit) setUnit(found.unit);
+        setLeadDays(numberText(found.leadDays));
+      }
+    })();
+    return () => {
+      live = false;
+    };
+  }, [treatmentId]);
 
   useEffect(() => {
     setOnHand(reading?.remaining !== null && reading?.remaining !== undefined ? numberText(reading.remaining) : '');
@@ -68,12 +112,17 @@ export function SupplyCountForm({ treatmentId, details, reading, defaultUnit, ta
     }
     setSaving(true);
     try {
+      const counted = { unit: unit.trim() || null, leadDays: lead ?? 7 };
       await saveTreatmentSupply(treatmentId, {
         onHand: count,
-        unit: unit.trim() || null,
+        unit: counted.unit,
         perDose: each && each > 0 ? each : 1,
-        leadDays: lead ?? 7,
+        leadDays: counted.leadDays,
       });
+      if (count !== null) {
+        if (bottle) await saveBottleCount(bottle.id, { onHand: count, ...counted });
+        else if (share && partnerName) await shareBottle(treatmentId, name?.trim() || counted.unit || 'Shared bottle', { onHand: count, ...counted });
+      }
       onDone(true);
     } catch (error) {
       onProblem('Could not save', error instanceof Error ? error.message : String(error));
@@ -82,8 +131,41 @@ export function SupplyCountForm({ treatmentId, details, reading, defaultUnit, ta
     }
   }
 
+  async function stopSharing() {
+    if (!bottle) return;
+    setSaving(true);
+    try {
+      await stopSharingBottle(bottle.id);
+      onDone(true);
+    } catch (error) {
+      onProblem('Could not save', error instanceof Error ? error.message : String(error));
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  const shared = bottle !== null || share;
+
   return (
     <View style={styles.form}>
+      {bottle ? (
+        <Text style={styles.caption}>
+          {partnerName
+            ? t('Shared with {name}. This count is the whole bottle, and both of your doses come off it.', { name: partnerName })
+            : 'Shared with your partner. This count is the whole bottle, and both of your doses come off it.'}
+        </Text>
+      ) : partnerName ? (
+        <View style={styles.inlineRow}>
+          <TouchableOpacity style={[styles.pill, share && styles.pillOn]} onPress={() => setShare(!share)}>
+            <Text style={share ? styles.pillOnText : styles.pillText}>{t('Shared with {name}', { name: partnerName })}</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
+      {share && !bottle && partnerName ? (
+        <Text style={styles.caption}>
+          {t('{name} is asked which of their meds takes from it. Then the count goes down by both of your doses.', { name: partnerName })}
+        </Text>
+      ) : null}
       <Text style={styles.label}>How many do you have right now</Text>
       <View style={styles.inlineRow}>
         <AppTextInput
@@ -100,15 +182,20 @@ export function SupplyCountForm({ treatmentId, details, reading, defaultUnit, ta
           placeholder="tablets, capsules, ml"
         />
       </View>
-      <Text style={styles.label}>How many one dose uses</Text>
+      <Text style={styles.label}>{shared ? 'How much of the bottle one of your doses uses' : 'How many one dose uses'}</Text>
       <AppTextInput style={[styles.input, styles.numberInput]} keyboardType="decimal-pad" value={perDose} onChangeText={setPerDose} />
+      {shared ? <Text style={styles.caption}>Half a tablet is 0.5.</Text> : null}
       <Text style={styles.label}>Tell me when this many days are left</Text>
       <AppTextInput style={[styles.input, styles.numberInput]} keyboardType="number-pad" value={leadDays} onChangeText={setLeadDays} />
       <Text style={styles.caption}>
         Each dose you mark taken comes off the count, and a reminder comes that many days before they run out.
       </Text>
       <View style={styles.actions}>
-        {details?.supplyCountedAt ? (
+        {bottle ? (
+          <TouchableOpacity style={styles.secondaryButton} disabled={saving} onPress={() => void stopSharing()}>
+            <Text style={styles.secondaryButtonText}>Stop sharing</Text>
+          </TouchableOpacity>
+        ) : details?.supplyCountedAt ? (
           <TouchableOpacity style={styles.secondaryButton} disabled={saving} onPress={() => save(true)}>
             <Text style={styles.secondaryButtonText}>Stop counting</Text>
           </TouchableOpacity>
@@ -144,6 +231,10 @@ function makeStyles(tabColor: string) {
     },
     label: { ...typography.label, color: tabColor, marginBottom: 6, marginTop: 10, ...textShadow },
     numberInput: { width: 88 },
+    pill: { ...PILL, marginTop: 8 },
+    pillOn: { ...PILL_ON },
+    pillOnText: { ...PILL_ON_TEXT },
+    pillText: { ...PILL_TEXT },
     primaryButton: { ...BUTTON_PRIMARY },
     primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
     secondaryButton: { ...BUTTON_SECONDARY },

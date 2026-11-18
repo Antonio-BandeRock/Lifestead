@@ -151,6 +151,12 @@ const AREAS: readonly Area[] = [
     count: ['treatments'],
     quiet: ['treatment_nutrients'],
   },
+  {
+    one: 'shared bottle',
+    many: 'shared bottles',
+    count: ['shared_supplies'],
+    quiet: ['shared_supply_use', 'shared_supply_links'],
+  },
   { one: 'personal rule', many: 'personal rules', count: ['personal_rules'], quiet: [] },
   { one: 'recall set aside', many: 'recalls set aside', count: ['recall_checks'], quiet: [] },
   {

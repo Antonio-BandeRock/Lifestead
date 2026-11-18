@@ -5810,6 +5810,55 @@ async function runDatabaseInitialization() {
       );
       CREATE INDEX IF NOT EXISTS idx_upkeep_doings_done ON upkeep_doings(done_on);
 
+      -- --- A bottle two partners take from (Tony, 2026-11-18) -------------
+      --
+      -- "If something is 1 tablet at 1000 mcg split between 2 people once
+      -- per day, they each get 500 mcg and the count of the pills goes down
+      -- only by one." The arithmetic and its reasons are in
+      -- lib/sharedSupply.ts; the reading and writing in lib/sharedSupplyDb.ts.
+      --
+      -- shared_supplies is the bottle and its count, and crosses to a
+      -- partner (the sharedSupplies area in lib/peerRelationships.ts).
+      -- ended_at is set by Stop sharing; the row is never deleted.
+      --
+      -- shared_supply_use is one line per person per bottle, written only by
+      -- that person's phone and crossing too: the doses marked taken and the
+      -- doses ahead, in units of the bottle and nothing else. Keyed by
+      -- bottle and med, so the two phones never write the same row.
+      --
+      -- shared_supply_links says which of this person's meds takes from
+      -- which bottle, or that they said it is not theirs. It never crosses
+      -- to the partner.
+      CREATE TABLE IF NOT EXISTS shared_supplies (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        unit TEXT,
+        on_hand REAL,
+        counted_at TEXT,
+        lead_days INTEGER NOT NULL DEFAULT 7,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL,
+        ended_at TEXT
+      );
+      CREATE TABLE IF NOT EXISTS shared_supply_use (
+        id TEXT PRIMARY KEY,
+        supply_id TEXT NOT NULL,
+        treatment_id TEXT NOT NULL,
+        taken_json TEXT NOT NULL DEFAULT '[]',
+        ahead_json TEXT,
+        through TEXT,
+        ends INTEGER NOT NULL DEFAULT 0,
+        updated_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_shared_supply_use_supply ON shared_supply_use(supply_id);
+      CREATE TABLE IF NOT EXISTS shared_supply_links (
+        supply_id TEXT PRIMARY KEY,
+        treatment_id TEXT,
+        answer TEXT NOT NULL,
+        answered_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+
       -- --- The capture inbox: somewhere to throw a thought (2026-09-16) ------
       --
       -- The one table in this file that deliberately knows nothing about what

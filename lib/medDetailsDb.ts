@@ -13,6 +13,8 @@ import {
   type SupplyStep,
 } from './medSupply';
 import { occurrencesOf, weekdaysFromColumn, type RepeatConfig, type RepeatEndType } from './repeatRule';
+import { combineSharedSupply, describeSharedUse, type SharedUse, type TakenDose } from './sharedSupply';
+import { getSharingPartner, readSharedState, writeMyUse } from './sharedSupplyDb';
 
 export type TreatmentDetails = {
   treatmentId: string;
@@ -290,5 +292,125 @@ export async function listSupplyReadings(today = localToday()): Promise<Map<stri
     if (item.supplyOnHand === null) continue;
     out.set(item.treatmentId, await readTreatmentSupply(item, today));
   }
+  try {
+    await overlaySharedBottles(out, details, today);
+  } catch (error) {
+    // A shared bottle that cannot be read leaves each med on its own count,
+    // which is what it showed before the bottle was shared.
+    console.error('[medDetails] could not read the shared bottles', error);
+  }
   return out;
+}
+
+/**
+ * One person's use of a shared bottle: the doses of this med marked taken
+ * since `from`, and the doses ahead, each in units of the bottle at what one
+ * of this person's doses uses (half a tablet is 0.5).
+ */
+async function readUseOfBottle(details: TreatmentDetails, from: string, today: string, now: string) {
+  const db = await getDatabase();
+  const [rows, steps, med] = await Promise.all([
+    db.getAllAsync<{ scheduled_for: string }>(
+      `SELECT scheduled_for FROM schedule_items
+       WHERE linked_treatment_id = ? AND status IN ${TAKEN} AND scheduled_for >= ? AND scheduled_for <= ?
+       ORDER BY scheduled_for`,
+      details.treatmentId,
+      from,
+      now,
+    ),
+    db.getAllAsync<{ start_date: string; end_date: string; dose_amount: number; dose_unit: string | null }>(
+      'SELECT start_date, end_date, dose_amount, dose_unit FROM treatment_taper_steps WHERE treatment_id = ? ORDER BY start_date',
+      details.treatmentId,
+    ),
+    db.getFirstAsync<{ dose_amount: number | null; dose_unit: string | null }>(
+      'SELECT dose_amount, dose_unit FROM treatments WHERE id = ?',
+      details.treatmentId,
+    ),
+  ]);
+  const supplySteps: SupplyStep[] = steps.map((step) => ({
+    startDate: step.start_date,
+    endDate: step.end_date,
+    amount: step.dose_amount,
+    unit: step.dose_unit,
+  }));
+  const taken: TakenDose[] = rows.map((row) => ({
+    at: row.scheduled_for.slice(0, 16),
+    units: unitsForDose(row.scheduled_for.slice(0, 10), {
+      perDose: details.supplyPerDose,
+      unit: details.supplyUnit,
+      medAmount: med?.dose_amount ?? null,
+      medUnit: med?.dose_unit ?? null,
+      steps: supplySteps,
+    }).units,
+  }));
+  const schedule = await readScheduleAhead(details, today, now);
+  return { taken, schedule };
+}
+
+/**
+ * A med that takes from a bottle shared with a partner (lib/sharedSupply.ts)
+ * reads the bottle, not its own count: the count minus what both people
+ * marked taken since, at both people's pace. This phone's own line of use is
+ * written here, only when it changed, so the partner's phone reads the same
+ * sum and both get the low reminder.
+ */
+async function overlaySharedBottles(
+  out: Map<string, SupplyReading>,
+  details: Map<string, TreatmentDetails>,
+  today: string,
+): Promise<void> {
+  const state = await readSharedState();
+  const joined = [...state.links.values()].filter((link) => link.answer === 'joined' && link.treatmentId);
+  if (joined.length === 0) return;
+  const now = localNow();
+  const partner = await getSharingPartner();
+  const partnerName = partner?.name ?? null;
+  const mine = new Set(joined.map((link) => link.treatmentId as string));
+  for (const link of joined) {
+    const bottle = state.bottles.get(link.supplyId);
+    if (!bottle || bottle.endedAt) continue;
+    const treatmentId = link.treatmentId as string;
+    const own = details.get(treatmentId) ?? blankDetails(treatmentId);
+    const counted = bottle.countedAt ?? `${today}T00:00`;
+    const fortnight = `${addDays(today, -14)}T00:00`;
+    const from = counted < fortnight ? counted : fortnight;
+    const use = await readUseOfBottle(own, from, today, now);
+    const line = {
+      supplyId: bottle.id,
+      treatmentId,
+      taken: use.taken,
+      ahead: use.schedule ? use.schedule.doses : null,
+      through: use.schedule ? use.schedule.through : null,
+      ends: use.schedule ? use.schedule.ends : true,
+    };
+    const existing = state.uses.find((row) => row.supplyId === bottle.id && row.treatmentId === treatmentId);
+    try {
+      await writeMyUse(existing, line);
+    } catch (error) {
+      // Another of this person's devices holds the session: the reading
+      // here is still right, and that device writes the line.
+      console.error("[medDetails] could not write this phone's use of a shared bottle", error);
+    }
+    const uses: SharedUse[] = [
+      { who: 'you', mine: true, ...line, updatedAt: new Date().toISOString() },
+      ...state.uses
+        .filter((row) => row.supplyId === bottle.id && !mine.has(row.treatmentId))
+        .map((row) => ({
+          who: partnerName ?? 'Your partner',
+          mine: false,
+          taken: row.taken,
+          ahead: row.ahead,
+          through: row.through,
+          ends: row.ends,
+          updatedAt: row.updatedAt,
+        })),
+    ];
+    const reading = readSupply(combineSharedSupply({ bottle, uses, today, now }));
+    const words = describeSharedUse({ uses, unit: bottle.unit, today, partnerName });
+    out.set(treatmentId, {
+      ...reading,
+      short: reading.short ? `${reading.short}, shared` : 'Shared, not counted yet',
+      sentence: `${reading.sentence} ${words}`,
+    });
+  }
 }

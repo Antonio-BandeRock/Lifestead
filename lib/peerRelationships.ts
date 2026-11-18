@@ -56,6 +56,7 @@ export type PeerAreaCode =
   | 'mealCalendar'
   | 'shopping'
   | 'chores'
+  | 'sharedSupplies'
   | 'conditions'
   | 'doses'
   | 'schedule'
@@ -166,6 +167,22 @@ export const PEER_AREAS: readonly PeerArea[] = [
     // No permission switch of its own: nothing crosses until somebody marks
     // a chore as the household's, and that mark is the permission, one
     // chore at a time.
+    ready: true,
+  },
+  {
+    code: 'sharedSupplies',
+    label: 'Shared bottles',
+    what: 'A bottle you both take from: its name, how many are in it, and how many each of you takes from it and when. Never the dose on the label, what it is for, or anything else you take.',
+    // Tony, 2026-11-18: two partners taking from one bottle, counted once
+    // between them (lib/sharedSupply.ts). Nothing crosses until somebody
+    // marks a bottle shared, and that mark is the permission, one bottle at
+    // a time, the way a household chore is. Each phone writes only its own
+    // lines of use, in units of the bottle, so treatments and their
+    // nutrients stay on the phone they belong to.
+    tables: [
+      { table: 'shared_supplies', keepsHome: [] },
+      { table: 'shared_supply_use', keepsHome: [] },
+    ],
     ready: true,
   },
   {
@@ -304,8 +321,8 @@ export const RELATIONSHIPS: readonly Relationship[] = [
   {
     role: 'partner',
     label: 'Partner',
-    what: 'You plan meals together. You both see the same days, each with what those meals mean for your conditions, and you share one shopping list, one household meal calendar and the household chores.',
-    shared: ['shopping', 'mealCalendar', 'chores'],
+    what: 'You plan meals together. You both see the same days, each with what those meals mean for your conditions, and you share one shopping list, one household meal calendar, the household chores and any bottle you both take from.',
+    shared: ['shopping', 'mealCalendar', 'chores', 'sharedSupplies'],
     theirs: ['meals', 'conditions', 'doses'],
     onTheirBehalf: [],
     granted: ['conditions', 'doses'],
