@@ -101,6 +101,10 @@ export default function MedicineLabelScreen() {
   const [busy, setBusy] = useState(false);
   const [found, setFound] = useState<Found | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  // Where the answer is drawn: under the button that asked. A scan's answer
+  // sat below the code and name boxes, at the foot of the screen, out of
+  // sight (Tony, 2026-11-18: a Mexican supplement's barcode).
+  const [askedFrom, setAskedFrom] = useState<'scan' | 'typed'>('typed');
   const [shown, setShown] = useState<Shown | null>(null);
   const [saved, setSaved] = useState<SavedLabel | null>(null);
   const [savedNote, setSavedNote] = useState<string | null>(null);
@@ -209,6 +213,7 @@ export default function MedicineLabelScreen() {
 
   function lookUpCode() {
     if (!codeText.trim()) return explainNotYet('Type the code from the box or the pharmacy label first.');
+    setAskedFrom('typed');
     const reading = readTypedCode(codeText);
     if (reading.kind !== 'ndc') {
       setFound(null);
@@ -221,6 +226,7 @@ export default function MedicineLabelScreen() {
 
   function searchName() {
     if (!nameText.trim()) return explainNotYet("Type the medicine's brand or generic name first.");
+    setAskedFrom('typed');
     runLookup({ kind: 'name', name: nameText });
   }
 
@@ -229,6 +235,7 @@ export default function MedicineLabelScreen() {
       if (handledScan.current) return;
       handledScan.current = true;
       setMode('find');
+      setAskedFrom('scan');
       const reading = readScannedCode(result.data);
       if (reading.kind !== 'ndc') {
         setFound(null);
@@ -542,56 +549,9 @@ export default function MedicineLabelScreen() {
     );
   }
 
-  return (
-    <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
-      <View style={styles.card}>
-        <Text style={styles.title}>{treatmentName ? `The label for ${treatmentName}` : 'Look up a medicine label'}</Text>
-        <Text style={styles.body}>
-          Scan the barcode on the box, type the code printed on it (the NDC, 10 or 11 digits), or search by name. The code or
-          the name is sent to openFDA, the U.S. Food and Drug Administration&apos;s public data service, and nothing else is.
-        </Text>
-        <Text style={styles.caption}>{LABEL_SOURCE_NOTE}</Text>
-        {saved ? (
-          <TouchableOpacity
-            style={styles.secondaryButton}
-            activeOpacity={0.85}
-            onPress={() => setShown({ document: saved.document, sent: saved.whatWasSent, retrievedAt: saved.retrievedAt, howFound: saved.howFound, isSavedCopy: true })}
-          >
-            <Text style={styles.secondaryButtonText}>Back to the Kept Label</Text>
-          </TouchableOpacity>
-        ) : null}
-      </View>
-
-      <TouchableOpacity style={[styles.inset, styles.primaryButton]} activeOpacity={0.85} onPress={startScanning}>
-        <Ionicons name="barcode-outline" size={18} color={colors.textOnButton} />
-        <Text style={styles.primaryButtonText}>Scan the Barcode</Text>
-      </TouchableOpacity>
-
-      <View style={styles.card}>
-        <Text style={styles.label}>Code from the box or pharmacy label</Text>
-        <AppTextInput
-          style={styles.input}
-          placeholder="e.g. 0074-4341-13"
-          value={codeText}
-          onChangeText={setCodeText}
-          onSubmitEditing={lookUpCode}
-        />
-        <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} disabled={busy} onPress={lookUpCode}>
-          <Text style={styles.secondaryButtonText}>Look Up This Code</Text>
-        </TouchableOpacity>
-        <Text style={styles.label}>Or the medicine&apos;s name</Text>
-        <AppTextInput
-          style={styles.input}
-          placeholder="brand or generic name"
-          value={nameText}
-          onChangeText={setNameText}
-          onSubmitEditing={searchName}
-        />
-        <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} disabled={busy} onPress={searchName}>
-          <Text style={styles.secondaryButtonText}>Search by Name</Text>
-        </TouchableOpacity>
-      </View>
-
+  // The answer to a lookup: drawn under whichever button asked for it.
+  const answer = (
+    <>
       {busy ? (
         <View style={styles.card}>
           <Text style={styles.body}>Asking openFDA…</Text>
@@ -619,6 +579,62 @@ export default function MedicineLabelScreen() {
           ))}
         </View>
       ) : null}
+    </>
+  );
+
+  return (
+    <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <View style={styles.card}>
+        <Text style={styles.title}>{treatmentName ? `The label for ${treatmentName}` : 'Look up a medicine label'}</Text>
+        <Text style={styles.body}>
+          Scan the barcode on the box, type the code printed on it (the NDC, 10 or 11 digits), or search by name. The code or
+          the name is sent to openFDA, the U.S. Food and Drug Administration&apos;s public data service, and nothing else is.
+        </Text>
+        <Text style={styles.caption}>{LABEL_SOURCE_NOTE}</Text>
+        {saved ? (
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            activeOpacity={0.85}
+            onPress={() => setShown({ document: saved.document, sent: saved.whatWasSent, retrievedAt: saved.retrievedAt, howFound: saved.howFound, isSavedCopy: true })}
+          >
+            <Text style={styles.secondaryButtonText}>Back to the Kept Label</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+
+      <TouchableOpacity style={[styles.inset, styles.primaryButton]} activeOpacity={0.85} onPress={startScanning}>
+        <Ionicons name="barcode-outline" size={18} color={colors.textOnButton} />
+        <Text style={styles.primaryButtonText}>Scan the Barcode</Text>
+      </TouchableOpacity>
+
+      {askedFrom === 'scan' ? answer : null}
+
+      <View style={styles.card}>
+        <Text style={styles.label}>Code from the box or pharmacy label</Text>
+        <AppTextInput
+          style={styles.input}
+          placeholder="e.g. 0074-4341-13"
+          value={codeText}
+          onChangeText={setCodeText}
+          onSubmitEditing={lookUpCode}
+        />
+        <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} disabled={busy} onPress={lookUpCode}>
+          <Text style={styles.secondaryButtonText}>Look Up This Code</Text>
+        </TouchableOpacity>
+        <Text style={styles.label}>Or the medicine&apos;s name</Text>
+        <AppTextInput
+          style={styles.input}
+          placeholder="brand or generic name"
+          value={nameText}
+          onChangeText={setNameText}
+          onSubmitEditing={searchName}
+        />
+        <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} disabled={busy} onPress={searchName}>
+          <Text style={styles.secondaryButtonText}>Search by Name</Text>
+        </TouchableOpacity>
+      </View>
+
+      {askedFrom === 'typed' ? answer : null}
     </ScrollView>
   );
 }
