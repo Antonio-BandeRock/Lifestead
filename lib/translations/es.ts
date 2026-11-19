@@ -548,6 +548,15 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'No email app opened, so the answers are copied. Paste them into an email to {address}.': 'No se abrió ninguna app de correo, así que las respuestas quedaron copiadas. Pégalas en un correo a {address}.',
   'The answers could not be sent or copied. They are still here, so try again in a moment.': 'No se pudieron enviar ni copiar las respuestas. Siguen aquí, así que inténtalo de nuevo en un momento.',
   'That answer was not saved. The reason given: {reason}': 'Esa respuesta no se guardó. El motivo: {reason}',
+  'From food logged today: about {amount} {unit}. This app has no daily target for {name}, so no share of one is shown.':
+    'De la comida registrada hoy: unos {amount} {unit}. Esta app no tiene una meta diaria para {name}, así que no se muestra qué parte de una meta es.',
+  'No {name} from food logged today yet. This app has no daily target for it, so no share of one is shown.':
+    'Todavía no hay {name} de la comida registrada hoy. Esta app no tiene una meta diaria para eso, así que no se muestra qué parte de una meta es.',
+  'A form of your own': 'Una forma propia',
+  'Form on the label, such as retinyl palmitate (optional)': 'Forma en la etiqueta, como palmitato de retinol (opcional)',
+  'Pick from the listed forms instead': 'Mejor elegir de las formas de la lista',
+  'For each row: pick the nutrient, type the amount, and pick the unit the label uses (mg, mcg, IU). Under it goes the form the label names, such as "as glycinate" or "retinyl palmitate": pick it from the list where one appears, or type it as the label says.':
+    'En cada fila: elige el nutriente, escribe la cantidad y elige la unidad que usa la etiqueta (mg, mcg, UI). Debajo va la forma que nombra la etiqueta, como "glicinato" o "palmitato de retinol": elígela de la lista cuando aparezca, o escríbela como dice la etiqueta.',
   // Pacing's answer and effort words, read as values inside its sentences (Q20).
   "better": "mejor",
   "same": "igual",

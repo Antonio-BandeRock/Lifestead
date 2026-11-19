@@ -133,6 +133,13 @@ const SPANISH_PHRASES: [RegExp, string][] = (
     ['gluconato ferroso', 'ferrous gluconate'],
     ['bisglicinato ferroso', 'ferrous bisglycinate'],
     ['oxido cuprico', 'cupric oxide'],
+    // Forms an ingredients paragraph names (Lisa's multivitamin, 2026-11-19).
+    // Hyphens are still in the text at this point, so "d-alfa" is matched.
+    ['palmitato de retinol', 'retinyl palmitate'],
+    ['acetato de retinol', 'retinyl acetate'],
+    ['acetato de d[ -]alfa tocoferilo', 'd alpha tocopheryl acetate'],
+    ['acetato de dl[ -]alfa tocoferilo', 'dl alpha tocopheryl acetate'],
+    ['acetato de tocoferilo', 'tocopheryl acetate'],
   ] as [string, string][]
 ).map(([phrase, english]) => [new RegExp(`\\b${phrase}\\b`, 'g'), english]);
 
@@ -148,13 +155,13 @@ const SPANISH_WORDS: Record<string, string> = {
   menaquinona: 'menaquinone', retinilo: 'retinyl', ascorbato: 'ascorbate', selenometionina: 'selenomethionine',
   selenito: 'selenite', glicina: 'glycine', cafeina: 'caffeine', licopeno: 'lycopene', proteina: 'protein',
   proteinas: 'protein', fibra: 'fiber', carbohidrato: 'carbohydrate', carbohidratos: 'carbohydrates', azucar: 'sugar',
-  azucares: 'sugars', grasa: 'fat', grasas: 'fat', citrato: 'citrate', glicinato: 'glycinate',
+  azucares: 'sugars', grasa: 'fat', grasas: 'fat', lipidos: 'fat', lipido: 'fat', citrato: 'citrate', glicinato: 'glycinate',
   bisglicinato: 'bisglycinate', picolinato: 'picolinate', gluconato: 'gluconate', oxido: 'oxide',
   carbonato: 'carbonate', malato: 'malate', treonato: 'threonate', sulfato: 'sulfate', fumarato: 'fumarate',
   quelato: 'chelate', cloruro: 'chloride', clorhidrato: 'hcl', mononitrato: 'mononitrate', bitartrato: 'bitartrate',
   acetato: 'acetate', palmitato: 'palmitate', ferroso: 'ferrous', como: 'as', y: 'and', mas: 'plus', de: 'of',
   miligramos: 'mg', miligramo: 'mg', microgramos: 'mcg', microgramo: 'mcg', gramos: 'g', gramo: 'g',
-  porcion: 'serving', tableta: 'tablet', tabletas: 'tablets', capsula: 'capsule', capsulas: 'capsules', cada: 'each',
+  alfa: 'alpha', porcion: 'serving', tableta: 'tablet', tabletas: 'tablets', capsula: 'capsule', capsulas: 'capsules', cada: 'each',
   por: 'per',
 };
 
@@ -333,21 +340,66 @@ function describeChunk(chunk: Chunk): string {
     .join(' ');
 }
 
-/** Reads a spoken or typed label into rows and the pieces it could not
- *  read, with the reason for each. */
+const INGREDIENTS_LINE = /^\s*(?:other\s+|otros\s+)?ingredie?nt(?:e)?s\b/i;
+
 /**
- * A photographed label without its ingredients paragraph. The paragraph
- * names every nutrient again with no amount and its last words would join
- * the table's last row, so a photo's text is read only down to the line
- * that starts it ("Ingredientes:", "Other ingredients:"). Said or typed
- * text is never cut.
+ * A label without its ingredients paragraph. The paragraph names every
+ * nutrient again with no amount and its last words would join the table's
+ * last row, so the amounts are read only down to the line that starts it
+ * ("Ingredientes:", "Other ingredients:"). Text with no such line, which is
+ * nearly everything said aloud, is read whole.
  */
 export function labelTableOnly(text: string): string {
   const lines = text.split('\n');
-  const at = lines.findIndex((line) => /^\s*(?:other\s+|otros\s+)?ingredie?nt(?:e)?s\b/i.test(line));
+  const at = lines.findIndex((line) => INGREDIENTS_LINE.test(line));
   return at > 0 ? lines.slice(0, at).join('\n') : text;
 }
 
+/**
+ * The form of each nutrient as an ingredients paragraph names it, in the
+ * shape "Vitamina A (Palmitato de retinol)" or "Vitamin B12
+ * (cyanocobalamin)". Many labels print the form only there, never in the
+ * table of amounts (Tony, 2026-11-19: Lisa's multivitamin). A nutrient named
+ * twice keeps the first form given. Exported for the test.
+ */
+export function ingredientForms(text: string): Record<string, string> {
+  const lines = text.split('\n');
+  const at = lines.findIndex((line) => INGREDIENTS_LINE.test(line));
+  if (at < 0) return {};
+  const paragraph = lines.slice(at).join(' ');
+  const forms: Record<string, string> = {};
+  for (const match of paragraph.matchAll(/([^,()]+)\(([^()]+)\)/g)) {
+    const named = findAliases(normalizeSpokenLabel(match[1]).replace(/\n/g, ' '));
+    const codes = new Set(named.map((found) => found.alias.code));
+    if (codes.size !== 1) continue;
+    const code = named[0].alias.code;
+    if (code in forms) continue;
+    const formText = normalizeSpokenLabel(match[2]).replace(/\n/g, ' ');
+    const formNames = findAliases(formText)
+      .map((found) => found.alias.form)
+      .filter((form): form is string => !!form);
+    const words = formNames.length ? formNames.join(' ') : meaningful(wordsOf(formText)).join(' ');
+    if (words) forms[code] = words;
+  }
+  return forms;
+}
+
+/**
+ * A whole label, said, typed or photographed: the amounts from above any
+ * ingredients paragraph, and a row's form from that paragraph when the
+ * amounts gave it none.
+ */
+export function readSupplementLabel(text: string): SpokenSupplementReading {
+  const reading = readSpokenSupplementLabel(labelTableOnly(text));
+  const forms = ingredientForms(text);
+  return {
+    ...reading,
+    rows: reading.rows.map((row) => (row.formWords || !forms[row.nutrientCode] ? row : { ...row, formWords: forms[row.nutrientCode] })),
+  };
+}
+
+/** Reads a spoken or typed label into rows and the pieces it could not
+ *  read, with the reason for each. */
 export function readSpokenSupplementLabel(transcript: string): SpokenSupplementReading {
   const reading: SpokenSupplementReading = { rows: [], notUnderstood: [] };
   for (const piece of splitPieces(normalizeSpokenLabel(transcript))) {

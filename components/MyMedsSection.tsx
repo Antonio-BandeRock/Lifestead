@@ -68,7 +68,7 @@ import { explainNotYet } from '../lib/notYet';
 import { recognizeLinesFromImage, recognizeTextFromImage } from '../lib/ocr';
 import { rowsFromPositionedLines } from '../lib/labImport';
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
-import { labelTableOnly, matchSupplementForm, readSpokenSupplementLabel } from '../lib/spokenSupplement';
+import { matchSupplementForm, readSupplementLabel } from '../lib/spokenSupplement';
 import { t, tl } from '../lib/i18n';
 import {
   BUTTON_PRIMARY,
@@ -131,6 +131,9 @@ function todayDateString(): string {
 // regardless of which nutrient is picked, with any that can't be
 // normalized surfaced honestly via Insights' "couldn't be counted" note
 // rather than hidden or guessed at.
+// The form picker's last choice: type a form not on the list.
+const OWN_FORM = '__own_form__';
+
 const SUPPLEMENT_UNIT_OPTIONS: DropdownOption[] = [
   { label: 'mg', value: 'mg' },
   { label: 'mcg', value: 'mcg' },
@@ -257,6 +260,17 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   const [nutrients, setNutrients] = useState<TrackedNutrient[]>([]);
   const [commonMedications, setCommonMedications] = useState<CommonMedication[]>([]);
   const [foodEntries, setFoodEntries] = useState<NutrientGapEntry[]>([]);
+  // Today's amounts from food for every nutrient the food data carries,
+  // including the ones with no daily target (fat, carbohydrate, inositol).
+  const [foodTotals, setFoodTotals] = useState<Record<string, number>>({});
+  // Ingredient rows where the person chose to type a form of their own.
+  const [typingFormKeys, setTypingFormKeys] = useState<Set<string>>(new Set());
+  // A row's form is typed when chosen so, or when it already holds a form
+  // that is not on the list (read off a label, or saved earlier).
+  function formTyped(row: MedIngredientRow, forms: SupplementForm[]): boolean {
+    if (typingFormKeys.has(row.key)) return true;
+    return !!row.supplementForm && !forms.some((form) => form.formName === row.supplementForm);
+  }
   const [loading, setLoading] = useState(false);
   const [readFailed, setReadFailed] = useState(false);
 
@@ -336,6 +350,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
         setNutrients(loadedNutrients);
         setCommonMedications(loadedMeds);
         setFoodEntries(dailyAnalysis.entries);
+        setFoodTotals(dailyAnalysis.foodTotals ?? {});
         setInteractionWarnings(evaluation.warnings);
         setReferenceOnlyRules(evaluation.referenceOnly);
         const supplementTreatments = loadedTreatments.filter((treatment) => treatment.treatmentType === 'supplement');
@@ -384,6 +399,15 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   // Schedules, which used to carry their own copies of these forms, are
   // gone), so a paused med has to be reachable here to be edited or turned
   // back on. A paused med is preserved in full and simply not counted.
+
+  function labelFormWords(words: string): string {
+    const trimmed = words.trim();
+    return trimmed ? trimmed.charAt(0).toUpperCase() + trimmed.slice(1) : '';
+  }
+
+  function formatFoodAmount(amount: number): string {
+    return amount >= 10 ? String(Math.round(amount)) : String(Math.round(amount * 10) / 10);
+  }
 
   function nutrientDisplayName(code: string): string {
     return nutrients.find((nutrient) => nutrient.code === code)?.displayName ?? code;
@@ -560,12 +584,11 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       if (shot.canceled || shot.assets.length === 0) return;
       // A label's table often comes back a column at a time (every name,
       // then every amount), so the lines are put back into rows by where
-      // they sit on the page, and the ingredients paragraph under the table
-      // is left out (Tony, 2026-11-19: a Mexican multivitamin's photo read
-      // as nothing with an amount).
+      // they sit on the page (Tony, 2026-11-19: a Mexican multivitamin's
+      // photo read as nothing with an amount). The ingredients paragraph
+      // under the table gives forms only, never amounts (readSupplementLabel).
       const lines = await recognizeLinesFromImage(shot.assets[0].uri);
-      const read = lines ? rowsFromPositionedLines(lines) : await recognizeTextFromImage(shot.assets[0].uri);
-      const text = read ? labelTableOnly(read) : null;
+      const text = lines ? rowsFromPositionedLines(lines) : await recognizeTextFromImage(shot.assets[0].uri);
       if (!text) {
         showInfoAlert('Could not read the label', 'No words came off that photo. Try again closer and flatter, in good light, or say or type what it lists.');
         return;
@@ -589,7 +612,7 @@ ${text}` : text));
       explainNotYet('Say or type what the label lists first, for example "vitamin D 25 mcg, zinc 11 mg".');
       return;
     }
-    const reading = readSpokenSupplementLabel(text);
+    const reading = readSupplementLabel(text);
     const tracked = new Set(nutrients.map((nutrient) => nutrient.code));
     const notes = reading.notUnderstood.map((item) => `"${item.spokenText}": ${item.reason}`);
     const filled: MedIngredientRow[] = [];
@@ -606,10 +629,11 @@ ${text}` : text));
         } catch {
           forms = [];
         }
-        form = matchSupplementForm(row.formWords, forms.map((item) => item.formName)) ?? '';
-        if (!form && forms.length > 0) {
-          notes.push(`"${row.spokenText}": "${row.formWords}" is not one of the forms listed, so the form is left for you to pick.`);
-        }
+        // A form the app has research on is used by its listed name; any
+        // other form the label names is kept in the label's words rather
+        // than dropped (Tony, 2026-11-19: the forms on Lisa's multivitamin
+        // were not read).
+        form = matchSupplementForm(row.formWords, forms.map((item) => item.formName)) ?? labelFormWords(row.formWords);
       }
       filled.push({ ...blankMedIngredientRow(), nutrientCode: row.nutrientCode, supplementForm: form, amount: String(row.amount), unit: row.unit });
       void ensureNutrientDataLoaded(row.nutrientCode);
@@ -931,7 +955,22 @@ ${text}` : text));
             from food ({Math.round(foodStatus.fromFood)}{foodStatus.unit}).
           </Text>
         ) : (
-          <Text style={styles.helperText}>This app doesn&apos;t track {nutrientDisplayName(nutrientCode)} content in food yet.</Text>
+          // No daily target for this one (fat, carbohydrate and inositol
+          // have none here), so there is no share of a target to give. The
+          // amount from food is still counted and shown (Tony, 2026-11-19:
+          // the old line said the app did not track fat or carbohydrate in
+          // food at all, which was never true).
+          <Text style={styles.helperText}>
+            {(foodTotals[nutrientCode] ?? 0) > 0
+              ? t('From food logged today: about {amount} {unit}. This app has no daily target for {name}, so no share of one is shown.', {
+                  amount: formatFoodAmount(foodTotals[nutrientCode]),
+                  unit: nutrients.find((nutrient) => nutrient.code === nutrientCode)?.unit ?? '',
+                  name: nutrientDisplayName(nutrientCode),
+                })
+              : t('No {name} from food logged today yet. This app has no daily target for it, so no share of one is shown.', {
+                  name: nutrientDisplayName(nutrientCode),
+                })}
+          </Text>
         )}
       </View>
     );
@@ -1082,16 +1121,49 @@ ${text}` : text));
                       <Text style={styles.actionTextRemove}>✕</Text>
                     </TouchableOpacity>
                   </View>
-                  {row.nutrientCode && formOptions.length > 0 ? (
+                  {row.nutrientCode && formOptions.length > 0 && !formTyped(row, forms) ? (
                     <View style={styles.ingredientFormRow}>
                       <PopoverSelect
                         selected={row.supplementForm || null}
-                        options={formOptions}
-                        onSelect={(value) => updateIngredientRow(row.key, { supplementForm: value })}
+                        options={[...formOptions, { label: 'A form of your own', value: OWN_FORM }]}
+                        onSelect={(value) => {
+                          if (value === OWN_FORM) {
+                            setTypingFormKeys((current) => new Set(current).add(row.key));
+                            updateIngredientRow(row.key, { supplementForm: '' });
+                          } else {
+                            updateIngredientRow(row.key, { supplementForm: value });
+                          }
+                        }}
                         placeholder="Which form? (optional, but changes absorption)"
                         tabColor={colors.tabFood}
                         width={240}
                       />
+                    </View>
+                  ) : null}
+                  {row.nutrientCode && (formOptions.length === 0 || formTyped(row, forms)) ? (
+                    // Any form, in the label's words, for a nutrient with no
+                    // listed forms or a form not on the list (open lists).
+                    <View style={styles.ingredientFormRow}>
+                      <AppTextInput
+                        style={styles.input}
+                        placeholder="Form on the label, such as retinyl palmitate (optional)"
+                        value={row.supplementForm}
+                        onChangeText={(text) => updateIngredientRow(row.key, { supplementForm: text })}
+                      />
+                      {formOptions.length > 0 ? (
+                        <TouchableOpacity
+                          onPress={() => {
+                            setTypingFormKeys((current) => {
+                              const next = new Set(current);
+                              next.delete(row.key);
+                              return next;
+                            });
+                            updateIngredientRow(row.key, { supplementForm: '' });
+                          }}
+                        >
+                          <Text style={styles.fieldHint}>Pick from the listed forms instead</Text>
+                        </TouchableOpacity>
+                      ) : null}
                     </View>
                   ) : null}
                   {row.nutrientCode ? renderNutrientResearchCard(row.nutrientCode, row.supplementForm) : null}
@@ -1100,7 +1172,7 @@ ${text}` : text));
             })}
             {supplementForm.ingredients.length > 0 ? (
               <Text style={styles.fieldHint}>
-                For each row: pick the nutrient, type the amount, and pick the unit the label uses (mg, mcg, IU). Where a second picker appears, the label often names the form, such as &quot;as glycinate&quot;.
+                For each row: pick the nutrient, type the amount, and pick the unit the label uses (mg, mcg, IU). Under it goes the form the label names, such as &quot;as glycinate&quot; or &quot;retinyl palmitate&quot;: pick it from the list where one appears, or type it as the label says.
               </Text>
             ) : null}
             <TouchableOpacity ref={walkMark.ref('myMeds.ingredient')} onPress={addIngredientRow} style={[styles.secondaryButton, walkMark('myMeds.ingredient')]}>

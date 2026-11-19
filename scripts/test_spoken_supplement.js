@@ -170,6 +170,31 @@ check('mexican table', rows(s.labelTableOnly(lisaLabel)).map((row) => row.slice(
   ['vitamin_b12', 2, 'mcg'],
 ]);
 
+// The forms come from the ingredients paragraph, which a Mexican table never
+// prints beside the amounts (Tony, 2026-11-19).
+const formsLabel = [
+  'Vitamina A 1 000 µg 125%',
+  'Vitamina D 5 µg 100%',
+  'Vitamina E 10 mg 67%',
+  'Vitamina B12 2 µg 83%',
+  'Lípidos 0 g',
+  'INGREDIENTES: Colágeno Hidrolizado, Vitamina A (Palmitato de retinol), Vitamina D3 (colecalciferol),',
+  'Vitamina E (Acetato de dl-alfa tocoferilo), Vitamina B12 (Cianocobalamina), Maltodextrina.',
+].join('\n');
+const forms = s.ingredientForms(formsLabel);
+check('ingredient form A', forms.vitamin_a, 'retinyl palmitate');
+check('ingredient form D', forms.vitamin_d, 'cholecalciferol');
+check('ingredient form E', forms.vitamin_e, 'dl alpha tocopheryl acetate');
+check('ingredient form B12', forms.vitamin_b12, 'cyanocobalamin');
+const filled = s.readSupplementLabel(formsLabel).rows.map((row) => [row.nutrientCode, row.amount, row.formWords]);
+check('label with forms', filled.filter((row) => row[0] !== 'fat_total'), [
+  ['vitamin_a', 1000, 'retinyl palmitate'],
+  ['vitamin_d', 5, 'cholecalciferol'],
+  ['vitamin_e', 10, 'dl alpha tocopheryl acetate'],
+  ['vitamin_b12', 2, 'cyanocobalamin'],
+]);
+check('fat has no form', filled.filter((row) => row[0] === 'fat_total').map((row) => row[2] ?? null), filled.some((row) => row[0] === 'fat_total') ? [null] : []);
+
 if (failures) {
   console.log(`\n${failures} failed`);
   process.exit(1);

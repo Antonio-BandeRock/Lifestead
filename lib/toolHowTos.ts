@@ -1063,8 +1063,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Fill a supplement from a photo of its label',
       steps: [
         { say: 'Tap + Supplement and type its name.', mark: 'myMeds.supplement' },
-        { say: 'Tap Photograph the Label and take a photo of the table on the bottle, or tap Use a Photo You Have.', mark: 'myMeds.labelPhoto' },
-        { say: 'The words read from the photo go in the box, and each nutrient it understood becomes an ingredient. Check every amount against the bottle, then tap Add supplement.', mark: 'myMeds.saveSupplement' },
+        { say: 'Tap Photograph the Label and take a photo of the table on the bottle, with the ingredients list under it if it fits, or tap Use a Photo You Have.', mark: 'myMeds.labelPhoto' },
+        { say: 'The words read from the photo go in the box, and each nutrient it understood becomes an ingredient, with the form the ingredients list names, such as retinyl palmitate. Check every amount against the bottle, then tap Add supplement.', mark: 'myMeds.saveSupplement' },
       ],
       forYou: 'A label in English or Spanish is read on the phone itself; the photo is not sent anywhere.',
     },
