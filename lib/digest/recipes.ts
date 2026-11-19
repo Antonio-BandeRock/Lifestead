@@ -55695,7 +55695,7 @@ export const RECIPES_ENTRIES: DigestEntry[] = [
       yield: 'Makes 4 servings.',
       ingredients: [
         { text: '960g artichoke, 8 mammole artichokes, trimmed to the pale leaves, stems peeled, braised (weight given is after trimming)' },
-        { text: '1 lemon juice, for the soaking water, juice of 1 lemon (in the water the cut artichokes wait in, poured away, not eaten)', notInDatabase: true },
+        { text: '48g lemon juice, juice of 1 lemon (in the water the cut artichokes wait in, counted as eaten)' },
         { text: '8g garlic, 2 cloves, finely chopped' },
         { text: '6g fresh peppermint, chopped (spearmint is used where mentuccia cannot be found; in place of mentuccia (lesser calamint) leaves, which the database does not hold)' },
         { text: '15g fresh parsley, chopped' },
@@ -55747,7 +55747,7 @@ export const RECIPES_ENTRIES: DigestEntry[] = [
       yield: 'Makes 4 servings.',
       ingredients: [
         { text: '1000g artichoke, 8 large round mammole, only the toughest outer leaves removed, stems trimmed short, fried (weight given is after trimming)' },
-        { text: '1 lemon juice, for the soaking water, juice of 1 lemon (in the water the cut artichokes wait in, poured away, not eaten)', notInDatabase: true },
+        { text: '48g lemon juice, juice of 1 lemon (in the water the cut artichokes wait in, counted as eaten)' },
         { text: '40ml peanut oil (80 ml seed oil for frying (peanut or sunflower); 40 ml counted as soaked up by the food (half of a shallow-frying amount), the rest stays in the pan)' },
         { text: '1 teaspoon salt' },
         { text: '¼ teaspoon black pepper' },
@@ -88813,7 +88813,7 @@ export const RECIPES_ENTRIES: DigestEntry[] = [
         { text: '200g pork loin, boiled and thinly sliced' },
         { text: '200g shrimp crustaceans, boiled, peeled and halved lengthwise' },
         { text: '1 carrot, cut in fine strips' },
-        { text: '1 lime juice, for the soaking water, juice of 1 lime (in the water the sliced banana blossom waits in, poured away, not eaten)', notInDatabase: true },
+        { text: '44g lime juice, juice of 1 lime (in the water the sliced banana blossom waits in, counted as eaten)' },
         { text: '10g spearmint, leaves' },
         { text: '40g peanut, roasted and crushed' },
         { text: '1g fresh chili, sliced (1 bird\'s eye chili)' },

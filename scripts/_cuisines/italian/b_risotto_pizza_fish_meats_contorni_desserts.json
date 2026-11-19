@@ -6267,13 +6267,13 @@
           "prepNote": "weight given is after trimming"
         },
         {
-          "notInDatabase": true,
-          "name": "lemon juice, for the soaking water",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Bev",
+          "baseName": "Lemon juice",
+          "quantity": 48,
+          "unit": "g",
           "cutPrep": "juice of 1 lemon",
-          "prepNote": "in the water the cut artichokes wait in, poured away, not eaten"
+          "cookingMethod": null,
+          "prepNote": "in the water the cut artichokes wait in, counted as eaten"
         },
         {
           "category": "Veg",
@@ -6398,13 +6398,13 @@
           "prepNote": "weight given is after trimming"
         },
         {
-          "notInDatabase": true,
-          "name": "lemon juice, for the soaking water",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Bev",
+          "baseName": "Lemon juice",
+          "quantity": 48,
+          "unit": "g",
           "cutPrep": "juice of 1 lemon",
-          "prepNote": "in the water the cut artichokes wait in, poured away, not eaten"
+          "cookingMethod": null,
+          "prepNote": "in the water the cut artichokes wait in, counted as eaten"
         },
         {
           "category": "Fats",

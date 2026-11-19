@@ -24,7 +24,9 @@ module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   // Not eaten as a food, so no food list needs it: a wrapper, or something that does a job in the pot.
   put(aid('Sets, cures or firms a food'), 'cal (food grade slaked lime, calcium hydroxide)', 'rennet (cuajo)', 'food-grade lye (sodium hydroxide), for a 4% bath', 'lye water (kansui)', 'food-grade gypsum (calcium sulphate)', 'calcium chloride', 'wood ash (ceniza), sifted');
   put(aid('Colour only'), 'red food colouring', 'natural food colouring', 'red food colouring (or a little cochineal, as was done before)');
-  put(aid('Used to clean or soak a food, then poured away'), 'lemon juice, for the soaking water', 'lime juice, for the soaking water');
+  // The juice in the soaking water counts as eaten (owner, 2026-11-19); merge-candidate sets its grams from data/short-names.json.
+  put(listed('Lemon juice'), 'lemon juice, for the soaking water');
+  put(listed('Lime juice'), 'lime juice, for the soaking water');
   put(aid('Steeped for flavour, then strained out'), 'orange peel, in wide strips');
   put(aid('A wrapper or lining'), 'banana leaves', 'dried corn husks', 'fresh green corn husks', 'fresh green corn plant leaves (hojas de milpa)', 'maguey leaves (pencas)', 'mixiote sheets (maguey membrane) or parchment', 'dried bamboo leaves', 'dried lotus leaves', 'tomatillo husks');
 

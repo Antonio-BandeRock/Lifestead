@@ -218,5 +218,21 @@
       "fdc_description": "Milk, canned, condensed, sweetened",
       "citation": "USDA FoodData Central, SR Legacy (NDB 01095), \"Milk, canned, condensed, sweetened\": 1 cup = 306 g"
     }
+  ],
+  "recipeLineChanges": [
+    {
+      "name": "lemon juice, for the soaking water",
+      "quantity": 48,
+      "unit": "g",
+      "prep_note": "in the water the cut artichokes wait in, counted as eaten",
+      "citation": "USDA FoodData Central, SR Legacy, FDC 167747 (NDB 9152), \"Lemon juice, raw\": 1 lemon yields 48 g"
+    },
+    {
+      "name": "lime juice, for the soaking water",
+      "quantity": 44,
+      "unit": "g",
+      "prep_note": "in the water the sliced banana blossom waits in, counted as eaten",
+      "citation": "USDA FoodData Central, SR Legacy, FDC 168156 (NDB 9160), \"Lime juice, raw\": 1 lime yields 44 g"
+    }
   ]
 }

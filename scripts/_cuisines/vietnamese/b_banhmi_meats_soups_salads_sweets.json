@@ -6158,13 +6158,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lime juice, for the soaking water",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Bev",
+          "baseName": "Lime juice",
+          "quantity": 44,
+          "unit": "g",
           "cutPrep": "juice of 1 lime",
-          "prepNote": "in the water the sliced banana blossom waits in, poured away, not eaten"
+          "cookingMethod": null,
+          "prepNote": "in the water the sliced banana blossom waits in, counted as eaten"
         },
         {
           "category": "Herbs",

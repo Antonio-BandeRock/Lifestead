@@ -21,6 +21,8 @@ the swap is kept as
 
 ## Status: swapped in, 2026-11-17; made foods added 2026-11-18
 
+**Citrus juice in soaking water, 2026-11-19 (`REFERENCE_DB_VERSION` 20261119120000).** Tony: "It counts as eaten, and if the app has details per 100 ml then a calculation should be able to be applied based on how much citrus juice... was used." The lemon juice in the two Roman artichoke recipes and the lime juice for the Vietnamese banana blossom salad move from aid to listed (`curate-recipe-outside.js`), and merge-candidate step 9d sets each line's grams and note from `recipeLineChanges` in `data/short-names.json`: 48 g per lemon (USDA FDC 167747) and 44 g per lime (USDA FDC 168156). The orange peel steeped in café de olla and strained out stays an aid; that question was about juice. `verify-candidate.js` now expects the progesterone row step 11 adds, so all 31 checks pass again.
+
 **Medicine list, 2026-11-18 (`REFERENCE_DB_VERSION` 20261118180000).** `common_medications` gains `brand_names_mexico`, `mexico_notes` and `mexico_source` (URLs, never shown), filled for 29 medicines from PLM, Vademécum México, Farmacias Benavides and COFEPRIS alerts, and a cited progesterone row. Step 11 of `merge-candidate.js` calls `scripts/add_mexican_medicine_brands.js`, so a rebuilt candidate carries them. Medicines with no confirmed Mexican source stay NULL.
 
 Tony's answers to the questions left after the swap (2026-11-18), built by `curate-made-foods.js` and 22 lines of `data/categories.json`, then swapped in the same way (`REFERENCE_DB_VERSION` 20261118120000):

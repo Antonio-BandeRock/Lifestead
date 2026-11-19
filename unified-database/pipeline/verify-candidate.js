@@ -71,12 +71,16 @@ for (const [t, cat] of Object.entries(REPOINTED)) {
   const everyFood = one(`select count(*) from foods f where not exists (select 1 from ${t} e where e.food_id=f.food_id and e.source=f.source)`) === 0;
   check('food_equivalence: every live row unchanged, and every food has a row', kept && everyFood && added === Number(one("select value from candidate_build where key='equivalence_rows_added'") || 0), `${added} added`);
 }
+// merge-candidate.js step 11 adds progesterone to the medicine list (scripts/add_mexican_medicine_brands.js), so that
+// one row is expected in the candidate and not in the copy from before the swap.
+const ADDED_ROWS = { common_medications: `id=${"'" + require('../../scripts/add_mexican_medicine_brands.js').PROGESTERONE.id + "'"}` };
 const changedTables = [];
 for (const t of tables) {
   const cols = q(`select name from pragma_table_info('${t}', 'L')`).map((r) => `"${r.name}"`).join(', ');
-  const same = one(`select count(*) from L."${t}"`) === one(`select count(*) from main."${t}"`)
-    && one(`select count(*) from (select ${cols} from L."${t}" except select ${cols} from main."${t}")`) === 0
-    && one(`select count(*) from (select ${cols} from main."${t}" except select ${cols} from L."${t}")`) === 0;
+  const mainRows = ADDED_ROWS[t] ? `(select * from main."${t}" where not (${ADDED_ROWS[t]}))` : `main."${t}"`;
+  const same = one(`select count(*) from L."${t}"`) === one(`select count(*) from ${mainRows}`)
+    && one(`select count(*) from (select ${cols} from L."${t}" except select ${cols} from ${mainRows})`) === 0
+    && one(`select count(*) from (select ${cols} from ${mainRows} except select ${cols} from L."${t}")`) === 0;
   if (!same) changedTables.push(t);
 }
 check(`the other ${tables.length} tables (scores, aliases, rules, conditions, recipes and the rest) are identical to the live ones`, changedTables.length === 0, changedTables.join(', ') || undefined);

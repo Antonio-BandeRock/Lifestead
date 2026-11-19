@@ -220,4 +220,4 @@
 // BUMPED again 2026-11-18: the medicine list carries the brand names sold
 // in Mexico (brand_names_mexico, mexico_notes) and has progesterone
 // (scripts/add_mexican_medicine_brands.js). A stale copy lacks the columns.
-export const REFERENCE_DB_VERSION = "20261118180000";
+export const REFERENCE_DB_VERSION = "20261119120000";

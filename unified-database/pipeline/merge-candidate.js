@@ -479,6 +479,20 @@ uwSql.push(`INSERT INTO candidate_build VALUES ('volume_weights_added', '${volum
 uwSql.push(`INSERT INTO candidate_build VALUES ('unit_weights_added', '${unitWeightsAdded}');`, 'COMMIT;');
 execFileSync('sqlite3', [OUT], { input: uwSql.join('\n'), maxBuffer: 2e9 });
 
+// 9d. A line moved out of the unlisted table keeps the amount and note it had there. Where the owner changed what the
+// line means (citrus juice in soaking water counts as eaten, 2026-11-19), its amount in grams and its note are set here.
+const lcSql = ['BEGIN;'];
+let recipeLinesChanged = 0;
+for (const c of SN.recipeLineChanges || []) {
+  const where = `original_base_name=${esc(c.name)}`;
+  const n = q(OUT, `select count(*) n from curated_recipe_ingredients where ${where}`)[0].n;
+  if (!n) throw new Error(`short-names.json recipeLineChanges: no moved line named ${c.name}`);
+  lcSql.push(`UPDATE curated_recipe_ingredients SET quantity=${c.quantity}, unit=${esc(c.unit)}, prep_note=${esc(c.prep_note)} WHERE ${where};`);
+  recipeLinesChanged += n;
+}
+lcSql.push(`INSERT INTO candidate_build VALUES ('recipe_lines_changed', '${recipeLinesChanged}');`, 'COMMIT;');
+execFileSync('sqlite3', [OUT], { input: lcSql.join('\n'), maxBuffer: 2e9 });
+
 // 9d. Equivalence groups (scripts/add_food_equivalence.js) for the foods the live file never had. The live groups stay as
 // they were: rebuilding them from the new names would split rows a reviewer matched by hand. A new food the curation
 // lists under a shown food joins that food's group, the same food in another table; any other new food takes its own
