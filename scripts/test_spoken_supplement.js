@@ -138,6 +138,38 @@ check('es printed table leaders', rows('Vitamina C ........ 60 mg\nCalcio ......
 ]);
 check('es b12 form', rows('Vitamina B12 (metilcobalamina) 500 µg'), [['vitamin_b12', 500, 'mcg', 'methylcobalamin']]);
 
+// Lisa's multivitamin photo (1.0.93.20): a Mexican Información Nutrimental
+// table with a per-portion and a per-100 g column, a space as the thousands
+// mark, and an ingredients paragraph under it. Each printed line is its own
+// row, so the second column never reads as the next row's amount.
+check('space thousands', rows('Vitamina A  1 000 µg  100 mg'), [['vitamin_a', 1000, 'mcg', null]]);
+check('two numbers stay two', s.normalizeSpokenLabel('2 capsulas 100 mg').includes('2100'), false);
+const lisaLabel = [
+  'Información Nutrimental',
+  'Tamaño de la porción: 2 Cápsulas (1 g)',
+  'Cantidades  Por porción (1 g)  Por 100 g',
+  'Calcio  100 mg  10 g',
+  'Maca  100 mg  10 g',
+  'Vitamina C  60 mg  6 g',
+  'Vitamina B1  1.5 mg  0.15 g',
+  'Vitamina A  1 000 µg  100 mg',
+  'Biotina  300 µg  30 mg',
+  'Ácido Fólico  200 µg  20 mg',
+  'Vitamina B12  2 µg  0.2 mg',
+  'INGREDIENTES: Colágeno Hidrolizado, Calcio, Inositol, Raíz de Maca, Potasio',
+].join('\n');
+check('ingredients cut', s.labelTableOnly(lisaLabel).includes('INGREDIENTES'), false);
+check('no ingredients heading keeps all', s.labelTableOnly('Vitamina C 60 mg'), 'Vitamina C 60 mg');
+check('mexican table', rows(s.labelTableOnly(lisaLabel)).map((row) => row.slice(0, 3)), [
+  ['calcium', 100, 'mg'],
+  ['vitamin_c', 60, 'mg'],
+  ['thiamin_b1', 1.5, 'mg'],
+  ['vitamin_a', 1000, 'mcg'],
+  ['biotin_b7', 300, 'mcg'],
+  ['folate_b9', 200, 'mcg'],
+  ['vitamin_b12', 2, 'mcg'],
+]);
+
 if (failures) {
   console.log(`\n${failures} failed`);
   process.exit(1);

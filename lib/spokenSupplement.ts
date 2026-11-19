@@ -173,6 +173,10 @@ function fromSpanish(text: string): string {
 export function normalizeSpokenLabel(text: string): string {
   let s = ` ${text.toLowerCase()} `;
   s = s.replace(/[µμ]g\b/g, 'mcg');
+  // A space as the thousands mark, the way Mexican and European labels print
+  // "1 000 µg". Only before a unit, so two numbers in a row stay two, and
+  // never straight after a letter, so "B12 500 mcg" stays B12 at 500.
+  s = s.replace(/(^|[^\w.])(\d{1,3})[   ](\d{3})(?=\s*(?:mg|mcg|g|iu|ui|u\.i\.)(?![a-z]))/g, '$1$2$3');
   // Thousands separators before any splitting on commas: "1,000 IU".
   s = s.replace(/(\d),(\d{3})\b/g, '$1$2');
   // A Spanish decimal comma: "2,5 mg".
@@ -193,7 +197,12 @@ export function normalizeSpokenLabel(text: string): string {
   s = s.replace(/\b(b|d|k|mk)[\s-](\d{1,2})\b(?!\s*(?:\.\d|\d|mg|mcg|g|iu)\b)/g, '$1$2');
   s = s.replace(/[()[\]:]/g, ' ');
   s = s.replace(/-/g, ' ');
-  return s.replace(/\s+/g, ' ').trim();
+  // Line breaks are kept, since each line of a printed table is one row and
+  // run together a row's second column reads as the next row's amount.
+  return s
+    .replace(/[^\S\n]+/g, ' ')
+    .replace(/ *\n[\s]*/g, '\n')
+    .trim();
 }
 
 function splitPieces(normalized: string): string[] {
@@ -326,6 +335,19 @@ function describeChunk(chunk: Chunk): string {
 
 /** Reads a spoken or typed label into rows and the pieces it could not
  *  read, with the reason for each. */
+/**
+ * A photographed label without its ingredients paragraph. The paragraph
+ * names every nutrient again with no amount and its last words would join
+ * the table's last row, so a photo's text is read only down to the line
+ * that starts it ("Ingredientes:", "Other ingredients:"). Said or typed
+ * text is never cut.
+ */
+export function labelTableOnly(text: string): string {
+  const lines = text.split('\n');
+  const at = lines.findIndex((line) => /^\s*(?:other\s+|otros\s+)?ingredie?nt(?:e)?s\b/i.test(line));
+  return at > 0 ? lines.slice(0, at).join('\n') : text;
+}
+
 export function readSpokenSupplementLabel(transcript: string): SpokenSupplementReading {
   const reading: SpokenSupplementReading = { rows: [], notUnderstood: [] };
   for (const piece of splitPieces(normalizeSpokenLabel(transcript))) {

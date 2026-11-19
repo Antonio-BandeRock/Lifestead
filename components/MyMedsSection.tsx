@@ -65,9 +65,10 @@ import { ThumbRow } from './ThumbRow';
 import { VaultClosedBand } from './VaultClosedBand';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { explainNotYet } from '../lib/notYet';
-import { recognizeTextFromImage } from '../lib/ocr';
+import { recognizeLinesFromImage, recognizeTextFromImage } from '../lib/ocr';
+import { rowsFromPositionedLines } from '../lib/labImport';
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
-import { matchSupplementForm, readSpokenSupplementLabel } from '../lib/spokenSupplement';
+import { labelTableOnly, matchSupplementForm, readSpokenSupplementLabel } from '../lib/spokenSupplement';
 import { t, tl } from '../lib/i18n';
 import {
   BUTTON_PRIMARY,
@@ -557,7 +558,14 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
           ? await ImagePicker.launchCameraAsync({ quality: 0.8 })
           : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8 });
       if (shot.canceled || shot.assets.length === 0) return;
-      const text = await recognizeTextFromImage(shot.assets[0].uri);
+      // A label's table often comes back a column at a time (every name,
+      // then every amount), so the lines are put back into rows by where
+      // they sit on the page, and the ingredients paragraph under the table
+      // is left out (Tony, 2026-11-19: a Mexican multivitamin's photo read
+      // as nothing with an amount).
+      const lines = await recognizeLinesFromImage(shot.assets[0].uri);
+      const read = lines ? rowsFromPositionedLines(lines) : await recognizeTextFromImage(shot.assets[0].uri);
+      const text = read ? labelTableOnly(read) : null;
       if (!text) {
         showInfoAlert('Could not read the label', 'No words came off that photo. Try again closer and flatter, in good light, or say or type what it lists.');
         return;
