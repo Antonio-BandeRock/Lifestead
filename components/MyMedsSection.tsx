@@ -131,6 +131,20 @@ function todayDateString(): string {
 // regardless of which nutrient is picked, with any that can't be
 // normalized surfaced honestly via Insights' "couldn't be counted" note
 // rather than hidden or guessed at.
+// How to fill a supplement from a store's picture of its label, which is
+// flat, sharp and evenly lit, so it reads better than a photo of a curved
+// bottle (Tony, 2026-11-19).
+const STORE_LABEL_TITLE = "Using a store's picture of the label";
+const STORE_LABEL_STEPS: string[] = [
+  "A store's picture of the label is flat, sharp and evenly lit, so it reads better than a photo of a curved bottle.",
+  '1. Open the product on a store website or app, such as Amazon, Mercado Libre, Walmart, a pharmacy or the maker\'s site. Search for the exact name and size printed on your bottle.',
+  '2. Go through the product\'s pictures to the one showing the nutrition table: Supplement Facts on a U.S. label, Información nutrimental on a Mexican one. If the ingredients list is in another picture, save that one as well, since it names each nutrient\'s form.',
+  '3. Tap the picture so it opens full size.',
+  '4. Save it. In a web browser, press and hold the picture and tap Download image. In a store app that will not save pictures, zoom in until the table fills the screen and take a screenshot (on most phones, press the power and volume down buttons together), then crop it to the table.',
+  '5. Back here, tap Use a Photo You Have and pick the picture. Up to four pictures of one label can be picked together, such as the table and the ingredients list.',
+  '6. Check every row it fills against the bottle you hold. A store can show an older label, or the version sold in another country, and the bottle is what you take.',
+];
+
 // The form picker's last choice: type a form not on the list.
 const OWN_FORM = '__own_form__';
 
@@ -580,15 +594,22 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       const shot =
         from === 'camera'
           ? await ImagePicker.launchCameraAsync({ quality: 0.8 })
-          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8 });
+          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8, allowsMultipleSelection: true, selectionLimit: 4 });
       if (shot.canceled || shot.assets.length === 0) return;
       // A label's table often comes back a column at a time (every name,
       // then every amount), so the lines are put back into rows by where
       // they sit on the page (Tony, 2026-11-19: a Mexican multivitamin's
       // photo read as nothing with an amount). The ingredients paragraph
       // under the table gives forms only, never amounts (readSupplementLabel).
-      const lines = await recognizeLinesFromImage(shot.assets[0].uri);
-      const text = lines ? rowsFromPositionedLines(lines) : await recognizeTextFromImage(shot.assets[0].uri);
+      // Up to four pictures of one label can be picked at once, since a
+      // store page often shows the table and the ingredients apart.
+      const pages: string[] = [];
+      for (const asset of shot.assets) {
+        const lines = await recognizeLinesFromImage(asset.uri);
+        const page = lines ? rowsFromPositionedLines(lines) : await recognizeTextFromImage(asset.uri);
+        if (page) pages.push(page);
+      }
+      const text = pages.join('\n\n');
       if (!text) {
         showInfoAlert('Could not read the label', 'No words came off that photo. Try again closer and flatter, in good light, or say or type what it lists.');
         return;
@@ -596,7 +617,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       setLabelText((current) => (current.trim() ? `${current.trim()}
 
 ${text}` : text));
-      await fillFromLabel(text);
+      await fillFromLabel(text, pages);
     } catch (error) {
       console.error('[MyMedsSection] Failed to read the label photo', error);
       showInfoAlert('Could not read the label', 'Something went wrong reading that photo. You can say or type what the label lists instead.');
@@ -607,12 +628,12 @@ ${text}` : text));
 
   // The label said or typed, read into rows added below any already filled.
   // A blank starter row is replaced rather than left above them.
-  async function fillFromLabel(text: string) {
+  async function fillFromLabel(text: string, pages?: string[]) {
     if (!text.trim()) {
       explainNotYet('Say or type what the label lists first, for example "vitamin D 25 mcg, zinc 11 mg".');
       return;
     }
-    const reading = readSupplementLabel(text);
+    const reading = readSupplementLabel(pages && pages.length > 1 ? pages : text);
     const tracked = new Set(nutrients.map((nutrient) => nutrient.code));
     const notes = reading.notUnderstood.map((item) => `"${item.spokenText}": ${item.reason}`);
     const filled: MedIngredientRow[] = [];
@@ -1052,6 +1073,7 @@ ${text}` : text));
                 <Text style={styles.secondaryButtonText}>{readingLabel ? 'Reading the Label' : 'Photograph the Label'}</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                ref={walkMark.ref('myMeds.labelLibrary')}
                 onPress={() => void readLabelPhoto('library')}
                 disabled={readingLabel}
                 style={[styles.secondaryButton, styles.labelPhotoButton, readingLabel ? styles.busy : null]}
@@ -1059,6 +1081,15 @@ ${text}` : text));
                 <Text style={styles.secondaryButtonText}>Use a Photo You Have</Text>
               </TouchableOpacity>
             </View>
+            {/* A store's picture of the label reads best (Tony, 2026-11-19). */}
+            <TouchableOpacity
+              ref={walkMark.ref('myMeds.storeLabelHelp')}
+              onPress={() => showInfoAlert(t(STORE_LABEL_TITLE), STORE_LABEL_STEPS.map((step) => t(step)).join('\n\n'))}
+            >
+              <Text style={styles.fieldHint}>
+                Clearest of all: the label picture on a store&apos;s page online. Tap here for how to save one and use it.
+              </Text>
+            </TouchableOpacity>
             <AppTextInput
               onVoiceResult={(text, isFinal) => {
                 setLabelText(text);

@@ -553,6 +553,52 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'No {name} from food logged today yet. This app has no daily target for it, so no share of one is shown.':
     'Todavía no hay {name} de la comida registrada hoy. Esta app no tiene una meta diaria para eso, así que no se muestra qué parte de una meta es.',
   'A form of your own': 'Una forma propia',
+  // What each database said about a retail code (Tony, 2026-11-19).
+  'What each database said': 'Lo que dijo cada base de datos',
+  '{source}: found {name}. This is the entry shown.': '{source}: encontró {name}. Esta es la entrada que se muestra.',
+  '{source}: also has an entry ({name}). It is not the one shown; {first} was asked first.':
+    '{source}: también tiene una entrada ({name}). No es la que se muestra; primero se consultó {first}.',
+  '{source}: has an entry for {code}, but nobody typed in a name, ingredients or amounts.':
+    '{source}: tiene una entrada para {code}, pero nadie escribió un nombre, ingredientes ni cantidades.',
+  '{source}: no entry for {code}.': '{source}: no hay entrada para {code}.',
+  '{source}: answered with an error (status {status}), so its answer is not known.':
+    '{source}: respondió con un error (estado {status}), así que no se sabe su respuesta.',
+  '{source}: could not be reached, so its answer is not known.': '{source}: no se pudo conectar, así que no se sabe su respuesta.',
+  'openFDA: not asked. This is {where}, and openFDA holds only U.S. drug codes.':
+    'openFDA: no se consultó. Esto es {where}, y openFDA solo tiene códigos de medicamentos de EE. UU.',
+  'No database asked holds {code}, so nothing is shown in its place. In My Meds a photo of the label reads its ingredients and amounts, and a picture of the label saved from a store page online usually reads best.':
+    'Ninguna base de datos consultada tiene {code}, así que no se muestra nada en su lugar. En Mis medicamentos, una foto de la etiqueta lee sus ingredientes y cantidades, y una imagen de la etiqueta guardada desde la página de una tienda en línea suele leerse mejor.',
+  // A store's picture of the label (Tony, 2026-11-19).
+  "Clearest of all: the label picture on a store's page online. Tap here for how to save one and use it.":
+    'Lo más claro: la imagen de la etiqueta en la página de una tienda en línea. Toca aquí para ver cómo guardarla y usarla.',
+  "Using a store's picture of the label": 'Usar la imagen de la etiqueta de una tienda',
+  "A store's picture of the label is flat, sharp and evenly lit, so it reads better than a photo of a curved bottle.":
+    'La imagen de la etiqueta de una tienda es plana, nítida y con luz pareja, así que se lee mejor que una foto de un frasco curvo.',
+  "1. Open the product on a store website or app, such as Amazon, Mercado Libre, Walmart, a pharmacy or the maker's site. Search for the exact name and size printed on your bottle.":
+    '1. Abre el producto en el sitio o la app de una tienda, como Amazon, Mercado Libre, Walmart, una farmacia o el sitio del fabricante. Busca el nombre y el tamaño exactos impresos en tu frasco.',
+  "2. Go through the product's pictures to the one showing the nutrition table: Supplement Facts on a U.S. label, Información nutrimental on a Mexican one. If the ingredients list is in another picture, save that one as well, since it names each nutrient's form.":
+    '2. Recorre las imágenes del producto hasta la que muestra la tabla nutrimental: Supplement Facts en una etiqueta de EE. UU., Información nutrimental en una mexicana. Si la lista de ingredientes está en otra imagen, guarda esa también, porque nombra la forma de cada nutriente.',
+  '3. Tap the picture so it opens full size.': '3. Toca la imagen para que se abra en tamaño completo.',
+  '4. Save it. In a web browser, press and hold the picture and tap Download image. In a store app that will not save pictures, zoom in until the table fills the screen and take a screenshot (on most phones, press the power and volume down buttons together), then crop it to the table.':
+    '4. Guárdala. En un navegador, mantén presionada la imagen y toca Descargar imagen. En la app de una tienda que no deja guardar imágenes, haz zoom hasta que la tabla llene la pantalla y toma una captura de pantalla (en la mayoría de los celulares, presiona juntos el botón de encendido y el de bajar volumen), y luego recórtala a la tabla.',
+  '5. Back here, tap Use a Photo You Have and pick the picture. Up to four pictures of one label can be picked together, such as the table and the ingredients list.':
+    '5. De vuelta aquí, toca Usar una foto que tengas y elige la imagen. Se pueden elegir hasta cuatro imágenes de una misma etiqueta juntas, como la tabla y la lista de ingredientes.',
+  '6. Check every row it fills against the bottle you hold. A store can show an older label, or the version sold in another country, and the bottle is what you take.':
+    '6. Revisa cada fila que llena contra el frasco que tienes. Una tienda puede mostrar una etiqueta anterior, o la versión que se vende en otro país, y lo que tomas es el frasco.',
+  "Fill a supplement from a store's picture of its label": 'Llenar un suplemento desde la imagen de su etiqueta en una tienda',
+  "Open the product on a store website or app, such as Amazon, Mercado Libre, Walmart, a pharmacy or the maker's site, and find the exact name and size printed on your bottle.":
+    'Abre el producto en el sitio o la app de una tienda, como Amazon, Mercado Libre, Walmart, una farmacia o el sitio del fabricante, y encuentra el nombre y el tamaño exactos impresos en tu frasco.',
+  'Go through its pictures to the nutrition table (Supplement Facts, or Información nutrimental on a Mexican label) and tap it so it opens full size. Save the ingredients list too if it is in another picture, since it names each form.':
+    'Recorre sus imágenes hasta la tabla nutrimental (Supplement Facts, o Información nutrimental en una etiqueta mexicana) y tócala para que se abra en tamaño completo. Guarda también la lista de ingredientes si está en otra imagen, porque nombra cada forma.',
+  'Save the picture: in a web browser, press and hold it and tap Download image. In a store app that will not save it, zoom until the table fills the screen, take a screenshot and crop it to the table.':
+    'Guarda la imagen: en un navegador, mantenla presionada y toca Descargar imagen. En la app de una tienda que no deja guardarla, haz zoom hasta que la tabla llene la pantalla, toma una captura de pantalla y recórtala a la tabla.',
+  'Here, tap + Supplement and type its name.': 'Aquí, toca + Suplemento y escribe su nombre.',
+  'Tap Use a Photo You Have and pick the picture. Up to four pictures of one label can be picked together, such as the table and the ingredients list.':
+    'Toca Usar una foto que tengas y elige la imagen. Se pueden elegir hasta cuatro imágenes de una misma etiqueta juntas, como la tabla y la lista de ingredientes.',
+  'Check every row against the bottle you hold, since a store can show an older label or one sold in another country, then tap Add supplement.':
+    'Revisa cada fila contra el frasco que tienes, porque una tienda puede mostrar una etiqueta anterior o una que se vende en otro país, y luego toca Agregar suplemento.',
+  "A store's picture is flat, sharp and evenly lit, so it reads better than a photo of a curved bottle. The picture is read on the phone and sent nowhere.":
+    'La imagen de una tienda es plana, nítida y con luz pareja, así que se lee mejor que una foto de un frasco curvo. La imagen se lee en el celular y no se manda a ningún lado.',
   'Form on the label, such as retinyl palmitate (optional)': 'Forma en la etiqueta, como palmitato de retinol (opcional)',
   'Pick from the listed forms instead': 'Mejor elegir de las formas de la lista',
   'For each row: pick the nutrient, type the amount, and pick the unit the label uses (mg, mcg, IU). Under it goes the form the label names, such as "as glycinate" or "retinyl palmitate": pick it from the list where one appears, or type it as the label says.':

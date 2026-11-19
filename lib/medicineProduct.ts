@@ -178,32 +178,93 @@ export function codeSpellings(code: string): string[] {
   return out;
 }
 
-export class ProductLookupError extends Error {}
+/** What one database said about a code. */
+export type DatabaseAnswer = {
+  source: ProductSource;
+  outcome: 'found' | 'empty' | 'not_found' | 'error' | 'unreachable';
+  /** The HTTP status when the database answered with an error. */
+  status?: number;
+  /** The product name it holds, when found. */
+  name?: string;
+};
 
-/** Asks each database in turn and stops at the first that knows the code. */
-export async function lookUpMedicineProduct(code: string): Promise<MedicineProduct | null> {
-  let reached = false;
-  for (const { base, source } of PRODUCT_SOURCES) {
-    for (const spelling of codeSpellings(code)) {
-      let response: Response;
-      try {
-        response = await fetch(productUrl(base, spelling));
-      } catch {
-        continue;
-      }
-      reached = true;
-      if (response.status === 404) continue;
-      if (!response.ok) continue;
-      let body: unknown;
-      try {
-        body = await response.json();
-      } catch {
-        continue;
-      }
-      const found = productFromResponse(body, code, source);
-      if (found) return found;
+export type ProductLookup = {
+  /** The first database in order that holds something usable, or null. */
+  product: MedicineProduct | null;
+  /** Every database asked, in order, with what it said (Tony, 2026-11-19). */
+  answers: DatabaseAnswer[];
+};
+
+/** Reads one database answer body into its outcome, keeping a usable product. */
+export function answerFromResponse(
+  data: unknown,
+  code: string,
+  source: ProductSource,
+): { answer: DatabaseAnswer; product: MedicineProduct | null } {
+  const body = data as { status?: unknown } | null;
+  if (!body || body.status !== 1) return { answer: { source, outcome: 'not_found' }, product: null };
+  const product = productFromResponse(data, code, source);
+  if (!product) return { answer: { source, outcome: 'empty' }, product: null };
+  return { answer: { source, outcome: 'found', name: product.name }, product };
+}
+
+/** Asks one database every spelling of the code; the best answer wins. */
+async function askOne(base: string, source: ProductSource, code: string): Promise<{ answer: DatabaseAnswer; product: MedicineProduct | null }> {
+  let best: { answer: DatabaseAnswer; product: MedicineProduct | null } = { answer: { source, outcome: 'unreachable' }, product: null };
+  const rank = { found: 4, empty: 3, not_found: 2, error: 1, unreachable: 0 };
+  for (const spelling of codeSpellings(code)) {
+    let next: { answer: DatabaseAnswer; product: MedicineProduct | null };
+    try {
+      const response = await fetch(productUrl(base, spelling));
+      if (response.status === 404) next = { answer: { source, outcome: 'not_found' }, product: null };
+      else if (!response.ok) next = { answer: { source, outcome: 'error', status: response.status }, product: null };
+      else next = answerFromResponse(await response.json(), code, source);
+    } catch {
+      next = { answer: { source, outcome: 'unreachable' }, product: null };
     }
+    if (rank[next.answer.outcome] > rank[best.answer.outcome]) best = next;
+    if (best.answer.outcome === 'found') break;
   }
-  if (!reached) throw new ProductLookupError('No Open Facts database answered.');
-  return null;
+  return best;
+}
+
+/**
+ * Asks all three databases at once and keeps every answer, so the screen
+ * can say what each one said. The product shown is the first found, in the
+ * order Open Food Facts, Open Products Facts, Open Beauty Facts.
+ */
+export async function lookUpMedicineProduct(code: string): Promise<ProductLookup> {
+  const results = await Promise.all(PRODUCT_SOURCES.map(({ base, source }) => askOne(base, source, code)));
+  const shown = results.find((r) => r.product)?.product ?? null;
+  return { product: shown, answers: results.map((r) => r.answer) };
+}
+
+/**
+ * One line per database asked, in order, saying what it answered for this
+ * code. The one whose entry is shown says so; another that also holds the
+ * code says it was not the one shown.
+ */
+export function databaseAnswerLines(lookup: ProductLookup, code: string): string[] {
+  const shownFrom = lookup.product?.source ?? null;
+  return lookup.answers.map((a) => {
+    switch (a.outcome) {
+      case 'found':
+        return a.source === shownFrom
+          ? `${a.source}: found ${a.name ?? code}. This is the entry shown.`
+          : `${a.source}: also has an entry (${a.name ?? code}). It is not the one shown; ${shownFrom} was asked first.`;
+      case 'empty':
+        return `${a.source}: has an entry for ${code}, but nobody typed in a name, ingredients or amounts.`;
+      case 'not_found':
+        return `${a.source}: no entry for ${code}.`;
+      case 'error':
+        return `${a.source}: answered with an error (status ${a.status ?? 'unknown'}), so its answer is not known.`;
+      default:
+        return `${a.source}: could not be reached, so its answer is not known.`;
+    }
+  });
+}
+
+/** True when no database answered at all, which reads as a connection problem. */
+export function noDatabaseAnswered(lookup: ProductLookup): boolean {
+  return lookup.answers.every((a) => a.outcome === 'unreachable');
 }

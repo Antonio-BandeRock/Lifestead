@@ -201,9 +201,11 @@ check('a retail code keeps its digits as its key', M.codeKey(M.readScannedCode('
 check('the same bottle in a DataMatrix keeps the same key', M.codeKey(M.readScannedCode('(01)07501008491966')), '7501008491966');
 check('nothing typed has no key', M.codeKey(M.readTypedCode('')), null);
 check('a remembered bottle is named', M.rememberedMedMessage('Vitamin D3'), 'This is the bottle you keep as Vitamin D3 in My Meds.');
-const nf = M.openFactsNotFoundMessage(M.readScannedCode('7501008491966'), '7501008491966');
-check('the not-found answer names all three databases', ['Open Food Facts', 'Open Products Facts', 'Open Beauty Facts'].every((w) => nf.includes(w)), true);
-check('the not-found answer says nothing is shown instead', nf.includes('Nothing else is shown in its place.'), true);
+const nf = M.openFactsNotFoundMessage('7501008491966');
+check('the not-found answer names the code', nf.includes('7501008491966'), true);
+check('the not-found answer says nothing is shown instead', nf.includes('nothing is shown in its place'), true);
+check('the not-found answer offers a store picture of the label', nf.includes('store page online'), true);
+check('openFDA is named as not asked for a Mexican code', M.openFdaNotAskedLine(M.readScannedCode('7501008491966')).startsWith('openFDA: not asked.'), true);
 check('the people-entered caveat says the maker did not type it', M.OPEN_FACTS_CAVEAT.includes('the maker did not'), true);
 
 console.log(`${total - failures} of ${total} passed`);

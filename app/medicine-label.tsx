@@ -55,6 +55,7 @@ import {
   OPEN_FACTS_CAVEAT,
   openFactsNotFoundMessage,
   openFactsUnreachableMessage,
+  openFdaNotAskedLine,
   type CodeReading,
   notFoundMessage,
   pickPrompt,
@@ -78,7 +79,9 @@ import { listAllActiveTreatments } from '../lib/db';
 import { findMedByCode, rememberMedCode } from '../lib/medBarcodesDb';
 import {
   labelTextFromProduct,
+  databaseAnswerLines,
   lookUpMedicineProduct,
+  noDatabaseAnswered,
   productBasisNote,
   productRetrievalStatement,
   type MedicineProduct,
@@ -128,6 +131,8 @@ export default function MedicineLabelScreen() {
   // Open Facts databases, and the bottle code a med is kept with.
   const [asking, setAsking] = useState('openFDA');
   const [product, setProduct] = useState<{ item: MedicineProduct; retrievedAt: string } | null>(null);
+  // What each database said about the last retail code, one line each.
+  const [databaseLines, setDatabaseLines] = useState<string[] | null>(null);
   const [askedCode, setAskedCode] = useState<string | null>(null);
   const [bottleOf, setBottleOf] = useState<{ treatmentId: string; name: string } | null>(null);
   const [meds, setMeds] = useState<{ label: string; value: string }[]>([]);
@@ -247,19 +252,20 @@ export default function MedicineLabelScreen() {
     setShown(null);
     setMessage(null);
     setProduct(null);
+    setDatabaseLines(null);
     const retail = retailCodeOf(reading);
     if (!retail) {
       setMessage(notADrugCodeMessage(reading));
       return;
     }
-    setAsking('Open Food Facts');
+    setAsking('Open Food Facts, Open Products Facts and Open Beauty Facts');
     setBusy(true);
     try {
-      const item = await lookUpMedicineProduct(retail);
-      if (item) setProduct({ item, retrievedAt: new Date().toISOString() });
-      else setMessage(openFactsNotFoundMessage(reading, retail));
-    } catch {
-      setMessage(openFactsUnreachableMessage());
+      const lookup = await lookUpMedicineProduct(retail);
+      setDatabaseLines([openFdaNotAskedLine(reading), ...databaseAnswerLines(lookup, retail)]);
+      if (lookup.product) setProduct({ item: lookup.product, retrievedAt: new Date().toISOString() });
+      else if (noDatabaseAnswered(lookup)) setMessage(openFactsUnreachableMessage());
+      else setMessage(openFactsNotFoundMessage(retail));
     } finally {
       setBusy(false);
       setAsking('openFDA');
@@ -275,6 +281,7 @@ export default function MedicineLabelScreen() {
       setBottleOf(null);
       setCodeNote(null);
       setProduct(null);
+      setDatabaseLines(null);
       if (key && !medsClosed) findMedByCode(key).then(setBottleOf).catch(() => setBottleOf(null));
       if (reading.kind === 'ndc') runLookup({ kind: 'code', reading });
       else runProductLookup(reading);
@@ -294,6 +301,7 @@ export default function MedicineLabelScreen() {
     setAskedCode(null);
     setBottleOf(null);
     setProduct(null);
+    setDatabaseLines(null);
     runLookup({ kind: 'name', name: nameText });
   }
 
@@ -658,6 +666,17 @@ export default function MedicineLabelScreen() {
       {message ? (
         <View style={styles.card}>
           <Text style={styles.body}>{message}</Text>
+        </View>
+      ) : null}
+
+      {databaseLines && !busy ? (
+        <View style={styles.card}>
+          <Text style={styles.label}>What each database said</Text>
+          {databaseLines.map((line) => (
+            <Text key={line} style={styles.body}>
+              {line}
+            </Text>
+          ))}
         </View>
       ) : null}
 

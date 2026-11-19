@@ -511,11 +511,20 @@ export function rememberedMedMessage(name: string): string {
 export const OPEN_FACTS_CAVEAT =
   'The people who use these databases typed this in from the package; the maker did not, and nobody checks it against the bottle. Read the label you hold before relying on any amount here.';
 
-export function openFactsNotFoundMessage(reading: Exclude<CodeReading, { kind: 'ndc' }>, retail: string): string {
+export function openFactsNotFoundMessage(retail: string): string {
+  return `No database asked holds ${retail}, so nothing is shown in its place. In My Meds a photo of the label reads its ingredients and amounts, and a picture of the label saved from a store page online usually reads best.`;
+}
+
+/**
+ * The line for openFDA when a retail code was scanned: it is never asked,
+ * since it holds only U.S. drug codes, and the screen says so beside what
+ * the other databases answered (Tony, 2026-11-19).
+ */
+export function openFdaNotAskedLine(reading: Exclude<CodeReading, { kind: 'ndc' }>): string {
   const where = reading.kind === 'not_us' && reading.issuedIn ? `a retail code issued in ${reading.issuedIn}` : 'a retail code';
-  return `This is ${where}, not a U.S. drug code, so openFDA has no label for it. Open Food Facts, Open Products Facts and Open Beauty Facts have no entry for ${retail} either. Nothing else is shown in its place. In My Meds you can photograph the label, and its ingredients are read from the photo.`;
+  return `openFDA: not asked. This is ${where}, and openFDA holds only U.S. drug codes.`;
 }
 
 export function openFactsUnreachableMessage(): string {
-  return 'Could not reach Open Food Facts, so nothing was looked up for this code. Check the connection and try again.';
+  return 'None of the three databases could be reached, so nothing was looked up for this code. Check the connection and try again.';
 }

@@ -39,6 +39,8 @@ export type ToolMark =
   | 'myMeds.ingredient'
   | 'myMeds.saveSupplement'
   | 'myMeds.labelPhoto'
+  | 'myMeds.storeLabelHelp'
+  | 'myMeds.labelLibrary'
   | 'myMeds.label'
   | 'myMeds.tracking'
   | 'myMeds.details'
@@ -1069,6 +1071,19 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'A label in English or Spanish is read on the phone itself; the photo is not sent anywhere.',
     },
     {
+      key: 'supplementStorePicture',
+      title: "Fill a supplement from a store's picture of its label",
+      steps: [
+        { say: "Open the product on a store website or app, such as Amazon, Mercado Libre, Walmart, a pharmacy or the maker's site, and find the exact name and size printed on your bottle.", mark: 'myMeds.storeLabelHelp' },
+        { say: 'Go through its pictures to the nutrition table (Supplement Facts, or Información nutrimental on a Mexican label) and tap it so it opens full size. Save the ingredients list too if it is in another picture, since it names each form.', mark: 'myMeds.storeLabelHelp' },
+        { say: 'Save the picture: in a web browser, press and hold it and tap Download image. In a store app that will not save it, zoom until the table fills the screen, take a screenshot and crop it to the table.', mark: 'myMeds.storeLabelHelp' },
+        { say: 'Here, tap + Supplement and type its name.', mark: 'myMeds.supplement' },
+        { say: 'Tap Use a Photo You Have and pick the picture. Up to four pictures of one label can be picked together, such as the table and the ingredients list.', mark: 'myMeds.labelLibrary' },
+        { say: 'Check every row against the bottle you hold, since a store can show an older label or one sold in another country, then tap Add supplement.', mark: 'myMeds.saveSupplement' },
+      ],
+      forYou: "A store's picture is flat, sharp and evenly lit, so it reads better than a photo of a curved bottle. The picture is read on the phone and sent nowhere.",
+    },
+    {
       key: 'label',
       title: 'Look up the label of a medicine',
       steps: [
@@ -1082,7 +1097,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Look up a bottle bought outside the United States',
       steps: [
         { say: 'Tap Look up a label.', mark: 'myMeds.label' },
-        { say: 'Scan its barcode. A code that is not a U.S. drug code is looked up in Open Food Facts and its two sister databases, and what people there typed in from the package is shown.' },
+        { say: 'Scan its barcode. A code that is not a U.S. drug code is asked of Open Food Facts and its two sister databases. What each database said names every one with its answer, and the entry found shows what people there typed in from the package.' },
         { say: 'Tap Start a Supplement From This to open a new supplement with its name and amounts filled in, or pick which of your meds it is and tap Remember This Bottle.' },
       ],
       forYou: 'The next time you scan that bottle, the screen names the med it is.',

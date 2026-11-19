@@ -129,6 +129,8 @@ Everything that joins one person's copy to another copy, theirs or someone else'
 - A shared bottle: one count two partners take from, in Life > My Meds
 - A bottle bought outside the United States looked up in Open Food Facts, and a bottle remembered with its med, in Life > My Meds > Look up a label
 - A supplement filled in from a photo of its label, English or Spanish, in Life > My Meds
+- What each database said for a scanned code (openFDA, Open Food Facts, Open Products Facts, Open Beauty Facts), in Life > My Meds > Look up a label
+- Steps for saving a store's picture of a label and filling a supplement from up to four pictures, in Life > My Meds
 - Household seats, Guardian children, Caregiver (not built)
 - Sharing recipes and favourites as .is files, Connections
 - The desktop app

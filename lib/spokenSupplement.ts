@@ -389,9 +389,26 @@ export function ingredientForms(text: string): Record<string, string> {
  * ingredients paragraph, and a row's form from that paragraph when the
  * amounts gave it none.
  */
-export function readSupplementLabel(text: string): SpokenSupplementReading {
-  const reading = readSpokenSupplementLabel(labelTableOnly(text));
-  const forms = ingredientForms(text);
+export function readSupplementLabel(text: string | string[]): SpokenSupplementReading {
+  // Several pictures of one label (a store page often shows the table in
+  // one and the ingredients in another, Tony 2026-11-19): each is read on
+  // its own, a row the same in two pictures is kept once, and a form named
+  // in any picture fills the nutrient it names.
+  const pages = Array.isArray(text) ? text : [text];
+  const reading: SpokenSupplementReading = { rows: [], notUnderstood: [] };
+  const forms: Record<string, string> = {};
+  const seen = new Set<string>();
+  for (const page of pages) {
+    const one = readSpokenSupplementLabel(labelTableOnly(page));
+    for (const row of one.rows) {
+      const key = `${row.nutrientCode}|${row.amount}|${row.unit}`;
+      if (pages.length > 1 && seen.has(key)) continue;
+      seen.add(key);
+      reading.rows.push(row);
+    }
+    reading.notUnderstood.push(...one.notUnderstood);
+    for (const [code, form] of Object.entries(ingredientForms(page))) if (!forms[code]) forms[code] = form;
+  }
   return {
     ...reading,
     rows: reading.rows.map((row) => (row.formWords || !forms[row.nutrientCode] ? row : { ...row, formWords: forms[row.nutrientCode] })),

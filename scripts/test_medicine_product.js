@@ -87,5 +87,29 @@ check('only the code and the field list are sent', P.productUrl(P.PRODUCT_SOURCE
 check('the three databases are asked in order', P.PRODUCT_SOURCES.map((s) => s.source), ['Open Food Facts', 'Open Products Facts', 'Open Beauty Facts']);
 check('the retrieval line names the source and the code', P.productRetrievalStatement(p, '2026-11-18T12:00:00Z').startsWith('From Open Food Facts, retrieved November 18, 2026. Only the code 7501234567890 was sent.'), true);
 
+// Every database asked is named with what it said (Tony, 2026-11-19).
+const offHit = { status: 1, product: { product_name: 'Multivitamínico', ingredients_text: 'Vitamina C' } };
+const one = P.answerFromResponse(offHit, '7501008491966', 'Open Food Facts');
+check('a usable entry is found', [one.answer.outcome, one.answer.name, !!one.product], ['found', 'Multivitamínico', true]);
+check('an entry with nothing typed in is empty', P.answerFromResponse({ status: 1, product: {} }, 'x', 'Open Beauty Facts').answer.outcome, 'empty');
+check('status 0 is no entry', P.answerFromResponse({ status: 0 }, 'x', 'Open Products Facts').answer.outcome, 'not_found');
+const lookup = {
+  product: one.product,
+  answers: [
+    one.answer,
+    { source: 'Open Products Facts', outcome: 'not_found' },
+    { source: 'Open Beauty Facts', outcome: 'unreachable' },
+  ],
+};
+check('one line per database, in order', P.databaseAnswerLines(lookup, '7501008491966'), [
+  'Open Food Facts: found Multivitamínico. This is the entry shown.',
+  'Open Products Facts: no entry for 7501008491966.',
+  'Open Beauty Facts: could not be reached, so its answer is not known.',
+]);
+check('a second hit says it is not the one shown', P.databaseAnswerLines({ product: one.product, answers: [one.answer, { source: 'Open Beauty Facts', outcome: 'found', name: 'Multi' }] }, 'c')[1].includes('It is not the one shown'), true);
+check('an error names its status', P.databaseAnswerLines({ product: null, answers: [{ source: 'Open Food Facts', outcome: 'error', status: 503 }] }, 'c')[0].includes('status 503'), true);
+check('all unreachable reads as no answer', P.noDatabaseAnswered({ product: null, answers: [{ source: 'Open Food Facts', outcome: 'unreachable' }] }), true);
+check('one answer is enough to say something answered', P.noDatabaseAnswered(lookup), false);
+
 console.log(`${total - failures} of ${total} passed`);
 if (failures > 0) process.exit(1);
