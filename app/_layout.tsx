@@ -15,6 +15,7 @@ import { isDesktopApp } from '../lib/desktop/bridge';
 import { GuideEdgeSync, GuideRoomView, useGuideRoomPadding } from '../components/GuideRoom';
 import { KeyboardLiftProvider, KeyboardLiftReleaser, KeyboardLiftView } from '../components/KeyboardLift';
 import { DatabaseSetupScreen } from '../components/DatabaseSetupScreen';
+import { referenceUnpackProgress } from '../lib/referenceUnpackProgress';
 import { FirstLaunchAgreement } from '../components/FirstLaunchAgreement';
 import { FirstSetup } from '../components/FirstSetup';
 import { TestDataFiller } from '../components/TestDataFiller';
@@ -314,7 +315,14 @@ function UnlockedApp() {
       .catch((error) => console.error('getReferenceDatabase failed', error))
       .finally(markResolved);
 
-    const timeoutId = setTimeout(() => {
+    // While the food list is being unpacked (2026-11-19) the limit waits:
+    // the screen shows how far it has got, and the work is still moving.
+    let timeoutId: ReturnType<typeof setTimeout>;
+    const onTimeout = () => {
+      if (!settled && referenceUnpackProgress() !== null) {
+        timeoutId = setTimeout(onTimeout, REFERENCE_DB_STARTUP_TIMEOUT_MS);
+        return;
+      }
       if (!settled) {
         // 2026-08-28, direct on-device report: this timeout firing exactly
         // as designed (letting someone into the app while a slow reimport
@@ -331,7 +339,8 @@ function UnlockedApp() {
         );
         markResolved();
       }
-    }, REFERENCE_DB_STARTUP_TIMEOUT_MS);
+    };
+    timeoutId = setTimeout(onTimeout, REFERENCE_DB_STARTUP_TIMEOUT_MS);
 
     return () => clearTimeout(timeoutId);
   }, []);
@@ -360,7 +369,14 @@ function UnlockedApp() {
   useEffect(() => {
     let settled = false;
     const HARD_STARTUP_TIMEOUT_MS = REFERENCE_DB_STARTUP_TIMEOUT_MS + 60_000;
-    const timeoutId = setTimeout(() => {
+    // While the food list is being unpacked (2026-11-19) the limit waits:
+    // the screen shows how far it has got, and the work is still moving.
+    let timeoutId: ReturnType<typeof setTimeout>;
+    const onTimeout = () => {
+      if (!settled && referenceUnpackProgress() !== null) {
+        timeoutId = setTimeout(onTimeout, HARD_STARTUP_TIMEOUT_MS);
+        return;
+      }
       if (!settled) {
         // 2026-08-28: console.warn, not console.error -- see the sibling
         // timeout's own comment just above for why. Direct on-device
@@ -373,7 +389,8 @@ function UnlockedApp() {
         );
         setReferenceDbReady(true);
       }
-    }, HARD_STARTUP_TIMEOUT_MS);
+    };
+    timeoutId = setTimeout(onTimeout, HARD_STARTUP_TIMEOUT_MS);
     return () => {
       settled = true;
       clearTimeout(timeoutId);

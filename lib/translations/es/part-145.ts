@@ -208,5 +208,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Build the meal the same way, then tap The meal is done.": "Arma la comida de la misma forma, y luego toca La comida está lista.",
  "Build the meal, then tap The meal is done.": "Arma la comida, y luego toca La comida está lista.",
  "A change sent out today reaches you now, without closing the app and opening it again to find out. On a phone, a turquoise dot on the cloud means a new version has already downloaded and only needs the restart.": "Un cambio enviado hoy te llega ahora, sin tener que cerrar la app y volver a abrirla para enterarte. En un teléfono, un punto turquesa en la nube quiere decir que una versión nueva ya se descargó y solo falta reiniciar.",
- "An update is ready. Tap to restart the app and finish it": "Hay una actualización lista. Toca para reiniciar la app y terminarla"
+ "An update is ready. Tap to restart the app and finish it": "Hay una actualización lista. Toca para reiniciar la app y terminarla",
+ "Setting up the food list on this phone": "Preparando la lista de alimentos en este teléfono",
+ "Lifestead carries its list of more than 2,000 foods packed small, and is unpacking it now. This happens after installing, and again only when an update brings a new food list. It can take a minute or two, and the app opens by itself when it is done.": "Lifestead lleva su lista de más de 2,000 alimentos comprimida, y la está descomprimiendo ahora. Esto pasa después de instalar, y otra vez solo cuando una actualización trae una lista de alimentos nueva. Puede tardar uno o dos minutos, y la app se abre sola cuando termina."
 };

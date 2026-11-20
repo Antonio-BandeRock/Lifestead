@@ -82,6 +82,7 @@ unified-database/.cache/
 # and node scripts/backup_reference_dbs.js copies them to OneDrive; run
 # it whenever either one changes. Do not add either back to git.
 assets/data/foods_reference.db
+assets/data/foods_reference.db.gz
 unified-database/unified_foods.sqlite
 # The phase 5 candidate, rebuilt from both databases by
 # unified-database/pipeline/merge-candidate.js, so never kept.

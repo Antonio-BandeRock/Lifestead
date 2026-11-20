@@ -1,5 +1,7 @@
 import * as SQLite from 'expo-sqlite';
 import { File } from 'expo-file-system';
+import { Platform } from 'react-native';
+import { unpackReferenceDatabase } from './referenceDbUnpack';
 import type { EffortLevel } from './exertion';
 import { buildFoodRenames, FOOD_NAMES_MOVED_KEY, moveFoodNames, type ReferenceNameRow } from './foodNameRenames';
 import { REFERENCE_DB_VERSION } from './referenceDbVersion';
@@ -614,10 +616,16 @@ export async function getReferenceDatabase() {
       const alreadyImported = versionMatches && new File(referenceDbPath).exists;
 
       if (!alreadyImported) {
-        await SQLite.importDatabaseFromAssetAsync(REFERENCE_DB_NAME, {
-          assetId: require('../assets/data/foods_reference.db'),
-          forceOverwrite: true,
-        });
+        // A phone unpacks the packed copy the app carries (2026-11-19,
+        // lib/referenceDbUnpack.ts); the desktop copies the plain file its
+        // installer placed (lib/desktop/expoSqliteShim.ts).
+        if (Platform.OS === 'web') {
+          // No asset is named here, so the plain file never rides in the phone
+          // app; the desktop shim ignores assetId.
+          await SQLite.importDatabaseFromAssetAsync(REFERENCE_DB_NAME, { assetId: 0, forceOverwrite: true });
+        } else {
+          await unpackReferenceDatabase(require('../assets/data/foods_reference.db.gz'), referenceDbPath);
+        }
 
         const now = new Date().toISOString();
         await mainDb.runAsync(

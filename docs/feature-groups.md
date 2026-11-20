@@ -25,6 +25,7 @@ The draft line in `lib/paidFeatures.ts` (44 lenses, 6 parts inside screens, read
 What a person needs so the details of daily living stop living in their head. The second audience's group.
 
 - Home, its bands and Not Tried Yet
+- The food list carried packed on a phone, unpacked on first open with a screen that says what is happening
 - The header's update cloud, with a dot on a phone when a new version has downloaded and waits for a restart
 - Life > To Dos, Work, Upkeep, Routines, Did I Do It, Days Until, Kitchen, Look Back
 - Life > Grocery List (also Planning food for me)

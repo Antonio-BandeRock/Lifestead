@@ -4,6 +4,9 @@ const path = require('path');
 const config = getDefaultConfig(__dirname);
 
 config.resolver.assetExts.push('db');
+// The phone carries the food list packed (assets/data/foods_reference.db.gz,
+// 2026-11-19), made by scripts/compress_reference_db.js.
+config.resolver.assetExts.push('gz');
 
 // Tell Claude's Edit wording mode (1.0.51.12): this app's own files get
 // components/reactNativeWithEditableText.js when they import 'react-native',
@@ -109,7 +112,7 @@ if (process.env.LIFESTEAD_DESKTOP === '1') {
   const defaultResolveRequest = config.resolver.resolveRequest;
   config.resolver.resolveRequest = (context, moduleName, platform) => {
     if (platform === 'web') {
-      if (moduleName.endsWith('assets/data/foods_reference.db')) {
+      if (moduleName.endsWith('assets/data/foods_reference.db') || moduleName.endsWith('assets/data/foods_reference.db.gz')) {
         return { type: 'empty' };
       }
       const shim = shims[moduleName];

@@ -4,6 +4,7 @@ import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { ProgressRing } from './ProgressRing';
+import { useReferenceUnpackProgress } from '../lib/referenceUnpackProgress';
 
 // A real, one-time loading screen -- 2026-08-10, direct request after
 // confirming what a 30-60 second blank-looking Home page on first launch
@@ -61,6 +62,9 @@ export function DatabaseSetupScreen({
   onExitComplete: () => void;
 }) {
   const [percent, setPercent] = useState(0);
+  // Real progress while the food list is unpacked (2026-11-19); the
+  // estimate below covers every other open.
+  const unpacking = useReferenceUnpackProgress();
   const [phase, setPhase] = useState<'loading' | 'finished' | 'exiting'>('loading');
   const scale = useSharedValue(1);
   const opacity = useSharedValue(1);
@@ -119,11 +123,11 @@ export function DatabaseSetupScreen({
   return (
     <Animated.View style={[styles.container, animatedStyle]}>
       <ProgressRing
-        percent={percent}
+        percent={unpacking !== null && phase === 'loading' ? Math.min(99, unpacking * 100) : percent}
         color={colors.primary}
         size={104}
         strokeWidth={9}
-        label={phase === 'loading' ? `${Math.round(percent)}%` : 'Finished!'}
+        label={phase === 'loading' ? `${Math.round(unpacking !== null ? Math.min(99, unpacking * 100) : percent)}%` : 'Finished!'}
       />
       {/* A real, separate Text below the ring rather than ProgressRing's
           own sublabel slot -- 2026-08-10, direct report: that slot lives
@@ -139,7 +143,16 @@ export function DatabaseSetupScreen({
           instantly on every launch after the first), where "Loading
           Lifestead" reads correctly regardless of which launch this
           is. */}
-      <Text style={styles.message}>Loading Lifestead</Text>
+      {unpacking !== null && phase === 'loading' ? (
+        <>
+          <Text style={styles.message}>Setting up the food list on this phone</Text>
+          <Text style={styles.detail}>
+            Lifestead carries its list of more than 2,000 foods packed small, and is unpacking it now. This happens after installing, and again only when an update brings a new food list. It can take a minute or two, and the app opens by itself when it is done.
+          </Text>
+        </>
+      ) : (
+        <Text style={styles.message}>Loading Lifestead</Text>
+      )}
     </Animated.View>
   );
 }
@@ -190,6 +203,13 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     textAlign: 'center',
     marginTop: 20,
+    ...textShadow,
+  },
+  detail: {
+    ...typography.body,
+    color: colors.textSecondary,
+    textAlign: 'center',
+    marginTop: 12,
     ...textShadow,
   },
 });

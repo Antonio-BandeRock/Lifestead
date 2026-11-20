@@ -31,6 +31,9 @@ const FILES = [
 ];
 
 function main() {
+  // The phone app carries the food list packed (2026-11-19); pack it again
+  // whenever it changed, since this script runs after every change.
+  require('child_process').execFileSync(process.execPath, [path.join(__dirname, 'compress_reference_db.js')], { stdio: 'inherit' });
   if (!fs.existsSync(path.dirname(BACKUP_DIR))) {
     console.error(`Backup folder's parent is missing: ${path.dirname(BACKUP_DIR)}`);
     process.exit(1);
