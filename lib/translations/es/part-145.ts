@@ -206,5 +206,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Find the food, then say how much goes into the meal and tap Add to Meal.": "Busca el alimento, luego di cuánto va en la comida y toca Agregar a la comida.",
  "An apple or a glass of milk joins the meal with no recipe needed, and is kept so you can pick it again.": "Una manzana o un vaso de leche entra a la comida sin necesidad de receta, y se guarda para que puedas elegirlo otra vez.",
  "Build the meal the same way, then tap The meal is done.": "Arma la comida de la misma forma, y luego toca La comida está lista.",
- "Build the meal, then tap The meal is done.": "Arma la comida, y luego toca La comida está lista."
+ "Build the meal, then tap The meal is done.": "Arma la comida, y luego toca La comida está lista.",
+ "A change sent out today reaches you now, without closing the app and opening it again to find out. On a phone, a turquoise dot on the cloud means a new version has already downloaded and only needs the restart.": "Un cambio enviado hoy te llega ahora, sin tener que cerrar la app y volver a abrirla para enterarte. En un teléfono, un punto turquesa en la nube quiere decir que una versión nueva ya se descargó y solo falta reiniciar.",
+ "An update is ready. Tap to restart the app and finish it": "Hay una actualización lista. Toca para reiniciar la app y terminarla"
 };

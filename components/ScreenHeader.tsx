@@ -2,12 +2,14 @@ import { useIsFocused } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { useEffect, useRef } from 'react';
 import { registerHubSpot } from '../lib/hubHandoff';
-import { Image, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Image, Platform, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import * as Updates from 'expo-updates';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Text as SvgText } from 'react-native-svg';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../constants/colors';
 import { EDGE_SHADOW_HEIGHT, EdgeShadow } from './EdgeShadow';
+import { t } from '../lib/i18n';
 import { useWalkMark } from './WalkMark';
 
 // Check for Updates at the row's right end (1.0.74.9, direct request:
@@ -182,16 +184,16 @@ export function ScreenHeader() {
               </SvgText>
             </Svg>
           </Pressable>
-          <Pressable
-            ref={walkMark.ref('header.checkUpdates')}
-            accessibilityRole="button"
-            accessibilityLabel="Check for updates"
-            hitSlop={UPDATE_HIT_SLOP}
-            style={styles.updateButton}
-            onPress={() => openUpdatesRef.current()}
-          >
-            <Ionicons name="cloud-download-outline" size={UPDATE_ICON_SIZE} color={LOGO_FIGURE_WHITE} />
-          </Pressable>
+          {/* On a phone the dot shows once an update has downloaded and is
+              waiting for a restart (2026-11-19, Tony: "How do my testers
+              know when to update the app using the button in the top
+              right corner?"). The computer is updated by its installer, so
+              the desktop draws the plain button. */}
+          {Platform.OS === 'web' ? (
+            <UpdatesButton pressRef={walkMark.ref('header.checkUpdates')} onPress={() => openUpdatesRef.current()} pending={false} />
+          ) : (
+            <PhoneUpdatesButton pressRef={walkMark.ref('header.checkUpdates')} onPress={() => openUpdatesRef.current()} />
+          )}
         </View>
         {/* The bottom edge reads as a rounded counter edge curling toward the
             screen, 2026-08-21; see EdgeShadow.tsx. */}
@@ -200,6 +202,38 @@ export function ScreenHeader() {
     </View>
   );
 }
+
+type UpdatesButtonProps = {
+  pressRef: ReturnType<ReturnType<typeof useWalkMark>['ref']>;
+  onPress: () => void;
+};
+
+// Its own component so the expo-updates hook is only ever called on a phone.
+function PhoneUpdatesButton(props: UpdatesButtonProps) {
+  const { isUpdatePending } = Updates.useUpdates();
+  return <UpdatesButton {...props} pending={Updates.isEnabled && isUpdatePending} />;
+}
+
+function UpdatesButton({ pressRef, onPress, pending }: UpdatesButtonProps & { pending: boolean }) {
+  return (
+    <Pressable
+      ref={pressRef}
+      accessibilityRole="button"
+      accessibilityLabel={pending ? t('An update is ready. Tap to restart the app and finish it') : t('Check for updates')}
+      hitSlop={UPDATE_HIT_SLOP}
+      style={styles.updateButton}
+      onPress={onPress}
+    >
+      <Ionicons name="cloud-download-outline" size={UPDATE_ICON_SIZE} color={LOGO_FIGURE_WHITE} />
+      {pending ? <View style={styles.updateDot} /> : null}
+    </Pressable>
+  );
+}
+
+// The dot sits on the cloud's upper right shoulder. Turquoise, the app's
+// colour for tap this, ringed in the header's own dark so it reads as a
+// separate mark rather than part of the icon.
+const UPDATE_DOT_SIZE = 12;
 
 const styles = StyleSheet.create({
   // Previously each screen's own `styles.header` box (paddingTop: 12,
@@ -250,6 +284,17 @@ const styles = StyleSheet.create({
     marginRight: UPDATE_RIGHT_INSET,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  updateDot: {
+    position: 'absolute',
+    top: 6,
+    right: 4,
+    width: UPDATE_DOT_SIZE,
+    height: UPDATE_DOT_SIZE,
+    borderRadius: UPDATE_DOT_SIZE / 2,
+    backgroundColor: colors.primary,
+    borderWidth: 2,
+    borderColor: colors.background,
   },
   logo: {
     width: HEADER_LOGO_SIZE,
