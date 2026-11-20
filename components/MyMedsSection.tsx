@@ -12,6 +12,7 @@ import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeB
 import { TabBand } from './TabBand';
 import { PartnerBesideBand } from './PartnerBesideBand';
 import { RecallsBand } from './RecallsBand';
+import { DoseGroupsBand } from './DoseGroupsBand';
 import { PopoverSelect } from './PopoverSelect';
 import { WhyExplainer } from './WhyExplainer';
 import { RuleLabelQuote } from './RuleLabelQuote';
@@ -1728,6 +1729,8 @@ ${text}` : text));
           ) : null}
 
           <RecallsBand folds={folds} tabColor={tabColor} reloadKey={treatments.length} />
+
+          {!medsClosed ? <DoseGroupsBand folds={folds} tabColor={tabColor} reloadKey={treatments.length} /> : null}
 
           {medsClosed ? (
             <VaultClosedBand color={tabColor} categories={['medications']} />

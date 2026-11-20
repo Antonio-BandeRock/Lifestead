@@ -7,6 +7,8 @@ import { getCheckinReminderInputs } from './checkinReminderDb';
 import { seriesReminderBody, seriesReminderTitle } from './photoSeries';
 import { listSeriesReminderInputs } from './photoSeriesDb';
 import { addCompostEvent, listCompostPilesToTurn } from './compostDb';
+import { groupForDose, joinDoseIds, splitDoseIds, timeOfScheduled, type DoseGroup, type DoseGroupMember } from './doseGroups';
+import { listDoseGroupMembers, listDoseGroups } from './doseGroupsDb';
 import { getDatabase, getDailyNutrientAnalysis, listReminderCandidates, listScheduledMealsForDateRange, recordCheckin, scheduleAppointment, setScheduleItemStatus, type ReminderCandidate } from './db';
 import { withSessionGuardLifted } from './databaseActivity';
 import { getMovedWaterTarget } from './hydrationIndexDb';
@@ -392,6 +394,10 @@ type ReminderPayload = {
    *  for Levothyroxine"), so the line after a press can name it. Absent on
    *  anything queued before 1.0.53.10, which falls back to the title. */
   subject?: string;
+  /** A dose group (lib/doseGroups.ts): the group, so a tap opens its full
+   *  list, and scheduleItemId then holds every dose id, joined by commas. */
+  doseGroupId?: string;
+  doseGroupTime?: string;
   /** A planned workout (H11): the workout to open in the player and the
    *  day of the plan it is for, so finishing it marks that day done. */
   workoutId?: string;
@@ -435,6 +441,7 @@ type PlannedNotification = {
 
 // Which set of buttons a planned reminder carries.
 function categoryIdFor(planned: PlannedNotification): string {
+  if (planned.payload.doseGroupId) return REMINDER_CATEGORY_IDS.doseGroup;
   return REMINDER_CATEGORY_IDS[categoryKeyFor(planned.payload.kind, planned.markable ?? true)];
 }
 
@@ -795,6 +802,34 @@ function buildPlanned(candidate: TravelCandidate, now: Date, mealLine?: string |
       fireAt: scheduledFor.toISOString(),
       tab: 'schedule',
       lens: 'meds',
+    },
+  };
+}
+
+// One reminder for a dose group's doses due together (lib/doseGroups.ts).
+// Over the lock screen it says the group's name, how many, and when, and
+// never names an item; the tap opens the full list (app/dose-group.tsx).
+function buildDoseGroupPlanned(group: DoseGroup, day: string, doses: TravelCandidate[], now: Date): PlannedNotification | null {
+  const scheduledFor = parseLocalDateTime(`${day}T${group.timeOfDay}`);
+  if (!scheduledFor || doses.length === 0) return null;
+  const due = formatTime12(group.timeOfDay);
+  const count = doses.length;
+  const lead = count === 1 ? t('1 item, due {time}. Tap for the list.', { time: t(due) }) : t('{count} items, due {time}. Tap for the list.', { count, time: t(due) });
+  return {
+    identifier: `${IDENTIFIER_PREFIX}doseGroup:${group.id}:${day}`,
+    title: group.name,
+    body: [lead, answerLine('doseGroup'), `Schedule as of ${describeFreshness(now, scheduledFor)}.`].filter(Boolean).join(' '),
+    fireAt: scheduledFor,
+    payload: {
+      kind: 'dose',
+      subject: group.name,
+      scheduleItemId: joinDoseIds(doses.map((dose) => dose.id)),
+      fireAt: scheduledFor.toISOString(),
+      tab: 'schedule',
+      lens: 'meds',
+      doseGroupId: group.id,
+      doseGroupTime: group.timeOfDay,
+      onDate: day,
     },
   };
 }
@@ -1858,7 +1893,7 @@ function buildNudges(
     nudges.push({
       identifier: `${planned.identifier}#nudge${index + 1}`,
       title: planned.title,
-      body: [`Still not marked.`, answerLine(planned.payload.kind), `Schedule as of ${describeFreshness(now, fireAt)}.`].filter(Boolean).join(' '),
+      body: [`Still not marked.`, answerLine(planned.payload.doseGroupId ? 'doseGroup' : planned.payload.kind), `Schedule as of ${describeFreshness(now, fireAt)}.`].filter(Boolean).join(' '),
       fireAt,
       payload: { ...planned.payload, fireAt: fireAt.toISOString() },
     });
@@ -2173,7 +2208,42 @@ async function runSync(): Promise<ReminderSyncResult> {
   const first = new Map<string, PlannedNotification>();
   const followUps = new Map<string, PlannedNotification>();
 
+  // Dose groups (lib/doseGroups.ts, 1.0.95.6): every dose of a group's meds
+  // due at the group's time on one day becomes one reminder, named for the
+  // group and naming no item over the lock screen. A failed read leaves
+  // every dose with a reminder of its own rather than none.
+  let doseGroups: DoseGroup[] = [];
+  let doseGroupMembers: DoseGroupMember[] = [];
+  if (isReminderKindEnabled(preferences, 'dose')) {
+    try {
+      [doseGroups, doseGroupMembers] = await Promise.all([listDoseGroups(), listDoseGroupMembers()]);
+    } catch (error) {
+      console.warn('[reminderNotifications] could not read dose groups', error);
+    }
+  }
+  const grouped = new Map<string, { group: DoseGroup; day: string; doses: TravelCandidate[] }>();
   for (const candidate of candidates) {
+    if (reminderKindFor(candidate) !== 'dose' || candidate.homeClock) continue;
+    const group = groupForDose(candidate.linkedTreatmentId ?? null, timeOfScheduled(candidate.scheduledFor), doseGroups, doseGroupMembers);
+    if (!group) continue;
+    const day = candidate.scheduledFor.slice(0, 10);
+    const key = `${group.id}:${day}`;
+    const bucket = grouped.get(key) ?? { group, day, doses: [] };
+    bucket.doses.push(candidate);
+    grouped.set(key, bucket);
+  }
+  const inAGroup = new Set<string>();
+  for (const bucket of grouped.values()) {
+    const planned = buildDoseGroupPlanned(bucket.group, bucket.day, bucket.doses, now);
+    if (!planned) continue;
+    bucket.doses.forEach((dose) => inAGroup.add(dose.id));
+    if (planned.fireAt.getTime() > now.getTime()) first.set(planned.identifier, planned);
+    const keep = bucket.doses.map((dose) => dose.keepRemindingMinutes).find((minutes) => minutes != null) ?? null;
+    for (const nudge of buildNudges(planned, now, keep, nudging)) followUps.set(nudge.identifier, nudge);
+  }
+
+  for (const candidate of candidates) {
+    if (inAGroup.has(candidate.id)) continue;
     if (!isReminderKindEnabled(preferences, reminderKindFor(candidate))) continue;
     if (candidate.itemType === 'appointment' && leftToCalendar(candidate.linkedCalendarEventId ?? null, calendarAlarms)) continue;
     const planned = buildPlanned(candidate, now, doseMealLines.get(candidate.id));
@@ -2559,7 +2629,8 @@ export type ReminderTapTarget =
   | { pathname: '/profile'; params: { section: 'updates'; install: '1' } }
   | { pathname: '/'; params: { openHomeSection: 'yourWeek' } }
   | { pathname: '/food'; params: { openFoodLens: 'myFoodProducts' } }
-  | { pathname: '/photo-camera'; params: { ownerKind: string; ownerId: string; guide: '1'; title: string } };
+  | { pathname: '/photo-camera'; params: { ownerKind: string; ownerId: string; guide: '1'; title: string } }
+  | { pathname: '/dose-group'; params: { id: string; on: string } };
 
 const SCHEDULE_LENSES: ScheduleLens[] = ['meds', 'appointments', 'meals', 'todaysMeals', 'hydration', 'exercise'];
 // The dated lenses that live on Life. 'compost' is a dated lens too and is
@@ -2621,6 +2692,11 @@ export function resolveReminderTap(response: Notifications.NotificationResponse 
   const data = request.content.data as Partial<ReminderPayload> | undefined;
 
   if (data?.tab === 'reconcile') return { pathname: '/reconcile' };
+  // A dose group opens its full list: what is taken, how much, and what the
+  // interaction rules say about taking them together.
+  if (typeof data?.doseGroupId === 'string' && data.doseGroupId) {
+    return { pathname: '/dose-group', params: { id: data.doseGroupId, on: typeof data.onDate === 'string' ? data.onDate : '' } };
+  }
   // The morning check-in opens the one-question-at-a-time check-in, which
   // starts on how somebody slept; one queued before 1.0.58.1 says 'home'.
   if (data?.tab === 'checkinFlow' || data?.kind === 'morning') return { pathname: '/daily-checkin' };
@@ -3288,7 +3364,8 @@ async function recordAnswer(
   }
   if (!id) return;
   if (plan.write === 'scheduleStatus') {
-    await setScheduleItemStatus(id, plan.status);
+    // A dose group's reminder carries every dose it stands for.
+    for (const one of splitDoseIds(id)) await setScheduleItemStatus(one, plan.status);
     return;
   }
   if (plan.write === 'checkMarked') {

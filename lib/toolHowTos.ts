@@ -48,6 +48,7 @@ export type ToolMark =
   | 'myMeds.schedule'
   | 'myMeds.remove'
   | 'myMeds.drugChecker'
+  | 'myMeds.takenTogether'
   | 'emergency.pickContact'
   | 'emergency.savePerson'
   | 'emergency.call'
@@ -1044,6 +1045,17 @@ function reportHowTos(o: { name: string; holds: string; rangeNote?: string; more
 
 export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
   '/life#myMeds': [
+    {
+      key: 'takenTogether',
+      title: 'Give meds taken at the same time one reminder',
+      steps: [
+        { say: 'Set a time for each med or supplement under its schedule. When two or more share a time, Taken together offers to make them one group.', mark: 'myMeds.takenTogether' },
+        { say: 'Change the name if you like, then tap Make the group. Tap No thanks and that time is not offered again.' },
+        { say: 'Tap a group to open its list: each item with how much to take, what to take it with, and anything the interaction rules know about taking them at the same time.' },
+        { say: 'When a supplement or an OTC item would do better at another time, the list says why and offers a button that moves it there. A prescription is left for you and your pharmacist or prescriber.' },
+      ],
+      forYou: 'One notification for the whole group, answered on the locked phone with Took them all, and one list that says what to take and how.',
+    },
     {
       key: 'otc',
       title: 'Add a medicine bought without a prescription',

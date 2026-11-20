@@ -81,6 +81,7 @@ export type ReminderActionId =
   | 'snooze'
   | 'gotIt'
   | 'taken'
+  | 'tookAll'
   | 'drank'
   | 'ate'
   | 'done'
@@ -131,6 +132,7 @@ export type ReminderActionId =
 export type ReminderCategoryKey =
   | 'plain'
   | 'dose'
+  | 'doseGroup'
   | 'hydration'
   | 'meal'
   | 'task'
@@ -158,6 +160,9 @@ export type ReminderCategoryKey =
 export const REMINDER_CATEGORY_IDS: Record<ReminderCategoryKey, string> = {
   plain: 'inside-story-reminder',
   dose: 'inside-story-reminder-dose',
+  // A dose group (lib/doseGroups.ts): one reminder for every med due at
+  // the group's time, 1.0.95.6.
+  doseGroup: 'inside-story-reminder-dose-group',
   hydration: 'inside-story-reminder-drink',
   meal: 'inside-story-reminder-meal',
   task: 'inside-story-reminder-task',
@@ -217,6 +222,8 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
       return 'Got it';
     case 'taken':
       return 'Taken';
+    case 'tookAll':
+      return 'Took them all';
     case 'drank':
       return 'Drank it';
     case 'ate':
@@ -319,6 +326,7 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
 export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> = {
   plain: ['gotIt', 'snooze'],
   dose: ['taken', 'snooze'],
+  doseGroup: ['tookAll', 'snooze'],
   hydration: ['drank', 'snooze'],
   meal: ['ate', 'snooze'],
   task: ['done', 'snooze'],
@@ -368,6 +376,8 @@ export function categoryKeyFor(kind: string, markable = true): ReminderCategoryK
   switch (kind) {
     case 'dose':
       return 'dose';
+    case 'doseGroup':
+      return 'doseGroup';
     case 'hydration':
       return 'hydration';
     case 'meal':
@@ -548,6 +558,9 @@ export function planReminderAction(kind: string, action: string): ReminderAction
     return action.startsWith('slept') ? { write: 'sleepQuality', value: morningValue } : { write: 'morningEnergy', value: morningValue };
   }
   if (action === 'taken' && kind === 'dose') return { write: 'scheduleStatus', status: 'logged' };
+  // A dose group's reminder is a dose reminder carrying every dose due at
+  // the group's time; the press marks each of them.
+  if (action === 'tookAll' && (kind === 'dose' || kind === 'doseGroup')) return { write: 'scheduleStatus', status: 'logged' };
   if (action === 'drank' && kind === 'hydration') return { write: 'scheduleStatus', status: 'logged' };
   if (action === 'ate' && kind === 'meal') return { write: 'scheduleStatus', status: 'logged' };
   if (action === 'done' && (kind === 'garden' || kind === 'reminder')) return { write: 'scheduleStatus', status: 'completed' };
@@ -574,6 +587,8 @@ export function answerLine(kind: string, markable = true): string | null {
   switch (categoryKeyFor(kind, markable)) {
     case 'dose':
       return 'Taken marks it taken on Meds.';
+    case 'doseGroup':
+      return 'Took them all marks every one taken on Meds.';
     case 'hydration':
       return 'Drank it marks it on Hydration.';
     case 'meal':

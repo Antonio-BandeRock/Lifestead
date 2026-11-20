@@ -1067,6 +1067,19 @@ function RootStack() {
           headerTintColor: colors.textPrimary,
         }}
       />
+      {/* One dose group, 2026-11-20: where a group's reminder lands,
+          every med in it with its amount, timing notes and what the
+          interaction rules say about taking them together. Titled
+          with the group's name once it loads. */}
+      <Stack.Screen
+        name="dose-group"
+        options={{
+          headerShown: true,
+          title: 'Dose group',
+          headerStyle: { backgroundColor: colors.background },
+          headerTintColor: colors.textPrimary,
+        }}
+      />
       {/* Walking a routine, 2026-09-17. A Stack screen rather
           than part of the Life lens that builds routines,
           because the two are opposite jobs: building one wants

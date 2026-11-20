@@ -9266,6 +9266,30 @@ async function runDatabaseInitialization() {
         FOREIGN KEY (treatment_id) REFERENCES treatments(id) ON DELETE CASCADE
       );
 
+      -- Dose groups, 1.0.95.6 (Tony, 2026-11-20): meds and supplements taken
+      -- at the same time, named by the person ("Morning pills"), with one
+      -- reminder for all of them. A dose belongs to a group when its med is
+      -- a member and its time of day is the group's (lib/doseGroups.ts), so
+      -- a twice-daily med joins only at the matching time. A group is
+      -- retired, never deleted, and a member that leaves is retired too.
+      CREATE TABLE IF NOT EXISTS dose_groups (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        time_of_day TEXT NOT NULL,
+        retired_at TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+      CREATE TABLE IF NOT EXISTS dose_group_members (
+        id TEXT PRIMARY KEY,
+        group_id TEXT NOT NULL,
+        treatment_id TEXT NOT NULL,
+        added_at TEXT NOT NULL,
+        retired_at TEXT,
+        updated_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_dose_group_members_group ON dose_group_members(group_id);
+
       -- A16, a linked person sees when a dose is not marked. The yes given
       -- on this phone for sending doses to one connection: 'self' when the
       -- person this phone belongs to agreed, 'attested' when somebody acting
@@ -19017,6 +19041,9 @@ export type ReminderCandidate = {
   // Only a reminder somebody set carries one; null everywhere else.
   keepRemindingMinutes: number | null;
   doseUnit: string | null;
+  // The med a dose belongs to, so a dose group (lib/doseGroupsDb.ts) can
+  // gather its members' doses into one reminder. Null on anything else.
+  linkedTreatmentId: string | null;
   // A2: which step of a taper the dose's day falls in, and how many steps
   // there are. Zero and null outside a taper.
   taperStepNumber: number | null;
@@ -19049,7 +19076,8 @@ export async function listReminderCandidates(fromLocalDateTime: string, toDate: 
         t.units_per_day AS unitsPerDay, t.serving_unit_label AS servingUnitLabel,
         s.keep_reminding_minutes AS keepRemindingMinutes,
         (SELECT tm.mode FROM treatment_time_mode tm WHERE tm.treatment_id = t.id) AS travelMode,
-        s.linked_device_calendar_event_id AS linkedCalendarEventId
+        s.linked_device_calendar_event_id AS linkedCalendarEventId,
+        s.linked_treatment_id AS linkedTreatmentId
       FROM schedule_items s
       LEFT JOIN treatments t ON t.id = s.linked_treatment_id
       WHERE s.status = 'planned'

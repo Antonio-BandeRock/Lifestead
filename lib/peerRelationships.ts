@@ -222,6 +222,8 @@ export const PEER_AREAS: readonly PeerArea[] = [
     tables: [
       { table: 'treatments', keepsHome: [] },
       { table: 'treatment_nutrients', keepsHome: [] },
+      { table: 'dose_groups', keepsHome: [] },
+      { table: 'dose_group_members', keepsHome: [] },
     ],
     ready: false,
     waitingOn: 'somewhere to keep another person’s medicines, apart from your own.',
@@ -268,6 +270,8 @@ export const PERSONAL_HEALTH_TABLES: readonly string[] = [
   'user_conditions',
   'personal_rules',
   'treatments',
+  'dose_groups',
+  'dose_group_members',
   'treatment_nutrients',
   'meals',
   'meal_items',
