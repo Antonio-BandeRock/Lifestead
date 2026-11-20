@@ -48,7 +48,9 @@ import { restartApp } from "../lib/restartApp";
 import { wording } from "../lib/playfulCopy";
 import { usePlayfulWording } from "../hooks/usePlayfulWording";
 import { appLocale } from '@/lib/language';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { keepVaultCodeSeparate, setVaultOwnCode, switchVaultToAppLockCode } from "../lib/vaultSession";
+import { chosenVaultCategories, getVaultSettings } from "../lib/vaultState";
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Mode = "setup" | "passcode" | "recovery" | "biometric" | "off";
 
@@ -117,6 +119,13 @@ export default function AppLockSetupScreen() {
   const chosen = useRef<{ passcode: string; kind: PasscodeKind } | null>(null);
   const heldKey = useRef<Uint8Array | null>(null);
   const savedCopy = useRef<File | null>(null);
+  // Whether the vault opens with this same code or a separate one, asked on
+  // the last step when the vault has records in it (Tony, 2026-11-19).
+  const vaultHasRecords = mode === "setup" && chosenVaultCategories().length > 0;
+  const vaultHadCode = getVaultSettings().code !== null;
+  const [vaultSeparate, setVaultSeparate] = useState(vaultHadCode);
+  const separateCode = useRef<{ passcode: string; kind: PasscodeKind } | null>(null);
+  const [separateChosen, setSeparateChosen] = useState(false);
 
   useEffect(() => {
     void canUseBiometrics().then(setBiometricAvailable);
@@ -208,15 +217,29 @@ export default function AppLockSetupScreen() {
 
   async function turnOn() {
     if (!chosen.current || !recovery) return;
+    const wantsNewVaultCode = vaultHasRecords && vaultSeparate && !vaultHadCode;
+    if (wantsNewVaultCode && !separateCode.current) {
+      explainNotYet("Choose the separate vault code first, or choose the same code for both.");
+      return;
+    }
     setStep("working");
     setProblem(null);
     try {
+      if (vaultHasRecords && vaultSeparate) {
+        if (separateCode.current) {
+          const wantsFingerprint = !isDesktopApp() && (await canUseBiometrics());
+          await setVaultOwnCode(separateCode.current.passcode, separateCode.current.kind, wantsFingerprint, true);
+        } else keepVaultCodeSeparate();
+      }
       await turnOnAppLock({
         passcode: chosen.current.passcode,
         passcodeKind: chosen.current.kind,
         biometric: useBiometric,
         recovery: recovery.bytes,
       });
+      // Taken away only once App Lock is on, so the vault is never left with
+      // nothing to open it if turning on fails.
+      if (vaultHasRecords && !vaultSeparate && vaultHadCode) await switchVaultToAppLockCode();
       await restartApp();
     } catch (error) {
       console.error("[appLockSetup] turning on failed", error);
@@ -478,11 +501,57 @@ export default function AppLockSetupScreen() {
         />
         <Text style={styles.title}>Ready to lock</Text>
         <Text style={styles.text}>{wording("appLockNoReset", playful)}</Text>
+        {vaultHasRecords ? (
+          <>
+            <Text style={styles.title}>What opens the vault</Text>
+            <Text style={styles.text}>
+              The records you put in the vault stay closed while the app is
+              open. They can open with this same code, or with a separate one,
+              so someone who knows the App Lock code still cannot see them.
+            </Text>
+            <View style={styles.choiceRow}>
+              {[false, true].map((own) => (
+                <TouchableOpacity
+                  key={String(own)}
+                  style={[styles.choice, vaultSeparate === own ? styles.choiceOn : null]}
+                  activeOpacity={0.85}
+                  onPress={() => setVaultSeparate(own)}
+                >
+                  <Text style={[styles.choiceText, vaultSeparate === own ? styles.choiceOnText : null]}>
+                    {own ? (vaultHadCode ? "Keep the vault code" : "A separate code") : "The same code"}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            {vaultSeparate && !vaultHadCode ? (
+              separateChosen ? (
+                <Text style={styles.text}>The separate vault code is chosen.</Text>
+              ) : (
+                <ChoosePasscode
+                  title="Choose the vault code"
+                  intro="This code opens the vault and nothing else. Make it different from your App Lock code."
+                  onChosen={(passcode, kind) => {
+                    if (chosen.current && passcode === chosen.current.passcode) {
+                      explainNotYet("That is your App Lock code. Choose a different one, or choose the same code for both.");
+                      return;
+                    }
+                    separateCode.current = { passcode, kind };
+                    setSeparateChosen(true);
+                  }}
+                />
+              )
+            ) : null}
+          </>
+        ) : null}
         <Text style={styles.text}>
           The app restarts now and locks your records. Keep it open until that
           finishes.
         </Text>
-        <PrimaryButton label="Turn On App Lock" onPress={turnOn} />
+        <PrimaryButton
+          label="Turn On App Lock"
+          onPress={turnOn}
+          dimmed={vaultHasRecords && vaultSeparate && !vaultHadCode && !separateChosen}
+        />
       </View>
     );
   } else if (step === "working") {
@@ -552,6 +621,11 @@ function SecondaryButton({
 }
 
 const styles = StyleSheet.create({
+  choiceRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, justifyContent: "center" },
+  choice: { ...PILL },
+  choiceOn: { ...PILL_ON },
+  choiceText: { ...PILL_TEXT },
+  choiceOnText: { ...PILL_ON_TEXT },
   screen: { flex: 1, backgroundColor: colors.background },
   body: {
     flexGrow: 1,

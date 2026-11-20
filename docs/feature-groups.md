@@ -138,3 +138,4 @@ Everything that joins one person's copy to another copy, theirs or someone else'
 ## Privacy
 
 - App Lock, the vault (decision U4 keeps both outside any paywall; listed here so the end decision sees them)
+- How Lifestead is protected: the four choices of App Lock and the vault, and a separate vault code beside App Lock (safety, so always Free like the two it joins)

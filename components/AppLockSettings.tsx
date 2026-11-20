@@ -14,6 +14,7 @@ import {
 import { biometricTitle, biometricWords, deviceWord } from '../lib/appLockWords';
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
+import { ProtectionChoices } from './ProtectionChoices';
 import { VaultChoices } from './VaultChoices';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
@@ -40,6 +41,8 @@ export function AppLockSettings() {
   if (!state) {
     return (
       <>
+        <ProtectionChoices appLockOn={false} />
+        <Text style={styles.subLabel}>App Lock</Text>
         <Text style={styles.help}>
           {`Keeps everything you have recorded in an encrypted file on this ${deviceWord()} that opens only with your passcode, or ${
             isDesktopApp() ? 'Windows Hello where this computer has it set up' : 'your fingerprint or face'
@@ -64,6 +67,8 @@ export function AppLockSettings() {
 
   return (
     <>
+      <ProtectionChoices appLockOn />
+      <Text style={styles.subLabel}>App Lock</Text>
       <Text style={styles.help}>
         {`App Lock is on. Your records are encrypted on this ${deviceWord()} and open with your passcode${
           state.biometric ? (isDesktopApp() ? ' or Windows Hello' : ' or your fingerprint or face') : ''

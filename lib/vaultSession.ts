@@ -4,10 +4,11 @@
 // importing any of this.
 //
 // What opens it: with App Lock on, the App Lock code or fingerprint (the
-// agreed default, one code for both). With App Lock off, a code of the
-// vault's own, set in Profile > App Lock > The Vault or at setup. That code
-// guards the screen and not the file, since without App Lock the database
-// is not encrypted, and the vault settings say so in words.
+// default, one code for both), or a separate vault code when the person
+// chose one (2026-11-19). With App Lock off, the vault's own code, set in
+// Profile > App Lock or at setup. That code guards the screen and not the
+// file, since without App Lock the database is not encrypted, and the vault
+// settings say so in words.
 
 import { useEffect, useState } from 'react';
 import { AppState } from 'react-native';
@@ -34,6 +35,7 @@ import {
   chosenVaultCategories,
   currentVaultKey,
   getVaultSettings,
+  isAppLockOnForVault,
   isVaultOn,
   isVaultOpen,
   saveVaultSettings,
@@ -152,8 +154,16 @@ export function setVaultCategories(categories: readonly VaultCategory[]): { guar
   return { guarded: currentVaultKey() !== 'none' };
 }
 
-/** Sets the vault's own code, replacing any earlier one. Used while App Lock is off. */
-export async function setVaultOwnCode(passcode: string, kind: PasscodeKind, biometric: boolean): Promise<{ biometric: boolean }> {
+/**
+ * Sets the vault's own code, replacing any earlier one. With App Lock on it
+ * becomes the separate vault code; with App Lock off it is the only code.
+ */
+export async function setVaultOwnCode(
+  passcode: string,
+  kind: PasscodeKind,
+  biometric: boolean,
+  separate?: boolean,
+): Promise<{ biometric: boolean }> {
   const salt = await randomBytes(KDF_SALT_BYTES);
   const kdf = { ...DEFAULT_KDF, salt: bytesToBase64Fast(salt) };
   const check = await randomBytes(DATA_KEY_BYTES);
@@ -164,6 +174,7 @@ export async function setVaultOwnCode(passcode: string, kind: PasscodeKind, biom
   saveVaultSettings({
     ...settings,
     code: { kind, kdf, check: wrapped, failedTries: 0, lastFailedAt: 0 },
+    separateCode: separate ?? (settings.separateCode || isAppLockOnForVault()),
     biometric: keptFingerprint,
     setupAsked: true,
   });
@@ -189,7 +200,7 @@ async function keepVaultFingerprint(): Promise<boolean> {
 /** Takes the vault's own code away. With App Lock off, nothing then opens the vault, so nothing is closed. */
 export async function removeVaultOwnCode(): Promise<void> {
   const settings = getVaultSettings();
-  saveVaultSettings({ ...settings, code: null, biometric: false });
+  saveVaultSettings({ ...settings, code: null, separateCode: false, biometric: false });
   setVaultOpen(false);
   try {
     const SecureStore = await import('expo-secure-store');
@@ -197,6 +208,21 @@ export async function removeVaultOwnCode(): Promise<void> {
   } catch {
     // Nothing kept.
   }
+}
+
+/**
+ * With App Lock on, the vault opens with the App Lock code again and its
+ * separate code is taken away. Refused while the vault is closed, by the
+ * caller, since it changes what opens the records.
+ */
+export async function switchVaultToAppLockCode(): Promise<void> {
+  await removeVaultOwnCode();
+}
+
+/** Keeps the vault code it already has as a separate code once App Lock is on (setup's last step). */
+export function keepVaultCodeSeparate(): void {
+  const settings = getVaultSettings();
+  if (settings.code && !settings.separateCode) saveVaultSettings({ ...settings, separateCode: true });
 }
 
 /** The setup question was answered Not Now: nothing goes in, and the occasional offer takes over. */

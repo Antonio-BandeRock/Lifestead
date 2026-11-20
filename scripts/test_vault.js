@@ -300,6 +300,28 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
   check('a settings file of another version reads as none', V.parseVaultSettings(JSON.stringify({ ...withCode, version: 2 })) === null);
   check('a damaged code is dropped', V.parseVaultSettings(JSON.stringify({ ...withCode, code: { kind: 'digits' } })).code === null);
 
+  // The four protection choices (Tony, 2026-11-19), and the separate code.
+  const separate = { ...withCode, separateCode: true };
+  check('a separate code opens the vault with App Lock on', V.vaultKey(true, separate) === 'own-code');
+  check('a separate code with no code set falls back to App Lock', V.vaultKey(true, { ...separate, code: null }) === 'app-lock');
+  check('the separate choice survives a round trip', V.parseVaultSettings(V.serializeVaultSettings(separate)).separateCode === true);
+  check('an older file reads as the same code', V.parseVaultSettings(JSON.stringify({ ...withCode, separateCode: undefined })).separateCode === false);
+  const noRecords = { ...withCode, categories: [] };
+  const bare = { ...V.EMPTY_VAULT_SETTINGS, categories: [] };
+  check('lock on, vault guarding is both', V.protectionChoice(true, withCode) === 'both');
+  check('lock on, vault empty is the app only', V.protectionChoice(true, noRecords) === 'app');
+  check('lock off, vault with a code is records only', V.protectionChoice(false, withCode) === 'records');
+  check('lock off, vault with no code is no lock', V.protectionChoice(false, { ...withCode, code: null }) === 'none');
+  check('the four choices are labelled', V.PROTECTION_CHOICES.every((c) => V.PROTECTION_LABELS[c] && V.PROTECTION_NOTES[c]));
+  check('no lock to both picks records and turns App Lock on', same(V.protectionSteps(false, bare, 'both'), ['chooseRecords', 'turnOnAppLock']));
+  check('no lock to records picks records and asks for a code', same(V.protectionSteps(false, bare, 'records'), ['chooseRecords', 'chooseVaultCode']));
+  check('both to records asks for a code before App Lock goes', same(V.protectionSteps(true, { ...withCode, code: null }, 'records'), ['chooseVaultCode', 'turnOffAppLock']));
+  check('both to records with a separate code only turns App Lock off', same(V.protectionSteps(true, separate, 'records'), ['turnOffAppLock']));
+  check('both to the app only empties the vault', same(V.protectionSteps(true, withCode, 'app'), ['emptyVault']));
+  check('records to no lock empties the vault', same(V.protectionSteps(false, withCode, 'none'), ['emptyVault']));
+  check('both to no lock empties the vault before App Lock goes', same(V.protectionSteps(true, withCode, 'none'), ['emptyVault', 'turnOffAppLock']));
+  check('the choice already in place takes no steps', V.protectionSteps(true, withCode, 'both').length === 0);
+
   setLock(null);
   setVaultFile(withCode);
   S.refreshVault();

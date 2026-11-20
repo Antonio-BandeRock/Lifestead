@@ -87,7 +87,7 @@ export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {
       <Text style={styles.subLabel}>The Vault</Text>
       <Text style={styles.help}>
         {`What you tick here stays closed while the app is open, until ${
-          appLockOn ? 'your App Lock code' : ownCode ? 'the vault code' : 'a code'
+          ownCode ? 'the vault code' : appLockOn ? 'your App Lock code' : 'a code'
         } or fingerprint opens it, so somebody handed this ${deviceWord()} to look at the shopping list does not see your labs. It closes again whenever the app is put away. Only your records go in: lists to choose from, forms and settings stay usable, and the emergency card and safety warnings are never in it.`}
       </Text>
 
@@ -136,12 +136,16 @@ export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {
         </View>
       ) : null}
 
-      {!appLockOn ? (
+      {!appLockOn || ownCode || choosingCode ? (
         choosingCode ? (
           <View style={styles.askBox}>
             <ChoosePasscode
               title={ownCode ? 'Choose a new vault code' : 'Choose a vault code'}
-              intro="This code opens the vault and nothing else. Without App Lock your records are not encrypted on this device, so the vault keeps them off the screen rather than locking the file."
+              intro={
+                appLockOn
+                  ? 'This code opens the vault and nothing else. Lifestead still asks for the App Lock code when it opens.'
+                  : 'This code opens the vault and nothing else. Without App Lock your records are not encrypted on this device, so the vault keeps them off the screen rather than locking the file.'
+              }
               busy={busy}
               onChosen={(passcode, kind) => void chooseOwnCode(passcode, kind)}
             />
@@ -152,8 +156,9 @@ export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {
         ) : ownCode ? (
           <>
             <Text style={styles.caption}>
-              The vault has a code of its own. It keeps these records off the screen; App Lock is what encrypts the file
-              itself.
+              {appLockOn
+                ? 'The vault has a code of its own, separate from your App Lock code.'
+                : 'The vault has a code of its own. It keeps these records off the screen; App Lock is what encrypts the file itself.'}
             </Text>
             <TouchableOpacity
               style={styles.button}
@@ -177,7 +182,11 @@ export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {
                   return;
                 }
                 void removeVaultOwnCode().then(() => {
-                  setCodeNote('The vault code is gone, so nothing closes the vault until a code is set again.');
+                  setCodeNote(
+                    appLockOn
+                      ? 'The vault code is gone, so your App Lock code opens the vault again.'
+                      : 'The vault code is gone, so nothing closes the vault until a code is set again.',
+                  );
                 });
               }}
             >

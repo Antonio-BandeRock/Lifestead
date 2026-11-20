@@ -361,8 +361,13 @@ export type VaultSettings = {
   version: 1;
   /** What is in the vault. Empty means nothing is. */
   categories: VaultCategory[];
-  /** The vault's own code, used only while App Lock is off. */
+  /** The vault's own code: used while App Lock is off, and with App Lock on
+   *  when separateCode is set. */
   code: VaultCode | null;
+  /** With App Lock on, the vault opens with its own code rather than the
+   *  App Lock code (Tony, 2026-11-19: "App lock being another code should be
+   *  a choice for the user"). Only counts while code is set. */
+  separateCode: boolean;
   /** Whether a fingerprint may open it in place of its own code. */
   biometric: boolean;
   /** When the offer to set the vault up was last made, in milliseconds, or 0. */
@@ -383,6 +388,7 @@ export const EMPTY_VAULT_SETTINGS: VaultSettings = {
   version: 1,
   categories: [],
   code: null,
+  separateCode: false,
   biometric: false,
   offeredAt: 0,
   stopOffering: false,
@@ -428,6 +434,7 @@ export function parseVaultSettings(text: string | null): VaultSettings | null {
     version: 1,
     categories: cleanCategories(Array.isArray(r.categories) ? r.categories : []),
     code: cleanCode(r.code),
+    separateCode: r.separateCode === true,
     biometric: r.biometric === true,
     offeredAt: typeof r.offeredAt === 'number' ? r.offeredAt : 0,
     stopOffering: r.stopOffering === true,
@@ -465,13 +472,71 @@ export function vaultSettingsFromPhaseOne(): VaultSettings {
 export type VaultKey = 'app-lock' | 'own-code' | 'none';
 
 export function vaultKey(appLockOn: boolean, settings: VaultSettings): VaultKey {
-  if (appLockOn) return 'app-lock';
-  return settings.code ? 'own-code' : 'none';
+  if (settings.code && (!appLockOn || settings.separateCode)) return 'own-code';
+  return appLockOn ? 'app-lock' : 'none';
 }
 
 /** Whether the vault is closing anything: categories are chosen and something opens it. */
 export function vaultGuarding(appLockOn: boolean, settings: VaultSettings): boolean {
   return settings.categories.length > 0 && vaultKey(appLockOn, settings) !== 'none';
+}
+
+// ---------------------------------------------------------------------------
+// How Lifestead is protected, the four choices (Tony, 2026-11-19: "Yes,
+// build it with 4 options"). Each is a pairing of the two things that
+// already exist: App Lock, which encrypts the whole file and asks for the
+// code when the app opens, and the vault, which keeps the chosen health and
+// money records closed while the app is open.
+
+export type ProtectionChoice = 'both' | 'records' | 'app' | 'none';
+
+export const PROTECTION_CHOICES: readonly ProtectionChoice[] = ['both', 'records', 'app', 'none'];
+
+export const PROTECTION_LABELS: Record<ProtectionChoice, string> = {
+  both: 'The whole app and the health records',
+  records: 'Only the health records',
+  app: 'Only the whole app',
+  none: 'No lock',
+};
+
+export const PROTECTION_NOTES: Record<ProtectionChoice, string> = {
+  both: 'Lifestead asks for a code when it opens, and the health and money records you choose stay closed until you open them as well.',
+  records: 'Lifestead opens without a code, and the health and money records you choose stay closed until a vault code opens them. The file is not encrypted.',
+  app: 'Lifestead asks for a code when it opens, and once it is open everything in it can be seen.',
+  none: 'Anyone holding this phone while it is unlocked can open Lifestead and read everything in it.',
+};
+
+/** Which of the four is in place now. The vault counts only while it is guarding. */
+export function protectionChoice(appLockOn: boolean, settings: VaultSettings): ProtectionChoice {
+  const guarding = vaultGuarding(appLockOn, settings);
+  if (appLockOn) return guarding ? 'both' : 'app';
+  return guarding ? 'records' : 'none';
+}
+
+/** One step toward a choice, in the order they must happen so nothing is ever left open with no way to close it. */
+export type ProtectionStep =
+  | 'chooseRecords'
+  | 'chooseVaultCode'
+  | 'turnOnAppLock'
+  | 'emptyVault'
+  | 'turnOffAppLock';
+
+/**
+ * What moving from now to the chosen protection takes. Setting a vault code
+ * comes before App Lock is turned off, so records in the vault are never
+ * left with nothing to close them; App Lock itself is turned on and off on
+ * its own screen, since that restarts the app.
+ */
+export function protectionSteps(appLockOn: boolean, settings: VaultSettings, target: ProtectionChoice): ProtectionStep[] {
+  const steps: ProtectionStep[] = [];
+  const wantsVault = target === 'both' || target === 'records';
+  const wantsLock = target === 'both' || target === 'app';
+  if (wantsVault && settings.categories.length === 0) steps.push('chooseRecords');
+  if (target === 'records' && !settings.code) steps.push('chooseVaultCode');
+  if (!wantsVault && settings.categories.length > 0) steps.push('emptyVault');
+  if (wantsLock && !appLockOn) steps.push('turnOnAppLock');
+  if (!wantsLock && appLockOn) steps.push('turnOffAppLock');
+  return steps;
 }
 
 // ---------------------------------------------------------------------------
