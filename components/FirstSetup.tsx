@@ -58,6 +58,7 @@ import { testerDoorOpen, useTesterAccess } from '../lib/testerAccess';
 import { cardDoneOn, cardWaitingOn, setupCardByKey, viewSetupCard, type SetupCardView } from '../lib/setupCards';
 import { DONE_ADDING_LABEL, keepsAddingLine, setStoryWalk, startStoryWalk } from '../lib/storyWalk';
 import { startTutorials } from '../lib/tutorialDb';
+import { useVault } from '../lib/vaultSession';
 import { SETUP_TUTORIALS_LABEL, SETUP_TUTORIALS_LINE } from '../lib/tutorials';
 import { GUIDES, type GuideRecords } from '../lib/yourStoryGuides';
 import { SETUP_AWAY_CAPTION, subscribeRunSetupAgain } from '../lib/setupFlow';
@@ -193,12 +194,21 @@ export function FirstSetup() {
   const [changingParts, setChangingParts] = useState(false);
   // The question on screen, held until it is answered or put off.
   const [held, setHeld] = useState<string | null>(null);
+  // The question that was showing when the vault was opened, with the step
+  // it was on. Opening the vault lets its records be read, which can make
+  // that question count as answered (Autism and ADHD chosen earlier), and
+  // setup then moved straight past it: the choices flashed and were gone
+  // (Tony, 2026-11-20: "It needs to be shown when the vault password sets
+  // it free"). It stays in view until its own Done, Later or None of these.
+  const [pinned, setPinned] = useState<{ key: string; step: Step } | null>(null);
   // Questions answered this run, so one answered with a choice that does
   // not close it (a condition) is not shown again from a stale read.
   const [passed, setPassed] = useState<string[]>([]);
   const { width: windowWidth } = useWindowDimensions();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [phase, setPhase] = useState<Phase>(putOffThisRun ? 'closed' : 'reading');
+  const phaseRef = useRef(phase);
+  phaseRef.current = phase;
   // The card opened from setup, so the strip can name it and say once it
   // is saved; null for anything else opened from here.
   const [awayCard, setAwayCard] = useState<SetupCardView | null>(null);
@@ -253,6 +263,7 @@ export function FirstSetup() {
         setSection(null);
         setChangingParts(false);
         setHeld(null);
+        setPinned(null);
         setPassed([]);
         setPhase('reading');
         void load();
@@ -324,7 +335,7 @@ export function FirstSetup() {
 
   const stage = interview ? setupStage(interview) : 'parts';
   // What the app needs comes before any part is opened (1.0.80.9).
-  const step: Step =
+  const stageStep: Step =
     changingParts || stage === 'parts'
       ? 'parts'
       : stage === 'required'
@@ -334,7 +345,10 @@ export function FirstSetup() {
           : section
             ? 'section'
             : 'list';
-  const allDone = stage === 'finished';
+  const step: Step = pinned ? pinned.step : stageStep;
+  const stepRef = useRef(step);
+  stepRef.current = step;
+  const allDone = stage === 'finished' && !pinned;
 
   // Each step opens at the top, so the new question or part is the first
   // thing in view.
@@ -362,14 +376,27 @@ export function FirstSetup() {
             : [];
   const candidate = waitingQuestions.find((question) => !passed.includes(question.key)) ?? null;
   const candidateKey = candidate?.key ?? null;
-  const shownQuestion = held ?? candidateKey;
+  const shownQuestion = pinned?.key ?? held ?? candidateKey;
   shownQuestionRef.current = shownQuestion;
   useEffect(() => {
     if (!held && candidateKey) setHeld(candidateKey);
   }, [held, candidateKey]);
+  const vault = useVault();
+  const vaultWasClosed = useRef(vault.closed);
+  useEffect(() => {
+    const wasClosed = vaultWasClosed.current;
+    vaultWasClosed.current = vault.closed;
+    if (!wasClosed || vault.closed) return;
+    const showing = shownQuestionRef.current;
+    // Only when it was opened here, on a question; opened on another screen
+    // while setup waits, everything is just read again.
+    if (showing && phaseRef.current === 'asking') setPinned({ key: showing, step: stepRef.current });
+    void load();
+  }, [vault.closed, load]);
   const answered = useCallback((key: string) => {
     setPassed((was) => (was.includes(key) ? was : [...was, key]));
     setHeld(null);
+    setPinned(null);
   }, []);
 
   const finishParts = useCallback(async () => {
@@ -393,6 +420,7 @@ export function FirstSetup() {
         }
       }
       setHeld(null);
+      setPinned(null);
       setSection(beat);
       await load();
     },
@@ -407,6 +435,7 @@ export function FirstSetup() {
         console.warn('Setup: could not keep how a part was left', error);
       }
       setHeld(null);
+      setPinned(null);
       // 2026-11-13, direct instruction: setup "should always continue ... to
       // the next and the next and the next thing after that until all things
       // have been setup from the sections of the app the user chose". So
@@ -610,6 +639,7 @@ export function FirstSetup() {
             accessibilityRole="button"
             onPress={() => {
               setHeld(null);
+              setPinned(null);
               setSection(null);
             }}
           >
