@@ -27,6 +27,7 @@
 // it applies and decides whether to save it; the app rewords nothing.
 import { Ionicons } from '@expo/vector-icons';
 import { CameraView, useCameraPermissions, type BarcodeScanningResult } from 'expo-camera';
+import * as Localization from 'expo-localization';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -38,6 +39,12 @@ import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { isDesktopApp } from '../lib/desktop/bridge';
 import {
+  ABROAD_WARNING_CLOSE,
+  ABROAD_WARNING_LEAD,
+  ABROAD_WARNING_POINTS,
+  ABROAD_WARNING_TITLE,
+  ABROAD_SHORT_WARNING,
+  isUsRegion,
   LABEL_FDA_CAVEAT,
   LABEL_SOURCE_NOTE,
   SAVED_COPY_NOTE,
@@ -181,6 +188,9 @@ export default function MedicineLabelScreen() {
   const [spain, setSpain] = useState<{ medicine: SpanishMedicine; retrievedAt: string } | null>(null);
   // A Canadian box found by its DIN in Health Canada's Drug Product Database (1.0.95.3).
   const [canada, setCanada] = useState<{ medicine: CanadianMedicine; retrievedAt: string } | null>(null);
+  // Set when the U.S. labels on screen stand in for a box from another
+  // country: a Spanish or Canadian box, or a name RxNorm crossed over.
+  const [abroadFrom, setAbroadFrom] = useState<string | null>(null);
   const [pictureLines, setPictureLines] = useState<string[] | null>(null);
   const [readingPicture, setReadingPicture] = useState(false);
   const [offHits, setOffHits] = useState<{ products: FoundProduct[]; countryTag: string | null } | null>(null);
@@ -288,6 +298,7 @@ export default function MedicineLabelScreen() {
         if (ask.kind === 'name') setNameMissed(true);
       } else {
         setFound({ ask, labels: outcome.labels, total: outcome.total, sent: outcome.sent, retrievedAt: outcome.retrievedAt, crossing: outcome.crossing });
+        if (outcome.crossing) setAbroadFrom('name');
       }
     } finally {
       setBusy(false);
@@ -303,6 +314,7 @@ export default function MedicineLabelScreen() {
     setProduct(null);
     setDatabaseLines(null);
     setSpain(null);
+    setAbroadFrom(null);
     setCanada(null);
     setOffHits(null);
     setNameMissed(false);
@@ -367,6 +379,7 @@ export default function MedicineLabelScreen() {
     setProduct(null);
     setDatabaseLines(null);
     setSpain(null);
+    setAbroadFrom(null);
     setCanada(null);
     setOffHits(null);
     setNameMissed(false);
@@ -391,6 +404,7 @@ export default function MedicineLabelScreen() {
     setProduct(null);
     setDatabaseLines(null);
     setSpain(null);
+    setAbroadFrom(null);
     setCanada(null);
     setOffHits(null);
     setNameMissed(false);
@@ -434,6 +448,7 @@ export default function MedicineLabelScreen() {
     setProduct(null);
     setDatabaseLines(null);
     setSpain(null);
+    setAbroadFrom(null);
     setCanada(null);
     setOffHits(null);
     setPictureLines(null);
@@ -453,6 +468,7 @@ export default function MedicineLabelScreen() {
     const query = spanishIngredientQuery(spain.medicine);
     setNameText(query);
     searchNameFor(query);
+    setAbroadFrom('Spain');
   }
 
   // The same ingredient's U.S. labels, after Health Canada named a Canadian box.
@@ -463,6 +479,7 @@ export default function MedicineLabelScreen() {
     const query = canadianIngredientQuery(canada.medicine);
     setNameText(query);
     searchNameFor(query);
+    setAbroadFrom('Canada');
   }
 
   // Read a Name From a Picture: the words on a saved picture of the label,
@@ -650,6 +667,27 @@ export default function MedicineLabelScreen() {
     });
   }
 
+  // The warning for a U.S. label standing in for another country's box:
+  // shown on any phone set to a country outside the United States, and on
+  // any phone once the labels came from a Spanish, Canadian or crossed name.
+  const showAbroadWarning = !isUsRegion(Localization.getLocales()[0]?.regionCode) || abroadFrom !== null || !!found?.crossing;
+  const abroadWarningCard = (
+    <View style={[styles.card, styles.boxedCard]} accessibilityRole="alert">
+      <View style={styles.abroadTitleRow}>
+        <Ionicons name="warning" size={22} color={colors.danger} />
+        <Text style={[styles.title, styles.abroadHeading, styles.abroadPointText]}>{ABROAD_WARNING_TITLE}</Text>
+      </View>
+      <Text style={styles.strong}>{ABROAD_WARNING_LEAD}</Text>
+      {ABROAD_WARNING_POINTS.map((point) => (
+        <View key={point} style={styles.abroadPoint}>
+          <Ionicons name="alert-circle" size={18} color={colors.danger} />
+          <Text style={styles.abroadPointText}>{point}</Text>
+        </View>
+      ))}
+      <Text style={styles.strong}>{ABROAD_WARNING_CLOSE}</Text>
+    </View>
+  );
+
   if (mode === 'scan') {
     if (isDesktopApp()) {
       return (
@@ -724,6 +762,7 @@ export default function MedicineLabelScreen() {
     const quotedHeading = ruleQuote ? (doc.sections.find((section) => section.key === ruleQuote.sectionKey)?.heading ?? ruleQuote.sectionKey) : '';
     return (
       <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        {showAbroadWarning ? abroadWarningCard : null}
         <View style={styles.card}>
           <Text style={styles.title}>{labelName(doc)}</Text>
           <Text style={styles.caption}>{labelCaption(doc)}</Text>
@@ -964,6 +1003,7 @@ export default function MedicineLabelScreen() {
               <Text style={styles.secondaryButtonText}>Open the Leaflet (Prospecto)</Text>
             </TouchableOpacity>
           ) : null}
+          <Text style={[styles.strong, styles.abroadHeading]}>{ABROAD_SHORT_WARNING}</Text>
           <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={searchUsForSpain}>
             <Text style={styles.secondaryButtonText}>U.S. Labels for the Same Ingredient</Text>
           </TouchableOpacity>
@@ -1005,11 +1045,14 @@ export default function MedicineLabelScreen() {
           >
             <Text style={styles.secondaryButtonText}>Open Health Canada&apos;s Page</Text>
           </TouchableOpacity>
+          <Text style={[styles.strong, styles.abroadHeading]}>{ABROAD_SHORT_WARNING}</Text>
           <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={searchUsForCanada}>
             <Text style={styles.secondaryButtonText}>U.S. Labels for the Same Ingredient</Text>
           </TouchableOpacity>
         </View>
       ) : null}
+
+      {found && showAbroadWarning ? abroadWarningCard : null}
 
       {found ? (
         <View style={styles.card}>
@@ -1212,6 +1255,10 @@ const styles = StyleSheet.create({
   foldRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
   sectionHeading: { ...typography.label, color: colors.textPrimary, flex: 1, ...textShadow },
   boxedHeading: { color: colors.danger },
+  abroadTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  abroadHeading: { color: colors.danger, fontWeight: '700' },
+  abroadPoint: { flexDirection: 'row', gap: 8 },
+  abroadPointText: { ...typography.body, color: colors.textPrimary, flex: 1, ...textShadow },
   labelText: { ...typography.body, color: colors.textPrimary, flexShrink: 1, ...textShadow },
   markedText: { fontWeight: '700', textDecorationLine: 'underline', textDecorationColor: colors.primary },
   sentenceRow: {

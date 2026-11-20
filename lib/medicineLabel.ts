@@ -671,6 +671,44 @@ export function outsideUsGuide(): string {
   ].join('\n\n');
 }
 
+// ---------------------------------------------------------------------------
+// The warning shown wherever a U.S. label stands in for a box from another
+// country (Tony 2026-11-20: "Make sure that warning is very clearly made to
+// the users of those countries ... state it clearly and visibly"). It sits
+// in a card of its own with the danger colour, above the labels list and at
+// the top of an opened label, never folded away.
+
+/** Places whose medicines are U.S. products: the states and the territories. */
+const US_REGIONS = new Set(['US', 'PR', 'GU', 'VI', 'AS', 'MP', 'UM']);
+
+/** True when the phone's region is the United States or one of its territories. */
+export function isUsRegion(regionCode: string | null | undefined): boolean {
+  return !!regionCode && US_REGIONS.has(regionCode.toUpperCase());
+}
+
+export const ABROAD_WARNING_TITLE = 'This is a U.S. label, not the label of your box';
+
+export const ABROAD_WARNING_LEAD =
+  'Lifestead matches a medicine from another country to U.S. labels by its active ingredient. The active ingredient is the same, but the box you hold can differ from the U.S. product in ways that matter.';
+
+export const ABROAD_WARNING_POINTS = [
+  'Other ingredients. Each maker chooses its own fillers, coatings and dyes, and they differ from country to country. Your box may contain lactose, wheat starch (gluten) or a dye that the U.S. product does not, or the other way round. With celiac disease, an allergy or an intolerance, read the ingredient list on the box you have or its leaflet.',
+  'Strength. Some countries print the strength of a different chemical form of the same medicine, or count it another way, so the same number can mean a different amount. Compare the strength on your box with the U.S. label.',
+  'Form. How the tablet releases (at once, slowly, through a coating) and how often it is taken can differ.',
+];
+
+/** One line above each button that crosses to U.S. labels. */
+export const ABROAD_SHORT_WARNING =
+  'U.S. labels match the active ingredient only, not your box. The other ingredients, the strength and the form can differ, and the next screen says how.';
+
+export const ABROAD_WARNING_CLOSE =
+  'The leaflet in your box and your pharmacist are what to follow for the box you have.';
+
+/** The whole warning as one text, for an alert or a test. */
+export function abroadWarningText(): string {
+  return [ABROAD_WARNING_TITLE, ABROAD_WARNING_LEAD, ...ABROAD_WARNING_POINTS, ABROAD_WARNING_CLOSE].join('\n\n');
+}
+
 /** A Spanish national code (C.N.) typed from the box: six digits, with or without its check digit. */
 export function typedSpanishCode(raw: string): string | null {
   const m = (raw ?? '').trim().match(/^c\.?\s*n\.?\s*:?\s*(\d{6})(?:[.\-\s]?\d)?$/i);

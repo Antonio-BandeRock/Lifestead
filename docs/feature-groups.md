@@ -137,7 +137,7 @@ Everything that joins one person's copy to another copy, theirs or someone else'
 - A supplement filled in from a photo of its label, English or Spanish, in Life > My Meds
 - What each database said for a scanned code (openFDA, Open Food Facts, Open Products Facts, Open Beauty Facts), in Life > My Meds > Look up a label
 - Steps for saving a store's picture of a label and filling a supplement from up to four pictures, in Life > My Meds
-- A medicine bought outside the United States looked up by its foreign name (RxNorm crossing to the U.S. ingredient), a Spanish box through CIMA, a Canadian box by its DIN through Health Canada's Drug Product Database, a name read from a picture, and each country's limits said plainly, in Life > My Meds > Look up a label
+- A medicine bought outside the United States looked up by its foreign name (RxNorm crossing to the U.S. ingredient), a Spanish box through CIMA, a Canadian box by its DIN through Health Canada's Drug Product Database, a name read from a picture, each country's limits said plainly, and a red warning that a U.S. label is not the label of a box bought elsewhere (other ingredients, strength, form), in Life > My Meds > Look up a label
 - The supplement form opening with the label picture, in Life > My Meds
 - Food scanner: search Open Food Facts by name with the person's country first, fill a product in from its label when nothing is found, and how to add it to Open Food Facts
 - Household seats, Guardian children, Caregiver (not built)

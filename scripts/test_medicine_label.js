@@ -37,6 +37,21 @@ function check(name, actual, expected) {
   }
 }
 
+// ---- The warning for a U.S. label standing in for another country's box.
+check('US region', M.isUsRegion('US'), true);
+check('Puerto Rico is U.S.', M.isUsRegion('pr'), true);
+check('Mexico is not U.S.', M.isUsRegion('MX'), false);
+check('U.K. is not U.S.', M.isUsRegion('GB'), false);
+check('no region counts as outside', M.isUsRegion(null), false);
+{
+  const w = M.abroadWarningText();
+  for (const word of ['not the label of your box', 'lactose', 'gluten', 'dye', 'celiac', 'allergy', 'Strength', 'chemical form', 'Form', 'leaflet']) {
+    check(`warning names ${word}`, w.includes(word), true);
+  }
+  check('warning never says to stop or switch', /\b(stop|switch|change your dose|skip)\b/i.test(w), false);
+  check('short line points to the full warning', M.ABROAD_SHORT_WARNING.includes('not your box'), true);
+}
+
 // ---- Reading typed codes.
 check('hyphenated 4-4-2 kept as typed', M.readTypedCode('0074-4341-13'), { kind: 'ndc', field: 'package_ndc', codes: ['0074-4341-13'], shown: '0074-4341-13' });
 check('ten digits become the three spellings', M.readTypedCode('0074434113').codes, ['0074-4341-13', '00744-341-13', '00744-3411-3']);
