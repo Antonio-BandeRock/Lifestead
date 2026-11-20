@@ -29,6 +29,10 @@ export type BuildMealHandoff = {
   // handoffs; the route param and the once-per-handoff check both key on
   // the whole value.
   nonce?: number;
+  // A dish just made for the meal Meal Builder is putting together
+  // (lib/mealInProgress.ts, 2026-11-19): added to that meal after asking how
+  // many servings, rather than starting a meal of its own.
+  appendToMeal?: boolean;
 };
 
 export function encodeBuildMealHandoff(handoff: BuildMealHandoff): string {
@@ -60,6 +64,7 @@ export function parseBuildMealHandoff(raw: string | undefined | null): BuildMeal
       mealType: typeof record.mealType === 'string' && record.mealType ? record.mealType : undefined,
       items,
       nonce: typeof record.nonce === 'number' ? record.nonce : undefined,
+      appendToMeal: record.appendToMeal === true ? true : undefined,
     };
   } catch {
     return null;

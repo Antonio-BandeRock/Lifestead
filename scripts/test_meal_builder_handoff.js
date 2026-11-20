@@ -57,6 +57,14 @@ function check(label, condition, detail) {
   check('round trip keeps both items in order', back && JSON.stringify(back.items) === JSON.stringify(sent.items));
 }
 
+// A dish made for the meal in progress says so, and only a true counts.
+{
+  const back = parseBuildMealHandoff(encodeBuildMealHandoff({ items: [{ componentType: 'side', componentId: 's1' }], appendToMeal: true }));
+  check('appendToMeal survives the round trip', back && back.appendToMeal === true);
+  const loose = parseBuildMealHandoff(JSON.stringify({ items: [{ componentType: 'side', componentId: 's1' }], appendToMeal: 'yes' }));
+  check('appendToMeal must be true, not truthy', loose && loose.appendToMeal === undefined);
+}
+
 // Only the items travel when nothing else was set.
 {
   const back = parseBuildMealHandoff(encodeBuildMealHandoff({ items: [{ curatedRecipeId: 'r1' }] }));

@@ -198,7 +198,7 @@ const FOOD_LENS_COPY: Record<FoodLens, string> = {
   findMeal:
     'Every meal you can reach without opening a builder, in groups you tap to open: meals you have logged or saved, meals already on your schedule, and the system recipes. Tap a meal to see what it is made of, then Use this meal logs it now, logs it for earlier today, puts it on your schedule, or swaps it in for a meal that was planned. To build something new from what is here, tick dishes from as many meals as you like; a Meal you are building box at the top shows the combination, and Build a meal with these opens Meal Builder with all of them loaded. Before you order out, Read a Menu checks each dish on a photographed or pasted menu against what you set in Profile.',
   mealBuilder:
-    "Put a whole meal together from dishes you have. Naming the meal is optional; choose its meal type, or start from a whole meal you already have (a favorite, one on your schedule, or one you have logged before). Add From opens every builder's dishes, your saved ones and the system recipes together: pick one, then say how much of that one dish's servings you had (100% is the whole dish, not a share of the meal split between people). Add as many dishes as the meal has. Before logging, it checks for raw goitrogenic foods across the whole meal, not only inside one dish. Log This Now logs the meal for right now; Save & Schedule for Later puts it on your schedule for a time you choose. Adjust on Past Meals opens a logged meal here to correct how much of each dish you had; Save Changes updates that meal, and a food trial riding on a changed dish asks whether to correct its start date or mark it as never having happened.",
+    "Put a whole meal together one dish at a time. Naming the meal is optional; choose its meal type, and it asks for the first dish. Tap what kind of dish it is, then Make a new dish to build it in that kind's builder, which saves it and brings it straight back to the meal, or Use one I have to pick from your saved dishes and the system recipes together. A single food from the food database can go in as it is, such as an apple or a glass of milk. For each dish, say how much of its servings go into the meal (100% is the whole dish, not a share of the meal split between people). It asks for the next dish until you tap The meal is done, then asks whether anything else goes with it, such as a drink. You can also start from a whole meal you already have (a favorite, one on your schedule, or one you have logged before). Before logging, it checks for raw goitrogenic foods across the whole meal, not only inside one dish. Log This Now logs the meal for right now; Save & Schedule for Later puts it on your schedule for a time you choose. Adjust on Past Meals opens a logged meal here to correct how much of each dish you had; Save Changes updates that meal, and a food trial riding on a changed dish asks whether to correct its start date or mark it as never having happened.",
   sideBuilder:
     "Anything served beside a main dish. Name the dish, then say how many servings it makes and how big one serving is. Add each ingredient by saying it, from My Food Products, from Whole Foods by category, or by the nutrient it is richest in, with how much, how it is cut and how it is cooked, since cooking changes what a food keeps. Steps are optional. Find a Recipe at the top starts you from one of your recipes or a system recipe instead. Before you save, you can see what the dish gives you and anything worth knowing for the conditions you track. Saving puts it in My Recipes, as a favorite too if you choose, and offers to log it or put it on your schedule. If nothing in it is a cooking oil, fat or seasoning, it asks whether you left one out, since both are easy to forget.",
   saladBuilder:
@@ -1546,6 +1546,16 @@ export default function FoodScreen() {
               editMealId={editMealId}
               buildFrom={buildMealFrom && consumedBuildMealFrom !== buildMealFrom ? buildMealHandoff : null}
               onBuildFromConsumed={() => setConsumedBuildMealFrom(buildMealFrom ?? null)}
+              onOpenBuilder={(builder) => {
+                // Make a new dish for the meal being put together
+                // (2026-11-19): opens that builder the way any other link
+                // here does, with no drink or ferment kind chosen yet.
+                setBeverageSubtype(null);
+                setFermentationSubtype(null);
+                router.setParams({ openFoodLens: builder, recipesFrom: '' });
+                setLens(builder);
+                setRevealed(true);
+              }}
             />
           ) : lens === 'sideBuilder' ? (
             // SideBuilder owns its own layout entirely (a plain View while

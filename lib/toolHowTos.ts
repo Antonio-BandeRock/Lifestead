@@ -553,6 +553,10 @@ export type ToolMark =
   | 'meal.continue'
   | 'meal.addFrom'
   | 'meal.addToMeal'
+  | 'meal.guide'
+  | 'meal.makeNew'
+  | 'meal.useOne'
+  | 'meal.done'
   | 'meal.logNow'
   | 'meal.schedule'
   | 'meal.scheduleIt'
@@ -5302,17 +5306,41 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Build a meal and log it',
       steps: [
         { say: 'Pick a meal type, name it if you like, and tap Continue.', mark: 'meal.continue' },
-        { say: 'Under Add from..., tap the kind of dish to add.', mark: 'meal.addFrom', stay: true },
-        { say: 'Find the dish and tap Add to Meal. Do the same for each dish.', mark: 'meal.addToMeal', stay: true },
+        { say: 'For the first dish, tap what kind it is.', mark: 'meal.guide', stay: true },
+        { say: 'Tap Use one I have, find the dish and tap Add to Meal.', mark: 'meal.useOne', stay: true },
+        { say: 'Answer What is the next dish? the same way for each dish, then tap The meal is done.', mark: 'meal.done', stay: true },
+        { say: 'Add a drink or anything else the same way, or tap No, the meal is done.', mark: 'meal.done', stay: true },
         { say: 'Tap Log This Now.', mark: 'meal.logNow' },
       ],
       forYou: "The meal goes on today's record, and the timing rules check it against your medicines and supplements.",
     },
     {
+      key: 'makeNew',
+      title: 'Make a new dish for the meal as you go',
+      steps: [
+        { say: 'Name the meal and tap Continue.', mark: 'meal.continue' },
+        { say: 'Tap the kind of dish, such as Side.', mark: 'meal.guide', stay: true },
+        { say: 'Tap Make a new dish. Its builder opens.', mark: 'meal.makeNew' },
+        { say: 'Make the dish and save it. You come back to the meal.' },
+        { say: 'Say how many servings go into the meal, 1 to start, and tap Add to Meal.', mark: 'meal.addToMeal', stay: true },
+        { say: 'Go on to the next dish, or tap The meal is done.', mark: 'meal.done', stay: true },
+      ],
+      forYou: 'Each dish you make is saved for next time and added to the meal in one go, so nothing is built twice.',
+    },
+    {
+      key: 'singleFood',
+      title: 'Add one food as it is',
+      steps: [
+        { say: 'When the meal asks for a dish, tap A single food.', mark: 'meal.guide', stay: true },
+        { say: 'Find the food, then say how much goes into the meal and tap Add to Meal.' },
+      ],
+      forYou: 'An apple or a glass of milk joins the meal with no recipe needed, and is kept so you can pick it again.',
+    },
+    {
       key: 'schedule',
       title: 'Build a meal for later',
       steps: [
-        { say: 'Build the meal the same way.', mark: 'meal.addFrom', stay: true },
+        { say: 'Build the meal the same way, then tap The meal is done.', mark: 'meal.guide', stay: true },
         { say: 'Tap Save & Schedule for Later.', mark: 'meal.schedule' },
         { say: 'Pick the date and the time, then tap Schedule It.', mark: 'meal.scheduleIt' },
       ],
@@ -5332,7 +5360,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'favorite',
       title: 'Keep a meal as a favorite',
       steps: [
-        { say: 'Build the meal.', mark: 'meal.addFrom', stay: true },
+        { say: 'Build the meal, then tap The meal is done.', mark: 'meal.guide', stay: true },
         { say: 'Tick Also save as a Favorite, for fast reuse later.', mark: 'builder.favorite' },
         { say: 'Tap Log This Now or Save & Schedule for Later.' },
       ],
@@ -5342,7 +5370,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'report',
       title: 'Read the full report before you log',
       steps: [
-        { say: 'Build the meal.', mark: 'meal.addFrom', stay: true },
+        { say: 'Build the meal, then tap The meal is done.', mark: 'meal.guide', stay: true },
         { say: 'Tap Preview Full Report.', mark: 'builder.preview' },
         { say: 'Read it, then close it and log or schedule the meal.' },
       ],

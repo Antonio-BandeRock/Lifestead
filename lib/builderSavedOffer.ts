@@ -9,6 +9,7 @@ import type { ConfirmSheetRequest } from '../components/ConfirmSheet';
 import type { MealComponentType } from './db';
 import { t } from './i18n';
 import { encodeBuildMealHandoff } from './mealBuilderHandoff';
+import { mealIsWaitingFor, stopWaiting } from './mealInProgress';
 
 export async function offerToLogSavedDish(args: {
   confirm: (request: ConfirmSheetRequest) => Promise<boolean>;
@@ -22,6 +23,15 @@ export async function offerToLogSavedDish(args: {
   id: string | null;
 }): Promise<void> {
   const { confirm, router, componentType, title, listTitle, name, id } = args;
+  // Made from Meal Builder's "Make a new dish" (2026-11-19): the meal is
+  // waiting for exactly this dish, so it goes straight back to the meal,
+  // which asks how many servings, with nothing asked here.
+  if (id && mealIsWaitingFor(componentType)) {
+    stopWaiting();
+    const buildMealFrom = encodeBuildMealHandoff({ items: [{ componentType, componentId: id }], nonce: Date.now(), appendToMeal: true });
+    router.push({ pathname: '/food', params: { buildMealFrom } });
+    return;
+  }
   const logIt = await confirm({
     title: t(title),
     message: t('{name} is in My Recipes under {list}. Log it as eaten or put it on your schedule now, or start a fresh one.', {

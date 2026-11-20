@@ -51,6 +51,7 @@ What is in food and what a person has eaten, apart from any condition.
 - Insights > Nutrients, Nutrient Ranking, Portions, Hydration, Food Lookup
 - Food > Scan Product, My Food Products, My Whole Foods
 - Food > Meal Builder and the builders, Fermentation Builder, My Recipes, Import Recipe
+- Meal Builder's guided questions: one dish at a time, Make a new dish in its builder and back to the meal, Use one I have, a single food as it is, then anything else such as a drink
 - Schedules > Hydration
 - Food first, supplements for the gap (on every nutrient reading)
 - The whole-foods list every food picker reads, one food per name with near-duplicates folded in, and records kept by name following a food to its new name

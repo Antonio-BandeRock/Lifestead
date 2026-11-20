@@ -17,6 +17,7 @@ import {
   getMealComponentsGoitrogenicFlags,
   getMealFavorite,
   getNutrientChartDataForIngredients,
+  getStoredMeasurementSystem,
   getUserConditions,
   listAllConditions,
   listCuratedRecipeComponentOptions,
@@ -28,7 +29,9 @@ import {
   materializeCuratedRecipeAsMealComponent,
   resolveMealComponent,
   revertFoodTrialToWaiting,
+  saveBeverage,
   saveMealFavorite,
+  saveSnack,
   scheduleMeal,
   setConditionStage,
   updateMealFromComponents,
@@ -41,14 +44,25 @@ import {
 } from '../lib/db';
 import { getConditionStagingModel, resolveDeclaredStage, type DeclaredConditionStage } from '../lib/conditionStages';
 import { offerGardenUse } from '../lib/gardenPlateOffer';
-import { parseAmountValue } from '../lib/measurement';
+import { detectMeasurementSystemFromLocale, parseAmountValue } from '../lib/measurement';
 import type { BuildMealHandoff } from '../lib/mealBuilderHandoff';
+import {
+  getMealInProgress,
+  isEmptyMeal,
+  saveMealInProgress,
+  setMealInProgress,
+  stopWaiting,
+  waitForDish,
+  type MealPhase,
+} from '../lib/mealInProgress';
+import { explainNotYet } from '../lib/notYet';
 import { computeRecipeDepth, type RecipeDepthResult } from '../lib/recipeDepth';
 import { buildTime24, describeTimeInputProblem, formatTime12, type TimeOfDayInput } from '../lib/timeOfDay';
 import { useActiveField, useActiveInputControls } from './ActiveInputContext';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
 import { useConfirmSheet } from './ConfirmSheet';
+import { FoodLookup, type ResolvedFoodSelection } from './FoodLookup';
 import { HelpButton, type HelpSection } from './HelpButton';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -129,10 +143,64 @@ const CATEGORY_META: { type: MealComponentType; label: string; icon: keyof typeo
 // screen it's describing. This is a real, second, in-context copy of the
 // same explanation, live on the one screen ("Your Meal") this actually
 // needs answering on, regardless of how someone got there.
+// The guided way through a fresh meal (Tony, 2026-11-19): each round asks
+// what kind of dish comes next, then whether to make a new one in that
+// kind's builder or use one already saved. The Food tab lens each kind's
+// builder lives on.
+export type MealBuilderLens =
+  | 'sideBuilder'
+  | 'saladBuilder'
+  | 'smoothieBuilder'
+  | 'fermentationBuilder'
+  | 'beverageBuilder'
+  | 'snackBuilder'
+  | 'bakedGoodsBuilder'
+  | 'soupBuilder'
+  | 'saucesBuilder'
+  | 'handheldsBuilder'
+  | 'dessertBuilder';
+
+const BUILDER_LENS_FOR: Record<MealComponentType, MealBuilderLens> = {
+  side: 'sideBuilder',
+  salad: 'saladBuilder',
+  smoothie: 'smoothieBuilder',
+  fermentation: 'fermentationBuilder',
+  beverage: 'beverageBuilder',
+  snack: 'snackBuilder',
+  bakedGoods: 'bakedGoodsBuilder',
+  soup: 'soupBuilder',
+  sauce: 'saucesBuilder',
+  handheld: 'handheldsBuilder',
+  dessert: 'dessertBuilder',
+};
+
+// 'food' is one food from the food database, added as it is (Tony: "Single
+// foods from the food database can be added as they are").
+type GuideKind = MealComponentType | 'food';
+
+// Units offered for a single food, the same sets the builders offer.
+const SINGLE_FOOD_UNITS = {
+  metric: ['g', 'ml', 'cup', 'tbsp', 'tsp', 'piece'],
+  imperial: ['oz', 'lb', 'cup', 'tbsp', 'tsp', 'piece'],
+} as const;
+
+const SOURCE_CANCEL_ROW_HEIGHT = 40;
+
+// The kinds the guided questions offer, alphabetical (lib/choiceOrder.ts's
+// rule for chooser lists), with a single food among them.
+const GUIDE_KINDS: { key: GuideKind; label: string }[] = [
+  ...CATEGORY_META.map((entry) => ({ key: entry.type as GuideKind, label: entry.label })),
+  { key: 'food' as GuideKind, label: 'A single food' },
+].sort((a, b) => a.label.localeCompare(b.label));
+
 const MEAL_BUILDER_HELP: HelpSection[] = [
   {
-    heading: '"Add from...": what it actually does',
-    body: "Each button opens that one builder's dishes: anything you have built and saved there yourself, followed by the system recipes for that builder. Tap a category, pick a dish from either list, then say how much of it you actually had. A search box at the top of the list finds a dish by its name or by an ingredient in it, across both lists at once. Picking a system recipe never adds it to your saved dishes; it only becomes part of this meal.",
+    heading: 'One dish at a time',
+    body: 'Once the meal has a type, it asks for the first dish. Tap what kind it is, then Make a new dish or Use one I have. Make a new dish opens that kind of builder; when you save the dish there, you come straight back here and say how many servings go into the meal, with 1 filled in. A single food goes in as it is: find it, say how much, and it is kept in My Recipes so you can pick it again. After each dish it asks for the next one, until you tap The meal is done. Then it asks whether anything else goes with the meal, such as a drink, and once you say the meal is done, Log This Now and Save & Schedule for Later appear.',
+  },
+  {
+    heading: 'Use one I have',
+    body: "It opens that one builder's dishes: anything you have built and saved there yourself, followed by the system recipes for that builder. Pick a dish from either list, then say how much of it you actually had. A search box at the top of the list finds a dish by its name or by an ingredient in it, across both lists at once. Picking a system recipe never adds it to your saved dishes; it only becomes part of this meal.",
   },
   {
     heading: 'Start from a meal you have',
@@ -300,6 +368,8 @@ export function MealBuilder({
   // Told once the handoff has been loaded, so the Food tab can stop
   // passing it.
   onBuildFromConsumed,
+  // Opens a builder on the Food tab, for "Make a new dish" (2026-11-19).
+  onOpenBuilder,
 }: {
   tabColor: string;
   scheduleItemId?: string;
@@ -310,6 +380,7 @@ export function MealBuilder({
   editMealId?: string;
   buildFrom?: BuildMealHandoff | null;
   onBuildFromConsumed?: () => void;
+  onOpenBuilder?: (lens: MealBuilderLens) => void;
 }) {
   const walkMark = useWalkMark();
   const router = useRouter();
@@ -350,8 +421,26 @@ export function MealBuilder({
     forceClear();
   }
 
-  const [mealName, setMealName] = useState(initialTitle ?? '');
-  const [mealType, setMealType] = useState<string | null>(initialMealType || null);
+  // The guided questions run for a fresh meal only (Tony, 2026-11-19).
+  // Logging a scheduled meal, using a favorite, starting from a past meal and
+  // adjusting a logged one each arrive with their dishes settled, so they keep
+  // the screen as it was. A fresh meal is kept in lib/mealInProgress.ts while
+  // the person is away making one of its dishes, and picked up here on
+  // return; a meal handed over from another lens replaces it.
+  const guided = !scheduleItemId && !favoriteId && !editMealId && !templateMealId;
+  const [restored] = useState(() => {
+    if (!guided) return null;
+    if (buildFrom && !buildFrom.appendToMeal) {
+      setMealInProgress(null);
+      return null;
+    }
+    const kept = getMealInProgress();
+    stopWaiting();
+    return kept;
+  });
+
+  const [mealName, setMealName] = useState(restored?.name ?? initialTitle ?? '');
+  const [mealType, setMealType] = useState<string | null>(restored?.mealType ?? (initialMealType || null));
   // Reached via Log Now, via a saved favorite's own "Use this Favorite"
   // tap, or via Past Meals' own editMealId, already knows both of the
   // above -- skips straight to assembling instead of showing an identity
@@ -360,7 +449,9 @@ export function MealBuilder({
   // the assembling screen tolerate a beat of "No meal type chosen" while
   // that load is still in flight, the same way templateMealId's own
   // component list starts empty and fills in).
-  const [identityConfirmed, setIdentityConfirmed] = useState(!!scheduleItemId || !!favoriteId || !!editMealId || !!buildFrom?.mealType);
+  const [identityConfirmed, setIdentityConfirmed] = useState(
+    !!restored?.identityConfirmed || !!scheduleItemId || !!favoriteId || !!editMealId || !!buildFrom?.mealType,
+  );
 
   // The 2026-08-08 "nothing to build from yet" gate (Continue blocked until
   // some other builder had a saved record) is gone as of 2026-09-13: every
@@ -368,7 +459,21 @@ export function MealBuilder({
   // assemble a whole meal without having built anything first.
   const identityReady = !!mealType;
 
-  const [components, setComponents] = useState<SelectedComponent[]>([]);
+  const [components, setComponents] = useState<SelectedComponent[]>(restored?.components ?? []);
+
+  // Where the guided questions have reached (lib/mealInProgress.ts): asking
+  // for dishes, asking whether anything else goes with the meal, or done,
+  // which shows Log and Schedule. Anything not guided is done from the start.
+  const [phase, setPhase] = useState<MealPhase>(guided ? (restored?.phase ?? 'dishes') : 'done');
+  const [guideKind, setGuideKind] = useState<GuideKind | null>(null);
+  const asking = guided && phase !== 'done';
+
+  useEffect(() => {
+    if (!guided) return;
+    const meal = { name: mealName, mealType, identityConfirmed, components, phase };
+    if (isEmptyMeal(meal)) setMealInProgress(null);
+    else saveMealInProgress(meal);
+  }, [guided, mealName, mealType, identityConfirmed, components, phase]);
 
   // "Start from a meal you have", 2026-09-13. Three kinds of whole meal this
   // app already holds, each loaded into `components` the same way the
@@ -569,6 +674,10 @@ export function MealBuilder({
     if (!mealType && type) setMealType(type);
     const stamp = Date.now();
     setComponents(dishes.map((dish, index) => ({ ...dish, key: `${dish.key}_${stamp}_${index}` })));
+    // A whole meal arrives with its dishes settled, so the guided questions
+    // step aside and Log and Schedule show at once.
+    setPhase('done');
+    setGuideKind(null);
     // A meal type is still required to log anything, so a starting point
     // that carries none leaves the identity step showing (with the dishes
     // already loaded) rather than skipping past the one question left.
@@ -639,6 +748,24 @@ export function MealBuilder({
         }
       }
       if (!isCurrent) return;
+      // A dish just made for this meal (Make a new dish): ask how many
+      // servings of it go into the meal, with 1 filled in, then add it.
+      if (buildFrom.appendToMeal) {
+        const dish = dishes[0];
+        if (dish) {
+          setPendingSelection({
+            componentType: dish.componentType,
+            componentId: dish.componentId,
+            curatedRecipeId: null,
+            name: dish.name,
+            servings: dish.servings,
+            justMade: true,
+          });
+          setPendingAmount('1');
+        }
+        onBuildFromConsumed?.();
+        return;
+      }
       // Arriving from another lens is a fresh start, not an edit of
       // something half-built here, so nothing is asked before loading.
       await loadDishesIntoMeal(dishes, buildFrom.name ?? 'that meal', buildFrom.name ?? null, buildFrom.mealType ?? null, { skipConfirm: true });
@@ -832,6 +959,9 @@ export function MealBuilder({
     curatedRecipeId: string | null;
     name: string;
     servings: number;
+    // Made just now through Make a new dish, so the question is how many
+    // servings go into the meal rather than how much was had.
+    justMade?: boolean;
   } | null>(null);
   const [pendingAmount, setPendingAmount] = useState<string | null>(null);
   const [confirmingPending, setConfirmingPending] = useState(false);
@@ -890,6 +1020,12 @@ export function MealBuilder({
     setComponents((current) => [...current, newComponent]);
     setPendingSelection(null);
     setPendingAmount(null);
+    // While the guided questions are running, back to them for the next
+    // dish rather than staying on this list.
+    if (asking) {
+      closeCategory();
+      setGuideKind(null);
+    }
     // Stays on the same category's saved list, deliberately -- a meal very
     // often draws more than one item from the same builder (two sides,
     // say), so bouncing all the way back to the full "Add from..." grid
@@ -1053,6 +1189,8 @@ export function MealBuilder({
     setMealName('');
     setMealType(null);
     setIdentityConfirmed(false);
+    setPhase('dishes');
+    setGuideKind(null);
     setAlsoSaveAsFavorite(false);
     setShowingReport(false);
     setReportData(null);
@@ -1203,6 +1341,8 @@ export function MealBuilder({
     setMealName('');
     setMealType(null);
     setIdentityConfirmed(false);
+    setPhase('dishes');
+    setGuideKind(null);
     setAlsoSaveAsFavorite(false);
     setShowingReport(false);
     setReportData(null);
@@ -1266,6 +1406,8 @@ export function MealBuilder({
     setMealName('');
     setMealType(null);
     setIdentityConfirmed(false);
+    setPhase('dishes');
+    setGuideKind(null);
     setAlsoSaveAsFavorite(false);
     setShowingReport(false);
     setReportData(null);
@@ -1436,6 +1578,190 @@ export function MealBuilder({
       return;
     }
     promptNextReconciliation(affected);
+  }
+
+  // The guided questions (Tony, 2026-11-19). A kind of dish is chosen
+  // first; a single food opens the food picker at once, any other kind then
+  // offers Make a new dish or Use one I have.
+  const [pickingFood, setPickingFood] = useState(false);
+  const [pickedFood, setPickedFood] = useState<ResolvedFoodSelection | null>(null);
+  const [foodQuantity, setFoodQuantity] = useState('');
+  const [foodUnit, setFoodUnit] = useState<string | null>(null);
+  const [savingFood, setSavingFood] = useState(false);
+  const [unitSystem, setUnitSystem] = useState<'metric' | 'imperial'>('metric');
+  useEffect(() => {
+    let isCurrent = true;
+    getStoredMeasurementSystem()
+      .then((stored) => {
+        if (isCurrent) setUnitSystem(stored ?? detectMeasurementSystemFromLocale());
+      })
+      .catch(() => undefined);
+    return () => {
+      isCurrent = false;
+    };
+  }, []);
+
+  function chooseGuideKind(kind: GuideKind) {
+    dismissKeyboard();
+    if (kind === 'food') {
+      setGuideKind(null);
+      setPickedFood(null);
+      setFoodQuantity('');
+      setFoodUnit(null);
+      setPickingFood(true);
+      return;
+    }
+    setGuideKind(kind);
+  }
+
+  function makeNewDish() {
+    if (!guideKind || guideKind === 'food') return;
+    if (!onOpenBuilder) {
+      explainNotYet('Making a new dish opens from the Food tab. Open Meal Builder there to make one for this meal.');
+      return;
+    }
+    dismissKeyboard();
+    const kind = guideKind;
+    waitForDish(kind);
+    setGuideKind(null);
+    onOpenBuilder(BUILDER_LENS_FOR[kind]);
+  }
+
+  function useOneIHave() {
+    if (!guideKind || guideKind === 'food') return;
+    openCategory(guideKind);
+  }
+
+  function cancelSingleFood() {
+    dismissKeyboard();
+    setPickingFood(false);
+    setPickedFood(null);
+  }
+
+  // One food from the database, added as it is. It is kept as a one-food
+  // snack, or a one-food drink when it comes from Beverages, so a meal's
+  // dishes stay records the way every other dish is and it can be picked
+  // again later with Use one I have.
+  async function addSingleFood() {
+    if (!pickedFood) return;
+    const quantity = parseAmountValue(foodQuantity.trim());
+    if (!foodQuantity.trim() || !Number.isFinite(quantity) || quantity <= 0) {
+      explainNotYet('Enter how much of it goes into the meal, such as 1 or 150.');
+      return;
+    }
+    if (!foodUnit) {
+      explainNotYet('Choose a unit for the amount, such as g or cup.');
+      return;
+    }
+    dismissKeyboard();
+    setSavingFood(true);
+    try {
+      const recordName = foodDisplayName(pickedFood.baseName);
+      const input = {
+        name: recordName,
+        servings: 1,
+        servingSizeAmount: quantity,
+        servingSizeUnit: foodUnit,
+        ingredients: [
+          {
+            foodId: pickedFood.foodId,
+            source: pickedFood.source,
+            foodName: pickedFood.prepMethod ? `${pickedFood.baseName} (${pickedFood.prepMethod})` : pickedFood.baseName,
+            category: pickedFood.category,
+            quantity,
+            unit: foodUnit,
+            cutPrep: 'N/A',
+            cookingMethod: 'N/A',
+          },
+        ],
+        instructions: [],
+      };
+      const asDrink = pickedFood.category === 'Bev';
+      const saved = asDrink ? await saveBeverage(input) : await saveSnack(input);
+      const componentType: MealComponentType = asDrink ? 'beverage' : 'snack';
+      setComponents((current) => [
+        ...current,
+        {
+          key: `${componentType}_${saved.id}_${Date.now()}`,
+          componentType,
+          componentId: saved.id,
+          name: recordName,
+          servings: 1,
+          yourSharePercent: 100,
+        },
+      ]);
+      setPickingFood(false);
+      setPickedFood(null);
+    } catch (error) {
+      console.error('[MealBuilder] Failed to add a single food', error);
+      showInfoAlert('Could not add it', 'Something went wrong adding that food. Please try again.');
+    } finally {
+      setSavingFood(false);
+    }
+  }
+
+  function renderGuide() {
+    const question =
+      phase === 'extras'
+        ? 'Anything else to add to the meal, such as a drink?'
+        : components.length === 0
+          ? 'What is the first dish?'
+          : 'What is the next dish?';
+    return (
+      <View ref={walkMark.ref('meal.guide')} style={[styles.formCard, { borderColor: tabColor }]}>
+        <Text style={[styles.formLabel, { color: tabColor }]}>{question}</Text>
+        <Text style={styles.guideCaption}>Choose what kind it is.</Text>
+        <View style={styles.pillWrap}>
+          {GUIDE_KINDS.map((kind) => {
+            const on = kind.key === guideKind;
+            return (
+              <TouchableOpacity
+                key={kind.key}
+                style={[styles.typePill, on ? styles.typePillActive : null]}
+                onPress={() => chooseGuideKind(kind.key)}
+                accessibilityState={{ selected: on }}
+              >
+                <Text style={[styles.typePillText, on ? styles.typePillTextActive : null]}>{kind.label}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+        {guideKind && guideKind !== 'food' ? (
+          <>
+            <TouchableOpacity ref={walkMark.ref('meal.makeNew')} style={styles.primaryButton} onPress={makeNewDish}>
+              <Text style={styles.primaryButtonText}>Make a new dish</Text>
+            </TouchableOpacity>
+            <TouchableOpacity ref={walkMark.ref('meal.useOne')} style={styles.secondaryButton} onPress={useOneIHave}>
+              <Text style={styles.secondaryButtonText}>Use one I have</Text>
+            </TouchableOpacity>
+          </>
+        ) : null}
+        {phase === 'dishes' && components.length > 0 ? (
+          <TouchableOpacity
+            ref={walkMark.ref('meal.done')}
+            style={styles.secondaryButton}
+            onPress={() => {
+              setGuideKind(null);
+              setPhase('extras');
+            }}
+          >
+            <Text style={styles.secondaryButtonText}>The meal is done</Text>
+          </TouchableOpacity>
+        ) : null}
+        {phase === 'extras' ? (
+          <TouchableOpacity
+            ref={walkMark.ref('meal.done')}
+            style={styles.secondaryButton}
+            onPress={() => {
+              setGuideKind(null);
+              setPhase('done');
+            }}
+          >
+            <Text style={styles.secondaryButtonText}>No, the meal is done</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+    );
   }
 
   function handleContinuePress() {
@@ -1721,6 +2047,77 @@ export function MealBuilder({
     );
   }
 
+  // A single food for the meal: pick it, then say how much.
+  if (pickingFood && !pickedFood) {
+    return (
+      <>
+        {infoAlertElement}
+        <View style={styles.pickerScreen}>
+          <TouchableOpacity style={styles.sourceCancelLink} onPress={cancelSingleFood}>
+            <Ionicons name="chevron-back" size={13} color={tabColor} />
+            <Text style={styles.secondaryButtonText}>Cancel</Text>
+          </TouchableOpacity>
+          <FoodLookup
+            tabColor={tabColor}
+            showNutrients={false}
+            onFoodResolved={(resolved) => {
+              const drink = resolved.category === 'Bev';
+              setPickedFood(resolved);
+              setFoodUnit(unitSystem === 'imperial' ? (drink ? 'cup' : 'oz') : drink ? 'ml' : 'g');
+            }}
+            squareTop={false}
+            topReserve={SOURCE_CANCEL_ROW_HEIGHT}
+          />
+        </View>
+      </>
+    );
+  }
+  if (pickingFood && pickedFood) {
+    const asDrink = pickedFood.category === 'Bev';
+    return (
+      <>
+        {infoAlertElement}
+        <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
+          <View style={[styles.formCard, { borderColor: tabColor }]}>
+            <Text style={styles.pendingName}>{foodDisplayName(pickedFood.baseName)}</Text>
+            {pickedFood.prepMethod ? <Text style={styles.pendingSubtitle}>{pickedFood.prepMethod}</Text> : null}
+            <Text style={[styles.formLabel, styles.formLabelSpaced, { color: tabColor }]}>How much goes into the meal?</Text>
+            <AppTextInput
+              style={[styles.formInput, { backgroundColor: inputBackground(tabColor) }]}
+              value={foodQuantity}
+              onChangeText={setFoodQuantity}
+              placeholder="e.g. 150"
+              placeholderTextColor={colors.textMuted}
+              keyboardType="decimal-pad"
+            />
+            <Text style={[styles.formLabel, styles.formLabelSpaced, { color: tabColor }]}>Unit</Text>
+            <PopoverSelect options={[...SINGLE_FOOD_UNITS[unitSystem]]} selected={foodUnit} onSelect={setFoodUnit} tabColor={tabColor} minWidth={80} />
+            <Text style={[styles.guideCaption, styles.formLabelSpaced]}>
+              {asDrink
+                ? 'It is kept in My Recipes as a one-food drink, so it can be picked again with Use one I have.'
+                : 'It is kept in My Recipes as a one-food snack, so it can be picked again with Use one I have.'}
+            </Text>
+            <ThumbRow primary="last" style={styles.buttonRow}>
+              <TouchableOpacity style={[styles.secondaryButton, { flex: 1 }]} onPress={() => setPickedFood(null)}>
+                <Text style={styles.secondaryButtonText}>Pick another</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.primaryButton, { flex: 1, marginTop: 0, opacity: savingFood ? 0.6 : 1 }]}
+                onPress={() => void addSingleFood()}
+                disabled={savingFood}
+              >
+                {savingFood ? <ActivityIndicator color={colors.textOnButton} /> : <Text style={styles.primaryButtonText}>Add to Meal</Text>}
+              </TouchableOpacity>
+            </ThumbRow>
+            <TouchableOpacity style={styles.secondaryButton} onPress={cancelSingleFood}>
+              <Text style={styles.secondaryButtonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </WalkScrollView>
+      </>
+    );
+  }
+
   // A saved item was tapped -- ask how much of it before it joins the meal.
   if (pendingSelection) {
     return (
@@ -1735,7 +2132,9 @@ export function MealBuilder({
               {pendingSelection.curatedRecipeId ? 'System recipe, makes ' : 'Makes '}
               {pendingSelection.servings} serving{pendingSelection.servings === 1 ? '' : 's'}
             </Text>
-            <Text style={[styles.formLabel, styles.formLabelSpaced, { color: tabColor }]}>How much did you have?</Text>
+            <Text style={[styles.formLabel, styles.formLabelSpaced, { color: tabColor }]}>
+              {pendingSelection.justMade ? 'How many servings go into this meal?' : 'How much did you have?'}
+            </Text>
             <PopoverSelect options={SHARE_PICKER_VALUES} selected={pendingAmount} onSelect={setPendingAmount} tabColor={tabColor} minWidth={80} />
             <ThumbRow primary="last" style={styles.buttonRow}>
               <TouchableOpacity style={[styles.secondaryButton, { flex: 1 }]} onPress={cancelPendingSelection}>
@@ -2203,7 +2602,9 @@ export function MealBuilder({
           <Text style={styles.pendingSubtitle}>{mealType ? mealType[0].toUpperCase() + mealType.slice(1) : 'No meal type chosen'}</Text>
           {components.length === 0 ? (
             <Text style={[styles.emptyText, styles.formLabelSpaced]}>
-              Nothing added yet. Pick a category below to add a dish, or start from a whole meal you already have.
+              {asking
+                ? 'Nothing added yet. Answer the question below to add the first dish, or start from a whole meal you already have.'
+                : 'Nothing added yet. Pick a category below to add a dish, or start from a whole meal you already have.'}
             </Text>
           ) : (
             <View style={[styles.savedList, styles.formLabelSpaced]}>
@@ -2246,6 +2647,9 @@ export function MealBuilder({
             its caption and the category grid inside, the tiles as inset
             boxes, instead of a heading chip, a caption chip and a loose
             grid on the photo. */}
+        {asking ? renderGuide() : null}
+
+        {!asking ? (
         <View style={styles.bandOut}>
           <HomeSectionBand
             kind="static"
@@ -2268,6 +2672,7 @@ export function MealBuilder({
             </View>
           </HomeSectionBand>
         </View>
+        ) : null}
 
         {components.length > 0 && editMealId ? (
           // Editing a real, already-real meal in place (Past Meals'
@@ -2300,7 +2705,7 @@ export function MealBuilder({
               {savingEdit ? <ActivityIndicator color={colors.textOnButton} /> : <Text style={styles.primaryButtonText}>Save Changes</Text>}
             </TouchableOpacity>
           </>
-        ) : components.length > 0 ? (
+        ) : components.length > 0 && !asking ? (
           <>
             {renderFavoriteToggle()}
             {/* "Preview Full Report" -- Meal Builder's own version, see the
@@ -2408,6 +2813,18 @@ const styles = StyleSheet.create({
   categorySearchRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 8, marginBottom: 4 },
   categorySearchInput: { flex: 1 },
   pillWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 6 },
+  guideCaption: { ...typography.caption, color: colors.textMuted, marginTop: 4, ...textShadow },
+  // The single-food picker, the same full-height frame the builders give
+  // FoodLookup, with a filled Cancel row above it.
+  pickerScreen: { flex: 1, paddingHorizontal: 16, paddingTop: 5 },
+  sourceCancelLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    gap: 2,
+    height: SOURCE_CANCEL_ROW_HEIGHT,
+    backgroundColor: colors.surface,
+  },
   typePill: { ...PILL },
   typePillText: { ...PILL_TEXT },
   // A selected pill fills with the tab colour and its label goes dark; dark
