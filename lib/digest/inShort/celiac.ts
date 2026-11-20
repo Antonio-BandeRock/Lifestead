@@ -1,6 +1,6 @@
 // In short lines for the celiac reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'celiac-overview': 'Celiac disease is an immune reaction to gluten that harms the lining of the small gut. The only treatment is a strict gluten-free diet.',
   'celiac-diagnostic-panel': 'Celiac tests only work while you are still eating gluten. Going gluten-free first can make the tests wrongly come back normal.',

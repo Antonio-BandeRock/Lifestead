@@ -110,16 +110,49 @@ export function setLanguageChoice(next: LanguageChoice): void {
   listeners.forEach((listener) => listener());
 }
 
-function subscribe(listener: () => void): () => void {
+/** Calls back when the language changes or more of its words arrive. */
+export function subscribeLanguage(listener: () => void): () => void {
   listeners.add(listener);
   return () => {
     listeners.delete(listener);
   };
 }
 
-/** Redraws the caller when the language changes. */
+const subscribe = subscribeLanguage;
+
+// Bumped by lib/translationLoad.ts each time a table arrives (the reading
+// comes a moment after the rest), so every screen showing words redraws
+// with them. Kept here rather than in the loader so this file imports
+// nothing that reads the tables.
+let wordsArrived = 0;
+
+export function noteWordsArrived(): void {
+  wordsArrived += 1;
+  listeners.forEach((listener) => listener());
+}
+
+function languageSnapshot(): string {
+  return `${getLanguage()}|${wordsArrived}`;
+}
+
+/** Redraws the caller when the language changes or more of its words arrive. */
 export function useLanguage(): AppLanguage {
-  return useSyncExternalStore(subscribe, getLanguage, getLanguage);
+  const snapshot = useSyncExternalStore(subscribe, languageSnapshot, languageSnapshot);
+  return snapshot.slice(0, snapshot.indexOf('|')) as AppLanguage;
+}
+
+function arrivedSnapshot(): number {
+  return wordsArrived;
+}
+
+/**
+ * How many times words have arrived. The React Compiler keeps a result for
+ * as long as what it was made from is the same, and the language is the
+ * same before and after the reading arrives, so anything that translates
+ * during render passes this along too (components/EditableText.tsx).
+ */
+export function useWordsArrived(): number {
+  return useSyncExternalStore(subscribe, arrivedSnapshot, arrivedSnapshot);
 }
 
 export function useLanguageChoice(): LanguageChoice {

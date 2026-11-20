@@ -33,8 +33,7 @@ const ROOT = path.join(__dirname, '..');
 const FOLDERS = ['app', 'components', 'constants', 'hooks', 'lib'];
 const SKIP = [path.join('lib', 'digest'), path.join('lib', 'translations'), path.join('lib', 'desktop')];
 
-// Loads es.ts together with the part files it imports from lib/translations/es,
-// which is where nearly the whole table lives.
+// Loads a TypeScript file with the files it imports, for lib/i18n.ts below.
 function loadModule(file, stubs = {}) {
   const source = fs.readFileSync(file, 'utf8');
   const { outputText } = ts.transpileModule(source, {
@@ -52,8 +51,11 @@ function loadModule(file, stubs = {}) {
   return module.exports;
 }
 
+// The words live in data files since 1.0.95.1 (assets/translations/es/),
+// read the way the phone reads them, hand-written entries over the files.
+const SPANISH = require('./translation_tables').loadTables('es');
 function loadTable() {
-  return loadModule(path.join(ROOT, 'lib', 'translations', 'es.ts')).ES;
+  return SPANISH.words;
 }
 
 // lib/i18n.ts itself, so a sentence is counted the way the app looks it up.
@@ -62,7 +64,10 @@ function loadLookup() {
     react: { cloneElement: (element) => element, isValidElement: () => false },
     './language': { getLanguage: () => 'es' },
   };
-  return loadModule(path.join(ROOT, 'lib', 'i18n.ts'), stubs).hasTranslation;
+  const i18n = loadModule(path.join(ROOT, 'lib', 'i18n.ts'), stubs);
+  const { ES_DATES } = loadModule(path.join(ROOT, 'lib', 'translations', 'esDates.ts'));
+  i18n.installTranslations('es', { ...SPANISH, dates: ES_DATES });
+  return i18n.hasTranslation;
 }
 
 const ENTITIES = { apos: "'", quot: '"', amp: '&', lt: '<', gt: '>', nbsp: ' ', rsquo: '’', lsquo: '‘', hellip: '…' };

@@ -1,6 +1,6 @@
 // In short lines for the type2Diabetes reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-glp1': 'GLP-1 drugs, like semaglutide, copy a gut hormone. They lower blood sugar, slow digestion and cut appetite, which often leads to weight loss.',
   'glossary-sglt2': 'SGLT2 drugs lower blood sugar by having the kidneys pass more sugar into urine. They also protect the kidneys and heart.',

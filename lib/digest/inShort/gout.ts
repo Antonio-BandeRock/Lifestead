@@ -1,6 +1,6 @@
 // In short lines for the gout reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'gout-overview': 'Gout happens when uric acid builds up in the blood and forms sharp crystals in a joint. Because the cause is so clear, diet plays a direct part.',
   'gout-purine-foods-and-dairy': 'In a 12-year study of 47,150 men, more meat and seafood went with more gout. More dairy went with less, and high-purine vegetables made no difference.',

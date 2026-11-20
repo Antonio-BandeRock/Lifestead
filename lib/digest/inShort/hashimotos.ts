@@ -1,6 +1,6 @@
 // In short lines for the hashimotos reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-aip':
     'AIP stands for Autoimmune Protocol. It is a diet that drops many foods for about six weeks, then adds them back one by one to find what bothers you.',

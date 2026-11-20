@@ -7,6 +7,10 @@ config.resolver.assetExts.push('db');
 // The phone carries the food list packed (assets/data/foods_reference.db.gz,
 // 2026-11-19), made by scripts/compress_reference_db.js.
 config.resolver.assetExts.push('gz');
+// The words of each language other than English (assets/translations/<code>/,
+// 2026-11-20), one asset per file so an update downloads only the files
+// that changed; read by lib/translationLoad.ts.
+config.resolver.assetExts.push('words');
 
 // Tell Claude's Edit wording mode (1.0.51.12): this app's own files get
 // components/reactNativeWithEditableText.js when they import 'react-native',
@@ -112,7 +116,7 @@ if (process.env.LIFESTEAD_DESKTOP === '1') {
   const defaultResolveRequest = config.resolver.resolveRequest;
   config.resolver.resolveRequest = (context, moduleName, platform) => {
     if (platform === 'web') {
-      if (moduleName.endsWith('assets/data/foods_reference.db') || moduleName.endsWith('assets/data/foods_reference.db.gz')) {
+      if (moduleName.endsWith('assets/data/foods_reference.db') || moduleName.endsWith('assets/data/foods_reference.db.gz') || moduleName.endsWith('assets/data/foods_reference.patch.gz')) {
         return { type: 'empty' };
       }
       const shim = shims[moduleName];

@@ -46,8 +46,8 @@ const { readingKey } = loadTs(path.join(ROOT, 'lib/readingKey'));
 
 // The Spanish reading pieces, read straight from the generated tables.
 const spanish = new Map();
-const esDir = path.join(ROOT, 'lib/translations/es');
-for (const name of fs.readdirSync(esDir).filter((n) => n.startsWith('reading-'))) {
+const esDir = path.join(ROOT, 'assets/translations/es');
+for (const name of fs.readdirSync(esDir).filter((n) => /^reading-\d+\.words$/.test(n))) {
   for (const line of fs.readFileSync(path.join(esDir, name), 'utf8').split(/\r?\n/)) {
     const m = /^ "([0-9a-z]+)": (".*"),?$/.exec(line);
     if (m) spanish.set(m[1], JSON.parse(m[2]));

@@ -1,6 +1,6 @@
 // In short lines for the ibs reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'ibs-adhd-crossover': 'Across 11 studies and 3.85 million people, IBS showed up more often with ADHD. No other gut condition did. That is a link, not proof of a cause.',
   'ibs-overview': 'IBS causes belly pain and changes in bowel habits, but it does not damage the gut. The problem is in how the gut and brain talk to each other.',

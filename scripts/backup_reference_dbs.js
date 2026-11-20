@@ -27,6 +27,11 @@ const BACKUP_DIR = path.join(process.env.USERPROFILE || '', 'OneDrive', 'Desktop
 
 const FILES = [
   'assets/data/foods_reference.db',
+  // The base the phones carry and its change file (2026-11-20): a fresh
+  // clone needs this exact base, since remaking it would make every phone
+  // download the whole list again.
+  'assets/data/foods_reference.db.gz',
+  'assets/data/foods_reference.patch.gz',
   'unified-database/unified_foods.sqlite',
 ];
 

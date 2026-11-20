@@ -1,4 +1,11 @@
 {
-  "android": { "version": null, "runtime": null, "downloadUrl": null },
-  "windows": { "version": null, "downloadUrl": null }
+  "android": {
+    "version": null,
+    "runtime": null,
+    "downloadUrl": null
+  },
+  "windows": {
+    "version": "1.0.95.1",
+    "downloadUrl": null
+  }
 }

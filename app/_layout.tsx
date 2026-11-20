@@ -72,6 +72,7 @@ import { watchVaultClosing } from '../lib/vaultSession';
 import { listenForReminderTaps, syncReminderNotifications } from '../lib/reminderNotifications';
 import { checkReminderTiming } from '../lib/reminderTiming';
 import { refreshWidgets } from '../lib/widgets/taskHandler';
+import { useTranslationsReady } from '../lib/translationLoad';
 
 // Kept visible until the header's own branding font finishes loading (see
 // ScreenHeader.tsx) -- without this, the native splash screen hides itself
@@ -110,6 +111,12 @@ function noteTouchEnd(event: GestureResponderEvent): void {
 // so nothing reads the database before the key is held. See
 // components/AppLockGate.tsx.
 export default function RootLayout() {
+  // The words of the language the app opens in are data files read when it
+  // opens (lib/translationLoad.ts, 2026-11-20); the splash screen stays up
+  // until they are in, so the lock screen and every screen after it open in
+  // that language rather than flashing English first.
+  const wordsReady = useTranslationsReady();
+  if (!wordsReady) return null;
   return (
     <AppLockGate>
       <UnlockedApp />

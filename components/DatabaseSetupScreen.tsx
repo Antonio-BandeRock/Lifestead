@@ -147,7 +147,7 @@ export function DatabaseSetupScreen({
         <>
           <Text style={styles.message}>Setting up the food list on this phone</Text>
           <Text style={styles.detail}>
-            Lifestead carries its list of more than 2,000 foods packed small, and is unpacking it now. This happens after installing, and again only when an update brings a new food list. It can take a minute or two, and the app opens by itself when it is done.
+            Lifestead carries its list of more than 2,000 foods packed small, and is setting it up now. This happens after installing; after that, an update brings only the foods that changed, which takes moments. The first time can take a minute or two, and the app opens by itself when it is done.
           </Text>
         </>
       ) : (

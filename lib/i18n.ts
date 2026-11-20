@@ -38,44 +38,64 @@
 // is looked up as "Tap <0>Save</0> to keep it", the way i18next's Trans
 // writes it, so a translation can move the bold word to where Spanish puts
 // it. An element with no words of its own (an icon) is <0/>.
+//
+// WHERE THE TABLES COME FROM. Since 1.0.95.1 the tables are data files
+// outside the app code (lib/translations/languages.ts), read when the app
+// opens by lib/translationLoad.ts and handed over through
+// installTranslations below. Until a language's words arrive, its screens
+// show English, which is why the app waits for them before its first draw.
 import { cloneElement, isValidElement, type ReactElement, type ReactNode } from 'react';
 import { getLanguage, type AppLanguage } from './language';
-import { ES, ES_FOODS, ES_READING } from './translations/es';
 import { readingKey } from './readingKey';
 import { setReadingTranslator } from './digest/searchLanguage';
-import { ES_DATES, type DateWords } from './translations/esDates';
+import type { DateWords } from './translations/esDates';
 
 type Table = Readonly<Record<string, string>>;
 
-const TABLES: Record<Exclude<AppLanguage, 'en'>, Table> = {
-  es: ES,
+type Installed = {
+  /** The app's words: the data files with the hand-written entries over them. */
+  words: Table;
+  // FOOD NAMES from the reference database ("Apple, raw, with skin") are
+  // translated by the parts between their commas, the way Mexico's food
+  // tables write a name too ("Manzana, cruda, con cáscara"), so one table of
+  // parts reaches every screen a food's name is shown on. A name is turned
+  // round only when every part of it is found.
+  foods: Table;
+  // THE READING (the conditions, Health Literacy, Earth Matters, Horticulture
+  // and the recipes) is filed by a fingerprint of each piece's English
+  // rather than by the English, since it runs to nearly three million
+  // characters (lib/readingKey.ts). A piece is looked up there once the
+  // table of the app's words has missed it. It arrives a moment after the
+  // rest, so it starts empty.
+  reading: Table;
+  // DATES written in English by the app ("Oct 26", "Mon 26 Oct", "October
+  // 2026", "Oct 26, 7:45 AM") are recognised and written again the way the
+  // language writes them, so the fifty or so places that build a date from an
+  // English list of months never needed changing (lib/translations/esDates.ts).
+  dates: DateWords;
 };
 
-// FOOD NAMES from the reference database ("Apple, raw, with skin") are
-// translated by the parts between their commas, the way Mexico's food
-// tables write a name too ("Manzana, cruda, con cáscara"), so one table of
-// parts reaches every screen a food's name is shown on. A name is turned
-// round only when every part of it is found.
-const FOODS: Record<Exclude<AppLanguage, 'en'>, Table> = {
-  es: ES_FOODS,
-};
+const INSTALLED = new Map<AppLanguage, Installed>();
 
-// THE READING (the conditions, Health Literacy, Earth Matters, Horticulture
-// and the recipes) is filed by a fingerprint of each piece's English
-// rather than by the English, since it runs to nearly three million
-// characters (lib/readingKey.ts). A piece is looked up there once the
-// table of the app's words has missed it.
-const READING: Record<Exclude<AppLanguage, 'en'>, Table> = {
-  es: ES_READING,
-};
+/** Hands a language's tables over; a later call replaces what it names. */
+export function installTranslations(language: Exclude<AppLanguage, 'en'>, tables: Partial<Installed>): void {
+  const before = INSTALLED.get(language);
+  const words = tables.words ?? before?.words;
+  const dates = tables.dates ?? before?.dates;
+  if (!words || !dates) throw new Error(`The ${language} words need their table and their dates.`);
+  INSTALLED.set(language, {
+    words,
+    dates,
+    foods: tables.foods ?? before?.foods ?? {},
+    reading: tables.reading ?? before?.reading ?? {},
+  });
+  compiled.delete(language);
+}
 
-// DATES written in English by the app ("Oct 26", "Mon 26 Oct", "October
-// 2026", "Oct 26, 7:45 AM") are recognised and written again the way the
-// language writes them, so the fifty or so places that build a date from an
-// English list of months never needed changing (lib/translations/esDates.ts).
-const DATES: Record<Exclude<AppLanguage, 'en'>, DateWords> = {
-  es: ES_DATES,
-};
+/** Whether a language's words have arrived; English always has. */
+export function translationsInstalled(language: AppLanguage): boolean {
+  return language === 'en' || INSTALLED.has(language);
+}
 
 type Pattern = {
   regex: RegExp;
@@ -122,7 +142,9 @@ function compile(language: AppLanguage): Compiled | null {
   if (language === 'en') return null;
   const existing = compiled.get(language);
   if (existing) return existing;
-  const words = TABLES[language];
+  const installed = INSTALLED.get(language);
+  if (!installed) return null;
+  const { words } = installed;
   const byFirst = new Map<string, Pattern[]>();
   const byLast = new Map<string, Pattern[]>();
   const loose: Pattern[] = [];
@@ -177,7 +199,7 @@ function compile(language: AppLanguage): Compiled | null {
     else index.set(key, [pattern]);
   }
   for (const list of [...byFirst.values(), ...byLast.values(), loose]) list.sort((a, b) => b.literal - a.literal);
-  const made: Compiled = { words, foods: FOODS[language], reading: READING[language], byFirst, byLast, loose, dates: DATES[language], memo: new Map() };
+  const made: Compiled = { words, foods: installed.foods, reading: installed.reading, byFirst, byLast, loose, dates: installed.dates, memo: new Map() };
   compiled.set(language, made);
   return made;
 }
@@ -571,8 +593,11 @@ function composite(children: unknown[], language: AppLanguage): unknown[] | null
  * inner Text marked <0>...</0>; failing both, each string piece is looked up
  * on its own and anything else is left as it is.
  */
-export function translateChildren<T>(children: T, language: AppLanguage): T {
-  if (language === 'en') return children;
+export function translateChildren<T>(children: T, language: AppLanguage, wordsArrived = 0): T {
+  // wordsArrived (lib/language.ts useWordsArrived) changes nothing here; it
+  // is taken so a caller's memoized result is made again when more words
+  // arrive in the same language.
+  if (wordsArrived < 0 || language === 'en') return children;
   if (typeof children === 'string') return translateIn(language, children) as T;
   if (!Array.isArray(children)) return children;
   if (children.every((child) => typeof child === 'string' || typeof child === 'number')) {

@@ -1,6 +1,6 @@
 // In short lines for the graves reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-graves-disease':
     "In Graves' disease, the immune system pushes the thyroid to make too much hormone. That is the opposite of Hashimoto's.",

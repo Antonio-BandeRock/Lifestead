@@ -26,7 +26,10 @@ What a person needs so the details of daily living stop living in their head. Th
 
 - Home, its bands and Not Tried Yet
 - The food list carried packed on a phone, unpacked on first open with a screen that says what is happening
+- Food list updates arrive as a small file of only the foods that changed, applied over the list the phone holds
 - The header's update cloud, with a dot on a phone when a new version has downloaded and waits for a restart
+- The app's words in each language carried as separate files, so an update downloads only the words that changed
+- For Testers saying on a tester's computer, as on a phone, when a new installer is ready and where to get it
 - Life > To Dos, Work, Upkeep, Routines, Did I Do It, Days Until, Kitchen, Look Back
 - Life > Grocery List (also Planning food for me)
 - Life > Projects and Interests > Projects

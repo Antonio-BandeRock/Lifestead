@@ -1,6 +1,6 @@
 // In short lines for the chronicKidneyDisease reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'ckd-overview': 'Chronic kidney disease is a slow loss of kidney work over months or years. Diabetes and high blood pressure are the most common causes.',
   'ckd-potassium-restriction-reconsidered': 'People with kidney disease are often told to avoid bananas and oranges. A check of the evidence found no trials behind that blanket advice.',

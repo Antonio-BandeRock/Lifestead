@@ -4144,3 +4144,12 @@ Audited 2026-08-18 against the Status history and the live codebase. These are t
 **If picking this up fresh:** read `unified-database/README.md` in full first.
 
 11. **The owner's questions on the unified database's curation report**, the next step on that track (see its section above).
+
+
+## Removed from CLAUDE.md on 2026-11-20 (size trim while moving the translations out of the app code)
+
+11. **CLOSED 2026-11-18**: the owner's questions on the curation report, answered and built.
+
+15, 16, 19, 20 and 21. **CLOSED**: recipe coverage per diet, condition and meal, quick-log, and personal nutrient targets. Accounts in `docs/CLAUDE-ARCHIVE-2026-09-14.md`.
+
+**The six-phase cross-app push is finished (2026-09-23): Where did I put it, Trends > What You Eat, Keeping Up, Garden Yield, What It Costs, and From your garden (`offerGardenUse(mealId)`).** **Nothing on Keeping Up scores anybody**, enforced by `scripts/test_keeping_up.js`. Still open: the regulation and sensory tags as a band inside Symptoms & Flares. (Archive.)

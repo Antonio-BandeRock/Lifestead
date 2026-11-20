@@ -1,0 +1,13 @@
+{
+ "Turn Setup Off": "Apagar la configuración",
+ "Turn Setup Back On": "Volver a encender la configuración",
+ "Stops setup opening when Lifestead starts. Everything you answered and set up stays, and turning it back on opens setup where you left off.": "Hace que la configuración deje de abrirse al iniciar Lifestead. Todo lo que contestaste y configuraste se queda, y al volver a encenderla la configuración se abre donde la dejaste.",
+ "Setup is turned off, so it does not open when Lifestead starts. Turn it back on to carry on with the rest from where you left off.": "La configuración está apagada, así que no se abre al iniciar Lifestead. Vuelve a encenderla para seguir con lo que falta desde donde la dejaste.",
+ "Setup is turned off": "La configuración está apagada",
+ "You are using {percent}% of what Lifestead can do: {done} of the {total} things in Your Guide are set up. Setup no longer opens when the app starts, and your place in it is kept. To set up the rest, come back here to Profile and tap Turn Setup Back On; it opens right where you left off.": "Estás usando el {percent}% de lo que Lifestead puede hacer: {done} de las {total} cosas de Tu guía están configuradas. La configuración ya no se abre al iniciar la app, y se guarda tu lugar en ella. Para configurar el resto, regresa aquí a Perfil y toca Volver a encender la configuración; se abre justo donde la dejaste.",
+ "Setup no longer opens when the app starts, and your place in it is kept. To set up the rest, come back here to Profile and tap Turn Setup Back On; it opens right where you left off.": "La configuración ya no se abre al iniciar la app, y se guarda tu lugar en ella. Para configurar el resto, regresa aquí a Perfil y toca Volver a encender la configuración; se abre justo donde la dejaste.",
+ "Setup is still on": "La configuración sigue encendida",
+ "Setup could not be turned off just now, so it will still open when Lifestead starts. Try again in a moment.": "No se pudo apagar la configuración en este momento, así que seguirá abriéndose al iniciar Lifestead. Inténtalo otra vez en un momento.",
+ "Setup is still off": "La configuración sigue apagada",
+ "Setup could not be turned back on just now. Your place in it is kept, so try again in a moment.": "No se pudo volver a encender la configuración en este momento. Tu lugar en ella se guarda, así que inténtalo otra vez en un momento."
+}

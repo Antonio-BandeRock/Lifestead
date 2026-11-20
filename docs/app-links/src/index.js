@@ -676,7 +676,21 @@ export default {
       }
     }
 
-    if (url.pathname.startsWith('/tester/')) {
+    // Which tester installer is newest (lib/testerInstaller.ts), a plain file
+    // in ./public. Until 2026-11-20 every /tester/ address went to the drop
+    // box below, which answered this one with a 404, so the line saying a new
+    // installer is ready could never appear. The computer app reads it from
+    // its own app:// origin, so it carries the same open CORS header as the
+    // drop box; it holds nothing about anybody.
+    if (url.pathname === '/tester/latest.json') {
+      const served = await env.ASSETS.fetch(request);
+      const headers = new Headers(served.headers);
+      headers.set('access-control-allow-origin', '*');
+      headers.set('cache-control', 'max-age=300');
+      return new Response(served.body, { status: served.status, headers });
+    }
+
+    if (url.pathname.startsWith('/tester/v1/')) {
       try {
         return await handleTester(request, env, url);
       } catch (error) {

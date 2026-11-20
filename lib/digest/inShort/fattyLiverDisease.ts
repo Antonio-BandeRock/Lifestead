@@ -1,6 +1,6 @@
 // In short lines for the fattyLiverDisease reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-nafld-masld': 'MASLD is the current name for fatty liver disease, when fat builds up in liver cells. NAFLD is the older name for the same thing.',
   'glossary-fib4': 'FIB-4 is a score worked out from your age and three common blood tests. It estimates the chance of liver scarring without a biopsy.',

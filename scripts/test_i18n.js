@@ -48,14 +48,13 @@ const { readingKey } = load('lib/readingKey.ts', {});
 const searchLanguage = load('lib/digest/searchLanguage.ts', {});
 const READING_EN = 'Selenium lowers thyroid antibodies in several trials.';
 
-const { t, translateIn, translateChildren, hasTranslation } = load('lib/i18n.ts', {
+const { t, translateIn, translateChildren, hasTranslation, installTranslations, translationsInstalled } = load('lib/i18n.ts', {
   './language': { getLanguage: () => language },
   './readingKey': { readingKey },
   './digest/searchLanguage': searchLanguage,
-  './translations/esDates': load('lib/translations/esDates.ts', {}),
-  './translations/es': { ES: TABLE, ES_FOODS: { Apple: 'Manzana', raw: 'cruda', 'with skin': 'con cáscara' }, ES_READING: { [readingKey(READING_EN)]: 'El selenio baja los anticuerpos tiroideos en varios ensayos.' } },
   react: require('react'),
 });
+const { ES_DATES } = load('lib/translations/esDates.ts', {});
 
 let failures = 0;
 function check(label, actual, expected) {
@@ -63,6 +62,17 @@ function check(label, actual, expected) {
   if (!ok) failures += 1;
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${label}${ok ? '' : ` (got ${JSON.stringify(actual)}, expected ${JSON.stringify(expected)})`}`);
 }
+
+// Since 1.0.95.1 the tables arrive from data files (lib/translationLoad.ts);
+// until they do, English shows.
+check('before the words arrive, English shows', translateIn('es', 'Save'), 'Save');
+check('before the words arrive, Spanish is not installed', translationsInstalled('es'), false);
+check('English is always installed', translationsInstalled('en'), true);
+installTranslations('es', { words: TABLE, foods: { Apple: 'Manzana', raw: 'cruda', 'with skin': 'con cáscara' }, dates: ES_DATES });
+check('once they arrive, Spanish shows', translateIn('es', 'Save'), 'Guardar');
+check('the reading has not arrived yet', translateIn('es', READING_EN), READING_EN);
+installTranslations('es', { reading: { [readingKey(READING_EN)]: 'El selenio baja los anticuerpos tiroideos en varios ensayos.' } });
+check('the reading arriving keeps the words', translateIn('es', 'Save'), 'Guardar');
 
 check('the reading is found by its fingerprint', translateIn('es', READING_EN), 'El selenio baja los anticuerpos tiroideos en varios ensayos.');
 check('a fingerprint is the same every time', readingKey(READING_EN), readingKey(String(READING_EN)));
@@ -112,11 +122,23 @@ language = 'en';
 check('t in English fills values', t('{count} meals', { count: 1 }), '1 meals');
 
 // The real table: every entry has words, and its {name}s match the English.
-const parts = load('lib/translations/es/index.ts', new Proxy({}, {
-  has: () => true,
-  get: (_, name) => load(`lib/translations/es/${name.replace('./', '')}.ts`, {}),
-}));
-const { ES, ES_READING } = load('lib/translations/es.ts', { './es/index': parts });
+const { loadTables, wordFiles, translationDir } = require('./translation_tables');
+const { words: ES, reading: ES_READING } = loadTables('es');
+// Every file is strict JSON (the phone forgives one trailing comma, but a
+// file should never need it), and the list the app reads names every file.
+let badFiles = 0;
+for (const name of wordFiles('es')) {
+  try {
+    JSON.parse(fs.readFileSync(path.join(translationDir('es'), name), 'utf8'));
+  } catch (error) {
+    badFiles += 1;
+    console.log(`FAIL ${name} is not JSON: ${error.message}`);
+  }
+}
+check(`the ${wordFiles('es').length} Spanish files are JSON`, badFiles, 0);
+const listed = fs.readFileSync(path.join(__dirname, '..', 'lib', 'translations', 'es', 'files.ts'), 'utf8');
+const listedNames = [...listed.matchAll(/assets\/translations\/es\/([\w-]+\.words)/g)].map((match) => match[1]).sort();
+check('lib/translations/es/files.ts lists every Spanish file', listedNames, wordFiles('es'));
 let badReading = 0;
 for (const spanish of Object.values(ES_READING)) {
   if (!spanish.trim() || /[–—]| -- /.test(spanish)) {

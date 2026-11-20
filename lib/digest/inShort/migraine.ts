@@ -1,6 +1,6 @@
 // In short lines for the migraine reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-cgrp': 'CGRP is a signal molecule that helps start migraine pain. A newer group of migraine drugs blocks it.',
   'migraine-adhd-crossover': 'A review of 14 studies found migraine and ADHD show up together more than chance would explain. It found no such link for tension headache.',

@@ -31,7 +31,7 @@ import type { TextProps } from 'react-native';
 import { Text as NativeText } from './reactNativeText';
 import { flattenTextChildren } from '../lib/devNotes';
 import { translateChildren } from '../lib/i18n';
-import { useLanguage } from '../lib/language';
+import { useLanguage, useWordsArrived } from '../lib/language';
 import {
   getWordingEditState,
   reportWordingTap,
@@ -73,7 +73,8 @@ export function EditableText(props: EditableTextProps) {
   // that draw text changing; see lib/i18n.ts. An edit note still records
   // the English, since that is what the source holds.
   const language = useLanguage();
-  const shown = translateChildren(props.children, language);
+  const wordsArrived = useWordsArrived();
+  const shown = translateChildren(props.children, language, wordsArrived);
 
   if (!wording.active || plain) {
     return shown === props.children ? <NativeText {...props} /> : <NativeText {...props}>{shown}</NativeText>;

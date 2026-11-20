@@ -1,6 +1,6 @@
 // In short lines for the earthMatters reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'foodhistory-soil-landmark-studies':
     'Two studies, one in the US and one in the UK, found that some crops now hold less of some nutrients than they did decades ago.',

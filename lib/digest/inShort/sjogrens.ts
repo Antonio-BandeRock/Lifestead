@@ -1,6 +1,6 @@
 // In short lines for the sjogrens reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'sjogrens-pregnancy-offspring-neurodevelopment': 'One small study of children of mothers with anti Ro antibodies found some delay in about 1 in 6. The study is small, so this figure needs follow up.',
   'sjogrens-overview': "In Sjögren's, the immune system attacks the glands that make tears and saliva. The disease can reach well past dry eyes and a dry mouth.",

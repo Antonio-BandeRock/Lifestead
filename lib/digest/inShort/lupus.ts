@@ -1,6 +1,6 @@
 // In short lines for the lupus reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-ana': 'ANA is a blood test for antibodies that attack the inside of cells. Most people with lupus test positive, but some healthy people do too.',
   'glossary-aps-antiphospholipid': 'APS is a clotting disorder that often comes with lupus. Antibodies raise the risk of blood clots and of losing a pregnancy.',

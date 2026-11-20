@@ -21,13 +21,13 @@
 // a native speaker. Health wording above all needs that check before the
 // app is offered in Spanish to anybody but Tony and Lisa.
 //
-// Most of the table lives in lib/translations/es/part-NNN.ts, written a
-// batch at a time by scripts/i18n_batch.js; the entries below were written
-// by hand and win over a part file. Food names are a table of their own,
-// ES_FOODS, keyed by the parts of a name between its commas.
-import { ES_FOODS, ES_PARTS, ES_READING } from './es/index';
-
-export { ES_FOODS, ES_READING };
+// Most of the table lives outside the app code, in the data files under
+// assets/translations/es/ (part-NNN.words, written a batch at a time by
+// scripts/i18n_batch.js), which lib/translationLoad.ts reads when the app
+// opens, so an update downloads only the files that changed. The entries
+// below were written by hand and win over a file. Food names are a table
+// of their own (foods-NNN.words), keyed by the parts of a name between its
+// commas, and the reading another (reading-NNN.words).
 
 const BY_HAND: Readonly<Record<string, string>> = {
   // ---- The tabs (constants/tabs.ts) and TabHub's two extra tiles.
@@ -625,4 +625,4 @@ const BY_HAND: Readonly<Record<string, string>> = {
   "activities": "actividades",
 };
 
-export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };
+export const ES_BY_HAND: Readonly<Record<string, string>> = BY_HAND;

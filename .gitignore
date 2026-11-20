@@ -147,3 +147,4 @@ desktop/google-oauth-desktop.json
 
 # Course workbooks: scripts/build_course_files.js turns them into assets/courses/.
 assets/decks/
+assets/data/foods_reference.patch.gz

@@ -1,6 +1,6 @@
 // In short lines for the multipleSclerosis reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'ms-overview': 'In MS, the immune system attacks the brain and spinal cord. It damages the coating that protects nerves.',
   'ms-ebv-trigger': 'A 20 year study of over 10 million people found almost every MS case came after one common virus, EBV. The virus raised MS risk 32 times.',

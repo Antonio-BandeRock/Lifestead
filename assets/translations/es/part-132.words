@@ -1,0 +1,9 @@
+{
+ "{meal} at {time} has about {amount} of {nutrient}.": "{meal} a las {time} tiene más o menos {amount} de {nutrient}.",
+ "Taking this dose at {time} or later leaves {hours} hours after the meal.": "Tomar esta dosis a las {time} o más tarde deja {hours} horas después de la comida.",
+ "Taking this dose at {time} or later leaves 1 hour after the meal.": "Tomar esta dosis a las {time} o más tarde deja 1 hora después de la comida.",
+ "Eating it at {time} or later leaves {hours} hours after this dose.": "Comerla a las {time} o más tarde deja {hours} horas después de esta dosis.",
+ "Eating it at {time} or later leaves 1 hour after this dose.": "Comerla a las {time} o más tarde deja 1 hora después de esta dosis.",
+ "Nothing with fat in it is planned or logged within {hours} hours of this dose.": "No hay nada con grasa planeado ni registrado a menos de {hours} horas de esta dosis.",
+ "Meals and schedule as of {freshness}.": "Comidas y agenda revisadas: {freshness}."
+}

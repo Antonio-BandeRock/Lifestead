@@ -1,6 +1,6 @@
 // In short lines for the pcos reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-ivf': 'IVF is a fertility treatment. An egg and sperm are joined in a lab, and the embryo is then placed in the womb.',
   'glossary-ogtt': 'An OGTT is a blood sugar test. You drink a sweet drink, and your blood sugar is checked again two hours later.',

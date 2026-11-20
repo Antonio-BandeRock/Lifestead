@@ -1,6 +1,6 @@
 // In short lines for the type1Diabetes reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-dka': 'DKA means diabetic ketoacidosis. It happens when the body lacks insulin and acids build up in the blood. It is an emergency that needs care fast.',
   'type1-overview': 'In type 1 diabetes, the immune system destroys the cells that make insulin. It is not caused by how a person lives.',

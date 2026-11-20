@@ -1,6 +1,6 @@
 // In short lines for the psoriasis reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-pasi': 'PASI is a score for how much skin psoriasis covers and how red, thick and scaly it is. PASI75 means a 75% improvement, the usual bar for trial success.',
   'psoriasis-overview': 'In psoriasis, the immune system makes skin cells grow far too fast. They pile up into thick, scaly patches, and the disease reaches past the skin.',

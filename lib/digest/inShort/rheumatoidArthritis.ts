@@ -1,6 +1,6 @@
 // In short lines for the rheumatoidArthritis reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'glossary-ccp-anti-ccp':
     'Anti-CCP is a blood test for RA. It is more exact than the older rheumatoid factor test and can turn positive years before symptoms.',

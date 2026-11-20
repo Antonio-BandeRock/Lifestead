@@ -1,0 +1,4 @@
+{
+ "Drinks: {amount} in {drinks}{without}": "Bebidas: {amount} en {drinks}{without}",
+ "Drinks: {drinks}{without}": "Bebidas: {drinks}{without}"
+}

@@ -1,6 +1,6 @@
 // In short lines for the makingItPay reading, keyed by entry id. Grade 8 or
 // under, checked by scripts/test_in_short.js. Spanish lives in the reading
-// table (lib/translations/es/reading-*.ts) like every other reading line.
+// table (assets/translations/es/reading-*.words) like every other reading line.
 export const LINES: Readonly<Record<string, string>> = {
   'pay-picture-business-survival': 'Of US businesses with staff opened in 2014, about half were still open five years later. About a third were open after ten years.',
   'pay-picture-income-swings': 'In a 2024 US survey, 59% of self-employed adults said their income changed from month to month. For all adults it was 29%.',
