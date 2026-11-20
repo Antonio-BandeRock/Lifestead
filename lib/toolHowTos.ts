@@ -576,6 +576,9 @@ export type ToolMark =
   | 'findMeal.menu'
   | 'findMeal.menuPhoto'
   | 'scan.frame'
+  | 'scan.byName'
+  | 'scan.nameSearch'
+  | 'scan.fromLabel'
   | 'scan.ingredientsPhoto'
   | 'scan.continue'
   | 'scan.readAloud'
@@ -1065,27 +1068,27 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'What it supplies is counted beside what your food supplies, so you can see which of the two met a target.',
     },
     {
-      key: 'supplementPhoto',
-      title: 'Fill a supplement from a photo of its label',
-      steps: [
-        { say: 'Tap + Supplement and type its name.', mark: 'myMeds.supplement' },
-        { say: 'Tap Photograph the Label and take a photo of the table on the bottle, with the ingredients list under it if it fits, or tap Use a Photo You Have.', mark: 'myMeds.labelPhoto' },
-        { say: 'The words read from the photo go in the box, and each nutrient it understood becomes an ingredient, with the form the ingredients list names, such as retinyl palmitate. Check every amount against the bottle, then tap Add supplement.', mark: 'myMeds.saveSupplement' },
-      ],
-      forYou: 'A label in English or Spanish is read on the phone itself; the photo is not sent anywhere.',
-    },
-    {
       key: 'supplementStorePicture',
       title: "Fill a supplement from a store's picture of its label",
       steps: [
         { say: "Open the product on a store website or app, such as Amazon, Mercado Libre, Walmart, a pharmacy or the maker's site, and find the exact name and size printed on your bottle.", mark: 'myMeds.storeLabelHelp' },
         { say: 'Go through its pictures to the nutrition table (Supplement Facts, or Información nutrimental on a Mexican label) and tap it so it opens full size. Save the ingredients list too if it is in another picture, since it names each form.', mark: 'myMeds.storeLabelHelp' },
         { say: 'Save the picture: in a web browser, press and hold it and tap Download image. In a store app that will not save it, zoom until the table fills the screen, take a screenshot and crop it to the table.', mark: 'myMeds.storeLabelHelp' },
-        { say: 'Here, tap + Supplement and type its name.', mark: 'myMeds.supplement' },
+        { say: 'Here, tap + Supplement. The label comes first on the form.', mark: 'myMeds.supplement' },
         { say: 'Tap Use a Photo You Have and pick the picture. Up to four pictures of one label can be picked together, such as the table and the ingredients list.', mark: 'myMeds.labelLibrary' },
-        { say: 'Check every row against the bottle you hold, since a store can show an older label or one sold in another country, then tap Add supplement.', mark: 'myMeds.saveSupplement' },
+        { say: 'Type its name, then check every row against the bottle you hold and fill in anything it missed, since a store can show an older label or one sold in another country. Tap Add supplement.', mark: 'myMeds.saveSupplement' },
       ],
-      forYou: "A store's picture is flat, sharp and evenly lit, so it reads better than a photo of a curved bottle. The picture is read on the phone and sent nowhere.",
+      forYou: "The label is the best start for most of what is in it, and a store's picture is flat, sharp and evenly lit, so it reads better than a photo of a curved bottle. The picture is read on the phone and sent nowhere.",
+    },
+    {
+      key: 'supplementPhoto',
+      title: 'Fill a supplement from a photo of its label',
+      steps: [
+        { say: 'Tap + Supplement. The label comes first on the form.', mark: 'myMeds.supplement' },
+        { say: 'Tap Photograph the Label and take a photo of the table on the bottle, holding it so the table faces you flat, with the ingredients list under it if it fits.', mark: 'myMeds.labelPhoto' },
+        { say: 'Each nutrient it understood becomes an ingredient, with the form the ingredients list names, such as retinyl palmitate. Type its name, check every amount against the bottle, fill in anything it missed, then tap Add supplement.', mark: 'myMeds.saveSupplement' },
+      ],
+      forYou: 'A label in English or Spanish is read on the phone itself; the photo is not sent anywhere.',
     },
     {
       key: 'label',
@@ -1095,6 +1098,27 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Scan the barcode on the box, type the code from the pharmacy label, or type the name of the medicine.' },
       ],
       forYou: 'You can read the printed label of a medicine without the box in your hand.',
+    },
+    {
+      key: 'nameFromElsewhere',
+      title: 'Look up a medicine sold under another name',
+      steps: [
+        { say: 'Tap Look up a label.', mark: 'myMeds.label' },
+        { say: 'Type the name on the box, such as levotiroxina, and tap Search by Name. A name from another country is matched to the U.S. name for the same active ingredient where RxNorm knows it, and the screen says what it was matched to.' },
+        { say: 'A bottle bought in Spain can be scanned, or its national code (C.N.) typed: the Spanish medicines register answers, and U.S. Labels for the Same Ingredient opens the matching U.S. labels.' },
+        { say: 'Tap Bought Outside the United States? to read what is known about the country you bought it in.' },
+      ],
+      forYou: 'The same active ingredient sold under another name can still be read about, and the app says plainly where a country keeps its list out of reach.',
+    },
+    {
+      key: 'nameFromPicture',
+      title: 'Read a medicine name from a picture',
+      steps: [
+        { say: 'Tap Look up a label.', mark: 'myMeds.label' },
+        { say: "Save a store's picture of the box or bottle, which shows the label flat, then tap Read a Name From a Picture and pick it. Or tap Take a Picture Instead." },
+        { say: 'Tap the line that is the name of the medicine, and it is searched.' },
+      ],
+      forYou: 'A curved bottle reads badly in a photo, so a flat picture from a store is the surer way. The picture is read on the phone and sent nowhere.',
     },
     {
       key: 'bottleFromElsewhere',
@@ -5261,11 +5285,31 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Scan a product',
       steps: [
         { say: 'Point your camera at the barcode inside the frame.', mark: 'scan.frame', stay: true },
-        { say: 'If the product is not found, tap Take a Photo of the Ingredients and photograph its ingredient list.', mark: 'scan.ingredientsPhoto', stay: true },
-        { say: 'Check the words it read, then tap Continue.', mark: 'scan.continue' },
+        { say: 'If the product is not found, type the name on the package and tap Search by Name, then pick the one whose package matches yours.', mark: 'scan.nameSearch', stay: true },
         { say: 'Read what it says about the product.' },
       ],
       forYou: 'You see what is in a packaged food, and anything in it that touches what you set in Profile, while still in the shop.',
+    },
+    {
+      key: 'byName',
+      title: 'Find a product with no barcode to scan',
+      steps: [
+        { say: 'Tap No Barcode? Search by Name.', mark: 'scan.byName' },
+        { say: 'Type the name printed on the package and tap Search by Name. Products sold in your country come first.', mark: 'scan.nameSearch', stay: true },
+        { say: 'Tap the one whose package matches yours.' },
+      ],
+      forYou: 'A product with a worn or missing barcode, or one bought online, can still be looked up.',
+    },
+    {
+      key: 'fromLabel',
+      title: 'Fill in a product from its label',
+      steps: [
+        { say: 'When a product is not found, type the name on the package.', mark: 'scan.nameSearch', stay: true },
+        { say: 'Tap Fill It In From the Label.', mark: 'scan.fromLabel' },
+        { say: 'Tap Take a Photo of the Ingredients, or choose a saved picture of the label from a store page, which shows it flat.', mark: 'scan.ingredientsPhoto', stay: true },
+        { say: 'Fix anything it read wrong, fill in what it missed, then tap Continue.', mark: 'scan.continue' },
+      ],
+      forYou: 'A product nobody has added yet is still checked against what you set in Profile, starting from what its label says.',
     },
     {
       key: 'readAloud',

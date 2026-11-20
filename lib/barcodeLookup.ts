@@ -33,6 +33,8 @@
 //   real product, Cheerios, returned zero hits; the same search with the
 //   real 14-digit padded value returned exactly one, correct hit).
 
+import { getLanguage } from './language';
+import { firstBrand, localizedField, localizedFieldList } from './offText';
 import { readOpenFoodFactsProcessing, type NovaGroup } from './productProcessing';
 import { householdProductFromResponse, type HouseholdLookupSource, type HouseholdProduct } from './scanToList';
 
@@ -128,13 +130,15 @@ async function lookupOpenFoodFacts(barcode: string): Promise<LookedUpProduct | n
     if (typeof raw !== 'number' || Number.isNaN(raw)) continue;
     nutrients.push({ code: entry.code, amountPer100g: entry.multiplier ? raw * entry.multiplier : raw });
   }
-  const name = typeof product.product_name === 'string' && product.product_name.trim() ? product.product_name.trim() : null;
+  // Read in any language: many Mexican products carry only product_name_es.
+  const language = getLanguage();
+  const name = localizedField(product, 'product_name', language);
   if (!name) return null;
   return {
     barcode,
     name,
-    brand: typeof product.brands === 'string' && product.brands.trim() ? product.brands.split(',')[0].trim() : null,
-    ingredientsText: typeof product.ingredients_text === 'string' && product.ingredients_text.trim() ? product.ingredients_text.trim() : null,
+    brand: firstBrand(product.brands),
+    ingredientsText: localizedField(product, 'ingredients_text', language),
     imageUrl:
       (typeof product.image_front_url === 'string' && product.image_front_url) ||
       (typeof product.image_url === 'string' && product.image_url) ||
@@ -234,10 +238,10 @@ export async function lookupHouseholdProductByBarcode(barcode: string): Promise<
   const trimmed = barcode.trim();
   if (!trimmed) return null;
   for (const { base, source } of HOUSEHOLD_SOURCES) {
-    const response = await fetch(`${base}/${encodeURIComponent(trimmed)}.json?fields=product_name,brands`);
+    const response = await fetch(`${base}/${encodeURIComponent(trimmed)}.json?fields=${localizedFieldList('product_name')},brands`);
     if (response.status === 404) continue;
     if (!response.ok) throw new Error(`${source} lookup failed with status ${response.status}`);
-    const found = householdProductFromResponse(await response.json(), trimmed, source);
+    const found = householdProductFromResponse(await response.json(), trimmed, source, getLanguage());
     if (found) return found;
   }
   return null;

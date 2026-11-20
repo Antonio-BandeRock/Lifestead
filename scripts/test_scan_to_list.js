@@ -36,7 +36,8 @@ function loadModule(relPath, deps = {}) {
 }
 
 const C = loadModule('lib/choiceOrder.ts');
-const S = loadModule('lib/scanToList.ts', { './choiceOrder': C });
+const O = loadModule('lib/offText.ts');
+const S = loadModule('lib/scanToList.ts', { './choiceOrder': C, './offText': O });
 
 let failures = 0;
 function check(label, actual, expected) {
@@ -67,6 +68,11 @@ check(
   'beauty starts in Personal Care',
   S.householdProductFromResponse({ status: 1, product: { product_name: 'Toothpaste' } }, '2', 'OpenBeautyFacts'),
   { barcode: '2', name: 'Toothpaste', brand: null, source: 'OpenBeautyFacts', group: 'Personal Care' },
+);
+check(
+  'a Spanish-only name is read (1.0.95.2)',
+  S.householdProductFromResponse({ status: 1, product: { product_name: '', product_name_es: 'Jabón líquido', brands: ['Salvo'] } }, '4', 'OpenProductsFacts', 'en'),
+  { barcode: '4', name: 'Jabón líquido', brand: 'Salvo', source: 'OpenProductsFacts', group: 'Around the House' },
 );
 check('a miss', S.householdProductFromResponse({ status: 0 }, '3', 'OpenProductsFacts'), null);
 check('no name', S.householdProductFromResponse({ status: 1, product: { product_name: ' ' } }, '3', 'OpenProductsFacts'), null);

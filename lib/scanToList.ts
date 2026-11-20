@@ -11,6 +11,7 @@
 // scripts/test_scan_to_list.js can check it directly.
 
 import { compareLabels } from './choiceOrder';
+import { firstBrand, localizedField } from './offText';
 
 export type HouseholdLookupSource = 'OpenProductsFacts' | 'OpenBeautyFacts';
 
@@ -48,15 +49,16 @@ export function householdProductFromResponse(
   data: unknown,
   barcode: string,
   source: HouseholdLookupSource,
+  language = 'en',
 ): HouseholdProduct | null {
   if (!data || typeof data !== 'object') return null;
   const body = data as { status?: unknown; product?: unknown };
   if (body.status !== 1 || !body.product || typeof body.product !== 'object') return null;
-  const product = body.product as { product_name?: unknown; brands?: unknown };
-  const name = typeof product.product_name === 'string' ? product.product_name.replace(/\s+/g, ' ').trim() : '';
+  const product = body.product as Record<string, unknown>;
+  // Any language: a product may carry only product_name_es (1.0.95.2).
+  const name = localizedField(product, 'product_name', language);
   if (!name) return null;
-  const brand =
-    typeof product.brands === 'string' && product.brands.trim() ? product.brands.split(',')[0].trim() : null;
+  const brand = firstBrand(product.brands);
   return { barcode, name, brand, source, group: defaultGroupFor(source) };
 }
 

@@ -34,6 +34,7 @@ export type PhoneOnlyFeature =
   | 'readMenu'
   | 'readLabSheet'
   | 'readSupplementLabel'
+  | 'readMedicineName'
   | 'healthConnect'
   | 'wifiSync'
   | 'scanPairingCode'
@@ -50,6 +51,8 @@ export type PhoneOnlyNotice = {
 };
 
 const MESSAGES: Record<PhoneOnlyFeature, string> = {
+  readMedicineName:
+    "Reading the words in a picture runs on the phone, and this computer has no way to do it yet. Save the store's picture of the label on your phone and read it from Lifestead there, or type the generic name here.",
   scanProduct:
     "Scanning a product uses the phone's camera, and this computer has no way to do it. Open Lifestead on your phone and scan the product there.",
   photo:
@@ -95,6 +98,7 @@ const PLAYFUL_TAILS: Record<PhoneOnlyFeature, PlayfulKey> = {
   readMenu: 'phoneOnlyCamera',
   readLabSheet: 'phoneOnlyCamera',
   readSupplementLabel: 'phoneOnlyCamera',
+  readMedicineName: 'phoneOnlyCamera',
   scanPairingCode: 'phoneOnlyCamera',
   scanMedicineCode: 'phoneOnlyCamera',
   scanHouseholdCode: 'phoneOnlyCamera',

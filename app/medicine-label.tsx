@@ -66,9 +66,34 @@ import {
   versionCheckMessage,
   type LabelDocument,
   type LookupAsk,
+  CIMA_SOURCE_NOTE,
+  OUTSIDE_US_TITLE,
+  PICTURE_NOTHING_READ,
+  PICTURE_PICK_PROMPT,
+  PICTURE_TIP,
+  cimaNotFoundMessage,
+  crossingNote,
+  crossingNotFoundMessage,
+  nameCandidates,
+  outsideUsGuide,
+  scannedSpanishCode,
+  spanishIngredientQuery,
+  typedSpanishCode,
+  type SpanishMedicine,
 } from '../lib/medicineLabel';
 import { findMedKeepingLabel, getSavedLabel, removeSavedLabel, saveLabel, type SavedLabel } from '../lib/medicineLabelDb';
-import { lookUpLabel } from '../lib/medicineLabelLookup';
+import { lookUpLabel, lookUpSpainByCode, type Crossing } from '../lib/medicineLabelLookup';
+import {
+  SEARCH_UNREACHABLE_MESSAGE,
+  searchCaption,
+  searchNoneMessage,
+  searchOpenFoodFacts,
+  type FoundProduct,
+} from '../lib/openFactsSearch';
+import * as ImagePicker from 'expo-image-picker';
+import { useInfoAlert } from '../components/InfoAlert';
+import { recognizeLinesFromImage } from '../lib/ocr';
+import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
 import { explainNotYet } from '../lib/notYet';
 import { t } from '../lib/i18n';
 import { leaveLabelRuleDraft } from '../lib/labelRuleDraft';
@@ -103,7 +128,7 @@ type Shown = {
 };
 
 // The last lookup: labels to pick from, or one sentence and nothing else.
-type Found = { ask: LookupAsk; labels: LabelDocument[]; total: number; sent: string; retrievedAt: string };
+type Found = { ask: LookupAsk; labels: LabelDocument[]; total: number; sent: string; retrievedAt: string; crossing?: Crossing };
 
 export default function MedicineLabelScreen() {
   const scrollPadding = useFloatingButtonScrollPadding();
@@ -145,6 +170,14 @@ export default function MedicineLabelScreen() {
   const [savedNote, setSavedNote] = useState<string | null>(null);
   const [newer, setNewer] = useState<{ document: LabelDocument; retrievedAt: string } | null>(null);
   const [open, setOpen] = useState<Set<string>>(new Set(['boxed_warning']));
+  // Outside the United States (1.0.95.2): a Spanish box found in CIMA, the
+  // lines read from a picture, and products found by name in Open Food Facts.
+  const [spain, setSpain] = useState<{ medicine: SpanishMedicine; retrievedAt: string } | null>(null);
+  const [pictureLines, setPictureLines] = useState<string[] | null>(null);
+  const [readingPicture, setReadingPicture] = useState(false);
+  const [offHits, setOffHits] = useState<{ products: FoundProduct[]; countryTag: string | null } | null>(null);
+  const [nameMissed, setNameMissed] = useState(false);
+  const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
   const [permission, requestPermission] = useCameraPermissions();
   const handledScan = useRef(false);
@@ -236,11 +269,18 @@ export default function MedicineLabelScreen() {
     setFound(null);
     setMessage(null);
     setShown(null);
+    setNameMissed(false);
     try {
       const outcome = await lookUpLabel(ask);
       if (outcome.kind === 'unreachable') setMessage(unreachableMessage(outcome.status));
-      else if (outcome.kind === 'not_found') setMessage(notFoundMessage(ask));
-      else setFound({ ask, labels: outcome.labels, total: outcome.total, sent: outcome.sent, retrievedAt: outcome.retrievedAt });
+      else if (outcome.kind === 'not_found') {
+        setMessage(outcome.crossing ? crossingNotFoundMessage(outcome.crossing.typed, outcome.crossing.usName) : notFoundMessage(ask));
+        // A name openFDA has nothing for may be a supplement or a product
+        // sold elsewhere: Open Food Facts can be searched for it next.
+        if (ask.kind === 'name') setNameMissed(true);
+      } else {
+        setFound({ ask, labels: outcome.labels, total: outcome.total, sent: outcome.sent, retrievedAt: outcome.retrievedAt, crossing: outcome.crossing });
+      }
     } finally {
       setBusy(false);
     }
@@ -254,6 +294,26 @@ export default function MedicineLabelScreen() {
     setMessage(null);
     setProduct(null);
     setDatabaseLines(null);
+    setSpain(null);
+    setOffHits(null);
+    setNameMissed(false);
+    // A Spanish box: its barcode carries the C.N., which CIMA answers for.
+    const cn = scannedSpanishCode(reading);
+    if (cn) {
+      setAsking("CIMA, Spain's register of medicines");
+      setBusy(true);
+      try {
+        const spainAnswer = await lookUpSpainByCode(cn);
+        if (spainAnswer.kind === 'found') {
+          setSpain({ medicine: spainAnswer.medicine, retrievedAt: spainAnswer.retrievedAt });
+          return;
+        }
+      } finally {
+        setBusy(false);
+        setAsking('openFDA');
+      }
+      // Nothing in CIMA: the Open Facts databases are asked as for any retail code.
+    }
     const retail = retailCodeOf(reading);
     if (!retail) {
       setMessage(notADrugCodeMessage(reading));
@@ -290,20 +350,132 @@ export default function MedicineLabelScreen() {
     [medsClosed, runLookup, runProductLookup],
   );
 
+  // A Spanish national code typed from the box (C.N. 726805.3).
+  const lookUpSpainCode = useCallback(async (cn: string) => {
+    setFound(null);
+    setShown(null);
+    setMessage(null);
+    setProduct(null);
+    setDatabaseLines(null);
+    setSpain(null);
+    setOffHits(null);
+    setNameMissed(false);
+    setAsking("CIMA, Spain's register of medicines");
+    setBusy(true);
+    try {
+      const answer = await lookUpSpainByCode(cn);
+      if (answer.kind === 'found') setSpain({ medicine: answer.medicine, retrievedAt: answer.retrievedAt });
+      else if (answer.kind === 'not_found') setMessage(cimaNotFoundMessage(cn));
+      else setMessage("Could not reach CIMA, Spain's register of medicines, so nothing was looked up. Check the connection and try again.");
+    } finally {
+      setBusy(false);
+      setAsking('openFDA');
+    }
+  }, []);
+
   function lookUpCode() {
     if (!codeText.trim()) return explainNotYet('Type the code from the box or the pharmacy label first.');
     setAskedFrom('typed');
+    const cn = typedSpanishCode(codeText);
+    if (cn) {
+      setAskedCode(null);
+      setBottleOf(null);
+      lookUpSpainCode(cn);
+      return;
+    }
     askAboutCode(readTypedCode(codeText));
   }
 
-  function searchName() {
-    if (!nameText.trim()) return explainNotYet("Type the medicine's brand or generic name first.");
+  function searchNameFor(name: string) {
     setAskedFrom('typed');
     setAskedCode(null);
     setBottleOf(null);
     setProduct(null);
     setDatabaseLines(null);
-    runLookup({ kind: 'name', name: nameText });
+    setSpain(null);
+    setOffHits(null);
+    setPictureLines(null);
+    runLookup({ kind: 'name', name });
+  }
+
+  function searchName() {
+    if (!nameText.trim()) return explainNotYet("Type the medicine's brand or generic name first.");
+    searchNameFor(nameText);
+  }
+
+  // The same ingredient's U.S. labels, after CIMA named a Spanish box.
+  function searchUsForSpain() {
+    if (!spain || spain.medicine.ingredients.length === 0) {
+      return explainNotYet('CIMA listed no active ingredient for this box, so there is no name to search with.');
+    }
+    const query = spanishIngredientQuery(spain.medicine);
+    setNameText(query);
+    searchNameFor(query);
+  }
+
+  // Read a Name From a Picture: the words on a saved picture of the label,
+  // offered as lines to tap. Best from a store's flat picture.
+  async function readNameFromPicture(from: 'camera' | 'library') {
+    if (announcePhoneOnly(showInfoAlert, 'readMedicineName')) return;
+    setReadingPicture(true);
+    try {
+      if (from === 'camera') {
+        const allowed = await ImagePicker.requestCameraPermissionsAsync();
+        if (!allowed.granted) {
+          showInfoAlert('Camera access needed', 'Lifestead needs your camera to take the picture. You can choose a saved picture instead, or type the name.');
+          return;
+        }
+      }
+      const shot =
+        from === 'camera'
+          ? await ImagePicker.launchCameraAsync({ quality: 0.8 })
+          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8 });
+      if (shot.canceled || shot.assets.length === 0) return;
+      const lines = await recognizeLinesFromImage(shot.assets[0].uri);
+      const candidates = lines ? nameCandidates(lines) : [];
+      if (candidates.length === 0) {
+        setPictureLines(null);
+        showInfoAlert('Nothing read', PICTURE_NOTHING_READ);
+        return;
+      }
+      setPictureLines(candidates);
+    } catch (error) {
+      console.error('[medicine-label] Failed to read the picture', error);
+      showInfoAlert('Could not read the picture', PICTURE_NOTHING_READ);
+    } finally {
+      setReadingPicture(false);
+    }
+  }
+
+  function takeLineAsName(line: string) {
+    setNameText(line);
+    searchNameFor(line);
+  }
+
+  // A name openFDA had nothing for, looked for in Open Food Facts, the
+  // person's country first. A tapped result is read like a scanned code.
+  async function searchOpenFacts() {
+    if (!nameText.trim()) return explainNotYet('Type the name printed on the box first.');
+    setAsking('Open Food Facts');
+    setBusy(true);
+    setMessage(null);
+    setOffHits(null);
+    try {
+      const outcome = await searchOpenFoodFacts(nameText);
+      if (outcome.kind === 'found') setOffHits({ products: outcome.products, countryTag: outcome.countryTag });
+      else if (outcome.kind === 'none') setMessage(searchNoneMessage(nameText));
+      else setMessage(SEARCH_UNREACHABLE_MESSAGE);
+    } finally {
+      setBusy(false);
+      setAsking('openFDA');
+    }
+  }
+
+  function pickOffProduct(code: string) {
+    setOffHits(null);
+    setNameMissed(false);
+    setCodeText(code);
+    askAboutCode(readTypedCode(code));
   }
 
   // Meds to tie a bottle to, read when a code has been asked about and the
@@ -681,8 +853,74 @@ export default function MedicineLabelScreen() {
         </View>
       ) : null}
 
+      {nameMissed && !busy ? (
+        <View style={styles.card}>
+          <Text style={styles.body}>
+            A supplement, or a product sold outside the United States, may be in Open Food Facts, filled in by the people who use it.
+          </Text>
+          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={searchOpenFacts}>
+            <Text style={styles.secondaryButtonText}>Look for It in Open Food Facts</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
+
+      {offHits && !busy ? (
+        <View style={styles.card}>
+          <Text style={styles.caption}>{searchCaption(offHits.countryTag)}</Text>
+          {offHits.products.map((p) => (
+            <TouchableOpacity key={p.code} style={styles.pickRow} activeOpacity={0.8} onPress={() => pickOffProduct(p.code)}>
+              <View style={styles.pickText}>
+                <Text style={styles.pickName}>{p.name}</Text>
+                <Text style={styles.caption}>{[p.brand, p.quantity, p.code].filter(Boolean).join(' · ')}</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+            </TouchableOpacity>
+          ))}
+        </View>
+      ) : null}
+
+      {spain && !busy ? (
+        <View style={styles.card}>
+          <Text style={styles.title}>{spain.medicine.name}</Text>
+          {spain.medicine.maker ? <Text style={styles.caption}>{t('Holder: {maker}', { maker: spain.medicine.maker })}</Text> : null}
+          {spain.medicine.ingredients.length ? (
+            <>
+              <Text style={styles.label}>Active ingredients</Text>
+              {spain.medicine.ingredients.map((i) => (
+                <View key={i.name} style={styles.amountRow}>
+                  <Text style={styles.pickName}>{i.name}</Text>
+                  {i.amount ? <Text style={styles.strong}>{i.amount}</Text> : null}
+                </View>
+              ))}
+            </>
+          ) : null}
+          {spain.medicine.prescription === null ? null : (
+            <Text style={styles.body}>
+              {spain.medicine.prescription ? 'Sold in Spain with a prescription.' : 'Sold in Spain without a prescription.'}
+            </Text>
+          )}
+          <Text style={styles.caption}>{CIMA_SOURCE_NOTE}</Text>
+          <Text style={styles.caption}>
+            {t('Sent: the national code {cn}. Retrieved {when}.', { cn: spain.medicine.cn, when: readableDate(spain.retrievedAt) })}
+          </Text>
+          {spain.medicine.leafletUrl ? (
+            <TouchableOpacity
+              style={styles.secondaryButton}
+              activeOpacity={0.85}
+              onPress={() => Linking.openURL(spain.medicine.leafletUrl as string)}
+            >
+              <Text style={styles.secondaryButtonText}>Open the Leaflet (Prospecto)</Text>
+            </TouchableOpacity>
+          ) : null}
+          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={searchUsForSpain}>
+            <Text style={styles.secondaryButtonText}>U.S. Labels for the Same Ingredient</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
+
       {found ? (
         <View style={styles.card}>
+          {found.crossing ? <Text style={styles.strong}>{crossingNote(found.crossing.typed, found.crossing.usName)}</Text> : null}
           <Text style={styles.body}>{pickPrompt(found.ask, found.labels.length, found.total)}</Text>
           <Text style={styles.caption}>{retrievalStatement(found.sent, found.retrievedAt)}</Text>
           {found.labels.map((doc) => (
@@ -762,9 +1000,18 @@ export default function MedicineLabelScreen() {
         <Text style={styles.body}>
           Scan the barcode on the box, type the code printed on it (the NDC, 10 or 11 digits), or search by name. The code or
           the name is sent to openFDA, the U.S. Food and Drug Administration&apos;s public data service, and nothing else is. A
-          barcode from a bottle bought outside the United States is sent to Open Food Facts instead.
+          barcode from a bottle bought outside the United States is sent to Open Food Facts instead, and a Spanish box to
+          CIMA, Spain&apos;s register of medicines. A name openFDA does not know, such as levotiroxina, is sent to RxNorm for
+          its U.S. ingredient name.
         </Text>
         <Text style={styles.caption}>{LABEL_SOURCE_NOTE}</Text>
+        <TouchableOpacity
+          style={styles.secondaryButton}
+          activeOpacity={0.85}
+          onPress={() => showInfoAlert(OUTSIDE_US_TITLE, outsideUsGuide())}
+        >
+          <Text style={styles.secondaryButtonText}>Bought Outside the United States?</Text>
+        </TouchableOpacity>
         {saved ? (
           <TouchableOpacity
             style={styles.secondaryButton}
@@ -806,9 +1053,41 @@ export default function MedicineLabelScreen() {
         <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} disabled={busy} onPress={searchName}>
           <Text style={styles.secondaryButtonText}>Search by Name</Text>
         </TouchableOpacity>
+        <Text style={styles.label}>Or the name from a picture of the label</Text>
+        <Text style={styles.caption}>{PICTURE_TIP}</Text>
+        <TouchableOpacity
+          style={styles.secondaryButton}
+          activeOpacity={0.85}
+          disabled={readingPicture}
+          onPress={() => readNameFromPicture('library')}
+        >
+          <Text style={styles.secondaryButtonText}>{readingPicture ? 'Reading the Picture…' : 'Read a Name From a Picture'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.secondaryButton}
+          activeOpacity={0.85}
+          disabled={readingPicture}
+          onPress={() => readNameFromPicture('camera')}
+        >
+          <Text style={styles.secondaryButtonText}>Take a Picture Instead</Text>
+        </TouchableOpacity>
+        {pictureLines ? (
+          <>
+            <Text style={styles.body}>{PICTURE_PICK_PROMPT}</Text>
+            {pictureLines.map((line) => (
+              <TouchableOpacity key={line} style={styles.pickRow} activeOpacity={0.8} onPress={() => takeLineAsName(line)}>
+                <View style={styles.pickText}>
+                  <Text style={styles.pickName}>{line}</Text>
+                </View>
+                <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+              </TouchableOpacity>
+            ))}
+          </>
+        ) : null}
       </View>
 
       {askedFrom === 'typed' ? answer : null}
+      {infoAlertElement}
     </WalkScrollView>
   );
 }

@@ -208,5 +208,66 @@ check('the not-found answer offers a store picture of the label', nf.includes('s
 check('openFDA is named as not asked for a Mexican code', M.openFdaNotAskedLine(M.readScannedCode('7501008491966')).startsWith('openFDA: not asked.'), true);
 check('the people-entered caveat says the maker did not type it', M.OPEN_FACTS_CAVEAT.includes('the maker did not'), true);
 
+// ---- Names from other countries (1.0.95.2, Tony 2026-11-20).
+check('an accented letter is kept, not cut out', M.cleanMedicineName('Levotiroxina sódica'), 'Levotiroxina sódica');
+check('accents come off for openFDA', M.plainLetters('levotiroxina sódica'), 'levotiroxina sodica');
+check('RxNorm is asked without accents', M.rxnavApproximateUrl('levotiroxina sódica').includes('term=levotiroxina%20sodica'), true);
+check('the rank-1 concept is taken', M.bestRxcui({ approximateGroup: { candidate: [{ rxcui: '9', rank: '2' }, { rxcui: '10582', rank: '1' }] } }), '10582');
+check('no candidate is no concept', M.bestRxcui({ approximateGroup: {} }), null);
+check('ingredient names are read once each', M.ingredientNames({ relatedGroup: { conceptGroup: [{ tty: 'IN', conceptProperties: [{ name: 'levothyroxine' }, { name: 'levothyroxine' }] }] } }), ['levothyroxine']);
+check('a foreign name crosses to the U.S. name', M.crossedName('levotiroxina', ['levothyroxine']), 'levothyroxine');
+check('a mix is named alphabetically', M.crossedName('Augmentin', ['clavulanate', 'amoxicillin']), 'amoxicillin and clavulanate');
+check('the same name crosses to nothing', M.crossedName('Levothyroxine', ['levothyroxine']), null);
+check('no ingredient crosses to nothing', M.crossedName('xyz', []), null);
+const crossing = M.crossingNote('levotiroxina', 'levothyroxine');
+check('the crossing says same active ingredient', crossing.includes('same active ingredient'), true);
+check('the crossing says it is not the label for the box', crossing.includes('not for your box'), true);
+check('the crossing never says same medicine', /same medicine/i.test(crossing), false);
+check('a crossing miss says nothing is shown instead', M.crossingNotFoundMessage('x', 'y').includes('Nothing else is shown in its place'), true);
+
+// ---- Each country said plainly.
+check('Mexico says no list can be asked', M.countryMedicineNote('Mexico').includes('publishes no list an app can ask'), true);
+check('Spain names CIMA', M.countryMedicineNote('Spain').includes('CIMA'), true);
+check('a country not listed is still answered', M.countryMedicineNote('Peru').includes('Peru'), true);
+check('no country is still answered', M.countryMedicineNote(null).length > 0, true);
+const guide = M.outsideUsGuide();
+for (const where of ['Mexico', 'Spain', 'Canada', 'France', 'German', 'Japan', 'Australia', 'Sweden', 'Finland', 'Norway', 'NHS']) {
+  check(`the guide covers ${where}`, guide.includes(where), true);
+}
+check('the guide says a U.S. label describes a U.S. product', guide.includes('describes a U.S. product'), true);
+
+// ---- Spain's national code.
+check('a typed C.N. is read', M.typedSpanishCode('C.N. 726805.4'), '726805');
+check('a typed C.N. without a check digit is read', M.typedSpanishCode('cn 726805'), '726805');
+check('a bare number is not a C.N.', M.typedSpanishCode('726805'), null);
+check('a Spanish medicine barcode carries its C.N.', M.scannedSpanishCode(M.readScannedCode('8470007268054')), '726805');
+check('another barcode carries none', M.scannedSpanishCode(M.readScannedCode('7501008491966')), null);
+const es = M.toSpanishMedicine('726805', {
+  nombre: 'EUTIROX 100 microgramos comprimidos',
+  labtitular: 'Merck, S.L.',
+  receta: true,
+  principiosActivos: [{ nombre: 'LEVOTIROXINA SODICA', cantidad: '100', unidad: 'microgramos' }],
+  docs: [{ tipo: 1, url: 'a' }, { tipo: 2, urlHtml: 'https://cima.aemps.es/p.html' }],
+});
+check('CIMA is read', [es.name, es.maker, es.prescription, es.ingredients[0].amount, es.leafletUrl], ['EUTIROX 100 microgramos comprimidos', 'Merck, S.L.', true, '100 microgramos', 'https://cima.aemps.es/p.html']);
+check('an empty CIMA answer is nothing', M.toSpanishMedicine('1', {}), null);
+check('the ingredient query is the ingredient names', M.spanishIngredientQuery(es), 'LEVOTIROXINA SODICA');
+check('a CIMA miss names the code', M.cimaNotFoundMessage('726805').includes('726805'), true);
+
+// ---- A name read from a picture.
+check(
+  'picture lines: largest first, letters only, each once',
+  M.nameCandidates([
+    { text: 'Tome 1 al día', height: 10 },
+    { text: 'EUTIROX', height: 40 },
+    { text: 'Levotiroxina sódica', height: 20 },
+    { text: 'eutirox', height: 12 },
+    { text: '100 µg', height: 30 },
+  ]),
+  ['EUTIROX', 'Levotiroxina sódica', 'Tome 1 al día'],
+);
+check('no more lines than the limit', M.nameCandidates(Array.from({ length: 30 }, (_, i) => ({ text: `Linea${'abcdefghijklmnopqrstuvwxyz'[i % 26]}${i}`, height: i }))).length, M.PICTURE_LINE_LIMIT);
+check('the picture tip points to a store page', M.PICTURE_TIP.includes("store's page"), true);
+
 console.log(`${total - failures} of ${total} passed`);
 if (failures > 0) process.exit(1);

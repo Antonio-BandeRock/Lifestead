@@ -71,6 +71,20 @@ const GS1_PREFIXES: [number, number, string][] = [
   [500, 509, 'the United Kingdom'],
   [840, 849, 'Spain'],
   [930, 939, 'Australia'],
+  [640, 649, 'Finland'],
+  [700, 709, 'Norway'],
+  [730, 739, 'Sweden'],
+  [740, 745, 'Central America'],
+  [746, 746, 'the Dominican Republic'],
+  [759, 759, 'Venezuela'],
+  [770, 771, 'Colombia'],
+  [773, 773, 'Uruguay'],
+  [775, 775, 'Peru'],
+  [777, 777, 'Bolivia'],
+  [778, 779, 'Argentina'],
+  [780, 780, 'Chile'],
+  [784, 784, 'Paraguay'],
+  [786, 786, 'Ecuador'],
 ];
 
 function issuedIn(prefix3: string): string | null {
@@ -147,13 +161,20 @@ export function readTypedCode(raw: string): CodeReading {
 // ---------------------------------------------------------------------------
 // What gets sent
 
-// Letters, digits, spaces and the punctuation drug names use. Anything else
-// is dropped rather than passed into the search.
+// Letters in any alphabet (so levotiroxina sódica keeps its accent),
+// digits, spaces and the punctuation drug names use. Anything else is
+// dropped rather than passed into the search. Before 1.0.95.2 every
+// accented letter was dropped, which cut "sódica" into "s dica".
 export function cleanMedicineName(raw: string): string {
   return (raw ?? '')
-    .replace(/[^A-Za-z0-9 .,/+-]/g, ' ')
+    .replace(/[^\p{L}\p{N} .,/+-]/gu, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+/** The name without accents, the way openFDA spells every U.S. name. */
+export function plainLetters(name: string): string {
+  return name.normalize('NFD').replace(/\p{M}/gu, '');
 }
 
 function quoted(field: string, value: string): string {
@@ -166,7 +187,7 @@ export function codeQueryUrl(reading: Extract<CodeReading, { kind: 'ndc' }>): st
 }
 
 export function nameQueryUrl(name: string): string {
-  const clean = cleanMedicineName(name);
+  const clean = plainLetters(cleanMedicineName(name));
   const terms = [quoted('openfda.generic_name', clean), quoted('openfda.brand_name', clean)].join('+');
   return `${OPENFDA_LABEL_URL}?search=${terms}&limit=${NAME_SEARCH_LIMIT}`;
 }
@@ -313,9 +334,9 @@ export function matchLabels(ask: LookupAsk, results: unknown[], total: number): 
     const wanted = new Set(ask.reading.codes);
     kept = docs.filter((d) => (ask.reading.field === 'package_ndc' ? d.packageNdcs : d.productNdcs).some((c) => wanted.has(c)));
   } else if (ask.kind === 'name') {
-    const words = cleanMedicineName(ask.name).toLowerCase();
+    const words = plainLetters(cleanMedicineName(ask.name)).toLowerCase();
     const pattern = new RegExp(`(^|[^a-z0-9])${words.replace(/[.+/]/g, (c) => `\\${c}`)}($|[^a-z0-9])`);
-    kept = docs.filter((d) => [d.generic, d.brand].some((n) => !!n && pattern.test(n.toLowerCase())));
+    kept = docs.filter((d) => [d.generic, d.brand].some((n) => !!n && pattern.test(plainLetters(n).toLowerCase())));
   } else {
     kept = docs.filter((d) => d.setId === ask.setId);
   }
@@ -454,7 +475,7 @@ export function notFoundMessage(ask: LookupAsk): string {
 export function notADrugCodeMessage(reading: Exclude<CodeReading, { kind: 'ndc' }>): string {
   if (reading.kind === 'not_us') {
     const where = reading.issuedIn ? `a retail code issued in ${reading.issuedIn}` : 'a retail code issued outside the United States';
-    return `This is ${where}, not a U.S. drug code. openFDA holds only U.S. labels, so there is nothing to look up for it, and nothing else is shown in its place. Searching by the medicine's name may find the U.S. label for the same medicine.`;
+    return `This is ${where}, not a U.S. drug code. openFDA holds only U.S. labels, so there is nothing to look up for it there, and nothing else is shown in its place. ${countryMedicineNote(reading.issuedIn)} ${OUTSIDE_US_WAYS}`;
   }
   return "This is not a U.S. drug code (NDC). A pharmacy's barcode usually holds its prescription number instead. The NDC is often printed on the pharmacy label or the manufacturer's box as 10 or 11 digits, and you can type it in. Nothing was looked up.";
 }
@@ -528,3 +549,222 @@ export function openFdaNotAskedLine(reading: Exclude<CodeReading, { kind: 'ndc' 
 export function openFactsUnreachableMessage(): string {
   return 'None of the three databases could be reached, so nothing was looked up for this code. Check the connection and try again.';
 }
+
+// ---------------------------------------------------------------------------
+// A name from another country (1.0.95.2, Tony 2026-11-20: "maybe there is
+// possibly a way the meds could be cross correlated to US versions that are
+// the same other than their name"). openFDA holds only U.S. names, so a name
+// it does not know goes to RxNorm, the U.S. National Library of Medicine's
+// list of medicine names, which also holds international and Spanish names
+// (paracetamol, levotiroxina, metamizol) and brands sold elsewhere (Eutirox).
+// RxNorm answers with the U.S. ingredient name, and openFDA is asked again
+// with that. The screen says every step, and says that a label for the same
+// ingredient is not a label for the box. Checked live 2026-11-20: free, no
+// key, and open to a browser (CORS *), so the computer asks it too.
+
+export const RXNAV_BASE = 'https://rxnav.nlm.nih.gov/REST';
+
+export function rxnavApproximateUrl(name: string): string {
+  return `${RXNAV_BASE}/approximateTerm.json?term=${encodeURIComponent(plainLetters(cleanMedicineName(name)))}&maxEntries=4`;
+}
+
+export function rxnavIngredientsUrl(rxcui: string): string {
+  return `${RXNAV_BASE}/rxcui/${encodeURIComponent(rxcui)}/related.json?tty=IN`;
+}
+
+/** RxNorm's closest concept for a name, or null when it has none. */
+export function bestRxcui(body: unknown): string | null {
+  const candidates = (body as { approximateGroup?: { candidate?: unknown } } | null)?.approximateGroup?.candidate;
+  if (!Array.isArray(candidates)) return null;
+  const top = candidates.find((c) => c && typeof c === 'object' && String((c as { rank?: unknown }).rank) === '1') as
+    | { rxcui?: unknown }
+    | undefined;
+  return top && typeof top.rxcui === 'string' && top.rxcui ? top.rxcui : null;
+}
+
+/** The U.S. ingredient names RxNorm ties to a concept, in its order. */
+export function ingredientNames(body: unknown): string[] {
+  const groups = (body as { relatedGroup?: { conceptGroup?: unknown } } | null)?.relatedGroup?.conceptGroup;
+  if (!Array.isArray(groups)) return [];
+  const names: string[] = [];
+  for (const group of groups) {
+    const props = (group as { conceptProperties?: unknown } | null)?.conceptProperties;
+    if (!Array.isArray(props)) continue;
+    for (const p of props) {
+      const name = (p as { name?: unknown } | null)?.name;
+      if (typeof name === 'string' && name.trim() && !names.includes(name.trim())) names.push(name.trim());
+    }
+  }
+  return names;
+}
+
+/** The name openFDA is asked for after RxNorm, or null when nothing new was learned. */
+export function crossedName(typed: string, ingredients: string[]): string | null {
+  if (ingredients.length === 0) return null;
+  // U.S. names for a mix mostly run alphabetically (amoxicillin and clavulanate).
+  const name = [...ingredients].sort((a, b) => a.localeCompare(b)).join(' and ');
+  const same = plainLetters(cleanMedicineName(typed)).toLowerCase() === plainLetters(name).toLowerCase();
+  return same ? null : name;
+}
+
+export function crossingNote(typed: string, usName: string): string {
+  return `openFDA has no U.S. label named "${cleanMedicineName(typed)}". RxNorm, the U.S. National Library of Medicine's list of medicine names, gives its U.S. ingredient name as ${usName}, so these are U.S. labels for ${usName}. They are labels for the same active ingredient, not for your box: the strength, the other ingredients and the form can differ, so check them against the box you hold.`;
+}
+
+export function crossingSent(typed: string, usName: string): string {
+  return `the name "${cleanMedicineName(typed)}" to RxNorm, then the name "${usName}" to openFDA`;
+}
+
+export function crossingNotFoundMessage(typed: string, usName: string): string {
+  return `openFDA has no label with the name "${cleanMedicineName(typed)}". RxNorm gives its U.S. ingredient name as ${usName}, and openFDA has no label for that either. Nothing else is shown in its place.`;
+}
+
+// ---------------------------------------------------------------------------
+// What each country publishes (1.0.95.2, Tony 2026-11-20: "If it cannot be
+// done and this is a true limitation, it needs to be said in the app in that
+// area"). Checked 2026-11-20 for the countries whose languages the app is
+// meant to ship in, plus Mexico and Latin America. Sources: AEMPS CIMA REST
+// (live, open), ANSM BDPM (monthly files), Fimea (XML file), DMP FEST (file),
+// NHSBSA dm+d (NHS TRUD account), PZN (licensed), PMDA (registration, no
+// scraping), TGA ARTG (no API), COFEPRIS (no API).
+
+const COUNTRY_NOTES: Record<string, string> = {
+  Mexico: "COFEPRIS, Mexico's medicines regulator, publishes no list an app can ask, so no app can look up a Mexican box by its barcode.",
+  Canada: "Health Canada's Drug Product Database is searched by the DIN printed on the box, not by the barcode, and Lifestead does not ask it yet.",
+  Spain: "Spain's medicines agency (AEMPS) publishes CIMA, its register of every medicine sold in Spain, and Lifestead asks it for the box's national code (C.N.), which you can also type in.",
+  France: 'France publishes its medicines list (the BDPM) only as files updated each month, not as a service an app can ask, so Lifestead cannot look up a French box by its barcode.',
+  Germany: "A German box's pharmacy number (PZN) is held in a paid, licensed list, so no free service can look it up.",
+  'the United Kingdom': 'The NHS medicines list (dm+d) can be downloaded only with an NHS account, and Lifestead does not ask it, so a U.K. box cannot be looked up by its barcode.',
+  Japan: "Japan's medicines agency (PMDA) offers its list only after registering and does not allow apps to read its site, so a Japanese box cannot be looked up by its barcode.",
+  Australia: "Australia's register of medicines (the ARTG) offers no service an app can ask, so an Australian box cannot be looked up by its barcode.",
+  Sweden: "Sweden's medicines list offers no service an app can ask, so a Swedish box cannot be looked up by its barcode.",
+  Finland: "Finland's medicines agency (Fimea) publishes its list only as a file to download, not as a service an app can ask, so a Finnish box cannot be looked up by its barcode yet.",
+  Norway: "Norway's medicines list (FEST) comes as a file to download, not as a service an app can ask, so a Norwegian box cannot be looked up by its barcode yet.",
+};
+
+/** What can and cannot be looked up for a box from this country, said plainly. */
+export function countryMedicineNote(issuedIn: string | null): string {
+  if (issuedIn && COUNTRY_NOTES[issuedIn]) return COUNTRY_NOTES[issuedIn];
+  if (issuedIn) return `Lifestead knows of no medicines list in ${issuedIn} that an app can ask, so the box cannot be looked up by its barcode.`;
+  return 'Lifestead knows of no medicines list for this code that an app can ask, so the box cannot be looked up by its barcode.';
+}
+
+/** What works for any box from outside the United States. */
+export const OUTSIDE_US_WAYS =
+  'What works instead: type the generic name printed on the box. On a Mexican box it is under the brand, often after "Denominación genérica". Lifestead finds its U.S. ingredient name and shows U.S. labels for the same ingredient. For the words printed on the box you have, save the picture of its label or leaflet from a store\'s page online and tap Read a Name From a Picture.';
+
+export const OUTSIDE_US_TITLE = 'Medicines bought outside the United States';
+
+/** Every country in one place, for the screen's info button. */
+export function outsideUsGuide(): string {
+  const order = ['Mexico', 'Spain', 'Canada', 'the United Kingdom', 'Australia', 'France', 'Germany', 'Sweden', 'Finland', 'Norway', 'Japan'];
+  return [
+    'openFDA holds only labels for medicines sold in the United States. For a box bought anywhere else:',
+    ...order.map((where) => COUNTRY_NOTES[where]),
+    'Central and South America: Lifestead knows of no medicines list there that an app can ask.',
+    OUTSIDE_US_WAYS,
+    "A U.S. label for the same ingredient describes a U.S. product. The strength, the other ingredients and how it releases can differ from the box you have, and that box's leaflet is what to follow.",
+  ].join('\n\n');
+}
+
+/** A Spanish national code (C.N.) typed from the box: six digits, with or without its check digit. */
+export function typedSpanishCode(raw: string): string | null {
+  const m = (raw ?? '').trim().match(/^c\.?\s*n\.?\s*:?\s*(\d{6})(?:[.\-\s]?\d)?$/i);
+  return m ? m[1] : null;
+}
+
+/**
+ * The C.N. a Spanish medicine barcode carries, or null. Spanish medicine
+ * boxes print 847000 followed by the six-digit C.N. and a check digit; no
+ * published source states this outright (searched 2026-11-20), so the screen
+ * only says what CIMA answered and says plainly when it answered nothing.
+ */
+export function scannedSpanishCode(reading: CodeReading): string | null {
+  const retail = retailCodeOf(reading);
+  return retail && retail.length === 13 && retail.startsWith('847000') ? retail.slice(6, 12) : null;
+}
+
+export const CIMA_BASE = 'https://cima.aemps.es/cima/rest';
+
+export function cimaByCodeUrl(cn: string): string {
+  return `${CIMA_BASE}/medicamento?cn=${encodeURIComponent(cn)}`;
+}
+
+export type SpanishMedicine = {
+  cn: string;
+  name: string;
+  maker: string | null;
+  ingredients: { name: string; amount: string | null }[];
+  prescription: boolean | null;
+  leafletUrl: string | null;
+};
+
+/** CIMA's answer read into what the screen shows, or null when it holds nothing. */
+export function toSpanishMedicine(cn: string, body: unknown): SpanishMedicine | null {
+  const b = body as Record<string, unknown> | null;
+  if (!b || typeof b !== 'object' || typeof b.nombre !== 'string' || !b.nombre.trim()) return null;
+  const ingredients = Array.isArray(b.principiosActivos)
+    ? (b.principiosActivos as Record<string, unknown>[])
+        .filter((p) => p && typeof p.nombre === 'string')
+        .map((p) => ({
+          name: String(p.nombre),
+          amount: p.cantidad != null && String(p.cantidad).trim() ? `${String(p.cantidad).trim()} ${String(p.unidad ?? '').trim()}`.trim() : null,
+        }))
+    : [];
+  const docs = Array.isArray(b.docs) ? (b.docs as Record<string, unknown>[]) : [];
+  const leaflet = docs.find((d) => d && Number(d.tipo) === 2) ?? null;
+  const leafletUrl = leaflet ? String(leaflet.urlHtml ?? leaflet.url ?? '') || null : null;
+  return {
+    cn,
+    name: b.nombre.trim(),
+    maker: typeof b.labtitular === 'string' && b.labtitular.trim() ? b.labtitular.trim() : null,
+    ingredients,
+    prescription: typeof b.receta === 'boolean' ? b.receta : null,
+    leafletUrl,
+  };
+}
+
+/** The ingredient names to search openFDA with after a CIMA answer. */
+export function spanishIngredientQuery(found: SpanishMedicine): string {
+  return found.ingredients.map((i) => i.name).join(' ');
+}
+
+export function cimaNotFoundMessage(cn: string): string {
+  return `CIMA, Spain's register of medicines, has nothing under the national code ${cn}, so nothing is shown in its place. Check the C.N. printed on the box and type it in, for example C.N. 726805.`;
+}
+
+export const CIMA_SOURCE_NOTE =
+  "From CIMA, the register of medicines kept by Spain's medicines agency (AEMPS). It describes the medicine authorised in Spain under this code. Read the box you hold before relying on it.";
+
+// Read a Name From a Picture (1.0.95.2). A box photographed round its curve
+// reads badly, so the person is pointed to the flat picture a store's page
+// shows; the words read from it are offered as lines to tap, largest print
+// first, since the brand and the generic name are the biggest words on a box.
+export type PictureLine = { text: string; height: number };
+
+export const PICTURE_LINE_LIMIT = 12;
+
+/** The lines worth offering as a name: letters in them, not too long, largest first, each once. */
+export function nameCandidates(lines: PictureLine[]): string[] {
+  const seen = new Set<string>();
+  return lines
+    .map((l) => ({ text: l.text.replace(/\s+/g, ' ').trim(), height: l.height }))
+    .filter((l) => l.text.length >= 3 && l.text.length <= 60 && /\p{L}{3,}/u.test(l.text))
+    .sort((a, b) => b.height - a.height)
+    .filter((l) => {
+      const key = plainLetters(l.text).toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, PICTURE_LINE_LIMIT)
+    .map((l) => l.text);
+}
+
+export const PICTURE_TIP =
+  "A box photographed round its curve reads badly. A store's page for the product usually shows the label flat: open it on this phone, press and hold the picture, save it, then choose it here.";
+
+export const PICTURE_PICK_PROMPT = 'Tap the line that is the medicine\'s name. The generic name is usually under the brand.';
+
+export const PICTURE_NOTHING_READ =
+  'No words came off that picture. Try the flat picture from a store\'s page, or type the name printed on the box.';

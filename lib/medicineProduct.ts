@@ -34,7 +34,7 @@ export const PRODUCT_SOURCES: { base: string; source: ProductSource }[] = [
 ];
 
 const FIELDS =
-  'product_name,product_name_es,product_name_en,brands,ingredients_text,ingredients_text_es,ingredients_text_en,serving_size,nutriments';
+  'product_name,product_name_es,product_name_en,product_name_fr,product_name_de,product_name_pt,brands,ingredients_text,ingredients_text_es,ingredients_text_en,ingredients_text_fr,ingredients_text_de,ingredients_text_pt,serving_size,nutriments';
 
 export function productUrl(base: string, code: string): string {
   return `${base}/${encodeURIComponent(code)}.json?fields=${FIELDS}`;
@@ -107,8 +107,10 @@ export function productFromResponse(data: unknown, code: string, source: Product
   const body = data as { status?: unknown; product?: Record<string, unknown> } | null;
   if (!body || body.status !== 1 || !body.product || typeof body.product !== 'object') return null;
   const p = body.product;
-  const name = text(p.product_name_es) ?? text(p.product_name) ?? text(p.product_name_en);
-  const ingredients = text(p.ingredients_text_es) ?? text(p.ingredients_text) ?? text(p.ingredients_text_en);
+  const inAny = (field: string) =>
+    ['_es', '', '_en', '_fr', '_de', '_pt'].reduce<string | null>((found, l) => found ?? text(p[`${field}${l}`]), null);
+  const name = inAny('product_name');
+  const ingredients = inAny('ingredients_text');
   const n = (p.nutriments && typeof p.nutriments === 'object' ? p.nutriments : {}) as Record<string, unknown>;
   const perServing = NUTRIENTS.some((x) => num(n[`${x.key}_serving`]) !== null);
   const suffix = perServing ? '_serving' : '_100g';

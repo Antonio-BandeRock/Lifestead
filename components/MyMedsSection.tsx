@@ -296,6 +296,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   const pendingCode = useRef<string | null>(null);
   const [labelNote, setLabelNote] = useState<string | null>(null);
   const [readingLabel, setReadingLabel] = useState(false);
+  // Where the reading's note shows: beside the pictures at the top of the
+  // form, or beside the box it was said or typed into.
+  const [labelNoteFromPicture, setLabelNoteFromPicture] = useState(false);
   const [medForm, setMedForm] = useState<MedFormState>(blankMedForm('prescription'));
   const [expandedId, setExpandedId] = useState<string | null>(null);
   // The row whose Tracking button opened the count, and the one just saved,
@@ -617,6 +620,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       setLabelText((current) => (current.trim() ? `${current.trim()}
 
 ${text}` : text));
+      setLabelNoteFromPicture(true);
       await fillFromLabel(text, pages);
     } catch (error) {
       console.error('[MyMedsSection] Failed to read the label photo', error);
@@ -1009,6 +1013,39 @@ ${text}` : text));
     return addMode === 'supplement' ? (
           <View style={[styles.formCard, inline ? styles.formInline : null]}>
             {supplementForm.editingId ? null : renderKindSwitch('supplement')}
+            {/* The label first, the gaps after (Tony, 2026-11-20: "they should
+                be able to just start with that as their best bet for many
+                ingredients and fill in the gaps after"). */}
+            <Text style={styles.label}>Start with a picture of the label</Text>
+            <Text style={styles.fieldHint}>
+              The best bet for most of what is in it. A store&apos;s picture of the label reads best, since it is flat; a photo around a curved bottle often reads badly. The amounts and forms it finds fill in under Ingredients, and you fill in the rest after.
+            </Text>
+            <View style={styles.labelPhotoRow}>
+              <TouchableOpacity
+                ref={walkMark.ref('myMeds.labelLibrary')}
+                onPress={() => void readLabelPhoto('library')}
+                disabled={readingLabel}
+                style={[styles.secondaryButton, styles.labelPhotoButton, readingLabel ? styles.busy : null]}
+              >
+                <Text style={styles.secondaryButtonText}>{readingLabel ? 'Reading the Label' : 'Use a Photo You Have'}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                ref={walkMark.ref('myMeds.labelPhoto')}
+                onPress={() => void readLabelPhoto('camera')}
+                disabled={readingLabel}
+                style={[styles.secondaryButton, styles.labelPhotoButton, readingLabel ? styles.busy : null]}
+              >
+                <Text style={styles.secondaryButtonText}>Photograph the Label</Text>
+              </TouchableOpacity>
+            </View>
+            {/* A store's picture of the label reads best (Tony, 2026-11-19). */}
+            <TouchableOpacity
+              ref={walkMark.ref('myMeds.storeLabelHelp')}
+              onPress={() => showInfoAlert(t(STORE_LABEL_TITLE), STORE_LABEL_STEPS.map((step) => t(step)).join('\n\n'))}
+            >
+              <Text style={styles.fieldHint}>How to save a store&apos;s picture of the label: tap here.</Text>
+            </TouchableOpacity>
+            {labelNote && labelNoteFromPicture ? <Text style={styles.helperText}>{labelNote}</Text> : null}
             <Text style={styles.label}>Name</Text>
             <Text style={styles.fieldHint}>What you call it. The name on the bottle works, or just the main nutrient.</Text>
             <AppTextInput
@@ -1061,35 +1098,8 @@ ${text}` : text));
             <Text style={styles.label}>Ingredients</Text>
             <Text style={styles.fieldHint}>The amounts on the label, for the serving size above.</Text>
             <Text style={styles.fieldHint}>
-              The quick way: photograph the Supplement Facts panel, or read it out loud or type it here and tap Fill Ingredients From This. Then check each row it fills in. Labels in Spanish read too. Or add each one yourself with + Add ingredient.
+              Filled from the label pictures at the top, or read the label out loud or type it here and tap Fill Ingredients From This. Then check each row it fills in, and add anything it missed with + Add ingredient.
             </Text>
-            <View style={styles.labelPhotoRow}>
-              <TouchableOpacity
-                ref={walkMark.ref('myMeds.labelPhoto')}
-                onPress={() => void readLabelPhoto('camera')}
-                disabled={readingLabel}
-                style={[styles.secondaryButton, styles.labelPhotoButton, readingLabel ? styles.busy : null]}
-              >
-                <Text style={styles.secondaryButtonText}>{readingLabel ? 'Reading the Label' : 'Photograph the Label'}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                ref={walkMark.ref('myMeds.labelLibrary')}
-                onPress={() => void readLabelPhoto('library')}
-                disabled={readingLabel}
-                style={[styles.secondaryButton, styles.labelPhotoButton, readingLabel ? styles.busy : null]}
-              >
-                <Text style={styles.secondaryButtonText}>Use a Photo You Have</Text>
-              </TouchableOpacity>
-            </View>
-            {/* A store's picture of the label reads best (Tony, 2026-11-19). */}
-            <TouchableOpacity
-              ref={walkMark.ref('myMeds.storeLabelHelp')}
-              onPress={() => showInfoAlert(t(STORE_LABEL_TITLE), STORE_LABEL_STEPS.map((step) => t(step)).join('\n\n'))}
-            >
-              <Text style={styles.fieldHint}>
-                Clearest of all: the label picture on a store&apos;s page online. Tap here for how to save one and use it.
-              </Text>
-            </TouchableOpacity>
             <AppTextInput
               onVoiceResult={(text, isFinal) => {
                 setLabelText(text);
@@ -1102,10 +1112,16 @@ ${text}` : text));
               value={labelText}
               onChangeText={setLabelText}
             />
-            <TouchableOpacity onPress={() => void fillFromLabel(labelText)} style={styles.secondaryButton}>
+            <TouchableOpacity
+              onPress={() => {
+                setLabelNoteFromPicture(false);
+                void fillFromLabel(labelText);
+              }}
+              style={styles.secondaryButton}
+            >
               <Text style={styles.secondaryButtonText}>Fill Ingredients From This</Text>
             </TouchableOpacity>
-            {labelNote ? <Text style={styles.helperText}>{labelNote}</Text> : null}
+            {labelNote && !labelNoteFromPicture ? <Text style={styles.helperText}>{labelNote}</Text> : null}
             {supplementForm.ingredients.map((row) => {
               const forms = formsByNutrient[row.nutrientCode] ?? [];
               const formOptions: DropdownOption[] = forms.map((form) => ({ label: form.formName, value: form.formName }));

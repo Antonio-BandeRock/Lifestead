@@ -25,7 +25,16 @@ import { Canvas, ColorMatrix, Image as SkiaImage, ImageFormat, useCanvasRef, use
 import { CameraView, useCameraPermissions, type BarcodeScanningResult } from 'expo-camera';
 import * as Speech from 'expo-speech';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Dimensions, Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ADD_TO_OPEN_FOOD_FACTS_STEPS,
+  ADD_TO_OPEN_FOOD_FACTS_URL,
+  SEARCH_UNREACHABLE_MESSAGE,
+  searchCaption,
+  searchNoneMessage,
+  searchOpenFoodFacts,
+  type FoundProduct,
+} from '../lib/openFactsSearch';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppTextInput } from './AppTextInput';
 import { DraggableCropOverlay, type CropRect } from './DraggableCropOverlay';
@@ -290,6 +299,12 @@ export function ScanProductView({
   const [processing, setProcessing] = useState<{ novaGroup: NovaGroup | null; additiveTags: string[] } | null>(null);
   const router = useRouter();
   const [name, setName] = useState('');
+  // Finding a product by its name when its barcode finds nothing, or when
+  // there is no barcode to scan (Tony 2026-11-20).
+  const [searchWords, setSearchWords] = useState('');
+  const [searchBusy, setSearchBusy] = useState(false);
+  const [searchHits, setSearchHits] = useState<{ products: FoundProduct[]; countryTag: string | null } | null>(null);
+  const [searchNote, setSearchNote] = useState<string | null>(null);
   const [brand, setBrand] = useState<string | null>(null);
   const [ingredientsText, setIngredientsText] = useState('');
   const [ingredientsPhotoUri, setIngredientsPhotoUri] = useState<string | null>(null);
@@ -460,8 +475,58 @@ export function ScanProductView({
   }, [ingredientsAttempts]);
   const effectiveAttemptIndex = selectedAttemptIndex ?? bestAttemptIndex;
 
+  // No barcode to scan: the same screen a missed barcode lands on, where a
+  // product can be searched for by name or filled in from its label.
+  function searchByNameInstead() {
+    scanLockRef.current = true;
+    setBarcode(null);
+    setStatus('not-found');
+  }
+
+  async function searchByName() {
+    if (!searchWords.trim()) {
+      explainNotYet('Type the name printed on the package first.');
+      return;
+    }
+    setSearchBusy(true);
+    setSearchHits(null);
+    setSearchNote(null);
+    try {
+      const outcome = await searchOpenFoodFacts(searchWords);
+      if (outcome.kind === 'found') setSearchHits({ products: outcome.products, countryTag: outcome.countryTag });
+      else if (outcome.kind === 'none') setSearchNote(searchNoneMessage(searchWords));
+      else setSearchNote(SEARCH_UNREACHABLE_MESSAGE);
+    } finally {
+      setSearchBusy(false);
+    }
+  }
+
+  function openFoundProduct(code: string) {
+    setSearchHits(null);
+    scanLockRef.current = false;
+    void handleBarcodeScanned({ data: code } as BarcodeScanningResult);
+  }
+
+  // The best bet for a product nobody has added yet: its name, then a
+  // picture of the ingredients label, filled in on the next screen.
+  function fillInFromLabel() {
+    if (!searchWords.trim()) {
+      explainNotYet('Type the name printed on the package first, so the product is saved under it.');
+      return;
+    }
+    setLookedUp(null);
+    setName(searchWords.trim());
+    // A product with no barcode is kept under a key of letters only, which
+    // never matches a recall's barcode (lib/recalls.ts compares digits).
+    if (!barcode) setBarcode(`label-${Date.now().toString(36).replace(/\d/g, (d) => 'abcdefghij'[Number(d)])}`);
+    setStatus('ingredients');
+  }
+
   function resetForNewScan() {
     scanLockRef.current = false;
+    setSearchWords('');
+    setSearchHits(null);
+    setSearchNote(null);
     setOnListNote(null);
     setBarcode(null);
     setExistingProductId(null);
@@ -1178,6 +1243,17 @@ export function ScanProductView({
           <View ref={walkMark.ref('scan.frame')} collapsable={false} style={styles.scanFrame} />
           <Text style={styles.scanHint}>Point your camera at a product&apos;s barcode</Text>
         </View>
+        <View style={[styles.scanByName, { bottom: 24 + insets.bottom }]} pointerEvents="box-none">
+          <TouchableOpacity
+            ref={walkMark.ref('scan.byName')}
+            style={styles.secondaryButton}
+            activeOpacity={0.85}
+            onPress={searchByNameInstead}
+          >
+            <Ionicons name="search-outline" size={18} color={colors.textPrimary} />
+            <Text style={styles.secondaryButtonText}>No Barcode? Search by Name</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -1461,22 +1537,70 @@ export function ScanProductView({
 
   if (status === 'not-found') {
     return (
-      <View style={styles.screen}>
-        <View style={styles.centerBody}>
-          <Ionicons name="help-circle-outline" size={40} color={colors.textMuted} />
-          <Text style={styles.title}>Couldn&apos;t find that product</Text>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <View style={styles.panel}>
+          <View style={styles.centerHeading}>
+            <Ionicons name={barcode ? 'help-circle-outline' : 'search-outline'} size={40} color={colors.textMuted} />
+            <Text style={styles.title}>{barcode ? 'Couldn\'t Find That Barcode' : 'Find a Product by Its Name'}</Text>
+          </View>
           <Text style={styles.text}>
-            This barcode isn&apos;t in Open Food Facts or USDA FoodData Central yet. You can still log this food manually
-            from any builder&apos;s ingredient search.
+            {barcode
+              ? 'This barcode is not in Open Food Facts or USDA FoodData Central yet. The same product may be there under another barcode, so search for it by the name on the package.'
+              : 'Type the name printed on the package. Open Food Facts is searched, with products sold in your country first.'}
           </Text>
-          <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85} onPress={resetForNewScan}>
-            <Text style={styles.primaryButtonText}>Scan Another</Text>
+          <AppTextInput
+            ref={walkMark.ref('scan.nameSearch')}
+            style={styles.priceInput}
+            placeholder="name on the package"
+            placeholderTextColor={colors.textMuted}
+            value={searchWords}
+            onChangeText={setSearchWords}
+            onSubmitEditing={searchByName}
+            returnKeyType="search"
+          />
+          <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85} disabled={searchBusy} onPress={searchByName}>
+            <Ionicons name="search-outline" size={18} color={colors.textOnButton} />
+            <Text style={styles.primaryButtonText}>{searchBusy ? 'Searching…' : 'Search by Name'}</Text>
+          </TouchableOpacity>
+          {searchNote ? <Text style={styles.gridHint}>{searchNote}</Text> : null}
+          {searchHits ? (
+            <View style={styles.card}>
+              <Text style={styles.gridHint}>{searchCaption(searchHits.countryTag)}</Text>
+              {searchHits.products.map((p) => (
+                <TouchableOpacity key={p.code} style={styles.pendingRow} activeOpacity={0.8} onPress={() => openFoundProduct(p.code)}>
+                  <Text style={styles.pendingTitle}>{p.name}</Text>
+                  <Text style={styles.pendingCaption}>{[p.brand, p.quantity, p.code].filter(Boolean).join(' · ')}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : null}
+        </View>
+        <View style={styles.panel}>
+          <Text style={styles.sectionLabel}>Not there? Start from the label</Text>
+          <Text style={styles.gridHint}>
+            The label is the best bet for most of what is in it. Type the name above, read the ingredients from a picture of the
+            label, then fill in anything it missed. A package photographed around its curve reads badly: a store&apos;s page for
+            the product usually shows the label flat, and a saved copy of that picture reads well.
+          </Text>
+          <TouchableOpacity ref={walkMark.ref('scan.fromLabel')} style={styles.primaryButton} activeOpacity={0.85} onPress={fillInFromLabel}>
+            <Ionicons name="document-text-outline" size={18} color={colors.textOnButton} />
+            <Text style={styles.primaryButtonText}>Fill It In From the Label</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.panel}>
+          <Text style={styles.sectionLabel}>Adding it to Open Food Facts</Text>
+          <Text style={styles.gridHint}>{ADD_TO_OPEN_FOOD_FACTS_STEPS}</Text>
+          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => void Linking.openURL(ADD_TO_OPEN_FOOD_FACTS_URL)}>
+            <Text style={styles.secondaryButtonText}>How to Add a Product</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={resetForNewScan}>
+            <Text style={styles.secondaryButtonText}>Scan Another</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={onDone}>
             <Text style={styles.secondaryButtonText}>Done</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </WalkScrollView>
     );
   }
 
@@ -1988,6 +2112,8 @@ const styles = StyleSheet.create({
   pendingButton: { borderWidth: 1, borderColor: colors.border, borderRadius: 8, paddingVertical: 6, paddingHorizontal: 14, backgroundColor: colors.surfaceMuted },
   pendingButtonText: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
   scanOverlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' },
+  scanByName: { position: 'absolute', left: 16, right: 16, alignItems: 'center' },
+  centerHeading: { alignItems: 'center', gap: 8 },
   scanFrame: { width: 260, height: 160, borderWidth: 3, borderColor: colors.accent, borderRadius: 16 },
   scanHint: {
     ...typography.body,
