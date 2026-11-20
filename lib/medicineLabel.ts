@@ -626,20 +626,24 @@ export function crossingNotFoundMessage(typed: string, usName: string): string {
 // meant to ship in, plus Mexico and Latin America. Sources: AEMPS CIMA REST
 // (live, open), ANSM BDPM (monthly files), Fimea (XML file), DMP FEST (file),
 // NHSBSA dm+d (NHS TRUD account), PZN (licensed), PMDA (registration, no
-// scraping), TGA ARTG (no API), COFEPRIS (no API).
+// scraping), TGA ARTG (no API), COFEPRIS (no API), Health Canada DPD (live,
+// open, by DIN; asked since 1.0.95.3). The file-only lists (France, Finland,
+// Norway) are deliberately not carried in the app (Tony 2026-11-20: "state
+// in the app ... that they are not from an automatic service so they are not
+// updated automatically and that is why we don't have them").
 
 const COUNTRY_NOTES: Record<string, string> = {
   Mexico: "COFEPRIS, Mexico's medicines regulator, publishes no list an app can ask, so no app can look up a Mexican box by its barcode.",
-  Canada: "Health Canada's Drug Product Database is searched by the DIN printed on the box, not by the barcode, and Lifestead does not ask it yet.",
+  Canada: "Health Canada's Drug Product Database is searched by the DIN, the eight-digit number printed on the box, not by the barcode. Type DIN and the number, for example DIN 02213265, and Lifestead asks it.",
   Spain: "Spain's medicines agency (AEMPS) publishes CIMA, its register of every medicine sold in Spain, and Lifestead asks it for the box's national code (C.N.), which you can also type in.",
-  France: 'France publishes its medicines list (the BDPM) only as files updated each month, not as a service an app can ask, so Lifestead cannot look up a French box by its barcode.',
+  France: "France publishes its medicines list (the BDPM) only as files to download, not from an automatic service an app can ask. A copy carried in Lifestead would not update by itself and would fall out of date, which is why Lifestead does not have it, so a French box cannot be looked up by its barcode.",
   Germany: "A German box's pharmacy number (PZN) is held in a paid, licensed list, so no free service can look it up.",
   'the United Kingdom': 'The NHS medicines list (dm+d) can be downloaded only with an NHS account, and Lifestead does not ask it, so a U.K. box cannot be looked up by its barcode.',
   Japan: "Japan's medicines agency (PMDA) offers its list only after registering and does not allow apps to read its site, so a Japanese box cannot be looked up by its barcode.",
   Australia: "Australia's register of medicines (the ARTG) offers no service an app can ask, so an Australian box cannot be looked up by its barcode.",
   Sweden: "Sweden's medicines list offers no service an app can ask, so a Swedish box cannot be looked up by its barcode.",
-  Finland: "Finland's medicines agency (Fimea) publishes its list only as a file to download, not as a service an app can ask, so a Finnish box cannot be looked up by its barcode yet.",
-  Norway: "Norway's medicines list (FEST) comes as a file to download, not as a service an app can ask, so a Norwegian box cannot be looked up by its barcode yet.",
+  Finland: "Finland's medicines agency (Fimea) publishes its list only as a file to download, not from an automatic service an app can ask. A copy carried in Lifestead would not update by itself and would fall out of date, which is why Lifestead does not have it, so a Finnish box cannot be looked up by its barcode.",
+  Norway: "Norway's medicines list (FEST) comes only as a file to download, not from an automatic service an app can ask. A copy carried in Lifestead would not update by itself and would fall out of date, which is why Lifestead does not have it, so a Norwegian box cannot be looked up by its barcode.",
 };
 
 /** What can and cannot be looked up for a box from this country, said plainly. */
@@ -735,6 +739,107 @@ export function cimaNotFoundMessage(cn: string): string {
 
 export const CIMA_SOURCE_NOTE =
   "From CIMA, the register of medicines kept by Spain's medicines agency (AEMPS). It describes the medicine authorised in Spain under this code. Read the box you hold before relying on it.";
+
+// A Canadian box (1.0.95.3, Tony 2026-11-20): Health Canada's Drug Product
+// Database answers by DIN, the eight digits printed on the box, through an
+// open service that allows apps to ask it. A bare eight-digit number is
+// already read as a U.S. product NDC, so a DIN is typed with the word DIN.
+
+/** A Canadian DIN typed from the box: DIN and eight digits. */
+export function typedCanadianDin(raw: string): string | null {
+  const m = (raw ?? '').trim().match(/^d\.?\s*i\.?\s*n\.?\s*:?\s*(\d{8})$/i);
+  return m ? m[1] : null;
+}
+
+export const DPD_BASE = 'https://health-products.canada.ca/api/drug';
+
+/** One DPD request: the product by DIN, or a part of it by its drug code. */
+export function dpdUrl(part: 'drugproduct' | 'activeingredient' | 'status' | 'schedule' | 'form', value: string): string {
+  const key = part === 'drugproduct' ? 'din' : 'id';
+  return `${DPD_BASE}/${part}/?${key}=${encodeURIComponent(value)}&lang=en&type=json`;
+}
+
+export function dpdPageUrl(drugCode: string): string {
+  return `https://health-products.canada.ca/dpd-bdpp/info?lang=eng&code=${encodeURIComponent(drugCode)}`;
+}
+
+export type CanadianMedicine = {
+  din: string;
+  drugCode: string;
+  name: string;
+  maker: string | null;
+  ingredients: { name: string; amount: string | null }[];
+  prescription: boolean | null;
+  status: string | null;
+  form: string | null;
+};
+
+function firstOf(body: unknown): Record<string, unknown> | null {
+  const one = Array.isArray(body) ? body[0] : body;
+  return one && typeof one === 'object' ? (one as Record<string, unknown>) : null;
+}
+
+function textOf(v: unknown): string | null {
+  return typeof v === 'string' && v.trim() ? v.trim() : null;
+}
+
+/** The drug code DPD gave for a DIN, or null when it holds nothing under it. */
+export function dpdDrugCode(product: unknown): string | null {
+  const p = firstOf(product);
+  return p && p.drug_code != null && textOf(p.brand_name) ? String(p.drug_code) : null;
+}
+
+/** DPD's answers read into what the screen shows, or null when it holds nothing. */
+export function toCanadianMedicine(
+  din: string,
+  answers: { product: unknown; ingredients?: unknown; status?: unknown; schedule?: unknown; form?: unknown },
+): CanadianMedicine | null {
+  const p = firstOf(answers.product);
+  const drugCode = dpdDrugCode(answers.product);
+  if (!p || !drugCode) return null;
+  const ingredients = Array.isArray(answers.ingredients)
+    ? (answers.ingredients as Record<string, unknown>[])
+        .filter((i) => i && textOf(i.ingredient_name))
+        .map((i) => {
+          const amount = [textOf(i.strength), textOf(i.strength_unit)].filter(Boolean).join(' ');
+          const per = [textOf(i.dosage_value), textOf(i.dosage_unit)].filter(Boolean).join(' ');
+          return { name: textOf(i.ingredient_name) as string, amount: amount ? (per ? `${amount} per ${per}` : amount) : null };
+        })
+    : [];
+  const schedules = Array.isArray(answers.schedule)
+    ? (answers.schedule as Record<string, unknown>[]).map((s) => (textOf(s?.schedule_name) ?? '').toUpperCase()).filter(Boolean)
+    : [];
+  const prescription = schedules.some((s) => s.includes('PRESCRIPTION'))
+    ? true
+    : schedules.length && schedules.every((s) => s === 'OTC')
+      ? false
+      : null;
+  const forms = Array.isArray(answers.form)
+    ? (answers.form as Record<string, unknown>[]).map((f) => textOf(f?.pharmaceutical_form_name)).filter((f): f is string => !!f)
+    : [];
+  return {
+    din,
+    drugCode,
+    name: [textOf(p.brand_name), textOf(p.descriptor)].filter(Boolean).join(' '),
+    maker: textOf(p.company_name),
+    ingredients,
+    prescription,
+    status: textOf(firstOf(answers.status)?.status),
+    form: forms.length ? forms.join(', ') : null,
+  };
+}
+
+/** The ingredient names to search openFDA with after a DPD answer. */
+export function canadianIngredientQuery(found: CanadianMedicine): string {
+  return found.ingredients.map((i) => i.name.toLowerCase()).join(' ');
+}
+
+export function dpdNotFoundMessage(din: string): string {
+  return `Health Canada's Drug Product Database has nothing under the DIN ${din}, so nothing is shown in its place. Check the eight digits after DIN on the box and type them in, for example DIN 02213265.`;
+}
+
+export const DPD_SOURCE_NOTE =
+  "From Health Canada's Drug Product Database. It describes the product authorised in Canada under this DIN. Read the box you hold before relying on it.";
 
 // Read a Name From a Picture (1.0.95.2). A box photographed round its curve
 // reads badly, so the person is pointed to the flat picture a store's page

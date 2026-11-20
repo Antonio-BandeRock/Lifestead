@@ -67,22 +67,28 @@ import {
   type LabelDocument,
   type LookupAsk,
   CIMA_SOURCE_NOTE,
+  DPD_SOURCE_NOTE,
   OUTSIDE_US_TITLE,
   PICTURE_NOTHING_READ,
   PICTURE_PICK_PROMPT,
   PICTURE_TIP,
+  canadianIngredientQuery,
   cimaNotFoundMessage,
   crossingNote,
   crossingNotFoundMessage,
+  dpdNotFoundMessage,
+  dpdPageUrl,
   nameCandidates,
   outsideUsGuide,
   scannedSpanishCode,
   spanishIngredientQuery,
+  typedCanadianDin,
   typedSpanishCode,
+  type CanadianMedicine,
   type SpanishMedicine,
 } from '../lib/medicineLabel';
 import { findMedKeepingLabel, getSavedLabel, removeSavedLabel, saveLabel, type SavedLabel } from '../lib/medicineLabelDb';
-import { lookUpLabel, lookUpSpainByCode, type Crossing } from '../lib/medicineLabelLookup';
+import { lookUpCanadaByDin, lookUpLabel, lookUpSpainByCode, type Crossing } from '../lib/medicineLabelLookup';
 import {
   SEARCH_UNREACHABLE_MESSAGE,
   searchCaption,
@@ -173,6 +179,8 @@ export default function MedicineLabelScreen() {
   // Outside the United States (1.0.95.2): a Spanish box found in CIMA, the
   // lines read from a picture, and products found by name in Open Food Facts.
   const [spain, setSpain] = useState<{ medicine: SpanishMedicine; retrievedAt: string } | null>(null);
+  // A Canadian box found by its DIN in Health Canada's Drug Product Database (1.0.95.3).
+  const [canada, setCanada] = useState<{ medicine: CanadianMedicine; retrievedAt: string } | null>(null);
   const [pictureLines, setPictureLines] = useState<string[] | null>(null);
   const [readingPicture, setReadingPicture] = useState(false);
   const [offHits, setOffHits] = useState<{ products: FoundProduct[]; countryTag: string | null } | null>(null);
@@ -295,6 +303,7 @@ export default function MedicineLabelScreen() {
     setProduct(null);
     setDatabaseLines(null);
     setSpain(null);
+    setCanada(null);
     setOffHits(null);
     setNameMissed(false);
     // A Spanish box: its barcode carries the C.N., which CIMA answers for.
@@ -358,6 +367,7 @@ export default function MedicineLabelScreen() {
     setProduct(null);
     setDatabaseLines(null);
     setSpain(null);
+    setCanada(null);
     setOffHits(null);
     setNameMissed(false);
     setAsking("CIMA, Spain's register of medicines");
@@ -373,9 +383,40 @@ export default function MedicineLabelScreen() {
     }
   }, []);
 
+  // A Canadian DIN typed from the box (DIN 02213265).
+  const lookUpCanadaDin = useCallback(async (din: string) => {
+    setFound(null);
+    setShown(null);
+    setMessage(null);
+    setProduct(null);
+    setDatabaseLines(null);
+    setSpain(null);
+    setCanada(null);
+    setOffHits(null);
+    setNameMissed(false);
+    setAsking("Health Canada's Drug Product Database");
+    setBusy(true);
+    try {
+      const answer = await lookUpCanadaByDin(din);
+      if (answer.kind === 'found') setCanada({ medicine: answer.medicine, retrievedAt: answer.retrievedAt });
+      else if (answer.kind === 'not_found') setMessage(dpdNotFoundMessage(din));
+      else setMessage("Could not reach Health Canada's Drug Product Database, so nothing was looked up. Check the connection and try again.");
+    } finally {
+      setBusy(false);
+      setAsking('openFDA');
+    }
+  }, []);
+
   function lookUpCode() {
     if (!codeText.trim()) return explainNotYet('Type the code from the box or the pharmacy label first.');
     setAskedFrom('typed');
+    const din = typedCanadianDin(codeText);
+    if (din) {
+      setAskedCode(null);
+      setBottleOf(null);
+      lookUpCanadaDin(din);
+      return;
+    }
     const cn = typedSpanishCode(codeText);
     if (cn) {
       setAskedCode(null);
@@ -393,6 +434,7 @@ export default function MedicineLabelScreen() {
     setProduct(null);
     setDatabaseLines(null);
     setSpain(null);
+    setCanada(null);
     setOffHits(null);
     setPictureLines(null);
     runLookup({ kind: 'name', name });
@@ -409,6 +451,16 @@ export default function MedicineLabelScreen() {
       return explainNotYet('CIMA listed no active ingredient for this box, so there is no name to search with.');
     }
     const query = spanishIngredientQuery(spain.medicine);
+    setNameText(query);
+    searchNameFor(query);
+  }
+
+  // The same ingredient's U.S. labels, after Health Canada named a Canadian box.
+  function searchUsForCanada() {
+    if (!canada || canada.medicine.ingredients.length === 0) {
+      return explainNotYet("Health Canada's Drug Product Database listed no active ingredient for this box, so there is no name to search with.");
+    }
+    const query = canadianIngredientQuery(canada.medicine);
     setNameText(query);
     searchNameFor(query);
   }
@@ -918,6 +970,47 @@ export default function MedicineLabelScreen() {
         </View>
       ) : null}
 
+      {canada && !busy ? (
+        <View style={styles.card}>
+          <Text style={styles.title}>{canada.medicine.name}</Text>
+          {canada.medicine.maker ? <Text style={styles.caption}>{t('Company: {maker}', { maker: canada.medicine.maker })}</Text> : null}
+          {canada.medicine.form ? <Text style={styles.caption}>{t('Form: {form}', { form: canada.medicine.form })}</Text> : null}
+          {canada.medicine.ingredients.length ? (
+            <>
+              <Text style={styles.label}>Active ingredients</Text>
+              {canada.medicine.ingredients.map((i) => (
+                <View key={i.name} style={styles.amountRow}>
+                  <Text style={styles.pickName}>{i.name}</Text>
+                  {i.amount ? <Text style={styles.strong}>{i.amount}</Text> : null}
+                </View>
+              ))}
+            </>
+          ) : null}
+          {canada.medicine.prescription === null ? null : (
+            <Text style={styles.body}>
+              {canada.medicine.prescription ? 'Sold in Canada with a prescription.' : 'Sold in Canada without a prescription.'}
+            </Text>
+          )}
+          {canada.medicine.status ? (
+            <Text style={styles.caption}>{t('Status in Canada: {status}', { status: canada.medicine.status })}</Text>
+          ) : null}
+          <Text style={styles.caption}>{DPD_SOURCE_NOTE}</Text>
+          <Text style={styles.caption}>
+            {t('Sent: the DIN {din}. Retrieved {when}.', { din: canada.medicine.din, when: readableDate(canada.retrievedAt) })}
+          </Text>
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            activeOpacity={0.85}
+            onPress={() => Linking.openURL(dpdPageUrl(canada.medicine.drugCode))}
+          >
+            <Text style={styles.secondaryButtonText}>Open Health Canada&apos;s Page</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={searchUsForCanada}>
+            <Text style={styles.secondaryButtonText}>U.S. Labels for the Same Ingredient</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
+
       {found ? (
         <View style={styles.card}>
           {found.crossing ? <Text style={styles.strong}>{crossingNote(found.crossing.typed, found.crossing.usName)}</Text> : null}
@@ -1000,8 +1093,9 @@ export default function MedicineLabelScreen() {
         <Text style={styles.body}>
           Scan the barcode on the box, type the code printed on it (the NDC, 10 or 11 digits), or search by name. The code or
           the name is sent to openFDA, the U.S. Food and Drug Administration&apos;s public data service, and nothing else is. A
-          barcode from a bottle bought outside the United States is sent to Open Food Facts instead, and a Spanish box to
-          CIMA, Spain&apos;s register of medicines. A name openFDA does not know, such as levotiroxina, is sent to RxNorm for
+          barcode from a bottle bought outside the United States is sent to Open Food Facts instead, a Spanish box to
+          CIMA, Spain&apos;s register of medicines, and a Canadian DIN (typed as DIN 02213265) to Health Canada&apos;s Drug
+          Product Database. A name openFDA does not know, such as levotiroxina, is sent to RxNorm for
           its U.S. ingredient name.
         </Text>
         <Text style={styles.caption}>{LABEL_SOURCE_NOTE}</Text>

@@ -254,6 +254,34 @@ check('an empty CIMA answer is nothing', M.toSpanishMedicine('1', {}), null);
 check('the ingredient query is the ingredient names', M.spanishIngredientQuery(es), 'LEVOTIROXINA SODICA');
 check('a CIMA miss names the code', M.cimaNotFoundMessage('726805').includes('726805'), true);
 
+// ---- Canada's DIN (1.0.95.3).
+check('a typed DIN is read', M.typedCanadianDin('DIN 02213265'), '02213265');
+check('a typed DIN with a colon is read', M.typedCanadianDin('din: 02213265'), '02213265');
+check('a bare eight digits stays an NDC', M.typedCanadianDin('02213265'), null);
+check('seven digits is not a DIN', M.typedCanadianDin('DIN 0221326'), null);
+check('the product is asked by DIN', M.dpdUrl('drugproduct', '02213265'), 'https://health-products.canada.ca/api/drug/drugproduct/?din=02213265&lang=en&type=json');
+check('a part is asked by drug code', M.dpdUrl('activeingredient', '36952'), 'https://health-products.canada.ca/api/drug/activeingredient/?id=36952&lang=en&type=json');
+check('an empty DPD answer has no drug code', M.dpdDrugCode([]), null);
+const ca = M.toCanadianMedicine('02213265', {
+  product: [{ drug_code: 36952, drug_identification_number: '02213265', brand_name: 'DERMOVATE CREAM', descriptor: '', company_name: 'TAROPHARMA' }],
+  ingredients: [{ ingredient_name: 'CLOBETASOL PROPIONATE', strength: '0.05', strength_unit: '%', dosage_value: '', dosage_unit: '' }],
+  status: { status: 'Marketed' },
+  schedule: [{ schedule_name: 'PRESCRIPTION' }],
+  form: [{ pharmaceutical_form_name: 'Cream' }],
+});
+check('DPD is read', [ca.name, ca.maker, ca.drugCode, ca.prescription, ca.status, ca.form, ca.ingredients[0].amount], ['DERMOVATE CREAM', 'TAROPHARMA', '36952', true, 'Marketed', 'Cream', '0.05 %']);
+const otc = M.toCanadianMedicine('1', { product: [{ drug_code: 1, brand_name: 'X' }], schedule: [{ schedule_name: 'OTC' }] });
+check('an OTC schedule is sold without a prescription', otc.prescription, false);
+check('no schedule answer is not known', M.toCanadianMedicine('1', { product: [{ drug_code: 1, brand_name: 'X' }] }).prescription, null);
+check('a per-dose amount is said', M.toCanadianMedicine('1', { product: [{ drug_code: 1, brand_name: 'X' }], ingredients: [{ ingredient_name: 'A', strength: '5', strength_unit: 'MG', dosage_value: '5', dosage_unit: 'ML' }] }).ingredients[0].amount, '5 MG per 5 ML');
+check('an empty DPD answer is nothing', M.toCanadianMedicine('1', { product: [] }), null);
+check('the Canadian ingredient query is lower case', M.canadianIngredientQuery(ca), 'clobetasol propionate');
+check('a DPD miss names the DIN', M.dpdNotFoundMessage('02213265').includes('02213265'), true);
+check('Canada says how to type the DIN', M.countryMedicineNote('Canada').includes('DIN 02213265'), true);
+for (const where of ['France', 'Finland', 'Norway']) {
+  check(`${where} says its list would not update by itself`, M.countryMedicineNote(where).includes('would not update by itself'), true);
+}
+
 // ---- A name read from a picture.
 check(
   'picture lines: largest first, letters only, each once',

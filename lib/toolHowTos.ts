@@ -1106,6 +1106,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Look up a label.', mark: 'myMeds.label' },
         { say: 'Type the name on the box, such as levotiroxina, and tap Search by Name. A name from another country is matched to the U.S. name for the same active ingredient where RxNorm knows it, and the screen says what it was matched to.' },
         { say: 'A bottle bought in Spain can be scanned, or its national code (C.N.) typed: the Spanish medicines register answers, and U.S. Labels for the Same Ingredient opens the matching U.S. labels.' },
+        { say: "A box bought in Canada: type DIN and the eight digits printed on the box, such as DIN 02213265, and tap Look Up This Code. Health Canada's Drug Product Database answers, and U.S. Labels for the Same Ingredient opens the matching U.S. labels." },
         { say: 'Tap Bought Outside the United States? to read what is known about the country you bought it in.' },
       ],
       forYou: 'The same active ingredient sold under another name can still be read about, and the app says plainly where a country keeps its list out of reach.',

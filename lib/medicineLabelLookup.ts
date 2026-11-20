@@ -14,14 +14,18 @@ import {
   codeQueryUrl,
   crossedName,
   crossingSent,
+  dpdDrugCode,
+  dpdUrl,
   ingredientNames,
   matchLabels,
   nameQueryUrl,
   rxnavApproximateUrl,
   rxnavIngredientsUrl,
   setIdQueryUrl,
+  toCanadianMedicine,
   toSpanishMedicine,
   whatWasSent,
+  type CanadianMedicine,
   type LabelDocument,
   type LookupAsk,
   type SpanishMedicine,
@@ -118,4 +122,42 @@ export async function lookUpSpainByCode(cn: string): Promise<SpainOutcome> {
   }
   const medicine = toSpanishMedicine(cn, body);
   return medicine ? { kind: 'found', medicine, retrievedAt: new Date().toISOString() } : { kind: 'not_found', cn };
+}
+
+export type CanadaOutcome =
+  | { kind: 'found'; medicine: CanadianMedicine; retrievedAt: string }
+  | { kind: 'not_found'; din: string }
+  | { kind: 'unreachable' };
+
+type DpdAnswer = { ok: true; body: unknown } | { ok: false };
+
+async function askDpd(url: string): Promise<DpdAnswer> {
+  try {
+    const response = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!response.ok) return { ok: false };
+    const text = await response.text();
+    return { ok: true, body: text.trim() ? JSON.parse(text) : null };
+  } catch {
+    return { ok: false };
+  }
+}
+
+/** Asks Health Canada's Drug Product Database for one DIN, then for its ingredients, status, schedule and form. */
+export async function lookUpCanadaByDin(din: string): Promise<CanadaOutcome> {
+  const product = await askDpd(dpdUrl('drugproduct', din));
+  if (!product.ok) return { kind: 'unreachable' };
+  const drugCode = dpdDrugCode(product.body);
+  if (!drugCode) return { kind: 'not_found', din };
+  const [ingredients, status, schedule, form] = await Promise.all(
+    (['activeingredient', 'status', 'schedule', 'form'] as const).map((part) => askDpd(dpdUrl(part, drugCode))),
+  );
+  const bodyOf = (a: DpdAnswer) => (a.ok ? a.body : undefined);
+  const medicine = toCanadianMedicine(din, {
+    product: product.body,
+    ingredients: bodyOf(ingredients),
+    status: bodyOf(status),
+    schedule: bodyOf(schedule),
+    form: bodyOf(form),
+  });
+  return medicine ? { kind: 'found', medicine, retrievedAt: new Date().toISOString() } : { kind: 'not_found', din };
 }
