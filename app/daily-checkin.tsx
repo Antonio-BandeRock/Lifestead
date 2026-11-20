@@ -9,7 +9,7 @@
 // were, so somebody who answers one question at a time still can.
 import { Stack, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BodyMap } from '../components/BodyMap';
 import { DailyList } from '../components/DailyList';
 import { DailyScalesPicker } from '../components/DailyScalesPicker';
@@ -48,6 +48,7 @@ import { VaultClosedBand } from '../components/VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
 import { tl } from '../lib/i18n';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 const TAB_COLOR = colors.tabBioCompass;
 const ENERGY = scaleOf('energy');
@@ -489,7 +490,7 @@ export default function DailyCheckinScreen() {
   return (
     <View style={styles.screen}>
       <Stack.Screen options={{ title: 'Check In' }} />
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <VaultClosedBand color={TAB_COLOR} categories={['symptoms']} />
         <View style={styles.band}>
           {caption ? <Text style={styles.caption}>{caption}</Text> : null}
@@ -532,7 +533,7 @@ export default function DailyCheckinScreen() {
             </>
           )}
         </View>
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

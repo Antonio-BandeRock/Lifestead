@@ -23,6 +23,9 @@ export type SpotNode = {
   measureInWindow?: (callback: (x: number, y: number, width: number, height: number) => void) => void;
   // A web element, which can be scrolled to.
   scrollIntoView?: (options?: { block?: string; behavior?: string }) => void;
+  // Whether another view is drawn inside this one: a web element, and a
+  // phone view on React Native's new architecture.
+  contains?: (other: unknown) => boolean;
 };
 
 // Where the button is compared with what is on screen.
@@ -262,13 +265,33 @@ export function pickFrame(spot: SpotRect, frames: (SpotRect | null)[]): number {
   return inside >= 0 ? inside : widest;
 }
 
+function holds(frame: SpotNode | null, node: SpotNode): boolean {
+  try {
+    return typeof frame?.contains === 'function' && frame.contains(node);
+  } catch {
+    return false;
+  }
+}
+
 /** Brings a spot to the top of the scrolling frame it is in. False when no frame holds it. */
 export async function bringSpotToTop(node: SpotNode): Promise<boolean> {
   const spot = await measureOne(node);
   if (!spot) return false;
   const list = [...scrollers];
   const frames = await Promise.all(list.map((scroller) => measureNode(scroller.frame())));
-  const at = pickFrame(spot, frames);
+  // A frame that says it holds the spot is the one, the innermost when
+  // several do (a list inside a page), so a screen opened over a tab never
+  // scrolls the tab underneath it (1.0.94.6). Where no frame can say,
+  // where the frames sit on screen decides.
+  const holding = list.map((scroller, index) => (holds(scroller.frame(), node) ? index : -1)).filter((index) => index >= 0);
+  const at =
+    holding.length > 0
+      ? holding.reduce((best, index) => {
+          const area = (frames[index]?.width ?? Infinity) * (frames[index]?.height ?? Infinity);
+          const bestArea = (frames[best]?.width ?? Infinity) * (frames[best]?.height ?? Infinity);
+          return area < bestArea ? index : best;
+        })
+      : pickFrame(spot, frames);
   if (at < 0) return false;
   list[at].bring(node);
   return true;

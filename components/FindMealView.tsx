@@ -39,7 +39,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState, type ComponentProps } from 'react';
-import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { useInfoAlert } from '../components/InfoAlert';
 import { MenuScanBand } from './MenuScanBand';
@@ -87,6 +87,7 @@ import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
 import { ReadProblem } from './ReadProblem';
+import { WalkScrollView } from './WalkScrollView';
 
 // Every meal and favourite is read, with no count (2026-11-15: a history is
 // limited by its dates, never by how many records there are). SQLite reads
@@ -1358,7 +1359,7 @@ export function FindMealView({
   function renderActions() {
     if (!selected) return null;
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>{selected.name}</Text>
         <Text style={styles.muted}>{describeMeal(selected)}</Text>
@@ -1401,13 +1402,13 @@ export function FindMealView({
           <Text style={styles.secondaryButtonText}>Back to the list</Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
   function renderEarlier() {
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>{selected?.name}</Text>
         <Text style={styles.sectionLabel}>What time did you eat it?</Text>
@@ -1425,13 +1426,13 @@ export function FindMealView({
           <Text style={styles.secondaryButtonText}>Back</Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
   function renderSchedule() {
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>{selected?.name}</Text>
         <Text style={styles.sectionLabel}>When should this be scheduled?</Text>
@@ -1474,13 +1475,13 @@ export function FindMealView({
           <Text style={styles.secondaryButtonText}>Back</Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
   function renderReplace() {
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>{selected?.name}</Text>
         <Text style={styles.sectionLabel}>Which planned meal did this replace?</Text>
@@ -1510,7 +1511,7 @@ export function FindMealView({
           <Text style={styles.secondaryButtonText}>Back</Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 

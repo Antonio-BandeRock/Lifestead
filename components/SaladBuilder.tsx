@@ -64,6 +64,7 @@ import { ConditionNoteRow } from './ConditionNoteRow';
 import { useNavigationHand } from '../lib/navigationHand';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from './WalkScrollView';
 
 // Common home-cooking units -- a plain pill row, not InlineSelectList's own
 // scrollable-box treatment, since this is a short, fixed set (unlike
@@ -1542,7 +1543,7 @@ export function SaladBuilder({
         {ingredients.length === 0 ? (
           <Text style={[styles.summaryEmptyText, { marginTop: 4 }]}>No ingredients yet.</Text>
         ) : (
-          <ScrollView style={inline ? undefined : styles.overlayIngredientScroll} scrollEnabled={!inline} showsVerticalScrollIndicator={false}>
+          <WalkScrollView style={inline ? undefined : styles.overlayIngredientScroll} scrollEnabled={!inline} showsVerticalScrollIndicator={false}>
             {ingredients.map((ingredient, index) => (
               <View key={index} style={styles.overviewIngredientRow}>
                 <View style={styles.overviewIngredientTextWrap}>
@@ -1565,7 +1566,7 @@ export function SaladBuilder({
                 </TouchableOpacity>
               </View>
             ))}
-          </ScrollView>
+          </WalkScrollView>
         )}
 
         {/* Edit mode: this card only ever shows while addingIngredient is
@@ -1635,7 +1636,7 @@ export function SaladBuilder({
     return (
       <>
         {infoAlertElement}
-        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
+        <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
           <RecipeDepthReport
             dishName={saladName.trim() || 'Salad'}
             yieldLabel={`Makes ${servings || '?'} serving${servings === '1' ? '' : 's'} (${servingSizeAmount || '?'} ${servingSizeUnit ?? '?'} each)`}
@@ -1662,7 +1663,7 @@ export function SaladBuilder({
               void confirmAndFinishSalad(ingredients, reportData).finally(() => setSavingFromReport(false));
             }}
           />
-        </ScrollView>
+        </WalkScrollView>
         <AppActionSheet
           visible={!!stagePickerFor}
           onClose={() => setStagePickerFor(null)}
@@ -1715,7 +1716,7 @@ export function SaladBuilder({
             render branches, never mounted at once), so renderStepsSection's
             own composer field can scroll itself into view above AppKeyboard
             here too, not just in create mode. */}
-        <ScrollView ref={scrollViewRef} contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
+        <WalkScrollView ref={scrollViewRef} contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
           <TouchableOpacity
             style={[styles.formCard, { borderColor: tabColor }]}
             onPress={() => {
@@ -1805,7 +1806,7 @@ export function SaladBuilder({
           >
             <Text style={styles.primaryButtonText}>Save Changes</Text>
           </TouchableOpacity>
-        </ScrollView>
+        </WalkScrollView>
       </>
     );
   }
@@ -1892,7 +1893,7 @@ export function SaladBuilder({
             Home lays everything out, rather than folded into a pill that
             had to be tapped open. Shares scrollViewRef with the other
             branches, which are never mounted at the same time. */}
-        <ScrollView ref={scrollViewRef} contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
+        <WalkScrollView ref={scrollViewRef} contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
           <TouchableOpacity
             ref={walkMark.ref('builder.addIngredients')}
             style={[
@@ -1916,7 +1917,7 @@ export function SaladBuilder({
               </HomeSectionBand>
             </View>
           ) : null}
-        </ScrollView>
+        </WalkScrollView>
         <AppActionSheet
           visible={sourceChooserVisible}
           onClose={() => setSourceChooserVisible(false)}
@@ -1939,7 +1940,7 @@ export function SaladBuilder({
     <>
       {infoAlertElement}
       {confirmSheetElement}
-      <ScrollView
+      <WalkScrollView
         ref={scrollViewRef}
         contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding + keyboardReserve }]}
       >
@@ -2502,7 +2503,7 @@ export function SaladBuilder({
           )}
         </>
       )}
-      </ScrollView>
+      </WalkScrollView>
     </>
   );
 }

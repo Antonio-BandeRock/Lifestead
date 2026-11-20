@@ -29,6 +29,7 @@ import { YourStorySection, useStoryGo, useYourStory } from '../components/YourSt
 import { YourStoryTour } from '../components/YourStoryTour';
 import { currentGuideKey, isGuideKey, type GuideKey } from '../lib/yourStoryGuides';
 import { SWITCHED_ON_HEADING, switchedOnFor } from '../lib/yourStoryInterview';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 export default function YourStoryScreen() {
   const scrollPadding = useFloatingButtonScrollPadding();
@@ -57,7 +58,7 @@ export default function YourStoryScreen() {
     <CalmBands>
       <View style={styles.screen}>
         <Stack.Screen options={{ title: 'Your Guide' }} />
-        <ScrollView ref={scrollRef} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <WalkScrollView ref={scrollRef} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={styles.leadBox}>
             <Text style={styles.heading}>{view?.heading ?? 'Your Guide'}</Text>
             <Text style={styles.lead}>
@@ -91,7 +92,7 @@ export default function YourStoryScreen() {
             <Text style={styles.heading}>Your paper, section by section</Text>
           </View>
           <YourStorySection mode="page" view={view} onChanged={() => void reload()} />
-        </ScrollView>
+        </WalkScrollView>
       </View>
     </CalmBands>
   );

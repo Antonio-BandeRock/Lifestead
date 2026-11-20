@@ -25,7 +25,7 @@ import { Canvas, ColorMatrix, Image as SkiaImage, ImageFormat, useCanvasRef, use
 import { CameraView, useCameraPermissions, type BarcodeScanningResult } from 'expo-camera';
 import * as Speech from 'expo-speech';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppTextInput } from './AppTextInput';
 import { DraggableCropOverlay, type CropRect } from './DraggableCropOverlay';
@@ -110,6 +110,7 @@ import {
 import { buildToneMatrix, computeContainRect, saveAdjustedIngredientsPhoto } from '../lib/toneAdjustment';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { WalkScrollView } from './WalkScrollView';
 
 type ScanStatus =
   | 'scanning'
@@ -1136,7 +1137,7 @@ export function ScanProductView({
         {pendingScans.length > 0 ? (
           <View style={styles.pendingPanel}>
             <Text style={styles.pendingHeading}>{pendingScansHeading(pendingScans)}</Text>
-            <ScrollView style={styles.pendingList} nestedScrollEnabled>
+            <WalkScrollView style={styles.pendingList} nestedScrollEnabled>
               {pendingScans.map((scan) => (
                 <View key={scan.barcode} style={styles.pendingRow}>
                   <Text style={styles.pendingTitle}>{pendingScanTitle(scan)}</Text>
@@ -1164,7 +1165,7 @@ export function ScanProductView({
                   </View>
                 </View>
               ))}
-            </ScrollView>
+            </WalkScrollView>
           </View>
         ) : null}
         <CameraView
@@ -1261,7 +1262,7 @@ export function ScanProductView({
     const boxHeight = Math.min(ADJUST_BOX_MAX_HEIGHT, ADJUST_BOX_WIDTH * (rawImage.height() / rawImage.width()));
     const displayRect = computeContainRect(rawImage.width(), rawImage.height(), ADJUST_BOX_WIDTH, boxHeight);
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>Set the Crop Area</Text>
         <Text style={styles.text}>
@@ -1289,7 +1290,7 @@ export function ScanProductView({
           <Text style={styles.secondaryButtonText}>Retake Photo</Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
@@ -1327,7 +1328,7 @@ export function ScanProductView({
     const scale = toneCanvasW / cropPixelW;
     const toneMatrix = buildToneMatrix(toneBrightness, toneContrast);
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>Adjust Brightness &amp; Contrast</Text>
         <Text style={styles.text}>
@@ -1368,7 +1369,7 @@ export function ScanProductView({
           <Text style={styles.secondaryButtonText}>Back to Crop</Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
@@ -1385,7 +1386,7 @@ export function ScanProductView({
   // real fallback either way, unchanged.
   if (status === 'photo-review') {
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>
           {t(ingredientsAttempts.length === 1 ? '{count} photo of up to {max}' : '{count} photos of up to {max}', { count: ingredientsAttempts.length, max: MAX_INGREDIENT_ANGLES })}
@@ -1443,7 +1444,7 @@ export function ScanProductView({
           </Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
@@ -1514,7 +1515,7 @@ export function ScanProductView({
 
   if (status === 'ingredients') {
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>{name}</Text>
         {brand ? <Text style={styles.text}>{brand}</Text> : null}
@@ -1613,7 +1614,7 @@ export function ScanProductView({
           <Text style={styles.primaryButtonText}>{computingReport ? 'Checking…' : 'Continue'}</Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
@@ -1625,7 +1626,7 @@ export function ScanProductView({
     const logAmountGrams = Number(logAmountText);
     const logAmountIsValid = Number.isFinite(logAmountGrams) && logAmountGrams > 0;
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>{name}</Text>
         {brand ? <Text style={styles.text}>{brand}</Text> : null}
@@ -1870,13 +1871,13 @@ export function ScanProductView({
           <Text style={styles.secondaryButtonText}>Not Interested / Scan Another</Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
   if (status === 'price-capture') {
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Ionicons name="checkmark-circle-outline" size={40} color={colors.accent} />
         <Text style={styles.title}>Added to My Processed Foods</Text>
@@ -1926,7 +1927,7 @@ export function ScanProductView({
           <Text style={styles.secondaryButtonText}>{groceryListId ? 'Add to My List Without a Price' : 'Skip for Now'}</Text>
         </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
@@ -43,6 +43,7 @@ import {
 } from '../lib/standardQuestionnaires';
 import { VaultClosedBand } from '../components/VaultClosedBand';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 type QuestionnaireResult = {
   code: QuestionnaireCode;
@@ -223,7 +224,7 @@ export default function AssessmentScreen() {
 
   return (
     <CalmBands>
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
         {/* The questions stay usable with the vault closed; the comparison
             with the last time waits for it to be opened. */}
         <VaultClosedBand color={colors.tabProfile} categories={['symptoms']} />
@@ -322,7 +323,7 @@ export default function AssessmentScreen() {
         >
           <Text style={styles.submitButtonText}>{submitting ? 'Saving…' : 'Save check-in'}</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </WalkScrollView>
     </CalmBands>
   );
 }
@@ -369,7 +370,7 @@ function AssessmentResults({
   const prostateDelta = comparison ? deltaLabel(comparison.prostateUrinaryDeltaRaw, false, ' pts') : null;
 
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.screen} contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
       <View style={styles.headingBand}>
         <Text style={styles.resultsTitle}>Your check-in</Text>
       </View>
@@ -454,7 +455,7 @@ function AssessmentResults({
       <TouchableOpacity style={styles.submitButton} onPress={onDone}>
         <Text style={styles.submitButtonText}>Done</Text>
       </TouchableOpacity>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

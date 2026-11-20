@@ -189,6 +189,7 @@ import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
+import { WalkScrollView } from '../../components/WalkScrollView';
 
 // 'YYYY-MM-DD' in LOCAL time -- same reasoning as the rest of the app
 // (see lib/db.ts/app/(tabs)/index.tsx): UTC's calendar date is wrong for
@@ -1493,7 +1494,7 @@ export default function InsightsScreen() {
               />
             </View>
           ) : (
-            <ScrollView
+            <WalkScrollView
               ref={scrollViewRef}
               style={styles.body}
               contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}
@@ -1621,7 +1622,7 @@ export default function InsightsScreen() {
             ) : (
               <PrepView breakdown={dimensionsBreakdown} scope={scope} />
               )}
-            </ScrollView>
+            </WalkScrollView>
           )}
         </GatedTabContent>
         </CalmBands>
@@ -3374,7 +3375,7 @@ function NutrientRankingView({
           instead of a separate fixed zone) still clears the floating
           button for whatever's rendered last -- now the results table,
           the same as every other scrollable lens on this screen. */}
-      <ScrollView
+      <WalkScrollView
         style={styles.rankResultsScroll}
         contentContainerStyle={[styles.rankResultsContent, { paddingBottom: fieldBottomPadding }]}
         scrollEnabled={!anyPopoverOpen}
@@ -3528,7 +3529,7 @@ function NutrientRankingView({
             )}
           </>
         )}
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

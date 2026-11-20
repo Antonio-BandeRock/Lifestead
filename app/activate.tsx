@@ -5,7 +5,7 @@
 // itself once it is good (components/TesterGate.tsx).
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
@@ -13,6 +13,7 @@ import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { isTesterBuild } from '../lib/appVariant';
 import { activateFromText, activateResultText } from '../lib/testerAccess';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 export default function ActivateScreen() {
   const router = useRouter();
@@ -37,14 +38,14 @@ export default function ActivateScreen() {
     : answer ?? 'Checking the approval.';
 
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+    <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
       <View style={styles.band}>
         <Text style={styles.body}>{text}</Text>
         <TouchableOpacity style={styles.primary} onPress={() => router.replace('/')} accessibilityRole="button">
           <Text style={styles.primaryText}>Go to Home</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

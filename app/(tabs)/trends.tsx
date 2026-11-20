@@ -1,7 +1,7 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { useRegisterScreenHelp } from '../../components/CurrentPageHelp';
 import { GatedTabContent } from '../../components/GatedTabContent';
 import type { HelpSection } from '../../components/HelpButton';
@@ -183,6 +183,7 @@ import { listEmptyTrendsLenses } from '../../lib/trendsLensRecords';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
+import { WalkScrollView } from '../../components/WalkScrollView';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -1970,7 +1971,7 @@ export default function TrendsScreen() {
         <CalmBands>
         <GatedTabContent pageTitle="Trends" variant="trends" revealed={revealed} lens={lens}>
           <CycleShadingContext.Provider value={cycleShading}>
-          <ScrollView style={styles.scroll} contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
+          <WalkScrollView style={styles.scroll} contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
             <View style={band.heading}>
               <Text style={band.headingText}>{activeLensLabel}</Text>
             </View>
@@ -4250,7 +4251,7 @@ export default function TrendsScreen() {
             {YEAR_SQUARE_LENSES[lens] ? (
               <YearInSquaresBand set={YEAR_SQUARE_LENSES[lens]} folds={folds} color={TAB_COLOR} idPrefix={`trends:${lens}`} />
             ) : null}
-          </ScrollView>
+          </WalkScrollView>
           </CycleShadingContext.Provider>
         </GatedTabContent>
         </CalmBands>

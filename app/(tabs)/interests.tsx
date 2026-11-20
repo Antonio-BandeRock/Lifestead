@@ -37,6 +37,7 @@ import { countLibraryAndPeople } from '../../lib/interestLibraryDb';
 import { LanguagesSection } from '../../components/LanguagesSection';
 import { LearnSection } from '../../components/LearnSection';
 import { useOnVaultChange } from '../../lib/vaultReads';
+import { WalkScrollView } from '../../components/WalkScrollView';
 
 // The Interests tab, 2026-10-30 (1.0.77.11). What a person follows,
 // practises, shares or earns from, kept as one record per interest that can
@@ -412,7 +413,7 @@ export default function InterestsScreen() {
       <SwipeableTabScreen enabled={!revealed}>
         <CalmBands>
           <GatedTabContent pageTitle="Interests" variant="field" revealed={revealed} lens={lens}>
-            <ScrollView ref={scrollRef} style={styles.scroll} contentContainerStyle={[band.column, { paddingBottom: scrollBottomPadding }]}>
+            <WalkScrollView ref={scrollRef} style={styles.scroll} contentContainerStyle={[band.column, { paddingBottom: scrollBottomPadding }]}>
               {lens === 'myInterests' ? (
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>My Interests</Text>
@@ -484,7 +485,7 @@ export default function InterestsScreen() {
               {lens === 'makingItPay' ? (
                 <DigestCategoryLens categoryKey="makingItPay" tabColor={TAB_COLOR} openEntryId={openEntryId} scrollToY={scrollTo} />
               ) : null}
-            </ScrollView>
+            </WalkScrollView>
           </GatedTabContent>
         </CalmBands>
       </SwipeableTabScreen>

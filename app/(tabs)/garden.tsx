@@ -157,6 +157,7 @@ import { t, tl } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
+import { WalkScrollView } from '../../components/WalkScrollView';
 
 // This page's own identity color -- see constants/colors.ts's own comment
 // on tabGarden for how it was chosen.
@@ -746,7 +747,7 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
   if (loading) return null;
   if (readFailed) {
     return (
-      <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
         <ReadProblem
           message="Your zone and place could not be read just now. Nothing you recorded is lost."
           onTryAgain={() => {
@@ -754,14 +755,14 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
             setReadTick((tick) => tick + 1);
           }}
         />
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
   const lookupDisabled = !country || !postalCode.trim();
 
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Find My Zone</Text>
         <Text style={styles.cardBody}>
@@ -894,7 +895,7 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
           ))}
         </View>
       ) : null}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -926,12 +927,12 @@ function HorticultureLens({
     scrollRef.current?.scrollTo({ y: guidesTop.current + y, animated: true });
   }, []);
   return (
-    <ScrollView ref={scrollRef} contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView ref={scrollRef} contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       <View onLayout={(event) => { guidesTop.current = event.nativeEvent.layout.y; }}>
         <CropGuideSection tabColor={TAB_COLOR} openCropKey={openCropKey} scrollToY={scrollToGuide} />
       </View>
       <DigestCategoryLens categoryKey="homeGardening" tabColor={TAB_COLOR} openEntryId={openEntryId} scrollToY={scrollTo} />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -1680,7 +1681,7 @@ function PlotsAndPlantingsLens({
   }
 
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       {photoRemovalSheet}
       {plotsReadFailed ? (
         <ReadProblem message="Your garden areas and plantings could not be read just now. Nothing you recorded is lost." onTryAgain={() => void loadPlots()} />
@@ -2202,7 +2203,7 @@ function PlotsAndPlantingsLens({
           </TouchableOpacity>
         </View>
       )}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -2335,7 +2336,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
   }
 
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       {photoRemovalSheet}
       {readFailed ? (
         <ReadProblem message="Your harvests and plantings could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
@@ -2476,7 +2477,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
           <Text style={styles.linkText}>Open Garden Yield on Trends</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -2497,12 +2498,12 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
 // the band around it and nothing more.
 function DaysUntilLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Days Until</Text>
         <DaysUntilSection showHeading={false} />
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -2668,7 +2669,7 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
   const tomorrow = tomorrowDateString();
 
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       <AppActionSheet
         visible={removePrompt !== null}
         onClose={() => setRemovePrompt(null)}
@@ -2827,7 +2828,7 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
           Garden tasks also show on Home and on Schedules &gt; Timeline, and the phone reminds you at the time set.
         </Text>
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

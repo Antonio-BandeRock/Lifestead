@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
@@ -28,6 +28,7 @@ import { REFERENCE_DB_VERSION } from '../lib/referenceDbVersion';
 import { referenceDataDate } from '../lib/reportVersion';
 import { describeMoment } from '../lib/snapshotSync';
 import { appLocale } from '@/lib/language';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // How many queued reminders are listed. The rest are counted.
 const QUEUED_SHOWN = 12;
@@ -86,7 +87,7 @@ export default function AppStatusScreen() {
     <CalmBands>
       <View style={styles.screen}>
         <Stack.Screen options={{ title: 'App Status' }} />
-        <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={styles.card}>
             <Text style={styles.heading}>This device</Text>
             {problem ? <Text style={styles.caption}>{problem}</Text> : null}
@@ -151,7 +152,7 @@ export default function AppStatusScreen() {
               )}
             </View>
           ) : null}
-        </ScrollView>
+        </WalkScrollView>
       </View>
     </CalmBands>
   );

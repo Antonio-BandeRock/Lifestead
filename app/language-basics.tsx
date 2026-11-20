@@ -39,6 +39,7 @@ import { askWhereLanguageBasicsGoes } from '../components/LanguageBasicsButton';
 import { addCourseAnswer, getCourseSettings, listCourseReviews, loadCourse, saveCourseSettings, withStudyGroup, type CourseSettings, type OpenedCourse } from '../lib/learnCoursesDb';
 import type { LearnGrade, LearnReview } from '../lib/learnSchedule';
 import { explainNotYet } from '../lib/notYet';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 const TAB_COLOR = colors.tabInterests;
 
@@ -243,7 +244,7 @@ export default function LanguageBasicsScreen() {
           {infoAlertElement}
           {infoModal}
           {/* Its own key per card, so every card opens at the top instead of where the list or the last card was scrolled. */}
-          <ScrollView key={`sitting-${sitting.index}`}contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]} keyboardShouldPersistTaps="handled">
+          <WalkScrollView key={`sitting-${sitting.index}`}contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]} keyboardShouldPersistTaps="handled">
             <View style={[bands.box, styles.gap]}>
               <Text style={styles.caption}>{t('Card {n} of {total}', { n: sitting.index + 1, total: sitting.queue.length })}</Text>
               {sitting.goingOver ? <Text style={styles.caption}>Nothing is waiting here today, so these are extra cards to go over.</Text> : null}
@@ -265,7 +266,7 @@ export default function LanguageBasicsScreen() {
                 <Text style={styles.secondaryText}>Stop for Now</Text>
               </TouchableOpacity>
             </View>
-          </ScrollView>
+          </WalkScrollView>
         </View>
       </CalmBands>
     );
@@ -277,7 +278,7 @@ export default function LanguageBasicsScreen() {
         <Stack.Screen options={{ title }} />
         {infoAlertElement}
         {infoModal}
-        <ScrollView key="list" ref={scrollRef} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <WalkScrollView key="list" ref={scrollRef} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={[bands.box, styles.gap]}>
             <Text style={styles.body}>{t(deck.name)}</Text>
             <Text style={styles.caption}>{t(deck.description)}</Text>
@@ -434,7 +435,7 @@ export default function LanguageBasicsScreen() {
               ) : null}
             </View>
           </TabBand>
-        </ScrollView>
+        </WalkScrollView>
       </View>
     </CalmBands>
   );

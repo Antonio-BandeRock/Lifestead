@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
@@ -39,6 +39,7 @@ import { isDesktopApp } from '../lib/desktop/bridge';
 import type { Marked } from '../lib/recipeMarkup';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
+import { WalkScrollView } from './WalkScrollView';
 
 // Opening a page inside the app to read or mark its recipe (G3) needs the
 // phone's web view, which the desktop build does not have.
@@ -436,7 +437,7 @@ export function RecipeImportView({
       {markingUrl ? (
         <RecipeMarkupView url={markingUrl} onClose={() => setMarkingUrl(null)} onRecipe={takeFoundOnPage} onMarked={takeMarked} />
       ) : null}
-      <ScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
+      <WalkScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
         <TouchableOpacity onPress={onClose} activeOpacity={0.7}>
           <Text style={styles.backLink}>‹ Back</Text>
         </TouchableOpacity>
@@ -655,7 +656,7 @@ export function RecipeImportView({
             Removing an import here leaves anything already saved from it in My Recipes as it is.
           </Text>
         </HomeSectionBand>
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
@@ -54,6 +54,7 @@ import { useOnVaultChange } from '../lib/vaultReads';
 import { useWalkMark } from './WalkMark';
 import { t, tl } from '../lib/i18n';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from './WalkScrollView';
 
 // Growing Costs, a lens of Garden.
 //
@@ -419,7 +420,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
   }
 
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       <VaultClosedBand color={TAB_COLOR} categories={['finances']} />
       {readFailed ? (
         <ReadProblem message="Your growing costs could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
@@ -778,7 +779,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
           </Text>
         </View>
       </TabBand>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

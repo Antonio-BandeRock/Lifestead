@@ -29,7 +29,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { CameraView, useCameraPermissions, type BarcodeScanningResult } from 'expo-camera';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { PhoneOnlyNotice } from '../components/PhoneOnlyNotice';
@@ -88,6 +88,7 @@ import {
 } from '../lib/medicineProduct';
 import { leaveSupplementDraft } from '../lib/supplementDraft';
 import { useCategoryClosed } from '../lib/vaultSession';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 const TAB = colors.tabLife;
 
@@ -498,7 +499,7 @@ export default function MedicineLabelScreen() {
     const mark = ruleQuote && quotedText ? markSentence(quotedText, ruleQuote.sentence) : null;
     const quotedHeading = ruleQuote ? (doc.sections.find((section) => section.key === ruleQuote.sectionKey)?.heading ?? ruleQuote.sectionKey) : '';
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.card}>
           <Text style={styles.title}>{labelName(doc)}</Text>
           <Text style={styles.caption}>{labelCaption(doc)}</Text>
@@ -643,7 +644,7 @@ export default function MedicineLabelScreen() {
             <Text style={styles.secondaryButtonText}>Remove the Kept Label</Text>
           </TouchableOpacity>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
@@ -755,7 +756,7 @@ export default function MedicineLabelScreen() {
   );
 
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+    <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
       <View style={styles.card}>
         <Text style={styles.title}>{treatmentName ? `The label for ${treatmentName}` : 'Look up a medicine label'}</Text>
         <Text style={styles.body}>
@@ -808,7 +809,7 @@ export default function MedicineLabelScreen() {
       </View>
 
       {askedFrom === 'typed' ? answer : null}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

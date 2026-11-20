@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { PILL, PILL_ON, PILL_ON_TEXT } from '../constants/buttons';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
@@ -46,6 +46,7 @@ import { scannedProductIdsWithRecalls } from '../lib/recallsDb';
 import { useInfoAlert } from './InfoAlert';
 import { ReadProblem } from './ReadProblem';
 import { useWalkMark } from './WalkMark';
+import { WalkScrollView } from './WalkScrollView';
 
 // A Food lens since 2026-09-13 (it was app/food-items.tsx, a Stack push
 // outside the (tabs) group, from 2026-08-01 until then): "only Profile
@@ -216,7 +217,7 @@ export function FoodItemsView({
 
   return (
     <View style={styles.wrapper}>
-      <ScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
         {/* The way back, at the top since the bottom belongs to the hub
             buttons now. Same pill as the Desktop's own "Back to My Foods". */}
         <TouchableOpacity style={styles.backPill} onPress={onClose} activeOpacity={0.7}>
@@ -300,7 +301,7 @@ export function FoodItemsView({
             </Text>
           </View>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
       {infoAlertElement}
       {confirmSheetElement}
     </View>

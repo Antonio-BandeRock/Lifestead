@@ -2,7 +2,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { router } from 'expo-router';
 import { LightSensor } from 'expo-sensors';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
@@ -102,6 +102,7 @@ import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { WalkScrollView } from './WalkScrollView';
 
 // Growing Conditions, a lens of Garden (2026-09-23).
 //
@@ -608,7 +609,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
   }
 
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       {readFailed ? (
         <ReadProblem message="Your growing conditions readings could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
       ) : null}
@@ -1218,7 +1219,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
           <Text style={styles.linkText}>Open Growing Conditions on Trends</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

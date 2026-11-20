@@ -1,10 +1,11 @@
 import { Stack } from 'expo-router';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { DayTimeline } from '../components/DayTimeline';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // The whole Today timeline (B1 of the competitive build plan, 2026-09-26):
 // the same builder and the same strip as the Home card and Schedules >
@@ -17,7 +18,7 @@ export default function TimelineScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'Timeline' }} />
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.box}>
           <Text style={styles.lead}>
             Everything on the days around today, on one clock: meals and doses, appointments, routines, check-ins and
@@ -27,7 +28,7 @@ export default function TimelineScreen() {
         <View style={styles.box}>
           <DayTimeline tabColor={colors.tabSchedules} />
         </View>
-      </ScrollView>
+      </WalkScrollView>
     </>
   );
 }

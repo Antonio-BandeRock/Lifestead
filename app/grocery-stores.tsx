@@ -11,7 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppActionSheet } from '../components/AppActionSheet';
 import { AppTextInput } from '../components/AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
@@ -45,6 +45,7 @@ import {
 import { explainNotYet } from '../lib/notYet';
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 const OWN_HEADING = '__own_heading__';
 
@@ -179,7 +180,7 @@ export default function GroceryStoresScreen() {
 
   return (
     <View style={styles.screen}>
-      <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.card}>
           <Text style={styles.title}>Stores and Aisles</Text>
           <Text style={styles.muted}>
@@ -395,7 +396,7 @@ export default function GroceryStoresScreen() {
             ))}
           </View>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
 
       <AppActionSheet
         visible={confirmStoreRemove}

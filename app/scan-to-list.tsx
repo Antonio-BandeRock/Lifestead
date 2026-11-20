@@ -13,7 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { CameraView, useCameraPermissions, type BarcodeScanningResult } from 'expo-camera';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { PhoneOnlyNotice } from '../components/PhoneOnlyNotice';
@@ -37,6 +37,7 @@ import {
 import { explainNotYet } from '../lib/notYet';
 import { findHouseholdProduct, putHouseholdOnList } from '../lib/scanToListDb';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 const TAB = colors.tabLife;
 const OWN_GROUP = 'A group of your own…';
@@ -253,7 +254,7 @@ export default function ScanToListScreen() {
   const groupChoices = draft ? householdGroupChoices(BUILT_IN_GROUPS, draft.group) : BUILT_IN_GROUPS;
 
   return (
-    <ScrollView
+    <WalkScrollView
       style={styles.screen}
       contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}
       keyboardShouldPersistTaps="handled"
@@ -383,7 +384,7 @@ export default function ScanToListScreen() {
           </TouchableOpacity>
         </View>
       ) : null}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

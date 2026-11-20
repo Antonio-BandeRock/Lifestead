@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { useWalkMark } from './WalkMark';
 import { textShadow, typography } from '../constants/typography';
+import { WalkScrollView } from './WalkScrollView';
 
 // 2026-08-21, direct request: "Fermentation should ask what type of
 // fermentation they want to build before moving on to any part of the
@@ -112,7 +113,7 @@ export function FermentationSubtypePicker({
 
   if (drinkChoice === null) {
     return (
-      <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
         <Text style={[styles.heading, { color: tabColor }]}>Is This a Drink?</Text>
         <Text style={styles.subheading}>
           Fermentation Builder covers both. A fermented drink and a fermented food (sauerkraut, yogurt) need different
@@ -126,13 +127,13 @@ export function FermentationSubtypePicker({
           <Text style={[styles.cardLabel, { color: tabColor }]}>No, Something You Eat</Text>
           <Text style={styles.cardDescription}>Sauerkraut, yogurt, or a syrup taken by the spoonful.</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
   const options = drinkChoice === 'drink' ? DRINK_TYPE_OPTIONS : FOOD_TYPE_OPTIONS;
   return (
-    <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
       <TouchableOpacity style={styles.backRow} onPress={() => setDrinkChoice(null)}>
         <Text style={[styles.backText, { color: tabColor }]}>{'‹ Back'}</Text>
       </TouchableOpacity>
@@ -147,7 +148,7 @@ export function FermentationSubtypePicker({
           <Text style={styles.cardDescription}>{option.description}</Text>
         </TouchableOpacity>
       ))}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

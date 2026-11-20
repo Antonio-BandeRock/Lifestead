@@ -302,6 +302,7 @@ import { t, tl } from '../lib/i18n';
 import { noteLensUsed } from '../lib/lensUseDb';
 import { appLocale } from '@/lib/language';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // Whether a backup that has been reached is restored or only checked.
 type BackupUse = 'restore' | 'check';
@@ -3425,7 +3426,7 @@ export default function ProfileScreen() {
         <HelpButton pageTitle="Profile" sections={PROFILE_HELP_SECTIONS} />
       </View>
     </View>
-    <ScrollView
+    <WalkScrollView
       ref={scrollRef}
       onScroll={(event) => {
         scrollYRef.current = event.nativeEvent.contentOffset.y;
@@ -6251,7 +6252,7 @@ export default function ProfileScreen() {
       </View>
       </View>) : null}
       </View>
-    </ScrollView>
+    </WalkScrollView>
     {closeButton}
     {passwordPromptElement}
     {busyOverlayElement}

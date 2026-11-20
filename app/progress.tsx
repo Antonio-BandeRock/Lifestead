@@ -19,7 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { router, Stack } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
 import { ProgressSceneSvg } from '../components/ProgressPicture';
 import { TabBand } from '../components/TabBand';
@@ -38,6 +38,7 @@ import {
 } from '../lib/progress';
 import { loadProgress, readLastSeenPieces, saveLastSeenPieces } from '../lib/progressDb';
 import { buildProgressScene } from '../lib/progressScene';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 type Since = ReturnType<typeof sinceLastLooked>;
 
@@ -87,7 +88,7 @@ export default function ProgressScreen() {
     <CalmBands>
       <View style={styles.screen}>
         <Stack.Screen options={{ title: 'Your Progress' }} />
-        <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={styles.introBox}>
             <Text style={styles.introTitle}>Made of what you have recorded</Text>
             <Text style={styles.caption}>
@@ -117,7 +118,7 @@ export default function ProgressScreen() {
           {inputs && bands
             ? bands.map((band) => <TabProgressBand key={band.tab} band={band} inputs={inputs} bands={bands} folds={folds} />)
             : null}
-        </ScrollView>
+        </WalkScrollView>
       </View>
     </CalmBands>
   );

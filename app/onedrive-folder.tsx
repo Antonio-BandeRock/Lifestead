@@ -50,7 +50,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { AppTextInput } from '../components/AppTextInput';
 import { colors } from '../constants/colors';
@@ -92,6 +92,7 @@ import {
 } from '../lib/oneDriveGraph';
 import { ONEDRIVE_NOT_CONFIGURED } from '../lib/oneDriveConfig';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 /** Where the listing came from, so Back knows what to go back to. */
 type Root = 'shared' | 'mine';
@@ -391,17 +392,17 @@ export default function OneDriveFolderScreen() {
 
   if (!isOneDriveConfigured()) {
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.card}>
           <Text style={styles.hint}>{ONEDRIVE_NOT_CONFIGURED}</Text>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 
   return (
     <CalmBands>
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.card}>
           <Text style={styles.label}>Your shared folder</Text>
           <Text style={styles.hint}>
@@ -669,7 +670,7 @@ export default function OneDriveFolderScreen() {
         <TouchableOpacity style={styles.card} onPress={() => router.back()} hitSlop={8}>
           <Text style={styles.action}>Go Back</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </WalkScrollView>
     </CalmBands>
   );
 }

@@ -360,6 +360,7 @@ import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
 import { doseWithUnit } from '../../lib/doseAmount';
+import { WalkScrollView } from '../../components/WalkScrollView';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -1553,7 +1554,7 @@ function MealsLens() {
       message={removePrompt?.message}
       actions={removePrompt?.actions ?? []}
     />
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <OffPlanShortcut />
       {loading ? (
           <View style={styles.bandBox}><Text style={styles.emptyText}>Loading…</Text></View>
@@ -2005,7 +2006,7 @@ function MealsLens() {
             <HouseholdMealCalendarBand folds={folds} weekStart={weekStart} onChanged={load} confirm={confirmSheet} />
           </>
         )}
-    </ScrollView>
+    </WalkScrollView>
 
     <ChangeDishesSheet scheduleItemId={changingDishesId} tabColor={TAB_COLOR} onClose={() => setChangingDishesId(null)} onSaved={load} />
     <Modal visible={rotatingItem !== null} transparent animationType={modalAnimationType('slide')} onRequestClose={closeRotateSheet}>
@@ -2030,7 +2031,7 @@ function MealsLens() {
             </TouchableOpacity>
           ) : null}
 
-          <ScrollView style={styles.rotateSheetScroll}>
+          <WalkScrollView style={styles.rotateSheetScroll}>
             {rotatingIngredients.map((ingredient, ingredientIndex) => (
               <View key={`${ingredient.dishName ?? ''}_${ingredient.foodName}_${ingredientIndex}`} style={styles.rotateIngredientCard}>
                 <Text style={styles.rotateIngredientLabel}>
@@ -2058,7 +2059,7 @@ function MealsLens() {
                 ) : null}
               </View>
             ))}
-          </ScrollView>
+          </WalkScrollView>
 
           <ThumbRow primary="last" style={styles.formActions}>
             <TouchableOpacity style={styles.secondaryButton} onPress={closeRotateSheet}>
@@ -2328,7 +2329,7 @@ function MoveMealSheet({
               <Text style={styles.rotateSheetCloseText}>✕</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView style={styles.rotateSheetScroll}>
+          <WalkScrollView style={styles.rotateSheetScroll}>
             <Text style={styles.helperText}>{item ? moveIntro(item.title, item.scheduledFor, today) : ''}</Text>
             {item?.repeatGroupId ? <Text style={styles.helperText}>{MOVE_SERIES_NOTE}</Text> : null}
             {bounds.reason ? <Text style={styles.helperText}>{bounds.reason}</Text> : null}
@@ -2350,7 +2351,7 @@ function MoveMealSheet({
               <Text style={styles.helperText}>There is no other day in the next four weeks this meal can move to.</Text>
             ) : null}
             {message ? <Text style={styles.errorText}>{message}</Text> : null}
-          </ScrollView>
+          </WalkScrollView>
           <ThumbRow primary="last" style={styles.formActions}>
             <TouchableOpacity style={styles.secondaryButton} onPress={onClose}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
@@ -2420,7 +2421,7 @@ function LeftoverSheet({ cook, profile, onClose }: { cook: LeftoverCook | null; 
               <Text style={styles.rotateSheetCloseText}>✕</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView style={styles.rotateSheetScroll}>
+          <WalkScrollView style={styles.rotateSheetScroll}>
             <Text style={styles.helperText}>{cook ? (cook.eaten ? saveLeftoversIntro(cook.title) : eatAgainIntro(cook.title)) : ''}</Text>
             <Text style={styles.label}>Which day</Text>
             {cook ? (
@@ -2455,7 +2456,7 @@ function LeftoverSheet({ cook, profile, onClose }: { cook: LeftoverCook | null; 
             </View>
             {message ? <Text style={message.problem ? styles.errorText : styles.helperText}>{message.text}</Text> : null}
             {planned.length > 0 ? <Text style={styles.helperText}>{cookCaption(planned.length)}.</Text> : null}
-          </ScrollView>
+          </WalkScrollView>
           <View style={styles.formActions}>
             <TouchableOpacity style={styles.secondaryButton} onPress={onClose}>
               <Text style={styles.secondaryButtonText}>Done</Text>
@@ -3108,7 +3109,7 @@ function PastMealsLens() {
 
   return (
     <>
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {loading ? (
         <View style={styles.bandBox}><Text style={styles.emptyText}>Loading…</Text></View>
       ) : errorMessage ? (
@@ -3217,7 +3218,7 @@ function PastMealsLens() {
           </View>
         </ScheduleBand>
       ) : null}
-    </ScrollView>
+    </WalkScrollView>
     <LeftoverSheet cook={leftoverCook} profile={profile} onClose={closeLeftovers} />
     </>
   );
@@ -4286,7 +4287,7 @@ function DailyMealPlanLens() {
   const singleDay = plans.length === 1 ? plans[0] : null;
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {confirmSheetElement}
       {draftReadFailed ? (
@@ -4687,7 +4688,7 @@ function DailyMealPlanLens() {
           </TouchableOpacity>
         </View>
       ) : null}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -4967,7 +4968,7 @@ function TodaysMealsLens() {
   }
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, styles.calmGap, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, styles.calmGap, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {errorMessage ? <ReadProblem message={errorMessage} onTryAgain={load} /> : null}
       {loading ? (
@@ -5019,7 +5020,7 @@ function TodaysMealsLens() {
         }
         </>
       )}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -5322,7 +5323,7 @@ function HydrationLens() {
   ].sort((a, b) => a.time.localeCompare(b.time));
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       <AppActionSheet
         visible={removePrompt !== null}
@@ -5585,7 +5586,7 @@ function HydrationLens() {
           ) : null}
         </>
       )}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -6071,7 +6072,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
   }
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, styles.calmGap, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, styles.calmGap, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       <AppActionSheet
         visible={removePrompt !== null}
@@ -6237,7 +6238,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
           )}
         </>
       )}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -6749,7 +6750,7 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
   }
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       <AppActionSheet
         visible={removePrompt !== null}
@@ -7069,7 +7070,7 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
         </>
       )}
       <PartnerBesideBand kind="appointments" tabColor={TAB_COLOR} />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -7092,11 +7093,11 @@ type UpkeepBucket = { key: string; title: string; icon: ComponentProps<typeof Io
 function TimelineLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <View style={styles.bandBox}>
         <DayTimeline tabColor={TAB_COLOR} />
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -7164,7 +7165,7 @@ function UpkeepLens() {
   }
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       <View style={styles.bandOut}>
         <HomeSectionBand
@@ -7228,7 +7229,7 @@ function UpkeepLens() {
           ),
         )
       )}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -7240,9 +7241,9 @@ const EXERCISE_REPEAT_PICKER = RepeatPicker;
 function ExerciseLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <ExerciseScheduleSection tabColor={TAB_COLOR} RepeatRulePicker={EXERCISE_REPEAT_PICKER} />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

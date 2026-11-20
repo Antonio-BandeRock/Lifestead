@@ -28,7 +28,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useFocusEffect, useLocalSearchParams, useRouter, type Href } from 'expo-router';
 import { useCallback, useEffect, useRef, useState, type ComponentProps } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NotesInput } from '../components/NotesInput';
 import { useInfoAlert } from '../components/InfoAlert';
 import { VoiceInputButton } from '../components/VoiceInputButton';
@@ -84,6 +84,7 @@ import {
   type WebPage,
 } from '../lib/webCapture';
 import { forgetPageForNote, listWebPagesForNotes, readPageForNote } from '../lib/webCaptureDb';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // A destination wears the colour and icon of the tab it hands off to, rather
 // than a palette invented here, so "In the garden" reads as Garden before the
@@ -557,7 +558,7 @@ export default function CaptureScreen() {
     <View style={styles.screen}>
       <Stack.Screen options={{ title: 'Capture' }} />
       {infoAlertElement}
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.leadBox}>
           <Text style={styles.lead}>
             Get it out of your head first. What it turns out to be can wait until you have a minute.
@@ -738,7 +739,7 @@ export default function CaptureScreen() {
             </Text>
           </View>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

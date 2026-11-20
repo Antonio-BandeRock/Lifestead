@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useEffect, useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from './AppTextInput';
 import { useConfirmSheet } from './ConfirmSheet';
 import { useInfoAlert } from './InfoAlert';
@@ -23,6 +23,7 @@ import { formatAmount } from '../lib/nutrientAnalysis';
 import { classSentence, howMatchedSentence, recallNumberSentence, recallTitle, statusSentence, whatToDoSentence, type RecallMatch } from '../lib/recalls';
 import { getProductRecallMatches, isRecallCheckOn, setAsideRecalls } from '../lib/recallsDb';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from './WalkScrollView';
 
 // A Food lens since 2026-09-13 (it was app/food-product-detail.tsx, a
 // Stack screen, from 2026-08-16 until then), for the same reason
@@ -153,7 +154,7 @@ export function FoodProductDetailView({ id, onClose }: { id: string; title?: str
   if (loading) {
     return (
       <View style={styles.screen}>
-        <ScrollView contentContainerStyle={styles.content}>{backLink}</ScrollView>
+        <WalkScrollView contentContainerStyle={styles.content}>{backLink}</WalkScrollView>
       </View>
     );
   }
@@ -161,12 +162,12 @@ export function FoodProductDetailView({ id, onClose }: { id: string; title?: str
   if (!product) {
     return (
       <View style={styles.screen}>
-        <ScrollView contentContainerStyle={styles.content}>
+        <WalkScrollView contentContainerStyle={styles.content}>
           {backLink}
           <View style={styles.card}>
             <Text style={styles.text}>This product isn&apos;t here anymore. It may have already been deleted.</Text>
           </View>
-        </ScrollView>
+        </WalkScrollView>
       </View>
     );
   }
@@ -179,7 +180,7 @@ export function FoodProductDetailView({ id, onClose }: { id: string; title?: str
 
   return (
     <View style={styles.screen}>
-      <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
         {backLink}
         {/* Name + brand + photo -- name is the one real thing this screen
             lets a person correct in place, matching updateScannedProduct's
@@ -337,7 +338,7 @@ export function FoodProductDetailView({ id, onClose }: { id: string; title?: str
             <Text style={styles.deleteButtonText}>Delete This Product</Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </WalkScrollView>
       {infoAlertElement}
       {confirmSheetElement}
     </View>

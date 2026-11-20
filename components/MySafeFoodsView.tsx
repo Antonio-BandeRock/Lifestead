@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
@@ -34,6 +34,7 @@ import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, 
 import { foodDisplayName } from '../lib/ingredientShortName';
 import { ReadProblem } from './ReadProblem';
 import { useWalkMark } from './WalkMark';
+import { WalkScrollView } from './WalkScrollView';
 
 // My Safe Foods: the person's list, kept by the person.
 //
@@ -333,7 +334,7 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
 
   return (
     <View style={styles.wrapper}>
-      <ScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
         <TouchableOpacity onPress={onClose} activeOpacity={0.7}>
           <Text style={styles.backLink}>‹ Back</Text>
         </TouchableOpacity>
@@ -547,7 +548,7 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
             {avoidEntries.map((entry) => renderFoodRow(entry.foodName, entry.category))}
           </HomeSectionBand>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

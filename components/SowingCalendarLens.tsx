@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
@@ -55,6 +55,7 @@ import { MyCropsBand } from './MyCropsBand';
 import { useInfoAlert } from './InfoAlert';
 import { makeTabBandStyles, TabBand } from './TabBand';
 import { useWalkMark } from './WalkMark';
+import { WalkScrollView } from './WalkScrollView';
 
 // Sowing Calendar, a lens of Garden (I5, 1.0.55.20).
 //
@@ -276,7 +277,7 @@ export function SowingCalendarLens({
   const line = anchorLine();
 
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Sowing Calendar</Text>
         {frost === null ? (
@@ -423,7 +424,7 @@ export function SowingCalendarLens({
       </TabBand>
 
       {infoAlertElement}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

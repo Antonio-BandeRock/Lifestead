@@ -24,6 +24,7 @@ import { isSideDish } from '../lib/recipeDishRole';
 import { CUISINE_BANDS, cuisineBandFor } from '../lib/cuisineBands';
 import { useWalkMark } from './WalkMark';
 import { t, tl } from '../lib/i18n';
+import { WalkScrollView } from './WalkScrollView';
 
 // The curated recipes, on the Food tab, grouped under the builder that
 // makes them. Direct instruction, 2026-09-18: "I would like the System
@@ -419,7 +420,7 @@ export function SystemRecipesView({
 
   return (
     <View style={styles.wrapper}>
-      <ScrollView ref={scrollRef} contentContainerStyle={{ paddingBottom: scrollBottomPadding }}>
+      <WalkScrollView ref={scrollRef} contentContainerStyle={{ paddingBottom: scrollBottomPadding }}>
         <View ref={contentRef} style={styles.container}>
           <TouchableOpacity style={styles.backPill} onPress={onClose} activeOpacity={0.7}>
             <Text style={styles.backPillText}>‹ Back</Text>
@@ -522,7 +523,7 @@ export function SystemRecipesView({
             ))
           )}
         </View>
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

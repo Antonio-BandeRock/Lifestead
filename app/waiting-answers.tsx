@@ -13,7 +13,7 @@
 // components/WaitingAnswersList.tsx and hooks/useWaitingReminders.ts.
 import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP } from '../components/HomeSectionBand';
 import { useTabBandStyles } from '../components/TabBand';
 import { WaitingAnswersList } from '../components/WaitingAnswersList';
@@ -22,6 +22,7 @@ import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { useWaitingReminders } from '../hooks/useWaitingReminders';
 import { countWaiting } from '../lib/waitingAnswers';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 const TAB_COLOR = colors.tabSchedules;
 const PHONE = Platform.OS === 'android' || Platform.OS === 'ios';
@@ -35,7 +36,7 @@ export default function WaitingAnswersScreen() {
   return (
     <View style={styles.screen}>
       <Stack.Screen options={{ title: 'Waiting for an Answer' }} />
-      <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]} keyboardShouldPersistTaps="handled">
+      <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]} keyboardShouldPersistTaps="handled">
         <View style={[band.box, styles.summary]}>
           <Text style={styles.summaryTitle}>
             {groups == null
@@ -63,7 +64,7 @@ export default function WaitingAnswersScreen() {
             <Text style={styles.refreshText}>Check Again</Text>
           </TouchableOpacity>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

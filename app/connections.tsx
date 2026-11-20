@@ -10,7 +10,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { useConfirmSheet } from '../components/ConfirmSheet';
 import { AppActionSheet } from '../components/AppActionSheet';
@@ -86,6 +86,7 @@ import {
   unlinkFiles,
 } from '../lib/partnerTransfer';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // One sentence per state, so every button that can hit a not-ready mailbox
 // says the same thing about it rather than each inventing its own wording.
@@ -430,7 +431,7 @@ export default function ConnectionsScreen() {
 
   return (
     <CalmBands>
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         {confirmSheetElement}
         <AppActionSheet
           visible={doseAsk !== null}
@@ -985,7 +986,7 @@ export default function ConnectionsScreen() {
             </View>
           ))
         )}
-      </ScrollView>
+      </WalkScrollView>
     </CalmBands>
   );
 }

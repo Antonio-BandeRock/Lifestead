@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { useConfirmSheet } from '../components/ConfirmSheet';
 import { useInfoAlert } from '../components/InfoAlert';
@@ -29,6 +29,7 @@ import {
 import { parseAmountValue } from '../lib/measurement';
 import { ThumbRow } from '../components/ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // The Fermentation Tracker, 2026-08-20 -- "a tracker for the entire
 // process... with triggers and reminders for keeping the fermentation
@@ -258,7 +259,7 @@ export default function FermentationTrackerScreen() {
       <Stack.Screen options={{ title: 'Fermentation Tracker' }} />
       {infoAlertElement}
       {confirmSheetElement}
-      <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
         {/* Start Tracking -- shown whenever there's a real fermentation to
             start (either the one this screen was opened for, or, absent
             that, a picker over every saved fermentation recipe) and no
@@ -428,7 +429,7 @@ export default function FermentationTrackerScreen() {
         <TouchableOpacity style={[styles.inset, styles.secondaryButton]} onPress={() => router.back()}>
           <Text style={styles.secondaryButtonText}>Close</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

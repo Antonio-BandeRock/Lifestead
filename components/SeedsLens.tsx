@@ -7,7 +7,7 @@
 
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { removePhotosOf } from '../lib/mediaDb';
@@ -59,6 +59,7 @@ import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { WalkScrollView } from './WalkScrollView';
 
 const TAB_COLOR = colors.tabGarden;
 // 1.0.61.7, extended to every Garden lens in 1.0.61.8: the calm look
@@ -175,7 +176,7 @@ export function SeedsLens({ scrollBottomPadding }: { scrollBottomPadding: number
   const testsOf = (id: string) => tests.filter((t) => t.seedId === id);
 
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       {readFailed ? (
         <ReadProblem message="Your seed packets could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
       ) : null}
@@ -239,7 +240,7 @@ export function SeedsLens({ scrollBottomPadding }: { scrollBottomPadding: number
           </View>
         </HomeSectionBand>
       ) : null}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

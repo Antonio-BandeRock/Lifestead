@@ -24,7 +24,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { CameraView, useCameraPermissions, type BarcodeScanningResult } from 'expo-camera';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { PhoneOnlyNotice } from '../components/PhoneOnlyNotice';
 import { QrCode } from '../components/QrCode';
 import { colors } from '../constants/colors';
@@ -48,6 +48,7 @@ import { isDesktopApp } from '../lib/desktop/bridge';
 import { getMyKeyFingerprint } from '../lib/deviceIdentity';
 import { confirmItsYou } from '../lib/freshAuth';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // Big enough that each module lands on several physical pixels at any normal
 // phone density, which is what actually decides whether a code scans on the
@@ -253,7 +254,7 @@ ${link}`;
   }
 
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+    <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
       <View style={styles.card}>
         <Text style={styles.title}>
           {alreadyHaveYou
@@ -345,7 +346,7 @@ ${link}`;
           has it; it is only useful to someone you meant to send it to.
         </Text>
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

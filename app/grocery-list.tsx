@@ -19,7 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { AppActionSheet } from '../components/AppActionSheet';
 import { ReadProblem } from '../components/ReadProblem';
@@ -117,6 +117,7 @@ import {
 } from '../lib/mealPlanDiet';
 import { matchFoodName } from '../lib/groceryFoodMatch';
 import type { InterviewQuestionView, InterviewView } from '../lib/yourStoryInterview';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 const DEFAULT_DAYS = 3;
 
@@ -1224,7 +1225,7 @@ export default function GroceryListScreen() {
     };
     return (
       <View style={styles.screen}>
-        <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={styles.card}>
             <Text style={styles.title}>{stepTitle[setupStep]}</Text>
             {setupStep === 'choose' ? (
@@ -1515,7 +1516,7 @@ export default function GroceryListScreen() {
               </TouchableOpacity>
             </>
           ) : null}
-        </ScrollView>
+        </WalkScrollView>
         {infoAlertElement}
       </View>
     );
@@ -1523,7 +1524,7 @@ export default function GroceryListScreen() {
 
   return (
     <View style={styles.screen}>
-      <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.card}>
           <Text style={styles.title}>{list?.name ?? 'Groceries'}</Text>
           <Text style={styles.muted}>
@@ -2004,7 +2005,7 @@ export default function GroceryListScreen() {
           <Ionicons name="document-text-outline" size={18} color={colors.textSecondary} />
           <Text style={styles.secondaryButtonText}>Start a New List</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </WalkScrollView>
       <AppActionSheet
         visible={confirmDeleteOpen}
         onClose={() => setConfirmDeleteOpen(false)}

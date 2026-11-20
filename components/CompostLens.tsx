@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
@@ -54,6 +54,7 @@ import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { t, tl } from '../lib/i18n';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { WalkScrollView } from './WalkScrollView';
 
 // Compost, a lens of Garden.
 //
@@ -217,7 +218,7 @@ export function CompostLens({
   }
 
   return (
-    <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       {readFailed ? (
         <ReadProblem message="Your compost piles could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
       ) : null}
@@ -304,7 +305,7 @@ export function CompostLens({
           />
         ))
       )}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

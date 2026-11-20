@@ -40,6 +40,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import { VAULT_CATEGORIES } from '../../lib/vault';
 import { useOnVaultChange } from '../../lib/vaultReads';
 import { BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
+import { WalkScrollView } from '../../components/WalkScrollView';
 
 const TAB_COLOR = colors.tabReports;
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
@@ -441,7 +442,7 @@ export default function ReportsScreen() {
       <SwipeableTabScreen enabled={!revealed}>
         <CalmBands>
         <GatedTabContent pageTitle="Reports" variant="reports" revealed={revealed} lens={lens}>
-          <ScrollView ref={scrollRef} style={styles.scroll} contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
+          <WalkScrollView ref={scrollRef} style={styles.scroll} contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
             <View style={band.heading}>
               <Text style={band.headingText}>{activeLensLabel}</Text>
             </View>
@@ -586,7 +587,7 @@ export default function ReportsScreen() {
             ) : null}
 
             <ReportHistoryBand tabColor={TAB_COLOR} refreshKey={historyKey} askForId={askForId} onMakeAgain={makeAgain} />
-          </ScrollView>
+          </WalkScrollView>
         </GatedTabContent>
         </CalmBands>
       </SwipeableTabScreen>

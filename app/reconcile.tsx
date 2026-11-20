@@ -35,7 +35,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useRouter, type Href } from 'expo-router';
 import { useCallback, useEffect, useState, type ComponentProps } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NotesInput } from '../components/NotesInput';
 import { useInfoAlert } from '../components/InfoAlert';
 import { colors } from '../constants/colors';
@@ -89,6 +89,7 @@ import {
 import { PhotoStrip } from '../components/PhotoStrip';
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { PILL, PILL_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // Same resolution app/capture.tsx makes: a destination wears the colour and
 // the icon of the tab it hands off to, so the pills read as the place before
@@ -415,7 +416,7 @@ export default function ReconcileScreen() {
     <View style={styles.screen}>
       <Stack.Screen options={{ title: 'Reconcile' }} />
       {infoAlertElement}
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.leadBox}>
           <Text style={styles.lead}>
             Everything waiting on a second of your attention, in one place. A week back, no further: anything older stays
@@ -495,7 +496,7 @@ export default function ReconcileScreen() {
             </Text>
           </View>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

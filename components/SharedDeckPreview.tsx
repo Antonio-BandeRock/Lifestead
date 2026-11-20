@@ -9,7 +9,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
@@ -20,6 +20,7 @@ import { describeSharedDeck, readSharedDeck } from '../lib/learnShare';
 import type { DeckEnvelope } from '../lib/sharing';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 import { ThumbRow } from './ThumbRow';
+import { WalkScrollView } from './WalkScrollView';
 
 const FRONTS_SHOWN = 5;
 
@@ -83,7 +84,7 @@ export function SharedDeckPreview({ envelope, verifiedName }: { envelope: DeckEn
   const fronts = read.cards.slice(0, FRONTS_SHOWN).map((card) => card.front.trim() || card.story.trim()).filter(Boolean);
 
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+    <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
       <View style={styles.card}>
         <Text style={styles.fromLine}>{t('A deck shared with you by {name}', { name: envelope.fromName })}</Text>
         <Text style={styles.title}>{read.title}</Text>
@@ -134,7 +135,7 @@ export function SharedDeckPreview({ envelope, verifiedName }: { envelope: DeckEn
           <Text style={styles.secondaryButtonText}>Discard</Text>
         </TouchableOpacity>
       </ThumbRow>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

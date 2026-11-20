@@ -11,12 +11,13 @@
 // changed here.
 
 import { Stack } from 'expo-router';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { CalmBands, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { isDesktopApp } from '../lib/desktop/bridge';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 type GuideSection = { title: string; lead?: string; steps: string[] };
 
@@ -87,7 +88,7 @@ export default function SyncGuideScreen() {
     <CalmBands>
       <View style={styles.screen}>
         <Stack.Screen options={{ title: 'Phone and Computer' }} />
-        <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={styles.card}>
             <Text style={styles.heading}>Keep your phone and computer in step</Text>
             <Text style={styles.caption}>
@@ -106,7 +107,7 @@ export default function SyncGuideScreen() {
               ))}
             </View>
           ))}
-        </ScrollView>
+        </WalkScrollView>
       </View>
     </CalmBands>
   );

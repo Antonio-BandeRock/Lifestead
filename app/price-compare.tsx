@@ -17,7 +17,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { useInfoAlert } from '../components/InfoAlert';
 import { colors } from '../constants/colors';
@@ -37,6 +37,7 @@ import {
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
 import { recognizeTextFromImage } from '../lib/ocr';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 type Entry = { label: string; priceText: string; sizeText: string };
 
@@ -163,7 +164,7 @@ export default function PriceCompareScreen() {
 
   return (
     <View style={styles.screen}>
-      <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.card}>
           <Text style={styles.title}>{foodName ? `Which ${foodName} is cheaper?` : 'Which is cheaper?'}</Text>
           <Text style={styles.muted}>
@@ -269,7 +270,7 @@ export default function PriceCompareScreen() {
             </Text>
           </TouchableOpacity>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
       {infoAlertElement}
     </View>
   );

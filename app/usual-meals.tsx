@@ -12,7 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { PackPicker } from '../components/PackPicker';
 import { PopoverSelect } from '../components/PopoverSelect';
@@ -47,6 +47,7 @@ import {
   setStandingWeekdays,
 } from '../lib/usualMealDb';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 const TINT = colors.tabFood;
 
@@ -273,7 +274,7 @@ export default function UsualMealsScreen() {
   return (
     <View style={styles.screen}>
       <Stack.Screen options={{ title: 'Your Usual Meals' }} />
-      <ScrollView
+      <WalkScrollView
         style={styles.screen}
         contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}
         keyboardShouldPersistTaps="handled"
@@ -421,7 +422,7 @@ export default function UsualMealsScreen() {
         <View style={styles.band}>
           <Text style={styles.muted}>Taking a meal off this list leaves every meal you logged from it as it was.</Text>
         </View>
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

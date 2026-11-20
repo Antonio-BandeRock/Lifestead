@@ -34,7 +34,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { useInfoAlert } from '../components/InfoAlert';
 import { PhoneOnlyNotice } from '../components/PhoneOnlyNotice';
@@ -79,6 +79,7 @@ import { offerGardenUse } from '../lib/gardenPlateOffer';
 import { explainNotYet } from '../lib/notYet';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // meals.eaten_at's own stored format: 'YYYY-MM-DDTHH:mm', local time. See
 // listMealsForDate in lib/db.ts for why a UTC toISOString() would break every
@@ -618,7 +619,7 @@ export default function VoiceLogScreen() {
 
   function renderReview() {
     return (
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         {photoUri ? (
           <View style={styles.card}>
             <Text style={styles.sectionLabel}>Finishing this photo</Text>
@@ -756,7 +757,7 @@ export default function VoiceLogScreen() {
         <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => router.back()}>
           <Text style={styles.secondaryButtonText}>Cancel</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </WalkScrollView>
     );
   }
 

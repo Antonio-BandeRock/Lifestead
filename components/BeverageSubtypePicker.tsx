@@ -1,8 +1,9 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { useWalkMark } from './WalkMark';
 import { textShadow, typography } from '../constants/typography';
+import { WalkScrollView } from './WalkScrollView';
 
 // 2026-08-13, direct request: "if I tap the Beverages lens, it should
 // provide a subcategorical choice about what kind of beverage they will be
@@ -80,7 +81,7 @@ export function BeverageSubtypePicker({
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const walkMark = useWalkMark();
   return (
-    <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
       <Text style={[styles.heading, { color: tabColor }]}>What Kind of Beverage?</Text>
       <Text style={styles.subheading}>
         Pick the closest match. This scopes ingredient search to the right kind of drink, or opens the right builder
@@ -97,7 +98,7 @@ export function BeverageSubtypePicker({
           <Text style={styles.cardDescription}>{option.description}</Text>
         </TouchableOpacity>
       ))}
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

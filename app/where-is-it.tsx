@@ -31,7 +31,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
@@ -59,6 +59,7 @@ import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { describeSpokenAnswer, parseWhereQuestion } from '../lib/whereSpeech';
 import { SENTENCE_PAUSE_MS } from '../components/StoreLocationSheet';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // Where the answer came from, so a result carries its source at a glance: a
 // garden bed reads differently from a cupboard, and a sentence somebody spoke
@@ -275,7 +276,7 @@ export default function WhereIsItScreen() {
   return (
     <View style={styles.screen}>
       <Stack.Screen options={{ title: 'Where Is It' }} />
-      <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.leadBox}>
           <Text style={styles.lead}>
             Anything with a place written down: kitchen and household items, notes you sorted to Where it is, and what
@@ -379,7 +380,7 @@ export default function WhereIsItScreen() {
             </Text>
           </View>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

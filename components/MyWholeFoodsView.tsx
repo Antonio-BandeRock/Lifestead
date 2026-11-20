@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
@@ -22,6 +22,7 @@ import { t, tl } from '../lib/i18n';
 import { foodDisplayName } from '../lib/ingredientShortName';
 import { ReadProblem } from './ReadProblem';
 import { useWalkMark } from './WalkMark';
+import { WalkScrollView } from './WalkScrollView';
 
 // My Whole Foods: what the person has on hand from their own garden, and
 // from other people's.
@@ -229,7 +230,7 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
 
   return (
     <View style={styles.wrapper}>
-      <ScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
         <TouchableOpacity onPress={onClose} activeOpacity={0.7}>
           <Text style={styles.backLink}>‹ Back</Text>
         </TouchableOpacity>
@@ -412,7 +413,7 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
             {usedUp.map((harvest) => renderHarvestRow(harvest, false))}
           </HomeSectionBand>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

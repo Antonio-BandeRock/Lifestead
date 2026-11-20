@@ -47,7 +47,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
@@ -58,6 +58,7 @@ import { SharedDeckPreview } from '../components/SharedDeckPreview';
 import { ThumbRow } from '../components/ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 function previewIngredientLines(envelope: ShareEnvelope): string[] {
   if (envelope.payload.kind === 'component') {
@@ -160,7 +161,7 @@ export default function ImportSharedScreen() {
   const photoBase64 = envelope.payload.photoBase64;
 
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+    <WalkScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
       {/* Who sent it, what it is, and whether the sender checks out, on one
           band; the ingredients on the next. Every surface reaches both edges
           of the screen, the same as the bands on every tab. */}
@@ -220,7 +221,7 @@ export default function ImportSharedScreen() {
           <Text style={styles.secondaryButtonText}>Discard</Text>
         </TouchableOpacity>
       </ThumbRow>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

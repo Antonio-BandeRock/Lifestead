@@ -21,7 +21,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Notifications from 'expo-notifications';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, Vibration, View } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, Vibration, View } from 'react-native';
 import { AppTextInput } from '../components/AppTextInput';
 import { NotesInput } from '../components/NotesInput';
 import { EffortPills } from '../components/EffortPills';
@@ -75,6 +75,7 @@ import {
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { inAppLanguage } from '@/lib/notificationWords';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 type Phase = 'ready' | 'set' | 'rest' | 'stopping' | 'review' | 'saved';
 
@@ -429,7 +430,7 @@ export default function WorkoutPlayerScreen() {
   return (
     <>
       <Stack.Screen options={{ title }} />
-      <ScrollView
+      <WalkScrollView
         style={styles.screen}
         contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}
         keyboardShouldPersistTaps="handled"
@@ -768,7 +769,7 @@ export default function WorkoutPlayerScreen() {
             )}
           </>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
       {infoAlertElement}
     </>
   );

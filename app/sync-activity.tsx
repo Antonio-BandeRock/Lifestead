@@ -23,7 +23,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppActionSheet } from '../components/AppActionSheet';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
 import { useInfoAlert } from '../components/InfoAlert';
@@ -43,6 +43,7 @@ import {
   type SyncLogMerge,
   type SyncLogRow,
 } from '../lib/syncLog';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 /**
  * Who made the change: a person by name, otherwise a device.
@@ -119,7 +120,7 @@ export default function SyncActivityScreen() {
             },
           ]}
         />
-        <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <TouchableOpacity style={styles.summaryCard} onPress={explain} activeOpacity={0.8} accessibilityRole="button">
             <Text style={styles.summaryNumber}>
               {merges == null
@@ -178,7 +179,7 @@ export default function SyncActivityScreen() {
               <Text style={styles.clearButtonText}>Clear This Log</Text>
             </TouchableOpacity>
           ) : null}
-        </ScrollView>
+        </WalkScrollView>
       </View>
     </CalmBands>
   );

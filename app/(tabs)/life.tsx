@@ -123,6 +123,7 @@ import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { t } from '../../lib/i18n';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
+import { WalkScrollView } from '../../components/WalkScrollView';
 
 // Which vault categories each lens shows (lib/vault.ts, phase 2). My Meds
 // and Conditions say so inside their own lists, beside the tools that stay.
@@ -2117,7 +2118,7 @@ export default function LifeScreen() {
       <SwipeableTabScreen enabled={!revealed && !rowDragging}>
         <CalmBands>
         <GatedTabContent pageTitle="Life" variant="field" revealed={revealed} lens={lens}>
-          <ScrollView ref={scrollRef} scrollEnabled={!rowDragging} style={styles.scroll} contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
+          <WalkScrollView ref={scrollRef} scrollEnabled={!rowDragging} style={styles.scroll} contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
             {infoAlertElement}
             <AppActionSheet
               visible={confirm !== null}
@@ -2244,7 +2245,7 @@ export default function LifeScreen() {
             )}
             </View>
             ) : null}
-          </ScrollView>
+          </WalkScrollView>
         </GatedTabContent>
         </CalmBands>
       </SwipeableTabScreen>

@@ -233,6 +233,7 @@ import { saveOrSay } from '../../lib/saveProblem';
 import { ReadProblem } from '../../components/ReadProblem';
 import { EffortPills } from '../../components/EffortPills';
 import { asEffort, effortWords, type EffortLevel } from '../../lib/exertion';
+import { WalkScrollView } from '../../components/WalkScrollView';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -1463,7 +1464,7 @@ function FlaresLens() {
   }
 
   return (
-    <ScrollView ref={scrollRef} style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView ref={scrollRef} style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {confirmElement}
       {!formOpen ? (
@@ -1522,7 +1523,7 @@ function FlaresLens() {
       )}
       {entries.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
       <YearInSquaresBand set="flares" color={TAB_COLOR} reloadKey={entries.length} />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -1659,7 +1660,7 @@ function FoodReactionsLens() {
   }
 
   return (
-    <ScrollView ref={scrollRef} style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView ref={scrollRef} style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {confirmElement}
       {!formOpen ? (
@@ -1746,7 +1747,7 @@ function FoodReactionsLens() {
       )}
       {entries.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
       <YearInSquaresBand set="reactions" color={TAB_COLOR} reloadKey={entries.length} />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -2337,7 +2338,7 @@ function NewFoodsLens({
   const firstTrialingId = trials.find((trial) => trial.status === 'trialing')?.id;
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {confirmElement}
       {arrivedViaPrefill ? (
@@ -3042,7 +3043,7 @@ function NewFoodsLens({
         </>
       )}
       <YearInSquaresBand set="newFoods" color={TAB_COLOR} reloadKey={trials.length} />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -3901,10 +3902,10 @@ function GeneralNoteSection() {
 function ExerciseLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <ExerciseSection />
       <YearInSquaresBand set="exercise" color={TAB_COLOR} />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -3912,42 +3913,42 @@ function BloodPressureLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [changes, setChanges] = useState(0);
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <BloodPressureSection onChanged={() => setChanges((n) => n + 1)} />
       <YearInSquaresBand set="bloodPressure" color={TAB_COLOR} reloadKey={changes} />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
 function WeightLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <WeightSection />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
 function TherapiesLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <TherapySessionsSection tabColor={TAB_COLOR} />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
 function GeneralNoteLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <View style={styles.panelStandalone}>
         <Text style={styles.helperText}>
           For anything else worth remembering: a prescription change, how a supplement felt, a drink you had.
         </Text>
       </View>
       <GeneralNoteSection />
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -4431,7 +4432,7 @@ function NocturiaLens() {
   }
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {confirmElement}
       <View style={styles.sectionColumn}>
@@ -4513,7 +4514,7 @@ function NocturiaLens() {
         )}
         {nights.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -4637,7 +4638,7 @@ function BowelLens() {
   }
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {confirmElement}
       <View style={styles.sectionColumn}>
@@ -4726,7 +4727,7 @@ function BowelLens() {
         )}
         {entries.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -4739,14 +4740,14 @@ function BowelLens() {
 function CalmLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <View style={styles.sectionColumn}>
         <View style={styles.panelStandalone}>
           <Text style={styles.emptyText}>{CALM_INTRO}</Text>
         </View>
         <CalmSection tabColor={TAB_COLOR} />
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -4755,14 +4756,14 @@ function CalmLens() {
 function MicrobiomeLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <View style={styles.sectionColumn}>
         <View style={styles.panelStandalone}>
           <Text style={styles.emptyText}>{MICROBIOME_INTRO}</Text>
         </View>
         <MicrobiomeTestsSection tabColor={TAB_COLOR} />
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -4858,7 +4859,7 @@ function CycleLens() {
   }
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {confirmElement}
       <View style={styles.sectionColumn}>
@@ -4941,7 +4942,7 @@ function CycleLens() {
         )}
         {days.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 
@@ -5157,7 +5158,7 @@ function MyTrackersLens() {
   const kindTakesUnit = TRACKER_KINDS.find((kind) => kind.key === (trackerForm === 'rename' ? selected?.kind : trackerKind))?.takesUnit ?? false;
 
   return (
-    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {confirmElement}
       <View style={styles.sectionColumn}>
@@ -5410,7 +5411,7 @@ function MyTrackersLens() {
           </View>
         ) : null}
       </View>
-    </ScrollView>
+    </WalkScrollView>
   );
 }
 

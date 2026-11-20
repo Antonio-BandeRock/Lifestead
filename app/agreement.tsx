@@ -3,7 +3,7 @@
 // Nothing here writes; agreeing happens once, on components/FirstLaunchAgreement.tsx.
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { AgreementPoints } from '../components/AgreementPoints';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
 import { colors } from '../constants/colors';
@@ -11,6 +11,7 @@ import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { agreedLine, type AgreementRecord } from '../lib/agreement';
 import { getAgreement } from '../lib/agreementDb';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 export default function AgreementScreen() {
   const scrollPadding = useFloatingButtonScrollPadding();
@@ -33,14 +34,14 @@ export default function AgreementScreen() {
   return (
     <CalmBands>
       <View style={styles.screen}>
-        <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           {record !== undefined ? (
             <View style={styles.card}>
               <Text style={styles.caption}>{agreedLine(record)}</Text>
             </View>
           ) : null}
           <AgreementPoints />
-        </ScrollView>
+        </WalkScrollView>
       </View>
     </CalmBands>
   );

@@ -41,7 +41,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
@@ -86,6 +86,7 @@ import {
   type StepTimerSettings,
 } from '../lib/stepTimerDb';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 export default function RoutineWalkScreen() {
   const params = useLocalSearchParams<{ id?: string }>();
@@ -357,7 +358,7 @@ export default function RoutineWalkScreen() {
   return (
     <>
       <Stack.Screen options={{ title }} />
-      <ScrollView
+      <WalkScrollView
         style={styles.screen}
         contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}
       >
@@ -544,7 +545,7 @@ export default function RoutineWalkScreen() {
             </TouchableOpacity>
           </>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
     </>
   );
 }

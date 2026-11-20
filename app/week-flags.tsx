@@ -25,7 +25,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useInfoAlert } from '../components/InfoAlert';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
@@ -36,6 +36,7 @@ import { getTrackedConditionsWithNames, type TrackedConditionRef } from '../lib/
 import { getSubCriterionSources, getTierDefinition, tierSeverity } from '../lib/sixDimensionsReference';
 import { dateStringOffsetFrom } from '../lib/trendAnalysis';
 import { appLocale } from '@/lib/language';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 // The same seven days Home sums: the last six days plus today.
 const WEEK_DAYS = 7;
@@ -153,7 +154,7 @@ export default function WeekFlagsScreen() {
     <View style={styles.screen}>
       <Stack.Screen options={{ title: "This Week's Flags" }} />
       {infoAlertElement}
-      <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.summaryCard}>
           <Text style={styles.summaryNumber}>
             {days == null ? '…' : `${relevantTotal} ${relevantTotal === 1 ? 'flag' : 'flags'} this week`}
@@ -211,7 +212,7 @@ export default function WeekFlagsScreen() {
           <Ionicons name="trending-up-outline" size={16} color={colors.tabTrends} style={textShadow} />
           <Text style={styles.trendLinkText}>See these as a day-by-day line in Trends</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }

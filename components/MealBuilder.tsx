@@ -58,6 +58,7 @@ import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
 import { ReadProblem } from './ReadProblem';
+import { WalkScrollView } from './WalkScrollView';
 
 // Deliberately last of the ten Food-tab builders, per this app's own build
 // order (see CLAUDE.md's Next steps) -- this is the only one that assembles
@@ -1545,7 +1546,7 @@ export function MealBuilder({
         {infoAlertElement}
         {confirmSheetElement}
         {reconciliationSheetElement}
-        <ScrollView
+        <WalkScrollView
           ref={startingPointsScrollRef}
           contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}
           keyboardShouldPersistTaps="handled"
@@ -1635,7 +1636,7 @@ export function MealBuilder({
               {renderGroup('Meals you have logged', 'restaurant-outline', loggedRows)}
             </>
           ) : null}
-        </ScrollView>
+        </WalkScrollView>
       </>
     );
   }
@@ -1650,7 +1651,7 @@ export function MealBuilder({
         {infoAlertElement}
         {confirmSheetElement}
         {reconciliationSheetElement}
-        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
+        <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
           {/* "Start from a meal you have", 2026-09-13: ahead of the name and
               type form, since a whole meal already carries both and picking
               one skips straight to assembling. */}
@@ -1715,7 +1716,7 @@ export function MealBuilder({
               <Text style={[styles.primaryButtonText, identityReady ? null : styles.primaryButtonTextMuted]}>Continue</Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
+        </WalkScrollView>
       </>
     );
   }
@@ -1727,7 +1728,7 @@ export function MealBuilder({
         {infoAlertElement}
         {confirmSheetElement}
         {reconciliationSheetElement}
-        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
+        <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
           <View style={[styles.formCard, { borderColor: tabColor }]}>
             <Text style={styles.pendingName}>{pendingSelection.name}</Text>
             <Text style={styles.pendingSubtitle}>
@@ -1750,7 +1751,7 @@ export function MealBuilder({
               </TouchableOpacity>
             </ThumbRow>
           </View>
-        </ScrollView>
+        </WalkScrollView>
       </>
     );
   }
@@ -1764,7 +1765,7 @@ export function MealBuilder({
         {infoAlertElement}
         {confirmSheetElement}
         {reconciliationSheetElement}
-        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
+        <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
           <View style={[styles.formCard, { borderColor: tabColor }]}>
             <Text style={[styles.mealTitle, { color: tabColor }]} numberOfLines={2}>
               {mealName.trim() || 'Meal'}
@@ -1823,7 +1824,7 @@ export function MealBuilder({
               </TouchableOpacity>
             </ThumbRow>
           </View>
-        </ScrollView>
+        </WalkScrollView>
       </>
     );
   }
@@ -1838,7 +1839,7 @@ export function MealBuilder({
         {infoAlertElement}
         {confirmSheetElement}
         {reconciliationSheetElement}
-        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
+        <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
           <View style={[styles.formCard, { borderColor: tabColor }]}>
             <Text style={[styles.mealTitle, { color: tabColor }]} numberOfLines={2}>
               {mealName.trim() || 'Drink'}
@@ -1900,7 +1901,7 @@ export function MealBuilder({
               </TouchableOpacity>
             </ThumbRow>
           </View>
-        </ScrollView>
+        </WalkScrollView>
       </>
     );
   }
@@ -1915,7 +1916,7 @@ export function MealBuilder({
         {infoAlertElement}
         {confirmSheetElement}
         {reconciliationSheetElement}
-        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
+        <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
           <View style={[styles.formCard, { borderColor: tabColor }]}>
             <Text style={[styles.mealTitle, { color: tabColor }]} numberOfLines={2}>
               {foodDisplayName(correctingTrial.foodName)}
@@ -2003,7 +2004,7 @@ export function MealBuilder({
               </TouchableOpacity>
             </ThumbRow>
           </View>
-        </ScrollView>
+        </WalkScrollView>
       </>
     );
   }
@@ -2034,7 +2035,7 @@ export function MealBuilder({
         {infoAlertElement}
         {confirmSheetElement}
         {reconciliationSheetElement}
-        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
+        <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
           <TouchableOpacity style={[styles.backPill, styles.backPillActive]} onPress={closeCategory}>
             <Text style={styles.backPillText}>‹ Back to Add from...</Text>
           </TouchableOpacity>
@@ -2097,7 +2098,7 @@ export function MealBuilder({
               </View>
             </>
           )}
-        </ScrollView>
+        </WalkScrollView>
       </>
     );
   }
@@ -2113,7 +2114,7 @@ export function MealBuilder({
         {infoAlertElement}
         {confirmSheetElement}
         {reconciliationSheetElement}
-        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
+        <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
           <RecipeDepthReport
             dishName={mealName.trim() || 'Meal'}
             yieldLabel={`Assembled from ${components.length} saved item${components.length === 1 ? '' : 's'}`}
@@ -2142,7 +2143,7 @@ export function MealBuilder({
               void finish.finally(() => setSavingFromReport(false));
             }}
           />
-        </ScrollView>
+        </WalkScrollView>
         <AppActionSheet
           visible={!!stagePickerFor}
           onClose={() => setStagePickerFor(null)}
@@ -2178,7 +2179,7 @@ export function MealBuilder({
       {infoAlertElement}
       {confirmSheetElement}
       {reconciliationSheetElement}
-      <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
         {/* 2026-09-13, direct report after Start from a meal you have
             landed here: "there is no way to go back once a meal is
             selected." This screen never had a way back; the identity step
@@ -2349,7 +2350,7 @@ export function MealBuilder({
             ) : null}
           </>
         ) : null}
-      </ScrollView>
+      </WalkScrollView>
     </>
   );
 }

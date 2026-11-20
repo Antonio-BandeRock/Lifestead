@@ -57,6 +57,7 @@ import {
   type HowTo,
   type TutorialScope,
 } from '../lib/tutorials';
+import { WalkScrollView } from '../components/WalkScrollView';
 
 export default function TutorialsScreen() {
   const router = useRouter();
@@ -108,7 +109,7 @@ export default function TutorialsScreen() {
     <CalmBands>
       <View style={styles.screen}>
         <Stack.Screen options={{ title: TUTORIALS_HEADING }} />
-        <ScrollView ref={scrollRef} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <WalkScrollView ref={scrollRef} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={styles.card}>
             <Text style={styles.lead}>{TUTORIALS_LEAD}</Text>
             <Action icon="play" label={START_ALL_LABEL} line={START_ALL_LINE} onPress={() => void start({ kind: 'all' })} filled />
@@ -219,7 +220,7 @@ export default function TutorialsScreen() {
               </View>
             );
           })}
-        </ScrollView>
+        </WalkScrollView>
       </View>
     </CalmBands>
   );

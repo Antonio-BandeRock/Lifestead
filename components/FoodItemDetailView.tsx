@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NutrientsTable, PrepView, SixDsView, type Scope } from '../app/(tabs)/insights';
 import type { ResolvedFoodSelection } from './FoodLookup';
 import { colors } from '../constants/colors';
@@ -74,6 +74,7 @@ import { getPersonalizationProfile, type PersonalizationProfile } from '../lib/f
 import { isFlaggedTier } from '../lib/sixDimensionsReference';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { WalkScrollView } from './WalkScrollView';
 
 // Step 2 of "save a Side, then actually be able to see it" (step 1:
 // app/food-items.tsx's own list screen) -- reuses Insights' own
@@ -332,7 +333,7 @@ export function FoodItemDetailView({
     <View style={styles.wrapper}>
       {confirmSheetElement}
       {infoAlertElement}
-      <ScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
+      <WalkScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
         {/* The way back to the list, at the top since the bottom belongs
             to the hub buttons now. */}
         <TouchableOpacity onPress={onClose} activeOpacity={0.7}>
@@ -563,7 +564,7 @@ export function FoodItemDetailView({
             ) : null}
           </>
         )}
-      </ScrollView>
+      </WalkScrollView>
     </View>
   );
 }
