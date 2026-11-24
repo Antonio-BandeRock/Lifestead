@@ -83,6 +83,7 @@ function runProbe(tab, clicks) {
   const clickAfter = 6000;
   const env = {
     ...process.env,
+    LIFESTEAD_CHECK_FOLDER: dataDir,
     LIFESTEAD_LOG: '1',
     LIFESTEAD_CLICK: clicks.join(','),
     LIFESTEAD_CLICK_AFTER_MS: String(clickAfter),
@@ -91,9 +92,11 @@ function runProbe(tab, clicks) {
     LIFESTEAD_SCREENSHOT: path.join(dataDir, 'frame.png'),
     LIFESTEAD_SCREENSHOT_AFTER_MS: String(clickAfter + clickCount * 1500 + 3000),
   };
+  // Set by VS Code's shell; with it Electron runs main.js as plain Node.
+  delete env.ELECTRON_RUN_AS_NODE;
   const result = spawnSync(
     electron,
-    ['.', `--user-data-dir=${dataDir}`, '--disable-features=CalculateNativeWinOcclusion'],
+    ['.', '--disable-features=CalculateNativeWinOcclusion'],
     { cwd: __dirname, env, encoding: 'utf8' },
   );
   const output = `${result.stdout || ''}${result.stderr || ''}`;

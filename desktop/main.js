@@ -73,7 +73,13 @@ function dataFolder() {
 // its folder apart from the person's records, and the single-instance lock,
 // taken per folder, brings an open one forward rather than opening it twice.
 const START = variant.versionsAllowed ? versions.startKind(process.argv) : { kind: 'own' };
-if (START.kind === 'version') {
+// A check run from the source (check-collapsed-text.js) names a throwaway
+// folder, so it never opens the person's records nor brings their window
+// forward. A packed app ignores it.
+const CHECK_FOLDER = app.isPackaged ? null : process.env.LIFESTEAD_CHECK_FOLDER || null;
+if (CHECK_FOLDER) {
+  app.setPath('userData', CHECK_FOLDER);
+} else if (START.kind === 'version') {
   app.setPath('userData', versions.folderFor(app.getPath('appData'), START.version.key));
 } else if (START.kind === 'picker') {
   app.setPath('userData', versions.pickerFolder(app.getPath('appData')));
