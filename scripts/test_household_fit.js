@@ -21,12 +21,17 @@ const restrictions = transpile('lib/foodRestrictions.ts', (name) => {
 const fodmap = transpile('lib/fodmapLabel.ts', (name) => {
   throw new Error(`fodmapLabel.ts imported ${name}`);
 });
+const lactose = transpile('lib/lactose.ts', (name) => {
+  throw new Error(`lactose.ts imported ${name}`);
+});
 const flags = transpile('lib/ingredientFlags.ts', (name) => {
   if (name === './fodmapLabel') return fodmap;
   if (name === './foodRestrictions') return restrictions;
+  if (name === './lactose') return lactose;
   throw new Error(`ingredientFlags.ts imported ${name}`);
 });
 const oneWord = transpile('lib/foodOneWord.ts', (name) => {
+  if (name === './lactose') return lactose;
   throw new Error(`foodOneWord.ts imported ${name}`);
 });
 const types = transpile('lib/digest/types.ts', (name) => {
@@ -37,6 +42,7 @@ const fit = transpile('lib/householdFit.ts', (name) => {
   if (name === './foodRestrictions') return restrictions;
   if (name === './ingredientFlags') return flags;
   if (name === './digest/types') return types;
+  if (name === './lactose') return lactose;
   throw new Error(`householdFit.ts imported ${name}`);
 });
 

@@ -155,6 +155,7 @@ export const ES_FILES: TranslationFiles = {
     require('../../../assets/translations/es/part-147.words'),
     require('../../../assets/translations/es/part-148.words'),
     require('../../../assets/translations/es/part-149.words'),
+    require('../../../assets/translations/es/part-150.words'),
   ],
   foods: [
     require('../../../assets/translations/es/foods-001.words'),

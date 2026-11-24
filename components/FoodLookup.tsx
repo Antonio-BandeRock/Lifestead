@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { SectionList, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
-import { useRouter } from 'expo-router';
 import { KEYBOARD_HEIGHT } from '../constants/appKeyboard';
 import { colors } from '../constants/colors';
 import { useFooterBandHeight } from '../constants/floatingButton';
@@ -36,12 +35,9 @@ import { buildFoodNameGroups } from '../lib/foodNameGrouping';
 import { foodSourceCaption } from '../lib/foodSource';
 import { countryForFoodSource, useFoodSourcePreference } from '../lib/foodSourcePreference';
 import {
-  evaluateFoodForPerson,
-  getHouseholdPeople,
   foodMatchesAllergy,
   foodMatchesDietPreferences,
   getPersonalizationProfile,
-  type PersonalFoodEvaluation,
   type PersonalizationProfile,
 } from '../lib/foodPersonalization';
 import {
@@ -55,12 +51,7 @@ import {
   type RichFood,
 } from '../lib/nutrientRichPicks';
 import { getStageDeprioritizedNames } from '../lib/foodStageReordering';
-import { verdictFor } from './RecipeDepthReport';
-import { oneWordFor, possessiveFor, whoFor, YOU_ID, HOUSEHOLD_FIT_CAPTION, type HouseholdPerson } from '../lib/householdFit';
-import { householdToneColor } from './HouseholdFitBand';
-import { PopoverSelect } from './PopoverSelect';
-import { describeRestrictionHit } from '../lib/foodRestrictions';
-import { routeForDigestEntry } from '../lib/digestNavigation';
+import { ForYouCard } from './ForYouCard';
 import { analyzeNutrientIntake, formatAmount } from '../lib/nutrientAnalysis';
 import { useActiveField } from './ActiveInputContext';
 import { AppTextInput } from './AppTextInput';
@@ -72,9 +63,6 @@ import { VoiceInputButton } from './VoiceInputButton';
 import { useNavigationHand } from '../lib/navigationHand';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
-import { isLactoseEntry } from '../lib/lactose';
-import { useTier } from '../lib/entitlement';
-import { isFunctionWalled, paidFunctionLine } from '../lib/paidFeatures';
 import { foodDisplayName } from '../lib/ingredientShortName';
 
 const NUTRIENT_GROUP_LABELS: Record<string, string> = {
@@ -619,18 +607,9 @@ export function FoodLookup({
   // the middle of recording one). Defaults true, so every existing caller
   // (all 11 Food builders) is unaffected.
   allowHarvestPick?: boolean;
-  // 2026-08-26 -- the person's own tracked conditions, declared diet
-  // preferences, and food allergies, so a resolved food can show what it
-  // actually means FOR THEM, not just its plain nutrient table. Optional
-  // and additive only: undefined (every existing caller -- all 11 Food
-  // builders, Garden's harvest log, log.tsx's food-trial picker) renders
-  // exactly as before. Only Insights' own Food Lookup lens passes this,
-  // since that's the tool area actually reported as never having been
-  // wired up -- the builders already have their own, separate live
-  // per-ingredient advisory (conditionNotes/getConditionStageAdvisory) and
-  // full pre-save depth report, so adding a second, differently-shaped
-  // personalization block to the shared picker they embed would be a real,
-  // unrequested duplication, not a fix.
+  // Shows the For You card under the resolved food, inside this picker.
+  // Insights' Food Lookup passes it. A builder leaves this picker the moment
+  // a food resolves, so each builder shows ForYouCard on the step after it.
   personalize?: PersonalizationProfile;
 }) {
   const navigationHand = useNavigationHand();
@@ -708,72 +687,6 @@ export function FoodLookup({
   // needs a real foodId/source pair, not just the source half this file
   // already tracked for its own fallback-source note).
   const [resolvedFoodId, setResolvedFoodId] = useState<number | null>(null);
-  // The personalize prop's own real, per-food result -- see that prop's
-  // comment above. Recomputed whenever the resolved food itself changes;
-  // deliberately NOT reset by every downstream Change/reset function the
-  // way nutrients/unitWeight are, since resolvedFoodId already becoming
-  // null the moment any upstream step changes (see its own reset sites
-  // above) is what actually drives this effect back to null too.
-  // G20: one evaluation per person in the household, keyed by person id,
-  // and the "for whom" switch choosing which of them the card speaks for.
-  const [personalEvaluations, setPersonalEvaluations] = useState<Record<string, PersonalFoodEvaluation> | null>(null);
-  const [personalEvaluationLoading, setPersonalEvaluationLoading] = useState(false);
-  const [householdPeople, setHouseholdPeople] = useState<HouseholdPerson[] | null>(null);
-  const [forWhom, setForWhom] = useState<string>(YOU_ID);
-  useEffect(() => {
-    if (!personalize) {
-      setHouseholdPeople(null);
-      return;
-    }
-    let cancelled = false;
-    getHouseholdPeople(personalize)
-      .then((result) => {
-        if (!cancelled) setHouseholdPeople(result);
-      })
-      .catch((error) => console.error('[FoodLookup] Failed to load the household', error));
-    return () => {
-      cancelled = true;
-    };
-  }, [personalize]);
-  const people = useMemo<HouseholdPerson[]>(
-    () => householdPeople ?? (personalize ? [{ id: YOU_ID, name: 'You', isYou: true, profile: personalize }] : []),
-    [householdPeople, personalize],
-  );
-  const everyone = forWhom === 'everyone' && people.length > 1;
-  const activePerson = everyone ? null : (people.find((person) => person.id === forWhom) ?? people[0] ?? null);
-  const personalEvaluation = activePerson ? (personalEvaluations?.[activePerson.id] ?? null) : null;
-  // G15: the card leads with one phrase; the rows behind it open on a tap
-  // and close again whenever a different food is looked up.
-  const [personalDetailOpen, setPersonalDetailOpen] = useState(false);
-  // P27: on Free the For You card checks allergies, diet and food avoided
-  // (safety stays Free) and says the condition reading is part of
-  // Individual, rather than hiding the card.
-  const tier = useTier();
-  const forYouWalled = isFunctionWalled(tier, 'forYou');
-  const router = useRouter();
-  useEffect(() => {
-    if (people.length === 0 || resolvedFoodId === null || !resolvedSource) {
-      setPersonalEvaluations(null);
-      return;
-    }
-    let cancelled = false;
-    setPersonalDetailOpen(false);
-    setPersonalEvaluationLoading(true);
-    const food = { foodId: resolvedFoodId, source: resolvedSource, category, baseName };
-    Promise.all(people.map((person) => evaluateFoodForPerson(food, person.profile)))
-      .then((results) => {
-        if (cancelled) return;
-        setPersonalEvaluations(Object.fromEntries(people.map((person, index) => [person.id, results[index]])));
-        setPersonalEvaluationLoading(false);
-      })
-      .catch((error) => {
-        console.error('[FoodLookup] Failed to check the food against the household', error);
-        if (!cancelled) setPersonalEvaluationLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [people, resolvedFoodId, resolvedSource, category, baseName]);
   // What the person actually plans to eat, by weight -- the whole reason
   // this exists: amounts/DRI% below should reflect THIS, not a fixed
   // reference amount the person has no say over. Reset to a sensible
@@ -1959,172 +1872,17 @@ export function FoodLookup({
         </View>
       ) : null}
 
-      {/* 2026-08-26 -- what this exact food means against the person's own
-          profile: their tracked conditions, declared diet preference, and
-          food allergies. See the personalize prop's own comment above for
-          why this is additive-only and Insights-scoped. Shown once a food
-          is fully resolved, hidden while loading/still resolving so it
-          never flashes stale data from the PREVIOUS food while a new one
-          is still being evaluated. */}
-      {personalize && resolvedFoodId !== null && !loading ? (
-        personalEvaluationLoading || !personalEvaluations || (!everyone && !personalEvaluation) ? (
-          <Text style={[styles.emptyText, styles.panelStandalone]}>
-            {people.length > 1 ? 'Checking against everyone in the household…' : 'Checking against your profile…'}
-          </Text>
-        ) : everyone ||
-          people.length > 1 ||
-          (personalEvaluation &&
-            activePerson &&
-            (personalEvaluation.allergyMatch ||
-              personalEvaluation.dietViolations.length > 0 ||
-              personalEvaluation.restrictionHits.length > 0 ||
-              activePerson.profile.trackedConditions.length > 0)) ? (
-          <View style={[styles.personalCard, { borderColor: tabColor }]}>
-            {people.length > 1 ? (
-              <View style={styles.personalSummaryRow}>
-                <Text style={[styles.personalCardLabel, { color: tabColor }]}>For</Text>
-                <PopoverSelect
-                  options={[
-                    ...people.map((person) => ({ label: whoFor(person), value: person.id })),
-                    { label: 'Everyone', value: 'everyone' },
-                  ]}
-                  selected={everyone ? 'everyone' : (activePerson?.id ?? YOU_ID)}
-                  onSelect={(value) => {
-                    setForWhom(value);
-                    setPersonalDetailOpen(false);
-                  }}
-                  tabColor={tabColor}
-                />
-              </View>
-            ) : null}
-            {everyone ? (
-              <>
-                {people.map((person) => {
-                  const evaluation = personalEvaluations[person.id];
-                  if (!evaluation) return null;
-                  const line = oneWordFor(
-                    person,
-                    {
-                      trackedConditions: forYouWalled ? [] : person.profile.trackedConditions,
-                      safeForConditions: evaluation.safeForConditions,
-                      conditionCautions: evaluation.conditionCautions,
-                      dietViolations: evaluation.dietViolations,
-                      allergyMatch: evaluation.allergyMatch,
-                      restrictionHits: evaluation.restrictionHits,
-                    },
-                    { conditions: true, diet: true },
-                  );
-                  return (
-                    <TouchableOpacity
-                      key={person.id}
-                      style={styles.personalSummaryRow}
-                      onPress={() => setForWhom(person.id)}
-                      accessibilityRole="button"
-                      accessibilityLabel={`${whoFor(person)}: ${line.phrase}. Open ${possessiveFor(person)} reasons.`}
-                    >
-                      <Text style={[styles.personalCardLabel, { color: tabColor }]}>{whoFor(person)}</Text>
-                      <View style={[styles.personalVerdictPill, { backgroundColor: householdToneColor(line.tone) }]}>
-                        <Text style={styles.personalVerdictPillText}>{line.phrase}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  );
-                })}
-                <Text style={styles.personalCautionNote}>{HOUSEHOLD_FIT_CAPTION} Tap a name for the reasons.</Text>
-                {forYouWalled ? <Text style={styles.personalCautionNote}>{paidFunctionLine('forYou')}</Text> : null}
-              </>
-            ) : personalEvaluation && activePerson ? (
-              <>
-              {(() => {
-                const oneWord = oneWordFor(
-                  activePerson,
-                  {
-                    trackedConditions: forYouWalled ? [] : activePerson.profile.trackedConditions,
-                    safeForConditions: personalEvaluation.safeForConditions,
-                    conditionCautions: personalEvaluation.conditionCautions,
-                    dietViolations: personalEvaluation.dietViolations,
-                    allergyMatch: personalEvaluation.allergyMatch,
-                    restrictionHits: personalEvaluation.restrictionHits,
-                  },
-                  { conditions: true, diet: true },
-                );
-                const forLabel = activePerson.isYou ? 'For You' : `For ${activePerson.name}`;
-                return (
-                  <TouchableOpacity
-                    ref={walkMark.ref('lookup.why')}
-                    style={styles.personalSummaryRow}
-                    onPress={() => setPersonalDetailOpen((open) => !open)}
-                    accessibilityRole="button"
-                    accessibilityLabel={`${forLabel}: ${oneWord.phrase}. ${personalDetailOpen ? 'Hide' : 'Show'} the reasons.`}
-                  >
-                    {people.length > 1 ? null : <Text style={[styles.personalCardLabel, { color: tabColor }]}>{forLabel}</Text>}
-                    <View style={[styles.personalVerdictPill, { backgroundColor: householdToneColor(oneWord.tone) }]}>
-                      <Text style={styles.personalVerdictPillText}>{oneWord.phrase}</Text>
-                    </View>
-                    <Text style={[styles.personalDetailToggle, { color: tabColor }]}>{personalDetailOpen ? 'Hide why' : 'Why'}</Text>
-                  </TouchableOpacity>
-                );
-              })()}
-              {personalDetailOpen && personalEvaluation.allergyMatch ? (
-                <View style={[styles.personalWarningRow, { backgroundColor: colors.statusRedBg }]}>
-                  <Text style={[styles.personalWarningText, { color: colors.danger }]}>
-                    {isLactoseEntry(personalEvaluation.allergyMatch)
-                      ? t('Carries lactose, and lactose intolerance is on {owner} food allergy list.', {
-                          owner: possessiveFor(activePerson),
-                        })
-                      : t('Contains {name}, which is on {owner} food allergy list.', {
-                          name: personalEvaluation.allergyMatch,
-                          owner: possessiveFor(activePerson),
-                        })}
-                  </Text>
-                </View>
-              ) : null}
-              {personalDetailOpen && personalEvaluation.dietViolations.length > 0 ? (
-                <View style={[styles.personalWarningRow, { backgroundColor: colors.statusYellowBg }]}>
-                  <Text style={[styles.personalWarningText, { color: colors.statusYellowStandalone }]}>
-                    Doesn&apos;t fit {possessiveFor(activePerson)} declared {personalEvaluation.dietViolations.join(', ')} preference
-                    {personalEvaluation.dietViolations.length === 1 ? '' : 's'}.
-                  </Text>
-                </View>
-              ) : null}
-              {(personalDetailOpen ? personalEvaluation.restrictionHits : []).map((hit) => {
-                const stop = hit.weight === 'allergy' && hit.strength !== 'maybe';
-                return (
-                  <TouchableOpacity
-                    key={`restriction-${hit.key}`}
-                    style={[styles.personalWarningRow, { backgroundColor: stop ? colors.statusRedBg : colors.statusYellowBg }]}
-                    disabled={!hit.readingId}
-                    onPress={() => (hit.readingId ? router.push(routeForDigestEntry(hit.readingId)) : undefined)}
-                    accessibilityRole={hit.readingId ? 'button' : 'text'}
-                  >
-                    <Text style={[styles.personalWarningText, { color: stop ? colors.danger : colors.statusYellowStandalone }]}>
-                      {describeRestrictionHit(hit)}. {hit.why}
-                      {hit.readingId ? ` ${t('Tap to read more.')}` : ''}
-                    </Text>
-                  </TouchableOpacity>
-                );
-              })}
-              {personalDetailOpen && forYouWalled && activePerson.profile.trackedConditions.length > 0 ? (
-                <Text style={styles.personalCautionNote}>{paidFunctionLine('forYou')}</Text>
-              ) : null}
-              {(personalDetailOpen && !forYouWalled ? activePerson.profile.trackedConditions : []).map((condition) => {
-                const verdict = verdictFor(condition.code, personalEvaluation.safeForConditions, personalEvaluation.conditionCautions);
-                const caution = personalEvaluation.conditionCautions[condition.code];
-                return (
-                  <View key={condition.code} style={styles.personalConditionRow}>
-                    <Text style={styles.personalConditionName}>
-                      {condition.name}
-                    </Text>
-                    <View style={[styles.personalVerdictPill, { backgroundColor: verdict.color }]}>
-                      <Text style={styles.personalVerdictPillText}>{verdict.label}</Text>
-                    </View>
-                    {caution ? <Text style={styles.personalCautionNote}>{caution.note}</Text> : null}
-                  </View>
-                );
-              })}
-              </>
-            ) : null}
-          </View>
-        ) : null
+      {/* What this food means for the person and everyone in the household:
+          components/ForYouCard.tsx, the same card every builder shows. */}
+      {personalize && resolvedFoodId !== null && resolvedSource && !loading ? (
+        <ForYouCard
+          tabColor={tabColor}
+          foodId={resolvedFoodId}
+          source={resolvedSource}
+          category={category}
+          baseName={baseName}
+          profile={personalize}
+        />
       ) : null}
 
       {loading ? (
@@ -2486,94 +2244,6 @@ const styles = StyleSheet.create({
   sourceFallbackText: {
     ...typography.caption,
     color: colors.textSecondary,
-
-    ...textShadow,
-
-  },
-  // The "For You" personalized card, 2026-08-26 -- same colors.surface +
-  // tab-colored border recipe every other opaque card on this screen
-  // already uses (matching RecipeDepthReport.tsx's own `card` style), so
-  // this reads as belonging to the same visual family, not a bolted-on
-  // extra.
-  personalCard: {
-    borderWidth: 2,
-    borderRadius: 10,
-    backgroundColor: colors.surface,
-    padding: 10,
-    marginTop: 8,
-    marginBottom: 4,
-    gap: 6,
-  },
-  personalCardLabel: {
-    ...typography.captionEmphasis,
-
-    ...textShadow,
-
-  },
-  personalSummaryRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    gap: 8,
-  },
-  personalDetailToggle: {
-    ...typography.captionEmphasis,
-    marginLeft: 'auto',
-
-    ...textShadow,
-
-  },
-  personalWarningRow: {
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-  },
-  personalWarningText: {
-    ...typography.caption,
-
-    ...textShadow,
-
-  },
-  personalConditionRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    gap: 6,
-  },
-  personalConditionName: {
-    ...typography.caption,
-    color: colors.textSecondary,
-    flexShrink: 1,
-
-    ...textShadow,
-
-  },
-  personalVerdictPill: {
-    borderRadius: 999,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-  },
-  personalVerdictPillText: {
-    ...typography.captionEmphasis,
-    color: colors.textOnPrimary,
-    fontSize: 11,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
-  // The caution's own real note (e.g. "Whole-Grain Wheat Flour: rated High
-  // Risk for gluten...") takes the full row width below the name/pill --
-  // same pattern RecipeDepthReport.tsx already uses for the same content.
-  personalCautionNote: {
-    ...typography.caption,
-    color: colors.textSecondary,
-    flexBasis: '100%',
 
     ...textShadow,
 

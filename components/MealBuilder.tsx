@@ -63,6 +63,7 @@ import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
 import { useConfirmSheet } from './ConfirmSheet';
 import { FoodLookup, type ResolvedFoodSelection } from './FoodLookup';
+import { ForYouCard } from './ForYouCard';
 import { HelpButton, type HelpSection } from './HelpButton';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
@@ -2081,6 +2082,14 @@ export function MealBuilder({
           <View style={[styles.formCard, { borderColor: tabColor }]}>
             <Text style={styles.pendingName}>{foodDisplayName(pickedFood.baseName)}</Text>
             {pickedFood.prepMethod ? <Text style={styles.pendingSubtitle}>{pickedFood.prepMethod}</Text> : null}
+            <ForYouCard
+              inBuilder
+              tabColor={tabColor}
+              foodId={pickedFood.foodId}
+              source={pickedFood.source}
+              category={pickedFood.category}
+              baseName={pickedFood.baseName}
+            />
             <Text style={[styles.formLabel, styles.formLabelSpaced, { color: tabColor }]}>How much goes into the meal?</Text>
             <AppTextInput
               style={[styles.formInput, { backgroundColor: inputBackground(tabColor) }]}

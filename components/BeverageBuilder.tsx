@@ -54,6 +54,7 @@ import { DimensionFlags } from './DimensionFlags';
 import { ingredientShortName, foodDisplayName } from '../lib/ingredientShortName';
 import { FoodSourceNote } from './FoodSourceNote';
 import { FoodLookup, type ResolvedFoodSelection } from './FoodLookup';
+import { ForYouCard } from './ForYouCard';
 import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPanel';
 import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
 import type { SpokenIngredient } from '../lib/spokenIngredients';
@@ -989,19 +990,12 @@ export function BeverageBuilder({
     setLastCategory(resolved.category);
     setLastSubcategory(resolved.subcategory);
   }
-  // Scrolled to the bottom the instant a food resolves (see the effect
-  // below) -- that Quantity/Add-to-Beverage card's own Quantity field
-  // autoFocuses immediately, raising AppKeyboard (a real, opaque overlay
-  // roughly 240px tall, see constants/appKeyboard.ts's own KEYBOARD_HEIGHT)
-  // the same instant. Without scrolling, "Add to Beverage" -- the very last
-  // thing in this card -- could sit behind that overlay with no way to
-  // reach it except an ordinary content scroll the person has no reason to
-  // know they need to do first. Reported 2026-07-28 as "tapping Add to
-  // Beverage does nothing," which is exactly what a covered button looks like.
+  // Back to the top when a food resolves, so its name and its For You card
+  // are read before its amount is set.
   const scrollViewRef = useRef<ScrollView>(null);
   useEffect(() => {
     if (pendingResolved) {
-      scrollViewRef.current?.scrollToEnd({ animated: true });
+      scrollViewRef.current?.scrollTo({ y: 0, animated: true });
     }
   }, [pendingResolved]);
 
@@ -2266,6 +2260,14 @@ export function BeverageBuilder({
                 <DimensionFlags scores={pendingScores} onExplain={showInfoAlert} size={14} />
               </View>
               <FoodSourceNote source={pendingResolved.source} tabColor={tabColor} />
+              <ForYouCard
+                inBuilder
+                tabColor={tabColor}
+                foodId={pendingResolved.foodId}
+                source={pendingResolved.source}
+                category={pendingResolved.category}
+                baseName={pendingResolved.baseName}
+              />
               {/* Healing Stage advisory -- 2026-08-09, informational, never
                   gating, same shape as every other advisory in this app.
                   See lib/healingStageAdvisory.ts's own top comment for the

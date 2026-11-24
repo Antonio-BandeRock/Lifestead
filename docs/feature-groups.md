@@ -43,7 +43,7 @@ What a person needs so the details of daily living stop living in their head. Th
 The app knowing a person's conditions and reading every food against them.
 
 - Insights > Six Dimensions and condition scores, Safe Foods, Healing Stage, Advisories, Label Check, Prep, Cooking Impact
-- Food lookup's For You, per condition
+- The For You card, per condition, in Food lookup and on a picked food in every Food builder
 - A dish's depth report, per condition and stage
 - Food > ready-made recipes checked against conditions and diet
 - Food > My Safe Foods

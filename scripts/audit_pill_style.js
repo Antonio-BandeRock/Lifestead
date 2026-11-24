@@ -45,7 +45,7 @@ const EXEMPT = {
     verdictPillAvoidOn: 'as above',
     verdictPillTextOn: 'words on those status colours',
   },
-  'components/FoodLookup.tsx': {
+  'components/ForYouCard.tsx': {
     personalVerdictPill: 'a verdict badge, not pressed',
     personalVerdictPillText: 'its words',
   },

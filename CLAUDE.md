@@ -299,7 +299,7 @@ Each item's full wording is in the archive; rows live in the Project Tracker.
 10. **The synthetic "Choline Bitartrate (Supplement Powder)" food row**: proposed, deliberately not added.
 12. **6-Week Meal Plan on-device walkthrough**; whether to extend past 6 weeks has not been asked.
 13. **Subtopic-sectioning the 19 condition pages' topics**: pull per-topic counts before designing any split.
-14. **Wiring conditions, allergies and diet through every tool:** still open for Today's Advisories, and whether builders' embedded `FoodLookup` gains the For You card (ask first).
+14. **Wiring conditions, allergies and diet through every tool:** still open for Today's Advisories. The For You card is `components/ForYouCard.tsx` (Food Lookup, all builders); a scanned product reads its ingredient list, never scores.
 17. **A corpus-wide audit for missing cooking-water ingredient rows** across the recipes that simmer, boil or braise.
 18. **Batch-remake-cadence planning for make-ahead foods**: the Fermentation Tracker knows yield and remaining, but no consumption rate or household size, so it cannot predict a next-batch reminder.
 22 to 26. **Parked from a 2026-08-30 competitor review:** Get Back on Track, a weekly check-in retuning targets, TRACK mode, menstrual cycle tracking in Pattern Finder, and "allergen-aware, not allergy-safe" wording.

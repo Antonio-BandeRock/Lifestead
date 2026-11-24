@@ -1,0 +1,18 @@
+{
+ "No ingredient list to check": "Sin lista de ingredientes que revisar",
+ "This food could not be checked against your profile.": "No se pudo revisar este alimento contra tu perfil.",
+ "Read from the ingredient list on the package. A word can be missed, so the package is the last word.": "Leído de la lista de ingredientes del empaque. Se puede escapar una palabra, así que el empaque tiene la última palabra.",
+ "This product was saved without an ingredient list, so only its name could be checked. Read the package.": "Este producto se guardó sin lista de ingredientes, así que solo se pudo revisar su nombre. Lee el empaque.",
+ "Find out why a food suits you before you add it": "Averigua por qué te conviene un alimento antes de agregarlo",
+ "Type a name for the {lower}, pick the servings and tap Continue.": "Escribe un nombre ({lower}), elige las porciones y toca Continuar.",
+ "Tap Add Ingredients, then pick a food.": "Toca Agregar ingredientes y elige un alimento.",
+ "The reasons come from the conditions, allergies and diet in Profile, and from each household member who has them set. A scanned product is read from its ingredient list.": "Las razones salen de los padecimientos, las alergias y la dieta en Perfil, y de cada persona de la casa que los tenga puestos. Un producto escaneado se lee de su lista de ingredientes.",
+ "Give meds taken at the same time one reminder": "Da un solo recordatorio a los medicamentos que se toman a la misma hora",
+ "Set a time for each med or supplement under its schedule. When two or more share a time, Taken together offers to make them one group.": "Pon una hora a cada medicamento o suplemento en su horario. Cuando dos o más comparten una hora, Tomados juntos ofrece hacerlos un grupo.",
+ "Change the name if you like, then tap Make the group. Tap No thanks and that time is not offered again.": "Cambia el nombre si quieres y toca Hacer el grupo. Si tocas No, gracias, esa hora no se vuelve a ofrecer.",
+ "Tap a group to open its list: each item with how much to take, what to take it with, and anything the interaction rules know about taking them at the same time.": "Toca un grupo para abrir su lista: cada cosa con cuánto tomar, con qué tomarla y lo que las reglas de interacción saben de tomarlas a la misma hora.",
+ "When a supplement or an OTC item would do better at another time, the list says why and offers a button that moves it there. A prescription is left for you and your pharmacist or prescriber.": "Cuando a un suplemento o a un producto de venta libre le conviene otra hora, la lista dice por qué y ofrece un botón que lo mueve. Una receta queda para ti y tu farmacéutico o quien la recetó.",
+ "One notification for the whole group, answered on the locked phone with Took them all, and one list that says what to take and how.": "Una sola notificación para todo el grupo, que se contesta con el teléfono bloqueado con Ya los tomé todos, y una sola lista que dice qué tomar y cómo.",
+ "Find out why a single food suits you before you add it": "Averigua por qué te conviene un solo alimento antes de agregarlo",
+ "When the meal asks for a dish, tap A single food, then find the food.": "Cuando la comida pida un platillo, toca Un solo alimento y busca el alimento."
+}

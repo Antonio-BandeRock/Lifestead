@@ -542,6 +542,7 @@ export type ToolMark =
   | 'builder.done'
   | 'builder.nudge'
   | 'builder.favorite'
+  | 'builder.forYou'
   | 'builder.preview'
   | 'builder.complete'
   | 'builder.systemRecipes'
@@ -844,6 +845,18 @@ function builderHowTos(o: {
         { say: `Tap Complete & Save This ${o.noun}.`, mark: 'builder.complete' },
       ],
       forYou: `The ${lower} goes in My Recipes, ready to add to a meal, log or schedule without building it again.`,
+    },
+    {
+      key: 'why',
+      title: 'Find out why a food suits you before you add it',
+      steps: [
+        ...first,
+        { say: `Type a name for the ${lower}, pick the servings and tap Continue.`, mark: 'builder.name', stay: true },
+        { say: 'Tap Add Ingredients, then pick a food.', mark: 'builder.addIngredients' },
+        { say: 'In the card for you, tap Why.', mark: 'builder.forYou', stay: true },
+        { say: 'If more than one person is listed, pick the person from For.' },
+      ],
+      forYou: 'The reasons come from the conditions, allergies and diet in Profile, and from each household member who has them set. A scanned product is read from its ingredient list.',
     },
     {
       key: 'report',
@@ -5392,6 +5405,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Find the food, then say how much goes into the meal and tap Add to Meal.' },
       ],
       forYou: 'An apple or a glass of milk joins the meal with no recipe needed, and is kept so you can pick it again.',
+    },
+    {
+      key: 'why',
+      title: 'Find out why a single food suits you before you add it',
+      steps: [
+        { say: 'When the meal asks for a dish, tap A single food, then find the food.', mark: 'meal.guide', stay: true },
+        { say: 'In the card for you, tap Why.', mark: 'builder.forYou', stay: true },
+        { say: 'If more than one person is listed, pick the person from For.' },
+      ],
+      forYou: 'The reasons come from the conditions, allergies and diet in Profile, and from each household member who has them set. A scanned product is read from its ingredient list.',
     },
     {
       key: 'schedule',
