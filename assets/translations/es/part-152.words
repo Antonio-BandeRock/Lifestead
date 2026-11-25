@@ -1,0 +1,12 @@
+{
+ "Add your health records to the vault?": "¿Agregar tus registros de salud a la bóveda?",
+ "They are not in the vault yet. Adding them keeps them closed until you open the vault with the App Lock code you already have. Safety warnings and reminders keep working either way.": "Todavía no están en la bóveda. Al agregarlos quedan cerrados hasta que abras la bóveda con el código del bloqueo de la app que ya tienes. Los avisos de seguridad y los recordatorios siguen funcionando de cualquier manera.",
+ "Add your diary to the vault?": "¿Agregar tu diario a la bóveda?",
+ "It is not in the vault yet. Adding it keeps your entries closed until you open the vault with the App Lock code you already have.": "Todavía no está en la bóveda. Al agregarlo, tus entradas quedan cerradas hasta que abras la bóveda con el código del bloqueo de la app que ya tienes.",
+ "Add your money records to the vault?": "¿Agregar tus registros de dinero a la bóveda?",
+ "They are not in the vault yet. Adding them keeps them closed until you open the vault with the App Lock code you already have.": "Todavía no están en la bóveda. Al agregarlos quedan cerrados hasta que abras la bóveda con el código del bloqueo de la app que ya tienes.",
+ "They are not in the vault yet. Adding them keeps them closed until you open the vault with the vault code you already have. Safety warnings and reminders keep working either way.": "Todavía no están en la bóveda. Al agregarlos quedan cerrados hasta que abras la bóveda con el código de la bóveda que ya tienes. Los avisos de seguridad y los recordatorios siguen funcionando de cualquier manera.",
+ "It is not in the vault yet. Adding it keeps your entries closed until you open the vault with the vault code you already have.": "Todavía no está en la bóveda. Al agregarlo, tus entradas quedan cerradas hasta que abras la bóveda con el código de la bóveda que ya tienes.",
+ "They are not in the vault yet. Adding them keeps them closed until you open the vault with the vault code you already have.": "Todavía no están en la bóveda. Al agregarlos quedan cerrados hasta que abras la bóveda con el código de la bóveda que ya tienes.",
+ "Add to the Vault": "Agregar a la bóveda"
+}

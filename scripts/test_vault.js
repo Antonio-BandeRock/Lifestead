@@ -367,6 +367,14 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
     check('nothing while health is already in the vault', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', true, guarded) === null);
     check('money is offered while only health is in the vault', V.firstRecordOfferFor('INSERT INTO finance_entries (id) VALUES (?)', true, guarded) === 'money');
     check('a chosen category with no code yet still offers', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, guarded) === 'health');
+    for (const group of ['health', 'money', 'personal']) {
+      for (const key of ['app-lock', 'own-code']) {
+        const said = V.firstRecordOfferText(group, key);
+        check(`${group}: nobody with a code is asked to set one up (${key})`, !/set up/i.test(said.message) && /already have/.test(said.message));
+      }
+      check(`${group}: with no code the offer is to set one up`, /Set up a code/.test(V.firstRecordOfferText(group, 'none').message));
+    }
+    check('adding the diary leaves every other choice alone', JSON.stringify(V.categoriesWithGroup(['labs'], 'personal')) === JSON.stringify(['labs', 'diary']));
     const parsed = V.parseVaultSettings(JSON.stringify({ version: 1, firstOffered: { money: true } }));
     check('firstOffered survives a reading', parsed.firstOffered.money === true && parsed.firstOffered.health === false);
     const activity = fs.readFileSync(path.join(LIB, 'databaseActivity.ts'), 'utf8');

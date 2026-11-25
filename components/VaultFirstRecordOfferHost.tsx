@@ -13,16 +13,19 @@
 import { useRouter } from 'expo-router';
 import { useSyncExternalStore } from 'react';
 import {
+  FIRST_RECORD_ADD_LABEL,
   FIRST_RECORD_NOT_NOW_LABEL,
   FIRST_RECORD_SET_UP_LABEL,
   FIRST_RECORD_STOP_LABEL,
   VAULT_DEFAULT_CATEGORIES,
+  categoriesWithGroup,
   firstRecordOfferText,
 } from '../lib/vault';
 import {
   answerFirstRecordOffer,
+  chosenVaultCategories,
+  currentVaultKey,
   getPendingVaultOffer,
-  isAppLockOnForVault,
   subscribeVaultOffer,
 } from '../lib/vaultState';
 import { setVaultCategories } from '../lib/vaultSession';
@@ -32,18 +35,22 @@ export function VaultFirstRecordOfferHost() {
   const router = useRouter();
   const group = useSyncExternalStore(subscribeVaultOffer, getPendingVaultOffer, getPendingVaultOffer);
   if (group === null) return null;
-  const words = firstRecordOfferText(group);
+  const hasCode = currentVaultKey() !== 'none';
+  const words = firstRecordOfferText(group, currentVaultKey());
 
   function setUp(): void {
     if (group === null) return;
-    const appLockOn = isAppLockOnForVault();
     answerFirstRecordOffer(group, 'setUp');
     setVaultCategories(VAULT_DEFAULT_CATEGORIES);
-    if (appLockOn) {
-      router.push({ pathname: '/profile', params: { section: 'applock' } });
-    } else {
-      router.push('/app-lock-setup');
-    }
+    router.push('/app-lock-setup');
+  }
+
+  // A code is already there, so this kind of record goes behind it now and
+  // every other choice stays as it was.
+  function add(): void {
+    if (group === null) return;
+    answerFirstRecordOffer(group, 'setUp');
+    setVaultCategories(categoriesWithGroup(chosenVaultCategories(), group));
   }
 
   return (
@@ -53,7 +60,7 @@ export function VaultFirstRecordOfferHost() {
       title={words.title}
       message={words.message}
       actions={[
-        { label: FIRST_RECORD_SET_UP_LABEL, onPress: setUp },
+        hasCode ? { label: FIRST_RECORD_ADD_LABEL, onPress: add } : { label: FIRST_RECORD_SET_UP_LABEL, onPress: setUp },
         { label: FIRST_RECORD_NOT_NOW_LABEL, onPress: () => answerFirstRecordOffer(group, 'notNow') },
         { label: FIRST_RECORD_STOP_LABEL, onPress: () => answerFirstRecordOffer(group, 'stop') },
       ]}

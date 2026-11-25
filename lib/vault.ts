@@ -622,8 +622,55 @@ export function firstRecordOfferFor(sql: string, appLockOn: boolean, settings: V
   return group;
 }
 
-/** The words of the offer, which say what kind of record and never what it says. */
-export function firstRecordOfferText(group: VaultGroup): { title: string; message: string } {
+/** What the vault holds once this group is added to it: every earlier choice stays as it was. */
+export function categoriesWithGroup(categories: readonly VaultCategory[], group: VaultGroup): VaultCategory[] {
+  return VAULT_CATEGORIES.filter((c) => categories.includes(c) || VAULT_CATEGORY_GROUP[c] === group);
+}
+
+/**
+ * The words of the offer, which say what kind of record and never what it
+ * says. Somebody who already has a code is never asked to set one up (Tony,
+ * 2026-11-24): the offer is only to put this kind of record behind it.
+ */
+export function firstRecordOfferText(group: VaultGroup, key: VaultKey): { title: string; message: string } {
+  if (key === 'app-lock') {
+    return group === 'health'
+      ? {
+          title: 'Add your health records to the vault?',
+          message:
+            'They are not in the vault yet. Adding them keeps them closed until you open the vault with the App Lock code you already have. Safety warnings and reminders keep working either way.',
+        }
+      : group === 'personal'
+      ? {
+          title: 'Add your diary to the vault?',
+          message:
+            'It is not in the vault yet. Adding it keeps your entries closed until you open the vault with the App Lock code you already have.',
+        }
+      : {
+          title: 'Add your money records to the vault?',
+          message:
+            'They are not in the vault yet. Adding them keeps them closed until you open the vault with the App Lock code you already have.',
+        };
+  }
+  if (key === 'own-code') {
+    return group === 'health'
+      ? {
+          title: 'Add your health records to the vault?',
+          message:
+            'They are not in the vault yet. Adding them keeps them closed until you open the vault with the vault code you already have. Safety warnings and reminders keep working either way.',
+        }
+      : group === 'personal'
+      ? {
+          title: 'Add your diary to the vault?',
+          message:
+            'It is not in the vault yet. Adding it keeps your entries closed until you open the vault with the vault code you already have.',
+        }
+      : {
+          title: 'Add your money records to the vault?',
+          message:
+            'They are not in the vault yet. Adding them keeps them closed until you open the vault with the vault code you already have.',
+        };
+  }
   return group === 'health'
     ? {
         title: 'Keep your health records closed?',
@@ -644,6 +691,7 @@ export function firstRecordOfferText(group: VaultGroup): { title: string; messag
 }
 
 export const FIRST_RECORD_SET_UP_LABEL = 'Set It Up';
+export const FIRST_RECORD_ADD_LABEL = 'Add to the Vault';
 export const FIRST_RECORD_NOT_NOW_LABEL = 'Not Now';
 export const FIRST_RECORD_STOP_LABEL = 'Don’t Ask Again';
 
