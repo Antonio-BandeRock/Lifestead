@@ -8,6 +8,9 @@ import { chartSeries, longRangeCaption, pointLabelPrefix } from '../lib/longRang
 import { runsWithin, type CycleShading } from '../lib/cycleShading';
 import { placeReadout, READOUT_HEIGHT, readoutWidth } from '../lib/chartReadout';
 import { useNavigationHand } from '../lib/navigationHand';
+import { trendChartWords } from '../lib/chartWords';
+import { SpokenFigure } from './SpokenFigure';
+import { useVisualPreferences } from '../hooks/useVisualPreferences';
 
 const HEIGHT = 140;
 const TOP_Y = 16;
@@ -36,7 +39,13 @@ function daysBetween(a: string, b: string): number {
   return Math.round((new Date(b).getTime() - new Date(a).getTime()) / 86400000);
 }
 
-export type TrendLineChartPoint = { date: string; value: number; color?: string };
+export type TrendLineChartPoint = {
+  date: string;
+  value: number;
+  color?: string;
+  /** A letter above the dot saying what its color says, drawn with Marks with Colors on. */
+  mark?: string;
+};
 
 // E4, 2026-09-30: logged period days as pale columns behind the line.
 // Handed down through context rather than a prop, so the Trends screen
@@ -141,6 +150,7 @@ export function TrendLineChart({
   const pointsSignature = drawn.map((point) => `${point.date}:${point.value}`).join('|');
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const hand = useNavigationHand();
+  const { colorMarks } = useVisualPreferences();
   const [lastSignature, setLastSignature] = useState(pointsSignature);
   if (pointsSignature !== lastSignature) {
     setLastSignature(pointsSignature);
@@ -201,6 +211,7 @@ export function TrendLineChart({
         .map((point) => `L ${dateToX(point.date)},${valueToY(secondaryByDate.get(point.date)!)}`)
         .join(' ')} Z`
     : null;
+  const lastSecondary = secondaryByDate.get(sorted[sorted.length - 1].date);
   const selectedSecondary = secondaryByDate.get(selectedPoint.date);
   const referenceY = referenceLine != null ? valueToY(referenceLine) : null;
   const usualTopY = usualBand ? valueToY(usualBand.high) : null;
@@ -235,6 +246,19 @@ export function TrendLineChart({
           : ''}
       </Text>
 
+      <SpokenFigure
+        words={() =>
+          trendChartWords({
+            points: sorted,
+            say: valueFormatter,
+            bucket: grouped?.bucket ?? 'day',
+            breakGapDays,
+            referenceLabel: referenceLine != null ? referenceLineLabel : null,
+            usual: usualBand,
+            lower: lastSecondary != null && secondaryLabel ? { value: lastSecondary, label: secondaryLabel } : null,
+          })
+        }
+      >
       <Svg width={plotRightEdge + NODE_RADIUS + SVG_RIGHT_MARGIN} height={HEIGHT}>
         {/* Real yMax/yMin value labels -- real context for the chart's own
             overall range, kept alongside the per-point readout above rather
@@ -337,6 +361,19 @@ export function TrendLineChart({
               stroke={index === effectiveIndex ? colors.textPrimary : 'none'}
               strokeWidth={index === effectiveIndex ? 2 : 0}
             />
+            {colorMarks && point.mark ? (
+              <SvgText
+                x={dateToX(point.date)}
+                y={valueToY(point.value) - NODE_RADIUS - 4}
+                fontSize={11}
+                fontWeight="700"
+                fill={colors.textPrimary}
+                textAnchor="middle"
+                pointerEvents="none"
+              >
+                {point.mark}
+              </SvgText>
+            ) : null}
           </Fragment>
         ))}
 
@@ -368,6 +405,7 @@ export function TrendLineChart({
             })()
           : null}
       </Svg>
+      </SpokenFigure>
       <View style={[styles.labelRow, { paddingLeft: Y_AXIS_LABEL_WIDTH }]}>
         <Text style={styles.labelText}>{formatShortDate(sorted[0].date, crossesYear)}</Text>
         <Text style={styles.labelText}>{formatShortDate(sorted[sorted.length - 1].date, crossesYear)}</Text>

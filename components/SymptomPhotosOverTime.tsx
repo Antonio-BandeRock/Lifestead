@@ -42,6 +42,7 @@ import {
 import { PopoverSelect } from './PopoverSelect';
 import { TabBand } from './TabBand';
 import { HorizontalScroll } from './HorizontalScroll';
+import { t } from '../lib/i18n';
 
 const WORDS: Words = {
   tag: (code) => getCheckinTagDefinition(code)?.label ?? code,
@@ -90,6 +91,7 @@ function Thumb({ item, size, onPress, active, color }: { item: MediaItem; size: 
       style={[styles.thumbWrap, { width: size, height: size }, active && { borderColor: color, borderWidth: 2 }]}
       accessibilityRole="button"
       accessibilityLabel="Open this photo"
+      accessibilityState={{ selected: active }}
     >
       {uri ? <Image source={{ uri }} style={styles.thumb} contentFit="cover" transition={0} /> : <View style={[styles.thumb, styles.thumbEmpty]} />}
     </TouchableOpacity>
@@ -193,7 +195,7 @@ export function SymptomPhotosOverTime({ tabColor }: { tabColor: string }) {
             {opened ? (
               <View style={styles.viewer}>
                 {largeUri ? (
-                  <Image source={{ uri: largeUri }} style={styles.large} contentFit="contain" transition={0} />
+                  <Image accessible accessibilityLabel={t('Photo. {caption}', { caption: entryCaption(opened.entry, WORDS) })} source={{ uri: largeUri }} style={styles.large} contentFit="contain" transition={0} />
                 ) : (
                   <View style={[styles.large, styles.largeEmpty]}>
                     <Text style={[styles.caption, styles.muted]}>{largeUri === null ? PHOTO_ON_THE_WAY : ''}</Text>

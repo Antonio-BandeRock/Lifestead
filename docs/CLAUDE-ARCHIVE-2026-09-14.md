@@ -4153,3 +4153,11 @@ Audited 2026-08-18 against the Status history and the live codebase. These are t
 15, 16, 19, 20 and 21. **CLOSED**: recipe coverage per diet, condition and meal, quick-log, and personal nutrient targets. Accounts in `docs/CLAUDE-ARCHIVE-2026-09-14.md`.
 
 **The six-phase cross-app push is finished (2026-09-23): Where did I put it, Trends > What You Eat, Keeping Up, Garden Yield, What It Costs, and From your garden (`offerGardenUse(mealId)`).** **Nothing on Keeping Up scores anybody**, enforced by `scripts/test_keeping_up.js`. Still open: the regulation and sensory tags as a band inside Symptoms & Flares. (Archive.)
+
+## Open next steps trimmed 2026-11-24
+
+8. **Sticky group headers spot-check** on the largest categories (Veg, Mixed, Meat).
+9. **A "home brew" ingredient-based path for beer, wine and spirits**, closer to Fermentation Builder than to barcodes. No design work.
+10. **The synthetic "Choline Bitartrate (Supplement Powder)" food row**: proposed, deliberately not added.
+17. **A corpus-wide audit for missing cooking-water ingredient rows** across the recipes that simmer, boil or braise.
+18. **Batch-remake-cadence planning for make-ahead foods**: needs a consumption rate and household size.

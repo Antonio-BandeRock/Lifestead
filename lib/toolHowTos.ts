@@ -2879,6 +2879,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Something you just ran out of goes on the list from any screen, before it slips your mind.',
     },
     {
+      key: 'colorMarks',
+      title: 'Turn on Marks with Colors',
+      steps: [
+        { say: 'Tap the quick-access tab at the bottom edge of the screen on your thumb side, the one with four small squares.' },
+        { say: 'Tap Marks with Colors and read what it adds.' },
+        { say: 'Tap Turn On. The same place turns it off, and so does Profile, under Marks with Colors.' },
+      ],
+      forYou: 'If you are color blind, or some colors are hard to tell apart, a word or a small mark says what the color says.',
+    },
+    {
       key: 'simpleView',
       title: 'Switch Home to Simple View and back',
       steps: [

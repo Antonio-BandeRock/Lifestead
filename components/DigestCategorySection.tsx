@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
+import { DigestEntryBody, entryHeaderDotColor, entryHeaderDotLabel } from './DigestEntryDetail';
 import { inShortOf } from '../lib/digest/inShort';
 import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
 import { ReadingCardRow } from './ReadingCardRow';
@@ -250,6 +250,7 @@ export function DigestCategorySection({
         title: isProblemFoodEntry(entry) ? entry.foodName : entry.title,
         line: inShortOf(entry) ?? entry.teaser,
         dotColor: entryHeaderDotColor(entry),
+        dotLabel: entryHeaderDotLabel(entry),
       }))}
       openId={openEntry}
       onToggle={(id) => setOpenEntry(openEntry === id ? null : id)}

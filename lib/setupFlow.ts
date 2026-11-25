@@ -63,6 +63,7 @@ export const QUESTION_PART: Record<InterviewKind, SetupPartKey> = {
   aboutYou: 'aboutYou',
   startTab: 'looks',
   homeView: 'looks',
+  colorVision: 'looks',
   meds: 'health',
   stage: 'health',
   eatingStyle: 'food',

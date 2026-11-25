@@ -255,7 +255,7 @@ export const Dropdown = forwardRef<DropdownHandle, DropdownProps>(function Dropd
         style={[styles.backdrop, { top: menuPosition?.top ?? 0 }]}
         onPress={closeMenu}
       />
-      <Pressable style={[styles.menu, fieldWidth ? { width: fieldWidth } : null, menuPosition]} onPress={() => {}}>
+      <Pressable accessible={false} style={[styles.menu, fieldWidth ? { width: fieldWidth } : null, menuPosition]} onPress={() => {}}>
         {label ? (
           <View style={styles.menuHeader}>
             <Text style={styles.menuHeaderText} numberOfLines={1}>
@@ -273,6 +273,7 @@ export const Dropdown = forwardRef<DropdownHandle, DropdownProps>(function Dropd
               <TouchableOpacity
                 style={[styles.menuItem, isSelected ? styles.menuItemSelected : null]}
                 onPress={() => handleSelect(item.value)}
+                accessibilityState={{ selected: isSelected }}
               >
                 <Text style={[styles.menuItemText, isSelected ? styles.menuItemTextSelected : null]}>
                   {item.label}

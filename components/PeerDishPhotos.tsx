@@ -113,7 +113,7 @@ export function PeerDishPhotos({
           <Pressable accessibilityLabel="Close" style={StyleSheet.absoluteFill} onPress={() => setOpen(null)} />
           {open?.photo.fullUri ? (
             <View style={styles.panel}>
-              <Image source={{ uri: open.photo.fullUri }} style={styles.large} contentFit="contain" />
+              <Image accessible accessibilityLabel={t('Photo of {name}', { name: open.dish.name })} source={{ uri: open.photo.fullUri }} style={styles.large} contentFit="contain" />
               <Text style={styles.panelTitle}>{open.dish.name}</Text>
               {open.photo.caption ? <Text style={styles.panelBody}>{open.photo.caption}</Text> : null}
               <View style={styles.panelActions}>

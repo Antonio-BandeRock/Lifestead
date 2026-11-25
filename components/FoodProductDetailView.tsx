@@ -24,6 +24,7 @@ import { classSentence, howMatchedSentence, recallNumberSentence, recallTitle, s
 import { getProductRecallMatches, isRecallCheckOn, setAsideRecalls } from '../lib/recallsDb';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { WalkScrollView } from './WalkScrollView';
+import { t } from '../lib/i18n';
 
 // A Food lens since 2026-09-13 (it was app/food-product-detail.tsx, a
 // Stack screen, from 2026-08-16 until then), for the same reason
@@ -190,7 +191,7 @@ export function FoodProductDetailView({ id, onClose }: { id: string; title?: str
             fixing here; brand editing wasn't asked for and would be a
             second, separate field to maintain for real, marginal value. */}
         <View style={styles.card}>
-          {product.photoUri ? <Image source={{ uri: product.photoUri }} style={styles.photo} resizeMode="cover" /> : null}
+          {product.photoUri ? <Image accessible accessibilityLabel={t('Photo of this product')} source={{ uri: product.photoUri }} style={styles.photo} resizeMode="cover" /> : null}
           <Text style={styles.sectionLabel}>Name</Text>
           <View style={styles.textAreaRow}>
             <AppTextInput

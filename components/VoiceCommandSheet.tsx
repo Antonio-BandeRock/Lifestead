@@ -48,7 +48,7 @@ import { DESKTOP_MIC_NOT_ALLOWED, DESKTOP_NO_MICROPHONE } from '../lib/desktop/s
 import { scheduleReminder } from '../lib/db';
 import { commandFromSpoken, undoSpokenCommand, writeSpokenCommand, type UnlockDone } from '../lib/lockedCaptures';
 import { explainNotYet } from '../lib/notYet';
-import { subscribeQuickAccess } from '../lib/quickAccess';
+import { openQuickAccessSheet, subscribeQuickAccess, type QuickAccessSheet } from '../lib/quickAccess';
 import { describeQuickReminderSet, quickReminderOptions } from '../lib/quickReminder';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { readSpokenCommand } from '../lib/spokenCommand';
@@ -128,6 +128,12 @@ function measure(node: VoiceNode): Promise<Box | null | 'unknown'> {
 function nextFrame(): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, 80));
 }
+
+// Opened by name from any screen, so neither has to be found first.
+const VOICE_SETTINGS: VoiceTarget[] = [
+  { id: 'lowStimulation', name: 'Low Stimulation' },
+  ...['Marks with Colors', 'Color Marks', 'Color Blind', 'Color Blindness', 'Colour Blind', 'Colour Blindness'].map((name) => ({ id: 'colorMarks', name })),
+];
 
 export function VoiceCommandSheet() {
   const router = useRouter();
@@ -338,6 +344,7 @@ export function VoiceCommandSheet() {
       fields: placedFields.filter((item) => item.seen),
       currentTab,
       elsewhere,
+      settings: VOICE_SETTINGS,
     });
     if (command.kind === 'notFound' || (command.kind === 'type' && command.fieldIds.length === 0)) {
       command = resolveVoiceCommand(spoken, {
@@ -347,6 +354,7 @@ export function VoiceCommandSheet() {
         fields: seenFirst(placedFields),
         currentTab,
         elsewhere,
+        settings: VOICE_SETTINGS,
       });
     }
     if (command.kind === 'notFound' && reminderTimes(spoken, saidAt)) return;
@@ -422,6 +430,10 @@ export function VoiceCommandSheet() {
         answer(`${list.length} lenses are called that. Pick the one you mean.`, false, list);
         return;
       }
+      case 'setting':
+        close();
+        openQuickAccessSheet(command.id as QuickAccessSheet);
+        return;
       case 'press': {
         const matched = placedControls.filter((item) => command.ids.includes(item.id));
         if (matched.length === 1) {

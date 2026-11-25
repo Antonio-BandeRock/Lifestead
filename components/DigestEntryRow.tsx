@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
+import { DotWithWord } from './ColorMark';
+import { DigestEntryBody, entryHeaderDotColor, entryHeaderDotLabel } from './DigestEntryDetail';
 import { inShortOf } from '../lib/digest/inShort';
 import { HOME_BAND_GAP } from './HomeSectionBand';
 import { colors } from '../constants/colors';
@@ -56,7 +57,7 @@ export function DigestEntryRow({
         <View style={styles.itemTextWrap}>
           {groupLabel ? <Text style={styles.itemGroupLabel}>{groupLabel}</Text> : null}
           <View style={styles.itemTitleRow}>
-            {dotColor ? <View style={[styles.tierDot, { backgroundColor: dotColor }]} /> : null}
+            {dotColor ? <DotWithWord word={entryHeaderDotLabel(entry, activeConditionCode)} style={[styles.tierDot, { backgroundColor: dotColor }]} /> : null}
             <Text style={styles.itemTitle}>{isProblemFoodEntry(entry) ? entry.foodName : entry.title}</Text>
           </View>
           <Text style={styles.itemSubtitle}>{inShortOf(entry) ?? entry.teaser}</Text>

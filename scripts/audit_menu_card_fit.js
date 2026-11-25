@@ -40,6 +40,7 @@ const MENU_FILES = [
   'components/LensHub.tsx',
   'components/MyItemsHub.tsx',
   'components/LowStimulationSheet.tsx',
+  'components/ColorMarksSheet.tsx',
   'components/TabHubIconPicker.tsx',
 ];
 

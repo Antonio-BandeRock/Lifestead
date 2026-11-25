@@ -439,6 +439,20 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
           ])
         );
       }
+      case 'colorVision': {
+        const chosen = facts.answers.colorVision?.answer ?? null;
+        const choose = (value: 'yes' | 'no') =>
+          void act(async () => {
+            await setVisualPreferences({ colorMarks: value === 'yes' });
+            await setYourStoryAnswer('colorVision', value);
+          }, null);
+        return (
+          panel([
+            well('Yes', chosen === 'yes', () => choose('yes')),
+            well('No', chosen === 'no', () => choose('no')),
+          ])
+        );
+      }
       case 'meds': {
         const setAside = facts.story.allItems.meds?.state === 'setAside';
         return (

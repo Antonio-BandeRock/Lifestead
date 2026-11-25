@@ -15,6 +15,9 @@ import { EntryScrollAnchor, type EntryScrollTarget } from './EntryScrollAnchor';
 import { useWalkMark } from './WalkMark';
 import type { ToolMark } from '../lib/toolHowTos';
 import { HorizontalScroll } from './HorizontalScroll';
+import { t } from '../lib/i18n';
+import { useLanguage } from '../lib/language';
+import { useVisualPreferences } from '../hooks/useVisualPreferences';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -24,6 +27,8 @@ export type ReadingCardItem = {
   line?: string;
   // The evidence tier or severity dot an entry row carries.
   dotColor?: string | null;
+  // What the dot means, in English.
+  dotLabel?: string;
 };
 
 export const READ_CARD_LABEL = 'Read';
@@ -64,6 +69,8 @@ export function ReadingCardRow({
   markCard?: ToolMark;
 }) {
   const walkMark = useWalkMark();
+  const { colorMarks } = useVisualPreferences();
+  useLanguage();
   const { width } = useWindowDimensions();
   const cardWidth = readingCardWidth(width);
   const scroller = useRef<ScrollView>(null);
@@ -99,7 +106,7 @@ export function ReadingCardRow({
                 onPress={() => onToggle(item.id)}
                 activeOpacity={0.85}
                 accessibilityRole="button"
-                accessibilityLabel={`${open ? CLOSE_CARD_LABEL : READ_CARD_LABEL}: ${item.title}`}
+                accessibilityLabel={[`${t(open ? CLOSE_CARD_LABEL : READ_CARD_LABEL)}: ${t(item.title)}`, item.dotLabel ? t(item.dotLabel) : null].filter(Boolean).join('. ')}
               >
                 <View style={[styles.hero, { backgroundColor: hexToRgba(tabColor, open ? 0.32 : 0.2) }]}>
                   <View style={[styles.heroCircle, { backgroundColor: hexToRgba(tabColor, 0.3), borderColor: tabColor }]}>
@@ -109,6 +116,7 @@ export function ReadingCardRow({
                 </View>
                 <View style={styles.body}>
                   <Text style={styles.title}>{item.title}</Text>
+                  {colorMarks && item.dotColor && item.dotLabel ? <Text style={styles.line}>{item.dotLabel}</Text> : null}
                   {item.line ? <Text style={styles.line}>{item.line}</Text> : null}
                   <View style={styles.spacer} />
                   <View

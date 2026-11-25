@@ -79,6 +79,12 @@ export function QuickAccessButton() {
       run: () => openQuickAccessSheet('lowStimulation'),
     },
     {
+      key: 'colorMarks',
+      label: prefs.colorMarks ? 'Marks with Colors is on' : 'Marks with Colors',
+      icon: prefs.colorMarks ? 'color-palette' : 'color-palette-outline',
+      run: () => openQuickAccessSheet('colorMarks'),
+    },
+    {
       key: 'view',
       label: prefs.simpleView ? 'Normal View' : 'Simple View',
       icon: prefs.simpleView ? 'expand-outline' : 'contract-outline',
@@ -125,8 +131,8 @@ export function QuickAccessButton() {
         accessibilityLabel="Quick access"
         accessibilityHint={
           prefs.simpleView
-            ? 'Opens Add to Grocery List, Ask Your Records, Log a Symptom, Low Stimulation, Normal View, Plan My Meals, Store Its Location, Type a Note, Voice Note and Where Is It'
-            : 'Opens Add to Grocery List, Ask Your Records, Log a Symptom, Low Stimulation, Plan My Meals, Simple View, Store Its Location, Type a Note, Voice Note and Where Is It'
+            ? 'Opens Add to Grocery List, Ask Your Records, Log a Symptom, Low Stimulation, Marks with Colors, Normal View, Plan My Meals, Store Its Location, Type a Note, Voice Note and Where Is It'
+            : 'Opens Add to Grocery List, Ask Your Records, Log a Symptom, Low Stimulation, Marks with Colors, Plan My Meals, Simple View, Store Its Location, Type a Note, Voice Note and Where Is It'
         }
         accessibilityState={{ expanded: open }}
       >

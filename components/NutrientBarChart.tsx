@@ -12,6 +12,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
+import { t } from '../lib/i18n';
 
 export type NutrientChartDatum = { nutrient: string; percent: number };
 
@@ -21,7 +22,7 @@ export function NutrientBarChart({ data, color }: { data: NutrientChartDatum[]; 
   return (
     <View>
       {data.map((datum) => (
-        <View key={datum.nutrient} style={styles.row}>
+        <View key={datum.nutrient} style={styles.row} accessible accessibilityLabel={`${t(datum.nutrient)}: ${Math.round(datum.percent)}%`}>
           <Text style={styles.label} numberOfLines={1}>
             {datum.nutrient}
           </Text>

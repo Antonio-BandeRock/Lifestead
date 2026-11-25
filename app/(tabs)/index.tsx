@@ -272,6 +272,7 @@ import { DiaryHomeCard } from '../../components/DiaryHomeCard';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
 import { formatDoseAmount } from '../../lib/doseAmount';
+import { ringWords } from '../../lib/chartWords';
 
 // What Home shows that the vault can hold: check-ins and flares, the
 // morning readings, the week, pacing and the assessment banner.
@@ -343,6 +344,19 @@ function capitalize(text: string): string {
 // -- colors.primaryMuted/primary are this app's own real cool teal pair,
 // already used elsewhere, not a new hex value invented for this.
 type SkyChipTone = 'good' | 'moderate' | 'bad' | 'cold';
+const SKY_BAND_WORDS: Record<ReturnType<typeof uvBandForIndex> | ReturnType<typeof aqiBandForIndex>, string> = {
+  low: 'low',
+  moderate: 'moderate',
+  high: 'high',
+  'very-high': 'very high',
+  extreme: 'extreme',
+  good: 'good',
+  'unhealthy-sensitive': 'unhealthy for sensitive groups',
+  unhealthy: 'unhealthy',
+  'very-unhealthy': 'very unhealthy',
+  hazardous: 'hazardous',
+};
+
 function uvChipTone(band: ReturnType<typeof uvBandForIndex>): SkyChipTone {
   if (band === 'low') return 'good';
   if (band === 'moderate') return 'moderate';
@@ -2655,14 +2669,14 @@ export default function HomeScreen() {
   if (skyReady?.data.uvIndexMax != null) {
     skyGridItems.push({
       emoji: '☀️',
-      label: `UV ${skyReady.data.uvIndexMax}`,
+      label: [`UV ${skyReady.data.uvIndexMax}`, visualPrefs.colorMarks ? t(SKY_BAND_WORDS[uvBandForIndex(skyReady.data.uvIndexMax)]) : null].filter(Boolean).join(', '),
       tone: uvChipTone(uvBandForIndex(skyReady.data.uvIndexMax)),
     });
   }
   if (skyReady?.data.usAqi != null) {
     skyGridItems.push({
       emoji: '🌬️',
-      label: `AQI ${skyReady.data.usAqi}`,
+      label: [`AQI ${skyReady.data.usAqi}`, visualPrefs.colorMarks ? t(SKY_BAND_WORDS[aqiBandForIndex(skyReady.data.usAqi)]) : null].filter(Boolean).join(', '),
       tone: aqiChipTone(aqiBandForIndex(skyReady.data.usAqi)),
     });
   }
@@ -3404,7 +3418,11 @@ export default function HomeScreen() {
             // drawn exactly as they always were.
             const split = nutrientSourceSplit(entry);
             return (
-              <TouchableOpacity accessibilityLabel={`${entry.displayName}, open Nutrients`}
+              <TouchableOpacity accessibilityLabel={`${ringWords({
+                label: entry.displayName,
+                percent: entry.percentOfTarget,
+                supplementPercent: split ? split.supplementShare * 100 : 0,
+              })} ${t('Open Nutrients')}.`}
                 ref={ringIndex === 0 ? walkMark.ref('home.ring') : undefined}
                 key={entry.nutrientCode}
                 onPress={() => router.navigate({ pathname: '/insights', params: { openInsightsLens: 'nutrients' } })}
@@ -4008,6 +4026,7 @@ export default function HomeScreen() {
                     style={[styles.varietyChip, { borderColor: foodColor }, picked && { backgroundColor: foodColor }]}
                     activeOpacity={0.8}
                     onPress={() => toggleVarietyExtra(plant)}
+                    accessibilityState={{ selected: picked }}
                     disabled={usualMealBusy}
                   >
                     {picked ? <Ionicons name="checkmark" size={16} color={colors.textOnPrimary} /> : <Ionicons name="add" size={16} color={foodColor} style={textShadow} />}
@@ -4164,7 +4183,7 @@ export default function HomeScreen() {
                   key={draft.id}
                   style={[styles.draftTile, { borderColor: foodColor }]}
                   activeOpacity={0.8}
-                  onPress={() => setActiveDraft(draft)}
+                  onPress={() => setActiveDraft(draft)} accessibilityLabel={draft.capturedAt.length >= 16 ? `Photo taken at ${formatTime12(draft.capturedAt.slice(11, 16))}, finish logging it` : 'Photo waiting, finish logging it'}
                 >
                   <Image source={{ uri: draft.photoUri }} style={styles.draftThumb} />
                   <Text style={styles.logAgainTileMeta} numberOfLines={1}>

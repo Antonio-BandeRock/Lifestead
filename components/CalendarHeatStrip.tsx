@@ -13,6 +13,8 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { describeCell, type CalendarHeat, type HeatLevel, type YearStripSpec } from '../lib/calendarHeat';
 import { HorizontalScroll } from './HorizontalScroll';
+import { SpokenFigure } from './SpokenFigure';
+import { tl } from '../lib/i18n';
 
 const DAY_LABEL_WIDTH = 26;
 const MONTH_ROW_HEIGHT = 14;
@@ -51,7 +53,8 @@ export function CalendarHeatStrip({ heat, spec, color }: { heat: CalendarHeat; s
   const pickedCell = picked ? heat.cells.find((c) => c.day === picked) ?? null : null;
 
   const grid = (
-    <Svg width={drawWidth} height={drawHeight} accessibilityLabel={heat.accessibilityLabel}>
+    <SpokenFigure words={() => tl(heat.accessibilityLabel)}>
+    <Svg width={drawWidth} height={drawHeight}>
       {heat.months.map((month) => (
         <SvgText
           key={`${month.label}-${month.column}`}
@@ -102,6 +105,7 @@ export function CalendarHeatStrip({ heat, spec, color }: { heat: CalendarHeat; s
         );
       })}
     </Svg>
+    </SpokenFigure>
   );
 
   return (

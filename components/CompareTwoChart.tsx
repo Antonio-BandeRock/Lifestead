@@ -13,6 +13,8 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { dayIndex, describeDay, formatAxisValue, sayShortDate, shiftDate, type Comparison } from '../lib/compareSeries';
 import { taggedOn, type TagMarkRow } from '../lib/tagMarks';
+import { SpokenFigure } from './SpokenFigure';
+import { t, tl } from '../lib/i18n';
 
 const HEIGHT = 190;
 const AXIS_WIDTH = 38;
@@ -52,7 +54,7 @@ export function CompareTwoChart({
   const marksTop = HEIGHT + 4;
   const svgHeight = HEIGHT + (marks.length > 0 ? marks.length * MARK_ROW + 4 : 0);
   const marksLabel =
-    marks.length > 0 ? ` Marked under the dates: ${marks.map((row) => `${row.label} on ${row.dates.length} of the days`).join(', ')}.` : '';
+    marks.length > 0 ? ` ${t('Marked under the dates: {marks}.', { marks: marks.map((row) => t('{label} on {count} of the days', { label: row.label, count: row.dates.length })).join(', ') })}` : '';
   const tagged = picked ? taggedOn(marks, picked) : null;
   const hitDates = [
     ...new Set([...comparison.a.points.map((p) => p.date), ...comparison.b.points.map((p) => p.date), ...marks.flatMap((row) => row.dates)]),
@@ -78,7 +80,8 @@ export function CompareTwoChart({
         {picked ? [describeDay(comparison, picked), tagged].filter(Boolean).join(' ') : 'Tap a dot to read that day for both.'}
       </Text>
       {width > 0 ? (
-        <Svg width={width} height={svgHeight} accessibilityLabel={comparison.accessibilityLabel + marksLabel}>
+        <SpokenFigure words={() => tl(comparison.accessibilityLabel) + marksLabel}>
+        <Svg width={width} height={svgHeight}>
           <Line x1={plotLeft} y1={TOP} x2={plotLeft} y2={TOP + plotHeight} stroke={colorA} strokeWidth={1} strokeOpacity={0.6} />
           <Line
             x1={plotLeft + plotWidth}
@@ -184,6 +187,7 @@ export function CompareTwoChart({
             />
           ))}
         </Svg>
+        </SpokenFigure>
       ) : null}
     </View>
   );

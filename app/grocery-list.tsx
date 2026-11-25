@@ -1653,6 +1653,8 @@ export default function GroceryListScreen() {
                       style={[styles.checkbox, item.checked && styles.checkboxChecked]}
                       activeOpacity={0.85}
                       onPress={() => handleToggleChecked(item)}
+                      accessibilityRole="checkbox"
+                      accessibilityState={{ checked: !!item.checked }}
                       accessibilityLabel={item.checked ? `Uncheck ${item.foodName}` : `Check off ${item.foodName}`}
                     >
                       {item.checked ? <Ionicons name="checkmark" size={16} color={colors.background} /> : null}

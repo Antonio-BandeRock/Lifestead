@@ -7,7 +7,7 @@ import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
 import { AttachedFiles } from './AttachedFiles';
 import { DIGEST_CONDITION_ICONS } from './DigestConditionIcons';
-import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
+import { DigestEntryBody, entryHeaderDotColor, entryHeaderDotLabel } from './DigestEntryDetail';
 import { inShortOf } from '../lib/digest/inShort';
 import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
 import { ReadingCardRow } from './ReadingCardRow';
@@ -1115,6 +1115,7 @@ function ConditionBandBody({
         title: isProblemFoodEntry(entry) ? entry.foodName : entry.title,
         line: inShortOf(entry) ?? entry.teaser,
         dotColor: entryHeaderDotColor(entry, conditionCode),
+        dotLabel: entryHeaderDotLabel(entry, conditionCode),
       }))}
       openId={openEntry}
       onToggle={onToggleEntry}

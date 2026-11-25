@@ -422,6 +422,8 @@ export default function RoutineWalkScreen() {
                 <TouchableOpacity
                   style={[styles.tickRow, tickedAt ? styles.tickRowOn : null]}
                   onPress={toggleTick}
+                  accessibilityRole="checkbox"
+                  accessibilityState={{ checked: !!tickedAt }}
                 >
                   <Ionicons
                     name={tickedAt ? 'checkmark-circle' : 'ellipse-outline'}

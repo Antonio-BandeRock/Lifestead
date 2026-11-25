@@ -1482,7 +1482,7 @@ export function ScanProductView({
                 key={attempt.uri}
                 style={[styles.attemptCard, isSelected ? styles.attemptCardSelected : null]}
                 activeOpacity={0.8}
-                onPress={() => handleSelectAttempt(index)}
+                onPress={() => handleSelectAttempt(index)} accessibilityLabel={`Photo ${index + 1} of the label`} accessibilityState={{ selected: isSelected }}
                 disabled={attempt.recognizing}
               >
                 <Image source={{ uri: attempt.uri }} style={styles.attemptThumbnail} resizeMode="cover" />

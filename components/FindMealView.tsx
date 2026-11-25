@@ -88,6 +88,7 @@ import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY
 import { foodDisplayName } from '../lib/ingredientShortName';
 import { ReadProblem } from './ReadProblem';
 import { WalkScrollView } from './WalkScrollView';
+import { t } from '../lib/i18n';
 
 // Every meal and favourite is read, with no count (2026-11-15: a history is
 // limited by its dates, never by how many records there are). SQLite reads
@@ -1068,7 +1069,7 @@ export function FindMealView({
             {photoUri ? (
               <View style={styles.card}>
                 <Text style={styles.sectionLabel}>Finishing this photo</Text>
-                <Image source={{ uri: photoUri }} style={styles.draftPhoto} />
+                <Image accessible accessibilityLabel={t('The photo you are finishing')} source={{ uri: photoUri }} style={styles.draftPhoto} />
                 <Text style={styles.muted}>
                   Nothing is read from the picture. It is kept with whatever you pick, and the meal is dated to when
                   the photo was taken.

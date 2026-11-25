@@ -183,7 +183,7 @@ export function PhotoStrip({
           {open ? (
             <View style={styles.panel}>
               {open.uri ? (
-                <Image
+                <Image accessible accessibilityLabel={open.item.caption || takenOnLabel(open.item.takenOn, today)}
                   source={{ uri: open.uri }}
                   style={[
                     styles.large,

@@ -59,6 +59,7 @@ import { ThumbRow } from '../components/ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
 import { WalkScrollView } from '../components/WalkScrollView';
+import { t } from '../lib/i18n';
 
 function previewIngredientLines(envelope: ShareEnvelope): string[] {
   if (envelope.payload.kind === 'component') {
@@ -185,7 +186,7 @@ export default function ImportSharedScreen() {
         )}
 
         {photoBase64 ? (
-          <Image source={{ uri: `data:image/jpeg;base64,${photoBase64}` }} style={styles.photo} resizeMode="cover" />
+          <Image accessible accessibilityLabel={t('Photo that came with this recipe')} source={{ uri: `data:image/jpeg;base64,${photoBase64}` }} style={styles.photo} resizeMode="cover" />
         ) : null}
       </View>
 

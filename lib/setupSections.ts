@@ -166,7 +166,7 @@ export const CARD_WHY: Record<string, string> = {
 // The questions after what the app needs and before the areas, in the order
 // asked (2026-11-14): protection before the first backup, and the backup
 // last, once the basic setup is in it.
-export const CLOSING_QUESTIONS = ['neuro', 'homeView', 'security', 'backup'];
+export const CLOSING_QUESTIONS = ['neuro', 'homeView', 'colorVision', 'security', 'backup'];
 
 // Which tab a part of life starts on, for the startTab answer the tour
 // reads.
@@ -261,6 +261,7 @@ const ON_RECORD_NAMES: Record<string, string> = {
   backup: 'Backup',
   security: 'How records are kept closed',
   homeView: 'How much Home shows',
+  colorVision: 'Color vision',
   aboutYou: 'Birth date and sex',
   conditions: 'Conditions',
   meds: 'Medicines and supplements',
@@ -276,6 +277,7 @@ const ON_RECORD_PLACES: Record<string, StoryDestination> = {
   backup: profileCard('backup'),
   security: profileCard('applock'),
   homeView: profileCard('simple-view'),
+  colorVision: profileCard('color-marks'),
   aboutYou: profileCard('personal-info'),
   conditions: profileCard('conditions'),
   stage: profileCard('conditions'),

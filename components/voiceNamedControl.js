@@ -7,9 +7,20 @@
 // button does changes: the same props reach the same component, plus a ref
 // this file keeps a copy of so it can ask where on screen the button is.
 //
-// Requires only 'react' and the registry, which imports nothing, so neither
-// can resolve back to the swap.
+// Since 2026-11-24 every one is also announced to a screen reader as what it
+// is: a button, open or closed, ticked or not, chosen or not (build plan Q10
+// and Q35). lib/spokenControl.ts works that out from the same props. On the
+// desktop the words go on the drawn element as attributes rather than as a
+// role prop, because React Native Web would then draw a <button> in place of
+// the <div> every layout here was made for.
+//
+// Requires only 'react', the registry, and modules that import nothing from
+// 'react-native', so none can resolve back to the swap.
 const React = require('react');
+const { translateIn } = require('../lib/i18n');
+const { useLanguage } = require('../lib/language');
+const { useScreenReaderOn } = require('../lib/screenReaderOn');
+const { hasRole, isSpokenButton, spokenControl } = require('../lib/spokenControl');
 const { focusOf, registerVoiceControl, registerVoiceScroller, wordsInside } = require('../lib/voiceControlRegistry');
 
 // Read on first use rather than at load: this file loads the moment anything
@@ -18,6 +29,53 @@ let navigationContext = null;
 function useScreenNavigation() {
   if (navigationContext === null) navigationContext = require('@react-navigation/native').NavigationContext;
   return React.useContext(navigationContext);
+}
+
+// Read on first use for the same reason: the colours read the preferences.
+let buttonColor = null;
+function chosenFill() {
+  if (buttonColor === null) buttonColor = require('../constants/colors').colors.buttonColor;
+  return buttonColor;
+}
+
+const onWeb = typeof document !== 'undefined' && typeof document.createElement === 'function';
+const ARIA = { expanded: 'aria-expanded', checked: 'aria-checked', selected: 'aria-pressed' };
+
+// On the desktop: the role and state, put on the element once drawn.
+function useSpokenElement(own, props) {
+  React.useEffect(() => {
+    const element = own.current;
+    if (!onWeb || !element || typeof element.setAttribute !== 'function') return;
+    if (!isSpokenButton(props)) return;
+    const { role, state } = spokenControl(props, chosenFill());
+    const roleGiven = hasRole(props);
+    if (!roleGiven) element.setAttribute('role', role);
+    const given = props.accessibilityState || {};
+    for (const key of Object.keys(ARIA)) {
+      if (given[key] !== undefined || props['aria-' + key] !== undefined) continue;
+      const name = ARIA[key];
+      if (state[key] === undefined) element.removeAttribute(name);
+      else element.setAttribute(name, String(state[key]));
+    }
+  });
+}
+
+// On the phone: the same as props.
+function spokenProps(props, language, screenReader) {
+  const extra = {};
+  if (language !== 'en') {
+    if (typeof props.accessibilityLabel === 'string') extra.accessibilityLabel = translateIn(language, props.accessibilityLabel);
+    if (typeof props.accessibilityHint === 'string') extra.accessibilityHint = translateIn(language, props.accessibilityHint);
+  }
+  if (onWeb || !isSpokenButton(props)) return extra;
+  if (!screenReader) {
+    if (!hasRole(props)) extra.accessibilityRole = 'button';
+    return extra;
+  }
+  const { role, state } = spokenControl(props, chosenFill());
+  if (!hasRole(props)) extra.accessibilityRole = role;
+  if (Object.keys(state).length > 0) extra.accessibilityState = Object.assign({}, state, props.accessibilityState);
+  return extra;
 }
 
 function copyStatics(Wrapped, Original) {
@@ -51,6 +109,9 @@ function withVoiceName(Original, displayName) {
     latest.current = props;
     const [own, setRef] = useSharedRef(ref);
     const navigation = useScreenNavigation();
+    const language = useLanguage();
+    const screenReader = useScreenReaderOn();
+    useSpokenElement(own, props);
     React.useEffect(
       () =>
         registerVoiceControl({
@@ -73,7 +134,7 @@ function withVoiceName(Original, displayName) {
         }),
       [own, navigation],
     );
-    return React.createElement(Original, Object.assign({}, props, { ref: setRef }));
+    return React.createElement(Original, Object.assign({}, props, spokenProps(props, language, screenReader), { ref: setRef }));
   });
   Wrapped.displayName = displayName;
   copyStatics(Wrapped, Original);

@@ -400,7 +400,7 @@ export function LabSheetBand({
                   style={draft.confirmed ? styles.button : styles.secondaryButton}
                   activeOpacity={0.8}
                   onPress={() => change(draft.key, { confirmed: !draft.confirmed })}
-                  accessibilityLabel={`${draft.confirmed ? 'Confirmed' : 'Confirm'} ${testName}`}
+                  accessibilityRole="checkbox" accessibilityState={{ checked: !!draft.confirmed }} accessibilityLabel={`${draft.confirmed ? 'Confirmed' : 'Confirm'} ${testName}`}
                 >
                   <Ionicons
                     name={draft.confirmed ? 'checkmark-circle' : 'ellipse-outline'}

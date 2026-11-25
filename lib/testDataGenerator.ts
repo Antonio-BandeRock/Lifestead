@@ -375,6 +375,7 @@ async function fillProfile(): Promise<void> {
   for (const key of ['beats', 'aboutYou', 'conditions', 'allergies', 'eatingStyle', 'neuro'] as const) await markYourStorySeen(key, day(-PAST));
   await setYourStoryAnswer('startTab', '/');
   await setYourStoryAnswer('homeView', 'full');
+  await setYourStoryAnswer('colorVision', 'no');
   await setYourStoryAnswer('backup', 'notNow');
   await setYourStoryAnswer('security', 'notNow');
   await setYourStoryAnswer('guidedTour', 'hidden');

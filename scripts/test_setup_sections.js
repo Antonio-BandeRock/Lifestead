@@ -141,8 +141,8 @@ check(healthQuestions.map((q) => q.key).join() === 'aboutYou,stage:HASH,meds', `
   check(rows[1].condition === "Hashimoto's" && rows[1].name === "Healing stage for Hashimoto's", 'a stage names its condition');
   check(rows.every((r) => r.destination && r.destination.kind === 'route'), 'every kept answer opens where it is changed');
   check(!sections.requiredOnRecord(mixed, 'meds').some((r) => r.key === 'meds'), 'the question on the screen is not listed twice');
-  const gardenOnly = sections.requiredOnRecord(interview({ picked: ['garden'], questions: [['conditions', true], ['neuro', true], ['homeView', true], ['security', true], ['startTab', true]] })).map((r) => r.key).join();
-  check(gardenOnly === 'conditions,neuro,homeView,security', `answers are listed whatever parts were chosen, start tab left out (got ${gardenOnly})`);
+  const gardenOnly = sections.requiredOnRecord(interview({ picked: ['garden'], questions: [['conditions', true], ['neuro', true], ['homeView', true], ['colorVision', true], ['security', true], ['startTab', true]] })).map((r) => r.key).join();
+  check(gardenOnly === 'conditions,neuro,homeView,colorVision,security', `answers are listed whatever parts were chosen, start tab left out (got ${gardenOnly})`);
   for (const kind of sections.ON_RECORD_ORDER) check(!!sections.requiredOnRecord(interview({ picked: ['garden'], questions: [[kind === 'stage' ? 'stage:HASH' : kind, true]] }))[0]?.destination, `${kind} on record has a place to change it`);
   for (const kind of sections.REQUIRED_ORDER) check(!!sections.requiredOnRecord(interview({ picked: ['food'], questions: [[kind === 'stage' ? 'stage:HASH' : kind, true]] }))[0]?.destination, `${kind} has a place to change it`);
 }

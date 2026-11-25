@@ -697,7 +697,7 @@
 ### Q10. A screen reader audit
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** All
 - **Answers:** Every leader · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Text already scales uncapped. Walk every tab with TalkBack and the desktop's narrator, give every icon button an accessibilityLabel, and add a script that fails on a Pressable with no label, so accessibility is a measured win rather than a "not checked" against every leader.
+- **How:** Text already scales uncapped. Walk every tab with TalkBack and the desktop's narrator, give every icon button an accessibilityLabel, and add a script that fails on a Pressable with no label, so accessibility is a measured win rather than a "not checked" against every leader. Built 1.0.96.5: every button announced with its state, scripts/audit_screen_reader.js at 0.
 
 ### Q11. Dose reminders that read the meals around them
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Schedules
@@ -757,7 +757,7 @@
 ### Q35. An accessibility pass on charts and lists
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** All
 - **Answers:** Streaks, Google Fit · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** TalkBack labels on every chart, button and fold band, a one-sentence text summary under each chart, contrast checked in both themes, and a script that fails on an unlabelled pressable.
+- **How:** TalkBack labels on every chart, button and fold band, a one-sentence text summary under each chart, contrast checked in both themes, and a script that fails on an unlabelled pressable. Built 1.0.96.5: chart sentences spoken only (lib/chartWords.ts, components/SpokenFigure.tsx), by Tony's choice not printed.
 
 ### Q36. One report on Free
 - **Ships by:** Owner decision first · **Size:** S · **Tabs:** Reports,All
@@ -1134,7 +1134,7 @@
 ### P9. Accessibility past text size
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** all
 - **Answers:** (your question) · **Theme:** Brainstorm review 2026-10-06
-- **How:** An audit for accessibilityLabel on pressables and icons (TalkBack, VoiceOver), a check that colour is never the only signal, and a Quieter view (plain backgrounds, less texture, reduced motion) that applies instantly for the autism audience. One screen-reader user in the beta (P2). Notion: https://app.notion.com/p/3f153652f272812db2ffe729fe54e3c9
+- **How:** An audit for accessibilityLabel on pressables and icons (TalkBack, VoiceOver), a check that colour is never the only signal, and a Quieter view (plain backgrounds, less texture, reduced motion) that applies instantly for the autism audience. One screen-reader user in the beta (P2). Notion: https://app.notion.com/p/3f153652f272812db2ffe729fe54e3c9 Built: Quieter view as Low Stimulation; label audit and Marks with Colors (off unless chosen, asked in setup) 1.0.96.5. Still open: a screen reader user among the testers. Kept apart from Simple View by Tony's choice.
 
 ### P10. What your records showed this month
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Home,Insights,Trends

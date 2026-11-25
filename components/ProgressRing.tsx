@@ -1,8 +1,10 @@
 import { useId } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
+import { ringWords } from '../lib/chartWords';
+import { SpokenFigure } from './SpokenFigure';
 
 // A single circular "fuel gauge" -- one nutrient's percent-of-target as a
 // ring instead of a table row, meant to be glanced at in a row of several
@@ -56,7 +58,7 @@ export function ProgressRing({
   const gradientId = `ring-${useId()}`;
 
   return (
-    <View style={styles.container}>
+    <SpokenFigure style={styles.container} words={() => ringWords({ label, sublabel, percent, supplementPercent })}>
       <Svg width={size} height={size}>
         {gradientTo ? (
           <Defs>
@@ -114,7 +116,7 @@ export function ProgressRing({
       {sublabel ? (
         <Text style={styles.sublabel} numberOfLines={1}>{sublabel}</Text>
       ) : null}
-    </View>
+    </SpokenFigure>
   );
 }
 

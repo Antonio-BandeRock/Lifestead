@@ -28,6 +28,7 @@ import {
 import { resolveActiveConditionCaution, resolveActiveConditionSeverity } from '../lib/digest/conditionGrouping';
 import { inShortOf } from '../lib/digest/inShort';
 import { PILL, PILL_TEXT } from '../constants/buttons';
+import { SEVERITY_WORDS } from '../lib/chartWords';
 
 export function tierColor(tier: EvidenceTier): string {
   if (tier === 'strong') return colors.accent;
@@ -139,6 +140,7 @@ export function CitationsBlock({ citations, tabTextColor }: { citations: { sourc
         <Text
           key={index}
           style={styles.citationLink}
+          accessibilityRole="link"
           onPress={() => Linking.openURL(citation.url)}
         >
           {citation.source}
@@ -402,6 +404,12 @@ export function entryHeaderDotColor(entry: AnyDigestEntry, activeConditionCode?:
   if (isProblemFoodEntry(entry)) return tierColor(entry.overallTier);
   const activeSeverity = resolveActiveConditionSeverity(entry, activeConditionCode);
   return activeSeverity ? severityDotColor(activeSeverity) : tierColor(entry.overallTier);
+}
+
+/** The same dot in words, English. */
+export function entryHeaderDotLabel(entry: AnyDigestEntry, activeConditionCode?: string): string {
+  const activeSeverity = isProblemFoodEntry(entry) ? null : resolveActiveConditionSeverity(entry, activeConditionCode);
+  return activeSeverity ? SEVERITY_WORDS[activeSeverity] : tierLabel(entry.overallTier);
 }
 
 const styles = StyleSheet.create({

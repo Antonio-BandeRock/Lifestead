@@ -471,7 +471,7 @@ export function MicrobiomeTestsSection({ tabColor }: { tabColor: string }) {
                     style={draft.confirmed ? styles.button : styles.secondaryButton}
                     activeOpacity={0.8}
                     onPress={() => change(draft.key, { confirmed: !draft.confirmed })}
-                    accessibilityLabel={`${draft.confirmed ? 'Confirmed' : 'Confirm'} ${draft.name || 'this row'}`}
+                    accessibilityRole="checkbox" accessibilityState={{ checked: !!draft.confirmed }} accessibilityLabel={`${draft.confirmed ? 'Confirmed' : 'Confirm'} ${draft.name || 'this row'}`}
                   >
                     <Ionicons
                       name={draft.confirmed ? 'checkmark-circle' : 'ellipse-outline'}

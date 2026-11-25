@@ -26,6 +26,7 @@ import { useInfoAlert } from './InfoAlert';
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
 import { dishOwnerFor, getPhotoForTarget, pickAndSaveMealPhoto, setPhotoForTarget, type PhotoTarget } from '../lib/mealPhotos';
 import { openPhotoCamera } from '../lib/photoCamera';
+import { t } from '../lib/i18n';
 
 export function resolvePhotoTarget(entry: DigestEntry): PhotoTarget | null {
   const action = entry.dynamicAction;
@@ -141,7 +142,7 @@ export function EntryPhotoSection({ entry, tabColor }: { entry: DigestEntry; tab
 
   return (
     <View style={styles.container}>
-      {photoUri ? <Image source={{ uri: photoUri }} style={styles.photo} resizeMode="cover" /> : null}
+      {photoUri ? <Image accessible accessibilityLabel={t('Your photo')} source={{ uri: photoUri }} style={styles.photo} resizeMode="cover" /> : null}
       {editable ? (
         loading ? (
           <ActivityIndicator color={tabColor} style={styles.spinner} />

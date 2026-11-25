@@ -18,6 +18,7 @@ import { restartApp } from '../lib/restartApp';
 import { Fragment, useCallback, useEffect, useRef, useState, type ComponentProps, type ReactNode } from 'react';
 import { ActivityIndicator, AppState, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { COLOR_MARKS_INTRO, COLOR_MARKS_PARTS } from '../lib/colorMarksWords';
 import { LOW_STIMULATION_INTRO, LOW_STIMULATION_PARTS } from '../lib/lowStimulationWords';
 import { useFocusEffect, useLocalSearchParams, useRouter, type Href } from 'expo-router';
 import { mediaStorageUsed } from '../lib/mediaDb';
@@ -476,6 +477,7 @@ const ALL_CARD_SECTION_KEYS = [
   'home-screen',
   'simple-view',
   'low-stimulation',
+  'color-marks',
   'playful-wording',
   'routine-timer',
   // Device & Account
@@ -730,6 +732,7 @@ const PROFILE_CARD_GROUP: Record<CardSectionKey, string> = {
   'home-screen': 'How the App Looks',
   'simple-view': 'How the App Looks',
   'low-stimulation': 'How the App Looks',
+  'color-marks': 'How the App Looks',
   'playful-wording': 'How the App Looks',
   'routine-timer': 'How the App Looks',
   'about-ghostead': 'Device & Account',
@@ -767,6 +770,7 @@ const PROFILE_CARD_ICONS: Record<CardSectionKey, ComponentProps<typeof Ionicons>
   'garden-details': 'map-outline',
   'simple-view': 'remove-circle-outline',
   'low-stimulation': 'moon-outline',
+  'color-marks': 'color-palette-outline',
   'playful-wording': 'happy-outline',
   'routine-timer': 'timer-outline',
   'home-screen': 'home-outline',
@@ -5669,6 +5673,38 @@ export default function ProfileScreen() {
             ))}
             <Text style={styles.helpText}>
               Low Stimulation in the quick-access menu, from the grid tab at the bottom edge, explains this and turns it on or off
+              from any screen.
+            </Text>
+          </View>
+        ) : null}
+      </View>
+
+      <View style={styles.card}>
+        {renderCardHeader('color-marks', 'Marks with Colors')}
+        {!collapsedSections.has('color-marks') ? (
+          <View style={styles.cardBody}>
+            <Text style={styles.helpText}>{COLOR_MARKS_INTRO}</Text>
+            <View style={styles.pillRow}>
+              {[false, true].map((value) => {
+                const active = visualPrefs.colorMarks === value;
+                return (
+                  <TouchableOpacity
+                    key={value ? 'on' : 'off'}
+                    style={[styles.pill, active && styles.pillActive]}
+                    onPress={() => {
+                      void setVisualPreferences({ colorMarks: value });
+                    }}
+                  >
+                    <Text style={[styles.pillText, active && styles.pillTextActive]}>{value ? 'On' : 'Off'}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+            {COLOR_MARKS_PARTS.map((part) => (
+              <Text key={part.title} style={styles.helpText}>{`${part.title}: ${part.text}`}</Text>
+            ))}
+            <Text style={styles.helpText}>
+              Marks with Colors in the quick-access menu, from the grid tab at the bottom edge, explains this and turns it on or off
               from any screen.
             </Text>
           </View>

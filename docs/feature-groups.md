@@ -33,6 +33,7 @@ What a person needs so the details of daily living stop living in their head. Th
 - Life > To Dos, Work, Upkeep, Routines, Did I Do It, Days Until, Kitchen, Look Back
 - Life > Grocery List (also Planning food for me)
 - Life > Projects and Interests > Projects
+- Screen reader words on every button and chart, and Marks with Colors (accessibility)
 - Schedules > Appointments, Upkeep, Timeline, Ready for Tomorrow (with its Home band, evening reminder and start-ahead times)
 - Life > To Dos: Break it into small steps
 - Capture, reminders answered on the locked phone, Life > Diary (several diaries, photos, recordings, life events on Trends, PDF or page)

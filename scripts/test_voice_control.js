@@ -58,6 +58,12 @@ check('same name on several tabs comes back as a choice', twice.kind === 'elsewh
 check('naming the tab settles it', t.resolveVoiceCommand('open days until on life', home), { kind: 'elsewhere', ids: ['/life|daysUntil'] });
 check('this tab first', t.resolveVoiceCommand('Open Days Until', { ...screen, currentTab: 'Garden', elsewhere }), { kind: 'lens', id: 'Days Until#3' });
 check('a button here beats a lens elsewhere', t.resolveVoiceCommand('Save', home), { kind: 'press', ids: ['Save#0'] });
+const withSettings = { ...home, settings: [{ id: 'colorMarks', name: 'Marks with Colors' }, { id: 'colorMarks', name: 'Color Blind' }] };
+check('a setting by name', t.resolveVoiceCommand('Marks with Colors', withSettings), { kind: 'setting', id: 'colorMarks' });
+check('open a setting', t.resolveVoiceCommand('open color blind', withSettings), { kind: 'setting', id: 'colorMarks' });
+check('turn on a setting', t.resolveVoiceCommand('turn on marks with colors', withSettings), { kind: 'setting', id: 'colorMarks' });
+check('turn a setting on', t.resolveVoiceCommand('Turn marks with colors on', withSettings), { kind: 'setting', id: 'colorMarks' });
+check('a button with that name comes first', t.resolveVoiceCommand('Marks with Colors', { ...withSettings, controls: named(['Marks with Colors']) }).kind, 'press');
 const { execFileSync } = require('child_process');
 try {
   execFileSync(process.execPath, [require.resolve('./build_voice_lens_directory.js'), '--check'], { stdio: 'pipe' });

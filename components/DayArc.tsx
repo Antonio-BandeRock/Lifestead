@@ -1,9 +1,12 @@
 import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import Svg, { Circle, Path } from 'react-native-svg';
+import Svg, { Circle, G, Path, Text as SvgText } from 'react-native-svg';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import type { ScheduleItemRecord } from '../lib/db';
 import { formatTime12 } from '../lib/timeOfDay';
+import { dayArcWords, type ArcState } from '../lib/chartWords';
+import { SpokenFigure } from './SpokenFigure';
+import { useVisualPreferences } from '../hooks/useVisualPreferences';
 
 const HEIGHT = 120;
 const TOP_Y = 26;
@@ -30,6 +33,15 @@ function nodeColor(item: ScheduleItemRecord, nowMinutes: number): string {
   const itemMinutes = timeStringToMinutes(item.scheduledFor.slice(11, 16));
   return itemMinutes < nowMinutes ? colors.statusFlagged : colors.surface;
 }
+
+function arcState(item: ScheduleItemRecord, nowMinutes: number): ArcState {
+  if (item.status === 'logged') return 'done';
+  if (item.status === 'skipped') return 'skipped';
+  return timeStringToMinutes(item.scheduledFor.slice(11, 16)) < nowMinutes ? 'late' : 'planned';
+}
+
+// What each color says, as a mark, drawn with Marks with Colors on.
+const ARC_MARKS: Record<ArcState, string> = { done: '\u2713', skipped: '\u00d7', late: '!', planned: '' };
 
 function nodeStroke(item: ScheduleItemRecord): string {
   return item.status === 'planned' ? colors.primary : colors.surface;
@@ -58,6 +70,7 @@ export function DayArc({
   labelColor?: string;
 }) {
   const { width: windowWidth } = useWindowDimensions();
+  const { colorMarks } = useVisualPreferences();
   const width = Math.max(200, windowWidth - 40 - NODE_RADIUS * 2);
 
   const now = new Date();
@@ -73,6 +86,22 @@ export function DayArc({
 
   return (
     <View style={styles.container}>
+      <SpokenFigure
+        words={() =>
+          dayArcWords(
+            items.map((item) => ({
+              title: item.title,
+              time: formatTime12(item.scheduledFor.slice(11, 16)),
+              state: arcState(item, nowMinutes),
+            })),
+          )
+        }
+        actions={items.map((item) => ({ name: String(item.id), label: item.title }))}
+        onAction={(name) => {
+          const item = items.find((entry) => String(entry.id) === name);
+          if (item) onPressItem(item);
+        }}
+      >
       <Svg width={width + NODE_RADIUS * 2} height={HEIGHT}>
         <Path
           d={`M ${NODE_RADIUS},${BASE_Y} Q ${NODE_RADIUS + width / 2},${TOP_Y} ${NODE_RADIUS + width},${BASE_Y}`}
@@ -92,8 +121,8 @@ export function DayArc({
           const t = timeToT(timeStringToMinutes(item.scheduledFor.slice(11, 16)));
           const point = pointOnArc(t, width);
           return (
+            <G key={item.id}>
             <Circle
-              key={item.id}
               cx={NODE_RADIUS + point.x}
               cy={point.y}
               r={NODE_RADIUS}
@@ -102,9 +131,24 @@ export function DayArc({
               strokeWidth={2}
               onPress={() => onPressItem(item)}
             />
+            {colorMarks ? (
+              <SvgText
+                x={NODE_RADIUS + point.x}
+                y={point.y + 4}
+                fontSize={12}
+                fontWeight="700"
+                fill={colors.background}
+                textAnchor="middle"
+                pointerEvents="none"
+              >
+                {ARC_MARKS[arcState(item, nowMinutes)]}
+              </SvgText>
+            ) : null}
+            </G>
           );
         })}
       </Svg>
+      </SpokenFigure>
       <View style={styles.labelRow}>
         <Text style={[styles.labelText, { color: labelColor }]}>{formatTime12(`${Math.floor(dayStartMinutes / 60)}:00`)}</Text>
         <Text style={[styles.labelText, { color: labelColor }]}>{formatTime12(`${Math.floor(dayEndMinutes / 60)}:00`)}</Text>

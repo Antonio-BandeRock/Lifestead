@@ -46,12 +46,11 @@ export function QrCode({ value, size, style, accessibilityLabel }: Props) {
   if (!drawing) return null;
 
   return (
-    <View style={style}>
+    <View style={style} accessible={!!accessibilityLabel} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
       <Svg
         width={size}
         height={size}
         viewBox={`0 0 ${drawing.extent} ${drawing.extent}`}
-        accessibilityLabel={accessibilityLabel}
       >
         <Rect x={0} y={0} width={drawing.extent} height={drawing.extent} fill={LIGHT} />
         <Path d={drawing.path} fill={DARK} />

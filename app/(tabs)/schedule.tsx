@@ -362,6 +362,7 @@ import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY
 import { foodDisplayName } from '../../lib/ingredientShortName';
 import { doseWithUnit } from '../../lib/doseAmount';
 import { WalkScrollView } from '../../components/WalkScrollView';
+import { useVisualPreferences } from '../../hooks/useVisualPreferences';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -3273,6 +3274,12 @@ function healthRatingDotColor(rating: DailyMealPlanResult['healthRating']): stri
   return colors.danger;
 }
 
+function healthRatingWord(rating: DailyMealPlanResult['healthRating']): string {
+  if (rating === 'green') return 'Green';
+  if (rating === 'yellow') return 'Yellow';
+  return 'Incomplete';
+}
+
 // side/salad/beverage all get the same "Role: " prefix treatment the
 // side label already established -- 2026-08-26, the two new real
 // "combine across builders" roles (see lib/dailyMealPlan.ts's own
@@ -3901,6 +3908,7 @@ function describePartnerPlanFreshness(sentAt: string | null): string {
 const MEAL_TITLES: Record<OpenMeal, string> = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner' };
 
 function DailyMealPlanLens() {
+  const { colorMarks } = useVisualPreferences();
   const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const folds = useBandFolds();
@@ -4670,9 +4678,14 @@ function DailyMealPlanLens() {
               <HomeSectionBand
                 kind="fold"
                 markRef={index === 0 ? walkMark.ref('mealPlan.firstDay') : undefined}
-                title={day.date ? `Day ${index + 1}, ${WEEKDAY_NAMES[targetWeekdayOf(day.date)]}` : `Day ${index + 1}`}
+                title={[
+                  day.date ? `Day ${index + 1}, ${WEEKDAY_NAMES[targetWeekdayOf(day.date)]}` : `Day ${index + 1}`,
+                  colorMarks ? t(healthRatingWord(day.healthRating)) : null,
+                ]
+                  .filter(Boolean)
+                  .join(', ')}
                 icon="calendar-outline"
-                renderIcon={() => <View style={[styles.dailyPlanHealthDot, { backgroundColor: healthRatingDotColor(day.healthRating) }]} />}
+                renderIcon={() => <View accessibilityLabel={t(healthRatingWord(day.healthRating))} style={[styles.dailyPlanHealthDot, { backgroundColor: healthRatingDotColor(day.healthRating) }]} />}
                 color={TAB_COLOR}
                 expanded={isExpanded}
                 onToggle={() => setExpandedDayIndex(isExpanded ? null : index)}

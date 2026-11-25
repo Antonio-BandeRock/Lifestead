@@ -34,7 +34,7 @@ export function linkifyText(text: string, linkStyle: object = styles.link): Reac
     const url = urls[index];
     if (url) {
       nodes.push(
-        <Text key={url + index} style={linkStyle} onPress={() => Linking.openURL(url)}>
+        <Text key={url + index} style={linkStyle} accessibilityRole="link" onPress={() => Linking.openURL(url)}>
           {url}
         </Text>,
       );

@@ -25,6 +25,7 @@ import {
 } from '../lib/digest';
 import { routeForDigestEntry } from '../lib/digestNavigation';
 import { t } from '../lib/i18n';
+import { useVisualPreferences } from '../hooks/useVisualPreferences';
 
 // One reading category as a lens on whichever tab it lives on, 2026-09-19.
 //
@@ -180,6 +181,7 @@ function MatchSummaryRow({ match, styles }: { match: SearchMatchInfo; styles: Ma
 // dots carry no label, since a person already knows the order they typed
 // their words in; a worked example needs one.
 function DemoDotRow({ match, styles }: { match: SearchMatchInfo; styles: MatchStyles }) {
+  const { colorMarks } = useVisualPreferences();
   return (
     <View style={styles.demoDotRow}>
       {match.terms.map((termMatch) => (
@@ -194,7 +196,9 @@ function DemoDotRow({ match, styles }: { match: SearchMatchInfo; styles: MatchSt
                   : styles.matchDotMiss,
             ]}
           />
-          <Text style={styles.demoDotLabel}>{termMatch.term}</Text>
+          <Text style={styles.demoDotLabel}>
+            {colorMarks ? `${termMatch.term} · ${t(termMatch.matchedInTitle ? 'title' : termMatch.matchedAnywhere ? 'text' : 'not found')}` : termMatch.term}
+          </Text>
         </View>
       ))}
     </View>

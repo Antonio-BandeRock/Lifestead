@@ -218,7 +218,7 @@ export function PhotoSeriesBand({
       {frames.length > 0 ? (
         <View style={styles.viewer}>
           {frameUri ? (
-            <Image source={{ uri: frameUri }} style={styles.frame} contentFit="cover" transition={0} />
+            <Image accessible accessibilityLabel={t('Photo in the series')} source={{ uri: frameUri }} style={styles.frame} contentFit="cover" transition={0} />
           ) : (
             <View style={[styles.frame, styles.frameEmpty]}>
               <Text style={[styles.caption, muted]}>On the way from your other device</Text>
@@ -284,7 +284,7 @@ export function PhotoSeriesBand({
       {gifLine ? <Text style={[styles.caption, muted]}>{gifLine}</Text> : null}
       {gif && gifUri ? (
         <View style={styles.viewer}>
-          <Image source={{ uri: gifUri }} style={styles.frame} contentFit="contain" autoplay />
+          <Image accessible accessibilityLabel={t('The photo series as a moving picture')} source={{ uri: gifUri }} style={styles.frame} contentFit="contain" autoplay />
           <TouchableOpacity style={styles.linkRow} onPress={() => void handleShareGif()} activeOpacity={0.8}>
             <Ionicons name="share-outline" size={16} color={tabColor} />
             <Text style={[styles.link, { color: tabColor }]}>Share the GIF</Text>

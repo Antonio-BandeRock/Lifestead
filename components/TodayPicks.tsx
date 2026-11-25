@@ -99,6 +99,8 @@ export function TodayPicks({ tabColor }: Props) {
               onPress={() =>
                 void run(() => (pick.doneAt ? unmarkTodayPick(pick.checkId, day) : markTodayPick(pick.checkId)))
               }
+              accessibilityRole="checkbox"
+              accessibilityState={{ checked: !!pick.doneAt }}
               accessibilityLabel={pick.doneAt ? `Take back the mark on ${pick.name}` : `Mark ${pick.name} as done`}
             >
               <Ionicons

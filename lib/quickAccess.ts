@@ -4,7 +4,7 @@
 // edge button (components/QuickAccessButton.tsx) only asks for one of them to
 // open. A plain listener list rather than a context, because the sheets and
 // the button are siblings at the root and nothing between them needs to know.
-export type QuickAccessSheet = 'voiceNote' | 'lowStimulation' | 'askRecords' | 'storeLocation' | 'voiceCommand';
+export type QuickAccessSheet = 'voiceNote' | 'lowStimulation' | 'colorMarks' | 'askRecords' | 'storeLocation' | 'voiceCommand';
 
 // `spoken` carries what was said after "Lifestead" in the same breath
 // (components/WakeWordListener.tsx), which Voice Control carries out at once.

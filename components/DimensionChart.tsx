@@ -20,6 +20,10 @@ import Svg, { Circle, Line, Polygon, Text as SvgText } from 'react-native-svg';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import type { TierSeverity } from '../lib/sixDimensionsReference';
+import { dimensionChartWords, SEVERITY_WORDS } from '../lib/chartWords';
+import { t } from '../lib/i18n';
+import { SpokenFigure } from './SpokenFigure';
+import { useVisualPreferences } from '../hooks/useVisualPreferences';
 
 export type DimensionChartDatum = { dimension: string; severity: TierSeverity };
 
@@ -64,6 +68,7 @@ function RadarChart({ data, color }: { data: DimensionChartDatum[]; color: strin
 
   return (
     <View style={styles.radarWrap}>
+      <SpokenFigure words={() => dimensionChartWords(data)}>
       <Svg width={SIZE} height={SIZE}>
         {RING_FRACTIONS.map((fraction) => {
           const ringPoints = Array.from({ length: n }, (_, i) => pointAt(angleFor(i), fraction));
@@ -102,17 +107,19 @@ function RadarChart({ data, color }: { data: DimensionChartDatum[]; color: strin
           );
         })}
       </Svg>
+      </SpokenFigure>
     </View>
   );
 }
 
 function DimensionRows({ data }: { data: DimensionChartDatum[] }) {
+  const { colorMarks } = useVisualPreferences();
   return (
     <View style={styles.rowsWrap}>
       {data.map((datum) => (
-        <View key={datum.dimension} style={styles.row}>
+        <View key={datum.dimension} style={styles.row} accessible accessibilityLabel={`${t(datum.dimension)}: ${t(SEVERITY_WORDS[datum.severity])}`}>
           <View style={[styles.rowDot, { backgroundColor: severityColor(datum.severity) }]} />
-          <Text style={styles.rowLabel}>{datum.dimension}</Text>
+          <Text style={styles.rowLabel}>{colorMarks ? `${t(datum.dimension)}: ${t(SEVERITY_WORDS[datum.severity])}` : datum.dimension}</Text>
         </View>
       ))}
     </View>
@@ -120,6 +127,7 @@ function DimensionRows({ data }: { data: DimensionChartDatum[] }) {
 }
 
 export function DimensionChart({ conditionName, data, color }: { conditionName?: string; data: DimensionChartDatum[]; color: string }) {
+  const { colorMarks } = useVisualPreferences();
   if (data.length === 0) return null;
   const useRadar = data.length >= 3;
   return (
@@ -141,11 +149,12 @@ export function DimensionChart({ conditionName, data, color }: { conditionName?:
       {useRadar ? (
         <View style={styles.legend}>
           {data.map((datum, i) => (
-            <View key={datum.dimension} style={styles.legendRow}>
+            <View key={datum.dimension} style={styles.legendRow} accessible accessibilityLabel={`${t(datum.dimension)}: ${t(SEVERITY_WORDS[datum.severity])}`}>
               <View style={[styles.legendDot, { backgroundColor: severityColor(datum.severity) }]} />
               <Text style={styles.legendText}>
                 {`${shortAxisLabel(datum.dimension, i)}: `}
                 {datum.dimension}
+                {colorMarks ? `: ${t(SEVERITY_WORDS[datum.severity])}` : ''}
               </Text>
             </View>
           ))}

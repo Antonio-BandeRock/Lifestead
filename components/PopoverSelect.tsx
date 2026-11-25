@@ -489,6 +489,7 @@ export const PopoverSelect = memo(function PopoverSelect({
                     key={`${option.value}-${index}`}
                     style={[styles.row, isRowSelected ? { backgroundColor: tabColor } : null]}
                     onPress={() => handleSelect(option.value)}
+                    accessibilityState={{ selected: isRowSelected }}
                     onLayout={
                       isRowSelected
                         ? (event) => {
@@ -639,6 +640,7 @@ export const PopoverSelect = memo(function PopoverSelect({
       }}
       style={[styles.field, { minWidth, borderColor: isOpen ? colors.buttonColor : 'transparent' }]}
       onPress={openMenu}
+      accessibilityState={{ expanded: isOpen }}
       activeOpacity={0.7}
     >
       {asWritten && selectedLabel ? (

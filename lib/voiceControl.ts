@@ -26,6 +26,8 @@ export type VoiceScreen = {
   // other tab. Both optional, so a screen with neither still resolves.
   currentTab?: string;
   elsewhere?: VoiceElsewhere[];
+  // Settings reached by name from any screen. Several names may share an id.
+  settings?: VoiceTarget[];
 };
 
 export type VoiceCommand =
@@ -36,6 +38,7 @@ export type VoiceCommand =
   | { kind: 'lens'; id: string }
   | { kind: 'elsewhere'; ids: string[] }
   | { kind: 'press'; ids: string[] }
+  | { kind: 'setting'; id: string }
   | { kind: 'type'; text: string; fieldIds: string[] }
   | { kind: 'notFound'; heard: string };
 
@@ -149,6 +152,9 @@ export function resolveVoiceCommand(spoken: string, screen: VoiceScreen): VoiceC
   const bare = TYPE_BARE.exec(said);
   if (bare && !typed) return { kind: 'type', text: bare[1], fieldIds: screen.fields.map((f) => f.id) };
 
+  const setting = settingNamed(said, screen);
+  if (setting) return setting;
+
   const go = GO.exec(said);
   if (go) {
     const where = go[1];
@@ -179,6 +185,22 @@ export function resolveVoiceCommand(spoken: string, screen: VoiceScreen): VoiceC
   const place = goTo(said, screen);
   if (place) return place;
   return { kind: 'notFound', heard: said };
+}
+
+const TURN = /^(?:please\s+)?(?:turn|switch)\s+(?:on|off)\s+(.+)$/i;
+const TURN_LAST = /^(?:please\s+)?(?:turn|switch)\s+(.+)\s+(?:on|off)$/i;
+
+// A setting said by its whole name. A button on the screen with that same
+// name is what is in front of the person, so it comes first, except where
+// the words say to turn it on or off.
+function settingNamed(said: string, screen: VoiceScreen): VoiceCommand | null {
+  if (!screen.settings) return null;
+  const turned = TURN.exec(said) ?? TURN_LAST.exec(said);
+  const words = voiceKey((turned ?? GO.exec(said) ?? PRESS.exec(said))?.[1] ?? said);
+  const setting = screen.settings.find((target) => voiceKey(target.name) === words);
+  if (!setting) return null;
+  if (!turned && screen.controls.some((control) => voiceKey(control.name) === words)) return null;
+  return { kind: 'setting', id: setting.id };
 }
 
 // A lens on this tab before a tab, since "open Meds" on Schedules means the

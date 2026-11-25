@@ -821,6 +821,9 @@ export type VisualPreferences = {
   // and in every band folds shut, since an override there would lock the
   // screen closed and leave no way to read anything.
   lowStimulation: boolean;
+  // A word or mark beside a color that is the only thing giving a meaning.
+  // Off unless asked for (lib/colorMarksWords.ts).
+  colorMarks: boolean;
   // 2026-09-17: how much room the lines of text get, which is the one
   // thing the phone's own accessibility font-size setting does not
   // change. Turn the font up on a phone and the lines get taller with
@@ -1097,6 +1100,7 @@ const DEFAULT_VISUAL_PREFERENCES: VisualPreferences = {
   homeSectionExpanded: {},
   bandExpanded: {},
   lowStimulation: false,
+  colorMarks: false,
   lineSpacing: DEFAULT_LINE_SPACING,
   letterSpacing: DEFAULT_LETTER_SPACING,
   hasSeenTabHubWelcome: false,

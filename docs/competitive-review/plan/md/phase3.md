@@ -331,7 +331,7 @@
 ### P9. Accessibility past text size
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** all
 - **Answers:** (your question) · **Theme:** Brainstorm review 2026-10-06
-- **How:** An audit for accessibilityLabel on pressables and icons (TalkBack, VoiceOver), a check that colour is never the only signal, and a Quieter view (plain backgrounds, less texture, reduced motion) that applies instantly for the autism audience. One screen-reader user in the beta (P2). Notion: https://app.notion.com/p/3f153652f272812db2ffe729fe54e3c9
+- **How:** An audit for accessibilityLabel on pressables and icons (TalkBack, VoiceOver), a check that colour is never the only signal, and a Quieter view (plain backgrounds, less texture, reduced motion) that applies instantly for the autism audience. One screen-reader user in the beta (P2). Notion: https://app.notion.com/p/3f153652f272812db2ffe729fe54e3c9 Built: Quieter view as Low Stimulation; label audit and Marks with Colors (off unless chosen, asked in setup) 1.0.96.5. Still open: a screen reader user among the testers. Kept apart from Simple View by Tony's choice.
 
 ### P10. What your records showed this month
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Home,Insights,Trends

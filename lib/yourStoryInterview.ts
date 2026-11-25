@@ -47,6 +47,7 @@ export type InterviewKind =
   | 'beats'
   | 'startTab'
   | 'homeView'
+  | 'colorVision'
   | 'meds'
   | 'stage'
   | 'eatingStyle'
@@ -97,6 +98,12 @@ export const INTERVIEW_QUESTIONS: InterviewQuestionDef[] = [
     kind: 'homeView',
     question: 'How much should Home show?',
     why: "Simple View keeps Home to today's greeting, the one next thing, Capture and anything waiting for an answer. Everything else stays one tap away in the menu, and Profile switches it back.",
+    beats: [],
+  },
+  {
+    kind: 'colorVision',
+    question: 'Are you color blind, or are some colors hard to tell apart?',
+    why: 'Yes turns on Marks with Colors, which puts a short word or a small mark beside a color wherever the color is the only thing giving a meaning. No leaves it off. Profile changes it any time.',
     beats: [],
   },
   {
@@ -1397,6 +1404,9 @@ function viewQuestion(def: InterviewQuestionDef, facts: InterviewFacts): Intervi
     case 'homeView':
       if (!answer) return { ...base, answered: false, summary: null };
       return { ...base, answered: true, summary: answer.answer === 'simple' ? `${SIMPLE_VIEW_LABEL}.` : 'Everything.' };
+    case 'colorVision':
+      if (!answer) return { ...base, answered: false, summary: null };
+      return { ...base, answered: true, summary: answer.answer === 'yes' ? 'Marks with Colors on.' : 'No.' };
     case 'meds': {
       const settled = itemSettled(facts, 'meds');
       if (settled === 'done') return { ...base, answered: true, summary: 'On record in My Meds.' };
@@ -1578,6 +1588,10 @@ function switchedOnLine(question: InterviewQuestionView, facts: InterviewFacts):
       return facts.answers.homeView?.answer === 'simple'
         ? "Home shows today's greeting, the one next thing, Capture and anything waiting for an answer. Profile, under Simple View, brings the rest back."
         : 'Home shows every card. Profile, under Simple View, keeps it to four.';
+    case 'colorVision':
+      return facts.answers.colorVision?.answer === 'yes'
+        ? 'A short word or a small mark goes beside a color that means something. Profile, under Marks with Colors, turns it off.'
+        : 'Colors stay on their own. Profile, under Marks with Colors, adds words to them.';
     case 'meds': {
       const settled = itemSettled(facts, 'meds');
       if (settled === 'done') return 'Timing advice, the dose schedule and the nutrients a supplement adds now read from My Meds.';

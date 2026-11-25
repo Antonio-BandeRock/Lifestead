@@ -186,6 +186,8 @@ import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
 import { WalkScrollView } from '../../components/WalkScrollView';
+import { useVisualPreferences } from '../../hooks/useVisualPreferences';
+import { NUTRIENT_STATUS_LABELS } from '../../lib/sixDimensionsReference';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -1214,7 +1216,13 @@ const MONTH_RANGE_OPTIONS = [
   { value: 0, label: 'Everything' },
 ] as const;
 
+// The letter beside a color, the first of its word in the app's language.
+function markLetter(word: 'Flare' | 'Reaction' | 'Sale'): string {
+  return t(word).slice(0, 1).toUpperCase();
+}
+
 export default function TrendsScreen() {
+  const { colorMarks } = useVisualPreferences();
   const walkMark = useWalkMark();
   useRegisterScreenHelp('Trends', TRENDS_HELP_SECTIONS, '/trends');
   const scrollBottomPadding = useFloatingButtonScrollPadding();
@@ -1909,6 +1917,7 @@ export default function TrendsScreen() {
   }
 
   const activeLensLabel = TRENDS_LENSES.find((option) => option.key === lens)?.label;
+  const nutrientWord = nutrientSeries?.latestStatus ? NUTRIENT_STATUS_LABELS[nutrientSeries.latestStatus] ?? null : null;
   const latestNutrientPoint = nutrientSeries && nutrientSeries.points.length > 0 ? nutrientSeries.points[nutrientSeries.points.length - 1] : null;
 
   // Food against supplements over the charted range (2026-09-23), asked
@@ -2233,6 +2242,7 @@ export default function TrendsScreen() {
                         <Text style={[styles.singleDayHeading, { color: nutrientStatusColor(nutrientSeries?.latestStatus ?? null) }]}>
                           {Math.round(latestNutrientPoint.value)}% of target
                         </Text>
+                        {colorMarks && nutrientWord ? <Text style={styles.caption}>{nutrientWord}</Text> : null}
                         <Text style={styles.caption}>
                           {nutrientSeries?.displayName ?? selectedNutrient} · {formatDisplayDate(latestNutrientPoint.date)}
                         </Text>
@@ -2262,6 +2272,7 @@ export default function TrendsScreen() {
                       secondaryPoints={nutrientSplit.supplementInvolved ? nutrientSeries?.foodPoints : undefined}
                       secondaryLabel="from food"
                     />
+                    {colorMarks && nutrientWord ? <Text style={styles.caption}>{nutrientWord}</Text> : null}
                     {nutrientSplit.daysCharted > 0 ? (
                       <>
                         <Text style={styles.caption}>{nutrientSplit.headline}</Text>
@@ -3253,6 +3264,7 @@ export default function TrendsScreen() {
                       date: point.date,
                       value: point.onTen,
                       color: checkinColor(point.checkinType),
+                      mark: point.checkinType === 'flare' ? markLetter('Flare') : markLetter('Reaction'),
                     }))}
                     yMin={0}
                     yMax={10}
@@ -3268,11 +3280,11 @@ export default function TrendsScreen() {
                   <View style={styles.legendRow}>
                     <View style={styles.legendItem}>
                       <View style={[styles.legendDot, { backgroundColor: colors.danger }]} />
-                      <Text style={styles.legendText}>Flare</Text>
+                      <Text style={styles.legendText}>{colorMarks ? `${markLetter('Flare')}: ${t('Flare')}` : 'Flare'}</Text>
                     </View>
                     <View style={styles.legendItem}>
                       <View style={[styles.legendDot, { backgroundColor: colors.statusYellow }]} />
-                      <Text style={styles.legendText}>Food Reaction</Text>
+                      <Text style={styles.legendText}>{colorMarks ? `${markLetter('Reaction')}: ${t('Food Reaction')}` : 'Food Reaction'}</Text>
                     </View>
                   </View>
                   {(symptomsSeries ?? []).some((point) => !point.tenGiven) ? (
@@ -3558,6 +3570,7 @@ export default function TrendsScreen() {
                       date: row.date.slice(0, 10),
                       value: row.price,
                       color: row.onSale ? colors.statusGood : undefined,
+                      mark: row.onSale ? markLetter('Sale') : undefined,
                     }));
                     const saleCount = rows.filter((row) => row.onSale).length;
                     const { yMin, yMax } = paddedTrendRange(points.map((point) => point.value));
@@ -3592,7 +3605,10 @@ export default function TrendsScreen() {
                             <View style={styles.legendItem}>
                               <View style={[styles.legendDot, { backgroundColor: colors.statusGood }]} />
                               <Text style={styles.legendText}>
-                                {`${saleCount} of these ${saleCount === 1 ? 'was' : 'were'} a sale price, not the usual one`}
+                                {(() => {
+                                  const saleWords = `${saleCount} of these ${saleCount === 1 ? 'was' : 'were'} a sale price, not the usual one`;
+                                  return colorMarks ? `${markLetter('Sale')}: ${tl(saleWords)}` : saleWords;
+                                })()}
                               </Text>
                             </View>
                           </View>

@@ -80,6 +80,7 @@ import { explainNotYet } from '../lib/notYet';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
 import { WalkScrollView } from '../components/WalkScrollView';
+import { t } from '../lib/i18n';
 
 // meals.eaten_at's own stored format: 'YYYY-MM-DDTHH:mm', local time. See
 // listMealsForDate in lib/db.ts for why a UTC toISOString() would break every
@@ -623,7 +624,7 @@ export default function VoiceLogScreen() {
         {photoUri ? (
           <View style={styles.card}>
             <Text style={styles.sectionLabel}>Finishing this photo</Text>
-            <Image source={{ uri: photoUri }} style={styles.draftPhoto} />
+            <Image accessible accessibilityLabel={t('The photo you are finishing')} source={{ uri: photoUri }} style={styles.draftPhoto} />
             <Text style={styles.privacyNote}>
               Nothing is read from the picture. It is kept with whatever you log, and the meal is dated to when the
               photo was taken.

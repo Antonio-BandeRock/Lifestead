@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import type { DigestChart as DigestChartData } from '../lib/digest';
+import { t } from '../lib/i18n';
 
 // A plain, small horizontal bar chart -- 2026-08-07, built for Purple
 // Digest's own DigestCard, direct request: "we need graph images that
@@ -23,7 +24,7 @@ export function DigestBarChart({ chart, color }: { chart: DigestChartData; color
     <View style={styles.container}>
       <Text style={styles.title}>{chart.title}</Text>
       {chart.data.map((datum) => (
-        <View key={datum.label} style={styles.row}>
+        <View key={datum.label} style={styles.row} accessible accessibilityLabel={`${t(datum.label)}: ${datum.value}${t(chart.unit ?? '')}`}>
           <Text style={styles.label} numberOfLines={2}>
             {datum.label}
           </Text>

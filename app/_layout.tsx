@@ -52,6 +52,7 @@ import { StoreLocationSheet } from '../components/StoreLocationSheet';
 import { VoiceCommandSheet } from '../components/VoiceCommandSheet';
 import { WakeWordListener } from '../components/WakeWordListener';
 import { LowStimulationSheet } from '../components/LowStimulationSheet';
+import { ColorMarksSheet } from '../components/ColorMarksSheet';
 import { LanguageBasicsButton } from '../components/LanguageBasicsButton';
 import { QuickAccessButton } from '../components/QuickAccessButton';
 import { VoiceControlButton } from '../components/VoiceControlButton';
@@ -654,6 +655,7 @@ function UnlockedApp() {
               {/* Low Stimulation's explain-then-ask card, opened from the
                   quick-access menu, components/LowStimulationSheet.tsx. */}
               <LowStimulationSheet />
+              <ColorMarksSheet />
               {/* Ask Your Records (1.0.66.6), from the quick-access menu. Not a
                   Modal, so it sits here ahead of AppKeyboard, which draws over
                   it while its box is being typed into. */}
