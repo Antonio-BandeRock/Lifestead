@@ -15,10 +15,12 @@ import { explainNotYet } from '../lib/notYet';
 import { cleanStepText, moveTodoStep, orderTodoSteps, stepsLabel, type TodoStep } from '../lib/todoExtras';
 import { addTodoStep, deleteTodoStep, renameTodoStep, reorderTodoSteps, setTodoStepDone } from '../lib/todosDb';
 import { AppTextInput } from './AppTextInput';
+import { BreakIntoSteps } from './BreakIntoSteps';
 import { useConfirmSheet } from './ConfirmSheet';
 
 export function TodoSteps({
   todoId,
+  title,
   steps,
   tabColor,
   closed,
@@ -27,6 +29,8 @@ export function TodoSteps({
   addRef,
 }: {
   todoId: string;
+  /** The to-do's words, which the kept lists of steps are matched against. */
+  title: string;
   steps: TodoStep[];
   tabColor: string;
   /** A closed to-do shows its steps but takes no new ones. */
@@ -40,6 +44,7 @@ export function TodoSteps({
   const [draft, setDraft] = useState('');
   const [editing, setEditing] = useState<{ id: string; value: string } | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [breaking, setBreaking] = useState(false);
   const [confirm, confirmElement] = useConfirmSheet();
   const ordered = orderTodoSteps(steps);
 
@@ -193,6 +198,13 @@ export function TodoSteps({
               </TouchableOpacity>
             </View>
           ) : null}
+          {closed ? null : breaking ? (
+            <BreakIntoSteps todoId={todoId} title={title} tabColor={tabColor} onSaved={onChanged} onClose={() => setBreaking(false)} />
+          ) : (
+            <TouchableOpacity style={styles.secondary} onPress={() => setBreaking(true)} accessibilityRole="button">
+              <Text style={styles.secondaryText}>Break it into small steps</Text>
+            </TouchableOpacity>
+          )}
           {message ? <Text style={[styles.caption, { color: colors.statusRedOnSurface }]}>{message}</Text> : null}
         </View>
       ) : null}

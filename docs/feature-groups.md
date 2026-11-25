@@ -33,7 +33,8 @@ What a person needs so the details of daily living stop living in their head. Th
 - Life > To Dos, Work, Upkeep, Routines, Did I Do It, Days Until, Kitchen, Look Back
 - Life > Grocery List (also Planning food for me)
 - Life > Projects and Interests > Projects
-- Schedules > Appointments, Upkeep, Timeline
+- Schedules > Appointments, Upkeep, Timeline, Ready for Tomorrow (with its Home band, evening reminder and start-ahead times)
+- Life > To Dos: Break it into small steps
 - Capture, reminders answered on the locked phone, Life > Diary (several diaries, photos, recordings, life events on Trends, PDF or page)
 - Signals > Calm
 - Meds and supplements taken at the same time grouped under one reminder, opening the whole list with amounts, what to take them with, the interaction rules between them and a time to move a supplement or OTC item to, in Life > My Meds > Taken together

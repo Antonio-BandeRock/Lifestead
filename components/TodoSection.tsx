@@ -337,6 +337,7 @@ export function TodoSection({ tabColor, scope }: Props) {
         </View>
         <TodoSteps
           todoId={todo.id}
+          title={todo.title}
           steps={stepsByTodo.get(todo.id) ?? []}
           tabColor={tabColor}
           closed={closed}

@@ -18,6 +18,7 @@ import {
 import { AppTextInput } from '../../components/AppTextInput';
 import { useRegisterScreenHelp } from '../../components/CurrentPageHelp';
 import { DayTimeline } from '../../components/DayTimeline';
+import { ReadyForTomorrowHomeCard, useReadyTimeReached } from '../../components/ReadyForTomorrow';
 import { LifeInSquares } from '../../components/LifeInSquares';
 import { GroceryQuickAdd } from '../../components/GroceryQuickAdd';
 import { TodayPicks } from '../../components/TodayPicks';
@@ -943,6 +944,12 @@ const HOME_LENS_DESTINATIONS: Partial<
     color: colors.tabSchedules,
     href: { pathname: '/schedule', params: { openScheduleLens: 'timeline' } } as Href,
   },
+  readyTomorrow: {
+    label: 'Ready for Tomorrow',
+    icon: 'moon',
+    color: colors.tabSchedules,
+    href: { pathname: '/schedule', params: { openScheduleLens: 'readyForTomorrow' } } as Href,
+  },
   todaysReminders: {
     label: "Today's Reminders",
     icon: 'alarm',
@@ -1143,6 +1150,7 @@ const HOME_LENS_ORDER: HomeSectionKey[] = [
   'scanProduct',
   'yourDay',
   'dayTimeline',
+  'readyTomorrow',
   'todaysReminders',
   'symptomCheckinReminder',
   'morningCheckin',
@@ -1363,6 +1371,7 @@ export default function HomeScreen() {
   const waiting = useWaitingReminders();
   const interestTimer = useRunningInterestTimer();
   const bladderDiary = useOpenBladderDiary();
+  const readyTimeReached = useReadyTimeReached();
   // Which of Home's per-tab groups are open, kept under "homeTab:/food"
   // and the rest (see HOME_TAB_GROUP_BAND_KEY_PREFIX). A group is a band
   // like any other, so it remembers its fold the same way.
@@ -1611,6 +1620,7 @@ export default function HomeScreen() {
     if (key === 'sharedFolderSetup') return sharedFolderReady === false;
     if (key === 'interestTimer') return Boolean(interestTimer.timer);
     if (key === 'bladderDiary') return Boolean(bladderDiary.open);
+    if (key === 'readyTomorrow') return readyTimeReached;
     if (key === 'weekTrend') return Boolean(weekTrend);
     if (key === 'outsideUsual') return (data?.outsideUsual.length ?? 0) > 0;
     if (key === 'pacingToday') return (data?.pacingToday.length ?? 0) > 0;
@@ -1636,7 +1646,7 @@ export default function HomeScreen() {
     // homeSectionHasContent is rebuilt every render and reads exactly the
     // two values listed here, so those are the dependencies that matter.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [visualPrefs, sharedFolderReady, weekTrend, data, interestTimer.timer, bladderDiary.open],
+    [visualPrefs, sharedFolderReady, weekTrend, data, interestTimer.timer, bladderDiary.open, readyTimeReached],
   );
 
   const userConditionCodesRef = useRef(userConditionCodes);
@@ -4467,6 +4477,11 @@ export default function HomeScreen() {
     );
   }
 
+  function renderReadyTomorrow() {
+    if (!isHomeSectionVisible(visualPrefs, 'readyTomorrow') || !readyTimeReached) return null;
+    return renderBand('readyTomorrow', 'Ready for Tomorrow', <ReadyForTomorrowHomeCard tabColor={colors.tabSchedules} />);
+  }
+
   // C6: add things to the list from here, typed or spoken, split the way a
   // Capture note is.
   function renderGroceryQuickAdd() {
@@ -5179,6 +5194,8 @@ export default function HomeScreen() {
         return renderGroceryQuickAdd();
       case 'dayTimeline':
         return renderDayTimeline();
+      case 'readyTomorrow':
+        return renderReadyTomorrow();
       default:
         // Each tab's tutorials, the last card in its band (2026-10-28).
         if (isTutorialSection(key)) {
@@ -5359,7 +5376,9 @@ export default function HomeScreen() {
                     ? 'No timer running now. Shows here while one runs on Interests, Sessions.'
                     : key === 'bladderDiary' && !bladderDiary.open
                       ? 'No bladder diary open. Shows here while one runs on Signals, Bladder.'
-                      : null
+                      : key === 'readyTomorrow' && !readyTimeReached
+                        ? 'Shows here in the evening, from the time set for it in Profile, Notifications.'
+                        : null
               }
               openFor={arrangeOpenKey}
               onReveal={(y) => scrollRef.current?.scrollTo({ y: Math.max(0, y - 12), animated: false })}

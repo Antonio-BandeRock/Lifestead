@@ -69,7 +69,7 @@ import { HorizontalScroll } from './HorizontalScroll';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
-const KIND_ICONS: Record<TimelineKind, IconName> = {
+export const KIND_ICONS: Record<TimelineKind, IconName> = {
   meal: 'restaurant-outline',
   dose: 'medkit-outline',
   appointment: 'calendar-outline',
@@ -87,7 +87,7 @@ const KIND_ICONS: Record<TimelineKind, IconName> = {
   steps: 'footsteps-outline',
 };
 
-const KIND_COLORS: Record<TimelineKind, string> = {
+export const KIND_COLORS: Record<TimelineKind, string> = {
   meal: colors.tabFood,
   dose: colors.tabSchedules,
   appointment: colors.tabSchedules,

@@ -227,6 +227,19 @@ export async function addTodoStep(todoId: string, text: string): Promise<boolean
   return true;
 }
 
+/** Several steps at once, in the order given, after any already there. */
+export async function addTodoSteps(todoId: string, texts: readonly string[]): Promise<void> {
+  const words = texts.map(cleanStepText).filter(Boolean);
+  if (words.length === 0) return;
+  const db = await getDatabase();
+  const first = nextStepPosition((await listStepsFor([todoId])).get(todoId) ?? []);
+  const now = new Date().toISOString();
+  await db.runAsync(
+    `INSERT INTO todo_steps (id, todo_id, text, position, done_at, created_at, updated_at) VALUES ${words.map(() => '(?, ?, ?, ?, NULL, ?, ?)').join(', ')}`,
+    ...words.flatMap((text, index) => [stepId(), todoId, text, first + index, now, now]),
+  );
+}
+
 export async function setTodoStepDone(id: string, done: boolean): Promise<void> {
   const db = await getDatabase();
   const now = new Date().toISOString();

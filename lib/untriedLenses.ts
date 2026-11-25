@@ -108,6 +108,7 @@ export const UNTRIED_LENSES: Record<UntriedTabPath, readonly UntriedLensDef[]> =
     { lens: 'makingItPay', used: [{ table: 'interest_pay_worksheets' }] },
   ],
   '/schedule': [
+    { lens: 'readyForTomorrow', used: [{ table: 'prep_marks' }, { table: 'prep_leads' }] },
     { lens: 'meals', used: [{ table: 'meals', where: "meal_type <> 'beverage'" }] },
     { lens: 'dailyMealPlan', used: [{ table: 'meal_plan_slots' }] },
     { lens: 'meds', used: [{ table: 'schedule_items', where: "item_type IN ('prescription', 'supplement')" }] },

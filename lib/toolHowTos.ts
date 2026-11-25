@@ -495,6 +495,9 @@ export type ToolMark =
   | 'schedule.useWeek'
   | 'schedule.weekNext'
   | 'schedule.weeksBand'
+  | 'ready.done'
+  | 'ready.ownAdd'
+  | 'ready.tomorrow'
   | 'timeline.calendar'
   | 'timeline.moveRest'
   | 'timeline.strip'
@@ -4121,6 +4124,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'A big task becomes the next small thing to do, and Steps says how many are still to do. One that repeats starts its steps fresh each time it comes back.',
     },
     {
+      key: 'smallSteps',
+      title: 'Have a task broken into small steps',
+      steps: [
+        { say: 'Tap Steps under the task.', mark: 'todo.steps', stay: true },
+        { say: 'Tap Break it into small steps. Choose a list to start from.' },
+        { say: 'Change a step, take one off or add one, then tap Add these steps.' },
+      ],
+      forYou: 'The steps come from lists kept in the app, your routines and tasks you broke down before. Nothing leaves the phone, and nothing is saved until you tap Add these steps.',
+    },
+    {
       key: 'labels',
       title: 'Label tasks and see one label at a time',
       steps: [
@@ -4642,6 +4655,41 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Edit in Upkeep, Renew in Upkeep or Set it up in Upkeep under it.', mark: 'upkeepLens.edit' },
       ],
       forYou: 'It opens on Life, where it is kept.',
+    },
+  ],
+  '/schedule#readyForTomorrow': [
+    {
+      key: 'tonight',
+      title: 'See what to start tonight',
+      steps: [
+        { say: 'Read Start tonight, at the top. Each line says how long it needs and when to start.' },
+        { say: 'Tap the box beside one once you have started it.', mark: 'ready.done' },
+      ],
+      forYou: 'The beans are soaking before you think of them, and the evening reminder says nothing more about one you have started.',
+    },
+    {
+      key: 'tomorrow',
+      title: 'Look over tomorrow',
+      steps: [
+        { say: 'Read Tomorrow: meals, doses, appointments, upkeep and the rest, in the order they come.', mark: 'ready.tomorrow' },
+        { say: 'Tap one to open where it is kept.' },
+      ],
+      forYou: 'What tomorrow needs is out of your head before you sleep.',
+    },
+    {
+      key: 'ownTime',
+      title: 'Give a dish a start-ahead time',
+      steps: [
+        { say: 'Under Start-ahead times of your own, pick the dish or type its name.' },
+        { say: 'Choose what it needs, type how many hours ahead, then tap Save the time.', mark: 'ready.ownAdd' },
+      ],
+      forYou: 'A roast that has to thaw overnight is raised every time it is on the plan. Type 0 hours for a dish that needs nothing started.',
+    },
+    {
+      key: 'reminder',
+      title: 'Be reminded in the evening',
+      steps: [{ say: 'Open Profile, Notifications, turn on Ready for Tomorrow and choose the time.' }],
+      forYou: 'One notification names what to start and what is due tomorrow. Done on it marks the starts without opening the app.',
     },
   ],
   '/schedule#timeline': [

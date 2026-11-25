@@ -6,6 +6,7 @@ import { Linking, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } 
 import { AppTextInput } from '../../components/AppTextInput';
 import { NotesInput } from '../../components/NotesInput';
 import { DayTimeline } from '../../components/DayTimeline';
+import { ReadyForTomorrow } from '../../components/ReadyForTomorrow';
 import { PeerDishPhotos } from '../../components/PeerDishPhotos';
 import { AppActionSheet, type AppActionSheetAction } from '../../components/AppActionSheet';
 import { useConfirmSheet } from '../../components/ConfirmSheet';
@@ -392,6 +393,7 @@ type Lens =
   | 'appointments'
   | 'upkeep'
   | 'timeline'
+  | 'readyForTomorrow'
   | 'exercise';
 
 // A repeat picker exists on Meals, Supplements' own reminder times, and
@@ -624,6 +626,29 @@ const LENSES: LensOption<Lens>[] = [
     ],
   },
   {
+    key: 'readyForTomorrow',
+    label: 'Ready for Tomorrow',
+    icon: 'moon-outline',
+    help: [
+      {
+        heading: 'What to start tonight',
+        body: 'Every planned meal is read for anything that has to be started well ahead: soaking, marinating, dough left to rise, something to chill or thaw. Each one says how long it needs and when to start. Mark it as started and the evening reminder says nothing more about it.',
+      },
+      {
+        heading: 'What tomorrow holds',
+        body: 'Meals, doses, appointments, garden tasks, routines, bills, upkeep and counters for tomorrow, in order, read from where each is kept. A tap opens it there. A dose says what Schedules already says about the food near it, and an appointment shows the notes you wrote on it.',
+      },
+      {
+        heading: 'Start-ahead times of your own',
+        body: 'Give any dish the hours it has to be started ahead, such as a roast to thaw. Yours is used in place of the one in the recipe, and 0 hours means nothing has to be started.',
+      },
+      {
+        heading: 'The evening reminder',
+        body: 'Turn it on and choose its time in Profile, Notifications. It names what to start tonight and what is due tomorrow, with a Done that marks the starts from a locked phone. On an evening with neither, nothing comes.',
+      },
+    ],
+  },
+  {
     key: 'exercise',
     label: 'Exercise',
     icon: 'barbell-outline',
@@ -646,7 +671,7 @@ const LENSES: LensOption<Lens>[] = [
 
 // The Schedules menu in groups, so ten lenses read as four kinds of plan.
 const SCHEDULE_LENS_GROUPS: { group: string; keys: Lens[] }[] = [
-  { group: 'Today', keys: ['timeline', 'todaysMeals'] },
+  { group: 'Today', keys: ['timeline', 'readyForTomorrow', 'todaysMeals'] },
   { group: 'Meals', keys: ['meals', 'dailyMealPlan', 'pastMeals'] },
   { group: 'Drinks, Meds and Exercise', keys: ['hydration', 'meds', 'exercise'] },
   { group: 'Appointments and Upkeep', keys: ['appointments', 'upkeep'] },
@@ -7101,6 +7126,18 @@ function TimelineLens() {
   );
 }
 
+// Q60: tonight's starts and tomorrow's records.
+function ReadyForTomorrowLens() {
+  const scrollBottomPadding = useFloatingButtonScrollPadding();
+  return (
+    <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+      <View style={styles.bandBox}>
+        <ReadyForTomorrow tabColor={TAB_COLOR} />
+      </View>
+    </WalkScrollView>
+  );
+}
+
 function UpkeepLens() {
   const router = useRouter();
   const walkMark = useWalkMark();
@@ -7363,6 +7400,8 @@ export default function ScheduleScreen() {
             <UpkeepLens />
           ) : lens === 'timeline' ? (
             <TimelineLens />
+          ) : lens === 'readyForTomorrow' ? (
+            <ReadyForTomorrowLens />
           ) : (
             <ExerciseLens />
           )}

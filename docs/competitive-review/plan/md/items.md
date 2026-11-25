@@ -1364,12 +1364,12 @@
 ### Q60. Ready for tomorrow
 - **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** Home,Schedules
 - **Answers:** Structured · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** One evening view over tomorrow’s records (meals, doses, appointments, upkeep, routines), with prep lead time on recipes raising an evening-before task.
+- **How:** One evening view over tomorrow’s records (meals, doses, appointments, upkeep, routines), with prep lead time on recipes raising an evening-before task. Built 1.0.96.4.
 
 ### Q61. Break a task into small steps on the phone
 - **Ships by:** Over the air (JS) · **Size:** S · **Tabs:** Life,Home
 - **Answers:** Goblin.tools, Tiimo · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** Steps from starter patterns and the person’s own routines, worked out on the phone with no model; text goes to a model only with an opt-in each time, if ever.
+- **How:** Steps from starter patterns and the person’s own routines, worked out on the phone with no model; text goes to a model only with an opt-in each time, if ever. Built 1.0.96.4.
 
 ### Q62. Google Drive and iCloud Drive as the shared folder
 - **Ships by:** Android rebuild R1 · **Size:** M · **Tabs:** All

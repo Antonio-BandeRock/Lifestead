@@ -313,6 +313,8 @@ export type HomeSectionKey =
   | 'yourDay'
   // The one Today timeline, B1 of the competitive build plan (2026-09-26).
   | 'dayTimeline'
+  // Ready for Tomorrow (Q60), from the evening on.
+  | 'readyTomorrow'
   // 2026-09-16, direct report after a day of dose reminders arrived and were
   // glanced at: "there is no quick access on the Home screen for reminders
   // for the day to see what they say." Your Day above is meals only (see
@@ -502,6 +504,7 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   // default order that needs regrouping to read correctly is a trap.
   'yourDay',
   'dayTimeline',
+  'readyTomorrow',
   'todaysReminders',
   'mealsLoggedToday',
   'sinceLastMeal',
@@ -596,6 +599,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   groceryList: 'Grocery List',
   yourDay: 'Your Day',
   dayTimeline: 'Timeline',
+  readyTomorrow: 'Ready for Tomorrow',
   todaysReminders: "Today's Reminders",
   mealsLoggedToday: 'Meals Logged Today',
   sinceLastMeal: 'Since Your Last Meal',
@@ -1049,6 +1053,9 @@ export const BANDS_OPEN_UNTIL_CLOSED: ReadonlySet<string> = new Set([
   // Waiting for an Answer, 1.0.60.3: drawn only when something waits, so
   // it opens on its list until somebody closes it.
   'waitingAnswers',
+  // Ready for Tomorrow, 1.0.96.4: the two bands that hold what it is for.
+  'ready:tonight',
+  'ready:tomorrow',
   `${HOME_TAB_GROUP_BAND_KEY_PREFIX}/`,
 ]);
 

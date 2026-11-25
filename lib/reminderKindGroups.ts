@@ -32,6 +32,7 @@ export const REMINDER_KIND_PLACE: Record<ReminderKindKey, ReminderPlace> = {
   learnReady: { tab: 'Interests', lens: 'Flashcards' },
   hydration: { tab: 'Schedules', lens: 'Hydration' },
   weekPlan: { tab: 'Schedules', lens: 'Meal Plan' },
+  readyTomorrow: { tab: 'Schedules', lens: 'Ready for Tomorrow' },
   meal: { tab: 'Schedules', lens: 'Meals' },
   dose: { tab: 'Schedules', lens: 'Meds' },
   checkin: { tab: 'Signals', lens: 'Health Journal' },

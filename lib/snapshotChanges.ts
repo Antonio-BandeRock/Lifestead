@@ -261,6 +261,7 @@ const AREAS: readonly Area[] = [
   // to-do itself already says by moving on. Q47: a task's steps and labels
   // are part of the task.
   { one: 'task', many: 'tasks', count: ['todos'], quiet: ['todo_doings', 'todo_steps', 'todo_labels'] },
+  { one: 'start-ahead time of yours', many: 'start-ahead times of yours', count: ['prep_leads'], quiet: ['prep_marks'] },
   // 2026-10-30. A step is part of its project, so a project and its five
   // steps read as one more project.
   { one: 'project', many: 'projects', count: ['projects'], quiet: ['project_steps'] },

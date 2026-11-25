@@ -11220,6 +11220,20 @@ async function runDatabaseInitialization() {
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
       CREATE INDEX IF NOT EXISTS idx_todo_labels_todo ON todo_labels(todo_id);
+      -- Ready for Tomorrow (Q60): how far ahead a dish has to be started,
+      -- when the person says so, and the starts already made.
+      CREATE TABLE IF NOT EXISTS prep_leads (
+        dish_key TEXT PRIMARY KEY NOT NULL,
+        name TEXT NOT NULL,
+        kind TEXT NOT NULL,
+        hours REAL NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+      CREATE TABLE IF NOT EXISTS prep_marks (
+        id TEXT PRIMARY KEY NOT NULL,
+        marked_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
     `);
     // Languages (2026-11-11): units studied together are kept as a group, so Home
     // can offer that group again in one tap. A JSON list of { units, order }.

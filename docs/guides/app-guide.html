@@ -417,7 +417,7 @@
     <h1>What is inside Lifestead, and how it is put together</h1>
     <p class="dek">Lifestead is an everything-about-a-person's-life app, tagline "Everything in your life has a place." It started with, and runs deepest on, food and autoimmune health: 19 tracked conditions, each a target for the same depth, alone or combined. It is also for somebody who needs an outside place to hold the details of daily living so they stop taking up room in their head, through Life, Schedules, reminders and capture. Garden, budget, family, interests, learning and the body are all in scope.</p>
     <p class="dek">Its job in food and health is finding the personal patterns between what someone eats and how their body responds, and doing that work for the person. Records stay on the person's devices, and no company server holds them.</p>
-    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-24 (1.0.96.3).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
+    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-24 (1.0.96.4).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
     <div class="stats">
       <div class="stat"><span class="n">2,520</span><span class="l">foods shown from the reference database</span></div>
       <div class="stat"><span class="n">10</span><span class="l">data sources (9 national tables plus a Derived set)</span></div>
@@ -517,6 +517,7 @@
         <li><strong>Add to the Grocery List</strong>: Each item goes on your open grocery list as a line of its own, without leaving Home.</li>
         <li><strong>Routines</strong>: The steps come one after another, so nothing has to be remembered in order.</li>
         <li><strong>Checklist</strong>: The answer to "did I already?" is on Home, with how far ahead the list looks set by you. Steps in a routine are left to the routine, which checks them off as you walk it, and Look back at what you did opens Did I Do It.</li>
+        <li><strong>Ready for Tomorrow</strong>: From 6:00 p.m., or the time you choose, what has to be started tonight for a planned meal, each with a box to mark it started, and what tomorrow holds.</li>
         <li><strong>Today I Want To</strong>: Today holds only the few things you picked, and each can be ticked off from Home.</li>
         <li><strong>Start a Workout</strong>: The workout opens step by step, and the session is logged when you finish.</li>
         <li><strong>Library</strong>: Short cards, each the start of an entry from the reading on Life or Garden, in the colour of the tab it lives on.</li>
@@ -622,7 +623,7 @@
       <div class="tabcard-head"><h3>Also here</h3><span class="status-pill status-built">Built</span></div>
       <ul class="lenslist">
         <li><strong>Workouts</strong>: Build a workout, set its sets, reps, weight and rest, and do it. The session goes into your exercise log, with how hard it felt if you say, and Movement and Trends read it.</li>
-        <li><strong>To Do List</strong>: One-off things to do, said the way you would say them: "call the dentist tomorrow at 3pm" keeps the day and the time, and the reminder comes at that time; with only a day it comes on that day. Steps under a task break it into smaller pieces, each ticked as it is done and put in order with the arrows, and Steps says how many are still to do; a task that repeats starts its steps fresh each time. Labels you choose, such as house or car, show on each task, and tapping one in the row above the list shows only the tasks that carry it.</li>
+        <li><strong>To Do List</strong>: One-off things to do, said the way you would say them: "call the dentist tomorrow at 3pm" keeps the day and the time, and the reminder comes at that time; with only a day it comes on that day. Steps under a task break it into smaller pieces, each ticked as it is done and put in order with the arrows, and Steps says how many are still to do; a task that repeats starts its steps fresh each time. Labels you choose, such as house or car, show on each task, and tapping one in the row above the list shows only the tasks that carry it. Break it into small steps offers lists matched to the words of the task, your routines and tasks you broke down before; you change the list until it fits, it is worked out on the phone, and nothing is saved until you tap Add these steps.</li>
         <li><strong>Projects</strong>: Steps in order, with the first one not done shown as Next. A paused project sends no reminders, and a finished one keeps every step it took.</li>
         <li><strong>Did I Do It</strong>: One day looked back on, made only of what was checked off. Things done by themselves come first: what is on the Checklist outside any routine, and things on the To Do List marked done, each with its times. Each routine comes after, with every walk that day and the steps done on it listed under the walk, so a routine step is never listed among the things on their own. Earlier and Later move a day at a time, and nothing here changes a record.</li>
       </ul>
@@ -733,9 +734,10 @@
     <h2><span class="dot" style="background:var(--schedules)"></span>Schedules</h2>
     <p class="section-dek">Each lens is one category's own timeline. A thing is defined where it lives, mostly on Life, and gets its schedule here. Schedules never defines anything.</p>
     <div class="tabcard" style="border-left-color: var(--schedules)">
-      <div class="tabcard-head"><h3>The ten lenses</h3><span class="status-pill status-built">Built</span></div>
+      <div class="tabcard-head"><h3>The eleven lenses</h3><span class="status-pill status-built">Built</span></div>
       <div class="chiprow">
         <span class="chip">Timeline</span>
+        <span class="chip">Ready for Tomorrow</span>
         <span class="chip">Meals</span>
         <span class="chip">Today&rsquo;s Meals</span>
         <span class="chip">Past Meals</span>
@@ -747,7 +749,7 @@
         <span class="chip">Exercise</span>
       </div>
       <p>Schedules is about the schedule for each category or topic. Prescriptions, over-the-counter drugs and supplements share one Meds timeline, and Upkeep is read straight from Life. The meds themselves are defined in Life &gt; My Meds, a hands-on therapy session is logged on Signals since it has already happened, and the grocery list is built on Life's Grocery List.</p>
-      <p>The menu is grouped: Today holds Timeline and Today&rsquo;s Meals; Meals holds Meals, Meal Plan and Past Meals; Drinks, Meds and Exercise holds those three; Appointments and Upkeep holds those two. When a lens cannot read what was recorded, it says so in place of the list, says nothing recorded is lost, and offers Try again. When a change cannot be saved, a note names what was not saved and the screen stays as it was, so it can be tried again.</p>
+      <p>The menu is grouped: Today holds Timeline, Ready for Tomorrow and Today&rsquo;s Meals; Meals holds Meals, Meal Plan and Past Meals; Drinks, Meds and Exercise holds those three; Appointments and Upkeep holds those two. When a lens cannot read what was recorded, it says so in place of the list, says nothing recorded is lost, and offers Try again. When a change cannot be saved, a note names what was not saved and the screen stays as it was, so it can be tried again.</p>
       <p><strong>Meds</strong> is one dose timeline for everything a person takes. Every med being tracked shows its reminder times, today's doses sit at the top to be marked taken or skipped, and the interaction checks that depend on those times sit beside them. Nothing is defined here: "Add or change a med in My Meds" at the top and "Edit in My Meds" on every row go to Life, and each med on Life carries a <strong>Schedule it</strong> button that lands back here with that med's reminder form open and its group unfolded. An over-the-counter drug gets reminder times of its own, as a separate schedule type rather than filed as a prescription.</p>
       <p><strong>Upkeep</strong> is the timeline of everything under Life &gt; Upkeep that has a date: overdue, due in the next 45 days, and later, plus anything still missing the piece it needs to be placed on a calendar, listed with what is missing rather than left off so the list looks complete. Done today records a recurring item as done and works out its next date from its own interval, the same as doing it from Life; adding, editing or renewing stays in Life, one tap away from any row, and Life's Upkeep links to the timeline.</p>
       <p><strong>Appointments</strong> holds each visit with its reminder, photos and files, and <strong>Questions</strong> under it: what to ask, typed or spoken, put in order with the arrows, with health notes from Capture brought in one tap each. At the visit each question is ticked as it is asked and its answer written under it. Print the page or Save as PDF gives one sheet to bring: the visit, what was recorded since the last visit with that provider (lab results, flares, medicine and supplement changes), the questions with a box to tick and lines for the answers, and room for anything else said. Removing a visit with questions not yet asked offers to move them to the next planned visit, or to remove them with it. Insights &gt; Before Your Appointment lists them too.</p>
@@ -764,6 +766,7 @@
       <ul class="lenslist">
         <li><strong>Today's Meals</strong>: Meals and doses interleaved in the order of the day. An opened dose reads the meals around it, so a clash with a food is seen before it happens.</li>
         <li><strong>Timeline</strong>: Meals, doses, appointments, routines, bills, upkeep and counters on one line, in the order they come.</li>
+        <li><strong>Ready for Tomorrow</strong>: One evening look at tomorrow. Start tonight lists what a planned meal needs ahead (soaking, marinating, dough to rise, something to thaw), how long it needs and when to start; a box marks it started. Tomorrow lists meals, doses, appointments, garden tasks, routines, bills, upkeep and counters in order, and a tap opens each where it is kept. Any dish can be given a start-ahead time of yours. One evening reminder, at a time you choose, names what to start and what is due, and Done on the locked phone marks the starts.</li>
       </ul>
     </div>
   </section>

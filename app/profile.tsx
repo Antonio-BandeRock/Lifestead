@@ -149,6 +149,8 @@ import {
   morningTimeOf,
   setMorningTime,
   weekDayOf,
+  readyTomorrowTimeOf,
+  setReadyTomorrowTime,
   weekPlanDayOf,
   weekPlanTimeOf,
   setWeekPlanSchedule,
@@ -1019,6 +1021,21 @@ export default function ProfileScreen() {
             </PickerField>
           </View>
         );
+      case 'readyTomorrow':
+        return (
+          <View style={styles.dateRow}>
+            <PickerField label="At">
+              <PopoverSelect
+                options={QUIET_TIME_OPTIONS}
+                selected={readyTomorrowTimeOf(reminderPrefs)}
+                minWidth={110}
+                tabColor={colors.menuIconMuted}
+                groundSurface
+                onSelect={saveReadyTomorrowTime}
+              />
+            </PickerField>
+          </View>
+        );
       case 'weekPlan':
         return (
           <View style={styles.dateRow}>
@@ -1383,6 +1400,10 @@ export default function ProfileScreen() {
 
   function saveGardenMonthTime(time: string) {
     void setGardenMonthSchedule(gardenMonthDayOf(reminderPrefs), time).then(() => syncReminderNotifications());
+  }
+
+  function saveReadyTomorrowTime(time: string) {
+    void setReadyTomorrowTime(time).then(() => syncReminderNotifications());
   }
 
   function saveWeekPlanTime(time: string) {

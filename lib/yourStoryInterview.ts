@@ -427,6 +427,7 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     appointments: 'Appointments',
     upkeep: 'Upkeep',
     timeline: 'Timeline',
+    readyForTomorrow: 'Ready for Tomorrow',
     exercise: 'Exercise',
   },
   '/log': {
@@ -612,6 +613,7 @@ export const TOUR_LENS_LINES: Record<string, Record<string, string>> = {
     upkeep: 'When each job from Life > Upkeep is next due.',
     exercise: 'When you plan to move, from the plans kept in Life > Movement.',
     timeline: 'Everything on today in one line: meals, doses, appointments, routines, bills and upkeep. What is left can move to tomorrow in one go.',
+    readyForTomorrow: 'What has to be started tonight for a planned meal, and everything tomorrow holds, in one evening look.',
   },
   '/log': {
     flares: 'When a flare started, how bad it was, which symptoms came with it, where on the body, and the photos of it lined up by day.',
@@ -1021,7 +1023,7 @@ export const TOUR_TABS: TourTabDef[] = [
       { title: 'Eating', lenses: ['meals', 'todaysMeals', 'pastMeals', 'dailyMealPlan'] },
       { title: 'Taking care', lenses: ['meds', 'hydration', 'appointments'] },
       { title: 'Around the house and body', lenses: ['upkeep', 'exercise'] },
-      { title: 'The whole day', lenses: ['timeline'] },
+      { title: 'The whole day', lenses: ['timeline', 'readyForTomorrow'] },
     ],
     steps: [
       {

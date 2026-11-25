@@ -30,6 +30,7 @@ export type ReminderKindKey =
   | 'morning'
   | 'week'
   | 'weekPlan'
+  | 'readyTomorrow'
   | 'gardenMonth'
   | 'afterMeal'
   | 'garden'
@@ -88,6 +89,10 @@ export const ALL_REMINDER_KIND_KEYS: ReminderKindKey[] = [
   // time the person picks, the meals planned for the seven days ahead, one
   // line a day. Starts off, like Your week.
   'weekPlan',
+  // Q60 (2026-11-24). Ready for Tomorrow: in the evening, what has to be
+  // started tonight and what is due tomorrow. Says nothing when there is
+  // neither. Starts off.
+  'readyTomorrow',
   'afterMeal',
   'garden',
   // I12 (2026-09-28). This month in the garden: once a month, on the day
@@ -163,6 +168,7 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   morning: 'Morning check-in',
   week: 'Your week',
   weekPlan: "This week's meals",
+  readyTomorrow: 'Ready for Tomorrow',
   gardenMonth: 'This month in the garden',
   afterMeal: 'After a meal',
   garden: 'Garden tasks',
@@ -203,6 +209,8 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
     'Once a week, on the day and at the time you pick below, word that the last seven days are on Home beside the seven before. The notification itself says nothing about what was logged.',
   weekPlan:
     'Once a week, on the day and at the time you pick below, the meals planned for the next seven days, one line a day. It names the meals, so they can be read on a locked screen. A meal planned after the app was last opened is not in it yet.',
+  readyTomorrow:
+    'In the evening, at the time you pick below, what has to be started tonight for a planned meal, and the appointments, bills and upkeep due tomorrow. It names them, so they can be read on a locked screen. Nothing comes on an evening with neither. The same time is when Ready for Tomorrow shows on Home.',
   gardenMonth:
     'Once a month, on the day and at the time you pick below, what is open or opening over the next 30 days for the crops you chose in Garden > Sowing Calendar > My Crops, one line for each kind of work, with the full and new moons. Nothing comes while My Crops is empty, and it needs a place saved in Garden > My Zone to name windows.',
   afterMeal:
@@ -275,6 +283,7 @@ const DEFAULT_REMINDER_KIND_ENABLED: Record<ReminderKindKey, boolean> = {
   morning: false,
   week: false,
   weekPlan: false,
+  readyTomorrow: false,
   gardenMonth: false,
   afterMeal: false,
   garden: true,
@@ -353,6 +362,8 @@ export const DEFAULT_WEEK_TIME = '18:00';
 // shop for the week from it.
 export const DEFAULT_WEEK_PLAN_DAY = 0;
 export const DEFAULT_WEEK_PLAN_TIME = '16:00';
+// When Ready for Tomorrow speaks and shows on Home (Q60).
+export const DEFAULT_READY_TOMORROW_TIME = '18:00';
 // This month in the garden (I12): the first of the month, in the morning.
 export const DEFAULT_GARDEN_MONTH_DAY = 1;
 export const DEFAULT_GARDEN_MONTH_TIME = '08:00';
@@ -381,6 +392,7 @@ export type ReminderPreferences = {
   // This week's meals' day and time (H10). Undefined means the defaults.
   weekPlanDay?: number;
   weekPlanTime?: string;
+  readyTomorrowTime?: string;
   // This month in the garden's day of the month (1 to 28) and time (I12).
   gardenMonthDay?: number;
   gardenMonthTime?: string;
@@ -436,6 +448,10 @@ export function weekTimeOf(prefs: ReminderPreferences): string {
 
 export function weekPlanDayOf(prefs: ReminderPreferences): number {
   return isValidWeekDay(prefs.weekPlanDay) ? prefs.weekPlanDay : DEFAULT_WEEK_PLAN_DAY;
+}
+
+export function readyTomorrowTimeOf(prefs: ReminderPreferences): string {
+  return isValidTime(prefs.readyTomorrowTime) ? prefs.readyTomorrowTime : DEFAULT_READY_TOMORROW_TIME;
 }
 
 export function weekPlanTimeOf(prefs: ReminderPreferences): string {
@@ -495,6 +511,7 @@ export async function getReminderPreferences(): Promise<ReminderPreferences> {
           weekTime: isValidTime(parsed.weekTime) ? parsed.weekTime : undefined,
           weekPlanDay: isValidWeekDay(parsed.weekPlanDay) ? parsed.weekPlanDay : undefined,
           weekPlanTime: isValidTime(parsed.weekPlanTime) ? parsed.weekPlanTime : undefined,
+          readyTomorrowTime: isValidTime(parsed.readyTomorrowTime) ? parsed.readyTomorrowTime : undefined,
           gardenMonthDay: isValidMonthDay(parsed.gardenMonthDay) ? parsed.gardenMonthDay : undefined,
           gardenMonthTime: isValidTime(parsed.gardenMonthTime) ? parsed.gardenMonthTime : undefined,
         };
@@ -575,6 +592,12 @@ export async function setWeekPlanSchedule(day: number, time: string): Promise<Re
     weekPlanDay: isValidWeekDay(day) ? day : undefined,
     weekPlanTime: isValidTime(time) ? time : undefined,
   });
+}
+
+// Ready for Tomorrow's time (Q60). Reconciled by the caller.
+export async function setReadyTomorrowTime(time: string): Promise<ReminderPreferences> {
+  const current = await getReminderPreferences();
+  return persist({ ...current, readyTomorrowTime: isValidTime(time) ? time : undefined });
 }
 
 // This month in the garden's day and time (I12). Reconciled by the caller.

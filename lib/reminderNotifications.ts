@@ -57,6 +57,7 @@ import {
   morningTimeOf,
   weekDayOf,
   weekTimeOf,
+  readyTomorrowTimeOf,
   weekPlanDayOf,
   weekPlanTimeOf,
   gardenMonthDayOf,
@@ -142,6 +143,8 @@ import { ANDROID_GROUP_PREFIX, androidGroupFor as groupFieldsFor, countWaiting, 
 import { ownLink } from './appVariant';
 
 import { YOUR_WEEK_NOTIFICATION_BODY, YOUR_WEEK_NOTIFICATION_TITLE } from './weeklySummary';
+import { joinMarkKeys, planPrep, READY_NOTIFICATION_TITLE, readyReminder, splitMarkKeys, tomorrowLines } from './readyForTomorrow';
+import { markPrep, readReady } from './readyForTomorrowDb';
 import { buildWeekPlanBody, WEEK_PLAN_NOTIFICATION_TITLE, weekPlanDays } from './weekPlanNotice';
 import { buildGardenMonthBody, GARDEN_MONTH_NOTIFICATION_TITLE, nextGardenMonthFire, type GardenMonthPlace } from './gardenMonthNotice';
 import { listCropPlans, recordCropStep } from './cropPlanDb';
@@ -358,7 +361,7 @@ export type ReminderKind = ReminderKindKey;
 // leaves that time out, follow-ups and all.
 const NUDGEABLE_TIMED_KINDS: ReminderKind[] = ['dose', 'meal', 'hydration', 'garden', 'reminder', 'routine', 'check'];
 
-type ScheduleLens = 'meds' | 'appointments' | 'meals' | 'todaysMeals' | 'hydration' | 'exercise';
+type ScheduleLens = 'meds' | 'appointments' | 'meals' | 'todaysMeals' | 'hydration' | 'exercise' | 'readyForTomorrow';
 type ReminderTab = 'schedule' | 'garden' | 'life' | 'reconcile' | 'routine' | 'signals' | 'camera' | 'home' | 'workout' | 'checkinFlow' | 'interests';
 // The two check-in reminders land on Signals (C1).
 type SignalsReminderLens = 'generalNote' | 'flares';
@@ -1795,6 +1798,25 @@ function buildWeekPlanPlanned(fireAt: Date, body: string): PlannedNotification {
   };
 }
 
+// Ready for Tomorrow (Q60). What has to be started tonight, and what is due
+// tomorrow, with a Done that marks the starts. Opens its lens.
+function buildReadyTomorrowPlanned(fireAt: Date, body: string, markKeys: string[]): PlannedNotification {
+  return {
+    identifier: `${IDENTIFIER_PREFIX}readyTomorrow:${localDateString(fireAt)}`,
+    title: READY_NOTIFICATION_TITLE,
+    body,
+    fireAt,
+    markable: markKeys.length > 0,
+    payload: {
+      kind: 'readyTomorrow',
+      scheduleItemId: markKeys.length > 0 ? joinMarkKeys(markKeys) : localDateString(fireAt),
+      fireAt: fireAt.toISOString(),
+      tab: 'schedule',
+      lens: 'readyForTomorrow',
+    },
+  };
+}
+
 // This month in the garden (I12). What the sowing calendar has open over
 // the next 30 days; opens Garden on the Sowing Calendar lens.
 function buildGardenMonthPlanned(fireAt: Date, body: string): PlannedNotification {
@@ -2034,6 +2056,7 @@ function groupChannelFor(kind: ReminderKind): string {
     kind === 'garden' ||
     kind === 'reminder' ||
     kind === 'routine' ||
+    kind === 'readyTomorrow' ||
     kind === 'exercise' ||
     kind === 'practice' ||
     kind === 'check' ||
@@ -2423,6 +2446,29 @@ async function runSync(): Promise<ReminderSyncResult> {
         first.set(planned.identifier, planned);
       } catch (error) {
         console.warn('[reminderNotifications] could not read the week of planned meals', error);
+      }
+    }
+  }
+  // Ready for Tomorrow (Q60): the next three evenings, each worked out as
+  // it will stand then. An evening with nothing to start and nothing due
+  // gets no notification at all.
+  if (isReminderKindEnabled(preferences, 'readyTomorrow')) {
+    const evenings = planDailyCheckins(readyTomorrowTimeOf(preferences), now, LOOKAHEAD_DAYS, false).slice(0, 3);
+    if (evenings.length > 0) {
+      try {
+        const ready = await readReady(now.getTime());
+        for (const fireAt of evenings) {
+          const at = fireAt.getTime();
+          const { tonight } = planPrep(ready.meals, ready.own, ready.marks, at);
+          const said = readyReminder(tonight, tomorrowLines(ready.items, at, ready.extras), t);
+          if (!said) continue;
+          const answers = said.markKeys.length > 0 ? answerLine('readyTomorrow') : null;
+          const body = [said.body, answers ? t(answers) : null, `Schedule as of ${describeFreshness(now, fireAt)}.`].filter(Boolean).join(' ');
+          const planned = buildReadyTomorrowPlanned(fireAt, body, said.markKeys);
+          first.set(planned.identifier, planned);
+        }
+      } catch (error) {
+        console.warn('[reminderNotifications] could not read what has to be started tonight', error);
       }
     }
   }
@@ -3368,6 +3414,10 @@ async function recordAnswer(
     return;
   }
   if (!id) return;
+  if (plan.write === 'prepDone') {
+    for (const key of splitMarkKeys(id)) await markPrep(key, true);
+    return;
+  }
   if (plan.write === 'scheduleStatus') {
     // A dose group's reminder carries every dose it stands for.
     for (const one of splitDoseIds(id)) await setScheduleItemStatus(one, plan.status);

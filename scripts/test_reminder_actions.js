@@ -117,6 +117,7 @@ check('category ids are distinct', new Set(Object.values(REMINDER_CATEGORY_IDS))
 
 // Which kinds get which set.
 const expected = {
+  readyTomorrow: 'task',
   dose: 'dose',
   hydration: 'hydration',
   meal: 'meal',
@@ -219,7 +220,7 @@ for (const key of ALL_REMINDER_CATEGORY_KEYS) check(key + ' has three buttons or
 check('Prepped records the prep step', planReminderAction('cropPrep', 'prepped').step === 'prepped');
 check('Sown records the sowing step', planReminderAction('cropSow', 'sown').step === 'sown');
 check('Sown on a get-ready reminder does nothing', planReminderAction('cropPrep', 'sown') === null);
-for (const kind of ['dose', 'hydration', 'meal', 'garden', 'reminder', 'check', 'upkeep', 'compost', 'checkin', 'afterMeal', 'morning', 'cropPrep', 'cropSow']) {
+for (const kind of ['dose', 'hydration', 'meal', 'garden', 'reminder', 'check', 'upkeep', 'compost', 'checkin', 'afterMeal', 'morning', 'cropPrep', 'cropSow', 'readyTomorrow']) {
   check(`${kind} says what its buttons do`, typeof answerLine(kind) === 'string' && answerLine(kind).length > 0);
 }
 check('a bill says nothing about buttons', answerLine('bill') === null);
@@ -229,7 +230,7 @@ check('an upkeep that cannot be marked says nothing', answerLine('upkeep', false
 const said = [];
 for (const q of ['howBad', 'worse', 'what', 'why']) said.push(FLARE_QUESTION_TEXT[q].title, FLARE_QUESTION_TEXT[q].body);
 said.push(FLARE_ASK_TITLE);
-for (const kind of ['dose', 'hydration', 'meal', 'garden', 'reminder', 'upkeep', 'compost', 'checkin', 'cropPrep', 'cropSow']) said.push(answerLine(kind));
+for (const kind of ['dose', 'hydration', 'meal', 'garden', 'reminder', 'upkeep', 'compost', 'checkin', 'cropPrep', 'cropSow', 'readyTomorrow']) said.push(answerLine(kind));
 const sentenceForbidden = /well done|good job|keep it up|great|you should|\breal\b|\bgenuine|\bown\b|[—–]| -- /i;
 for (const line of said) check(`"${line}" has no praise, dashes or filler`, typeof line === 'string' && !sentenceForbidden.test(line));
 
