@@ -384,7 +384,11 @@ function createWindow() {
     title,
     autoHideMenuBar: true,
     backgroundColor: '#1F2A2C',
+    // A check is measured, never looked at: the window draws as usual but is
+    // see-through, off the taskbar and never takes the mouse or keyboard.
+    ...(CHECK_FOLDER ? { opacity: 0, skipTaskbar: true, focusable: false, show: false } : {}),
     webPreferences: {
+      ...(CHECK_FOLDER ? { backgroundThrottling: false } : {}),
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       sandbox: true,
@@ -392,6 +396,10 @@ function createWindow() {
       zoomFactor: zoom.current,
     },
   });
+  if (CHECK_FOLDER) {
+    mainWindow.setIgnoreMouseEvents(true);
+    mainWindow.showInactive();
+  }
   zoom.attach(mainWindow);
   // A version's window keeps its name rather than taking the page's, so
   // two side by side can be told apart on the taskbar.
