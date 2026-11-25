@@ -34,7 +34,7 @@ What a person needs so the details of daily living stop living in their head. Th
 - Life > Grocery List (also Planning food for me)
 - Life > Projects and Interests > Projects
 - Schedules > Appointments, Upkeep, Timeline
-- Capture, reminders answered on the locked phone, the Diary
+- Capture, reminders answered on the locked phone, Life > Diary (several diaries, photos, recordings, life events on Trends, PDF or page)
 - Signals > Calm
 - Meds and supplements taken at the same time grouped under one reminder, opening the whole list with amounts, what to take them with, the interaction rules between them and a time to move a supplement or OTC item to, in Life > My Meds > Taken together
 
@@ -75,7 +75,7 @@ The app doing the planning so eating becomes following a plan.
 
 Signals recorded, and the app looking for what tends to come before them.
 
-- Signals > Flares, Food Reactions, New Foods and leave-it-out experiments, Bowel, Bladder, Cycle, Blood Pressure, Weight, Therapies, Microbiome, Trackers, General Note, Exercise
+- Signals > Flares, Food Reactions, New Foods and leave-it-out experiments, Bowel, Bladder, Cycle, Blood Pressure, Weight, Therapies, Microbiome, Trackers, Health Journal, Exercise
 - Trends > Pattern Finder, Make this a rule
 - Trends > Compare Two
 - Morning check-in and how a bigger day landed (Pacing)

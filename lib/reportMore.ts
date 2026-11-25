@@ -30,6 +30,30 @@ function inRange(day: string, start: string, end: string): boolean {
   return day >= start && day <= end;
 }
 
+// --- Health Journal ------------------------------------------------------
+
+/** One entry: when, as a local wall clock, its words, and what is kept with it. */
+export type HealthJournalRow = { at: string; words: string; kept: number };
+
+/** Every entry with words in the range, in the order it was written. An
+ *  answer with no words (a mood on its own) is charted elsewhere. */
+export function healthJournalSection(entries: HealthJournalRow[], start: string, end: string): ReportTableSection {
+  const rows = entries
+    .filter((entry) => inRange(entry.at.slice(0, 10), start, end) && (entry.words.trim().length > 0 || entry.kept > 0))
+    .sort((a, b) => a.at.localeCompare(b.at));
+  return {
+    kind: 'table',
+    heading: 'Health Journal',
+    note: rows.length > 0 ? `${count(rows.length, 'entry', 'entries')}, in the person's words, oldest first.` : undefined,
+    columns: ['When', 'Entry'],
+    rows: rows.map((row) => [
+      when(row.at),
+      [row.words.trim(), row.kept > 0 ? `(${count(row.kept, 'photo, recording or file', 'photos, recordings or files')} kept in the app)` : ''].filter(Boolean).join(' '),
+    ]),
+    empty: 'Nothing written in this range. Signals > Health Journal is where it goes in.',
+  };
+}
+
 // --- Labs ---------------------------------------------------------------
 
 export type LabHistoryRow = {

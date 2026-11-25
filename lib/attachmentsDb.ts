@@ -253,6 +253,20 @@ export async function openAttachment(item: Attachment): Promise<string | null> {
   }
 }
 
+/** Where a file can be played or read on this device, fetched first when it
+ *  is only in the shared folder. Null when it has not arrived yet. */
+export async function attachmentUriHere(item: Attachment): Promise<string | null> {
+  const file = await attachmentFile(item.fileName);
+  if (!file.exists && !(await fetchAttachmentFromFolder(item))) return null;
+  return (await attachmentFile(item.fileName)).uri;
+}
+
+/** The file itself as base64, for a page that opens with nothing installed. */
+export async function attachmentBase64(item: Attachment): Promise<string | null> {
+  if (!(await attachmentUriHere(item))) return null;
+  return (await attachmentFile(item.fileName)).base64();
+}
+
 let running: Promise<void> | null = null;
 
 /**

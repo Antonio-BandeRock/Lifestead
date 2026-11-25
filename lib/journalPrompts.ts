@@ -1,5 +1,5 @@
 // Journal prompts, D14 of the competitive build plan (Phase 2, 2026-09-26).
-// A short list above the note in Signals > General Note, for a day when a
+// A short list above the note in Signals > Health Journal, for a day when a
 // blank box is the hard part. Tapping one puts the question into the note
 // as its own line, and whatever the person writes under it is theirs. The
 // questions ask what happened and what somebody noticed; none of them asks

@@ -48,6 +48,8 @@ export type CaptureDestinationKey =
   // cupboard" is already finished business, and sorting it here makes it
   // findable instead of asking somebody to turn it into a task.
   | 'place'
+  // A day worth keeping rather than a thing to do (1.0.96.2).
+  | 'diary'
   | 'thought';
 
 export type CaptureNote = {
@@ -123,7 +125,7 @@ export const CAPTURE_DESTINATIONS: CaptureDestination[] = [
     label: 'Health',
     hint: 'Something to mention at an appointment, or to keep an eye on.',
     tabPath: '/log',
-    // Opened at General Note, where a health note is written (1.0.79.5).
+    // Opened at the Health Journal, where a health note is written (1.0.79.5).
     open: { pathname: '/log', params: { openSignalsLens: 'generalNote' } },
   },
   {
@@ -135,6 +137,13 @@ export const CAPTURE_DESTINATIONS: CaptureDestination[] = [
     // the house.
     tabPath: null,
     open: { pathname: '/where-is-it' },
+  },
+  {
+    key: 'diary',
+    label: 'Diary',
+    hint: 'Something about the day worth keeping, in your words.',
+    tabPath: '/life',
+    open: { pathname: '/life', params: { openLifeLens: 'diary' } },
   },
   {
     key: 'thought',

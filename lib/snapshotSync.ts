@@ -376,6 +376,9 @@ export const DEVICE_LOCAL_TABLES: readonly string[] = [
   // 1.0.80.3: what a partner shares about themselves, as their phone last
   // sent it; it arrives again on whichever device is linked.
   'peer_beside',
+  // An unfinished diary entry belongs to the device it is being written on,
+  // and travels once it is saved as an entry.
+  'diary_drafts',
   'daily_nutrient_totals_cache',
   // A lookup this device could not make (G21); the other device has its own signal.
   'pending_barcode_scans',

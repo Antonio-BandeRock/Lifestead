@@ -62,9 +62,10 @@ export type VaultCategory =
   | 'conditions'
   | 'appointments'
   | 'medicalBills'
-  | 'finances';
+  | 'finances'
+  | 'diary';
 
-/** The order categories are listed in, health first, then money. */
+/** The order categories are listed in: health, then money, then the diary. */
 export const VAULT_CATEGORIES: readonly VaultCategory[] = [
   'symptoms',
   'labs',
@@ -80,6 +81,7 @@ export const VAULT_CATEGORIES: readonly VaultCategory[] = [
   'appointments',
   'medicalBills',
   'finances',
+  'diary',
 ];
 
 /** Refused at the database (records), or hidden where the list is shown (listed). */
@@ -100,10 +102,11 @@ export const VAULT_CATEGORY_KIND: Record<VaultCategory, VaultCategoryKind> = {
   appointments: 'listed',
   medicalBills: 'records',
   finances: 'records',
+  diary: 'records',
 };
 
-/** Health information or money, which is how setup groups them. */
-export const VAULT_CATEGORY_GROUP: Record<VaultCategory, 'health' | 'money'> = {
+/** Health information, money or personal, which is how setup groups them. */
+export const VAULT_CATEGORY_GROUP: Record<VaultCategory, VaultGroup> = {
   symptoms: 'health',
   labs: 'health',
   body: 'health',
@@ -118,11 +121,13 @@ export const VAULT_CATEGORY_GROUP: Record<VaultCategory, 'health' | 'money'> = {
   appointments: 'health',
   medicalBills: 'money',
   finances: 'money',
+  diary: 'personal',
 };
 
 /**
  * What setup offers pre-ticked: everything HIPAA would treat as health
- * information plus everything about money, which today is every category.
+ * information, everything about money and the diary, which today is every
+ * category.
  * Kept as its own list so a category added later can be offered unticked.
  */
 export const VAULT_DEFAULT_CATEGORIES: readonly VaultCategory[] = VAULT_CATEGORIES;
@@ -175,6 +180,8 @@ export const VAULT_TABLES: Record<VaultCategory, readonly string[]> = {
     'interest_pay_worksheets',
     'electricity_bills',
   ],
+  // The diaries themselves (their names) are a list to write in, a tool.
+  diary: ['diary_entries', 'diary_links', 'diary_drafts'],
 };
 
 /** What each category is called where a person reads it. */
@@ -193,6 +200,7 @@ export const VAULT_CATEGORY_LABELS: Record<VaultCategory, string> = {
   appointments: 'Appointments',
   medicalBills: 'Medical bills',
   finances: 'Finances',
+  diary: 'Diary',
 };
 
 /** How a category reads inside a sentence, always plural: "Your cycle records are in the vault." */
@@ -211,6 +219,7 @@ export const VAULT_CATEGORY_PHRASES: Record<VaultCategory, string> = {
   appointments: 'appointments',
   medicalBills: 'medical bills',
   finances: 'money records',
+  diary: 'diary entries',
 };
 
 /** "Your cycle records are in the vault." or "These are in the vault: labs and health records; cycle records." */
@@ -379,9 +388,9 @@ export type VaultSettings = {
   /** Set It Up was pressed on the offer, and setup opens the next time the
    *  app is opened (1.0.67.1: no button on a notification opens the app). */
   setUpWaiting: boolean;
-  /** The offer made the moment a first health or money record was saved,
+  /** The offer made the moment a first health, money or diary record was saved,
    *  once for each group (direct instruction, 2026-11-14). */
-  firstOffered: { health: boolean; money: boolean };
+  firstOffered: Record<VaultGroup, boolean>;
 };
 
 export const EMPTY_VAULT_SETTINGS: VaultSettings = {
@@ -394,7 +403,7 @@ export const EMPTY_VAULT_SETTINGS: VaultSettings = {
   stopOffering: false,
   setupAsked: false,
   setUpWaiting: false,
-  firstOffered: { health: false, money: false },
+  firstOffered: { health: false, money: false, personal: false },
 };
 
 function cleanCode(value: unknown): VaultCode | null {
@@ -443,6 +452,7 @@ export function parseVaultSettings(text: string | null): VaultSettings | null {
     firstOffered: {
       health: (r.firstOffered as Record<string, unknown> | undefined)?.health === true,
       money: (r.firstOffered as Record<string, unknown> | undefined)?.money === true,
+      personal: (r.firstOffered as Record<string, unknown> | undefined)?.personal === true,
     },
   };
 }
@@ -580,7 +590,7 @@ export function shouldOfferVault(
 // question is the last one in setup, after medicines are typed in. The
 // monthly notification above stays as the fallback.
 
-export type VaultGroup = 'health' | 'money';
+export type VaultGroup = 'health' | 'money' | 'personal';
 
 const INSERT_TABLE = /^\s*(?:INSERT(?:\s+OR\s+\w+)?\s+INTO|REPLACE\s+INTO)\s+"?([A-Za-z0-9_]+)"?/i;
 
@@ -605,7 +615,7 @@ export function vaultGroupGuarded(group: VaultGroup, appLockOn: boolean, setting
 export function firstRecordOfferFor(sql: string, appLockOn: boolean, settings: VaultSettings): VaultGroup | null {
   if (settings.stopOffering) return null;
   const category = vaultCategoryInserted(sql);
-  if (!category) return null;
+  if (!category || /\bdiary_drafts\b/i.test(sql)) return null; // a draft waits for its entry
   const group = VAULT_CATEGORY_GROUP[category];
   if (settings.firstOffered[group]) return null;
   if (vaultGroupGuarded(group, appLockOn, settings)) return null;
@@ -619,6 +629,12 @@ export function firstRecordOfferText(group: VaultGroup): { title: string; messag
         title: 'Keep your health records closed?',
         message:
           'You just saved your first health record, and anyone holding this device can open it. Set up a code or fingerprint to keep health and money records closed until you open them. Safety warnings and reminders keep working either way.',
+      }
+    : group === 'personal'
+    ? {
+        title: 'Keep your diary closed?',
+        message:
+          'You just saved your first diary entry, and anyone holding this device can open it. Set up a code or fingerprint to keep your diary closed until you open it.',
       }
     : {
         title: 'Keep your money records closed?',
@@ -666,6 +682,7 @@ export const VAULT_COUNTED_TABLES: readonly string[] = [
   'work_checkins',
   'work_benefits',
   'electricity_bills',
+  'diary_entries',
 ];
 
 /** The offer arrives in the day, never at night or first thing. */
@@ -678,7 +695,7 @@ export function vaultOfferHourOk(at: Date): boolean {
 export function vaultOfferText(recordCount: number): { title: string; body: string } {
   return {
     title: 'Your vault has no code yet',
-    body: `You have ${recordCount} health and money records anyone holding this phone can open. Set up the vault to keep them closed until your code or fingerprint opens them. Set It Up opens the setup the next time you open Lifestead.`,
+    body: `You have ${recordCount} private records anyone holding this phone can open. Set up the vault to keep them closed until your code or fingerprint opens them. Set It Up opens the setup the next time you open Lifestead.`,
   };
 }
 

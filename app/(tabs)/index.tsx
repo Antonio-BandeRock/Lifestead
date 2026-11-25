@@ -267,6 +267,7 @@ import { isFunctionWalled, paidFunctionLine } from '../../lib/paidFeatures';
 import { useTier } from '../../lib/entitlement';
 import { appLocale } from '@/lib/language';
 import { BringToTopProvider, useBringToTopHost } from '../../components/BringToTop';
+import { DiaryHomeCard } from '../../components/DiaryHomeCard';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
 import { formatDoseAmount } from '../../lib/doseAmount';
@@ -1077,6 +1078,12 @@ const HOME_LENS_DESTINATIONS: Partial<
     color: colors.tabLife,
     href: { pathname: '/life', params: { openLifeLens: 'daysUntil' } } as Href,
   },
+  diary: {
+    label: 'Diary',
+    icon: 'book',
+    color: colors.tabLife,
+    href: { pathname: '/life', params: { openLifeLens: 'diary' } } as Href,
+  },
   startWorkout: {
     label: 'Start a Workout',
     icon: 'barbell',
@@ -1168,6 +1175,7 @@ const HOME_LENS_ORDER: HomeSectionKey[] = [
   'doneChecks',
   'todayPicks',
   'countdowns',
+  'diary',
   'startWorkout',
   'digestCards',
 ];
@@ -2795,7 +2803,7 @@ export default function HomeScreen() {
     }
     const key = destination.section as HomeSectionKey;
     if (!(key in HOME_SECTION_LABELS) || !isHomeSectionVisible(visualPrefs, key)) {
-      // The day's check-in is kept on Signals > General Note.
+      // The day's check-in is kept on Signals > Health Journal.
       router.push({ pathname: '/log', params: { openSignalsLens: 'generalNote' } } as Href);
       return;
     }
@@ -4524,6 +4532,11 @@ export default function HomeScreen() {
     );
   }
 
+  function renderDiary() {
+    if (!isHomeSectionVisible(visualPrefs, 'diary')) return null;
+    return renderBand('diary', 'Diary', <DiaryHomeCard tabColor={colors.tabLife} />);
+  }
+
   function renderCountdowns() {
     if (!isHomeSectionVisible(visualPrefs, 'countdowns')) return null;
     return renderBand(
@@ -5154,6 +5167,8 @@ export default function HomeScreen() {
         return renderWaitingAnswers();
       case 'todayPicks':
         return renderTodayPicks();
+      case 'diary':
+        return renderDiary();
       case 'countdowns':
         return renderCountdowns();
       case 'startWorkout':

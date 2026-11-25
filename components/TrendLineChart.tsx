@@ -43,6 +43,11 @@ export type TrendLineChartPoint = { date: string; value: number; color?: string 
 // sets it once for every chart it draws and a chart anywhere else (a
 // food's price history) never shows it. Null draws exactly as before.
 export const CycleShadingContext = createContext<CycleShading | null>(null);
+
+// A life event marked in the Diary, as a labelled line on every chart whose
+// dates reach it (1.0.96.2). Null or empty draws exactly as before.
+export type ChartLifeEvent = { id: string; day: string; label: string };
+export const LifeEventsContext = createContext<readonly ChartLifeEvent[] | null>(null);
 const CYCLE_SHADE_COLOR = colors.statusRedOnSurface;
 
 // A straight date/value trend line, generalizing DayArc's technique
@@ -107,6 +112,7 @@ export function TrendLineChart({
   // onLayout has reported the container's width.
   const { width: windowWidth } = useWindowDimensions();
   const shading = useContext(CycleShadingContext);
+  const lifeEventList = useContext(LifeEventsContext);
   const [containerWidth, setContainerWidth] = useState<number | null>(null);
   const availableWidth = containerWidth ?? windowWidth - 2 * (HOME_BAND_CONTENT_PADDING + HOME_BAND_ACCENT_WIDTH);
   const plotWidth = Math.max(160, availableWidth - SVG_RIGHT_MARGIN - NODE_RADIUS * 2 - Y_AXIS_LABEL_WIDTH);
@@ -211,6 +217,9 @@ export function TrendLineChart({
         return { key: run.start, x: left, width: Math.max(2, right - left) };
       })
     : [];
+  const eventLines = (lifeEventList ?? []).filter(
+    (event) => event.day >= sorted[0].date.slice(0, 10) && event.day <= sorted[sorted.length - 1].date.slice(0, 10),
+  );
 
   return (
     <View style={styles.container} onLayout={onLayout}>
@@ -247,6 +256,25 @@ export function TrendLineChart({
             fill={CYCLE_SHADE_COLOR}
             fillOpacity={0.22}
           />
+        ))}
+
+        {/* Each life event: a line on its day with a number the list under
+            the chart names in full, so two close together stay readable. */}
+        {eventLines.map((event, index) => (
+          <G key={`event-${event.id}`} pointerEvents="none">
+            <Line
+              x1={dateToX(event.day)}
+              x2={dateToX(event.day)}
+              y1={TOP_Y - 2}
+              y2={BASE_Y}
+              stroke={colors.textSecondary}
+              strokeWidth={1.5}
+              strokeDasharray="2,3"
+            />
+            <SvgText x={dateToX(event.day)} y={TOP_Y - 5} fontSize={10} fill={colors.textSecondary} textAnchor="middle">
+              {String(index + 1)}
+            </SvgText>
+          </G>
         ))}
 
         {usualTopY != null && usualBottomY != null ? (
@@ -346,6 +374,11 @@ export function TrendLineChart({
       </View>
       {caption ? <Text style={styles.captionText}>{caption}</Text> : null}
       {shadedColumns.length > 0 && shading ? <Text style={styles.captionText}>{shading.caption}</Text> : null}
+      {eventLines.map((event, index) => (
+        <Text key={`event-label-${event.id}`} style={styles.captionText}>
+          {`${index + 1}. ${formatShortDate(event.day, crossesYear)}: ${event.label}`}
+        </Text>
+      ))}
     </View>
   );
 }

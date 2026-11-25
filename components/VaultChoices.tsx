@@ -25,6 +25,7 @@ import {
   VAULT_CATEGORY_NOTES,
   VAULT_NO_CODE_SENTENCE,
   type VaultCategory,
+  type VaultGroup,
 } from '../lib/vault';
 import {
   closeVault,
@@ -37,9 +38,10 @@ import { ChoosePasscode } from './AppLockGate';
 import { VaultOpener } from './VaultOpener';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
-const GROUPS: { key: 'health' | 'money'; title: string }[] = [
+const GROUPS: { key: VaultGroup; title: string }[] = [
   { key: 'health', title: 'Health' },
   { key: 'money', title: 'Money' },
+  { key: 'personal', title: 'Personal' },
 ];
 
 export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {

@@ -32,6 +32,7 @@ import {
   type PatternComparison,
   type PatternDelay,
 } from './patternBasis';
+import { listDiaryEntriesBetween } from './diaryDb';
 import { contextLines, weatherLines, type TreatmentDates } from './patternContext';
 import { isWeatherOn, listWeatherDays, weatherPoint, weatherReadOn, getWeatherUnits } from './weatherDb';
 import { sayTemp, shiftDay, weatherCredit } from './weather';
@@ -682,10 +683,11 @@ export async function findFoodPatterns(
 
   // Other things on record around the same flares (lib/patternContext.ts).
   const flareDates = symptomCheckins.map((checkin) => checkin.loggedAt.slice(0, 10));
-  const [sleepPoints, treatmentDates, periodStarts] = await Promise.all([
+  const [sleepPoints, treatmentDates, periodStarts, diary] = await Promise.all([
     getSleepTrendPoints(days + 1),
     listTreatmentDates(),
     listPeriodStarts(),
+    readOrClosed(() => listDiaryEntriesBetween(rangeStart, today), []),
   ]);
   const context = contextLines({
     flareDates,
@@ -696,6 +698,7 @@ export async function findFoodPatterns(
     windowHours,
     words,
     periodStarts,
+    diary,
   });
   // G9: meals eaten out before some of these, whose contents are a stand-in
   // or not known, so a food missing from the counts above may have been there.

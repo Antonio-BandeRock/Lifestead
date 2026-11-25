@@ -31,6 +31,7 @@ const OWN_MIC = {
   'components/EntrySearchInput.tsx': 'a search box that already draws its mic inside the box on the hand side',
   'components/StepsEditor.tsx': 'the step editor, which already draws its mic inside the box on the hand side',
   'app/capture.tsx': 'the large mic that is the capture screen, not a field',
+  'components/DiarySection.tsx': 'the two fields that take a date as YYYY-MM-DD, which speech cannot write',
   'components/FoodLookup.tsx': 'Say a Food Name, a voice search with no field under it',
 };
 

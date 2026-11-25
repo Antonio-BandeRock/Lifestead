@@ -26,6 +26,8 @@ function load(relPath) {
   });
   const module = { exports: {} };
   new Function('exports', 'module', 'require', outputText)(module.exports, module, (name) => {
+    // The one module it may build on, pure in its turn.
+    if (name === './diary') return load('lib/diary.ts');
     throw new Error(`${relPath} must stay free of runtime imports (asked for ${name})`);
   });
   return module.exports;

@@ -21,12 +21,14 @@ import { useMyItemsCategories } from '../../hooks/useMyItemsCategories';
 import { PageIdentityLabel } from '../../components/PageIdentityLabel';
 import { PopoverSelect } from '../../components/PopoverSelect';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
-import { CycleShadingContext, TrendLineChart } from '../../components/TrendLineChart';
+import { CycleShadingContext, LifeEventsContext, TrendLineChart, type ChartLifeEvent } from '../../components/TrendLineChart';
 import { CompareTwoLens } from '../../components/CompareTwoLens';
 import { ReadProblem } from '../../components/ReadProblem';
 import { LifeInSquares } from '../../components/LifeInSquares';
 import { listAllCycleDays } from '../../lib/cycleDb';
 import type { CycleDay } from '../../lib/cycle';
+import { lifeEvents } from '../../lib/diary';
+import { listDiaryLifeEvents } from '../../lib/diaryDb';
 import { CYCLE_SHADING_SWITCH_HELP, CYCLE_SHADING_SWITCH_LABEL, cycleShadingFor } from '../../lib/cycleShading';
 import { getVisualPreferences, setVisualPreferences, subscribeToVisualPreferences } from '../../lib/visualPreferences';
 import { summarizeSourceSplit } from '../../lib/supplementWindow';
@@ -261,7 +263,7 @@ const TRENDS_LENS_VAULT: Partial<Record<TrendsLens, readonly VaultCategory[]>> =
   patterns: ['symptoms', 'labs'],
   therapyResponse: ['therapy', 'symptoms'],
   compare: ['symptoms', 'labs', 'body', 'cycle'],
-  squares: ['symptoms', 'experiments', 'body', 'therapy', 'labs', 'cycle', 'finances', 'work'],
+  squares: ['symptoms', 'experiments', 'body', 'therapy', 'labs', 'cycle', 'finances', 'work', 'diary'],
   work: ['work'],
   keepingUp: ['work'],
   bloodPressure: ['body'],
@@ -1242,6 +1244,19 @@ export default function TrendsScreen() {
       // eslint-disable-next-line react-hooks/exhaustive-deps -- vaultKey reads again as the vault opens or closes
     }, [vaultKey, cycleRetry]),
   );
+  const [diaryEvents, setDiaryEvents] = useState<ChartLifeEvent[]>([]);
+  useFocusEffect(
+    useCallback(() => {
+      listDiaryLifeEvents()
+        .then((entries) => setDiaryEvents(lifeEvents(entries)))
+        .catch((error) => {
+          // Only the lines on the charts are lost.
+          console.warn('Life events for the charts could not be read', error);
+          setDiaryEvents([]);
+        });
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- vaultKey reads again as the vault opens or closes
+    }, [vaultKey]),
+  );
   const autoOpenLensHub = useAutoOpenLensHubSignal();
   const [lens, setLens] = useState<TrendsLens>('nutrients');
   // The lenses with nothing recorded yet, read again each time Trends comes
@@ -1971,6 +1986,7 @@ export default function TrendsScreen() {
         <CalmBands>
         <GatedTabContent pageTitle="Trends" variant="trends" revealed={revealed} lens={lens}>
           <CycleShadingContext.Provider value={cycleShading}>
+          <LifeEventsContext.Provider value={diaryEvents}>
           <WalkScrollView style={styles.scroll} contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}>
             <View style={band.heading}>
               <Text style={band.headingText}>{activeLensLabel}</Text>
@@ -3282,7 +3298,7 @@ export default function TrendsScreen() {
                           yMin={1}
                           yMax={5}
                           valueFormatter={(value) => `${Math.round(value)}, ${scaleWord(scale.key, Math.round(value))}`}
-                          emptyMessage={`No ${scale.label.toLowerCase()} answers in this range. Answer it on Home's Today's Check-In or in Signals > General Note.`}
+                          emptyMessage={`No ${scale.label.toLowerCase()} answers in this range. Answer it on Home's Today's Check-In or in Signals > Health Journal.`}
                         />
                         {points.length > 0 ? <Text style={styles.caption}>{answeredSentence(points, days)}</Text> : null}
                         {renderPeriodAverages(points, (value) => value.toFixed(1), { one: 'day', many: 'days' })}
@@ -4252,6 +4268,7 @@ export default function TrendsScreen() {
               <YearInSquaresBand set={YEAR_SQUARE_LENSES[lens]} folds={folds} color={TAB_COLOR} idPrefix={`trends:${lens}`} />
             ) : null}
           </WalkScrollView>
+          </LifeEventsContext.Provider>
           </CycleShadingContext.Provider>
         </GatedTabContent>
         </CalmBands>

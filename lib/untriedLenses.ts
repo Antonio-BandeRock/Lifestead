@@ -61,6 +61,7 @@ export const UNTRIED_LENSES: Record<UntriedTabPath, readonly UntriedLensDef[]> =
     { lens: 'routines', used: [{ table: 'routines' }] },
     { lens: 'didIDoIt', used: [{ table: 'done_checks' }] },
     { lens: 'lookBack', used: [{ table: 'done_check_marks' }, { table: 'routine_runs' }, { table: 'todo_doings' }] },
+    { lens: 'diary', used: [{ table: 'diary_entries' }] },
     { lens: 'daysUntil', used: [{ table: 'countdowns' }] },
     { lens: 'todos', used: [{ table: 'todos' }] },
     { lens: 'projects', used: [{ table: 'projects' }] },

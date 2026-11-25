@@ -237,6 +237,14 @@ export type ToolMark =
   | 'didIDoIt.moveDown'
   | 'didIDoIt.remove'
   | 'didIDoIt.save'
+  | 'diary.write'
+  | 'diary.which'
+  | 'diary.addDiary'
+  | 'diary.find'
+  | 'diary.export'
+  | 'diary.text'
+  | 'diary.more'
+  | 'diary.save'
   | 'daysUntil.add'
   | 'daysUntil.save'
   | 'daysUntil.done'
@@ -499,6 +507,7 @@ export type ToolMark =
   | 'signals.add'
   | 'signals.save'
   | 'signals.editFirst'
+  | 'signals.journalRecord'
   | 'signals.effort'
   | 'signals.photosFirst'
   | 'signals.removeFirst'
@@ -1815,6 +1824,56 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Remove it to say yes. Everything recorded against it goes too.' },
       ],
       forYou: 'Your list holds only what you still need to do.',
+    },
+  ],
+  '/life#diary': [
+    {
+      key: 'write',
+      title: 'Write in your diary',
+      steps: [
+        { say: 'Tap the button to write.', mark: 'diary.write', stay: true },
+        { say: 'Write, or tap the microphone and say it. Photos and recordings go on the same page.', mark: 'diary.text', stay: true },
+        { say: 'Tap Save.', mark: 'diary.save' },
+      ],
+      forYou: 'What you write is for you. No report reads it.',
+    },
+    {
+      key: 'event',
+      title: 'Mark a life event',
+      steps: [
+        { say: 'Tap the button to write.', mark: 'diary.write', stay: true },
+        { say: 'Tap More, switch on This is a life event and give it a few words.', mark: 'diary.more', stay: true },
+        { say: 'Tap Save.', mark: 'diary.save' },
+      ],
+      forYou: 'The event is drawn on its day across your charts on Trends.',
+    },
+    {
+      key: 'another',
+      title: 'Keep a second diary',
+      steps: [
+        { say: 'Tap Add a Diary of Your Own.', mark: 'diary.addDiary', stay: true },
+        { say: 'Give it a name and tap Add.' },
+        { say: 'Tap its name here whenever you want to read it.', mark: 'diary.which' },
+      ],
+      forYou: 'Letters to somebody, dreams or a garden can each have pages of their own.',
+    },
+    {
+      key: 'find',
+      title: 'Find something you wrote',
+      steps: [
+        { say: 'Tap Find.', mark: 'diary.find', stay: true },
+        { say: 'Type words you remember, or a day to read back from.' },
+      ],
+      forYou: 'Accents and capitals do not matter, and every entry is searched, however old.',
+    },
+    {
+      key: 'export',
+      title: 'Take entries out of the app',
+      steps: [
+        { say: 'Tap PDF or Page.', mark: 'diary.export', stay: true },
+        { say: 'Choose which entries, then a PDF for paper or a page that plays the recordings in any browser.' },
+      ],
+      forYou: 'What you wrote can be read without this app.',
     },
   ],
   '/life#daysUntil': [
@@ -4905,31 +4964,41 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
   '/log#generalNote': [
     {
       key: 'add',
-      title: 'Add a note',
+      title: 'Write an entry',
       steps: [
-        { say: 'Tap + Add a note.', mark: 'signals.add', stay: true },
-        { say: 'Write the note. Mood, energy and stress are there if you want to mark them.' },
+        { say: 'Tap + Write an entry.', mark: 'signals.add', stay: true },
+        { say: 'Write as much as you like, or tap the microphone and say it. Mood, energy and stress are there if you want to mark them.' },
         { say: 'Tap Save.', mark: 'signals.save' },
       ],
-      forYou: 'Anything worth remembering has a place, with the day it happened.',
+      forYou: 'What you want your doctor to know is kept with its day and time, and the doctor report can carry it.',
+    },
+    {
+      key: 'files',
+      title: 'Add a recording or a photo',
+      steps: [
+        { say: 'Tap + Write an entry.', mark: 'signals.add', stay: true },
+        { say: 'Tap Record Your Voice, speak, then tap Stop. Photos are added the same way, just above.', mark: 'signals.journalRecord', stay: true },
+        { say: 'Tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'An entry can be a recording and nothing else, for when writing is too much.',
     },
     {
       key: 'edit',
-      title: 'Correct a note',
+      title: 'Correct an entry',
       steps: [
-        { say: 'Tap Edit on the note.', mark: 'signals.editFirst', stay: true },
-        { say: 'Change the words, the scales or the time, then tap Save changes.' },
+        { say: 'Tap Edit on the entry.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change the words, the scales, the recordings or the time, then tap Save changes.' },
       ],
-      forYou: 'A note can be added to after the moment has passed.',
+      forYou: 'An entry can be added to after the moment has passed.',
     },
     {
       key: 'remove',
-      title: 'Remove a note',
+      title: 'Remove an entry',
       steps: [
-        { say: 'Tap Remove on the note.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove on the entry.', mark: 'signals.removeFirst', stay: true },
         { say: 'Tap Remove again to confirm.' },
       ],
-      forYou: 'A note you no longer want is taken out.',
+      forYou: 'An entry you no longer want is taken out, with its photos and recordings.',
     },
   ],
   '/log#nocturia': [

@@ -222,7 +222,7 @@ export function emptyOutcomeSentence(outcome: PatternOutcome): string {
   }
   const scale = SCALE_OF[outcome as ScaleOutcome].key;
   const which = outcome === 'highStress' ? '4 or 5' : '1 or 2';
-  return `No day in this range has a ${scale} answer of ${which}. Answer mood, energy and stress on Home's Today's Check-In or in Signals > General Note, and days that fit will show up here.`;
+  return `No day in this range has a ${scale} answer of ${which}. Answer mood, energy and stress on Home's Today's Check-In or in Signals > Health Journal, and days that fit will show up here.`;
 }
 
 export type OutcomeCheckin = {

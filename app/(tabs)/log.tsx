@@ -60,6 +60,11 @@ import {
 import { SEVERITY_STEPS, describeSeverity, stepFromTen } from '../../lib/severityScale';
 import { PopoverSelect } from '../../components/PopoverSelect';
 import { sortByLabel } from '../../lib/choiceOrder';
+import { AttachedFiles } from '../../components/AttachedFiles';
+import { PhotoStrip } from '../../components/PhotoStrip';
+import { VoiceRecordings } from '../../components/VoiceRecordings';
+import { countAttachmentsByOwner, listAttachmentsOf } from '../../lib/attachmentsDb';
+import { listMediaFor, listMediaOfKind, removePhotosOf } from '../../lib/mediaDb';
 import { EMPTY_DAILY_SCALES, describeScales, hasAnyScale, localStamp, localStampOf, type DailyScaleValues } from '../../lib/dailyScales';
 import { appendDictatedText, parseVoiceCommands } from '../../lib/voiceCommandParsing';
 import {
@@ -242,11 +247,14 @@ import { WalkScrollView } from '../../components/WalkScrollView';
 // identity. Matches the same rule applied there, 2026-07-27.
 const TAB_COLOR = colors.tabBioCompass;
 
+const HEALTH_JOURNAL_HELP =
+  'How your health is, in your words, for the people who care for you. Write as much as you like, say it out loud, and add photos or recordings. Mood, energy and stress are there to mark if you want to. The doctor report carries these entries in order, and you can leave that section out. Anything you would rather keep to yourself belongs in Life > Diary, which no report can read.';
+
 // Mirrors the Insights/Schedule tabs' own lens pattern -- most of these
 // are real/built here, unlike Schedule's "some stubbed" approach, since
 // each is a small, self-contained log rather than a big planning system.
 //
-// 2026-07-28: Exercise, Blood Pressure, and General Note used to be three
+// 2026-07-28: Exercise, Blood Pressure, and Health Journal used to be three
 // sections stacked inside one shared 'other' lens -- promoted to their
 // own top-level lenses instead (their own real components already
 // existed, see ExerciseSection/BloodPressureSection/GeneralNoteSection
@@ -395,12 +403,12 @@ const LENSES: LensOption<Lens>[] = [
   },
   {
     key: 'generalNote',
-    label: 'General Note',
+    label: 'Health Journal',
     icon: 'document-text-outline',
     help: [
       {
-        heading: 'General Note',
-        body: 'For anything else worth remembering: a prescription change, how a supplement felt, a drink you had.',
+        heading: 'Health Journal',
+        body: HEALTH_JOURNAL_HELP,
       },
       LOG_PERSONAL_NOTES_HELP,
     ],
@@ -529,8 +537,8 @@ const LOG_HELP_SECTIONS: HelpSection[] = [
     body: 'Log a reading (systolic, diastolic, and pulse) whenever you take one.',
   },
   {
-    heading: 'General Note',
-    body: 'For anything else worth remembering: a prescription change, how a supplement felt, a drink you had.',
+    heading: 'Health Journal',
+    body: HEALTH_JOURNAL_HELP,
   },
   {
     heading: 'Bladder',
@@ -3709,12 +3717,17 @@ function WeightSection() {
   );
 }
 
-function GeneralNoteSection() {
+const newHealthNoteId = () => `checkin_${Date.now()}`;
+
+function GeneralNoteSection({ openId }: { openId?: string }) {
   const walkMark = useWalkMark();
   const [notesList, setNotesList] = useState<WellbeingCheckin[]>([]);
   const [limit, setLimit] = useState(30);
   const [formOpen, setFormOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  // Made before the first word, so photos and recordings have an entry to belong to.
+  const [entryId, setEntryId] = useState(newHealthNoteId);
+  const [withFiles, setWithFiles] = useState<ReadonlySet<string>>(new Set());
   const [notes, setNotes] = useState('');
   // Mood, energy and stress (D1, 2026-09-26), each optional.
   const [scales, setScales] = useState<DailyScaleValues>(EMPTY_DAILY_SCALES);
@@ -3724,20 +3737,38 @@ function GeneralNoteSection() {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [confirm, confirmElement] = useConfirmSheet();
 
+  const openedLink = useRef<string | null>(null);
+  const startEditRef = useRef<((entry: WellbeingCheckin) => void) | null>(null);
   const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(() => {
     setReadFailed(false);
     listCheckins({ checkinType: 'general', limit })
-      .then(setNotesList)
+      .then((list) => {
+        setNotesList(list);
+        // The entry a link named, opened once it is here to open.
+        if (openId && openedLink.current !== openId) {
+          const asked = list.find((entry) => entry.id === openId);
+          if (asked) {
+            openedLink.current = openId;
+            startEditRef.current?.(asked);
+          } else if (limit > 0 && list.length >= limit) {
+            setLimit(-1);
+          }
+        }
+      })
       .catch((error) => {
-        console.warn('Notes could not be read', error);
+        console.warn('The Health Journal could not be read', error);
         setReadFailed(true);
       });
-  }, [limit]);
+    Promise.all([listMediaOfKind('health_note'), countAttachmentsByOwner('health_note')])
+      .then(([photos, files]) => setWithFiles(new Set([...photos.map((photo) => photo.ownerId), ...files.keys()])))
+      .catch((error) => console.warn('Health Journal photos and recordings could not be counted', error));
+  }, [limit, openId]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
   function resetForm() {
+    setEntryId(newHealthNoteId());
     setNotes('');
     setScales(EMPTY_DAILY_SCALES);
     setDateChoice('today');
@@ -3758,17 +3789,35 @@ function GeneralNoteSection() {
     setFormOpen(true);
   }
 
+  useEffect(() => {
+    startEditRef.current = startEdit;
+  });
+
+  async function cancelForm() {
+    // A new entry that is let go takes its photos and recordings with it.
+    if (!editingId) await removePhotosOf('health_note', entryId).catch((error) => console.warn('Unkept files could not be removed', error));
+    setFormOpen(false);
+    resetForm();
+    load();
+  }
+
   async function handleSave() {
     if (!notes.trim() && !hasAnyScale(scales)) {
-      showInfoAlert('Almost there', 'Write a quick note or pick a number for mood, energy or stress first.');
-      return;
+      const [photos, files] = await Promise.all([
+        listMediaFor('health_note', editingId ?? entryId),
+        listAttachmentsOf('health_note', editingId ?? entryId),
+      ]);
+      if (photos.length === 0 && files.length === 0) {
+        showInfoAlert('Almost there', 'Write something, add a photo or a recording, or pick a number for mood, energy or stress first.');
+        return;
+      }
     }
     const loggedAt = resolveDateTime(dateChoice, customDate, time);
     if (!loggedAt) {
       showInfoAlert('Almost there', 'Enter a valid date and time.');
       return;
     }
-    const saved = await saveOrSay('The note was not saved. Try again.', async () => {
+    const saved = await saveOrSay('The entry was not saved. Try again.', async () => {
       if (editingId) {
         await updateCheckinRecord(editingId, {
           loggedAt,
@@ -3780,7 +3829,7 @@ function GeneralNoteSection() {
           scales,
         });
       } else {
-        await recordCheckin({ loggedAt, checkinType: 'general', valence: 'neutral', notes: notes.trim() || undefined, ...scales });
+        await recordCheckin({ id: entryId, loggedAt, checkinType: 'general', valence: 'neutral', notes: notes.trim() || undefined, ...scales });
       }
       return true;
     });
@@ -3791,9 +3840,9 @@ function GeneralNoteSection() {
   }
 
   async function handleDelete(id: string) {
-    const ok = await confirm({ title: 'Remove this note?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    const ok = await confirm({ title: 'Remove this entry?', message: 'Its photos and recordings go with it. This cannot be undone.', confirmLabel: 'Remove', destructive: true });
     if (!ok) return;
-    const removed = await saveOrSay('The note was not removed. Try again.', async () => {
+    const removed = await saveOrSay('The entry was not removed. Try again.', async () => {
       await deleteCheckin(id);
       return true;
     });
@@ -3811,7 +3860,7 @@ function GeneralNoteSection() {
       {confirmElement}
       {!formOpen ? (
         <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
-          <Text style={styles.addButtonText}>+ Add a note</Text>
+          <Text style={styles.addButtonText}>+ Write an entry</Text>
         </TouchableOpacity>
       ) : (
         <View style={styles.formCard}>
@@ -3820,7 +3869,7 @@ function GeneralNoteSection() {
               just got. Only the FINAL transcript is parsed and
               appended -- a partial mid-sentence result would land real,
               half-finished command phrases in the actual note text. */}
-          <Text style={styles.label}>Note</Text>
+          <Text style={styles.label}>What you want to say</Text>
           {/* D14 (2026-09-26): questions to start from, for a day when the
               blank box is the hard part. A tap adds the question as a line
               of the note (lib/journalPrompts.ts). */}
@@ -3837,12 +3886,17 @@ function GeneralNoteSection() {
                 if (!isFinal) return;
                 setNotes((current) => appendDictatedText(current, parseVoiceCommands(transcript)));
               }}
-            style={[styles.input, styles.multilineInput]}
+            style={[styles.input, styles.journalInput]}
             placeholder="e.g. Started a new dose of vitamin D today"
             multiline
             value={notes}
             onChangeText={setNotes}
           />
+          <PhotoStrip key={`photos-${editingId ?? entryId}`} ownerKind="health_note" ownerId={editingId ?? entryId} tabColor={TAB_COLOR} title={t('Health Journal')} />
+          <View ref={walkMark.ref('signals.journalRecord')} style={walkMark('signals.journalRecord')}>
+            <VoiceRecordings key={`voice-${editingId ?? entryId}`} ownerKind="health_note" ownerId={editingId ?? entryId} tabColor={TAB_COLOR} />
+          </View>
+          <AttachedFiles key={`files-${editingId ?? entryId}`} ownerKind="health_note" ownerId={editingId ?? entryId} tabColor={TAB_COLOR} leaveOutSounds />
           <Text style={styles.label}>Mood, energy and stress (each optional)</Text>
           <DailyScalesPicker values={scales} onChange={setScales} accent={TAB_COLOR} />
           <Text style={styles.label}>When?</Text>
@@ -3850,7 +3904,7 @@ function GeneralNoteSection() {
           <Text style={styles.label}>About what time?</Text>
           <TimePicker value={time} onChange={setTime} />
           <ThumbRow primary="last" style={styles.formActions}>
-            <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
+            <TouchableOpacity style={styles.secondaryButton} onPress={() => void cancelForm()}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
@@ -3861,10 +3915,10 @@ function GeneralNoteSection() {
       )}
 
       {readFailed ? (
-        <ReadProblem message="Your notes could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
+        <ReadProblem message="Your Health Journal could not be read just now. Nothing you recorded is lost." onTryAgain={load} />
       ) : notesList.length === 0 ? (
         <View style={styles.panelStandalone}>
-          <Text style={styles.emptyText}>No notes yet.</Text>
+          <Text style={styles.emptyText}>Nothing written yet.</Text>
         </View>
       ) : (
         <View style={styles.table}>
@@ -3874,6 +3928,8 @@ function GeneralNoteSection() {
                 <Text style={styles.rowTitle}>{entry.notes || describeScales(entry) || 'How you were'}</Text>
                 {entry.notes && describeScales(entry) ? <Text style={styles.rowMeta}>{describeScales(entry)}</Text> : null}
                 <Text style={styles.rowMeta}>{formatEntryDateTime(entry.loggedAt)}</Text>
+                {withFiles.has(entry.id) ? <Text style={styles.rowMeta}>Has photos, recordings or files. Tap Edit to see them.</Text> : null}
+                {withFiles.has(entry.id) ? <VoiceRecordings ownerKind="health_note" ownerId={entry.id} tabColor={TAB_COLOR} readOnly /> : null}
               </View>
               <View style={styles.rowActions}>
                 <TouchableOpacity ref={entry === notesList[0] ? walkMark.ref('signals.editFirst') : undefined} onPress={() => startEdit(entry)}>
@@ -3887,16 +3943,16 @@ function GeneralNoteSection() {
           ))}
         </View>
       )}
-      {notesList.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
+      {limit > 0 && notesList.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
     </View>
   );
 }
 
 // Split from a single OtherLens, 2026-07-28 -- Exercise/Blood Pressure/
-// General Note used to be three sections stacked in one shared lens; each
+// Health Journal used to be three sections stacked in one shared lens; each
 // is now reached directly from its own LensHub entry instead. Dropped the
 // section headings each used to need to tell them apart on one shared
-// screen (Exercise/Blood Pressure/General Note) -- redundant now that each
+// screen (Exercise/Blood Pressure/Health Journal) -- redundant now that each
 // has its own whole screen, the same way Flares/Food Reactions/New Foods
 // never repeat their own name as an on-screen heading either.
 function ExerciseLens() {
@@ -3938,16 +3994,16 @@ function TherapiesLens() {
   );
 }
 
-function GeneralNoteLens() {
+function GeneralNoteLens({ openId }: { openId?: string }) {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   return (
     <WalkScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <View style={styles.panelStandalone}>
         <Text style={styles.helperText}>
-          For anything else worth remembering: a prescription change, how a supplement felt, a drink you had.
+          For the people who care for you: a prescription change, how a supplement felt, what hurt and when. Your doctor report can carry it.
         </Text>
       </View>
-      <GeneralNoteSection />
+      <GeneralNoteSection openId={openId} />
     </WalkScrollView>
   );
 }
@@ -5421,9 +5477,10 @@ export default function LogScreen() {
   // trialPrepMethod -- a real cross-tab deep link from a Food builder's own
   // "Worth testing?" button (see SideBuilder.tsx's own comment), the same
   // shape food.tsx's own editXId/fromXFavoriteId params already use.
-  const { trialFoodId, trialSource, trialBaseName, trialCategory, trialSubcategory, trialPrepMethod, trialDesign, openSignalsLens } =
+  const { trialFoodId, trialSource, trialBaseName, trialCategory, trialSubcategory, trialPrepMethod, trialDesign, openSignalsLens, openHealthNoteId } =
     useLocalSearchParams<{
       openSignalsLens?: string;
+      openHealthNoteId?: string;
       trialDesign?: string;
       trialFoodId?: string;
       trialSource?: string;
@@ -5513,7 +5570,7 @@ export default function LogScreen() {
           ) : lens === 'therapies' ? (
             <TherapiesLens />
           ) : lens === 'generalNote' ? (
-            <GeneralNoteLens />
+            <GeneralNoteLens key={openHealthNoteId ?? 'journal'} openId={openHealthNoteId} />
           ) : lens === 'nocturia' ? (
             <NocturiaLens />
           ) : lens === 'bowel' ? (
@@ -5657,6 +5714,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceMuted,
   },
   multilineInput: { minHeight: 70, textAlignVertical: 'top' },
+  journalInput: { minHeight: 180, textAlignVertical: 'top' },
   // 2026-08-16 -- wraps GeneralNoteSection's own "Note" label with a real
   // mic button beside it.
   noteLabelRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },

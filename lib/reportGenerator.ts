@@ -73,6 +73,7 @@ import {
   interestsSection,
   hobbyMoneySection,
   interestThingsSection,
+  healthJournalSection,
   interestLibrarySection,
   keepingUpSections,
   kitchenItemsSection,
@@ -92,6 +93,9 @@ import {
 } from './reportMore';
 import { listBloodPressureReadings } from './trendsMoreDb';
 import { listBowelEntriesBetween } from './bowelDb';
+import { countAttachmentsByOwner } from './attachmentsDb';
+import { listMediaOfKind } from './mediaDb';
+import { localStampOf } from './dailyScales';
 import { getTherapyResponseInputs, listFoodAllergies, listTherapySessions, listTodaysMealsWithRecipes } from './db';
 import { DIARY_NOTE, REPORT_COLUMNS, reportRows, summariseDiary } from './bladderDiary';
 import { listBladderDiariesBetween, listBladderEntries, listDiaryDrinks } from './bladderDiaryDb';
@@ -766,6 +770,31 @@ function daysFrom(start: string, count: number): string[] {
   return Array.from({ length: count }, (_, i) => addDays(start, i));
 }
 
+// The Health Journal. An older stamp is UTC, so the read reaches a day past
+// the range at both ends and the section keeps the local days it was asked.
+async function healthJournal(start: string, end: string): Promise<ReportSection[]> {
+  const shift = (day: string, by: number) => {
+    const [year, month, date] = day.split('-').map(Number);
+    return isoDate(new Date(year, month - 1, date + by));
+  };
+  const [rows, photos, files] = await Promise.all([
+    listCheckinsBetween(['general'], shift(start, -1), shift(end, 1)),
+    listMediaOfKind('health_note'),
+    countAttachmentsByOwner('health_note'),
+  ]);
+  return [
+    healthJournalSection(
+      rows.map((row) => ({
+        at: localStampOf(row.loggedAt),
+        words: row.notes ?? '',
+        kept: photos.filter((photo) => photo.ownerId === row.id).length + (files.get(row.id) ?? 0),
+      })),
+      start,
+      end,
+    ),
+  ];
+}
+
 // Each extra section a report can carry, started only when called, so a
 // report's extras list says which run and in what order, and a section
 // the person left out is never read at all (K10).
@@ -775,6 +804,7 @@ function extraSectionLoaders(days: number): Record<ExtraSectionId, () => Promise
   return {
     'since-visit': () => readingSections('Since the last appointment', loadSinceLastVisitView),
     appointments: () => insights('i-appointment', 'Appointments'),
+    'health-journal': () => healthJournal(start, end),
     'blood-pressure': () => trends('bloodPressure', 'Blood pressure', days),
     doses: () => trends('doses', 'Doses', days),
     interactions: () => interactionSection(),

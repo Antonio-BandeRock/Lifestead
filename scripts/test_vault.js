@@ -280,7 +280,7 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
   check('a flare contributor list is a tool, never in the vault', !V.ALL_VAULT_TABLES.includes('custom_flare_contributors'));
   check('what was going on before a flare is a symptoms record', V.VAULT_TABLES.symptoms.includes('checkin_contributors'));
   check('every category is in the default set', same([...V.VAULT_DEFAULT_CATEGORIES].sort(), [...V.VAULT_CATEGORIES].sort()));
-  check('every category is health or money', V.VAULT_CATEGORIES.every((c) => ['health', 'money'].includes(V.VAULT_CATEGORY_GROUP[c])));
+  check('every category is health, money or personal', V.VAULT_CATEGORIES.every((c) => ['health', 'money', 'personal'].includes(V.VAULT_CATEGORY_GROUP[c])));
   check('every category has a label', V.VAULT_CATEGORIES.every((c) => typeof V.VAULT_CATEGORY_LABELS[c] === 'string'));
   check('a listed category says what keeps working', ['medications', 'conditions', 'appointments'].every((c) => typeof V.VAULT_CATEGORY_NOTES[c] === 'string'));
   check('an unknown category is dropped', same(V.cleanCategories(['labs', 'nonsense', 'labs', 3]), ['labs']));
@@ -341,7 +341,7 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
   check('an offer again after the month', V.shouldOfferVault({ ...none, offeredAt: 60 * DAY }, false, 50, 100 * DAY));
   check('Stop Asking stops it', !V.shouldOfferVault({ ...none, stopOffering: true }, false, 50, 100 * DAY));
   check('no offer while the vault is guarding', !V.shouldOfferVault(withCode, false, 50, 100 * DAY));
-  check('the offer names a count and nothing else', /^You have 25 health and money records/.test(V.vaultOfferText(25).body));
+  check('the offer names a count and nothing else', /^You have 25 private records/.test(V.vaultOfferText(25).body));
 
   const everyTable = new Set(Object.values(V.VAULT_TABLES).flat());
   check('the offer counts only tables the vault holds', V.VAULT_COUNTED_TABLES.every((t) => everyTable.has(t)));
@@ -361,6 +361,8 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
     check('nothing after Don’t Ask Again', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, { ...asked, stopOffering: true }) === null);
     check('health is offered once', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, { ...asked, firstOffered: { health: true, money: false } }) === null);
     check('money is still offered after health was', V.firstRecordOfferFor('INSERT INTO finance_entries (id) VALUES (?)', false, { ...asked, firstOffered: { health: true, money: false } }) === 'money');
+    check('a first diary entry brings the diary offer', V.firstRecordOfferFor('INSERT INTO diary_entries (id) VALUES (?)', false, asked) === 'personal');
+    check('a diary draft brings no offer', V.firstRecordOfferFor('INSERT OR REPLACE INTO diary_drafts (entry_id) VALUES (?)', false, asked) === null);
     const guarded = { ...asked, categories: ['medications'] };
     check('nothing while health is already in the vault', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', true, guarded) === null);
     check('money is offered while only health is in the vault', V.firstRecordOfferFor('INSERT INTO finance_entries (id) VALUES (?)', true, guarded) === 'money');

@@ -393,7 +393,7 @@ export const RELEASE_NOTES: ReleaseNote[] = [
     changes: [
       'Setup keeps the parts of life question open while you choose, so you can pick as many as you like. It used to move on after the first one.',
       'Every link to Profile opens the card it names: birth date and sex open Personal Info, allergies open Food Restrictions, and so on, rather than the top of Profile.',
-      'A health note from Capture opens Signals at General Note.',
+      'A health note from Capture opens Signals at Health Journal.',
     ],
   },
   {

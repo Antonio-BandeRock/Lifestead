@@ -24,7 +24,7 @@
 // result or an insurance letter as a recipe, so its copy in the folder is
 // sealed with the sync password the way a photo is.
 
-// WHICH RECORDS TAKE FILES (1.0.80.4). Eighteen kinds, each named the way
+// WHICH RECORDS TAKE FILES (1.0.80.4). Twenty kinds, each named the way
 // the media table names the same owner where it already has photos, so a
 // record's photos and files sit under one owner and go together when the
 // record is deleted (removePhotosOf in lib/mediaDb.ts clears both). Each
@@ -52,7 +52,9 @@ export type AttachmentOwnerKind =
   | 'seed_stock'
   | 'interest'
   | 'library_entry'
-  | 'interest_thing';
+  | 'interest_thing'
+  | 'diary_entry'
+  | 'health_note';
 
 /** What a file is, in the terms a place keeps it by. */
 export type AttachmentFamily =
@@ -174,6 +176,16 @@ export const ATTACHMENT_PLACES: Readonly<Record<AttachmentOwnerKind, AttachmentP
     accepts: ['pdf', 'image', 'document', 'text', 'video'],
     takes: 'A supply, a collected thing or a wish takes a photo or scan, a PDF, a document, a text file or a video: the thing itself, a receipt, a manual, a certificate.',
     removal: '{name} goes from this thing, from this device and from the Files folder in your shared folder. The thing stays.',
+  },
+  diary_entry: {
+    accepts: ['pdf', 'image', 'document', 'text', 'audio', 'video'],
+    takes: 'A diary entry takes a photo, a recording, a video, a PDF, a document or a text file.',
+    removal: '{name} goes from this diary entry, from this device and from the Files folder in your shared folder. The entry stays.',
+  },
+  health_note: {
+    accepts: ['pdf', 'image', 'document', 'text', 'audio', 'video'],
+    takes: 'A Health Journal entry takes a photo, a recording, a video, a PDF, a document or a text file.',
+    removal: '{name} goes from this Health Journal entry, from this device and from the Files folder in your shared folder. The entry stays.',
   },
 };
 

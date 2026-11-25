@@ -1,5 +1,5 @@
 // Other things on record around the same flares (Phase B of the
-// 2026-09-24 gap review, item 22). Pure: no imports, no I/O.
+// 2026-09-24 gap review, item 22). Pure, no I/O.
 //
 // A food count on its own invites the reader to credit the food with
 // everything that happened that week. So beside the food findings,
@@ -9,6 +9,8 @@
 // at all. Each line only says what happened alongside; none of them is
 // offered as the explanation, and the closing line says the app cannot
 // tell any of them apart from food.
+
+import { entriesNearDays, type DiaryEntry } from './diary';
 
 export const MIN_FLARE_NIGHTS = 2;
 export const MIN_OTHER_NIGHTS = 3;
@@ -102,6 +104,26 @@ export function treatmentLines(flareDates: string[], treatments: TreatmentDates[
   return lines.sort();
 }
 
+// Diary entries written, and life events marked, in the week before one or
+// more flares (1.0.96.2). Only that they are there: the words themselves are
+// never read for meaning.
+export const DIARY_DAYS = 7;
+export const DIARY_EVENTS_LISTED = 5;
+
+export function diaryLines(flareDates: string[], entries: DiaryEntry[], words: ContextWords = FLARE_WORDS): string[] {
+  const near = entriesNearDays(entries, flareDates, DIARY_DAYS);
+  if (near.length === 0) return [];
+  const events = near.filter((entry) => entry.isLifeEvent && entry.lifeEventLabel);
+  const lines = events
+    .slice(0, DIARY_EVENTS_LISTED)
+    .map((entry) => `${entry.lifeEventLabel}, marked in your Diary on ${entry.happenedAt.slice(0, 10)}, within a week before a ${words.short}.`);
+  const others = near.length - Math.min(events.length, DIARY_EVENTS_LISTED);
+  if (others > 0) {
+    lines.push(`${others === 1 ? '1 diary entry' : `${others} diary entries`} written within a week before a ${words.short}. What they say is yours to read, in Life > Diary.`);
+  }
+  return lines;
+}
+
 export function unloggedLine(flares: number, flaresWithMeals: number, windowHours: number): string | null {
   const without = flares - flaresWithMeals;
   if (without <= 0) return null;
@@ -124,6 +146,7 @@ export function contextLines(input: {
   windowHours: number;
   words?: ContextWords;
   periodStarts?: string[];
+  diary?: DiaryEntry[];
 }): string[] {
   const lines: string[] = [];
   const unlogged = unloggedLine(input.flares, input.flaresWithMeals, input.windowHours);
@@ -131,6 +154,7 @@ export function contextLines(input: {
   const sleep = sleepLine(input.flareDates, input.nights, input.words);
   if (sleep) lines.push(sleep);
   lines.push(...treatmentLines(input.flareDates, input.treatments, input.words));
+  lines.push(...diaryLines(input.flareDates, input.diary ?? [], input.words));
   const cycle = cycleLine(input.flareDates, input.periodStarts ?? [], input.words);
   if (cycle) lines.push(cycle);
   return lines;

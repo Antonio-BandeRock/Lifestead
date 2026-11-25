@@ -1,5 +1,5 @@
 // Checks D14 of the competitive build plan (Phase 2, 2026-09-26), the
-// journal prompts above General Note: a prompt starts an empty note, lands
+// journal prompts above the Health Journal: a prompt starts an empty note, lands
 // on its own line under an existing one, is never added twice, and no
 // prompt judges the day. Exits non-zero on any failure.
 

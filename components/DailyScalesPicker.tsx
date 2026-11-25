@@ -7,7 +7,7 @@ import { t, tl } from '../lib/i18n';
 
 // Mood, energy and stress on a 1 to 5 scale (D1, 2026-09-26). One row of
 // five buttons per scale, used on Home's Today's Check-In and on Signals >
-// General Note so both ask the same question the same way. Every scale is
+// Health Journal so both ask the same question the same way. Every scale is
 // optional: tapping the chosen number again clears it, and the word under
 // the row says what the chosen number means rather than judging it.
 export function DailyScalesPicker({

@@ -13,8 +13,11 @@ import { Platform } from 'react-native';
 import { getCheckinTagDefinition } from './checkinTags';
 import { getDatabase } from './db';
 import { isDesktopApp } from './desktop/bridge';
+import { entryTitle } from './diary';
+import { listDiaryEntriesBetween } from './diaryDb';
 import { hasCalendarPermission, listDeviceEventsForTimeline } from './deviceCalendar';
 import { EXERCISE_TYPE_NAMES } from './healthSync';
+import { t } from './i18n';
 import {
   buildDayTimeline,
   dayStartMs,
@@ -117,7 +120,7 @@ export async function loadDayTimeline(now: number = Date.now()): Promise<DayTime
   const utcFrom = new Date(dayStartMs(firstDay, -1)).toISOString();
   const utcTo = new Date(dayStartMs(dayAfterLast, 1)).toISOString();
 
-  const [schedule, runs, checkinRows, sleep, routines, dated, workoutRows, steps, calendar] = await Promise.all([
+  const [schedule, runs, checkinRows, sleep, routines, dated, workoutRows, steps, calendar, diary] = await Promise.all([
     db.getAllAsync<TimelineScheduleRow & { durationMinutes: number | null }>(
       `SELECT s.id, s.scheduled_for AS scheduledFor, s.duration_minutes AS durationMinutes, s.item_type AS itemType, s.meal_type AS mealType,
               COALESCE(s.title, '') AS title, s.status, s.provider_name AS providerName, s.location,
@@ -164,6 +167,7 @@ export async function loadDayTimeline(now: number = Date.now()): Promise<DayTime
       dayAfterLast,
     ),
     readCalendar(firstDay, dayAfterLast),
+    readOrClosed(() => listDiaryEntriesBetween(firstDay, dayAfterLast), []),
   ]);
   const scheduleMinutes: Record<string, number> = {};
   for (const row of schedule) {
@@ -199,6 +203,7 @@ export async function loadDayTimeline(now: number = Date.now()): Promise<DayTime
     runs,
     checkins,
     sleep,
+    diary: diary.map((entry) => ({ id: entry.id, happenedAt: entry.happenedAt, title: entryTitle(entry) || t('A diary entry') })),
     dated,
     calendar,
     workouts: workoutRows.map(toWorkout),

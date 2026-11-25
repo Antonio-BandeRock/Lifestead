@@ -1,6 +1,6 @@
 // Mood, energy and stress on a 1 to 5 scale (D1 of the competitive build
 // plan, 2026-09-26). Three optional columns on wellbeing_checkins, answered
-// on Home's Today's Check-In and on Signals > General Note, charted on
+// on Home's Today's Check-In and on Signals > Health Journal, charted on
 // Trends > Symptoms & Flares and offered to Pattern Finder as something to
 // look for patterns before.
 //

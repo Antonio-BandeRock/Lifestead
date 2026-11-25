@@ -20,6 +20,7 @@ function load(file) {
   });
   const mod = { exports: {} };
   new Function('exports', 'module', 'require', outputText)(mod.exports, mod, (name) => {
+    if (name === './diary') return load('lib/diary.ts');
     throw new Error(`${file} must stay free of runtime imports (${name})`);
   });
   return mod.exports;

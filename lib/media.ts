@@ -49,6 +49,8 @@
 export type MediaOwnerKind =
   | 'treatment'
   | 'symptom'
+  | 'diary_entry'
+  | 'health_note'
   | 'planting'
   | 'garden_area'
   | 'harvest'

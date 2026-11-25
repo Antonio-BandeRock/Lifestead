@@ -727,7 +727,7 @@
 ### Q24. The Diary
 - **Ships by:** Over the air (JS) · **Size:** L · **Tabs:** Signals,Life
 - **Answers:** Day One, Journey · **Theme:** Beating the leader, function by function (2026-10-07)
-- **How:** The Diary from the 2026-09-26 gap review, absorbing General Note: entries with photos and voice, prompts, on this day, its own lock, private until chosen, and the words a life’s Inside Story is later made from.
+- **How:** The Diary from the 2026-09-26 gap review, absorbing General Note: entries with photos and voice, prompts, on this day, its own lock, private until chosen, and the words a life’s Inside Story is later made from. Built 1.0.96.2 (2026-11-24): Life > Diary (lib/diary.ts, diaryDb, diaryExport, components/DiarySection.tsx, scripts/test_diary.js), several named diaries, photos, recordings, drafts, questions, on this day, find, life events as lines on Trends, vault category, Home card, Capture destination, PDF or page. Nothing was absorbed, by Tony's decision: General Note became the Health Journal, where it was, with recordings, and the doctor report carries it.
 
 ### Q25. A taste of Insights on Free
 - **Ships by:** Owner decision first · **Size:** S · **Tabs:** Insights,Food

@@ -132,6 +132,7 @@ function pending(foods) {
     const key = raw.trim();
     if (!key || seen.has(key) || done.has(key) || parts.has(key)) continue;
     seen.add(key);
+    if (/^<(!doctype|p class)/.test(key)) continue; // markup with no words in it
     const file = info.where.replace(/:\d+$/, '');
     if (notShown(file.replace(/\\/g, '/'), Number(info.where.split(':').pop()))) continue;
     const group = PRIORITY.findIndex((test) => test(file));

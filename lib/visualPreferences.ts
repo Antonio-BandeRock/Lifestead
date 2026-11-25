@@ -377,6 +377,8 @@ export type HomeSectionKey =
   // ('daysUntil') keeps the garden ones; this is the card for everything
   // else somebody is counting the days to.
   | 'countdowns'
+  // The Diary's Write button and what this day held in other years.
+  | 'diary'
   // H11 part 4, 2026-09-28: today's planned exercise and the workouts on
   // Life > Workouts, each one press from starting.
   | 'startWorkout'
@@ -472,6 +474,7 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'groceryQuickAdd',
   'todayPicks',
   'countdowns',
+  'diary',
   'startWorkout',
   'untriedLife',
   'tutorialsLife',
@@ -615,6 +618,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   routines: 'Routines',
   doneChecks: 'Checklist',
   countdowns: 'Days Until',
+  diary: 'Diary',
   startWorkout: 'Start a Workout',
   groceryQuickAdd: 'Add to the Grocery List',
   todayPicks: 'Today I Want To',

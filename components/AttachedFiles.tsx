@@ -27,9 +27,12 @@ export function AttachedFiles({
   tabColor,
   openerRef,
   openerMarkStyle,
+  leaveOutSounds = false,
 }: {
   ownerKind: AttachmentOwnerKind;
   ownerId: string;
+  /** Recordings are shown by components/VoiceRecordings.tsx instead. */
+  leaveOutSounds?: boolean;
   tabColor: string;
   /** A how-to's ring on the opener, from the screen's walkMark. */
   openerRef?: (node: unknown) => void;
@@ -43,10 +46,11 @@ export function AttachedFiles({
   const [confirm, confirmElement] = useConfirmSheet();
 
   const load = useCallback(async () => {
-    const list = await listAttachmentsOf(ownerKind, ownerId);
+    const all = await listAttachmentsOf(ownerKind, ownerId);
+    const list = leaveOutSounds ? all.filter((item) => !item.mimeType.startsWith('audio/')) : all;
     setItems(list);
     setHere(await attachmentsHere(list));
-  }, [ownerKind, ownerId]);
+  }, [ownerKind, ownerId, leaveOutSounds]);
 
   useFocusEffect(
     useCallback(() => {

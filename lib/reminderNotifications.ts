@@ -1164,6 +1164,11 @@ function wordsLine(): string {
   return wordsScreenOnThisPhone() ? ` ${ADD_WORDS_LINE}` : '';
 }
 
+// A check-in's words are kept in the Health Journal, and the reminder says so.
+function checkinWordsLine(): string {
+  return wordsScreenOnThisPhone() ? ` ${ADD_WORDS_LINE} ${t('Your words go in your Health Journal.')}` : '';
+}
+
 /**
  * Words written or said on the screen over the lock screen, handed in the
  * way a button press is: sealed for the next unlock while App Lock holds no
@@ -1216,7 +1221,7 @@ function buildDailyCheckinPlanned(fireAt: Date, now: Date): PlannedNotification 
   return {
     identifier: `${IDENTIFIER_PREFIX}checkin:${localDateString(fireAt)}`,
     title: FLARE_ASK_TITLE,
-    body: `The daily check-in you asked for. ${answerLine('checkin')}${wordsLine()} Check-ins as of ${describeFreshness(now, fireAt)}.`,
+    body: `The daily check-in you asked for. ${answerLine('checkin')}${checkinWordsLine()} Check-ins as of ${describeFreshness(now, fireAt)}.`,
     fireAt,
     payload: {
       kind: 'checkin',
@@ -1857,7 +1862,7 @@ function buildAfterMealPlanned(meal: { id: string; name: string }, fireAt: Date,
   return {
     identifier: `${IDENTIFIER_PREFIX}afterMeal:${meal.id}`,
     title: flareAskAfterMealTitle(meal.name),
-    body: `About ${AFTER_MEAL_MINUTES / 60} hours since you ate. ${answerLine('afterMeal')}${wordsLine()} Meals as of ${describeFreshness(now, fireAt)}.`,
+    body: `About ${AFTER_MEAL_MINUTES / 60} hours since you ate. ${answerLine('afterMeal')}${checkinWordsLine()} Meals as of ${describeFreshness(now, fireAt)}.`,
     fireAt,
     payload: {
       kind: 'afterMeal',

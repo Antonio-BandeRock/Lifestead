@@ -106,6 +106,7 @@ const DESTINATION_ICONS: Record<CaptureDestinationKey, ComponentProps<typeof Ion
   upkeep: 'construct-outline',
   money: 'wallet-outline',
   health: 'pulse-outline',
+  diary: 'book-outline',
   place: 'location-outline',
   thought: 'bulb-outline',
 };

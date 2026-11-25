@@ -245,6 +245,8 @@ const AREAS: readonly Area[] = [
   { one: 'Days Until counter', many: 'Days Until counters', count: ['garden_countdowns', 'countdowns'], quiet: [] },
   // My Crops, 2026-10-01. A step marked on a crop is part of the crop.
   { one: 'crop in My Crops', many: 'crops in My Crops', count: ['garden_crop_plans'], quiet: ['garden_crop_plan_steps'] },
+  { one: 'diary', many: 'diaries', count: ['diaries'], quiet: [] },
+  { one: 'diary entry', many: 'diary entries', count: ['diary_entries'], quiet: ['diary_links'] },
   { one: 'night logged', many: 'nights logged', count: ['nocturia_nights'], quiet: [] },
   // Q23: each tap in a bladder diary is the thing recorded; the diary
   // itself only holds the days they belong to.

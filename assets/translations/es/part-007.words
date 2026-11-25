@@ -174,7 +174,7 @@
  "Flare": "Brote",
  "Food Reaction": "Reacción a un alimento",
  "Drawn on 0 to 10. An entry logged with a word and no number sits at the middle of that word: Mild 1.5, Moderate 4.5, Severe 7, Very severe 9.5.": "Dibujado del 0 al 10. Una entrada registrada con una palabra y sin número queda a la mitad de esa palabra: Leve 1.5, Moderado 4.5, Fuerte 7, Muy fuerte 9.5.",
- "No {label} answers in this range. Answer it on Home's Today's Check-In or in Signals > General Note.": "No hay respuestas de {label} en este periodo. Contéstala en la Revisión de hoy de Inicio o en Señales > Nota general.",
+ "No {label} answers in this range. Answer it on Home's Today's Check-In or in Signals > Health Journal.": "No hay respuestas de {label} en este periodo. Contéstala en la Revisión de hoy de Inicio o en Señales > Diario de salud.",
  "Type {type}: {count}": "Tipo {type}: {count}",
  "Bowel movements go in Signals > Bowel Movements.": "Las evacuaciones se registran en Señales > Evacuaciones.",
  "Where on the Body": "En qué parte del cuerpo",

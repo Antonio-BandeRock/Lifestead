@@ -25,6 +25,7 @@ export type TimelineKind =
   | 'garden'
   | 'routine'
   | 'checkin'
+  | 'diary'
   | 'flare'
   | 'sleep'
   | 'due'
@@ -152,6 +153,13 @@ export type TimelineStepsInput = {
   steps: number;
 };
 
+/** A diary entry: its first line only. The whole entry is read in the Diary. */
+export type TimelineDiaryInput = {
+  id: string;
+  happenedAt: string;
+  title: string;
+};
+
 export type DayTimelineInput = {
   /** Milliseconds, the moment the timeline is drawn for. */
   now: number;
@@ -164,6 +172,7 @@ export type DayTimelineInput = {
   calendar?: TimelineCalendarInput[];
   workouts?: TimelineWorkoutInput[];
   steps?: TimelineStepsInput[];
+  diary?: TimelineDiaryInput[];
   /** Scheduled items' optional length in minutes (B4), by schedule row id. */
   scheduleMinutes?: Record<string, number>;
   daysBack?: number;
@@ -317,6 +326,8 @@ export function kindLabel(kind: TimelineKind): string {
       return 'Routine';
     case 'checkin':
       return 'Check-in';
+    case 'diary':
+      return 'Diary';
     case 'flare':
       return 'Flare';
     case 'sleep':
@@ -519,7 +530,24 @@ function checkinItem(checkin: TimelineCheckinInput): DayTimelineItem | null {
     allDay: false,
     day: localDayOf(start),
     status: 'record',
-    route: { pathname: '/log', params: isFlare ? { openSignalsLens: 'flares' } : {} },
+    route: { pathname: '/log', params: isFlare ? { openSignalsLens: 'flares' } : checkin.checkinType === 'general' ? { openSignalsLens: 'generalNote', openHealthNoteId: checkin.id } : {} },
+  };
+}
+
+function diaryItem(entry: TimelineDiaryInput): DayTimelineItem | null {
+  const start = localStampMs(entry.happenedAt);
+  if (start === null) return null;
+  return {
+    id: `diary:${entry.id}`,
+    kind: 'diary',
+    title: entry.title,
+    caption: 'Diary',
+    start,
+    end: null,
+    allDay: false,
+    day: localDayOf(start),
+    status: 'record',
+    route: { pathname: '/life', params: { openLifeLens: 'diary', openDiaryEntryId: entry.id } },
   };
 }
 
@@ -683,6 +711,10 @@ export function buildDayTimeline(input: DayTimelineInput): DayTimelineView {
   timed.push(...routineItems(input.routines, input.runs, days, input.now, today));
   for (const checkin of input.checkins) {
     const item = checkinItem(checkin);
+    if (item) timed.push(item);
+  }
+  for (const entry of input.diary ?? []) {
+    const item = diaryItem(entry);
     if (item) timed.push(item);
   }
   for (const record of input.sleep) {

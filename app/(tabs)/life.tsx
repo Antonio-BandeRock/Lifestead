@@ -117,6 +117,7 @@ import { parsePriceInput } from '../../lib/groceryList';
 import { useWalkMark } from '../../components/WalkMark';
 import type { WalkMark } from '../../lib/storyWalk';
 import { ThumbRow } from '../../components/ThumbRow';
+import { DiarySection } from '../../components/DiarySection';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
@@ -199,6 +200,7 @@ type LifeLens =
   | 'routines'
   | 'didIDoIt'
   | 'lookBack'
+  | 'diary'
   | 'daysUntil'
   | 'todos'
   | 'projects';
@@ -504,6 +506,25 @@ const EARTH_MATTERS_HELP_SECTIONS: HelpSection[] = [
   DIGEST_READING_HELP,
 ];
 
+const DIARY_HELP_SECTIONS: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'Your days, in your words, for nobody but you. Write a line or pages, say it out loud, add photos and recordings, and give any entry the date and time it belongs to. Keep one diary, or several with names you choose.',
+  },
+  {
+    heading: 'It stays private',
+    body: 'Nothing you write here goes into a report, to a doctor or to anyone you share the app with. The vault can close it, and the only way an entry leaves is PDF or Page, where you choose which ones.',
+  },
+  {
+    heading: 'Life events',
+    body: 'Mark an entry as a life event, such as a move, a birth, a new job or a loss, and its name is drawn across your charts on Trends on the day it happened, so you can see what else was going on.',
+  },
+  {
+    heading: 'The Health Journal',
+    body: 'Signals > Health Journal is the separate place for what you want your doctor to read. Each diary has a switch that shows those entries here beside your days. It is off until you turn it on, and nothing goes the other way.',
+  },
+];
+
 const DAYS_UNTIL_HELP_SECTIONS: HelpSection[] = [
   {
     heading: 'What this is for',
@@ -623,6 +644,9 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
   { key: 'routines', label: 'Routines', icon: 'footsteps-outline', help: ROUTINES_HELP_SECTIONS },
   { key: 'didIDoIt', label: 'Checklist', icon: 'checkmark-done-outline', help: DID_I_DO_IT_HELP_SECTIONS },
   { key: 'lookBack', label: 'Did I Do It', icon: 'time-outline', help: LOOK_BACK_HELP_SECTIONS },
+  // 1.0.96.2. The person's diaries, separate from the Health Journal on
+  // Signals and offered to no report. See components/DiarySection.tsx.
+  { key: 'diary', label: 'Diary', icon: 'book-outline', help: DIARY_HELP_SECTIONS },
   // 2026-09-22, when a Days Until counter stopped having to be about the
   // garden. Every counter of either kind reads here, in the order they
   // land; a counter started here belongs to nothing unless a garden area
@@ -643,6 +667,7 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
 // lens is in exactly one group; scripts/test_lens_menu.js checks that.
 const LIFE_LENS_GROUPS: readonly { group: string; keys: readonly LifeLens[] }[] = [
   { group: 'Doing and Checking Off', keys: ['todos', 'didIDoIt', 'lookBack', 'routines', 'daysUntil', 'projects'] },
+  { group: 'Writing', keys: ['diary'] },
   { group: 'Home and Household', keys: ['groceryList', 'kitchen', 'upkeep'] },
   { group: 'Health', keys: ['conditions', 'myMeds', 'emergency', 'movement', 'workouts'] },
   { group: 'Money and work', keys: ['finances', 'work'] },
@@ -857,7 +882,7 @@ export default function LifeScreen() {
   const folds = useBandFolds();
   // searchQuery comes from Ask Your Records (C22): Search Reading
   // opens with the question's words already in the box.
-  const { openLifeLens, focusTreatmentId, openEntryId, upkeepName, searchQuery } = useLocalSearchParams<{ openLifeLens?: string; focusTreatmentId?: string; openEntryId?: string; upkeepName?: string; searchQuery?: string }>();
+  const { openLifeLens, focusTreatmentId, openEntryId, upkeepName, searchQuery, openDiaryEntryId, openDiaryWrite } = useLocalSearchParams<{ openLifeLens?: string; focusTreatmentId?: string; openEntryId?: string; upkeepName?: string; searchQuery?: string; openDiaryEntryId?: string; openDiaryWrite?: string }>();
   // Conditions asks to scroll to a band it just opened from a link; its y
   // is relative to its own wrapper, so the wrapper's place in this scroll
   // is added on the way through.
@@ -2192,6 +2217,7 @@ export default function LifeScreen() {
             {lens === 'routines' ? <RoutinesSection tabColor={TAB_COLOR} /> : null}
             {lens === 'didIDoIt' ? <DidIDoItSection tabColor={TAB_COLOR} /> : null}
             {lens === 'lookBack' ? <DidIDoItLookBack tabColor={TAB_COLOR} /> : null}
+            {lens === 'diary' ? <DiarySection tabColor={TAB_COLOR} openEntryId={openDiaryEntryId} openWrite={openDiaryWrite} /> : null}
             {lens === 'daysUntil' ? (
               <View style={band.box}>
                 <Text style={styles.cardTitle}>Days Until</Text>

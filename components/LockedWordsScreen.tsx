@@ -140,7 +140,7 @@ export function LockedWordsScreen({ identifier, title, data: rawData }: Props) {
               <Text style={styles.hint}>
                 {onFlare
                   ? 'Write or say anything about this flare. It is added to the flare\'s notes.'
-                  : 'Write or say how you are. It is kept as a check-in note. The Yes and No buttons stay on the lock screen.'}
+                  : 'Write or say how you are. It goes in your Health Journal. The Yes and No buttons stay on the lock screen.'}
               </Text>
               <AppTextInput
                 voice={false}
@@ -185,10 +185,10 @@ export function LockedWordsScreen({ identifier, title, data: rawData }: Props) {
                 {stage.how === 'sealed'
                   ? onFlare
                     ? 'It is sealed on this phone and written into the flare the next time Lifestead is unlocked, with the time you saved it.'
-                    : 'It is sealed on this phone and written as a check-in note the next time Lifestead is unlocked, with the time you saved it.'
+                    : 'It is sealed on this phone and written in your Health Journal the next time Lifestead is unlocked, with the time you saved it.'
                   : onFlare
                     ? 'It is added to the flare\'s notes in Signals.'
-                    : 'It is saved as a check-in note in Signals.'}
+                    : 'It is saved in Signals > Health Journal.'}
               </Text>
               <View style={styles.actions}>
                 <TouchableOpacity style={styles.primaryButton} onPress={close}>

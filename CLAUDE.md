@@ -189,7 +189,7 @@ Hub-and-spoke, replacing the original four-tab plan as of 2026-07-22: a central 
 
 Tabs (ten), in menu and swipe order: **Home**, **Life**, **Food**, **Garden**, **Interests**, **Schedules**, **Signals**, **Insights**, **Trends**, **Reports**, then Profile and Info in TabHub. **The Digest tab is gone**: "the Digest" here and in code names the reading corpus (`lib/digest/`, `ALL_DIGEST_ENTRIES`), and no customer-facing text says "Digest". Reading lives on Life (Conditions, Health Literacy, Earth Matters, Search Reading), Garden (Horticulture) and Food (recipes). `routeForDigestEntry` in `lib/digestNavigation.ts` is the one place that knows where an entry opens.
 
-**Life lenses:** Grocery List, Conditions, Finances, Work, Upkeep, Emergency, My Meds, Kitchen, Movement, Routines, Did I Do It, Days Until, plus the reading lenses. `components/ConditionsSection.tsx` keeps three lists that never mix: My Conditions (Profile), Family (`lib/family.ts`; joins the Meal Plan through `lib/partnerPlanning.ts` when switched on) and Other Conditions (curious about, **never feeding scoring, planning, advisories, rules, stages or safe foods**). (Archive.)
+**Life lenses:** Grocery List, Conditions, Finances, Work, Upkeep, Emergency, My Meds, Kitchen, Movement, Routines, Did I Do It, Days Until, Diary, plus the reading lenses. `components/ConditionsSection.tsx` keeps three lists that never mix: My Conditions (Profile), Family (`lib/family.ts`; joins the Meal Plan through `lib/partnerPlanning.ts` when switched on) and Other Conditions (curious about, **never feeding scoring, planning, advisories, rules, stages or safe foods**). (Archive.)
 
 **Garden** has per-area Grow Setup (`lib/growSetupDb.ts`, `lib/growSetup.ts`, `scripts/test_grow_setup.js`), lights in place of sun indoors, and Electricity compared per day. (Archive.)
 
@@ -212,7 +212,7 @@ Schedule lenses (2026-09-13): Meals, Today's Meals, Past Meals, Meal Plan (the o
 - *Free viewer companion.* Reads periodic snapshots from a shared cloud folder (meal schedule, shopping list, trend reports). One write exception: **checking off shopping-list items** and marking tasks done, sent back as a small delta file.
 - *Paid interactive companion.* Read-write access to a shared "household domain" (meal plan, shopping list, schedule) but **never** the primary's personal health domain (symptoms, labs, supplements, scoring history), which stays unreachable by any companion account.
 
-Cross-provider sharing (OneDrive on one end, Google Drive on the other) does **not** require matching providers. The sync mechanism that makes that work is deliberately deferred to a design pass of its own.
+Cross-provider sharing (OneDrive on one end, Google Drive on the other) does **not** require matching providers. The sync mechanism that makes that work is deliberately deferred to its design pass.
 
 **Sharing between people: the `.is` format.** `.is` is intended as the one general-purpose file format for anything shareable: recipes and favorites (built), plus future gardening, exercise and other non-health content. A person's health domain stays outside it, since that is the tier model's job. Build the payload shape generically from day one (an envelope type per content kind), not recipe-specific.
 
@@ -301,7 +301,7 @@ Each item's full wording is in the archive; rows live in the Project Tracker.
 13. **Subtopic-sectioning the 19 condition pages' topics**: pull per-topic counts before designing any split.
 14. **Wiring conditions, allergies and diet through every tool:** still open for Today's Advisories. The For You card is `components/ForYouCard.tsx` (Food Lookup, all builders); a scanned product reads its ingredient list, never scores.
 17. **A corpus-wide audit for missing cooking-water ingredient rows** across the recipes that simmer, boil or braise.
-18. **Batch-remake-cadence planning for make-ahead foods**: the Fermentation Tracker knows yield and remaining, but no consumption rate or household size, so it cannot predict a next-batch reminder.
+18. **Batch-remake-cadence planning for make-ahead foods**: needs a consumption rate and household size.
 22 to 26. **Parked from a 2026-08-30 competitor review:** Get Back on Track, a weekly check-in retuning targets, TRACK mode, menstrual cycle tracking in Pattern Finder, and "allergen-aware, not allergy-safe" wording.
 
 27. **External data program**, nine lookup projects behind one Cloudflare Worker, Decision row [three privacy shapes, one Worker](https://app.notion.com/p/3db53652f272816d8051f1d335574853). Not built.
@@ -314,7 +314,7 @@ Each item's full wording is in the archive; rows live in the Project Tracker.
 
 31. **Interests, the tenth tab, plus Projects and Share to Lifestead** ([Decision](https://app.notion.com/p/3e753652f27281488613cded8a054483)). All of its lenses are built; the share target needs a rebuild. Nothing pushes an interest toward earning, and [Making It Pay](https://app.notion.com/p/3e753652f2728132b238f59188fc3946) never advises starting a business or quitting a job. Languages sits on it too (item 37). Colour: rose, `colors.tabInterests`.
 
-32. **Eighteen gaps from the 2026-09-26 review, plus the Diary**, all kept in scope by direct instruction and none ranked. Index: [Gap review 2026-09-26](https://app.notion.com/p/3e753652f2728169aff4d14fb6dc121f). The [Diary](https://app.notion.com/p/3e753652f27281c590add1a9394c2254) absorbs Signals > General Note.
+32. **Eighteen gaps from the 2026-09-26 review, plus the Diary**, all kept in scope by direct instruction none ranked. Index: [Gap review 2026-09-26](https://app.notion.com/p/3e753652f2728169aff4d14fb6dc121f). The [Diary](https://app.notion.com/p/3e753652f27281c590add1a9394c2254) is built (1.0.96.2): private, no report or share reads it (`test_diary.js`); Signals > Health Journal is the doctor's.
 
 33. **Working life and a resume, plus saving exports to a folder**, not built: [Working life](https://app.notion.com/p/3e753652f272819e88fcdf1f3d6d5746), [Reports saved to a folder](https://app.notion.com/p/3e753652f27281ac8312e58fdda73b4d). Health never appears on a resume unless the person puts it there.
 

@@ -5407,6 +5407,54 @@ async function runDatabaseInitialization() {
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
 
+      -- The Diary (lib/diary.ts). Private: no report reads these tables and
+      -- lib/peerRelationships.ts names none of them. happened_at is the local
+      -- wall clock, 'YYYY-MM-DDTHH:mm'. show_health puts the person's Health
+      -- Journal entries on their dates in that diary's list; the health
+      -- record stays one record, where it is.
+      CREATE TABLE IF NOT EXISTS diaries (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        show_health INTEGER NOT NULL DEFAULT 0,
+        retired_at TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+      INSERT OR IGNORE INTO diaries (id, name, created_at, updated_at)
+        VALUES ('diary_daily', 'Daily', '2026-11-24T00:00:00.000Z', '2026-11-24T00:00:00.000Z');
+
+      CREATE TABLE IF NOT EXISTS diary_entries (
+        id TEXT PRIMARY KEY,
+        diary_id TEXT NOT NULL,
+        happened_at TEXT NOT NULL,
+        body TEXT NOT NULL DEFAULT '',
+        is_life_event INTEGER NOT NULL DEFAULT 0,
+        life_event_label TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_diary_entries_happened_at ON diary_entries(happened_at);
+
+      -- What an entry is about, or the one Health Journal entry it refers to
+      -- (target_kind 'health'). target_label keeps the name it had, so a
+      -- link to something since removed still reads.
+      CREATE TABLE IF NOT EXISTS diary_links (
+        id TEXT PRIMARY KEY,
+        entry_id TEXT NOT NULL,
+        target_kind TEXT NOT NULL,
+        target_id TEXT NOT NULL,
+        target_label TEXT NOT NULL,
+        created_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_diary_links_entry ON diary_links(entry_id);
+
+      -- What is being written, kept on this device only until it is saved.
+      CREATE TABLE IF NOT EXISTS diary_drafts (
+        entry_id TEXT PRIMARY KEY,
+        payload TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+
       -- The raw material the trend/correlation engine works from: a
       -- moment-in-time report of how the person actually feels. Covers
       -- both directions on purpose -- "felt great after this meal" is
@@ -24563,6 +24611,7 @@ export async function deleteCheckin(id: string) {
   await db.runAsync('DELETE FROM checkin_contributors WHERE checkin_id = ?', id);
   // Its photos go with it (1.0.53.7), so none is left pointing at nothing.
   await (await import('./mediaDb')).removePhotosOf('symptom', id);
+  await (await import('./mediaDb')).removePhotosOf('health_note', id);
 }
 
 // --- Hands-on therapy sessions ---------------------------------------------

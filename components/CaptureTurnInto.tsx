@@ -17,6 +17,7 @@
 //   Grocery list  one line per thing, on the list being shopped.
 //   Steps         a new routine with these steps, or one Did I Do It check
 //                 for each.
+//   Diary         an entry on the day the note was made, in the words it has.
 //
 // A note that became something is marked done rather than deleted, so it
 // can still be looked back at, the same as Reconcile's "Put it on a day".
@@ -30,7 +31,9 @@ import { textShadow, typography } from '../constants/typography';
 import { groceryItemsFromNote, splitCaptureNote, type CaptureNote } from '../lib/captureNotes';
 import { setCaptureNoteDestination, setCaptureNoteDone } from '../lib/captureNotesDb';
 import { addCountdown } from '../lib/countdownDb';
+import { localStampOf } from '../lib/dailyScales';
 import { scheduleReminder } from '../lib/db';
+import { addDiaryEntry, quickEntryDiary } from '../lib/diaryDb';
 import { addNamesToActiveGroceryList } from '../lib/groceryDb';
 import { explainNotYet } from '../lib/notYet';
 import {
@@ -63,11 +66,12 @@ export type CaptureTurnResult = { message: string; open?: { label: string; href:
 const REMINDER_FALLBACK_TIME = '09:00';
 const NOTHING_KEPT = 'Every line has been taken out, so there is nothing to make. Tap a line to put it back first.';
 
-const MENU: { mode: Mode | 'upkeep'; label: string; icon: ComponentProps<typeof Ionicons>['name'] }[] = [
+const MENU: { mode: Mode | 'upkeep' | 'diary'; label: string; icon: ComponentProps<typeof Ionicons>['name'] }[] = [
   { mode: 'day', label: 'On a day', icon: 'calendar-outline' },
   { mode: 'upkeep', label: 'An upkeep item', icon: 'construct-outline' },
   { mode: 'grocery', label: 'On the grocery list', icon: 'cart-outline' },
   { mode: 'steps', label: 'Steps or checks', icon: 'list-outline' },
+  { mode: 'diary', label: 'In your diary', icon: 'book-outline' },
 ];
 
 function lifeLens(lens: string): Href {
@@ -113,7 +117,28 @@ export function CaptureTurnInto({ note, onChanged, onFinished }: Props) {
   const kept = pieces.filter((unused, index) => !removed.has(index));
   const nameForRoutine = routineName ?? split.heading ?? '';
 
-  function choose(next: Mode | 'upkeep') {
+  async function writeInDiary() {
+    if (busy) return;
+    setBusy(true);
+    const diary = await quickEntryDiary();
+    if (!diary) {
+      setBusy(false);
+      return explainNotYet('There is no diary in use. Add one in Life > Diary first.');
+    }
+    await addDiaryEntry(note.text, localStampOf(note.createdAt), diary.id);
+    await setCaptureNoteDestination(note.id, 'diary');
+    await finish({
+      message: 'In your diary, on the day you captured it. The note is marked done.',
+      open: { label: 'Open the Diary', href: lifeLens('diary') },
+    });
+  }
+
+  function choose(next: Mode | 'upkeep' | 'diary') {
+    if (next === 'diary') {
+      // One entry in the note's exact words is all it makes, so there is no second step.
+      void writeInDiary();
+      return;
+    }
     if (next === 'upkeep') {
       void (async () => {
         await setCaptureNoteDestination(note.id, 'upkeep');
