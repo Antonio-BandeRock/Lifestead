@@ -74,6 +74,21 @@ const ACCENT_ROWS = [
 
 type Mode = 'letters' | 'numbers' | 'accents';
 
+// Shift, the way a phone keyboard does it (Tony, 2026-11-26: "The app keyboard
+// needs to be able to keep caps lock on"). One tap capitalises the next
+// letter; a second tap soon after, or holding Shift, locks capitals on until
+// Shift is tapped again. A locked Shift carries on to the next box, and goes
+// when the keyboard closes.
+type ShiftState = 'off' | 'once' | 'locked';
+const SHIFT_DOUBLE_TAP_MS = 400;
+
+/** What one tap on Shift leads to. */
+function nextShiftState(current: ShiftState, msSinceLastTap: number): ShiftState {
+  if (current === 'off') return 'once';
+  if (current === 'once') return msSinceLastTap <= SHIFT_DOUBLE_TAP_MS ? 'locked' : 'off';
+  return 'off';
+}
+
 // Mounted once, at the very root (app/_layout.tsx), so it works identically
 // whether the focused field is inside the (tabs) group or a top-level stack
 // screen (profile.tsx, purple-digest.tsx) -- see ActiveInputContext.tsx for
@@ -101,7 +116,9 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
   const { reportKeyboardTop } = useKeyboardLift();
   const clipRef = useRef<View>(null);
   const [mode, setMode] = useState<Mode>('letters');
-  const [shiftActive, setShiftActive] = useState(false);
+  const [shift, setShift] = useState<ShiftState>('off');
+  const lastShiftTap = useRef(0);
+  const shiftActive = shift !== 'off';
   const progress = useSharedValue(0);
 
   const visible = activeField !== null;
@@ -119,12 +136,23 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
   }, [visible, progress]);
 
   // A brand-new field taking focus always resets back to its own default
-  // mode/shift state -- switching from a text field mid-numbers-toggle to a
-  // number field, for instance, shouldn't carry that toggle over.
+  // mode -- switching from a text field mid-numbers-toggle to a number field,
+  // for instance, shouldn't carry that toggle over. A one-letter Shift goes
+  // too; caps lock stays on while the keyboard is up and goes when it closes.
+  const fieldOpen = activeField !== null;
   useEffect(() => {
     setMode('letters');
-    setShiftActive(false);
+    setShift((current) => (fieldOpen && current === 'locked' ? 'locked' : 'off'));
+    // fieldOpen is read at the moment the field changes, not a trigger.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeField?.id]);
+
+  function tapShift() {
+    const now = Date.now();
+    const since = now - lastShiftTap.current;
+    lastShiftTap.current = now;
+    setShift((current) => nextShiftState(current, since));
+  }
 
   // Android-specific, reported directly 2026-08-02 after a few real
   // occurrences: the OS's own soft keyboard could appear over this
@@ -247,7 +275,7 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
 
   function pressLetter(letter: string) {
     insertText(shiftActive ? letter.toUpperCase() : letter);
-    if (shiftActive) setShiftActive(false);
+    if (shift === 'once') setShift('off');
   }
 
   function done() {
@@ -312,10 +340,19 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
             {rowIndex === 2 ? (
               <Key
                 label="shift"
-                icon="arrow-up-outline"
-                onPress={() => setShiftActive((current) => !current)}
+                icon={shift === 'locked' ? 'arrow-up-circle' : shift === 'once' ? 'arrow-up' : 'arrow-up-outline'}
+                onPress={tapShift}
+                onLongPress={() => setShift('locked')}
+                spokenLabel={
+                  shift === 'locked'
+                    ? 'Caps lock on. Tap to turn it off'
+                    : shift === 'once'
+                      ? 'Shift on. Tap again for caps lock'
+                      : 'Shift. Tap twice or hold for caps lock'
+                }
                 flex={1.5}
                 active={shiftActive}
+                locked={shift === 'locked'}
                 muted={!shiftActive}
               />
             ) : null}
@@ -485,19 +522,30 @@ function Key({
   label,
   icon,
   onPress,
+  onLongPress,
+  spokenLabel,
   flex = 1,
   muted,
   active,
+  locked,
 }: {
   label: string;
   icon?: keyof typeof Ionicons.glyphMap;
   onPress: () => void;
+  onLongPress?: () => void;
+  spokenLabel?: string;
   flex?: number;
   muted?: boolean;
   active?: boolean;
+  locked?: boolean;
 }) {
   return (
-    <Pressable onPress={onPress} style={[styles.key, { flex }, muted ? styles.keyMuted : styles.keyLetter, active ? styles.keyActive : null]}>
+    <Pressable
+      onPress={onPress}
+      onLongPress={onLongPress}
+      accessibilityLabel={spokenLabel}
+      style={[styles.key, { flex }, muted ? styles.keyMuted : styles.keyLetter, active ? styles.keyActive : null, locked ? styles.keyLocked : null]}
+    >
       {icon ? (
         <Ionicons name={icon} size={18} color={colors.textPrimary} />
       ) : label ? (
@@ -602,5 +650,8 @@ const styles = StyleSheet.create({
   keyLetter: { backgroundColor: colors.keySurface },
   keyMuted: { backgroundColor: colors.border },
   keyActive: { backgroundColor: colors.accent },
+  // Caps lock: the one-letter Shift fill plus an outline, so the lock reads
+  // by its shape as well as by its filled icon.
+  keyLocked: { borderWidth: 2, borderColor: colors.textPrimary },
   keyLabel: { ...typography.bodyEmphasis, color: colors.textPrimary, textTransform: 'none', ...textShadow },
 });

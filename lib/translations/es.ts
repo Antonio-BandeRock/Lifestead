@@ -623,6 +623,9 @@ const BY_HAND: Readonly<Record<string, string>> = {
   "{count} crashed": "{count} me desplomé",
   "activity": "actividad",
   "activities": "actividades",
+  "Caps lock on. Tap to turn it off": "Mayúsculas fijas. Toca para quitarlas",
+  "Shift on. Tap again for caps lock": "Mayúscula activada. Toca otra vez para fijar las mayúsculas",
+  "Shift. Tap twice or hold for caps lock": "Mayúscula. Toca dos veces o mantén presionado para fijar las mayúsculas",
 };
 
 export const ES_BY_HAND: Readonly<Record<string, string>> = BY_HAND;
