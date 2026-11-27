@@ -6,7 +6,9 @@
 // see, kept closed while the app is open, so a phone left unlocked on the
 // counter shows the shopping list and not the labs. It opens with the App
 // Lock code or fingerprint, or with a code of its own when App Lock is off,
-// and closes when the app is put away.
+// and closes once the app has been put away for as long as the person chose
+// (Tony, 2026-11-27: it had closed on every trip to the camera or a
+// fingerprint prompt, so it asked again at every turn).
 //
 // What goes in it is the person's choice, one category at a time (direct
 // instruction, 2026-10-07): "let the user decide what goes into the vault
@@ -391,7 +393,40 @@ export type VaultSettings = {
   /** The offer made the moment a first health, money or diary record was saved,
    *  once for each group (direct instruction, 2026-11-14). */
   firstOffered: Record<VaultGroup, boolean>;
+  /** How long the app may be put away before the vault closes, used while
+   *  App Lock is off. With App Lock on its own choice counts instead
+   *  (vaultCloseMinutes). 0 is right away. */
+  closeAfterMinutes: VaultCloseMinutes;
 };
+
+/** The same four choices App Lock offers (AUTO_LOCK_CHOICES in lib/appLock.ts). */
+export const VAULT_CLOSE_CHOICES = [0, 1, 5, 15] as const;
+export type VaultCloseMinutes = (typeof VAULT_CLOSE_CHOICES)[number];
+export const DEFAULT_VAULT_CLOSE_MINUTES: VaultCloseMinutes = 1;
+
+/**
+ * How long the app may be away before the vault closes: App Lock's choice
+ * while App Lock is on, so one setting governs both, and the vault's own
+ * otherwise.
+ */
+export function vaultCloseMinutes(appLockMinutes: number | null, settings: VaultSettings): VaultCloseMinutes {
+  if (appLockMinutes !== null && (VAULT_CLOSE_CHOICES as readonly number[]).includes(appLockMinutes)) {
+    return appLockMinutes as VaultCloseMinutes;
+  }
+  return settings.closeAfterMinutes;
+}
+
+/**
+ * Whether coming back closes the vault: away at least the chosen minutes, or
+ * any time at all for right away. A clock that went backwards counts as long
+ * enough, since the time away is unknown.
+ */
+export function vaultClosesOnReturn(awaySince: number | null, now: number, minutes: VaultCloseMinutes): boolean {
+  if (awaySince === null) return false;
+  const away = now - awaySince;
+  if (away < 0) return true;
+  return away >= minutes * 60_000;
+}
 
 export const EMPTY_VAULT_SETTINGS: VaultSettings = {
   version: 1,
@@ -404,6 +439,7 @@ export const EMPTY_VAULT_SETTINGS: VaultSettings = {
   setupAsked: false,
   setUpWaiting: false,
   firstOffered: { health: false, money: false, personal: false },
+  closeAfterMinutes: DEFAULT_VAULT_CLOSE_MINUTES,
 };
 
 function cleanCode(value: unknown): VaultCode | null {
@@ -454,6 +490,9 @@ export function parseVaultSettings(text: string | null): VaultSettings | null {
       money: (r.firstOffered as Record<string, unknown> | undefined)?.money === true,
       personal: (r.firstOffered as Record<string, unknown> | undefined)?.personal === true,
     },
+    closeAfterMinutes: (VAULT_CLOSE_CHOICES as readonly unknown[]).includes(r.closeAfterMinutes)
+      ? (r.closeAfterMinutes as VaultCloseMinutes)
+      : DEFAULT_VAULT_CLOSE_MINUTES,
   };
 }
 

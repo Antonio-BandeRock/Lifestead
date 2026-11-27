@@ -4,7 +4,8 @@
 // store or the prompt. The rules themselves are in lib/vault.ts.
 //
 // Open lives only in this module's memory, like the App Lock key: a restart
-// closes it, and so does putting the app away (lib/vaultSession.ts).
+// closes it, and so does coming back after the app was away for the chosen
+// time (lib/vaultSession.ts).
 
 import { readLockStateSync } from './appLockSession';
 import {
@@ -77,7 +78,8 @@ export function refreshVault(): void {
   if (!current().guarding) vaultOpen = false;
   // Just set up, by the person, in the open app (setup's security question,
   // the offer at a first record, Profile, or App Lock switched on): the vault
-  // starts open and closes the next time the app is put away. Closing it at
+  // starts open and closes after time away like any other opening
+  // (lib/vaultSession.ts). Closing it at
   // once hid what they had just entered (Tony, 2026-11-18: Autism and ADHD
   // looked unaccepted in setup, and two new supplements were missing from
   // My Meds).

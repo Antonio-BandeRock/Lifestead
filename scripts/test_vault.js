@@ -390,7 +390,20 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
   check('the backup reads through unguardedGetAll', backup.includes('await unguardedGetAll<Record<string, unknown>>(db, `SELECT * FROM "${name}"`)'));
   check('database startup runs inside withVaultBypass', /withVaultBypass\(runDatabaseInitialization\)/.test(dbSource));
   const layout = fs.readFileSync(path.join(ROOT, 'app', '_layout.tsx'), 'utf8');
-  check('the root layout closes the vault when the app is put away', layout.includes('watchVaultClosing()'));
+  check('the root layout watches for time away to close the vault', layout.includes('watchVaultClosing()'));
+  // 8. Staying open while the app is in use (Tony, 2026-11-27).
+  check('back after a moment away stays open', V.vaultClosesOnReturn(1000, 1000 + 20_000, 1) === false);
+  check('back after the chosen time closes', V.vaultClosesOnReturn(1000, 1000 + 60_000, 1) === true);
+  check('never away never closes', V.vaultClosesOnReturn(null, 5_000_000, 0) === false);
+  check('right away closes on any return', V.vaultClosesOnReturn(1000, 1001, 0) === true);
+  check('a clock gone backwards closes', V.vaultClosesOnReturn(5000, 1000, 15) === true);
+  check('App Lock on, its time counts', V.vaultCloseMinutes(5, { ...V.EMPTY_VAULT_SETTINGS, closeAfterMinutes: 15 }) === 5);
+  check('App Lock off, the vault time counts', V.vaultCloseMinutes(null, { ...V.EMPTY_VAULT_SETTINGS, closeAfterMinutes: 15 }) === 15);
+  check('an older vault file reads as one minute', V.parseVaultSettings(JSON.stringify({ version: 1, categories: [] })).closeAfterMinutes === 1);
+  check('a chosen time is kept', V.parseVaultSettings(V.serializeVaultSettings({ ...V.EMPTY_VAULT_SETTINGS, closeAfterMinutes: 5 })).closeAfterMinutes === 5);
+  check('an unknown time reads as one minute', V.parseVaultSettings(JSON.stringify({ version: 1, categories: [], closeAfterMinutes: 7 })).closeAfterMinutes === 1);
+  const sessionSource = fs.readFileSync(path.join(LIB, 'vaultSession.ts'), 'utf8');
+  check('putting the app away alone never closes the vault', !/next === 'background' && isVaultOpen()/.test(sessionSource));
   const lockDevice = fs.readFileSync(path.join(LIB, 'appLockDevice.ts'), 'utf8');
   check('writing the lock file refreshes the vault switch', /serializeLockState\(state\)\);\s*refreshVaultOn\(\);/.test(lockDevice));
 

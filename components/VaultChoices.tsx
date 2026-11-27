@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
+import { autoLockLabel } from '../lib/appLock';
 import { canUseBiometrics } from '../lib/appLockDevice';
 import { biometricWords, deviceWord } from '../lib/appLockWords';
 import { isDesktopApp } from '../lib/desktop/bridge';
@@ -23,6 +24,7 @@ import {
   VAULT_CATEGORY_GROUP,
   VAULT_CATEGORY_LABELS,
   VAULT_CATEGORY_NOTES,
+  VAULT_CLOSE_CHOICES,
   VAULT_NO_CODE_SENTENCE,
   type VaultCategory,
   type VaultGroup,
@@ -30,13 +32,14 @@ import {
 import {
   closeVault,
   removeVaultOwnCode,
+  setVaultCloseMinutes,
   setVaultCategories,
   setVaultOwnCode,
   useVault,
 } from '../lib/vaultSession';
 import { ChoosePasscode } from './AppLockGate';
 import { VaultOpener } from './VaultOpener';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 const GROUPS: { key: VaultGroup; title: string }[] = [
   { key: 'health', title: 'Health' },
@@ -53,6 +56,7 @@ export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {
   const [codeNote, setCodeNote] = useState<string | null>(null);
 
   const chosen = new Set(vault.categories);
+  const closeMinutes = vault.closeAfterMinutes;
 
   const toggle = (category: VaultCategory) => {
     const isIn = chosen.has(category);
@@ -90,7 +94,7 @@ export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {
       <Text style={styles.help}>
         {`What you tick here stays closed while the app is open, until ${
           ownCode ? 'the vault code' : appLockOn ? 'your App Lock code' : 'a code'
-        } or fingerprint opens it, so somebody handed this ${deviceWord()} to look at the shopping list does not see your labs. It closes again whenever the app is put away. Only your records go in: lists to choose from, forms and settings stay usable, and the emergency card and safety warnings are never in it.`}
+        } or fingerprint opens it, so somebody handed this ${deviceWord()} to look at the shopping list does not see your labs. It stays open while you use the app, and closes again once the app has been away for the time chosen for it. Only your records go in: lists to choose from, forms and settings stay usable, and the emergency card and safety warnings are never in it.`}
       </Text>
 
       {GROUPS.map((group) => (
@@ -209,6 +213,35 @@ export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {
 
       {codeNote ? <Text style={styles.caption}>{codeNote}</Text> : null}
 
+      {vault.key === 'app-lock' || (vault.key === 'own-code' && appLockOn) ? (
+        <Text style={styles.caption}>
+          The vault closes after the same time away that App Lock waits before it locks again.
+        </Text>
+      ) : vault.key === 'own-code' ? (
+        <>
+          <Text style={styles.subLabel}>Close the vault after the app has been away for</Text>
+          <View style={styles.pillRow}>
+            {VAULT_CLOSE_CHOICES.map((minutes) => {
+              const on = closeMinutes === minutes;
+              return (
+                <TouchableOpacity
+                  key={minutes}
+                  style={[styles.pill, on ? styles.pillActive : null]}
+                  activeOpacity={0.85}
+                  onPress={() => setVaultCloseMinutes(minutes)}
+                  accessibilityState={{ selected: on }}
+                >
+                  <Text style={[styles.pillText, on ? styles.pillTextActive : null]}>{autoLockLabel(minutes)}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+          <Text style={styles.caption}>
+            {`Checked when you come back to the app. Closing Lifestead or restarting the ${deviceWord()} closes the vault at once.`}
+          </Text>
+        </>
+      ) : null}
+
       {vault.on && vault.open ? (
         <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={closeVault}>
           <Text style={styles.buttonText}>Close the Vault</Text>
@@ -243,6 +276,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   askText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
   button: { ...BUTTON_PRIMARY, marginTop: 14 },
   buttonText: { ...BUTTON_PRIMARY_TEXT },
   quietButton: {

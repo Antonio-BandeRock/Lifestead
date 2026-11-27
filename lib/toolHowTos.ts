@@ -1112,7 +1112,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Go through its pictures to the nutrition table (Supplement Facts, or Información nutrimental on a Mexican label) and tap it so it opens full size. Save the ingredients list too if it is in another picture, since it names each form.', mark: 'myMeds.storeLabelHelp' },
         { say: 'Save the picture: in a web browser, press and hold it and tap Download image. In a store app that will not save it, zoom until the table fills the screen, take a screenshot and crop it to the table.', mark: 'myMeds.storeLabelHelp' },
         { say: 'Here, tap + Supplement. The label comes first on the form.', mark: 'myMeds.supplement' },
-        { say: 'Tap Use a Photo You Have and pick the picture. Up to four pictures of one label can be picked together, such as the table and the ingredients list.', mark: 'myMeds.labelLibrary' },
+        { say: 'Tap Use a Photo You Have and pick the picture. Up to eight pictures of one label can be picked together, such as the table and the ingredients list.', mark: 'myMeds.labelLibrary' },
         { say: 'Type its name, then check every row against the bottle you hold and fill in anything it missed, since a store can show an older label or one sold in another country. Tap Add supplement.', mark: 'myMeds.saveSupplement' },
       ],
       forYou: "The label is the best start for most of what is in it, and a store's picture is flat, sharp and evenly lit, so it reads better than a photo of a curved bottle. The picture is read on the phone and sent nowhere.",
@@ -1123,6 +1123,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Tap + Supplement. The label comes first on the form.', mark: 'myMeds.supplement' },
         { say: 'Tap Photograph the Label and take a photo of the table on the bottle, holding it so the table faces you flat, with the ingredients list under it if it fits.', mark: 'myMeds.labelPhoto' },
+        { say: 'On a round bottle, turn it a little and tap Photograph More of the Label for the part the first picture missed. Each picture adds to the ones before it, and a nutrient already filled in is not added twice.', mark: 'myMeds.labelPhoto' },
         { say: 'Each nutrient it understood becomes an ingredient, with the form the ingredients list names, such as retinyl palmitate. Type its name, check every amount against the bottle, fill in anything it missed, then tap Add supplement.', mark: 'myMeds.saveSupplement' },
       ],
       forYou: 'A label in English or Spanish is read on the phone itself; the photo is not sent anywhere.',

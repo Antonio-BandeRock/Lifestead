@@ -581,8 +581,8 @@ const BY_HAND: Readonly<Record<string, string>> = {
   '3. Tap the picture so it opens full size.': '3. Toca la imagen para que se abra en tamaño completo.',
   '4. Save it. In a web browser, press and hold the picture and tap Download image. In a store app that will not save pictures, zoom in until the table fills the screen and take a screenshot (on most phones, press the power and volume down buttons together), then crop it to the table.':
     '4. Guárdala. En un navegador, mantén presionada la imagen y toca Descargar imagen. En la app de una tienda que no deja guardar imágenes, haz zoom hasta que la tabla llene la pantalla y toma una captura de pantalla (en la mayoría de los celulares, presiona juntos el botón de encendido y el de bajar volumen), y luego recórtala a la tabla.',
-  '5. Back here, tap Use a Photo You Have and pick the picture. Up to four pictures of one label can be picked together, such as the table and the ingredients list.':
-    '5. De vuelta aquí, toca Usar una foto que tengas y elige la imagen. Se pueden elegir hasta cuatro imágenes de una misma etiqueta juntas, como la tabla y la lista de ingredientes.',
+  '5. Back here, tap Use a Photo You Have and pick the picture. Up to eight pictures of one label can be picked together, such as the table and the ingredients list.':
+    '5. De vuelta aquí, toca Usar una foto que tengas y elige la imagen. Se pueden elegir hasta ocho imágenes de una misma etiqueta juntas, como la tabla y la lista de ingredientes.',
   '6. Check every row it fills against the bottle you hold. A store can show an older label, or the version sold in another country, and the bottle is what you take.':
     '6. Revisa cada fila que llena contra el frasco que tienes. Una tienda puede mostrar una etiqueta anterior, o la versión que se vende en otro país, y lo que tomas es el frasco.',
   "Fill a supplement from a store's picture of its label": 'Llenar un suplemento desde la imagen de su etiqueta en una tienda',
@@ -593,8 +593,8 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'Save the picture: in a web browser, press and hold it and tap Download image. In a store app that will not save it, zoom until the table fills the screen, take a screenshot and crop it to the table.':
     'Guarda la imagen: en un navegador, mantenla presionada y toca Descargar imagen. En la app de una tienda que no deja guardarla, haz zoom hasta que la tabla llene la pantalla, toma una captura de pantalla y recórtala a la tabla.',
   'Here, tap + Supplement and type its name.': 'Aquí, toca + Suplemento y escribe su nombre.',
-  'Tap Use a Photo You Have and pick the picture. Up to four pictures of one label can be picked together, such as the table and the ingredients list.':
-    'Toca Usar una foto que tengas y elige la imagen. Se pueden elegir hasta cuatro imágenes de una misma etiqueta juntas, como la tabla y la lista de ingredientes.',
+  'Tap Use a Photo You Have and pick the picture. Up to eight pictures of one label can be picked together, such as the table and the ingredients list.':
+    'Toca Usar una foto que tengas y elige la imagen. Se pueden elegir hasta ocho imágenes de una misma etiqueta juntas, como la tabla y la lista de ingredientes.',
   'Check every row against the bottle you hold, since a store can show an older label or one sold in another country, then tap Add supplement.':
     'Revisa cada fila contra el frasco que tienes, porque una tienda puede mostrar una etiqueta anterior o una que se vende en otro país, y luego toca Agregar suplemento.',
   "A store's picture is flat, sharp and evenly lit, so it reads better than a photo of a curved bottle. The picture is read on the phone and sent nowhere.":
@@ -626,6 +626,21 @@ const BY_HAND: Readonly<Record<string, string>> = {
   "Caps lock on. Tap to turn it off": "Mayúsculas fijas. Toca para quitarlas",
   "Shift on. Tap again for caps lock": "Mayúscula activada. Toca otra vez para fijar las mayúsculas",
   "Shift. Tap twice or hold for caps lock": "Mayúscula. Toca dos veces o mantén presionado para fijar las mayúsculas",
+  "Caps": "Mayús",
+  "CAPS": "MAYÚS",
+  "Caps lock. Tap to type in capitals": "Mayúsculas fijas. Toca para escribir en mayúsculas",
+  "The best bet for most of what is in it. A store's picture of the label reads best, since it is flat. On a round bottle, take several pictures, turning the bottle a little each time; each picture adds to the ones before it. The amounts and forms it finds fill in under Ingredients, and you fill in the rest after.": "Es lo más seguro para casi todo lo que contiene. La imagen de la etiqueta de una tienda se lee mejor porque es plana. En un frasco redondo, toma varias fotos girando el frasco un poco cada vez; cada foto se suma a las anteriores. Las cantidades y formas que encuentre se llenan en Ingredientes, y tú completas lo demás después.",
+  "Photograph More of the Label": "Tomar otra foto de la etiqueta",
+  "1 picture of this label read. Turn the bottle and take another for any part it missed.": "Se leyó 1 foto de esta etiqueta. Gira el frasco y toma otra para la parte que no salió.",
+  "{count} pictures of this label read, together. Turn the bottle and take another for any part still missing.": "Se leyeron {count} fotos de esta etiqueta, juntas. Gira el frasco y toma otra para la parte que todavía falte.",
+  "Nothing new: every nutrient read here is already filled in below.": "Nada nuevo: cada nutriente que se leyó aquí ya aparece abajo.",
+  "On a round bottle, turn it a little and tap Photograph More of the Label for the part the first picture missed. Each picture adds to the ones before it, and a nutrient already filled in is not added twice.": "En un frasco redondo, gíralo un poco y toca Tomar otra foto de la etiqueta para la parte que no salió en la primera. Cada foto se suma a las anteriores, y un nutriente que ya aparece no se agrega dos veces.",
+  "What you tick here stays closed while the app is open, until {value} or fingerprint opens it, so somebody handed this {deviceWord} to look at the shopping list does not see your labs. It stays open while you use the app, and closes again once the app has been away for the time chosen for it. Only your records go in: lists to choose from, forms and settings stay usable, and the emergency card and safety warnings are never in it.": "Lo que palomees aquí se queda cerrado mientras la app está abierta, hasta que {value} o la huella lo abra, así que alguien a quien le pasaste este {deviceWord} para ver la lista del súper no ve tus estudios. Sigue abierta mientras usas la app, y se vuelve a cerrar cuando la app lleva guardada el tiempo que elegiste. Solo entran tus registros: las listas para elegir, los formularios y la configuración se siguen pudiendo usar, y la tarjeta de emergencia y las advertencias de seguridad nunca entran.",
+  "Open it with your App Lock code or fingerprint to see them. It stays open while you use the app, and closes again once the app has been away for the time chosen for it.": "Ábrela con tu código del bloqueo de la app o tu huella para verlos. Sigue abierta mientras usas la app, y se vuelve a cerrar cuando la app lleva guardada el tiempo que elegiste.",
+  "Open it with your vault code or fingerprint to see them. It stays open while you use the app, and closes again once the app has been away for the time chosen for it.": "Ábrela con el código de la bóveda o tu huella para verlos. Sigue abierta mientras usas la app, y se vuelve a cerrar cuando la app lleva guardada el tiempo que elegiste.",
+  "The vault closes after the same time away that App Lock waits before it locks again.": "La bóveda se cierra después del mismo tiempo fuera que espera el bloqueo de la app antes de volver a bloquearse.",
+  "Close the vault after the app has been away for": "Cerrar la bóveda cuando la app lleve guardada",
+  "Checked when you come back to the app. Closing Lifestead or restarting the {deviceWord} closes the vault at once.": "Se revisa cuando vuelves a la app. Cerrar Lifestead o reiniciar el {deviceWord} cierra la bóveda en ese momento.",
 };
 
 export const ES_BY_HAND: Readonly<Record<string, string>> = BY_HAND;

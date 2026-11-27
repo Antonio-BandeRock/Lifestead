@@ -292,6 +292,8 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
     if (!found) done();
   }
 
+  const showsLetterKeys = canToggleMode && !showsNumbersLayout && !showsAccentsLayout;
+
   const mainKeys =
     showsNumbersLayout && canToggleMode ? (
       <>
@@ -301,7 +303,7 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
               <Key key={char} label={char} onPress={() => insertText(char)} />
             ))}
             {rowIndex === SYMBOL_ROWS.length - 1 ? (
-              <Key label="backspace" icon="backspace-outline" onPress={backspace} flex={2} muted />
+              <Key label="backspace" icon="backspace-outline" onPress={backspace} repeats flex={2} muted />
             ) : null}
           </View>
         ))}
@@ -317,7 +319,7 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
         ))}
         <View style={styles.row}>
           <Key label="." onPress={() => insertText('.')} />
-          <Key label="backspace" icon="backspace-outline" onPress={backspace} flex={2} muted />
+          <Key label="backspace" icon="backspace-outline" onPress={backspace} repeats flex={2} muted />
         </View>
       </>
     ) : showsAccentsLayout ? (
@@ -328,7 +330,7 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
               <Key key={char} label={char} onPress={() => insertText(char)} />
             ))}
             {rowIndex === ACCENT_ROWS.length - 1 ? (
-              <Key label="backspace" icon="backspace-outline" onPress={backspace} flex={2} muted />
+              <Key label="backspace" icon="backspace-outline" onPress={backspace} repeats flex={2} muted />
             ) : null}
           </View>
         ))}
@@ -359,7 +361,7 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
             {row.map((letter) => (
               <Key key={letter} label={shiftActive ? letter.toUpperCase() : letter} onPress={() => pressLetter(letter)} />
             ))}
-            {rowIndex === 2 ? <Key label="backspace" icon="backspace-outline" onPress={backspace} flex={1.5} muted /> : null}
+            {rowIndex === 2 ? <Key label="backspace" icon="backspace-outline" onPress={backspace} repeats flex={1.5} muted /> : null}
           </View>
         ))}
       </>
@@ -387,8 +389,22 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
           muted
         />
       ) : null}
+      {/* A Caps key that can be seen (Tony, 2026-11-27: "The app keyboard
+          still doesn't show a caps lock that I can see"). Shift still locks
+          by a double tap or a hold; this key does the same in one tap. */}
+      {showsLetterKeys ? (
+        <Key
+          label={shift === 'locked' ? 'CAPS' : 'Caps'}
+          onPress={() => setShift((current) => (current === 'locked' ? 'off' : 'locked'))}
+          spokenLabel={shift === 'locked' ? 'Caps lock on. Tap to turn it off' : 'Caps lock. Tap to type in capitals'}
+          flex={1.3}
+          active={shift === 'locked'}
+          locked={shift === 'locked'}
+          muted={shift !== 'locked'}
+        />
+      ) : null}
       {canToggleMode ? <Key label="," onPress={() => insertText(',')} /> : null}
-      <Key label="" onPress={() => insertText(' ')} flex={canToggleMode ? 3 : 6} muted />
+      <Key label="" onPress={() => insertText(' ')} flex={canToggleMode ? (showsLetterKeys ? 2.2 : 3) : 6} muted />
       {canToggleMode ? <Key label="." onPress={() => insertText('.')} /> : null}
     </View>
   );
@@ -518,6 +534,11 @@ function CloseOnRouteChange() {
   return null;
 }
 
+// Held backspace: one delete on touch, then after a short wait one every
+// REPEAT_EVERY_MS until the finger lifts.
+const REPEAT_AFTER_MS = 400;
+const REPEAT_EVERY_MS = 70;
+
 function Key({
   label,
   icon,
@@ -528,6 +549,7 @@ function Key({
   muted,
   active,
   locked,
+  repeats,
 }: {
   label: string;
   icon?: keyof typeof Ionicons.glyphMap;
@@ -538,10 +560,35 @@ function Key({
   muted?: boolean;
   active?: boolean;
   locked?: boolean;
+  /** Fires on touch and keeps firing while held, the way a phone's backspace
+   *  does (Tony, 2026-11-27: "it should continue to backspace as long as the
+   *  key is pressed"). */
+  repeats?: boolean;
 }) {
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const latest = useRef(onPress);
+  latest.current = onPress;
+  const stopRepeat = () => {
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = null;
+  };
+  useEffect(() => stopRepeat, []);
+  const startRepeat = () => {
+    stopRepeat();
+    latest.current();
+    const again = (wait: number) => {
+      timer.current = setTimeout(() => {
+        latest.current();
+        again(REPEAT_EVERY_MS);
+      }, wait);
+    };
+    again(REPEAT_AFTER_MS);
+  };
   return (
     <Pressable
-      onPress={onPress}
+      onPress={repeats ? undefined : onPress}
+      onPressIn={repeats ? startRepeat : undefined}
+      onPressOut={repeats ? stopRepeat : undefined}
       onLongPress={onLongPress}
       accessibilityLabel={spokenLabel}
       style={[styles.key, { flex }, muted ? styles.keyMuted : styles.keyLetter, active ? styles.keyActive : null, locked ? styles.keyLocked : null]}

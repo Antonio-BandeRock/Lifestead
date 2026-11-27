@@ -1,6 +1,6 @@
 // The vault (lib/vault.ts): choosing what goes in it, opening it with a code
-// or fingerprint, closing it, and closing it again whenever the app is put
-// away. lib/vaultState.ts holds the flags, so the database can ask without
+// or fingerprint, closing it, and closing it again once the app has been
+// put away for the chosen time. lib/vaultState.ts holds the flags, so the database can ask without
 // importing any of this.
 //
 // What opens it: with App Lock on, the App Lock code or fingerprint (the
@@ -30,7 +30,15 @@ import { canUseBiometrics, checkPasscode, unlockWithBiometric } from './appLockD
 import { heldDataKey, readLockStateSync } from './appLockSession';
 import { bytesToBase64Fast } from './localSeal';
 import { isDesktopApp } from './desktop/bridge';
-import { cleanCategories, VAULT_CATEGORY_KIND, type VaultCategory, type VaultKey } from './vault';
+import {
+  cleanCategories,
+  vaultCloseMinutes,
+  vaultClosesOnReturn,
+  VAULT_CATEGORY_KIND,
+  type VaultCategory,
+  type VaultCloseMinutes,
+  type VaultKey,
+} from './vault';
 import {
   chosenVaultCategories,
   currentVaultKey,
@@ -267,16 +275,42 @@ export function setVaultOn(on: boolean): void {
 // Closing when the app is put away
 
 let watching = false;
+let awaySince: number | null = null;
+
+/** How long the app may be put away before the vault closes, as set up now. */
+export function currentVaultCloseMinutes(): VaultCloseMinutes {
+  const lock = readLockStateSync();
+  const appLockMinutes = lock && lock.phase === 'on' ? lock.autoLockMinutes : null;
+  return vaultCloseMinutes(appLockMinutes, getVaultSettings());
+}
+
+/** The vault's own close time, for while App Lock is off. */
+export function setVaultCloseMinutes(minutes: VaultCloseMinutes): void {
+  saveVaultSettings({ ...getVaultSettings(), closeAfterMinutes: minutes });
+}
 
 /**
- * Closes the vault whenever the app is put away. Called once from the root
+ * Closes the vault when the person comes back after the app was put away for
+ * the chosen time, the way App Lock locks (components/AppLockGate.tsx).
+ * Going to the camera, a file picker, a fingerprint prompt or the share
+ * sheet puts the app in the background for a moment, and closing on each of
+ * those made the vault ask again at every turn (Tony, 2026-11-27: "it should
+ * remain unlocked the entire time they are using the app"). A restart still
+ * closes it, since open is held only in memory. Called once from the root
  * layout; a second call does nothing.
  */
 export function watchVaultClosing(): void {
   if (watching) return;
   watching = true;
   AppState.addEventListener('change', (next) => {
-    if (next === 'background' && isVaultOpen()) setVaultOpen(false);
+    if (next === 'background') {
+      if (awaySince === null) awaySince = Date.now();
+      return;
+    }
+    if (next !== 'active') return;
+    const since = awaySince;
+    awaySince = null;
+    if (isVaultOpen() && vaultClosesOnReturn(since, Date.now(), currentVaultCloseMinutes())) setVaultOpen(false);
   });
 }
 
@@ -288,12 +322,21 @@ export type VaultView = {
   /** What is in it, guarded or not. */
   categories: VaultCategory[];
   key: VaultKey;
+  /** How long the app may be away before it closes, as set up now. */
+  closeAfterMinutes: VaultCloseMinutes;
 };
 
 function readView(): VaultView {
   const on = isVaultOn();
   const open = isVaultOpen();
-  return { on, open, closed: on && !open, categories: chosenVaultCategories(), key: currentVaultKey() };
+  return {
+    on,
+    open,
+    closed: on && !open,
+    categories: chosenVaultCategories(),
+    key: currentVaultKey(),
+    closeAfterMinutes: currentVaultCloseMinutes(),
+  };
 }
 
 /** The vault's state, redrawn whenever it opens, closes, or its settings change. */

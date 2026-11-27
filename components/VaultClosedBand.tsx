@@ -38,7 +38,7 @@ export function VaultClosedBand({
     <View style={inline ? styles.inline : band.box}>
       <Text style={styles.title}>{vaultClosedWords(closedHere)}</Text>
       <Text style={styles.message}>
-        {`Open it with your ${vault.key === 'app-lock' ? 'App Lock code' : 'vault code'} or fingerprint to see them. It closes again when the app is put away.`}
+        {`Open it with your ${vault.key === 'app-lock' ? 'App Lock code' : 'vault code'} or fingerprint to see them. It stays open while you use the app, and closes again once the app has been away for the time chosen for it.`}
       </Text>
       {opening ? (
         <VaultOpener accent={color} />

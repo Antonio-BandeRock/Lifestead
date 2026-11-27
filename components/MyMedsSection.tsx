@@ -142,7 +142,7 @@ const STORE_LABEL_STEPS: string[] = [
   '2. Go through the product\'s pictures to the one showing the nutrition table: Supplement Facts on a U.S. label, Información nutrimental on a Mexican one. If the ingredients list is in another picture, save that one as well, since it names each nutrient\'s form.',
   '3. Tap the picture so it opens full size.',
   '4. Save it. In a web browser, press and hold the picture and tap Download image. In a store app that will not save pictures, zoom in until the table fills the screen and take a screenshot (on most phones, press the power and volume down buttons together), then crop it to the table.',
-  '5. Back here, tap Use a Photo You Have and pick the picture. Up to four pictures of one label can be picked together, such as the table and the ingredients list.',
+  '5. Back here, tap Use a Photo You Have and pick the picture. Up to eight pictures of one label can be picked together, such as the table and the ingredients list.',
   '6. Check every row it fills against the bottle you hold. A store can show an older label, or the version sold in another country, and the bottle is what you take.',
 ];
 
@@ -300,6 +300,10 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   // Where the reading's note shows: beside the pictures at the top of the
   // form, or beside the box it was said or typed into.
   const [labelNoteFromPicture, setLabelNoteFromPicture] = useState(false);
+  // Every picture of this label read so far, one page each, so a round
+  // bottle can be photographed a turn at a time and each picture adds to
+  // the last (Tony, 2026-11-27).
+  const [labelPages, setLabelPages] = useState<string[]>([]);
   const [medForm, setMedForm] = useState<MedFormState>(blankMedForm('prescription'));
   const [expandedId, setExpandedId] = useState<string | null>(null);
   // The row whose Tracking button opened the count, and the one just saved,
@@ -452,6 +456,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
     setSupplementForm(blankMyMedsSupplementForm());
     setLabelText('');
     setLabelNote(null);
+    setLabelPages([]);
     setAddMode('supplement');
   }
   function openAddMed(category: 'prescription' | 'otc') {
@@ -509,6 +514,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
     setSupplementForm(blankMyMedsSupplementForm());
     setLabelText('');
     setLabelNote(null);
+    setLabelPages([]);
     setMedForm(blankMedForm('prescription'));
     setPendingBottleId(null);
     pendingCode.current = null;
@@ -580,10 +586,13 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
     }));
   }
 
-  // A photo of the label, read on the phone. Its words go into the box (a
-  // second photo adds to the first, for a label that wraps around the
-  // bottle) and only the new photo's words are read into rows, so the rows
-  // the first photo filled are not added twice. Spanish labels read too.
+  // A photo of the label, read on the phone. Its words go into the box, and
+  // every picture taken of this label is read together, so a label that
+  // wraps around a round bottle can be photographed a turn at a time (Tony,
+  // 2026-11-27: "it should allow for multiple images of the label"). A row
+  // already filled in is not added again, so two pictures that overlap give
+  // each nutrient once, and a form named in one picture fills a nutrient
+  // read in another. Spanish labels read too.
   async function readLabelPhoto(from: 'camera' | 'library') {
     if (announcePhoneOnly(showInfoAlert, 'readSupplementLabel')) return;
     setReadingLabel(true);
@@ -598,14 +607,14 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       const shot =
         from === 'camera'
           ? await ImagePicker.launchCameraAsync({ quality: 0.8 })
-          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8, allowsMultipleSelection: true, selectionLimit: 4 });
+          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8, allowsMultipleSelection: true, selectionLimit: 8 });
       if (shot.canceled || shot.assets.length === 0) return;
       // A label's table often comes back a column at a time (every name,
       // then every amount), so the lines are put back into rows by where
       // they sit on the page (Tony, 2026-11-19: a Mexican multivitamin's
       // photo read as nothing with an amount). The ingredients paragraph
       // under the table gives forms only, never amounts (readSupplementLabel).
-      // Up to four pictures of one label can be picked at once, since a
+      // Up to eight pictures of one label can be picked at once, since a
       // store page often shows the table and the ingredients apart.
       const pages: string[] = [];
       for (const asset of shot.assets) {
@@ -622,7 +631,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
 
 ${text}` : text));
       setLabelNoteFromPicture(true);
-      await fillFromLabel(text, pages);
+      const allPages = [...labelPages, ...pages];
+      setLabelPages(allPages);
+      await fillFromLabel(allPages.join('\n\n'), allPages);
     } catch (error) {
       console.error('[MyMedsSection] Failed to read the label photo', error);
       showInfoAlert('Could not read the label', 'Something went wrong reading that photo. You can say or type what the label lists instead.');
@@ -641,8 +652,19 @@ ${text}` : text));
     const reading = readSupplementLabel(pages && pages.length > 1 ? pages : text);
     const tracked = new Set(nutrients.map((nutrient) => nutrient.code));
     const notes = reading.notUnderstood.map((item) => `"${item.spokenText}": ${item.reason}`);
+    // A nutrient with the same amount already in the form is not added
+    // again: an earlier picture of this label filled it, or it was typed.
+    const rowKey = (code: string, amount: string | number, unit: string) => `${code}|${Number(amount)}|${unit}`;
+    const already = new Set(
+      supplementForm.ingredients.filter((row) => row.nutrientCode).map((row) => rowKey(row.nutrientCode, row.amount, row.unit)),
+    );
     const filled: MedIngredientRow[] = [];
+    let repeated = 0;
     for (const row of reading.rows) {
+      if (already.has(rowKey(row.nutrientCode, row.amount, row.unit))) {
+        repeated += 1;
+        continue;
+      }
       if (!tracked.has(row.nutrientCode)) {
         notes.push(`"${row.spokenText}": No nutrient this app tracks was recognised in it.`);
         continue;
@@ -665,14 +687,24 @@ ${text}` : text));
       void ensureNutrientDataLoaded(row.nutrientCode);
     }
     if (filled.length > 0) {
-      setSupplementForm((current) => ({
-        ...current,
-        ingredients: [...current.ingredients.filter((row) => row.nutrientCode || row.amount), ...filled],
-      }));
+      setSupplementForm((current) => {
+        const have = new Set(
+          current.ingredients.filter((row) => row.nutrientCode).map((row) => rowKey(row.nutrientCode, row.amount, row.unit)),
+        );
+        return {
+          ...current,
+          ingredients: [
+            ...current.ingredients.filter((row) => row.nutrientCode || row.amount),
+            ...filled.filter((row) => !have.has(rowKey(row.nutrientCode, row.amount, row.unit))),
+          ],
+        };
+      });
     }
     const lead =
       filled.length === 0
-        ? 'Nothing in that could be read as a nutrient with an amount.'
+        ? repeated > 0
+          ? 'Nothing new: every nutrient read here is already filled in below.'
+          : 'Nothing in that could be read as a nutrient with an amount.'
         : `${filled.length === 1 ? '1 ingredient' : `${filled.length} ingredients`} filled in below. Check each one before adding the supplement.`;
     setLabelNote(notes.length ? `${lead}\n\nNot read, so nothing was guessed:\n${notes.join('\n')}` : lead);
   }
@@ -1019,7 +1051,7 @@ ${text}` : text));
                 ingredients and fill in the gaps after"). */}
             <Text style={styles.label}>Start with a picture of the label</Text>
             <Text style={styles.fieldHint}>
-              The best bet for most of what is in it. A store&apos;s picture of the label reads best, since it is flat; a photo around a curved bottle often reads badly. The amounts and forms it finds fill in under Ingredients, and you fill in the rest after.
+              The best bet for most of what is in it. A store&apos;s picture of the label reads best, since it is flat. On a round bottle, take several pictures, turning the bottle a little each time; each picture adds to the ones before it. The amounts and forms it finds fill in under Ingredients, and you fill in the rest after.
             </Text>
             <View style={styles.labelPhotoRow}>
               <TouchableOpacity
@@ -1036,9 +1068,18 @@ ${text}` : text));
                 disabled={readingLabel}
                 style={[styles.secondaryButton, styles.labelPhotoButton, readingLabel ? styles.busy : null]}
               >
-                <Text style={styles.secondaryButtonText}>Photograph the Label</Text>
+                <Text style={styles.secondaryButtonText}>
+                  {labelPages.length > 0 ? 'Photograph More of the Label' : 'Photograph the Label'}
+                </Text>
               </TouchableOpacity>
             </View>
+            {labelPages.length > 0 ? (
+              <Text style={styles.fieldHint}>
+                {labelPages.length === 1
+                  ? t('1 picture of this label read. Turn the bottle and take another for any part it missed.')
+                  : t('{count} pictures of this label read, together. Turn the bottle and take another for any part still missing.', { count: labelPages.length })}
+              </Text>
+            ) : null}
             {/* A store's picture of the label reads best (Tony, 2026-11-19). */}
             <TouchableOpacity
               ref={walkMark.ref('myMeds.storeLabelHelp')}
