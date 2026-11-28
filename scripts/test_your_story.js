@@ -610,6 +610,14 @@ const back = load('lib/storyReturn.ts');
   );
   same(noneAnswered.next.key, 'beats', 'answering none moves on to the parts of life');
 
+  // Tony, 2026-11-27: with the vault closed the autism, ADHD and dyslexia
+  // list reads empty; something listed behind it still answers the question.
+  const neuroQ = (overrides) => interview.buildInterview(interviewFacts(fresh, overrides)).questions.find((q) => q.key === 'neuro');
+  check(neuroQ({ neuroInVault: true }).answered, 'a neuro answer kept in the closed vault still counts as answered');
+  same(neuroQ({ neuroInVault: true }).summary, 'Kept in the vault.', 'and says where it is');
+  check(!neuroQ({}).answered, 'with nothing listed it is still asked');
+  check(neuroQ({ neuro: ['adhd'] }).answered, 'with the vault open the list answers it');
+
   const withCondition = interview.buildInterview(
     interviewFacts(fresh, {
       conditions: ['hashimotos'],

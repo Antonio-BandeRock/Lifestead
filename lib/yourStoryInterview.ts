@@ -1287,6 +1287,9 @@ export type InterviewFacts = {
   stages: Record<string, string>;
   neuro: string[];
   neuroLabels: Record<string, string>;
+  // Something is listed but the vault is closed, so the list above came
+  // back empty. Read as answered, never as a question waiting (1.0.98.3).
+  neuroInVault?: boolean;
   diets: string[];
   // The cuisines the meal plan leans toward (cuisine_preferences).
   cuisines: string[];
@@ -1390,6 +1393,7 @@ function viewQuestion(def: InterviewQuestionDef, facts: InterviewFacts): Intervi
     case 'neuro': {
       const names = facts.neuro.map((key) => facts.neuroLabels[key] ?? key);
       if (names.length > 0) return { ...base, answered: true, summary: listSentence(names) };
+      if (facts.neuroInVault) return { ...base, answered: true, summary: 'Kept in the vault.' };
       return { ...base, answered: !!answer, summary: answer ? `${NONE_OF_THESE_LABEL}.` : null };
     }
     case 'beats':

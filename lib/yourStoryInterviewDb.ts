@@ -30,6 +30,11 @@ import {
   listNeuroProfile,
 } from './db';
 
+async function neuroListed(db: Awaited<ReturnType<typeof getDatabase>>): Promise<boolean> {
+  const row = await db.getFirstAsync<{ n: number }>('/* vault:tool */ SELECT COUNT(*) AS n FROM user_neuro_profile');
+  return (row?.n ?? 0) > 0;
+}
+
 export async function setYourStoryAnswer(key: string, answer: string | null = null): Promise<void> {
   const db = await getDatabase();
   await db.runAsync(
@@ -117,6 +122,12 @@ export async function loadYourStoryEverything(withGuides = true): Promise<YourSt
     stages,
     neuro,
     neuroLabels: NEURO_PROFILE_LABELS,
+    // Tony, 2026-11-27: the autism, ADHD and dyslexia answer kept coming
+    // back in setup after it was done. It is a vault category, so with the
+    // vault closed the list reads empty and the question looked unanswered.
+    // Whether anything is listed is asked past the vault, without reading
+    // what it is.
+    neuroInVault: neuro.length === 0 && (await safely(() => neuroListed(db), false)),
     diets,
     cuisines,
     allergies,

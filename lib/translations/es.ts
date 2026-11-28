@@ -644,6 +644,7 @@ const BY_HAND: Readonly<Record<string, string>> = {
   "The vault closes after the same time away that App Lock waits before it locks again.": "La bóveda se cierra después del mismo tiempo fuera que espera el bloqueo de la app antes de volver a bloquearse.",
   "Close the vault after the app has been away for": "Cerrar la bóveda cuando la app lleve guardada",
   "Checked when you come back to the app. Closing Lifestead or restarting the {deviceWord} closes the vault at once.": "Se revisa cuando vuelves a la app. Cerrar Lifestead o reiniciar el {deviceWord} cierra la bóveda en ese momento.",
+  "Kept in the vault.": "Guardado en la bóveda.",
 };
 
 export const ES_BY_HAND: Readonly<Record<string, string>> = BY_HAND;
