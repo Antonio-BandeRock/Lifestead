@@ -32,7 +32,7 @@ import {
   PILL_TEXT,
 } from '../constants/buttons';
 import { saveTreatmentSupply, type TreatmentDetails } from '../lib/medDetailsDb';
-import type { SupplyReading } from '../lib/medSupply';
+import { unitsDisagree, type SupplyReading } from '../lib/medSupply';
 import { parseDoseAmount } from '../lib/doseAmount';
 import { t } from '../lib/i18n';
 import {
@@ -52,6 +52,9 @@ type Props = {
   reading: SupplyReading | undefined;
   /** What one is called, used when nothing has been counted yet (capsule, tablet). */
   defaultUnit?: string | null;
+  /** A supplement's name for one, from its own form. When the count's unit
+   *  says something else (capsules counted, a tablet a dose), the form says so. */
+  doseCalled?: string | null;
   tabColor: string;
   /** "Not now" after a new one is saved; "Cancel" everywhere else. */
   cancelLabel?: string;
@@ -63,7 +66,7 @@ function numberText(value: number | null | undefined): string {
   return value === null || value === undefined ? '' : String(value);
 }
 
-export function SupplyCountForm({ treatmentId, name, details, reading, defaultUnit, tabColor, cancelLabel = 'Cancel', onDone, onProblem }: Props) {
+export function SupplyCountForm({ treatmentId, name, details, reading, defaultUnit, doseCalled, tabColor, cancelLabel = 'Cancel', onDone, onProblem }: Props) {
   const styles = makeStyles(tabColor);
   const [onHand, setOnHand] = useState('');
   const [unit, setUnit] = useState('');
@@ -198,6 +201,14 @@ export function SupplyCountForm({ treatmentId, name, details, reading, defaultUn
           placeholder="tablets, capsules, ml"
         />
       </View>
+      {unitsDisagree(unit, doseCalled) ? (
+        <Text style={styles.caption}>
+          {t('The supplement calls one "{called}" and this count says "{unit}". If they are the same thing, use the same word in both.', {
+            called: doseCalled?.trim() ?? '',
+            unit: unit.trim(),
+          })}
+        </Text>
+      ) : null}
       <Text style={styles.label}>{eachLabel}</Text>
       <AppTextInput style={[styles.input, styles.numberInput]} keyboardType="decimal-pad" value={perDose} onChangeText={setPerDose} />
       <Text style={styles.caption}>

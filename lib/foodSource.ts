@@ -50,6 +50,11 @@ export function foodSourceCaption(source: string, preferred = 'USDA'): string {
   return `${first} Neither the table you put first (${chosen}) nor USDA has an entry for this food prepared this way.`;
 }
 
+/** The table and its country, such as "the German Nutrient Database (BLS), Germany". */
+export function foodTableName(source: string): string {
+  return where(source);
+}
+
 function where(source: string): string {
   const info = SOURCES[source];
   if (!info) return source;

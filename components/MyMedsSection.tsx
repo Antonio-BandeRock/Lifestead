@@ -59,7 +59,7 @@ import { getHomeZone, listTravelModes } from '../lib/travelTimeDb';
 import type { TravelMode } from '../lib/travelTime';
 import { listInjectionSettings, listSiteHistory, type InjectionSetting } from '../lib/injectionSitesDb';
 import type { SiteUse } from '../lib/injectionSites';
-import type { SupplyReading } from '../lib/medSupply';
+import { unitsDisagree, type SupplyReading } from '../lib/medSupply';
 import type { NutrientGapEntry } from '../lib/nutrientAnalysis';
 import { useWalkMark } from '../components/WalkMark';
 import { ThumbRow } from './ThumbRow';
@@ -88,7 +88,8 @@ import { saveOrSay } from '../lib/saveProblem';
 import { rememberMedCode } from '../lib/medBarcodesDb';
 import { takeSupplementDraft, type SupplementDraft } from '../lib/supplementDraft';
 import { doseWithUnit, formatDoseAmount, parseDoseAmount } from '../lib/doseAmount';
-import { isSupplementOnlyIngredient, withSupplementIngredients } from '../lib/supplementIngredients';
+import { ingredientFood, isSupplementOnlyIngredient, withSupplementIngredients } from '../lib/supplementIngredients';
+import { foodTableName } from '../lib/foodSource';
 import { sortByLabel } from '../lib/choiceOrder';
 
 // My Meds, the registry of everything a person takes: prescriptions, OTC
@@ -990,6 +991,7 @@ ${text}` : text));
     const timing = timingByNutrient[nutrientCode];
     const foodStatus = foodStatusFor(nutrientCode);
     const formDetail = forms.find((form) => form.formName === chosenForm);
+    const linkedFood = ingredientFood(nutrientCode);
 
     if (!nutrientCode) return null;
 
@@ -1013,7 +1015,23 @@ ${text}` : text));
             {timing.pairsWellWith ? <Text style={styles.helperText}>Pairs well with: {timing.pairsWellWith}</Text> : null}
           </>
         ) : null}
-        {isSupplementOnlyIngredient(nutrientCode) ? (
+        {linkedFood ? (
+          <>
+            <Text style={styles.myMedsResearchLabel}>How it is counted</Text>
+            <Text style={styles.helperText}>
+              {t(
+                'Counted as a typical {name}: what the record "{food}" holds in {table}, times the amount on your label. Your bottle can differ, and any nutrient the label lists itself is taken from the label instead.',
+                { name: nutrientDisplayName(nutrientCode).toLowerCase(), food: linkedFood.foodName, table: foodTableName(linkedFood.source) },
+              )}
+            </Text>
+            {linkedFood.alsoCarries ? <Text style={styles.helperText}>{t(linkedFood.alsoCarries)}</Text> : null}
+            {/antioxidant/i.test(linkedFood.alsoCarries ?? '') ? (
+              <Text style={styles.helperText}>
+                Antioxidants are named here and never given as an amount. USDA withdrew its antioxidant table (ORAC) in 2012, saying the figures do not show what happens in the body.
+              </Text>
+            ) : null}
+          </>
+        ) : isSupplementOnlyIngredient(nutrientCode) ? (
           <Text style={styles.helperText}>
             {t('The food records carry no amount of {name}, so it is kept as the label gives it and not added into the nutrients for the day.', {
               name: nutrientDisplayName(nutrientCode),
@@ -1486,15 +1504,21 @@ ${text}` : text));
                   {treatment.treatmentType === 'supplement'
                     ? `${doseWithUnit(Number(treatment.unitsPerDay), treatment.servingUnitLabel ?? '')}/day`
                     : [
-                        taperToday ? `${taperDoseLine(taperToday)} today` : treatment.doseAmount ? `${formatDoseAmount(treatment.doseAmount)}${treatment.doseUnit ?? ''}` : null,
+                        taperToday ? `${taperDoseLine(taperToday)} today` : treatment.doseAmount ? `${formatDoseAmount(treatment.doseAmount)}${treatment.doseUnit ? ' ' + treatment.doseUnit : ''}` : null,
                         treatment.frequency,
                       ]
                         .filter(Boolean)
                         .join(', ') || 'No dose details entered'}
                   {treatment.active ? '' : ` ${t('· Paused, so it is left out of nutrient totals and timing warnings')}`}
                 </Text>
-                {supplyByTreatment.get(treatment.id)?.short ? (
-                  <Text style={styles.rowMeta}>{supplyByTreatment.get(treatment.id)?.short}</Text>
+                {treatment.treatmentType === 'supplement' &&
+                unitsDisagree(detailsByTreatment.get(treatment.id)?.supplyUnit, treatment.servingUnitLabel) ? (
+                  <Text style={styles.rowMeta}>
+                    {t('Taken as "{called}", counted as "{unit}". Tap Tracking to use one word for both.', {
+                      called: treatment.servingUnitLabel ?? '',
+                      unit: detailsByTreatment.get(treatment.id)?.supplyUnit ?? '',
+                    })}
+                  </Text>
                 ) : null}
                 {ingredients.length > 0 ? (
                   <Text style={styles.rowMeta}>
@@ -1551,6 +1575,7 @@ ${text}` : text));
                     details={detailsByTreatment.get(treatment.id)}
                     reading={supplyByTreatment.get(treatment.id)}
                     defaultUnit={treatment.servingUnitLabel}
+                    doseCalled={treatment.treatmentType === 'supplement' ? treatment.servingUnitLabel : null}
                     tabColor={tabColor}
                     onDone={(saved) => {
                       setCountingId(null);
@@ -1693,6 +1718,7 @@ ${text}` : text));
                 details={detailsByTreatment.get(justSaved.id)}
                 reading={supplyByTreatment.get(justSaved.id)}
                 defaultUnit={justSaved.unit}
+                doseCalled={justSaved.unit}
                 tabColor={tabColor}
                 cancelLabel="Not now"
                 onDone={() => void finishJustSaved(justSaved)}

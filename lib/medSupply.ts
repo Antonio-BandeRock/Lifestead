@@ -145,6 +145,18 @@ function counted(n: number, unit: string | null): string {
   return `${amount(n)} ${n === 1 ? singular(typed) : typed}`;
 }
 
+/**
+ * Whether the count's unit and the supplement's name for one disagree, as
+ * B-9 did on Lisa's phone (2026-11-27): "½ tablet/day" over "140 capsules".
+ * "tablet" and "Tablets" agree; either one left empty is no disagreement.
+ */
+export function unitsDisagree(countUnit: string | null | undefined, doseCalled: string | null | undefined): boolean {
+  const a = countUnit?.trim().toLowerCase();
+  const b = doseCalled?.trim().toLowerCase();
+  if (!a || !b) return false;
+  return singular(a) !== singular(b);
+}
+
 /** "tablets" as "tablet" for a count of one, the unit being typed as a plural. */
 function singular(unit: string): string {
   if (/[^aeiou]ies$/i.test(unit)) return unit.slice(0, -3) + 'y';
@@ -286,7 +298,12 @@ function readAhead(input: SupplyInput, ahead: ScheduleAhead, remaining: number, 
       sentence: `${leftOf}${doses} ${covers}` + unconvertedSentence(ahead, input) + UNMARKED,
     };
   }
-  const daysLeft = Math.max(0, daysBetween(input.today, runsOutOn));
+  // Days are counted from the first day the count still has to cover: today
+  // when a dose is still to come today, tomorrow once today's is taken (or
+  // today has none). Counting from today regardless read 150 tablets taken
+  // once a day as 151 days every evening (Lisa's phone, 2026-11-27).
+  const firstDay = ahead.doses[0].date > input.today ? addDays(input.today, 1) : input.today;
+  const daysLeft = Math.max(0, daysBetween(firstDay, runsOutOn));
   const lead = Math.max(0, Math.round(input.leadDays));
   const early = addDays(runsOutOn, -lead);
   const remindOn = early < input.today ? input.today : early;

@@ -75,7 +75,7 @@ import { ownContributorFromRow, setOwnContributors, type FlareContributor, type 
 import { gapFoodNameKey } from './nutrientGapFoods';
 import { eatenOutCaption, eatenOutOf, parseEatenOutNote, recentPlaces, type EatenOutHow } from './eatenOut';
 import { readOrClosed } from './vaultReads';
-import { isSupplementOnlyIngredient, withSupplementIngredients } from './supplementIngredients';
+import { ingredientFood, isSupplementOnlyIngredient, labelAmountInGrams, linkedFoodShare, withSupplementIngredients } from './supplementIngredients';
 
 // Exported as of 2026-08-19 -- lib/visualPreferences.ts's own
 // getGroundThemeSync() needs to open this exact same file (by name, via
@@ -22568,6 +22568,22 @@ export async function listInteractionRules(): Promise<InteractionRuleRecord[]> {
   }));
 }
 
+// The amounts in 100 g of one food record from its one table, for an oil a
+// supplement label names. Read straight, with no other country's table
+// filling a gap, so the caption in My Meds can name the one table the
+// figures come from.
+async function getLinkedFoodAmounts(foodId: number, source: string): Promise<Record<string, number>> {
+  const db = await getReferenceDatabase();
+  const rows = await db.getAllAsync<{ code: string; amount: number | null }>(
+    'SELECT nutrient_code AS code, amount_per_100g AS amount FROM food_nutrients WHERE food_id = ? AND source = ?',
+    foodId,
+    source,
+  );
+  const amounts: Record<string, number> = {};
+  for (const row of rows) if (row.amount !== null) amounts[row.code] = row.amount;
+  return amounts;
+}
+
 async function getNutrientCanonicalUnits(): Promise<Record<string, string>> {
   const db = await getReferenceDatabase();
   const rows = await db.getAllAsync<{ code: string; unit: string }>('SELECT code, unit FROM nutrients');
@@ -22626,10 +22642,27 @@ async function getSupplementContributions(): Promise<{ contributions: Supplement
     const ingredients = await getTreatmentNutrients(row.id);
     const totals: Record<string, number> = {};
     const rowSkipped: SupplementSkip[] = [];
+    // Whatever the label lists is counted from the label, so an oil's food
+    // record never adds a second figure for the same nutrient.
+    const labelCodes = new Set(ingredients.map((ingredient) => ingredient.nutrientCode));
 
     for (const ingredient of ingredients) {
       const canonicalUnit = canonicalUnits[ingredient.nutrientCode];
       const dailyAmount = ingredient.amountPerUnit * row.units_per_day;
+
+      // An oil with a food record adds what that much of the oil holds in
+      // that one table (lib/supplementIngredients.ts, ingredientFood).
+      const food = canonicalUnit ? null : ingredientFood(ingredient.nutrientCode);
+      if (food) {
+        const grams = labelAmountInGrams(dailyAmount, ingredient.unit);
+        if (grams !== null) {
+          const per100g = await getLinkedFoodAmounts(food.foodId, food.source);
+          for (const [code, amount] of Object.entries(linkedFoodShare(grams, per100g, labelCodes))) {
+            totals[code] = (totals[code] ?? 0) + amount;
+          }
+        }
+        continue;
+      }
 
       // An oil, hormone or herb from lib/supplementIngredients.ts has no
       // food amount to add to, and is not a nutrient that went uncounted.

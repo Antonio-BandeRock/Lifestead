@@ -7,9 +7,11 @@
 // nutrients alone (listTrackedNutrients), so an oil, a fatty acid, a hormone,
 // an herb or an amino acid had nowhere to go. These are kept on the
 // supplement as the label gives them. None of them is added into a day's
-// nutrient totals: the food records carry no amount for any of them, so
-// there is nothing to compare a dose against, and getSupplementContributions
-// in lib/db.ts passes over them without calling them uncounted.
+// nutrient totals as itself: the food records carry no amount for any of
+// them, so there is nothing to compare a dose against, and
+// getSupplementContributions in lib/db.ts passes over them without calling
+// them uncounted. An oil with a food record adds what that food holds
+// (IngredientFood, below).
 //
 // Chromium, molybdenum and boron are here for the same reason: multivitamin
 // labels carry them and the food database does not. A code the food
@@ -23,6 +25,28 @@
 // Pure, no imports, so lib/spokenSupplement.ts can read it and
 // scripts/test_spoken_supplement.js can run both under node.
 
+// An oil with a food record (Tony, 2026-11-27: "How do we get things like
+// this in there with correct numbers"). The label's amount of the oil is
+// turned into grams and multiplied by what that one food record holds in
+// 100 g, from the one table named, so a 1,000 mg capsule of pumpkin seed
+// oil adds what 1 g of the oil in that table holds. It is a typical oil,
+// not the bottle, and a nutrient the label itself lists for the same
+// supplement is taken from the label instead (linkedFoodShare). The oils
+// no table the app reads has a record for (krill, algae, evening primrose,
+// black seed, sea buckthorn, MCT) stay as the label gives them.
+//
+// `alsoCarries` says in words what the oil is known for that no table gives
+// an amount the app can add up. Antioxidants are never an amount: USDA
+// withdrew its antioxidant (ORAC) table in 2012, saying the figures do not
+// show what happens in the body.
+export type IngredientFood = {
+  foodId: number;
+  source: string;
+  /** The food record's name, as the table gives it. */
+  foodName: string;
+  alsoCarries?: string;
+};
+
 export type SupplementIngredient = {
   code: string;
   displayName: string;
@@ -30,6 +54,7 @@ export type SupplementIngredient = {
   unit: 'mg' | 'mcg' | 'g';
   aliases: string[];
   forms?: Record<string, string>;
+  food?: IngredientFood;
 };
 
 export const SUPPLEMENT_INGREDIENTS: SupplementIngredient[] = [
@@ -49,15 +74,71 @@ export const SUPPLEMENT_INGREDIENTS: SupplementIngredient[] = [
   { code: 'omega_9', displayName: 'Omega-9', unit: 'mg', aliases: ['omega9', 'omega9 fatty acids', 'oleic acid'] },
 
   // Oils.
-  { code: 'fish_oil', displayName: 'Fish oil', unit: 'mg', aliases: ['fish oil', 'fish oil concentrate'] },
+  {
+    code: 'fish_oil',
+    displayName: 'Fish oil',
+    unit: 'mg',
+    aliases: ['fish oil', 'fish oil concentrate'],
+    food: {
+      foodId: 6067,
+      source: 'USDA',
+      foodName: 'Fish oil, sardine',
+      alsoCarries: 'How much EPA and DHA a fish oil holds differs a great deal from one product to the next, so a label that gives them is read first.',
+    },
+  },
   { code: 'krill_oil', displayName: 'Krill oil', unit: 'mg', aliases: ['krill oil'] },
-  { code: 'cod_liver_oil', displayName: 'Cod liver oil', unit: 'mg', aliases: ['cod liver oil'] },
+  {
+    code: 'cod_liver_oil',
+    displayName: 'Cod liver oil',
+    unit: 'mg',
+    aliases: ['cod liver oil'],
+    food: {
+      foodId: 6066,
+      source: 'USDA',
+      foodName: 'Fish oil, cod liver',
+      alsoCarries: 'Cod liver oil is high in vitamins A and D, and how much differs from batch to batch, so a label that gives them is read first.',
+    },
+  },
   { code: 'algal_oil', displayName: 'Algae oil', unit: 'mg', aliases: ['algae oil', 'algal oil'] },
-  { code: 'flaxseed_oil', displayName: 'Flaxseed oil', unit: 'mg', aliases: ['flaxseed oil', 'flax seed oil', 'flax oil', 'linseed oil'] },
-  { code: 'pumpkin_seed_oil', displayName: 'Pumpkin seed oil', unit: 'mg', aliases: ['pumpkin seed oil', 'pumpkin oil'] },
+  {
+    code: 'flaxseed_oil',
+    displayName: 'Flaxseed oil',
+    unit: 'mg',
+    aliases: ['flaxseed oil', 'flax seed oil', 'flax oil', 'linseed oil'],
+    food: {
+      foodId: 191,
+      source: 'USDA',
+      foodName: 'Oil, flaxseed, cold pressed',
+      alsoCarries: 'Flaxseed oil also carries tocopherols (forms of vitamin E, mostly gamma-tocopherol) and other antioxidants.',
+    },
+  },
+  {
+    code: 'pumpkin_seed_oil',
+    displayName: 'Pumpkin seed oil',
+    unit: 'mg',
+    aliases: ['pumpkin seed oil', 'pumpkin oil'],
+    food: {
+      foodId: 10763,
+      source: 'Germany_BLS',
+      foodName: 'Pumpkin seed oil',
+      alsoCarries:
+        'Pumpkin seed oil also carries phytosterols, tocopherols (forms of vitamin E), carotenoids such as lutein, and other antioxidants. The German table gives no amount of vitamin E for it, so none is counted from it.',
+    },
+  },
   { code: 'black_seed_oil', displayName: 'Black seed oil', unit: 'mg', aliases: ['black seed oil', 'black cumin seed oil', 'nigella sativa', 'nigella sativa oil'] },
   { code: 'evening_primrose_oil', displayName: 'Evening primrose oil', unit: 'mg', aliases: ['evening primrose oil', 'evening primrose'] },
-  { code: 'borage_oil', displayName: 'Borage oil', unit: 'mg', aliases: ['borage oil', 'borage seed oil'] },
+  {
+    code: 'borage_oil',
+    displayName: 'Borage oil',
+    unit: 'mg',
+    aliases: ['borage oil', 'borage seed oil'],
+    food: {
+      foodId: 8012,
+      source: 'UK_CoFID',
+      foodName: 'Oil, borage',
+      alsoCarries: 'Borage oil is known for GLA (gamma-linolenic acid), about a fifth of the oil. No table gives it, so it counts only as the label lists it.',
+    },
+  },
   { code: 'mct_oil', displayName: 'MCT oil', unit: 'g', aliases: ['mct oil', 'mct', 'medium chain triglycerides'] },
   { code: 'sea_buckthorn_oil', displayName: 'Sea buckthorn oil', unit: 'mg', aliases: ['sea buckthorn oil', 'sea buckthorn'] },
 
@@ -134,6 +215,49 @@ export const SUPPLEMENT_INGREDIENTS: SupplementIngredient[] = [
 ];
 
 const CODES = new Set(SUPPLEMENT_INGREDIENTS.map((item) => item.code));
+const FOODS = new Map<string, IngredientFood>();
+for (const item of SUPPLEMENT_INGREDIENTS) if (item.food) FOODS.set(item.code, item.food);
+
+/** The food record an oil is counted from, when it has one. */
+export function ingredientFood(code: string): IngredientFood | null {
+  return FOODS.get(code) ?? null;
+}
+
+const GRAMS_PER: Record<string, number> = {
+  g: 1,
+  gram: 1,
+  grams: 1,
+  mg: 0.001,
+  milligram: 0.001,
+  milligrams: 0.001,
+  mcg: 0.000001,
+  ug: 0.000001,
+  'µg': 0.000001,
+  microgram: 0.000001,
+  micrograms: 0.000001,
+};
+
+/** A label amount as grams, or null for a unit that is not a weight (IU, ml, a count). */
+export function labelAmountInGrams(amount: number, unit: string): number | null {
+  const factor = GRAMS_PER[(unit.trim().split(/\s+/)[0] ?? '').toLowerCase()];
+  return factor === undefined || !Number.isFinite(amount) ? null : amount * factor;
+}
+
+/**
+ * What `grams` of the oil adds, nutrient by nutrient, from the food record's
+ * amounts in 100 g (each in the unit the nutrients table gives it). A code
+ * in `labelCodes`, one the label itself lists for the same supplement, is
+ * left out, so the label's figure is the one counted.
+ */
+export function linkedFoodShare(grams: number, per100g: Record<string, number>, labelCodes: ReadonlySet<string>): Record<string, number> {
+  const share: Record<string, number> = {};
+  if (!(grams > 0)) return share;
+  for (const [code, amount] of Object.entries(per100g)) {
+    if (labelCodes.has(code) || !Number.isFinite(amount)) continue;
+    share[code] = (amount * grams) / 100;
+  }
+  return share;
+}
 
 /** True for a label ingredient the food records do not count. */
 export function isSupplementOnlyIngredient(code: string): boolean {

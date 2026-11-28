@@ -116,7 +116,7 @@ const series = (from, n, every, units = 1) => Array.from({ length: n }, (_, i) =
 const monthlyDoses = ['2026-10-01', '2026-11-01', '2026-12-01', '2027-01-01', '2027-02-01'].map((date) => ({ date, units: 1 }));
 const monthly = M.readSupply({ ...base, onHand: 9, takenSinceCount: 6, dueNext7Days: 0, schedule: ahead(monthlyDoses) });
 check('monthly runs out on the first dose not covered', monthly.runsOutOn, '2027-01-01');
-check('monthly days left', monthly.daysLeft, 97);
+check('monthly days left', monthly.daysLeft, 96);
 check('monthly reminder lead', monthly.remindOn, '2026-12-25');
 has('monthly sentence', monthly.sentence, 'Going by each dose on the schedule, they run out around Jan 1');
 
@@ -169,13 +169,26 @@ check('short date', M.shortDate('2026-03-05'), 'Mar 5');
 // the amount a dose takes and how many doses that is, so the slip shows, and
 // a reminder day already passed is said as now, never as days before.
 const lisa = M.readSupply({ ...base, onHand: 150, perDose: 150, takenSinceCount: 0, leadDays: 30, schedule: ahead(series('2026-09-27', 30, 1, 150)) });
-check('one dose of 150', [lisa.daysLeft, lisa.runsOutOn], [2, '2026-09-28']);
+check('one dose of 150', [lisa.daysLeft, lisa.runsOutOn], [1, '2026-09-28']);
 has('lisa sentence', lisa.sentence, 'At 150 tablets a dose, that is enough for 1 dose.');
 has('lisa sentence', lisa.sentence, 'That is within the 30 days you asked to be told, so it is time to get more.');
 lacks('lisa sentence', lisa.sentence, 'days before that');
 has('not enough sentence', short.sentence, 'At 4 tablets a dose, that does not cover the next one.');
 has('none left sentence', out.sentence, 'None left: the 30 you counted on Sep 20');
 lacks('taper has no dose count', taper.sentence, 'enough for');
+// The evening after today's dose (Lisa's phone, 2026-11-27): 150 tablets once
+// a day, the next dose tomorrow, is 150 days, never 151. Before today's dose
+// it is 150 as well, counting today.
+const evening = M.readSupply({ ...base, onHand: 150, takenSinceCount: 0, schedule: ahead(series('2026-09-27', 400, 1)) });
+check('evening, today taken', evening.daysLeft, 150);
+const morning = M.readSupply({ ...base, onHand: 150, takenSinceCount: 0, schedule: ahead(series('2026-09-26', 400, 1)) });
+check('morning, today to come', morning.daysLeft, 150);
+const half = M.readSupply({ ...base, onHand: 140, perDose: 0.5, takenSinceCount: 0, schedule: ahead(series('2026-09-27', 400, 1, 0.5)) });
+check('half a tablet a day', half.daysLeft, 280);
+check('capsules against tablet disagree', M.unitsDisagree('capsules', 'tablet'), true);
+check('Tablets against tablet agree', M.unitsDisagree('Tablets', 'tablet'), false);
+check('gummies against gummy agree', M.unitsDisagree('gummies', 'gummy'), false);
+check('nothing typed is no disagreement', [M.unitsDisagree('', 'tablet'), M.unitsDisagree('tablets', null)], [false, false]);
 check('singular units', M.readSupply({ ...base, onHand: 1, takenSinceCount: 0, unit: 'gummies' }).short, 'About 1 day left (1 gummy)');
 
 // --- 3. Phone numbers ------------------------------------------------------------
