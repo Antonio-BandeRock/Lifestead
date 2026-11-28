@@ -151,6 +151,12 @@ const taperEnough = M.readSupply({ ...base, onHand: 40, takenSinceCount: 0, perD
 check('covered taper has no run-out', [taperEnough.runsOutOn, taperEnough.daysLeft, taperEnough.remindOn], [null, null, null]);
 has('covered taper sentence', taperEnough.sentence, 'That covers every dose on the schedule, through the last one on Oct 10.');
 check('covered short', taperEnough.short, '40 tablets left, enough for the schedule');
+// A daily series that carries on past the year looked at says more than a
+// year, and one counted on is written in the plural (Lisa's phone, 2026-11-27).
+const ongoing = M.readSupply({ ...base, onHand: 400, takenSinceCount: 0, perDose: 1, unit: 'tablet', schedule: ahead(series('2026-09-26', 366, 1), { ends: false }) });
+check('ongoing short', ongoing.short, 'More than a year left (400 tablets)');
+const oneLeft = M.readSupply({ ...base, onHand: 1, takenSinceCount: 0, perDose: 1, unit: 'tablets', schedule: ahead(series('2026-09-26', 1, 1), { ends: true }) });
+check('one is singular', oneLeft.short, '1 tablet left, enough for the schedule');
 
 const unconv = M.readSupply({ ...base, schedule: ahead(series('2026-09-26', 10, 1), { tapered: true, unconverted: { stepUnit: 'mg' } }) });
 has('unconverted sentence', unconv.sentence, "The taper's steps are in mg, so each dose is counted as 1 tablet.");

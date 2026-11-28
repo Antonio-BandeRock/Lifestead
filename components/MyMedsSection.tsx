@@ -87,7 +87,7 @@ import { declineBottle, getSharingPartner, joinBottle, listBottlesToAnswer, type
 import { saveOrSay } from '../lib/saveProblem';
 import { rememberMedCode } from '../lib/medBarcodesDb';
 import { takeSupplementDraft, type SupplementDraft } from '../lib/supplementDraft';
-import { doseWithUnit, formatDoseAmount, parseDoseAmount } from '../lib/doseAmount';
+import { doseWithUnit, formatDoseAmount, parseDoseAmount, unitSingular } from '../lib/doseAmount';
 import { ingredientFood, isSupplementOnlyIngredient, withSupplementIngredients } from '../lib/supplementIngredients';
 import { foodTableName } from '../lib/foodSource';
 import { sortByLabel } from '../lib/choiceOrder';
@@ -1041,9 +1041,19 @@ ${text}` : text));
         <>
         <Text style={styles.myMedsResearchLabel}>From food today</Text>
         {foodStatus ? (
+          // Food alone (Lisa's phone, 2026-11-27): percentOfTarget counts the
+          // supplements too, so copper read "278% of today's target from food
+          // (0mg)" when the 278% was the copper tablet. The food share is
+          // worked out here from fromFood, and the amount keeps its decimals.
           <Text style={styles.helperText}>
-            You&apos;re already getting about {Math.round(foodStatus.percentOfTarget)}% of today&apos;s {foodStatus.displayName} target
-            from food ({Math.round(foodStatus.fromFood)}{foodStatus.unit}).
+            {foodStatus.fromFood > 0
+              ? t('From food logged today: about {amount} {unit}, {percent}% of the daily {name} target.', {
+                  amount: formatFoodAmount(foodStatus.fromFood),
+                  unit: foodStatus.unit,
+                  percent: foodStatus.target > 0 ? Math.round((foodStatus.fromFood / foodStatus.target) * 100) : 0,
+                  name: foodStatus.displayName,
+                })
+              : t('No {name} from food logged today yet.', { name: foodStatus.displayName })}
           </Text>
         ) : (
           // No daily target for this one (fat, carbohydrate and inositol
@@ -1592,7 +1602,20 @@ ${text}` : text));
                     ? ingredients.map((ingredient) => (
                         <View key={ingredient.id}>
                           <Text style={styles.myMedsResearchLabel}>
-                            {t('{nutrient}: {amount}{unit}/dose', { nutrient: tl(nutrientDisplayName(ingredient.nutrientCode)), amount: ingredient.amountPerUnit, unit: ingredient.unit })}
+                            {/* The label's amount is kept per one tablet or capsule, so "10mg/dose" on a ¼ tablet a day misread it (Lisa's phone, 2026-11-27): it says what one holds and what the day comes to. */}
+                            {(() => {
+                              // Measured amounts read as decimals ("2.5 mg"), never as a fraction of a tablet.
+                              const perOne = Number(ingredient.amountPerUnit.toFixed(3));
+                              const one = treatment.servingUnitLabel?.trim() ? unitSingular(treatment.servingUnitLabel) : t('unit');
+                              const name = tl(nutrientDisplayName(ingredient.nutrientCode));
+                              const perDay = Number(treatment.unitsPerDay);
+                              return perDay > 0
+                                ? t('{nutrient}: {amount} {unit} in each {one}, so {daily} {unit} a day', {
+                                    nutrient: name, amount: perOne, unit: ingredient.unit, one,
+                                    daily: Number((ingredient.amountPerUnit * perDay).toFixed(3)),
+                                  })
+                                : t('{nutrient}: {amount} {unit} in each {one}', { nutrient: name, amount: perOne, unit: ingredient.unit, one });
+                            })()}
                           </Text>
                           {renderNutrientResearchCard(ingredient.nutrientCode, ingredient.supplementForm ?? '')}
                         </View>

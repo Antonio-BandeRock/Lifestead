@@ -552,6 +552,12 @@ const BY_HAND: Readonly<Record<string, string>> = {
     'De la comida registrada hoy: unos {amount} {unit}. Esta app no tiene una meta diaria para {name}, así que no se muestra qué parte de una meta es.',
   'No {name} from food logged today yet. This app has no daily target for it, so no share of one is shown.':
     'Todavía no hay {name} de la comida registrada hoy. Esta app no tiene una meta diaria para eso, así que no se muestra qué parte de una meta es.',
+  'From food logged today: about {amount} {unit}, {percent}% of the daily {name} target.':
+    'De la comida registrada hoy: unos {amount} {unit}, el {percent}% de la meta diaria de {name}.',
+  'No {name} from food logged today yet.': 'Todavía no hay {name} de la comida registrada hoy.',
+  '{nutrient}: {amount} {unit} in each {one}, so {daily} {unit} a day': '{nutrient}: {amount} {unit} en cada {one}, o sea {daily} {unit} al día',
+  '{nutrient}: {amount} {unit} in each {one}': '{nutrient}: {amount} {unit} en cada {one}',
+  'unit': 'unidad',
   'A form of your own': 'Una forma propia',
   // What each database said about a retail code (Tony, 2026-11-19).
   'What each database said': 'Lo que dijo cada base de datos',

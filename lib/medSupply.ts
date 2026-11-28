@@ -142,7 +142,7 @@ function amount(n: number): string {
 function counted(n: number, unit: string | null): string {
   const typed = unit?.trim();
   if (!typed) return amount(n);
-  return `${amount(n)} ${n === 1 ? singular(typed) : typed}`;
+  return `${amount(n)} ${n > 0 && n <= 1 ? singular(typed) : plural(typed)}`;
 }
 
 /**
@@ -157,11 +157,28 @@ export function unitsDisagree(countUnit: string | null | undefined, doseCalled: 
   return singular(a) !== singular(b);
 }
 
-/** "tablets" as "tablet" for a count of one, the unit being typed as a plural. */
+// The same rules as unitSingular and unitPlural in lib/doseAmount.ts, kept
+// here so this file stays import-free: "75 tablet" read as typed on Lisa's
+// phone (2026-11-27), so a count of more than one takes the plural however
+// the unit was typed, and a unit of measure stays as it is.
+const MEASURE_UNITS = new Set(['mg', 'mcg', 'µg', 'ug', 'g', 'kg', 'ml', 'l', 'iu', 'ui', 'oz', 'fl oz', 'tsp', 'tbsp', 'cfu', '%']);
+
+/** "tablets" as "tablet": the name for one, however it was typed. */
 function singular(unit: string): string {
+  if (MEASURE_UNITS.has(unit.toLowerCase())) return unit;
   if (/[^aeiou]ies$/i.test(unit)) return unit.slice(0, -3) + 'y';
+  if (/(ch|sh|x|ss)es$/i.test(unit)) return unit.slice(0, -2);
   if (/[^s]s$/i.test(unit) && unit.length > 3) return unit.slice(0, -1);
   return unit;
+}
+
+/** "tablet" as "tablets": the name for more than one, typed either way. */
+function plural(unit: string): string {
+  if (MEASURE_UNITS.has(unit.toLowerCase())) return unit;
+  const one = singular(unit);
+  if (/[^aeiou]y$/i.test(one)) return one.slice(0, -1) + 'ies';
+  if (/(s|x|ch|sh)$/i.test(one)) return one + 'es';
+  return one + 's';
 }
 
 /** How much one day uses: the week ahead on the schedule first, then the
@@ -294,7 +311,12 @@ function readAhead(input: SupplyInput, ahead: ScheduleAhead, remaining: number, 
       daysLeft: null,
       runsOutOn: null,
       remindOn: null,
-      short: `${counted(remaining, input.unit)} left, enough for the schedule`,
+      // A series that carries on past the year looked at is not covered to
+      // its end, so it says more than a year (the copper count on Lisa's
+      // phone, 2026-11-27, read "enough for the schedule" on a daily dose).
+      short: ahead.ends
+        ? `${counted(remaining, input.unit)} left, enough for the schedule`
+        : `More than a year left (${counted(remaining, input.unit)})`,
       sentence: `${leftOf}${doses} ${covers}` + unconvertedSentence(ahead, input) + UNMARKED,
     };
   }

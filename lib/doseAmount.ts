@@ -62,6 +62,29 @@ export function formatDoseAmount(amount: number): string {
   return String(whole);
 }
 
+// Units of measure are written the same for one or many ("2 mg", "5 ml").
+const MEASURE_UNITS = new Set(['mg', 'mcg', 'µg', 'ug', 'g', 'kg', 'ml', 'l', 'iu', 'ui', 'oz', 'fl oz', 'tsp', 'tbsp', 'cfu', '%']);
+
+/** "tablets" as "tablet": the name for one of something, however it was typed. */
+export function unitSingular(unit: string): string {
+  const typed = unit.trim();
+  if (MEASURE_UNITS.has(typed.toLowerCase())) return typed;
+  if (/[^aeiou]ies$/i.test(typed)) return typed.slice(0, -3) + 'y';
+  if (/(ch|sh|x|ss)es$/i.test(typed)) return typed.slice(0, -2);
+  if (/[^s]s$/i.test(typed) && typed.length > 3) return typed.slice(0, -1);
+  return typed;
+}
+
+/** "tablet" as "tablets": the name for more than one, typed either way, never "capsuless". */
+export function unitPlural(unit: string): string {
+  const typed = unit.trim();
+  if (MEASURE_UNITS.has(typed.toLowerCase())) return typed;
+  const one = unitSingular(typed);
+  if (/[^aeiou]y$/i.test(one)) return one.slice(0, -1) + 'ies';
+  if (/(s|x|ch|sh)$/i.test(one)) return one + 'es';
+  return one + 's';
+}
+
 /** A unit takes the plural for anything but exactly one, a half included ("½ capsule"). */
 export function doseIsSingular(amount: number): boolean {
   return amount > 0 && amount <= 1;
@@ -69,5 +92,6 @@ export function doseIsSingular(amount: number): boolean {
 
 /** "½ capsule", "2 capsules": how much one dose or one day is, with its unit. */
 export function doseWithUnit(amount: number, unit: string): string {
-  return `${formatDoseAmount(amount)} ${unit}${doseIsSingular(amount) ? '' : 's'}`;
+  if (!unit.trim()) return formatDoseAmount(amount);
+  return `${formatDoseAmount(amount)} ${doseIsSingular(amount) ? unitSingular(unit) : unitPlural(unit)}`;
 }

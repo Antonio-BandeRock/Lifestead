@@ -9,7 +9,7 @@ const source = fs.readFileSync(path.join(__dirname, '..', 'lib', 'doseAmount.ts'
 const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2019 } }).outputText;
 const mod = { exports: {} };
 new Function('module', 'exports', 'require', js)(mod, mod.exports, require);
-const { parseDoseAmount, formatDoseAmount, doseIsSingular } = mod.exports;
+const { parseDoseAmount, formatDoseAmount, doseIsSingular, doseWithUnit } = mod.exports;
 
 let failed = 0;
 function check(label, actual, expected) {
@@ -39,6 +39,12 @@ for (const [amount, expected] of formats) {
 if (!doseIsSingular(0.5) || !doseIsSingular(1) || doseIsSingular(2) || doseIsSingular(1.5)) {
   failed += 1;
   console.log('FAIL doseIsSingular');
+}
+
+// Typed singular or plural, the unit agrees with the amount; a measure never changes.
+for (const [amount, unit, expected] of [[3, 'capsules', '3 capsules'], [3, 'capsule', '3 capsules'], [0.5, 'capsules', '½ capsule'], [1, 'tablets', '1 tablet'], [2, 'mg', '2 mg'], [2, 'softgel', '2 softgels'], [2, 'patches', '2 patches'], [1, 'patches', '1 patch'], [2, 'drops', '2 drops']]) {
+  const got = doseWithUnit(amount, unit);
+  if (got !== expected) { failed += 1; console.log(`FAIL doseWithUnit ${amount} ${unit}: got ${got}, expected ${expected}`); }
 }
 
 if (failed) {
