@@ -142,7 +142,7 @@ const STORE_LABEL_STEPS: string[] = [
   '2. Go through the product\'s pictures to the one showing the nutrition table: Supplement Facts on a U.S. label, Información nutrimental on a Mexican one. If the ingredients list is in another picture, save that one as well, since it names each nutrient\'s form.',
   '3. Tap the picture so it opens full size.',
   '4. Save it. In a web browser, press and hold the picture and tap Download image. In a store app that will not save pictures, zoom in until the table fills the screen and take a screenshot (on most phones, press the power and volume down buttons together), then crop it to the table.',
-  '5. Back here, tap Use a Photo You Have and pick the picture. Up to eight pictures of one label can be picked together, such as the table and the ingredients list.',
+  '5. Back here, tap Use a Photo You Have, pick the picture and crop it to the table. If the ingredients list is in a second picture, tap Use Another Photo You Have for it.',
   '6. Check every row it fills against the bottle you hold. A store can show an older label, or the version sold in another country, and the bottle is what you take.',
 ];
 
@@ -606,16 +606,19 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       }
       const shot =
         from === 'camera'
-          ? await ImagePicker.launchCameraAsync({ quality: 0.8 })
-          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8, allowsMultipleSelection: true, selectionLimit: 8 });
+          ? await ImagePicker.launchCameraAsync({ quality: 0.8, allowsEditing: true })
+          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8, allowsEditing: true });
       if (shot.canceled || shot.assets.length === 0) return;
       // A label's table often comes back a column at a time (every name,
       // then every amount), so the lines are put back into rows by where
       // they sit on the page (Tony, 2026-11-19: a Mexican multivitamin's
       // photo read as nothing with an amount). The ingredients paragraph
       // under the table gives forms only, never amounts (readSupplementLabel).
-      // Up to eight pictures of one label can be picked at once, since a
-      // store page often shows the table and the ingredients apart.
+      // Each picture opens in the crop box first, so it can be cut to the
+      // table (Tony, 2026-11-27: "Allow for the images taken for supplements
+      // and medications are able to be cropped to the right size"). The crop
+      // box takes one picture at a time, so a store page that shows the
+      // table and the ingredients apart is picked one picture after another.
       const pages: string[] = [];
       for (const asset of shot.assets) {
         const lines = await recognizeLinesFromImage(asset.uri);
@@ -1049,9 +1052,11 @@ ${text}` : text));
             {/* The label first, the gaps after (Tony, 2026-11-20: "they should
                 be able to just start with that as their best bet for many
                 ingredients and fill in the gaps after"). */}
-            <Text style={styles.label}>Start with a picture of the label</Text>
+            <Text style={styles.label}>Start with a picture of the Supplement Facts table</Text>
+            {/* Which side of the box (Tony, 2026-11-27: "does it mean the
+                ingredients or the front of the box?"). */}
             <Text style={styles.fieldHint}>
-              The best bet for most of what is in it. A store&apos;s picture of the label reads best, since it is flat. On a round bottle, take several pictures, turning the bottle a little each time; each picture adds to the ones before it. The amounts and forms it finds fill in under Ingredients, and you fill in the rest after.
+              Photograph the side or back of the bottle or box, where the Supplement Facts table (Información nutrimental on a Mexican label) lists each nutrient and its amount, with the ingredients list under it, which names each form. The front only shows the name, so type that under Name instead. After each picture, crop it to the table. A store&apos;s picture of the table reads best, since it is flat. On a round bottle, take several pictures, turning the bottle a little each time; each picture adds to the ones before it. The amounts and forms it finds fill in under Ingredients, and you fill in the rest after.
             </Text>
             <View style={styles.labelPhotoRow}>
               <TouchableOpacity
@@ -1060,7 +1065,9 @@ ${text}` : text));
                 disabled={readingLabel}
                 style={[styles.secondaryButton, styles.labelPhotoButton, readingLabel ? styles.busy : null]}
               >
-                <Text style={styles.secondaryButtonText}>{readingLabel ? 'Reading the Label' : 'Use a Photo You Have'}</Text>
+                <Text style={styles.secondaryButtonText}>
+                  {readingLabel ? 'Reading the Label' : labelPages.length > 0 ? 'Use Another Photo You Have' : 'Use a Photo You Have'}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 ref={walkMark.ref('myMeds.labelPhoto')}
@@ -1487,12 +1494,9 @@ ${text}` : text));
                 ) : null}
               </TouchableOpacity>
 
-              <View style={styles.supplementRowActions}>
-                {treatment.active ? null : (
-                  <TouchableOpacity onPress={() => handleToggleActive(treatment)}>
-                    <Text style={styles.actionTextPrimary}>Start again</Text>
-                  </TouchableOpacity>
-                )}
+              {/* Tracking on a line of its own, the row's buttons under it
+                  (Tony, 2026-11-27): a long count no longer squeezes them. */}
+              <View style={styles.trackingRow}>
                 <TouchableOpacity
                   ref={treatment.id === firstShownId ? walkMark.ref('myMeds.tracking') : undefined}
                   style={walkMark('myMeds.tracking')}
@@ -1502,6 +1506,13 @@ ${text}` : text));
                     {supplyByTreatment.get(treatment.id)?.short ? t('Tracking: {left}', { left: supplyByTreatment.get(treatment.id)?.short ?? '' }) : 'Track how many'}
                   </Text>
                 </TouchableOpacity>
+              </View>
+              <View style={styles.supplementRowActions}>
+                {treatment.active ? null : (
+                  <TouchableOpacity onPress={() => handleToggleActive(treatment)}>
+                    <Text style={styles.actionTextPrimary}>Start again</Text>
+                  </TouchableOpacity>
+                )}
                 <TouchableOpacity ref={treatment.id === firstShownId ? walkMark.ref('myMeds.details') : undefined} style={walkMark('myMeds.details')} onPress={() => setExpandedId(isExpanded ? null : treatment.id)}>
                   <Text style={styles.actionText}>{isExpanded ? 'Hide details' : 'Details'}</Text>
                 </TouchableOpacity>
@@ -1884,7 +1895,8 @@ function makeStyles(tabColor: string, calm: boolean = false) {
     labelPhotoButton: { flexGrow: 1 },
     busy: { opacity: 0.5 },
     secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
-    supplementRowActions: { flexDirection: 'row', gap: 16, marginTop: 10 },
+    supplementRowActions: { flexDirection: 'row', flexWrap: 'wrap', gap: 16, marginTop: 10 },
+    trackingRow: { marginTop: 10 },
     table: { gap: bandGap },
     timeInput: { width: 56, textAlign: 'center' },
     timeRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },

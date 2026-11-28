@@ -18366,7 +18366,23 @@ async function insertScheduleSeries(input: {
 // call repeatedly -- a series whose latest occurrence already reaches the
 // window end, or whose own count/until limit is already met, is skipped
 // with no writes.
-export async function ensureScheduleSeriesGenerated(): Promise<void> {
+//
+// One top-up at a time (2026-11-27). Five screens call this as they load,
+// and two runs side by side each read the same latest row and each wrote
+// the same next days, so a series could get every dose twice. A call made
+// while one is running waits for that run, which fills the same window.
+let scheduleTopUpRunning: Promise<void> | null = null;
+
+export function ensureScheduleSeriesGenerated(): Promise<void> {
+  if (!scheduleTopUpRunning) {
+    scheduleTopUpRunning = topUpScheduleSeries().finally(() => {
+      scheduleTopUpRunning = null;
+    });
+  }
+  return scheduleTopUpRunning;
+}
+
+async function topUpScheduleSeries(): Promise<void> {
   const db = await getDatabase();
   const windowEnd = addDaysToDateString(todayDateStringLocal(), SCHEDULE_ROLLING_WINDOW_DAYS);
 

@@ -497,8 +497,8 @@ export default function MedicineLabelScreen() {
       }
       const shot =
         from === 'camera'
-          ? await ImagePicker.launchCameraAsync({ quality: 0.8 })
-          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8 });
+          ? await ImagePicker.launchCameraAsync({ quality: 0.8, allowsEditing: true })
+          : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.8, allowsEditing: true });
       if (shot.canceled || shot.assets.length === 0) return;
       const lines = await recognizeLinesFromImage(shot.assets[0].uri);
       const candidates = lines ? nameCandidates(lines) : [];
