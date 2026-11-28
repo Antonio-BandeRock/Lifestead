@@ -88,6 +88,8 @@ import { saveOrSay } from '../lib/saveProblem';
 import { rememberMedCode } from '../lib/medBarcodesDb';
 import { takeSupplementDraft, type SupplementDraft } from '../lib/supplementDraft';
 import { doseWithUnit, formatDoseAmount, parseDoseAmount } from '../lib/doseAmount';
+import { isSupplementOnlyIngredient, withSupplementIngredients } from '../lib/supplementIngredients';
+import { sortByLabel } from '../lib/choiceOrder';
 
 // My Meds, the registry of everything a person takes: prescriptions, OTC
 // drugs and supplements, each with its dose, form, timing rules, interactions
@@ -369,7 +371,9 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
         if (focusTreatmentId && loadedTreatments.some((treatment) => treatment.id === focusTreatmentId)) {
           setExpandedId(focusTreatmentId);
         }
-        setNutrients(loadedNutrients);
+        // Oils, fatty acids, hormones, herbs and the rest a label can hold
+        // join the food database's nutrients (Tony, 2026-11-27).
+        setNutrients(withSupplementIngredients(loadedNutrients));
         setCommonMedications(loadedMeds);
         setFoodEntries(dailyAnalysis.entries);
         setFoodTotals(dailyAnalysis.foodTotals ?? {});
@@ -966,7 +970,7 @@ ${text}` : text));
   // re-renders this whole lens) would otherwise force these two pickers'
   // own popovers to rebuild for no real reason.
   const nutrientOptions: DropdownOption[] = useMemo(
-    () => nutrients.map((nutrient) => ({ label: nutrient.displayName, value: nutrient.code })),
+    () => sortByLabel(nutrients.map((nutrient) => ({ label: nutrient.displayName, value: nutrient.code }))),
     [nutrients],
   );
   const commonMedOptionsForCategory: DropdownOption[] = useMemo(
@@ -1009,6 +1013,14 @@ ${text}` : text));
             {timing.pairsWellWith ? <Text style={styles.helperText}>Pairs well with: {timing.pairsWellWith}</Text> : null}
           </>
         ) : null}
+        {isSupplementOnlyIngredient(nutrientCode) ? (
+          <Text style={styles.helperText}>
+            {t('The food records carry no amount of {name}, so it is kept as the label gives it and not added into the nutrients for the day.', {
+              name: nutrientDisplayName(nutrientCode),
+            })}
+          </Text>
+        ) : (
+        <>
         <Text style={styles.myMedsResearchLabel}>From food today</Text>
         {foodStatus ? (
           <Text style={styles.helperText}>
@@ -1032,6 +1044,8 @@ ${text}` : text));
                   name: nutrientDisplayName(nutrientCode),
                 })}
           </Text>
+        )}
+        </>
         )}
       </View>
     );

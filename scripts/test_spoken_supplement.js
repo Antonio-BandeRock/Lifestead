@@ -18,7 +18,10 @@ function load(relPath) {
     fileName: path.basename(relPath),
   });
   const module = { exports: {} };
+  // The one import allowed is the plain list of label ingredients beyond
+  // the food database's nutrients, itself free of imports.
   new Function('exports', 'module', 'require', outputText)(module.exports, module, (name) => {
+    if (name === './supplementIngredients') return load('lib/supplementIngredients.ts');
     throw new Error(`${relPath} must stay free of runtime imports (${name})`);
   });
   return module.exports;
@@ -97,10 +100,11 @@ check('trailing form', rows('zinc 15 mg picolinate'), [['zinc', 15, 'mg', 'picol
 // Nothing guessed.
 check('no unit', missed('zinc 11'), ['No unit']);
 check('no amount', missed('vitamin C'), ['No amount']);
-check('unknown nutrient', missed('ashwagandha 300 mg'), ['No nutrient']);
+check('unknown nutrient', missed('bacopa 300 mg'), ['No nutrient']);
 check('two nutrients one amount', missed('calcium magnesium 500 mg'), ['More than']);
 check('headings passed over', s.readSpokenSupplementLabel('supplement facts serving size 1 capsule').notUnderstood.length, 0);
-check('mixed good and bad', rows('vitamin C 90 mg, ashwagandha 300 mg, zinc 11 mg').length, 2);
+check('mixed good and bad', rows('vitamin C 90 mg, bacopa 300 mg, zinc 11 mg').length, 2);
+check('ashwagandha known', rows('ashwagandha 300 mg'), [['ashwagandha', 300, 'mg', null]]);
 
 // Forms matched against the list the database holds.
 const zincForms = ['Zinc picolinate', 'Zinc citrate / zinc gluconate', 'Zinc oxide'];
@@ -162,6 +166,7 @@ check('ingredients cut', s.labelTableOnly(lisaLabel).includes('INGREDIENTES'), f
 check('no ingredients heading keeps all', s.labelTableOnly('Vitamina C 60 mg'), 'Vitamina C 60 mg');
 check('mexican table', rows(s.labelTableOnly(lisaLabel)).map((row) => row.slice(0, 3)), [
   ['calcium', 100, 'mg'],
+  ['maca', 100, 'mg'],
   ['vitamin_c', 60, 'mg'],
   ['thiamin_b1', 1.5, 'mg'],
   ['vitamin_a', 1000, 'mcg'],
@@ -194,6 +199,44 @@ check('label with forms', filled.filter((row) => row[0] !== 'fat_total'), [
   ['vitamin_b12', 2, 'cyanocobalamin'],
 ]);
 check('fat has no form', filled.filter((row) => row[0] === 'fat_total').map((row) => row[2] ?? null), filled.some((row) => row[0] === 'fat_total') ? [null] : []);
+
+// Oils, fatty acids, hormones and the rest beyond the food database's
+// nutrients (Tony, 2026-11-27).
+check('pumpkin seed oil', rows('pumpkin seed oil 1000 mg'), [['pumpkin_seed_oil', 1000, 'mg', null]]);
+check('omega-3 with a hyphen', rows('Omega-3 1200 mg'), [['omega_3', 1200, 'mg', null]]);
+check('omega 3 fatty acids, EPA, DHA', rows('Omega 3 fatty acids 1000 mg, EPA 360 mg, DHA 240 mg'), [
+  ['omega_3', 1000, 'mg', null],
+  ['epa', 360, 'mg', null],
+  ['dha', 240, 'mg', null],
+]);
+check('fish oil said', rows('fish oil 1000 milligrams'), [['fish_oil', 1000, 'mg', null]]);
+check('estradiol is estrogen with its form', rows('estradiol 1 mg'), [['estrogen', 1, 'mg', 'estradiol']]);
+check('estrogen said plainly', rows('estrogen 0.5 mg'), [['estrogen', 0.5, 'mg', null]]);
+check('ubiquinol is CoQ10 with its form', rows('ubiquinol 100 mg'), [['coq10', 100, 'mg', 'ubiquinol']]);
+check('CoQ-10', rows('CoQ-10 200 mg'), [['coq10', 200, 'mg', null]]);
+check('5-HTP', rows('5-HTP 100 mg'), [['htp_5', 100, 'mg', null]]);
+check('chromium picolinate', rows('chromium 200 mcg as chromium picolinate'), [['chromium', 200, 'mcg', 'chromium picolinate']]);
+check('L-glutamine in grams', rows('L-Glutamine 5 g'), [['l_glutamine', 5, 'g', null]]);
+check('oil beside a vitamin', rows('vitamin D3 25 mcg, black seed oil 500 mg'), [
+  ['vitamin_d', 25, 'mcg', 'd3'],
+  ['black_seed_oil', 500, 'mg', null],
+]);
+check('Spanish fish oil', rows('aceite de pescado 1000 mg'), [['fish_oil', 1000, 'mg', null]]);
+check('Spanish pumpkin seed oil', rows('aceite de semilla de calabaza 500 mg'), [['pumpkin_seed_oil', 500, 'mg', null]]);
+check('Spanish estrogen', rows('estrógeno 1 mg'), [['estrogen', 1, 'mg', null]]);
+
+// Every code in the list is distinct from the food database's codes the
+// reader already knows, and every alias is lower case with no hyphen.
+const extra = load('lib/supplementIngredients.ts');
+const known = new Set(['vitamin_a', 'vitamin_c', 'vitamin_d', 'vitamin_e', 'vitamin_k', 'zinc', 'iron', 'calcium', 'magnesium', 'selenium', 'iodine', 'glycine', 'inositol', 'lycopene', 'choline']);
+const seen = new Set();
+for (const item of extra.SUPPLEMENT_INGREDIENTS) {
+  if (known.has(item.code) || seen.has(item.code)) check(`code ${item.code} is new and appears once`, false, true);
+  seen.add(item.code);
+  for (const alias of [...item.aliases, ...Object.keys(item.forms ?? {})]) {
+    if (alias !== alias.toLowerCase() || alias.includes('-')) check(`alias "${alias}" is normalized`, false, true);
+  }
+}
 
 if (failures) {
   console.log(`\n${failures} failed`);

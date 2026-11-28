@@ -16,7 +16,10 @@
 //
 // Pure, no React and no database, so scripts/test_spoken_supplement.js can
 // check it under node. Form names are matched by matchSupplementForm against
-// the list the caller reads from supplement_forms.
+// the list the caller reads from supplement_forms. The one import is the
+// plain list of oils, hormones, herbs and the rest in supplementIngredients.
+
+import { SUPPLEMENT_INGREDIENTS } from './supplementIngredients';
 
 export type SpokenSupplementUnit = 'mg' | 'mcg' | 'g' | 'IU';
 
@@ -91,7 +94,10 @@ const ALIAS_TABLE: [string, string[], Record<string, string>?][] = [
   ['fat_total', ['fat', 'total fat']],
 ];
 
-const ALIASES: Alias[] = ALIAS_TABLE.flatMap(([code, plain, withForm]) => [
+const ALIASES: Alias[] = [
+  ...ALIAS_TABLE,
+  ...SUPPLEMENT_INGREDIENTS.map((item): [string, string[], Record<string, string>?] => [item.code, item.aliases, item.forms]),
+].flatMap(([code, plain, withForm]) => [
   ...plain.map((words) => ({ words, code })),
   ...Object.entries(withForm ?? {}).map(([words, form]) => ({ words, code, form })),
 ])
@@ -140,6 +146,21 @@ const SPANISH_PHRASES: [RegExp, string][] = (
     ['acetato de d[ -]alfa tocoferilo', 'd alpha tocopheryl acetate'],
     ['acetato de dl[ -]alfa tocoferilo', 'dl alpha tocopheryl acetate'],
     ['acetato de tocoferilo', 'tocopheryl acetate'],
+    ['aceite de semilla de calabaza', 'pumpkin seed oil'],
+    ['aceite de pepita de calabaza', 'pumpkin seed oil'],
+    ['aceite de higado de bacalao', 'cod liver oil'],
+    ['aceite de pescado', 'fish oil'],
+    ['aceite de krill', 'krill oil'],
+    ['aceite de linaza', 'flaxseed oil'],
+    ['aceite de onagra', 'evening primrose oil'],
+    ['aceite de borraja', 'borage oil'],
+    ['aceite de comino negro', 'black seed oil'],
+    ['aceite mct', 'mct oil'],
+    ['acidos grasos omega', 'omega'],
+    ['acido alfa lipoico', 'alpha lipoic acid'],
+    ['acido hialuronico', 'hyaluronic acid'],
+    ['cardo mariano', 'milk thistle'],
+    ['te verde', 'green tea'],
   ] as [string, string][]
 ).map(([phrase, english]) => [new RegExp(`\\b${phrase}\\b`, 'g'), english]);
 
@@ -153,7 +174,14 @@ const SPANISH_WORDS: Record<string, string> = {
   metilcobalamina: 'methylcobalamin', hidroxocobalamina: 'hydroxocobalamin', adenosilcobalamina: 'adenosylcobalamin',
   colecalciferol: 'cholecalciferol', tocoferol: 'tocopherol', tocoferilo: 'tocopheryl', filoquinona: 'phylloquinone',
   menaquinona: 'menaquinone', retinilo: 'retinyl', ascorbato: 'ascorbate', selenometionina: 'selenomethionine',
-  selenito: 'selenite', glicina: 'glycine', cafeina: 'caffeine', licopeno: 'lycopene', proteina: 'protein',
+  selenito: 'selenite', cromo: 'chromium', molibdeno: 'molybdenum', boro: 'boron', estrogeno: 'estrogen',
+  estrogenos: 'estrogen', estradiol: 'estradiol', estriol: 'estriol', progesterona: 'progesterone', melatonina: 'melatonin',
+  colageno: 'collagen', glucosamina: 'glucosamine', condroitina: 'chondroitin', curcuma: 'turmeric', curcumina: 'curcumin',
+  jengibre: 'ginger', ajo: 'garlic', glutamina: 'glutamine', teanina: 'theanine', carnitina: 'carnitine', tirosina: 'tyrosine',
+  taurina: 'taurine', arginina: 'arginine', lisina: 'lysine', creatina: 'creatine', glutation: 'glutathione', luteina: 'lutein',
+  zeaxantina: 'zeaxanthin', astaxantina: 'astaxanthin', resveratrol: 'resveratrol', quercetina: 'quercetin', berberina: 'berberine',
+  equinacea: 'echinacea', sauco: 'elderberry', valeriana: 'valerian', manzanilla: 'chamomile', ortiga: 'nettle', calostro: 'colostrum',
+  glicina: 'glycine', cafeina: 'caffeine', licopeno: 'lycopene', proteina: 'protein',
   proteinas: 'protein', fibra: 'fiber', carbohidrato: 'carbohydrate', carbohidratos: 'carbohydrates', azucar: 'sugar',
   azucares: 'sugars', grasa: 'fat', grasas: 'fat', lipidos: 'fat', lipido: 'fat', citrato: 'citrate', glicinato: 'glycinate',
   bisglicinato: 'bisglycinate', picolinato: 'picolinate', gluconato: 'gluconate', oxido: 'oxide',
@@ -180,6 +208,11 @@ function fromSpanish(text: string): string {
 export function normalizeSpokenLabel(text: string): string {
   let s = ` ${text.toLowerCase()} `;
   s = s.replace(/[µμ]g\b/g, 'mcg');
+  // "Omega-3", "omega 6", "5-HTP" and "CoQ-10" as the one word the list
+  // uses, before the thousands mark below can read "CoQ-10 200 mg" as 10200.
+  s = s.replace(/\bomega[\s-]?([369])\b(?!\s*(?:\.\d|mg|mcg|g|iu)\b)/g, 'omega$1');
+  s = s.replace(/\b5[\s-]?htp\b/g, '5htp');
+  s = s.replace(/\bco[\s-]?q[\s-]?10\b(?!\s*(?:mg|mcg|g|iu)\b)/g, 'coq10');
   // A space as the thousands mark, the way Mexican and European labels print
   // "1 000 µg". Only before a unit, so two numbers in a row stay two, and
   // never straight after a letter, so "B12 500 mcg" stays B12 at 500.

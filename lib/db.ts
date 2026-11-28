@@ -75,6 +75,7 @@ import { ownContributorFromRow, setOwnContributors, type FlareContributor, type 
 import { gapFoodNameKey } from './nutrientGapFoods';
 import { eatenOutCaption, eatenOutOf, parseEatenOutNote, recentPlaces, type EatenOutHow } from './eatenOut';
 import { readOrClosed } from './vaultReads';
+import { isSupplementOnlyIngredient, withSupplementIngredients } from './supplementIngredients';
 
 // Exported as of 2026-08-19 -- lib/visualPreferences.ts's own
 // getGroundThemeSync() needs to open this exact same file (by name, via
@@ -22630,6 +22631,9 @@ async function getSupplementContributions(): Promise<{ contributions: Supplement
       const canonicalUnit = canonicalUnits[ingredient.nutrientCode];
       const dailyAmount = ingredient.amountPerUnit * row.units_per_day;
 
+      // An oil, hormone or herb from lib/supplementIngredients.ts has no
+      // food amount to add to, and is not a nutrient that went uncounted.
+      if (!canonicalUnit && isSupplementOnlyIngredient(ingredient.nutrientCode)) continue;
       if (!canonicalUnit) {
         rowSkipped.push({ treatmentId: row.id, treatmentName: row.name, nutrientCode: ingredient.nutrientCode, reason: 'unknown_unit' });
         continue;
@@ -23538,7 +23542,7 @@ export async function getDayMealAndDoseTimeline(date: string): Promise<{
     .sort((a, b) => a.scheduledFor.localeCompare(b.scheduledFor));
 
   const nutrientNames: Record<string, string> = {};
-  for (const nutrient of tracked) nutrientNames[nutrient.code] = nutrient.displayName;
+  for (const nutrient of withSupplementIngredients(tracked)) nutrientNames[nutrient.code] = nutrient.displayName;
 
   // One set of caches across the whole day, for the reason
   // getProjectedIngredientsByDateRange keeps one across a range: a rotation
