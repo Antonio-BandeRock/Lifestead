@@ -215,7 +215,7 @@ export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {
 
       {vault.key === 'app-lock' || (vault.key === 'own-code' && appLockOn) ? (
         <Text style={styles.caption}>
-          The vault closes after the same time away that App Lock waits before it locks again.
+          The vault stays open while you use the app, and closes after the same time away that App Lock waits before it locks again. The camera, a photo or file picker and the fingerprint prompt opened from the app count as using it.
         </Text>
       ) : vault.key === 'own-code' ? (
         <>
@@ -237,7 +237,7 @@ export function VaultChoices({ appLockOn }: { appLockOn: boolean }) {
             })}
           </View>
           <Text style={styles.caption}>
-            {`Checked when you come back to the app. Closing Lifestead or restarting the ${deviceWord()} closes the vault at once.`}
+            The vault stays open while you use the app. The camera, a photo or file picker and the fingerprint prompt opened from the app count as using it.
           </Text>
         </>
       ) : null}

@@ -3,28 +3,39 @@
 // lib/databaseActivity.ts can ask on every read without pulling in secure
 // store or the prompt. The rules themselves are in lib/vault.ts.
 //
-// Open lives only in this module's memory, like the App Lock key: a restart
-// closes it, and so does coming back after the app was away for the chosen
-// time (lib/vaultSession.ts).
+// Open lives in this module's memory, with a mark on this device
+// (vault-open.json, VaultOpenMark in lib/vault.ts) so a restart the app
+// makes on its own within the chosen time keeps it open. Coming back after
+// the app was away for the chosen time closes it (lib/vaultSession.ts).
 
 import { readLockStateSync } from './appLockSession';
 import {
   firstRecordOfferFor,
+  vaultCloseMinutes,
   vaultGuarding,
   vaultKey,
+  vaultOpenAtStart,
   vaultRefusal,
   type VaultCategory,
   type VaultClosedError,
   type VaultGroup,
   type VaultKey,
+  type VaultOpenMark,
   type VaultSettings,
 } from './vault';
-import { readVaultSettingsSync, writeVaultSettingsSync } from './vaultSettings';
+import {
+  readVaultOpenMarkSync,
+  readVaultSettingsSync,
+  writeVaultOpenMarkSync,
+  writeVaultSettingsSync,
+} from './vaultSettings';
 
 type Snapshot = { settings: VaultSettings; appLockOn: boolean; guarding: boolean; key: VaultKey };
 
 let snapshot: Snapshot | null = null;
 let vaultOpen = false;
+let restored = false;
+let mark: VaultOpenMark | null = null;
 let bypassDepth = 0;
 const listeners = new Set<() => void>();
 
@@ -39,6 +50,17 @@ function current(): Snapshot {
     const appLockOn = lock !== null && lock.phase === 'on';
     const settings = readVaultSettingsSync();
     snapshot = { settings, appLockOn, guarding: vaultGuarding(appLockOn, settings), key: vaultKey(appLockOn, settings) };
+    if (!restored) {
+      restored = true;
+      const left = readVaultOpenMarkSync();
+      const minutes = vaultCloseMinutes(appLockOn && lock ? lock.autoLockMinutes : null, settings);
+      if (snapshot.guarding && vaultOpenAtStart(left, Date.now(), minutes)) {
+        vaultOpen = true;
+        keepMark({ awaySince: null, appTrip: false, restartAt: null });
+      } else {
+        keepMark(null);
+      }
+    }
   }
   return snapshot;
 }
@@ -75,7 +97,10 @@ export function chosenVaultCategories(): VaultCategory[] {
 export function refreshVault(): void {
   const wasGuarding = snapshot === null ? null : snapshot.guarding;
   snapshot = null;
-  if (!current().guarding) vaultOpen = false;
+  if (!current().guarding) {
+    vaultOpen = false;
+    keepMark(null);
+  }
   // Just set up, by the person, in the open app (setup's security question,
   // the offer at a first record, Profile, or App Lock switched on): the vault
   // starts open and closes after time away like any other opening
@@ -83,7 +108,10 @@ export function refreshVault(): void {
   // once hid what they had just entered (Tony, 2026-11-18: Autism and ADHD
   // looked unaccepted in setup, and two new supplements were missing from
   // My Meds).
-  else if (wasGuarding === false) vaultOpen = true;
+  else if (wasGuarding === false) {
+    vaultOpen = true;
+    keepMark({ awaySince: null, appTrip: false, restartAt: null });
+  }
   notify();
 }
 
@@ -105,9 +133,34 @@ export function isCategoryClosed(category: VaultCategory): boolean {
 }
 
 export function setVaultOpen(open: boolean): void {
+  current();
   if (vaultOpen === open) return;
   vaultOpen = open;
+  keepMark(open ? { awaySince: null, appTrip: false, restartAt: null } : null);
   notify();
+}
+
+function keepMark(next: VaultOpenMark | null): void {
+  mark = next;
+  writeVaultOpenMarkSync(next);
+}
+
+/** The app was put away while the vault is open; appTrip when the app itself started the trip. */
+export function noteVaultAway(at: number, appTrip: boolean): void {
+  if (!vaultOpen || !mark || mark.awaySince !== null) return;
+  keepMark({ ...mark, awaySince: at, appTrip });
+}
+
+/** Back in the app with the vault still open: in use again. */
+export function noteVaultBack(): void {
+  if (!vaultOpen || !mark) return;
+  keepMark({ ...mark, awaySince: null, appTrip: false });
+}
+
+/** The app is about to restart itself (lib/restartApp.ts). */
+export function noteVaultRestart(at: number = Date.now()): void {
+  if (!vaultOpen || !mark) return;
+  keepMark({ ...mark, restartAt: at });
 }
 
 /**

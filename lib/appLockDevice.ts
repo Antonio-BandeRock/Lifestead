@@ -60,7 +60,7 @@ import { dropDataKey, holdDataKey, LOCK_FILE_NAME, readLockStateSync } from './a
 import { restartApp } from './restartApp';
 import { bytesToBase64Fast } from './localSeal';
 import { runBeforeRestart } from './beforeRestart';
-import { refreshVaultOn } from './vaultState';
+import { refreshVaultOn, setVaultOpen } from './vaultState';
 import { closeDatabasesForRestart, DB_NAME } from './db';
 import { unsealWaitingAnswersForTurnOff } from './lockedAnswers';
 import { unsealLockedCapturesForTurnOff } from './lockedCaptures';
@@ -909,6 +909,8 @@ export async function bringRecordsBackFromSharedFolder(): Promise<RecordsBackOut
  */
 export async function lockNow(): Promise<void> {
   await runBeforeRestart();
+  // Locking on purpose closes the vault too, so the restart does not carry it open.
+  setVaultOpen(false);
   dropDataKey();
   await restartApp();
 }

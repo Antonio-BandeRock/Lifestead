@@ -9,9 +9,11 @@ import { File, Paths } from 'expo-file-system';
 import { readLockStateSync } from './appLockSession';
 import {
   EMPTY_VAULT_SETTINGS,
+  parseVaultOpenMark,
   parseVaultSettings,
   serializeVaultSettings,
   vaultSettingsFromPhaseOne,
+  type VaultOpenMark,
   type VaultSettings,
 } from './vault';
 
@@ -40,4 +42,32 @@ export function writeVaultSettingsSync(settings: VaultSettings): void {
   const file = new File(Paths.document, VAULT_FILE_NAME);
   if (!file.exists) file.create();
   file.write(serializeVaultSettings(settings));
+}
+
+// The open mark (VaultOpenMark in lib/vault.ts), beside the settings: there
+// only while the vault is open, so a restart the app makes itself finds it.
+export const VAULT_OPEN_FILE_NAME = 'vault-open.json';
+
+export function readVaultOpenMarkSync(): VaultOpenMark | null {
+  try {
+    const file = new File(Paths.document, VAULT_OPEN_FILE_NAME);
+    return file.exists ? parseVaultOpenMark(file.textSync()) : null;
+  } catch (error) {
+    console.error('[vault] the open mark could not be read', error);
+    return null;
+  }
+}
+
+export function writeVaultOpenMarkSync(mark: VaultOpenMark | null): void {
+  try {
+    const file = new File(Paths.document, VAULT_OPEN_FILE_NAME);
+    if (mark === null) {
+      if (file.exists) file.delete();
+      return;
+    }
+    if (!file.exists) file.create();
+    file.write(JSON.stringify(mark));
+  } catch (error) {
+    console.error('[vault] the open mark could not be written', error);
+  }
 }

@@ -17,8 +17,12 @@
 import { Platform } from 'react-native';
 import * as Updates from 'expo-updates';
 import { closeDatabasesForRestart } from './db';
+import { noteVaultRestart } from './vaultState';
 
 export async function restartApp(): Promise<void> {
+  // An open vault stays open through a restart the app makes on its own
+  // (Tony, 2026-11-27). Lock Now closes it first.
+  noteVaultRestart();
   await closeDatabasesForRestart();
   if (Platform.OS === 'web' && typeof window !== 'undefined') {
     try {

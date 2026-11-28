@@ -57,6 +57,9 @@ const fakeFileSystem = {
     textSync() {
       return files.get(this.name) ?? null;
     }
+    delete() {
+      files.delete(this.name);
+    }
   },
 };
 function setLock(value) {
@@ -407,6 +410,29 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
   const lockDevice = fs.readFileSync(path.join(LIB, 'appLockDevice.ts'), 'utf8');
   check('writing the lock file refreshes the vault switch', /serializeLockState\(state\)\);\s*refreshVaultOn\(\);/.test(lockDevice));
 
+  // 9. Trips the app starts and restarts it makes itself (Tony, 2026-11-27:
+  // "If the user unlocks it ANYWHERE in the app and is actively using the
+  // app then they should literally never have to unlock it again").
+  check('leaving within three seconds of a tap is a trip', V.leftFromATap(10_000, 12_000) === true);
+  check('leaving long after a tap is not a trip', V.leftFromATap(10_000, 20_000) === false);
+  check('no tap yet is not a trip', V.leftFromATap(null, 20_000) === false);
+  check('ten minutes in the camera stays open', V.vaultClosesAfterAway(0, 10 * 60_000, 1, true) === false);
+  check('ten minutes away with no trip closes', V.vaultClosesAfterAway(0, 10 * 60_000, 1, false) === true);
+  check('a trip past half an hour closes', V.vaultClosesAfterAway(0, 31 * 60_000, 1, true) === true);
+  check('a trip with a clock gone backwards closes', V.vaultClosesAfterAway(5000, 1000, 15, true) === true);
+  check('no mark starts closed', V.vaultOpenAtStart(null, 1000, 1) === false);
+  check('a restart the app made carries the vault open', V.vaultOpenAtStart({ awaySince: null, appTrip: false, restartAt: 1000 }, 31_000, 1) === true);
+  check('a restart long ago does not', V.vaultOpenAtStart({ awaySince: null, appTrip: false, restartAt: 1000 }, 1000 + 3 * 60_000, 1) === false);
+  check('open and never left, with no restart, starts closed', V.vaultOpenAtStart({ awaySince: null, appTrip: false, restartAt: null }, 1000, 1) === false);
+  check('put away and opened within the time stays open', V.vaultOpenAtStart({ awaySince: 1000, appTrip: false, restartAt: null }, 21_000, 1) === true);
+  check('put away past the time starts closed', V.vaultOpenAtStart({ awaySince: 1000, appTrip: false, restartAt: null }, 1000 + 2 * 60_000, 1) === false);
+  check('a mark that does not parse is no mark', V.parseVaultOpenMark('not json') === null);
+  check('a mark reads back', same(V.parseVaultOpenMark(JSON.stringify({ awaySince: 5, appTrip: true, restartAt: null })), { awaySince: 5, appTrip: true, restartAt: null }));
+  check('the watcher counts app trips', sessionSource.includes('vaultClosesAfterAway(') && sessionSource.includes('leftFromATap('));
+  check('every tap is shown to the watcher', layout.includes('noteVaultTap();'));
+  const restartSource = fs.readFileSync(path.join(LIB, 'restartApp.ts'), 'utf8');
+  check('a restart the app makes marks the vault', restartSource.includes('noteVaultRestart();'));
+  check('locking on purpose closes the vault', /lockNow[\s\S]*setVaultOpen\(false\)/.test(lockDevice));
   console.log(`${passed} passed, ${failed} failed`);
   if (failed) process.exit(1);
 })();

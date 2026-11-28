@@ -69,7 +69,7 @@ import { getReferenceDatabase, initializeDatabase, settlePastScheduledMeals } fr
 import { handleIncomingIsFile } from '../lib/isFileLinking';
 import { refreshLockScreenNotice } from '../lib/emergencyLockScreen';
 import { writeLockedCaptures } from '../lib/lockedCaptures';
-import { watchVaultClosing } from '../lib/vaultSession';
+import { noteVaultTap, watchVaultClosing } from '../lib/vaultSession';
 import { listenForReminderTaps, syncReminderNotifications } from '../lib/reminderNotifications';
 import { checkReminderTiming } from '../lib/reminderTiming';
 import { refreshWidgets } from '../lib/widgets/taskHandler';
@@ -102,6 +102,8 @@ function noteTouchStart(event: GestureResponderEvent): void {
 function noteTouchEnd(event: GestureResponderEvent): void {
   const from = touchStartedAt;
   touchStartedAt = null;
+  // Every tap, so the vault knows a trip out of the app it started for one (lib/vault.ts).
+  noteVaultTap();
   if (!from) return;
   const { pageX, pageY } = event.nativeEvent;
   if (Math.abs(pageX - from.x) < 10 && Math.abs(pageY - from.y) < 10) reportTap(pageX, pageY);

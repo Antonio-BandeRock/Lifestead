@@ -32,8 +32,9 @@ import { bytesToBase64Fast } from './localSeal';
 import { isDesktopApp } from './desktop/bridge';
 import {
   cleanCategories,
+  leftFromATap,
   vaultCloseMinutes,
-  vaultClosesOnReturn,
+  vaultClosesAfterAway,
   VAULT_CATEGORY_KIND,
   type VaultCategory,
   type VaultCloseMinutes,
@@ -46,6 +47,8 @@ import {
   isAppLockOnForVault,
   isVaultOn,
   isVaultOpen,
+  noteVaultAway,
+  noteVaultBack,
   saveVaultSettings,
   setVaultOpen,
   subscribeVault,
@@ -276,6 +279,13 @@ export function setVaultOn(on: boolean): void {
 
 let watching = false;
 let awaySince: number | null = null;
+let awayOnATrip = false;
+let lastTapAt: number | null = null;
+
+/** A tap anywhere in the app (the root view in app/_layout.tsx), so a trip it starts is known for one. */
+export function noteVaultTap(at: number = Date.now()): void {
+  lastTapAt = at;
+}
 
 /** How long the app may be put away before the vault closes, as set up now. */
 export function currentVaultCloseMinutes(): VaultCloseMinutes {
@@ -295,8 +305,10 @@ export function setVaultCloseMinutes(minutes: VaultCloseMinutes): void {
  * Going to the camera, a file picker, a fingerprint prompt or the share
  * sheet puts the app in the background for a moment, and closing on each of
  * those made the vault ask again at every turn (Tony, 2026-11-27: "it should
- * remain unlocked the entire time they are using the app"). A restart still
- * closes it, since open is held only in memory. Called once from the root
+ * remain unlocked the entire time they are using the app"). Those trips
+ * follow a tap inside the app within a moment, so they count as in use
+ * (vaultClosesAfterAway), and a restart the app makes on its own keeps it
+ * open through the mark in lib/vaultState.ts. Called once from the root
  * layout; a second call does nothing.
  */
 export function watchVaultClosing(): void {
@@ -304,13 +316,26 @@ export function watchVaultClosing(): void {
   watching = true;
   AppState.addEventListener('change', (next) => {
     if (next === 'background') {
-      if (awaySince === null) awaySince = Date.now();
+      if (awaySince === null) {
+        awaySince = Date.now();
+        awayOnATrip = leftFromATap(lastTapAt, awaySince);
+        noteVaultAway(awaySince, awayOnATrip);
+      }
       return;
     }
     if (next !== 'active') return;
     const since = awaySince;
+    const trip = awayOnATrip;
     awaySince = null;
-    if (isVaultOpen() && vaultClosesOnReturn(since, Date.now(), currentVaultCloseMinutes())) setVaultOpen(false);
+    awayOnATrip = false;
+    if (!isVaultOpen()) return;
+    if (vaultClosesAfterAway(since, Date.now(), currentVaultCloseMinutes(), trip)) setVaultOpen(false);
+    else {
+      noteVaultBack();
+      // A picker that asks for permission first goes away twice; the second
+      // trip belongs to the same tap.
+      if (trip) lastTapAt = Date.now();
+    }
   });
 }
 

@@ -428,6 +428,82 @@ export function vaultClosesOnReturn(awaySince: number | null, now: number, minut
   return away >= minutes * 60_000;
 }
 
+/**
+ * A trip out of the app that the app itself started: the camera, the photo
+ * picker and its crop box, a file picker, the share sheet, a fingerprint
+ * prompt. Each follows a tap inside the app within a moment, and the person
+ * is still using the app while it is up, so it is not time away (Tony,
+ * 2026-11-27: "If they stop using the app, THEN AFTER THE AMOUNT OF TIME
+ * THEY CHOOSE IN PROFILE, then it locks them out, never before"). A trip
+ * like that left open for half an hour is counted as away after all, since
+ * by then nobody is using it.
+ */
+export const APP_TRIP_TAP_MS = 3_000;
+export const APP_TRIP_LIMIT_MS = 30 * 60_000;
+
+/** Whether the app went away within a moment of a tap inside it. */
+export function leftFromATap(lastTapAt: number | null, leftAt: number): boolean {
+  if (lastTapAt === null) return false;
+  const gap = leftAt - lastTapAt;
+  return gap >= 0 && gap <= APP_TRIP_TAP_MS;
+}
+
+/** vaultClosesOnReturn, with a trip the app started counted as in use up to its limit. */
+export function vaultClosesAfterAway(
+  awaySince: number | null,
+  now: number,
+  minutes: VaultCloseMinutes,
+  appTrip: boolean,
+): boolean {
+  if (!appTrip || awaySince === null) return vaultClosesOnReturn(awaySince, now, minutes);
+  const away = now - awaySince;
+  if (away < 0) return true;
+  return away >= Math.max(minutes * 60_000, APP_TRIP_LIMIT_MS);
+}
+
+/**
+ * What the vault leaves on this device while it is open, so a restart the
+ * app makes on its own (a sync bringing records in, a theme or spacing
+ * change) does not close it under the person. Never synced, never in the
+ * database. Deleted the moment the vault closes.
+ */
+export type VaultOpenMark = {
+  /** When the app was last put away, or null while it is in use. */
+  awaySince: number | null;
+  /** That time away was a trip the app started. */
+  appTrip: boolean;
+  /** When the app restarted itself while the vault was open, or null. */
+  restartAt: number | null;
+};
+
+/** A restart the app made itself carries the vault open only if the app is back this soon. */
+export const RESTART_CARRY_MS = 2 * 60_000;
+
+/**
+ * Whether the vault starts open. Only from a mark it left: after time away,
+ * by the same rule as coming back; while in use, only through a restart the
+ * app made itself a moment ago, so a crash or a phone left for a day starts
+ * closed.
+ */
+export function vaultOpenAtStart(mark: VaultOpenMark | null, now: number, minutes: VaultCloseMinutes): boolean {
+  if (!mark) return false;
+  if (mark.awaySince !== null) return !vaultClosesAfterAway(mark.awaySince, now, minutes, mark.appTrip);
+  if (mark.restartAt === null) return false;
+  const since = now - mark.restartAt;
+  return since >= 0 && since <= RESTART_CARRY_MS;
+}
+
+export function parseVaultOpenMark(text: string): VaultOpenMark | null {
+  try {
+    const raw = JSON.parse(text) as Partial<VaultOpenMark> | null;
+    if (!raw || typeof raw !== 'object') return null;
+    const num = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+    return { awaySince: num(raw.awaySince), appTrip: raw.appTrip === true, restartAt: num(raw.restartAt) };
+  } catch {
+    return null;
+  }
+}
+
 export const EMPTY_VAULT_SETTINGS: VaultSettings = {
   version: 1,
   categories: [],
