@@ -73,7 +73,21 @@ for (const [t, cat] of Object.entries(REPOINTED)) {
 }
 // merge-candidate.js step 11 adds progesterone to the medicine list (scripts/add_mexican_medicine_brands.js), so that
 // one row is expected in the candidate and not in the copy from before the swap.
-const ADDED_ROWS = { common_medications: `id=${"'" + require('../../scripts/add_mexican_medicine_brands.js').PROGESTERONE.id + "'"}` };
+// merge-candidate.js step 4b adds the five nutrients in data/new-nutrients.json and their adequate intakes.
+const NEW_NUTRIENTS = require('./data/new-nutrients.json');
+const newCodes = NEW_NUTRIENTS.nutrients.map((n) => `'${n.code}'`).join(',');
+const ADDED_ROWS = {
+  common_medications: `id=${"'" + require('../../scripts/add_mexican_medicine_brands.js').PROGESTERONE.id + "'"}`,
+  nutrients: `code in (${newCodes})`,
+  dietary_reference_intakes: `nutrient_code in (${newCodes})`,
+};
+{
+  const rows = q(`select code, display_name, unit, nutrient_group from nutrients where code in (${newCodes}) order by code`);
+  const want = [...NEW_NUTRIENTS.nutrients].sort((a, b) => a.code.localeCompare(b.code));
+  const sameRows = rows.length === want.length && rows.every((r, i) => r.code === want[i].code && r.display_name === want[i].display_name && r.unit === want[i].unit && r.nutrient_group === want[i].group);
+  const intakes = one(`select count(*) from dietary_reference_intakes where nutrient_code in (${newCodes})`);
+  check('the five added nutrients are in the nutrients table as data/new-nutrients.json names them, with their adequate intakes', sameRows && intakes === NEW_NUTRIENTS.intakes.length, `${rows.length} nutrients, ${intakes} intakes`);
+}
 const changedTables = [];
 for (const t of tables) {
   const cols = q(`select name from pragma_table_info('${t}', 'L')`).map((r) => `"${r.name}"`).join(', ');
@@ -143,6 +157,22 @@ const salt = one(`select max(n.amount_per_100g) from food_nutrients n join foods
 check('table salt reads close to 38,758 mg sodium per 100 g', salt > 37000 && salt < 40000, salt);
 const paste = one(`select max(n.amount_per_100g) from food_nutrients n join foods f using(food_id, source) where n.nutrient_code='lycopene' and f.name like 'Tomato products, canned, paste%'`);
 check('tomato paste reads close to 28,764 micrograms lycopene per 100 g', paste > 25000 && paste < 32000, paste);
+// The added fatty acids: known foods read what their tables say, Australia's mg arrive as g, and no shown food carries
+// more of the four acids than it has fat.
+const amountOf = (like, code) => one(`select max(n.amount_per_100g) from food_nutrients n join foods f using(food_id, source) where f.source='USDA' and f.name like '${like}' and n.nutrient_code='${code}'`);
+const flaxAla = amountOf('Oil, flaxseed, cold pressed%', 'ala_omega_3');
+check('cold pressed flaxseed oil reads close to 53 g ALA per 100 g', flaxAla > 48 && flaxAla < 58, flaxAla);
+const salmonEpa = amountOf('Fish, salmon, Atlantic, farmed, raw%', 'epa');
+const salmonDha = amountOf('Fish, salmon, Atlantic, farmed, raw%', 'dha');
+check('raw farmed Atlantic salmon reads close to 0.86 g EPA and 1.10 g DHA per 100 g', salmonEpa > 0.7 && salmonEpa < 1.0 && salmonDha > 0.95 && salmonDha < 1.25, `${salmonEpa} / ${salmonDha}`);
+const auMax = one(`select max(n.amount_per_100g) from food_nutrients n where n.source='Australia_AFCD' and n.nutrient_code in ('epa','dha')`);
+check('Australian EPA and DHA are grams, not milligrams (none above 30 g per 100 g)', auMax !== null && auMax < 30, auMax);
+const overFat = q(`select f.base_name b, f.source s, round(sum(n.amount_per_100g),2) acids, t.amount_per_100g fat from food_nutrients n join foods f using(food_id, source)
+  join food_nutrients t on t.food_id=n.food_id and t.source=n.source and t.nutrient_code='fat_total'
+  where f.hidden=0 and n.nutrient_code in ('linoleic_acid','ala_omega_3','epa','dha') group by n.food_id, n.source having acids > fat * 1.05 + 0.1`);
+check('no shown food carries more linoleic acid, ALA, EPA and DHA together than its total fat', overFat.length === 0, overFat.slice(0, 8).map((o) => `${o.b} (${o.s}) ${o.acids} of ${o.fat}`).join('; ') || undefined);
+const sterolMax = one(`select max(amount_per_100g) from food_nutrients where nutrient_code='phytosterols'`);
+check('phytosterols are milligrams (none above 2,000 mg per 100 g)', sterolMax !== null && sterolMax < 2000, sterolMax);
 const gained = q(`select n.nutrient_code code, sum(f.food_id<1000000) on_live_foods, sum(f.food_id>=1000000) on_new_foods,
   sum(f.food_id<1000000 and n.amount_per_100g=0) zero_on_live from food_nutrients n join foods f using(food_id, source)
   where not exists (select 1 from L.food_nutrients l where l.food_id=n.food_id and l.source=n.source and l.nutrient_code=n.nutrient_code) group by 1 order by 2 desc`);

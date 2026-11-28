@@ -1,0 +1,81 @@
+{
+  "note": "Added 2026-11-27 (merge-candidate.js step 4b). Adequate intakes from the NASEM 2005 DRI Macronutrients report, as the ODS Omega-3 fact sheet gives them; EPA, DHA and phytosterols have no DRI.",
+  "source_agency": "National Academies of Sciences, Engineering, and Medicine (NASEM) Dietary Reference Intakes, as summarized by NIH Office of Dietary Supplements (ODS) fact sheets",
+  "citation": "NASEM 2005 DRI Macronutrients report.",
+  "nutrients": [
+    {
+      "code": "linoleic_acid",
+      "display_name": "Linoleic acid (omega-6)",
+      "unit": "g",
+      "group": "macro"
+    },
+    {
+      "code": "ala_omega_3",
+      "display_name": "ALA (alpha-linolenic acid)",
+      "unit": "g",
+      "group": "macro"
+    },
+    {
+      "code": "epa",
+      "display_name": "EPA (eicosapentaenoic acid)",
+      "unit": "g",
+      "group": "macro"
+    },
+    {
+      "code": "dha",
+      "display_name": "DHA (docosahexaenoic acid)",
+      "unit": "g",
+      "group": "macro"
+    },
+    {
+      "code": "phytosterols",
+      "display_name": "Phytosterols",
+      "unit": "mg",
+      "group": "other"
+    }
+  ],
+  "intakes": [
+    {
+      "code": "linoleic_acid",
+      "sex": "male",
+      "age_min": 19,
+      "age_max": 50,
+      "amount": 17
+    },
+    {
+      "code": "linoleic_acid",
+      "sex": "male",
+      "age_min": 51,
+      "age_max": null,
+      "amount": 14
+    },
+    {
+      "code": "linoleic_acid",
+      "sex": "female",
+      "age_min": 19,
+      "age_max": 50,
+      "amount": 12
+    },
+    {
+      "code": "linoleic_acid",
+      "sex": "female",
+      "age_min": 51,
+      "age_max": null,
+      "amount": 11
+    },
+    {
+      "code": "ala_omega_3",
+      "sex": "male",
+      "age_min": 19,
+      "age_max": null,
+      "amount": 1.6
+    },
+    {
+      "code": "ala_omega_3",
+      "sex": "female",
+      "age_min": 19,
+      "age_max": null,
+      "amount": 1.1
+    }
+  ]
+}

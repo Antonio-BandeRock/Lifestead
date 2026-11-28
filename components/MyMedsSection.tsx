@@ -1031,7 +1031,7 @@ ${text}` : text));
               </Text>
             ) : null}
           </>
-        ) : isSupplementOnlyIngredient(nutrientCode) ? (
+        ) : isSupplementOnlyIngredient(nutrientCode) && !nutrients.some((n) => n.code === nutrientCode && n.group !== 'supplement') ? (
           <Text style={styles.helperText}>
             {t('The food records carry no amount of {name}, so it is kept as the label gives it and not added into the nutrients for the day.', {
               name: nutrientDisplayName(nutrientCode),

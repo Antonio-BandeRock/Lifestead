@@ -87,6 +87,8 @@ const ALIAS_TABLE: [string, string[], Record<string, string>?][] = [
   ['glycine', ['glycine']],
   ['caffeine', ['caffeine']],
   ['lycopene', ['lycopene']],
+  ['linoleic_acid', ['linoleic acid']],
+  ['phytosterols', ['phytosterols', 'plant sterols', 'beta sitosterol']],
   ['protein', ['protein']],
   ['fiber_total', ['fiber', 'fibre', 'dietary fiber', 'dietary fibre']],
   ['carbohydrate', ['carbohydrate', 'carbohydrates', 'carbs', 'total carbohydrate']],

@@ -220,4 +220,9 @@
 // BUMPED again 2026-11-18: the medicine list carries the brand names sold
 // in Mexico (brand_names_mexico, mexico_notes) and has progesterone
 // (scripts/add_mexican_medicine_brands.js). A stale copy lacks the columns.
-export const REFERENCE_DB_VERSION = "20261119120000";
+// BUMPED again 2026-11-27: linoleic acid, ALA, EPA, DHA and phytosterols
+// are tracked nutrients, carried by the foods whose tables give them
+// (unified-database/pipeline/add-fatty-acids.js), with NASEM's adequate
+// intakes for linoleic acid and ALA. A supplement oil linked to its food
+// record counts them. A stale copy lacks the five nutrients.
+export const REFERENCE_DB_VERSION = "20261127120000";

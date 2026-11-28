@@ -34,8 +34,11 @@
 // own tracked-but-unmeasured nutrients) -- a real, different gap
 // profile from Norway's, worth keeping distinct rather than assuming
 // the same nutrients are missing for the same reasons across sources.
-// Sub-component columns (individual fatty acids, mono-/di-saccharide
-// breakdowns, niacin equivalents, an alternate vitamin-D-inclusive-
+// Four single fatty acids ARE mapped since 2026-11-27: linoleic acid
+// (29), ALA (30), EPA (32) and DHA (34). Each is one named acid, not a
+// total, so it adds alongside fat_polyunsaturated without counting
+// anything twice. Other sub-component columns (the remaining fatty
+// acids, mono-/di-saccharide breakdowns, niacin equivalents, an alternate vitamin-D-inclusive-
 // metabolite column, salt as NaCl-equivalent grams) are deliberately
 // NOT mapped, to avoid double-counting against the parent total column
 // that already covers the same real nutrient.
@@ -54,6 +57,10 @@ const SWEDEN_COLUMN_INDEX = {
   fat_saturated: 18,
   fat_monounsaturated: 25,
   fat_polyunsaturated: 28,
+  linoleic_acid: 29,
+  ala_omega_3: 30,
+  epa: 32,
+  dha: 34,
   cholesterol: 35,
   vitamin_a: 36,
   vitamin_d: 39,

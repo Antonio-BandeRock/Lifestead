@@ -68,6 +68,11 @@ const NORWAY_NUTRIENT_MAP = {
   Se: 'selenium',
   I: 'iodine',
   Cu: 'copper',
+  // Single fatty acids, g per 100 g, added 2026-11-27. No phytosterol constituent exists.
+  'C18:2n-6Linolsyre': 'linoleic_acid',
+  'C18:3n-3AlfaLinolensyre': 'ala_omega_3',
+  'C20:5n-3Eikosapentaensyre': 'epa',
+  'C22:6n-3Dokosaheksaensyre': 'dha',
 };
 
 function buildNutrients(record) {

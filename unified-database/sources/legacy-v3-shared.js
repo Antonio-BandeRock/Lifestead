@@ -57,7 +57,12 @@ const { extractZipTo } = require('./legacy-v3-extract.js');
 // (median near 165 against about 0.2 elsewhere). The live database divided its BLS values by 1000 on
 // 2026-11-11 (scripts/fix_nutrient_source_errors.js); this does the same on ingest, and the unified
 // database's existing 7,041 BLS values were divided once by hand the same day.
-const SOURCE_SCALE = { Germany_BLS: { vitamin_b6: 1 / 1000 } };
+const SOURCE_SCALE = {
+  Germany_BLS: { vitamin_b6: 1 / 1000 },
+  // Australia's EPA and DHA tags are the only fatty acids any source gives in mg (their names end
+  // _MG, largest value 1757); every other source's fatty acids are g per 100 g (2026-11-27).
+  Australia_AFCD: { epa: 1 / 1000, dha: 1 / 1000 },
+};
 
 const SQLITE_EXE =
   process.env.SQLITE_EXE ||
@@ -131,7 +136,41 @@ const NUTRIENT_TAG_MAP = {
   LYCPN: 'lycopene',
   AU_LYCOPENE_UG: 'lycopene',
   LYCO: 'lycopene',
+  // Linoleic acid, ALA, EPA, DHA (all g per 100 g) and phytosterols (mg), added 2026-11-27 so a
+  // supplement oil linked to its food record counts them. Several sources carry both the exact
+  // isomer (cis n-6, cis n-3) and the plain chain length that lumps the isomers together; the exact
+  // one wins through TAG_PRIORITY below. Canada FAPUN3/FAPUN6 and UK TOTn3/TOTn6 are family totals,
+  // not one acid, and stay out. Japan carries no fatty acid tags at all.
+  PUFA_18_2_N_6_C_C: 'linoleic_acid', PUFA_18_2: 'linoleic_acid',
+  F18D2CN6: 'linoleic_acid', F18D2: 'linoleic_acid',
+  'FOD18:2cn6': 'linoleic_acid', 'FOD18:2': 'linoleic_acid',
+  'F18:2CN6': 'linoleic_acid',
+  FR_AG_18_2_9C_12C_N_6_LINOL_IQUE_G_100_G: 'linoleic_acid',
+  AU_C18_2W6_G: 'linoleic_acid',
+  PUFA_18_3_N_3_C_C_C_ALA: 'ala_omega_3', PUFA_18_3: 'ala_omega_3',
+  F18D3CN3: 'ala_omega_3', F18D3: 'ala_omega_3',
+  'FOD18:3cn3': 'ala_omega_3', 'FOD18:3': 'ala_omega_3',
+  'F18:3CN3': 'ala_omega_3',
+  FR_AG_18_3_C9_C12_C15_N_3_ALPHA_LINOL_NIQUE_G_100_G: 'ala_omega_3',
+  AU_C18_3W3_G: 'ala_omega_3',
+  PUFA_20_5_N_3_EPA: 'epa', F20D5N3: 'epa', 'FOD20:5cn3': 'epa', 'FOD20:5': 'epa', 'F20:5CN3': 'epa',
+  FR_AG_20_5_5C_8C_11C_14C_17C_N_3_EPA_G_100_G: 'epa', AU_C20_5W3_MG: 'epa',
+  PUFA_22_6_N_3_DHA: 'dha', F22D6N3: 'dha', 'FOD22:6cn3': 'dha', 'FOD22:6': 'dha', 'F22:6CN3': 'dha',
+  FR_AG_22_6_4C_7C_10C_13C_16C_19C_N_3_DHA_G_100_G: 'dha', AU_C22_6W3_MG: 'dha',
+  // UK PHYTO and "Total PHYTO" sit on different foods; BSITPHYTO is beta-sitosterol alone and stays out.
+  PHYTOSTEROLS: 'phytosterols', PHYSTR: 'phytosterols', PHYTO: 'phytosterols', 'Total PHYTO': 'phytosterols',
 };
+
+// When one food carries two tags for the same code, the lower rank wins. Tags not listed rank 0,
+// so the exact isomer tags above beat the plain chain-length ones regardless of row order.
+const TAG_PRIORITY = {
+  PUFA_18_2: 1, F18D2: 1, 'FOD18:2': 1,
+  PUFA_18_3: 1, F18D3: 1, 'FOD18:3': 1,
+  'FOD20:5': 1, 'FOD22:6': 1,
+  'Total PHYTO': 1,
+};
+
+const FATTY_ACID_CODES = ['linoleic_acid', 'ala_omega_3', 'epa', 'dha', 'phytosterols'];
 
 function ensureExtracted() {
   if (fs.existsSync(CACHED_DB_PATH)) return CACHED_DB_PATH;
@@ -174,7 +213,7 @@ async function ingestLegacySource(legacySourceValue) {
     throw new Error(`No real rows found for legacy source '${legacySourceValue}' -- check the real value against the v3_full database's own distinct source list.`);
   }
 
-  const tagList = Object.keys(NUTRIENT_TAG_MAP).map((t) => `'${t}'`).join(',');
+  const tagList = Object.keys(NUTRIENT_TAG_MAP).map((t) => `'${t.replace(/'/g, "''")}'`).join(',');
   const nutrientRows = query(dbPath, `
     SELECT fn.food_id, fn.tag, fn.value
     FROM food_nutrients fn
@@ -183,6 +222,7 @@ async function ingestLegacySource(legacySourceValue) {
   `);
 
   const nutrientsByFood = new Map();
+  const rankByFood = new Map();
   for (const r of nutrientRows) {
     if (typeof r.value !== 'number') continue;
     const code = NUTRIENT_TAG_MAP[r.tag];
@@ -193,7 +233,13 @@ async function ingestLegacySource(legacySourceValue) {
     // -- both real synonyms for the identical nutrient in the SAME
     // real unit, confirmed above. First real value wins; not summed,
     // which would double-count.
-    if (!(code in bucket)) bucket[code] = r.value * ((SOURCE_SCALE[legacySourceValue] || {})[code] || 1);
+    if (!rankByFood.has(r.food_id)) rankByFood.set(r.food_id, {});
+    const ranks = rankByFood.get(r.food_id);
+    const rank = TAG_PRIORITY[r.tag] || 0;
+    if (!(code in bucket) || rank < ranks[code]) {
+      bucket[code] = r.value * ((SOURCE_SCALE[legacySourceValue] || {})[code] || 1);
+      ranks[code] = rank;
+    }
   }
 
   const needsTranslation = SOURCES_NEEDING_REAL_TRANSLATION.has(legacySourceValue);
@@ -217,4 +263,4 @@ async function ingestLegacySource(legacySourceValue) {
   }));
 }
 
-module.exports = { ingestLegacySource, NUTRIENT_TAG_MAP, ensureExtracted };
+module.exports = { ingestLegacySource, NUTRIENT_TAG_MAP, TAG_PRIORITY, SOURCE_SCALE, FATTY_ACID_CODES, ensureExtracted, query };

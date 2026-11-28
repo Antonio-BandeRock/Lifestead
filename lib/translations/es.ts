@@ -657,6 +657,8 @@ const BY_HAND: Readonly<Record<string, string>> = {
   "DHA (docosahexaenoic acid)": "DHA (ácido docosahexaenoico)",
   "ALA (alpha-linolenic acid)": "ALA (ácido alfa linolénico)",
   "Omega-6": "Omega 6",
+  "Linoleic acid (omega-6)": "Ácido linoleico (omega 6)",
+  "Phytosterols": "Fitoesteroles",
   "GLA (gamma-linolenic acid)": "GLA (ácido gamma linolénico)",
   "Omega-9": "Omega 9",
   "Fish oil": "Aceite de pescado",

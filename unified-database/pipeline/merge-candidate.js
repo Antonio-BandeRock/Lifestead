@@ -25,6 +25,8 @@
 //      and base_name_renames records each old name and where it went.
 //   node merge-candidate.js <recipe_check.json> [renames.txt] writes the shared names and their choices to renames.txt.
 //   8. Categories (data/categories.json). 9. Purchase forms pointed by hand (data/purchase-forms.json).
+//   4b. Five nutrients the live table never had (linoleic acid, ALA, EPA, DHA, phytosterols; 2026-11-27) are added to
+//       the nutrients table first, with NASEM's adequate intakes for the two that have one, so the step 4 rule carries them.
 //   10. Every shown food the workbook never scored is scored by score-unscored.js, which records where each score came
 //       from in score_origin; the live scores are never changed, and verify-candidate.js checks both.
 const { execFileSync } = require('child_process');
@@ -101,6 +103,13 @@ const categoryFor = (type) => {
 
 // Nutrients: the codes the app knows, what each live food has, and the source's values.
 const codes = new Set(q(LIVE, 'select code from nutrients').map((r) => r.code));
+// Added 2026-11-27 so a food, and a supplement oil linked to one, can carry them. Units match the sources: the fatty
+// acids are g per 100 g in every table (Australia's EPA and DHA arrive in mg and the adapter divides them by 1000),
+// phytosterols mg. verify-candidate.js reads the same file and expects exactly these rows beyond the live table.
+const NEW_NUTRIENTS = require('./data/new-nutrients.json');
+for (const n of NEW_NUTRIENTS.nutrients) if (codes.has(n.code)) throw new Error(`${n.code} is already in the live nutrients table`);
+for (const n of NEW_NUTRIENTS.nutrients) codes.add(n.code);
+const firstDriId = q(LIVE, 'select max(id) m from dietary_reference_intakes')[0].m + 1;
 const liveHas = new Set(q(LIVE, `select food_id||'|'||source||'|'||nutrient_code k from food_nutrients`).map((r) => r.k));
 const uniNut = q(UNI, 'select raw_id, nutrient_code c, amount_per_100g a from raw_food_nutrients where amount_per_100g is not null');
 
@@ -110,6 +119,9 @@ fs.copyFileSync(LIVE, OUT);
 
 const sql = ['PRAGMA foreign_keys=OFF;', 'BEGIN;'];
 for (const col of ['unified_raw_id INTEGER', 'curation_status TEXT', 'listing_name TEXT', 'food_type TEXT', 'caution TEXT']) sql.push(`ALTER TABLE foods ADD COLUMN ${col};`);
+for (const n of NEW_NUTRIENTS.nutrients) sql.push(`INSERT INTO nutrients (code, display_name, unit, nutrient_group) VALUES (${esc(n.code)}, ${esc(n.display_name)}, ${esc(n.unit)}, ${esc(n.group)});`);
+NEW_NUTRIENTS.intakes.forEach((d, i) => sql.push(`INSERT INTO dietary_reference_intakes (id, nutrient_code, sex, age_min, age_max, value_type, amount, unit, upper_limit, upper_limit_type, source_agency, citation, notes)
+  VALUES (${firstDriId + i}, ${esc(d.code)}, ${esc(d.sex)}, ${d.age_min}, ${d.age_max === null ? 'NULL' : d.age_max}, 'AI', ${d.amount}, 'g', NULL, NULL, ${esc(NEW_NUTRIENTS.source_agency)}, ${esc(NEW_NUTRIENTS.citation)}, NULL);`));
 
 const foodOfRaw = new Map();
 let namesTranslated = 0;
@@ -376,7 +388,7 @@ for (const [l, spec] of Object.entries(CAT.moves)) {
 
 s7.push('DROP TABLE placed_listing;');
 s7.push(`CREATE TABLE candidate_build (key TEXT PRIMARY KEY, value TEXT);`);
-const build = { built_at: new Date().toISOString(), live_foods: live.length, added_foods: added, nutrients_gained: gained, recipe_names_pointed: pointed, unlisted_names_moved: moved,
+const build = { built_at: new Date().toISOString(), live_foods: live.length, added_foods: added, nutrients_gained: gained, nutrients_added: NEW_NUTRIENTS.nutrients.length, intakes_added: NEW_NUTRIENTS.intakes.length, recipe_names_pointed: pointed, unlisted_names_moved: moved,
   names_renamed: renames.length, category_moves: categoryMoves, recipe_lines_renamed: linesRenamed, recipe_lines_by_their_words: linesByWords, unit_weights_renamed: weightsRenamed };
 for (const [k, v] of Object.entries(build)) s7.push(`INSERT INTO candidate_build VALUES (${esc(k)}, ${esc(String(v))});`);
 s7.push('COMMIT;', 'VACUUM;');

@@ -69,7 +69,7 @@ export const SUPPLEMENT_INGREDIENTS: SupplementIngredient[] = [
   { code: 'epa', displayName: 'EPA (eicosapentaenoic acid)', unit: 'mg', aliases: ['epa', 'eicosapentaenoic acid'] },
   { code: 'dha', displayName: 'DHA (docosahexaenoic acid)', unit: 'mg', aliases: ['dha', 'docosahexaenoic acid'] },
   { code: 'ala_omega_3', displayName: 'ALA (alpha-linolenic acid)', unit: 'mg', aliases: ['alpha linolenic acid'] },
-  { code: 'omega_6', displayName: 'Omega-6', unit: 'mg', aliases: ['omega6', 'omega6 fatty acids', 'linoleic acid'] },
+  { code: 'omega_6', displayName: 'Omega-6', unit: 'mg', aliases: ['omega6', 'omega6 fatty acids'] },
   { code: 'gla', displayName: 'GLA (gamma-linolenic acid)', unit: 'mg', aliases: ['gla', 'gamma linolenic acid'] },
   { code: 'omega_9', displayName: 'Omega-9', unit: 'mg', aliases: ['omega9', 'omega9 fatty acids', 'oleic acid'] },
 
