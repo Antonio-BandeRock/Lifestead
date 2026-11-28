@@ -103,7 +103,7 @@ export function SupplyCountForm({ treatmentId, name, details, reading, defaultUn
     const each = parseDoseAmount(perDose);
     const lead = parseDoseAmount(leadDays);
     if (Number.isNaN(count) || Number.isNaN(each) || Number.isNaN(lead)) {
-      onProblem('Almost there', 'Use numbers for how many you have, how many one dose uses, and the days ahead.');
+      onProblem('Almost there', 'Use numbers for how many you have, how many you take each time, and the days ahead.');
       return;
     }
     if (!clear && count === null) {
@@ -145,6 +145,22 @@ export function SupplyCountForm({ treatmentId, name, details, reading, defaultUn
   }
 
   const shared = bottle !== null || share;
+  // The amount for one dose is easy to read as the whole count (150 typed in
+  // both boxes once gave "About 2 days left"), so the label names the unit
+  // typed above it, and a dose as large as everything on hand is pointed out
+  // while it is being typed.
+  const typedUnit = unit.trim();
+  const eachLabel = typedUnit
+    ? shared
+      ? t('How many {unit} you take each time (your dose only)', { unit: typedUnit })
+      : t('How many {unit} you take each time', { unit: typedUnit })
+    : shared
+      ? 'How many you take each time (your dose only)'
+      : 'How many you take each time';
+  const countNow = parseDoseAmount(onHand);
+  const eachNow = parseDoseAmount(perDose);
+  const wholeCount =
+    typeof countNow === 'number' && typeof eachNow === 'number' && !Number.isNaN(countNow) && !Number.isNaN(eachNow) && countNow > 1 && eachNow >= countNow;
 
   return (
     <View style={styles.form}>
@@ -166,7 +182,7 @@ export function SupplyCountForm({ treatmentId, name, details, reading, defaultUn
           {t('{name} is asked which of their meds takes from it. Then the count goes down by both of your doses.', { name: partnerName })}
         </Text>
       ) : null}
-      <Text style={styles.label}>How many do you have right now</Text>
+      <Text style={styles.label}>How many you have now, and what they are</Text>
       <View style={styles.inlineRow}>
         <AppTextInput
           style={[styles.input, styles.numberInput]}
@@ -182,13 +198,17 @@ export function SupplyCountForm({ treatmentId, name, details, reading, defaultUn
           placeholder="tablets, capsules, ml"
         />
       </View>
-      <Text style={styles.label}>{shared ? 'How much of the bottle one of your doses uses' : 'How many one dose uses'}</Text>
+      <Text style={styles.label}>{eachLabel}</Text>
       <AppTextInput style={[styles.input, styles.numberInput]} keyboardType="decimal-pad" value={perDose} onChangeText={setPerDose} />
-      {shared ? <Text style={styles.caption}>Half a tablet is 0.5.</Text> : null}
-      <Text style={styles.label}>Tell me when this many days are left</Text>
+      <Text style={styles.caption}>
+        {wholeCount
+          ? t('One dose would use all {count} you have. Put how many you take each time, such as 1 or 2.', { count: onHand.trim() })
+          : 'One dose, not the whole bottle. Half a tablet is 0.5.'}
+      </Text>
+      <Text style={styles.label}>Remind me when this many days are left</Text>
       <AppTextInput style={[styles.input, styles.numberInput]} keyboardType="number-pad" value={leadDays} onChangeText={setLeadDays} />
       <Text style={styles.caption}>
-        Each dose you mark taken comes off the count, and a reminder comes that many days before they run out.
+        Each dose you mark taken comes off the count by itself, and the reminder to get more comes when that many days are left.
       </Text>
       <View style={styles.actions}>
         {bottle ? (

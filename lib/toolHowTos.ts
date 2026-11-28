@@ -1211,7 +1211,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Know when one will run out',
       steps: [
         { say: 'Tap Track how many under it. Once counted, the same button shows how many are left.', mark: 'myMeds.tracking' },
-        { say: 'Type how many there are now, what they are (tablets, capsules, ml), how many one dose uses and how many days ahead to be told, then tap Save the count.' },
+        { say: 'Type how many there are now, what they are (tablets, capsules, ml), how many you take each time and how many days ahead to be told, then tap Save the count.' },
         { say: 'A new one asks this by itself the moment it is saved, then asks whether to put it on the schedule.' },
       ],
       forYou: 'Each dose you mark taken comes off the count. The days left follow the doses on your schedule, weekly, monthly or a taper step by step, and a reminder comes before it runs out.',

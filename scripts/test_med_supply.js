@@ -82,7 +82,10 @@ check('runs out', r.runsOutOn, '2026-10-20');
 check('remind on', r.remindOn, '2026-10-13');
 check('short', r.short, 'About 24 days left (24 tablets)');
 has('sentence', r.sentence, 'Oct 20');
-has('sentence', r.sentence, 'A dose taken but not marked is still counted as there.');
+has('sentence', r.sentence, 'A dose you take without marking it taken is not taken off the count.');
+has('sentence', r.sentence, '24 tablets left of the 30 you counted on Sep 20.');
+has('sentence', r.sentence, 'At 1 tablet a dose, that is enough for 24 doses.');
+has('sentence', r.sentence, 'A reminder to get more comes on Oct 13.');
 
 const twice = M.readSupply({ ...base, perDose: 2, dueNext7Days: 14 });
 check('two per dose, twice a day', twice.remaining, 18);
@@ -115,7 +118,7 @@ const monthly = M.readSupply({ ...base, onHand: 9, takenSinceCount: 6, dueNext7D
 check('monthly runs out on the first dose not covered', monthly.runsOutOn, '2027-01-01');
 check('monthly days left', monthly.daysLeft, 97);
 check('monthly reminder lead', monthly.remindOn, '2026-12-25');
-has('monthly sentence', monthly.sentence, 'Following each dose on the schedule, it runs out around Jan 1');
+has('monthly sentence', monthly.sentence, 'Going by each dose on the schedule, they run out around Jan 1');
 
 // Weekly: two a week for 24 tablets lasts twelve weeks.
 const weekly = M.readSupply({ ...base, schedule: ahead([...series('2026-09-28', 30, 7), ...series('2026-10-01', 30, 7)].sort((a, b) => a.date.localeCompare(b.date))) });
@@ -150,7 +153,7 @@ has('covered taper sentence', taperEnough.sentence, 'That covers every dose on t
 check('covered short', taperEnough.short, '40 tablets left, enough for the schedule');
 
 const unconv = M.readSupply({ ...base, schedule: ahead(series('2026-09-26', 10, 1), { tapered: true, unconverted: { stepUnit: 'mg' } }) });
-has('unconverted sentence', unconv.sentence, "The taper's steps are in mg, so each dose is counted as 1 tablets.");
+has('unconverted sentence', unconv.sentence, "The taper's steps are in mg, so each dose is counted as 1 tablet.");
 lacks('unconverted pace', unconv.sentence, 'taper step,');
 
 // Less left than the next dose: not enough, said that way.
@@ -161,6 +164,19 @@ check('no doses ahead falls back to the average', M.readSupply({ ...base, schedu
 check('refill line, no pace', M.describeRefillDue('X', noPace), 'X: time to ask for more.');
 check('month edge', M.addDays('2026-01-31', 1), '2026-02-01');
 check('short date', M.shortDate('2026-03-05'), 'Mar 5');
+
+// The count Lisa saw (2026-11-27): 150 typed as one dose. The reading names
+// the amount a dose takes and how many doses that is, so the slip shows, and
+// a reminder day already passed is said as now, never as days before.
+const lisa = M.readSupply({ ...base, onHand: 150, perDose: 150, takenSinceCount: 0, leadDays: 30, schedule: ahead(series('2026-09-27', 30, 1, 150)) });
+check('one dose of 150', [lisa.daysLeft, lisa.runsOutOn], [2, '2026-09-28']);
+has('lisa sentence', lisa.sentence, 'At 150 tablets a dose, that is enough for 1 dose.');
+has('lisa sentence', lisa.sentence, 'That is within the 30 days you asked to be told, so it is time to get more.');
+lacks('lisa sentence', lisa.sentence, 'days before that');
+has('not enough sentence', short.sentence, 'At 4 tablets a dose, that does not cover the next one.');
+has('none left sentence', out.sentence, 'None left: the 30 you counted on Sep 20');
+lacks('taper has no dose count', taper.sentence, 'enough for');
+check('singular units', M.readSupply({ ...base, onHand: 1, takenSinceCount: 0, unit: 'gummies' }).short, 'About 1 day left (1 gummy)');
 
 // --- 3. Phone numbers ------------------------------------------------------------
 check('dial plus', M.dialable('+52 (322) 555-0100'), '+523225550100');
